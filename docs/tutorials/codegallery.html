@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -71,7 +71,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -353,19 +355,74 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<p>import pandas as pd from IPython.display import HTML</p>
-<section id="change-these-if-you-rename-the-repo" class="level1">
-<h1>CHANGE THESE IF YOU RENAME THE REPO</h1>
-<p>REPO_RAW_BASE = “https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/”</p>
-<p>df = pd.read_csv(“code_gallery.csv”).fillna(““)</p>
-<p>def view_icon(path, label): if not path: return ‘<span class="text-muted">—</span>’ return ( f’<a href="{path}" aria-label="{label}">’ f’<i class="bi bi-eye-fill"></i></a>’ )</p>
-<p>def download_icon(repo_path, label): if not repo_path: return ‘<span class="text-muted">—</span>’ return ( f’<a href="{REPO_RAW_BASE}{repo_path}" aria-label="{label}">’ f’<i class="bi bi-download"></i></a>’ )</p>
-<p>rows = [] for _, r in df.iterrows(): rows.append({ “Title”: r[“title”], “Category”: r[“category”], “Python”: view_icon(r[“py_view”], f”View Python: {r[‘title’]}“),”Python ↓“: download_icon(r[”py_download”], f”Download Python: {r[‘title’]}“),”R”: view_icon(r[“r_view”], f”View R: {r[‘title’]}“),”R ↓“: download_icon(r[”r_download”], f”Download R: {r[‘title’]}“), })</p>
-<p>out = pd.DataFrame(rows)</p>
-<p>HTML( out.to_html( index=False, escape=False, classes=[“code-gallery-table”] ) )</p>
+<div id="ea44c968" class="cell" data-message="false" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="1">
+<table class="dataframe code-gallery-table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Title</th>
+<th data-quarto-table-cell-role="th">Category</th>
+<th data-quarto-table-cell-role="th">Python</th>
+<th data-quarto-table-cell-role="th">Python ↓</th>
+<th data-quarto-table-cell-role="th">R</th>
+<th data-quarto-table-cell-role="th">R ↓</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Access satellite data</td>
+<td>Data Access</td>
+<td><a class="cg-icon" href="../tutorials/data-access/convert-180+180-to-0-360-longitude.html" aria-label="View Python: Access satellite data">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a class="cg-icon" href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/data-access/convert-180+180-to-0-360-longitude.ipynb" aria-label="Download Python: Access satellite data">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><span class="text-muted">—</span></td>
+<td><span class="text-muted">—</span></td>
+</tr>
+<tr class="even">
+<td>Compare sensors</td>
+<td>Time Series</td>
+<td><a class="cg-icon" href="../tutorials/time-series/timeseries_compare_sensors.html" aria-label="View Python: Compare sensors">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a class="cg-icon" href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/time-series/timeseries_compare_sensors.ipynb" aria-label="Download Python: Compare sensors">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a class="cg-icon" href="time-series/compare-sensors.qmd" aria-label="View R: Compare sensors">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a class="cg-icon" href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/time-series/compare-sensors.Rmd" aria-label="Download R: Compare sensors">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

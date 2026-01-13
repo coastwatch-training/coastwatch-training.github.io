@@ -5,30 +5,53 @@ title: "Code Gallery"
 This page lists CoastWatch code gallery tutorials.  
 Click the **eye** icon to view the tutorial or **download** to get the source file.
 
+
 ```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
 import pandas as pd
 from IPython.display import HTML
 
 # CHANGE THESE IF YOU RENAME THE REPO
 REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
 
-df = pd.read_csv("code_gallery.csv").fillna("")
+df = pd.read_csv("code_gallery.csv", encoding="utf-8-sig").fillna("")
+
+# Simple, reliable inline SVGs (no newlines in the output)
+EYE_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
+    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>'
+    '<circle cx="12" cy="12" r="3"></circle>'
+    '</svg>'
+)
+
+DOWNLOAD_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
+    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>'
+    '<path d="M7 10l5 5 5-5"></path>'
+    '<path d="M12 15V3"></path>'
+    '</svg>'
+)
+
+def icon_link(url, label, svg):
+    if not url:
+        return '<span class="text-muted">—</span>'
+    return f'<a class="cg-icon" href="{url}" aria-label="{label}">{svg}</a>'
 
 def view_icon(path, label):
-    if not path:
-        return '<span class="text-muted">—</span>'
-    return (
-        f'<a href="{path}" aria-label="{label}">'
-        f'<i class="bi bi-eye-fill"></i></a>'
-    )
+    return icon_link(path, label, EYE_SVG)
 
 def download_icon(repo_path, label):
     if not repo_path:
         return '<span class="text-muted">—</span>'
-    return (
-        f'<a href="{REPO_RAW_BASE}{repo_path}" aria-label="{label}">'
-        f'<i class="bi bi-download"></i></a>'
-    )
+    url = f"{REPO_RAW_BASE}{repo_path}"
+    return icon_link(url, label, DOWNLOAD_SVG)
 
 rows = []
 for _, r in df.iterrows():

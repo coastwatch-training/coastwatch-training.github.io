@@ -23,10 +23,20 @@
   width: 6rem;
 }
 
-.bi {
-  font-size: 1.1rem;
+.cg-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  color: inherit;
+  text-decoration: none;
 }
 
-a:hover .bi-eye-fill {
-  color: #0d6efd;
+.cg-icon svg {
+  display: block;      /* prevents baseline weirdness */
+}
+
+.cg-icon:hover {
+  background: rgba(0,0,0,0.06);
+  border-radius: 0.4rem;
 }
