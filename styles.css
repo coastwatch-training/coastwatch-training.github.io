@@ -1,0 +1,32 @@
+/* css styles */
+.code-gallery-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.code-gallery-table th,
+.code-gallery-table td {
+  padding: 0.65rem 0.8rem;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  vertical-align: middle;
+}
+
+.code-gallery-table th {
+  text-align: left;
+  font-weight: 600;
+}
+
+.code-gallery-table td:nth-child(n+3),
+.code-gallery-table th:nth-child(n+3) {
+  text-align: center;
+  width: 6rem;
+}
+
+.bi {
+  font-size: 1.1rem;
+}
+
+a:hover .bi-eye-fill {
+  color: #0d6efd;
+}

@@ -1,0 +1,2653 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>timeseries_compare_sensors – CoastWatch Training Materials</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ef56b68f8fa1e9d2ba328e99e439f80.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-c9ba5ccbb5d6767d09d08efdb3a920f9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c9dddf6076e84551194d71f506282cbe.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-c9ba5ccbb5d6767d09d08efdb3a920f9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar docked nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">CoastWatch Training Materials</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/madrichardson/CoastWatch-Training-Tutorials"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Training Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Tutorials</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../tutorials/codegallery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code Gallery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<p style="font-size:14px; text-align: right">
+CoastWatch Python Exercises
+</p>
+<section id="tutorial-2.-compare-time-series-from-different-sensors" class="level1">
+<h1>Tutorial 2. Compare time series from different sensors</h1>
+<blockquote class="blockquote">
+<p>History | Updated August 2023</p>
+</blockquote>
+<section id="background" class="level2">
+<h2 class="anchored" data-anchor-id="background">Background</h2>
+<p>Several ocean color sensors have been launched since 1997 to provide continuous global coverage for ocean color data. The sensors have differences in design and calibration, and different algorithms may be applied to generate chlorophyll values. Consequently, chlorophyll-a values can vary among the sensors during periods where measurements overlap.</p>
+<p>To examine this phenomenon, we will download and plot a time series of chlorophyll-a concentrations from various sensors that collected data between 1997 and the present to see how the measurements compare during periods of overlap.</p>
+</section>
+<section id="objective" class="level2">
+<h2 class="anchored" data-anchor-id="objective">Objective</h2>
+<p>This tutorial will show how to extract a time series from four different monthly satellite chlorophyll datasets for the period that each was in operation between 1997-present.</p>
+</section>
+<section id="the-tutorial-demonstrates-the-following-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="the-tutorial-demonstrates-the-following-techniques">The tutorial demonstrates the following techniques</h2>
+<ul>
+<li>Using xarray to extract data from a rectangular area of the ocean over time</li>
+<li>Retrieving information about a dataset from ERDDAP</li>
+<li>Comparing results from different sensors</li>
+<li>Averaging data spatially</li>
+<li>Producing time-series plots</li>
+<li>Drawing maps with satellite data</li>
+</ul>
+</section>
+<section id="datasets-used" class="level2">
+<h2 class="anchored" data-anchor-id="datasets-used">Datasets used</h2>
+<p>SeaWiFS Chlorophyll-a, V.2018, Monthly, Global, 4km, 1997-2012<br>
+https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdSW2018chlamday</p>
+<p>MODIS Aqua, Chlorophyll-a, V.2022, Monthly, Global, 4km, 2002-present<br>
+https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdMH1chlamday_R2022SQ</p>
+<p>NOAA VIIRS S-NPP, Chlorophyll-a, Monthly, Global, 4km, 2012-present<br>
+https://coastwatch.noaa.gov/erddap/griddap/noaacwNPPVIIRSSQchlaMonthly</p>
+<p><strong>ESA CCI Ocean Colour Dataset, v6.0, Monthly, Global, 4km, 1997-Present</strong><br>
+This dataset was developed by the European Space Agency’s Climate Change Initiative. The dataset merges data from multiple sensors (MERIS, MODIS, VIIRS and SeaWiFS) to create a long time series (1997 to present) with better spatial coverage than any single sensor. Parameters include chlorophyll a, remote sensing reflectance, diffuse attenuation coefficients, absorption coefficients, backscatter coefficients, and water classification.<br>
+https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
+</section>
+<section id="import-required-packages" class="level2">
+<h2 class="anchored" data-anchor-id="import-required-packages">Import required packages</h2>
+<div id="cell-6" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cartopy.mpl.ticker <span class="im">import</span> LongitudeFormatter, LatitudeFormatter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="define-the-area-to-extract" class="level2">
+<h2 class="anchored" data-anchor-id="define-the-area-to-extract">Define the area to extract</h2>
+<p>For each dataset we will extract data for an area in the Gulf of Mexico between -95 to -90°W longitude and 25-30°N latitude.</p>
+<p>Set up variables with the minimum and maximum values from the longitude and latitude ranges.</p>
+<div id="cell-8" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lon_min <span class="op">=</span> <span class="op">-</span><span class="fl">95.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lon_max <span class="op">=</span> <span class="op">-</span><span class="fl">90.</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lat_min <span class="op">=</span> <span class="fl">25.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>lat_max <span class="op">=</span> <span class="fl">30.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="get-the-seawifs-data" class="level2">
+<h2 class="anchored" data-anchor-id="get-the-seawifs-data">Get the SeaWiFS data</h2>
+<section id="open-a-dataset-object-in-xarray" class="level3">
+<h3 class="anchored" data-anchor-id="open-a-dataset-object-in-xarray">Open a dataset object in xarray</h3>
+<div id="cell-10" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url_sw <span class="op">=</span> <span class="st">'https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdSW2018chlamday'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sw_ds <span class="op">=</span> xr.open_dataset(url_sw)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sw_ds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
+Dimensions:      (time: 157, latitude: 2160, longitude: 4320)
+Coordinates:
+  * time         (time) datetime64[ns] 1997-09-16 1997-10-16 ... 2010-12-16
+  * latitude     (latitude) float32 89.96 89.88 89.79 ... -89.79 -89.88 -89.96
+  * longitude    (longitude) float32 -180.0 -179.9 -179.8 ... 179.8 179.9 180.0
+Data variables:
+    chlorophyll  (time, latitude, longitude) float32 ...
+Attributes: (12/50)
+    _lastModified:                     2018-01-31T04:58:26.000Z
+    _NCProperties:                     version=1|netcdflibversion=4.4.1.1|hdf...
+    cdm_data_type:                     Grid
+    Conventions:                       CF-1.6, COARDS, ACDD-1.3
+    creator_email:                     data@oceancolor.gsfc.nasa.gov
+    creator_name:                      NASA/GSFC/OBPG
+    ...                                ...
+    summary:                           NASA GSFC Ocean Color Web distributes ...
+    temporal_range:                    10-day
+    time_coverage_end:                 2010-12-16T00:00:00Z
+    time_coverage_start:               1997-09-16T00:00:00Z
+    title:                             Chlorophyll-a, Orbview-2 SeaWiFS, R201...
+    Westernmost_Easting:               -179.9583</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input id="section-e51367af-e709-498c-8880-61f6ea5bd808" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-e51367af-e709-498c-8880-61f6ea5bd808" class="xr-section-summary" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span class="xr-has-index">time</span>: 157</li><li><span class="xr-has-index">latitude</span>: 2160</li><li><span class="xr-has-index">longitude</span>: 4320</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input id="section-27a341f9-2170-45b9-b28c-a81f8cfc101f" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-27a341f9-2170-45b9-b28c-a81f8cfc101f" class="xr-section-summary">Coordinates: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">time</span></div><div class="xr-var-dims">(time)</div><div class="xr-var-dtype">datetime64[ns]</div><div class="xr-var-preview xr-preview">1997-09-16 ... 2010-12-16</div><input id="attrs-e3ba54fc-48bf-487d-92ca-48c1e258eae8" class="xr-var-attrs-in" type="checkbox"><label for="attrs-e3ba54fc-48bf-487d-92ca-48c1e258eae8" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-977294bb-8de9-4825-bf48-e7a9b5667141" class="xr-var-data-in" type="checkbox"><label for="data-977294bb-8de9-4825-bf48-e7a9b5667141" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[8.7436800e+08 1.2924576e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Centered Time</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class="xr-var-data"><pre>array(['1997-09-16T00:00:00.000000000', '1997-10-16T00:00:00.000000000',
+       '1997-11-16T00:00:00.000000000', '1997-12-16T00:00:00.000000000',
+       '1998-01-16T00:00:00.000000000', '1998-02-16T00:00:00.000000000',
+       '1998-03-16T00:00:00.000000000', '1998-04-16T00:00:00.000000000',
+       '1998-05-16T00:00:00.000000000', '1998-06-16T00:00:00.000000000',
+       '1998-07-16T00:00:00.000000000', '1998-08-16T00:00:00.000000000',
+       '1998-09-16T00:00:00.000000000', '1998-10-16T00:00:00.000000000',
+       '1998-11-16T00:00:00.000000000', '1998-12-16T00:00:00.000000000',
+       '1999-01-16T00:00:00.000000000', '1999-02-16T00:00:00.000000000',
+       '1999-03-16T00:00:00.000000000', '1999-04-16T00:00:00.000000000',
+       '1999-05-16T00:00:00.000000000', '1999-06-16T00:00:00.000000000',
+       '1999-07-16T00:00:00.000000000', '1999-08-16T00:00:00.000000000',
+       '1999-09-16T00:00:00.000000000', '1999-10-16T00:00:00.000000000',
+       '1999-11-16T00:00:00.000000000', '1999-12-16T00:00:00.000000000',
+       '2000-01-16T00:00:00.000000000', '2000-02-16T00:00:00.000000000',
+       '2000-03-16T00:00:00.000000000', '2000-04-16T00:00:00.000000000',
+       '2000-05-16T00:00:00.000000000', '2000-06-16T00:00:00.000000000',
+       '2000-07-16T00:00:00.000000000', '2000-08-16T00:00:00.000000000',
+       '2000-09-16T00:00:00.000000000', '2000-10-16T00:00:00.000000000',
+       '2000-11-16T00:00:00.000000000', '2000-12-16T00:00:00.000000000',
+       '2001-01-16T00:00:00.000000000', '2001-02-16T00:00:00.000000000',
+       '2001-03-16T00:00:00.000000000', '2001-04-16T00:00:00.000000000',
+       '2001-05-16T00:00:00.000000000', '2001-06-16T00:00:00.000000000',
+       '2001-07-16T00:00:00.000000000', '2001-08-16T00:00:00.000000000',
+       '2001-09-16T00:00:00.000000000', '2001-10-16T00:00:00.000000000',
+       '2001-11-16T00:00:00.000000000', '2001-12-16T00:00:00.000000000',
+       '2002-01-16T00:00:00.000000000', '2002-02-16T00:00:00.000000000',
+       '2002-03-16T00:00:00.000000000', '2002-04-16T00:00:00.000000000',
+       '2002-05-16T00:00:00.000000000', '2002-06-16T00:00:00.000000000',
+       '2002-07-16T00:00:00.000000000', '2002-08-16T00:00:00.000000000',
+       '2002-09-16T00:00:00.000000000', '2002-10-16T00:00:00.000000000',
+       '2002-11-16T00:00:00.000000000', '2002-12-16T00:00:00.000000000',
+       '2003-01-16T00:00:00.000000000', '2003-02-16T00:00:00.000000000',
+       '2003-03-16T00:00:00.000000000', '2003-04-16T00:00:00.000000000',
+       '2003-05-16T00:00:00.000000000', '2003-06-16T00:00:00.000000000',
+       '2003-07-16T00:00:00.000000000', '2003-08-16T00:00:00.000000000',
+       '2003-09-16T00:00:00.000000000', '2003-10-16T00:00:00.000000000',
+       '2003-11-16T00:00:00.000000000', '2003-12-16T00:00:00.000000000',
+       '2004-01-16T00:00:00.000000000', '2004-02-16T00:00:00.000000000',
+       '2004-03-16T00:00:00.000000000', '2004-04-16T00:00:00.000000000',
+       '2004-05-16T00:00:00.000000000', '2004-06-16T00:00:00.000000000',
+       '2004-07-16T00:00:00.000000000', '2004-08-16T00:00:00.000000000',
+       '2004-09-16T00:00:00.000000000', '2004-10-16T00:00:00.000000000',
+       '2004-11-16T00:00:00.000000000', '2004-12-16T00:00:00.000000000',
+       '2005-01-16T00:00:00.000000000', '2005-02-16T00:00:00.000000000',
+       '2005-03-16T00:00:00.000000000', '2005-04-16T00:00:00.000000000',
+       '2005-05-16T00:00:00.000000000', '2005-06-16T00:00:00.000000000',
+       '2005-07-16T00:00:00.000000000', '2005-08-16T00:00:00.000000000',
+       '2005-09-16T00:00:00.000000000', '2005-10-16T00:00:00.000000000',
+       '2005-11-16T00:00:00.000000000', '2005-12-16T00:00:00.000000000',
+       '2006-01-16T00:00:00.000000000', '2006-02-16T00:00:00.000000000',
+       '2006-03-16T00:00:00.000000000', '2006-04-16T00:00:00.000000000',
+       '2006-05-16T00:00:00.000000000', '2006-06-16T00:00:00.000000000',
+       '2006-07-16T00:00:00.000000000', '2006-08-16T00:00:00.000000000',
+       '2006-09-16T00:00:00.000000000', '2006-10-16T00:00:00.000000000',
+       '2006-11-16T00:00:00.000000000', '2006-12-16T00:00:00.000000000',
+       '2007-01-16T00:00:00.000000000', '2007-02-16T00:00:00.000000000',
+       '2007-03-16T00:00:00.000000000', '2007-04-16T00:00:00.000000000',
+       '2007-05-16T00:00:00.000000000', '2007-06-16T00:00:00.000000000',
+       '2007-07-16T00:00:00.000000000', '2007-08-16T00:00:00.000000000',
+       '2007-09-16T00:00:00.000000000', '2007-10-16T00:00:00.000000000',
+       '2007-11-16T00:00:00.000000000', '2007-12-16T00:00:00.000000000',
+       '2008-01-16T00:00:00.000000000', '2008-04-16T00:00:00.000000000',
+       '2008-05-16T00:00:00.000000000', '2008-06-16T00:00:00.000000000',
+       '2008-07-16T00:00:00.000000000', '2008-08-16T00:00:00.000000000',
+       '2008-09-16T00:00:00.000000000', '2008-10-16T00:00:00.000000000',
+       '2008-11-16T00:00:00.000000000', '2008-12-16T00:00:00.000000000',
+       '2009-01-16T00:00:00.000000000', '2009-02-16T00:00:00.000000000',
+       '2009-03-16T00:00:00.000000000', '2009-04-16T00:00:00.000000000',
+       '2009-06-16T00:00:00.000000000', '2009-07-16T00:00:00.000000000',
+       '2009-08-16T00:00:00.000000000', '2009-09-16T00:00:00.000000000',
+       '2009-10-16T00:00:00.000000000', '2009-11-16T00:00:00.000000000',
+       '2009-12-16T00:00:00.000000000', '2010-01-16T00:00:00.000000000',
+       '2010-02-16T00:00:00.000000000', '2010-03-16T00:00:00.000000000',
+       '2010-04-16T00:00:00.000000000', '2010-05-16T00:00:00.000000000',
+       '2010-06-16T00:00:00.000000000', '2010-07-16T00:00:00.000000000',
+       '2010-08-16T00:00:00.000000000', '2010-09-16T00:00:00.000000000',
+       '2010-10-16T00:00:00.000000000', '2010-11-16T00:00:00.000000000',
+       '2010-12-16T00:00:00.000000000'], dtype='datetime64[ns]')</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">latitude</span></div><div class="xr-var-dims">(latitude)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">89.96 89.88 89.79 ... -89.88 -89.96</div><input id="attrs-3c10835f-0f57-4601-a7cc-9bd4c6ca1574" class="xr-var-attrs-in" type="checkbox"><label for="attrs-3c10835f-0f57-4601-a7cc-9bd4c6ca1574" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-1e03a6a4-ece3-43ba-9a80-62b1d23ffcf6" class="xr-var-data-in" type="checkbox"><label for="data-1e03a6a4-ece3-43ba-9a80-62b1d23ffcf6" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd><dt><span>actual_range :</span></dt><dd>[-89.95834  89.95834]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>valid_max :</span></dt><dd>90.0</dd><dt><span>valid_min :</span></dt><dd>-90.0</dd></dl></div><div class="xr-var-data"><pre>array([ 89.958336,  89.875   ,  89.79167 , ..., -89.791664, -89.87501 ,
+       -89.958336], dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">longitude</span></div><div class="xr-var-dims">(longitude)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-180.0 -179.9 ... 179.9 180.0</div><input id="attrs-417e3db7-606f-4a13-b40a-c1bfca63059b" class="xr-var-attrs-in" type="checkbox"><label for="attrs-417e3db7-606f-4a13-b40a-c1bfca63059b" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-cd38612c-8282-4076-ae80-4985fcf5527b" class="xr-var-data-in" type="checkbox"><label for="data-cd38612c-8282-4076-ae80-4985fcf5527b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd><dt><span>actual_range :</span></dt><dd>[-179.9583  179.9584]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>valid_max :</span></dt><dd>180.0</dd><dt><span>valid_min :</span></dt><dd>-180.0</dd></dl></div><div class="xr-var-data"><pre>array([-179.95833, -179.875  , -179.79166, ...,  179.79167,  179.87502,
+        179.95836], dtype=float32)</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-a2c0884c-2e1a-4172-be33-b89786d8fa43" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-a2c0884c-2e1a-4172-be33-b89786d8fa43" class="xr-section-summary">Data variables: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>chlorophyll</span></div><div class="xr-var-dims">(time, latitude, longitude)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-64ee4f08-4a6d-4251-803c-3e8869f11e99" class="xr-var-attrs-in" type="checkbox"><label for="attrs-64ee4f08-4a6d-4251-803c-3e8869f11e99" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-ac2e59cc-0e59-4458-a906-fa0b61d1b85f" class="xr-var-data-in" type="checkbox"><label for="data-ac2e59cc-0e59-4458-a906-fa0b61d1b85f" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>colorBarMaximum :</span></dt><dd>30.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.03</dd><dt><span>colorBarScale :</span></dt><dd>Log</dd><dt><span>ioos_category :</span></dt><dd>Ocean Color</dd><dt><span>long_name :</span></dt><dd>Chlorophyll Concentration, OCI Algorithm</dd><dt><span>references :</span></dt><dd>Hu, C., Lee Z., and Franz, B.A. (2012). Chlorophyll-a algorithms for oligotrophic oceans: A novel approach based on three-band reflectance difference, J. Geophys. Res., 117, C01011, doi:10.1029/2011JC007395.</dd><dt><span>standard_name :</span></dt><dd>concentration_of_chlorophyll_in_sea_water</dd><dt><span>units :</span></dt><dd>mg m^-3</dd><dt><span>valid_max :</span></dt><dd>100.0</dd><dt><span>valid_min :</span></dt><dd>0.001</dd></dl></div><div class="xr-var-data"><pre>[1464998400 values with dtype=float32]</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-1f50c13c-e899-4532-893a-913af3d3b5d9" class="xr-section-summary-in" type="checkbox"><label for="section-1f50c13c-e899-4532-893a-913af3d3b5d9" class="xr-section-summary">Indexes: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>time</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-cf1676eb-41e7-4c6d-a978-dcb7daecac26" class="xr-index-data-in" type="checkbox"><label for="index-cf1676eb-41e7-4c6d-a978-dcb7daecac26" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(DatetimeIndex(['1997-09-16', '1997-10-16', '1997-11-16', '1997-12-16',
+               '1998-01-16', '1998-02-16', '1998-03-16', '1998-04-16',
+               '1998-05-16', '1998-06-16',
+               ...
+               '2010-03-16', '2010-04-16', '2010-05-16', '2010-06-16',
+               '2010-07-16', '2010-08-16', '2010-09-16', '2010-10-16',
+               '2010-11-16', '2010-12-16'],
+              dtype='datetime64[ns]', name='time', length=157, freq=None))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>latitude</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-efe390b0-73c9-4113-ae5b-13be374931b6" class="xr-index-data-in" type="checkbox"><label for="index-efe390b0-73c9-4113-ae5b-13be374931b6" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([ 89.95833587646484,             89.875,  89.79167175292969,
+        89.70833587646484,             89.625,  89.54167175292969,
+        89.45833587646484,             89.375,  89.29167175292969,
+        89.20833587646484,
+       ...
+       -89.20833587646484, -89.29166412353516, -89.37500762939453,
+       -89.45833587646484, -89.54166412353516, -89.62500762939453,
+       -89.70833587646484, -89.79166412353516, -89.87500762939453,
+       -89.95833587646484],
+      dtype='float32', name='latitude', length=2160))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>longitude</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-09a3d95a-443e-48f4-8700-fef651e2bae9" class="xr-index-data-in" type="checkbox"><label for="index-09a3d95a-443e-48f4-8700-fef651e2bae9" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([ -179.9583282470703,            -179.875, -179.79165649414062,
+        -179.7083282470703,            -179.625, -179.54165649414062,
+        -179.4583282470703,            -179.375, -179.29165649414062,
+        -179.2083282470703,
+       ...
+        179.20835876464844,   179.2916717529297,  179.37501525878906,
+        179.45835876464844,   179.5416717529297,  179.62501525878906,
+        179.70835876464844,   179.7916717529297,  179.87501525878906,
+        179.95835876464844],
+      dtype='float32', name='longitude', length=4320))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-58843489-fd02-4a46-aa47-334eb9bfd9c2" class="xr-section-summary-in" type="checkbox"><label for="section-58843489-fd02-4a46-aa47-334eb9bfd9c2" class="xr-section-summary">Attributes: <span>(50)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"><dt><span>_lastModified :</span></dt><dd>2018-01-31T04:58:26.000Z</dd><dt><span>_NCProperties :</span></dt><dd>version=1|netcdflibversion=4.4.1.1|hdf5libversion=1.8.18</dd><dt><span>cdm_data_type :</span></dt><dd>Grid</dd><dt><span>Conventions :</span></dt><dd>CF-1.6, COARDS, ACDD-1.3</dd><dt><span>creator_email :</span></dt><dd>data@oceancolor.gsfc.nasa.gov</dd><dt><span>creator_name :</span></dt><dd>NASA/GSFC/OBPG</dd><dt><span>creator_type :</span></dt><dd>group</dd><dt><span>creator_url :</span></dt><dd>https://oceandata.sci.gsfc.nasa.gov</dd><dt><span>date_created :</span></dt><dd>2018-01-31T04:58:26.000Z</dd><dt><span>Easternmost_Easting :</span></dt><dd>179.9584</dd><dt><span>geospatial_lat_max :</span></dt><dd>89.95834</dd><dt><span>geospatial_lat_min :</span></dt><dd>-89.95834</dd><dt><span>geospatial_lat_units :</span></dt><dd>degrees_north</dd><dt><span>geospatial_lon_max :</span></dt><dd>179.9584</dd><dt><span>geospatial_lon_min :</span></dt><dd>-179.9583</dd><dt><span>geospatial_lon_units :</span></dt><dd>degrees_east</dd><dt><span>grid_mapping_name :</span></dt><dd>latitude_longitude</dd><dt><span>history :</span></dt><dd>These R2018.0 data files were downloaded from https://oceandata.sci.gsfc.nasa.gov/SeaWiFS/Mapped/Monthly/9km/chlor_a to NOAA NMFS SWFSC by erd.data@noaa.gov ERD on 2018-03-05.
+2023-09-06T13:45:15Z (local files)
+2023-09-06T13:45:15Z http://coastwatch.pfeg.noaa.gov/erddap/griddap/erdSW2018chlamday.das</dd><dt><span>identifier_product_doi :</span></dt><dd>10.5067/ORBVIEW-2/SEAWIFS/L3M/CHL/2018</dd><dt><span>identifier_product_doi_authority :</span></dt><dd>https://dx.doi.org</dd><dt><span>infoUrl :</span></dt><dd>https://oceandata.sci.gsfc.nasa.gov</dd><dt><span>institution :</span></dt><dd>NASA/GSFC OBPG</dd><dt><span>instrument :</span></dt><dd>SeaWiFS</dd><dt><span>keywords :</span></dt><dd>algorithm, biology, center, chemistry, chlor_a, chlorophyll, color, concentration, concentration_of_chlorophyll_in_sea_water, data, Earth Science &gt; Oceans &gt; Ocean Chemistry &gt; Chlorophyll, Earth Science &gt; Oceans &gt; Ocean Optics &gt; Ocean Color, field, field-of-view, flight, goddard, group, gsfc, image, L3, level, level-3, mapped, nasa, noaa, obpg, ocean, ocean color, oceans, oci, optics, orbview, orbview-2, palette, processing, sea, sea-wide, seawater, seawifs, sensor, smi, space, standard, view, water, wide</dd><dt><span>keywords_vocabulary :</span></dt><dd>GCMD Science Keywords</dd><dt><span>l2_flag_names :</span></dt><dd>ATMFAIL,LAND,HILT,HISATZEN,STRAYLIGHT,CLDICE,COCCOLITH,LOWLW,CHLWARN,CHLFAIL,NAVWARN,MAXAERITER,ATMWARN,HISOLZEN,NAVFAIL,FILTER,HIGLINT</dd><dt><span>license :</span></dt><dd>https://science.nasa.gov/earth-science/earth-science-data/data-information-policy/
+
+Please cite: NASA Goddard Space Flight Center, Ocean Ecology Laboratory, Ocean Biology Processing Group. Sea-viewing Wide Field-of-view Sensor (SeaWiFS) R2018.0 Chlorophyll Data; NASA OB.DAAC, Greenbelt, MD, USA. doi: https://dx.doi.org/10.5067/ORBVIEW-2/SEAWIFS/L3M/CHL/2018 .
+
+The data may be used and redistributed for free but is not intended
+for legal use, since it may contain inaccuracies. Neither the data
+Contributor, ERD, NOAA, nor the United States Government, nor any
+of their employees or contractors, makes any warranty, express or
+implied, including warranties of merchantability and fitness for a
+particular purpose, or assumes any legal liability for the accuracy,
+completeness, or usefulness, of this information.</dd><dt><span>map_projection :</span></dt><dd>Equidistant Cylindrical</dd><dt><span>measure :</span></dt><dd>Mean</dd><dt><span>naming_authority :</span></dt><dd>gov.noaa.pfeg.coastwatch</dd><dt><span>Northernmost_Northing :</span></dt><dd>89.95834</dd><dt><span>platform :</span></dt><dd>Orbview-2</dd><dt><span>processing_level :</span></dt><dd>L3 Mapped</dd><dt><span>processing_version :</span></dt><dd>2018.0</dd><dt><span>project :</span></dt><dd>Ocean Biology Processing Group (NASA/GSFC/OBPG)</dd><dt><span>publisher_email :</span></dt><dd>data@oceancolor.gsfc.nasa.gov</dd><dt><span>publisher_name :</span></dt><dd>NASA/GSFC/OBPG</dd><dt><span>publisher_type :</span></dt><dd>group</dd><dt><span>publisher_url :</span></dt><dd>https://oceandata.sci.gsfc.nasa.gov</dd><dt><span>references :</span></dt><dd>SeaWiFS information: https://oceancolor.gsfc.nasa.gov/SeaWiFS/ . NASA Ocean
+Color information: https://oceancolor.gsfc.nasa.gov/
+Processing reference: O'Reilly, J.E., Maritorena, S., Mitchell, B.G., Siegel, D.A., Carder, K.L., Garver, S.A., Kahru, M. and McClain, C. (1998). Ocean color chlorophyll algorithms for SeaWiFS. J. Geophys. Res., 103: 24, 937-24, 953.
+Processing reference: O'Reilly, J. E., and 21 others. 2000. Ocean color chlorophyll a algorithms for SeaWiFS, OC2 and OC4: Version 4. SeaWiFS Postlaunch Calibration and Validation Analyses, part 3. NASA SeaWiFS technical report series. pp. 8 226 22.
+Processing reference: Fu, G., Baith, K. S., and McClain, C. R. (1998). SeaDAS: The SeaWiFS Data Analysis System. Proceedings of "The 4th Pacific Ocean Remote Sensing Conference", Qingdao, China, July 28-31, 1998, 73-79.
+Validation reference: Hooker, S.B., and C.R. McClain (2000). The Calibration and Validation of SeaWiFS Data. Prog. Oceanogr., 45, 427-465.
+R2014.0 processing reference: Hu, C., Lee Z., and Franz, B.A. (2012). Chlorophyll-a algorithms for oligotrophic oceans: A novel approach based on three-band reflectance difference, J. Geophys. Res., 117, C01011, doi:10.1029/2011JC007395.
+R2018.0 reprocessing information: https://oceancolor.gsfc.nasa.gov/reprocessing/r2018/seawifs/</dd><dt><span>sourceUrl :</span></dt><dd>(local files)</dd><dt><span>Southernmost_Northing :</span></dt><dd>-89.95834</dd><dt><span>spatialResolution :</span></dt><dd>9.28 km</dd><dt><span>standard_name_vocabulary :</span></dt><dd>CF Standard Name Table v70</dd><dt><span>summary :</span></dt><dd>NASA GSFC Ocean Color Web distributes science-quality chlorophyll-a
+concentration data from the Sea-viewing Wide Field-of-view Sensor (SeaWiFS)
+on the Orbview-2 satellite. This version is the 2018.0 Reprocessing (R2018.0). https://oceancolor.gsfc.nasa.gov/reprocessing/r2018/seawifs/
+
+The SeaWiFS instrument was launched by Orbital Sciences Corporation on the
+OrbView-2 (a.k.a. SeaStar) satellite in August 1997, and collected data from
+September 1997 until the end of mission in December 2010. SeaWiFS had 8
+spectral bands from 412 to 865 nm. It collected global data at 4 km
+resolution, and local data (limited onboard storage and direct broadcast)
+at 1 km. The mission and sensor were optimized for ocean color measurements,
+with a local noon (descending) equator crossing time orbit, fore-and-aft
+tilt capability, full dynamic range, and low polarization sensitivity.</dd><dt><span>temporal_range :</span></dt><dd>10-day</dd><dt><span>time_coverage_end :</span></dt><dd>2010-12-16T00:00:00Z</dd><dt><span>time_coverage_start :</span></dt><dd>1997-09-16T00:00:00Z</dd><dt><span>title :</span></dt><dd>Chlorophyll-a, Orbview-2 SeaWiFS, R2018.0, 0.1�, Global, 1997-2010 (Monthly Composite)</dd><dt><span>Westernmost_Easting :</span></dt><dd>-179.9583</dd></dl></div></li></ul></div></div>
+</div>
+</div>
+</section>
+<section id="print-out-some-useful-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="print-out-some-useful-metadata">Print out some useful metadata</h3>
+<p>You can view all of the metadata above in the dataset object. Let’s print out some metadata items to point a few things out: * The SeaWiFS dataset spans 13 years, from 1997 to 2010<br>
+* The chlorophyll variable is called “chlorophyll”. Knowing this is important because variable names are not standardized, and we will need to know the exact variable name to extract the data. * Checking the first and last value of latitude can tell us if the latitude values are in ascending or descending order.</p>
+<div id="cell-12" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'earliest date ='</span>, sw_ds.time.values[<span class="dv">0</span>])</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'most recent date ='</span>, sw_ds.time.values[<span class="op">-</span><span class="dv">1</span>], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'variable:'</span>, <span class="bu">list</span>(sw_ds.data_vars.keys()), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Is latitude's first value --&gt;"</span>, <span class="bu">round</span>(sw_ds.latitude[<span class="dv">0</span>].item(), <span class="dv">6</span>))</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'greater than'</span>) </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"latitude's last value --&gt;"</span>, <span class="bu">round</span>(sw_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item(), <span class="dv">6</span>))</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sw_ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> sw_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item())</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>earliest date = 1997-09-16T00:00:00.000000000
+most recent date = 2010-12-16T00:00:00.000000000 
+
+variable: ['chlorophyll'] 
+
+Is latitude's first value --&gt; 89.958336
+greater than
+latitude's last value --&gt; -89.958336
+True</code></pre>
+</div>
+</div>
+</section>
+<section id="pay-attention-to-the-first-and-last-values-of-latitude-in-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="pay-attention-to-the-first-and-last-values-of-latitude-in-the-dataset">Pay attention to the first and last values of latitude in the dataset</h3>
+<p>In a netCDF file that completely follows accepted standards, the latitude values are ascending; the values go from lowest to highest (south to north). Therefore, when we use the slice function (below) to subset the dataset we would list the lowest value in our subset followed by the highest.<br>
+* slice(lat_min, lat_max)</p>
+<p>However, for some datasets the latitude values are in descending order, meaning the files were built with latitudes indexed from highest to lowest (north to south). It is a common occurrence and it impacts how we subset that dataset, so you need to be aware of it.<br>
+* With latitude values in descending order, if you use “slice(lat_min, lat_max)” you will get no data, because <strong>there are no latitude values between lat_min and lat_max</strong>. * However, by reversing the order within slice by <strong>using “slice(lat_max, lat_min)” you will get data.</strong></p>
+<p><strong>For the SeaWiFS dataset, the metadata above show that the first latitude value (89.958336) is greater than the last (-89.958336). The latitude values are in descending order.</strong><br>
+* There are methods in xarray to flip the latitude dimension. A simpler solution is to use a logic step that determines if latitude values are descending, then set slice values to use the higher value first (see below).</p>
+<div id="cell-14" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The lat1 and lat2 values are used in the slice function</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># At first we set them as if the dataset is compliant with standards</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>lat1 <span class="op">=</span> lat_min</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>lat2 <span class="op">=</span> lat_max</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Then switch them if latitude values are descending</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> sw_ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> sw_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item():</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    lat1 <span class="op">=</span> lat_max</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    lat2 <span class="op">=</span> lat_min</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="subset-the-data-from-the-dataset-object." class="level3">
+<h3 class="anchored" data-anchor-id="subset-the-data-from-the-dataset-object.">Subset the data from the dataset object.</h3>
+<p>Note that so far we have not downloaded data. We have only set up how we want to download the data. * The download will happen when we request to use data, like when creating the map below.</p>
+<div id="cell-16" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sw_subset <span class="op">=</span> sw_ds[<span class="st">'chlorophyll'</span>].sel(time<span class="op">=</span><span class="bu">slice</span>(sw_ds.time[<span class="dv">0</span>], sw_ds.time[<span class="op">-</span><span class="dv">1</span>]),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                                     latitude<span class="op">=</span><span class="bu">slice</span>(lat1, lat2),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                     longitude<span class="op">=</span><span class="bu">slice</span>(lon_min, lon_max)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                                     )</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>sw_subset</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.DataArray 'chlorophyll' (time: 157, latitude: 60, longitude: 60)&gt;
+[565200 values with dtype=float32]
+Coordinates:
+  * time       (time) datetime64[ns] 1997-09-16 1997-10-16 ... 2010-12-16
+  * latitude   (latitude) float32 29.96 29.87 29.79 29.71 ... 25.21 25.12 25.04
+  * longitude  (longitude) float32 -94.96 -94.88 -94.79 ... -90.21 -90.12 -90.04
+Attributes:
+    colorBarMaximum:  30.0
+    colorBarMinimum:  0.03
+    colorBarScale:    Log
+    ioos_category:    Ocean Color
+    long_name:        Chlorophyll Concentration, OCI Algorithm
+    references:       Hu, C., Lee Z., and Franz, B.A. (2012). Chlorophyll-a a...
+    standard_name:    concentration_of_chlorophyll_in_sea_water
+    units:            mg m^-3
+    valid_max:        100.0
+    valid_min:        0.001</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.DataArray</div><div class="xr-array-name">'chlorophyll'</div><ul class="xr-dim-list"><li><span class="xr-has-index">time</span>: 157</li><li><span class="xr-has-index">latitude</span>: 60</li><li><span class="xr-has-index">longitude</span>: 60</li></ul></div><ul class="xr-sections"><li class="xr-section-item"><div class="xr-array-wrap"><input id="section-127edc54-e8cb-41f1-ac2b-12b701b1c354" class="xr-array-in" type="checkbox" checked=""><label for="section-127edc54-e8cb-41f1-ac2b-12b701b1c354" title="Show/hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-array-preview xr-preview"><span>...</span></div><div class="xr-array-data"><pre>[565200 values with dtype=float32]</pre></div></div></li><li class="xr-section-item"><input id="section-6dd82a29-9326-41e0-a123-b5c1dee76f15" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-6dd82a29-9326-41e0-a123-b5c1dee76f15" class="xr-section-summary">Coordinates: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">time</span></div><div class="xr-var-dims">(time)</div><div class="xr-var-dtype">datetime64[ns]</div><div class="xr-var-preview xr-preview">1997-09-16 ... 2010-12-16</div><input id="attrs-7a203fff-9392-4c25-8830-7ab6e41fabb7" class="xr-var-attrs-in" type="checkbox"><label for="attrs-7a203fff-9392-4c25-8830-7ab6e41fabb7" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-e134c27e-ce45-4c91-b218-61991a0ae105" class="xr-var-data-in" type="checkbox"><label for="data-e134c27e-ce45-4c91-b218-61991a0ae105" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[8.7436800e+08 1.2924576e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Centered Time</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class="xr-var-data"><pre>array(['1997-09-16T00:00:00.000000000', '1997-10-16T00:00:00.000000000',
+       '1997-11-16T00:00:00.000000000', '1997-12-16T00:00:00.000000000',
+       '1998-01-16T00:00:00.000000000', '1998-02-16T00:00:00.000000000',
+       '1998-03-16T00:00:00.000000000', '1998-04-16T00:00:00.000000000',
+       '1998-05-16T00:00:00.000000000', '1998-06-16T00:00:00.000000000',
+       '1998-07-16T00:00:00.000000000', '1998-08-16T00:00:00.000000000',
+       '1998-09-16T00:00:00.000000000', '1998-10-16T00:00:00.000000000',
+       '1998-11-16T00:00:00.000000000', '1998-12-16T00:00:00.000000000',
+       '1999-01-16T00:00:00.000000000', '1999-02-16T00:00:00.000000000',
+       '1999-03-16T00:00:00.000000000', '1999-04-16T00:00:00.000000000',
+       '1999-05-16T00:00:00.000000000', '1999-06-16T00:00:00.000000000',
+       '1999-07-16T00:00:00.000000000', '1999-08-16T00:00:00.000000000',
+       '1999-09-16T00:00:00.000000000', '1999-10-16T00:00:00.000000000',
+       '1999-11-16T00:00:00.000000000', '1999-12-16T00:00:00.000000000',
+       '2000-01-16T00:00:00.000000000', '2000-02-16T00:00:00.000000000',
+       '2000-03-16T00:00:00.000000000', '2000-04-16T00:00:00.000000000',
+       '2000-05-16T00:00:00.000000000', '2000-06-16T00:00:00.000000000',
+       '2000-07-16T00:00:00.000000000', '2000-08-16T00:00:00.000000000',
+       '2000-09-16T00:00:00.000000000', '2000-10-16T00:00:00.000000000',
+       '2000-11-16T00:00:00.000000000', '2000-12-16T00:00:00.000000000',
+       '2001-01-16T00:00:00.000000000', '2001-02-16T00:00:00.000000000',
+       '2001-03-16T00:00:00.000000000', '2001-04-16T00:00:00.000000000',
+       '2001-05-16T00:00:00.000000000', '2001-06-16T00:00:00.000000000',
+       '2001-07-16T00:00:00.000000000', '2001-08-16T00:00:00.000000000',
+       '2001-09-16T00:00:00.000000000', '2001-10-16T00:00:00.000000000',
+       '2001-11-16T00:00:00.000000000', '2001-12-16T00:00:00.000000000',
+       '2002-01-16T00:00:00.000000000', '2002-02-16T00:00:00.000000000',
+       '2002-03-16T00:00:00.000000000', '2002-04-16T00:00:00.000000000',
+       '2002-05-16T00:00:00.000000000', '2002-06-16T00:00:00.000000000',
+       '2002-07-16T00:00:00.000000000', '2002-08-16T00:00:00.000000000',
+       '2002-09-16T00:00:00.000000000', '2002-10-16T00:00:00.000000000',
+       '2002-11-16T00:00:00.000000000', '2002-12-16T00:00:00.000000000',
+       '2003-01-16T00:00:00.000000000', '2003-02-16T00:00:00.000000000',
+       '2003-03-16T00:00:00.000000000', '2003-04-16T00:00:00.000000000',
+       '2003-05-16T00:00:00.000000000', '2003-06-16T00:00:00.000000000',
+       '2003-07-16T00:00:00.000000000', '2003-08-16T00:00:00.000000000',
+       '2003-09-16T00:00:00.000000000', '2003-10-16T00:00:00.000000000',
+       '2003-11-16T00:00:00.000000000', '2003-12-16T00:00:00.000000000',
+       '2004-01-16T00:00:00.000000000', '2004-02-16T00:00:00.000000000',
+       '2004-03-16T00:00:00.000000000', '2004-04-16T00:00:00.000000000',
+       '2004-05-16T00:00:00.000000000', '2004-06-16T00:00:00.000000000',
+       '2004-07-16T00:00:00.000000000', '2004-08-16T00:00:00.000000000',
+       '2004-09-16T00:00:00.000000000', '2004-10-16T00:00:00.000000000',
+       '2004-11-16T00:00:00.000000000', '2004-12-16T00:00:00.000000000',
+       '2005-01-16T00:00:00.000000000', '2005-02-16T00:00:00.000000000',
+       '2005-03-16T00:00:00.000000000', '2005-04-16T00:00:00.000000000',
+       '2005-05-16T00:00:00.000000000', '2005-06-16T00:00:00.000000000',
+       '2005-07-16T00:00:00.000000000', '2005-08-16T00:00:00.000000000',
+       '2005-09-16T00:00:00.000000000', '2005-10-16T00:00:00.000000000',
+       '2005-11-16T00:00:00.000000000', '2005-12-16T00:00:00.000000000',
+       '2006-01-16T00:00:00.000000000', '2006-02-16T00:00:00.000000000',
+       '2006-03-16T00:00:00.000000000', '2006-04-16T00:00:00.000000000',
+       '2006-05-16T00:00:00.000000000', '2006-06-16T00:00:00.000000000',
+       '2006-07-16T00:00:00.000000000', '2006-08-16T00:00:00.000000000',
+       '2006-09-16T00:00:00.000000000', '2006-10-16T00:00:00.000000000',
+       '2006-11-16T00:00:00.000000000', '2006-12-16T00:00:00.000000000',
+       '2007-01-16T00:00:00.000000000', '2007-02-16T00:00:00.000000000',
+       '2007-03-16T00:00:00.000000000', '2007-04-16T00:00:00.000000000',
+       '2007-05-16T00:00:00.000000000', '2007-06-16T00:00:00.000000000',
+       '2007-07-16T00:00:00.000000000', '2007-08-16T00:00:00.000000000',
+       '2007-09-16T00:00:00.000000000', '2007-10-16T00:00:00.000000000',
+       '2007-11-16T00:00:00.000000000', '2007-12-16T00:00:00.000000000',
+       '2008-01-16T00:00:00.000000000', '2008-04-16T00:00:00.000000000',
+       '2008-05-16T00:00:00.000000000', '2008-06-16T00:00:00.000000000',
+       '2008-07-16T00:00:00.000000000', '2008-08-16T00:00:00.000000000',
+       '2008-09-16T00:00:00.000000000', '2008-10-16T00:00:00.000000000',
+       '2008-11-16T00:00:00.000000000', '2008-12-16T00:00:00.000000000',
+       '2009-01-16T00:00:00.000000000', '2009-02-16T00:00:00.000000000',
+       '2009-03-16T00:00:00.000000000', '2009-04-16T00:00:00.000000000',
+       '2009-06-16T00:00:00.000000000', '2009-07-16T00:00:00.000000000',
+       '2009-08-16T00:00:00.000000000', '2009-09-16T00:00:00.000000000',
+       '2009-10-16T00:00:00.000000000', '2009-11-16T00:00:00.000000000',
+       '2009-12-16T00:00:00.000000000', '2010-01-16T00:00:00.000000000',
+       '2010-02-16T00:00:00.000000000', '2010-03-16T00:00:00.000000000',
+       '2010-04-16T00:00:00.000000000', '2010-05-16T00:00:00.000000000',
+       '2010-06-16T00:00:00.000000000', '2010-07-16T00:00:00.000000000',
+       '2010-08-16T00:00:00.000000000', '2010-09-16T00:00:00.000000000',
+       '2010-10-16T00:00:00.000000000', '2010-11-16T00:00:00.000000000',
+       '2010-12-16T00:00:00.000000000'], dtype='datetime64[ns]')</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">latitude</span></div><div class="xr-var-dims">(latitude)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">29.96 29.87 29.79 ... 25.12 25.04</div><input id="attrs-0c426676-99eb-4da6-994a-cbeeec98512e" class="xr-var-attrs-in" type="checkbox"><label for="attrs-0c426676-99eb-4da6-994a-cbeeec98512e" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-94dc1b38-de95-4d37-a148-301d1aaddf6a" class="xr-var-data-in" type="checkbox"><label for="data-94dc1b38-de95-4d37-a148-301d1aaddf6a" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_CoordinateAxisType :</span></dt><dd>Lat</dd><dt><span>actual_range :</span></dt><dd>[-89.95834  89.95834]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Latitude</dd><dt><span>standard_name :</span></dt><dd>latitude</dd><dt><span>units :</span></dt><dd>degrees_north</dd><dt><span>valid_max :</span></dt><dd>90.0</dd><dt><span>valid_min :</span></dt><dd>-90.0</dd></dl></div><div class="xr-var-data"><pre>array([29.958334, 29.874998, 29.791666, 29.708334, 29.624998, 29.541666,
+       29.458334, 29.374998, 29.291666, 29.208334, 29.124998, 29.041666,
+       28.958334, 28.874998, 28.791666, 28.708334, 28.624998, 28.541666,
+       28.458334, 28.374998, 28.291666, 28.208334, 28.124998, 28.041666,
+       27.958334, 27.874998, 27.791666, 27.708334, 27.624998, 27.541666,
+       27.458334, 27.374998, 27.291666, 27.208334, 27.124998, 27.041666,
+       26.958334, 26.874998, 26.791666, 26.708334, 26.624998, 26.541666,
+       26.458334, 26.374998, 26.291666, 26.208334, 26.124998, 26.041666,
+       25.958334, 25.874998, 25.791662, 25.708334, 25.624998, 25.541662,
+       25.458334, 25.374998, 25.291662, 25.208334, 25.124998, 25.041662],
+      dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">longitude</span></div><div class="xr-var-dims">(longitude)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-94.96 -94.88 ... -90.12 -90.04</div><input id="attrs-2f1be628-8ebd-434a-888a-0b55069a7ec4" class="xr-var-attrs-in" type="checkbox"><label for="attrs-2f1be628-8ebd-434a-888a-0b55069a7ec4" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-fb987db7-1575-4b5a-b221-d55c64aad08d" class="xr-var-data-in" type="checkbox"><label for="data-fb987db7-1575-4b5a-b221-d55c64aad08d" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_CoordinateAxisType :</span></dt><dd>Lon</dd><dt><span>actual_range :</span></dt><dd>[-179.9583  179.9584]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Longitude</dd><dt><span>standard_name :</span></dt><dd>longitude</dd><dt><span>units :</span></dt><dd>degrees_east</dd><dt><span>valid_max :</span></dt><dd>180.0</dd><dt><span>valid_min :</span></dt><dd>-180.0</dd></dl></div><div class="xr-var-data"><pre>array([-94.958336, -94.875   , -94.791664, -94.708336, -94.625   , -94.541664,
+       -94.458336, -94.375   , -94.291664, -94.208336, -94.125   , -94.041664,
+       -93.958336, -93.875   , -93.791664, -93.708336, -93.625   , -93.541664,
+       -93.458336, -93.375   , -93.291664, -93.208336, -93.125   , -93.041664,
+       -92.958336, -92.875   , -92.791664, -92.708336, -92.625   , -92.541664,
+       -92.458336, -92.375   , -92.291664, -92.208336, -92.125   , -92.041664,
+       -91.958336, -91.875   , -91.791664, -91.708336, -91.625   , -91.541664,
+       -91.458336, -91.375   , -91.291664, -91.208336, -91.125   , -91.041664,
+       -90.958336, -90.875   , -90.791664, -90.708336, -90.625   , -90.541664,
+       -90.458336, -90.375   , -90.291664, -90.208336, -90.125   , -90.041664],
+      dtype=float32)</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-addf2b8e-e7ce-4fa0-b994-1ceb74c11591" class="xr-section-summary-in" type="checkbox"><label for="section-addf2b8e-e7ce-4fa0-b994-1ceb74c11591" class="xr-section-summary">Indexes: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>time</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-12c6184e-c91a-4c17-9728-33f320d6e42b" class="xr-index-data-in" type="checkbox"><label for="index-12c6184e-c91a-4c17-9728-33f320d6e42b" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(DatetimeIndex(['1997-09-16', '1997-10-16', '1997-11-16', '1997-12-16',
+               '1998-01-16', '1998-02-16', '1998-03-16', '1998-04-16',
+               '1998-05-16', '1998-06-16',
+               ...
+               '2010-03-16', '2010-04-16', '2010-05-16', '2010-06-16',
+               '2010-07-16', '2010-08-16', '2010-09-16', '2010-10-16',
+               '2010-11-16', '2010-12-16'],
+              dtype='datetime64[ns]', name='time', length=157, freq=None))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>latitude</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-5f664260-ba2c-46fb-a280-78776b283ee7" class="xr-index-data-in" type="checkbox"><label for="index-5f664260-ba2c-46fb-a280-78776b283ee7" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([ 29.95833396911621, 29.874998092651367,  29.79166603088379,
+        29.70833396911621, 29.624998092651367,  29.54166603088379,
+        29.45833396911621, 29.374998092651367,  29.29166603088379,
+        29.20833396911621, 29.124998092651367,  29.04166603088379,
+        28.95833396911621, 28.874998092651367,  28.79166603088379,
+        28.70833396911621, 28.624998092651367,  28.54166603088379,
+        28.45833396911621, 28.374998092651367,  28.29166603088379,
+        28.20833396911621, 28.124998092651367,  28.04166603088379,
+        27.95833396911621, 27.874998092651367,  27.79166603088379,
+        27.70833396911621, 27.624998092651367,  27.54166603088379,
+        27.45833396911621, 27.374998092651367,  27.29166603088379,
+        27.20833396911621, 27.124998092651367,  27.04166603088379,
+        26.95833396911621, 26.874998092651367,  26.79166603088379,
+        26.70833396911621, 26.624998092651367,  26.54166603088379,
+        26.45833396911621, 26.374998092651367,  26.29166603088379,
+        26.20833396911621, 26.124998092651367,  26.04166603088379,
+        25.95833396911621, 25.874998092651367, 25.791662216186523,
+        25.70833396911621, 25.624998092651367, 25.541662216186523,
+        25.45833396911621, 25.374998092651367, 25.291662216186523,
+        25.20833396911621, 25.124998092651367, 25.041662216186523],
+      dtype='float32', name='latitude'))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>longitude</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-3cfd9652-7693-4f9a-bf94-8fe055bc6079" class="xr-index-data-in" type="checkbox"><label for="index-3cfd9652-7693-4f9a-bf94-8fe055bc6079" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-94.95833587646484,            -94.875, -94.79166412353516,
+       -94.70833587646484,            -94.625, -94.54166412353516,
+       -94.45833587646484,            -94.375, -94.29166412353516,
+       -94.20833587646484,            -94.125, -94.04166412353516,
+       -93.95833587646484,            -93.875, -93.79166412353516,
+       -93.70833587646484,            -93.625, -93.54166412353516,
+       -93.45833587646484,            -93.375, -93.29166412353516,
+       -93.20833587646484,            -93.125, -93.04166412353516,
+       -92.95833587646484,            -92.875, -92.79166412353516,
+       -92.70833587646484,            -92.625, -92.54166412353516,
+       -92.45833587646484,            -92.375, -92.29166412353516,
+       -92.20833587646484,            -92.125, -92.04166412353516,
+       -91.95833587646484,            -91.875, -91.79166412353516,
+       -91.70833587646484,            -91.625, -91.54166412353516,
+       -91.45833587646484,            -91.375, -91.29166412353516,
+       -91.20833587646484,            -91.125, -91.04166412353516,
+       -90.95833587646484,            -90.875, -90.79166412353516,
+       -90.70833587646484,            -90.625, -90.54166412353516,
+       -90.45833587646484,            -90.375, -90.29166412353516,
+       -90.20833587646484,            -90.125, -90.04166412353516],
+      dtype='float32', name='longitude'))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-644b8d22-c791-43f9-b19e-7d6341007689" class="xr-section-summary-in" type="checkbox"><label for="section-644b8d22-c791-43f9-b19e-7d6341007689" class="xr-section-summary">Attributes: <span>(10)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"><dt><span>colorBarMaximum :</span></dt><dd>30.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.03</dd><dt><span>colorBarScale :</span></dt><dd>Log</dd><dt><span>ioos_category :</span></dt><dd>Ocean Color</dd><dt><span>long_name :</span></dt><dd>Chlorophyll Concentration, OCI Algorithm</dd><dt><span>references :</span></dt><dd>Hu, C., Lee Z., and Franz, B.A. (2012). Chlorophyll-a algorithms for oligotrophic oceans: A novel approach based on three-band reflectance difference, J. Geophys. Res., 117, C01011, doi:10.1029/2011JC007395.</dd><dt><span>standard_name :</span></dt><dd>concentration_of_chlorophyll_in_sea_water</dd><dt><span>units :</span></dt><dd>mg m^-3</dd><dt><span>valid_max :</span></dt><dd>100.0</dd><dt><span>valid_min :</span></dt><dd>0.001</dd></dl></div></li></ul></div></div>
+</div>
+</div>
+</section>
+<section id="plot-data-to-show-where-it-is-in-the-world." class="level3">
+<h3 class="anchored" data-anchor-id="plot-data-to-show-where-it-is-in-the-world.">Plot data to show where it is in the world.</h3>
+<div id="cell-18" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes of a Plate Carree projection with a central longitude of 180:</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ax1 <span class="op">=</span> plt.subplot(<span class="dv">211</span>, projection<span class="op">=</span>ccrs.PlateCarree(central_longitude<span class="op">=</span><span class="dv">180</span>))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the lon and lat ranges to set the extent of the map</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>ax1.set_extent([<span class="dv">240</span>, <span class="dv">300</span>, <span class="dv">5</span>, <span class="dv">45</span>], ccrs.PlateCarree())</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the tick marks to be slightly inside the map extents</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ax1.set_xticks(<span class="bu">range</span>(<span class="dv">235</span>, <span class="dv">305</span>, <span class="dv">20</span>), crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ax1.set_yticks(<span class="bu">range</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">10</span>), crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add features to the map</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>ax1.add_feature(cfeature.LAND, facecolor<span class="op">=</span><span class="st">'0.6'</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>ax1.coastlines()</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Format the lat and lon axis labels</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>lon_formatter <span class="op">=</span> LongitudeFormatter(zero_direction_label<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>lat_formatter <span class="op">=</span> LatitudeFormatter()</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>ax1.xaxis.set_major_formatter(lon_formatter)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>ax1.yaxis.set_major_formatter(lat_formatter)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>np.log10(sw_subset[<span class="op">-</span><span class="dv">1</span>]).plot.pcolormesh(ax<span class="op">=</span>ax1, </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>                                        transform<span class="op">=</span>ccrs.PlateCarree(), </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>                                        cmap<span class="op">=</span><span class="st">'jet'</span>, </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>                                        cbar_kwargs<span class="op">=</span>{<span class="st">'label'</span>: <span class="st">"log chlorophyll (mg m-3)"</span>})</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Time series data location - Gulf of Mexico'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>Text(0.5, 1.0, 'Time series data location - Gulf of Mexico')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="timeseries_compare_sensors_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="compute-the-monthly-mean-over-the-region" class="level3">
+<h3 class="anchored" data-anchor-id="compute-the-monthly-mean-over-the-region">Compute the monthly mean over the region</h3>
+<div id="cell-20" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>swAVG <span class="op">=</span> sw_subset.mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>,<span class="st">'longitude'</span>])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>swAVG.head()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># If you are running low on memory, uncomment the next line</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># del sw_subset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.DataArray 'chlorophyll' (time: 5)&gt;
+array([0.59386134, 0.59238297, 0.68359953, 0.81557316, 0.85900825],
+      dtype=float32)
+Coordinates:
+  * time     (time) datetime64[ns] 1997-09-16 1997-10-16 ... 1998-01-16</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.DataArray</div><div class="xr-array-name">'chlorophyll'</div><ul class="xr-dim-list"><li><span class="xr-has-index">time</span>: 5</li></ul></div><ul class="xr-sections"><li class="xr-section-item"><div class="xr-array-wrap"><input id="section-9625f1b4-81ab-4fd1-9767-be35b97df451" class="xr-array-in" type="checkbox" checked=""><label for="section-9625f1b4-81ab-4fd1-9767-be35b97df451" title="Show/hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-array-preview xr-preview"><span>0.5939 0.5924 0.6836 0.8156 0.859</span></div><div class="xr-array-data"><pre>array([0.59386134, 0.59238297, 0.68359953, 0.81557316, 0.85900825],
+      dtype=float32)</pre></div></div></li><li class="xr-section-item"><input id="section-d3ddfd6d-b81b-4eee-9b45-8193a5701c33" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-d3ddfd6d-b81b-4eee-9b45-8193a5701c33" class="xr-section-summary">Coordinates: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">time</span></div><div class="xr-var-dims">(time)</div><div class="xr-var-dtype">datetime64[ns]</div><div class="xr-var-preview xr-preview">1997-09-16 ... 1998-01-16</div><input id="attrs-652bef8c-5d4f-4588-98e8-784dd1f32366" class="xr-var-attrs-in" type="checkbox"><label for="attrs-652bef8c-5d4f-4588-98e8-784dd1f32366" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-a4670fc9-6578-4a6a-967e-e288fbb2a061" class="xr-var-data-in" type="checkbox"><label for="data-a4670fc9-6578-4a6a-967e-e288fbb2a061" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[8.7436800e+08 1.2924576e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Centered Time</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class="xr-var-data"><pre>array(['1997-09-16T00:00:00.000000000', '1997-10-16T00:00:00.000000000',
+       '1997-11-16T00:00:00.000000000', '1997-12-16T00:00:00.000000000',
+       '1998-01-16T00:00:00.000000000'], dtype='datetime64[ns]')</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-ebbbc3f5-7057-444a-b84e-8ee025966352" class="xr-section-summary-in" type="checkbox"><label for="section-ebbbc3f5-7057-444a-b84e-8ee025966352" class="xr-section-summary">Indexes: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>time</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-db92e134-8b9a-4a9c-a00c-f1074529dac3" class="xr-index-data-in" type="checkbox"><label for="index-db92e134-8b9a-4a9c-a00c-f1074529dac3" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(DatetimeIndex(['1997-09-16', '1997-10-16', '1997-11-16', '1997-12-16',
+               '1998-01-16'],
+              dtype='datetime64[ns]', name='time', freq=None))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-0643c92b-66f0-4d83-a929-84e2087c6eef" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-0643c92b-66f0-4d83-a929-84e2087c6eef" class="xr-section-summary" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div>
+</div>
+</div>
+</section>
+</section>
+<section id="get-monthly-modis-data" class="level2">
+<h2 class="anchored" data-anchor-id="get-monthly-modis-data">Get monthly MODIS data</h2>
+<section id="repeat-the-steps-above-to-get-data-for-the-modis-aqua-chlorophyll-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="repeat-the-steps-above-to-get-data-for-the-modis-aqua-chlorophyll-dataset">Repeat the steps above to get data for the MODIS Aqua chlorophyll dataset</h3>
+<div id="cell-22" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>url_modis <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.pfeg.noaa.gov'</span>,</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'erddap'</span>,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'griddap'</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'erdMH1chlamday_R2022SQ'</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                      ])</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>modis_ds <span class="op">=</span> xr.open_dataset(url_modis)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>modis_ds</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'earliest date ='</span>, modis_ds.time.values[<span class="dv">0</span>])</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'latest date ='</span>, modis_ds.time.values[<span class="op">-</span><span class="dv">1</span>], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'variables:'</span>, modis_ds.data_vars.keys(), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Is the first latitude value --&gt;'</span>, modis_ds.latitude[<span class="dv">0</span>].item())</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'greater than the last latitude value --&gt;'</span>, modis_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item())</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(modis_ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> modis_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item())</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>lat1 <span class="op">=</span> lat_min</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>lat2 <span class="op">=</span> lat_max</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> modis_ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> modis_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item():</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    lat1 <span class="op">=</span> lat_max</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    lat2 <span class="op">=</span> lat_min</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>modis_subset <span class="op">=</span> modis_ds[<span class="st">'chlor_a'</span>].sel(time<span class="op">=</span><span class="bu">slice</span>(modis_ds.time[<span class="dv">0</span>], modis_ds.time[<span class="op">-</span><span class="dv">1</span>]),</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>                                       latitude<span class="op">=</span><span class="bu">slice</span>(lat1, lat2),</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>                                       longitude<span class="op">=</span><span class="bu">slice</span>(lon_min, lon_max)</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>                                       )</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>modisAVG <span class="op">=</span> modis_subset.mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>, <span class="st">'longitude'</span>])</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="co"># If you are running low on memory, uncomment the next line</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="co"># del modis_subset </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>earliest date = 2002-07-16T00:00:00.000000000
+latest date = 2023-07-16T00:00:00.000000000 
+
+variables: KeysView(Data variables:
+    chlor_a  (time, latitude, longitude) float32 ...) 
+
+Is the first latitude value --&gt; 89.97916412353516
+greater than the last latitude value --&gt; -89.97917175292969
+True</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="get-monthly-viirs-data" class="level2">
+<h2 class="anchored" data-anchor-id="get-monthly-viirs-data">Get monthly VIIRS data</h2>
+<section id="repeat-the-steps-above-to-get-data-for-the-viirs-snpp-chlorophyll-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="repeat-the-steps-above-to-get-data-for-the-viirs-snpp-chlorophyll-dataset">Repeat the steps above to get data for the VIIRS SNPP chlorophyll dataset</h3>
+<div id="cell-24" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>url_viirs <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.noaa.gov'</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'erddap'</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'griddap'</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'noaacwNPPVIIRSSQchlaMonthly'</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                        ])</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>viirs_ds <span class="op">=</span> xr.open_dataset(url_viirs)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>viirs_ds</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'earliest date ='</span>, viirs_ds.time.values[<span class="dv">0</span>])</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'latest date ='</span>, viirs_ds.time.values[<span class="op">-</span><span class="dv">1</span>], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'variables:'</span>, viirs_ds.data_vars.keys(), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Is the first latitude value --&gt;'</span>, viirs_ds.latitude[<span class="dv">0</span>].item())</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'greater than the last latitude value --&gt;'</span>, viirs_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item())</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(viirs_ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> viirs_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item())</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>lat1 <span class="op">=</span> lat_min</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>lat2 <span class="op">=</span> lat_max</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> viirs_ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> viirs_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item():</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    lat1 <span class="op">=</span> lat_max</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    lat2 <span class="op">=</span> lat_min</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>viirs_subset <span class="op">=</span> modis_ds[<span class="st">'chlor_a'</span>].sel(time<span class="op">=</span><span class="bu">slice</span>(viirs_ds.time[<span class="dv">0</span>], viirs_ds.time[<span class="op">-</span><span class="dv">1</span>]),</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>                                       latitude<span class="op">=</span><span class="bu">slice</span>(lat1, lat2),</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>                                       longitude<span class="op">=</span><span class="bu">slice</span>(lon_min, lon_max)</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>                                       )</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>viirsAVG <span class="op">=</span> viirs_subset.mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>, <span class="st">'longitude'</span>])</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="co"># If you are running low on memory, uncomment the next line</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="co"># del viirs_subset </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>earliest date = 2012-01-02T12:00:00.000000000
+latest date = 2023-08-01T12:00:00.000000000 
+
+variables: KeysView(Data variables:
+    chlor_a  (time, altitude, latitude, longitude) float32 ...) 
+
+Is the first latitude value --&gt; 89.75625
+greater than the last latitude value --&gt; -89.75625
+True</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="plot-the-time-series" class="level2">
+<h2 class="anchored" data-anchor-id="plot-the-time-series">Plot the time series</h2>
+<section id="plot-the-result-for-three-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="plot-the-result-for-three-datasets">Plot the result for three datasets</h3>
+<div id="cell-26" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the SeaWiFS data</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.plot_date(swAVG.time, swAVG, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>              <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">3</span>, </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>              label<span class="op">=</span><span class="st">'SeaWiFS'</span>, c<span class="op">=</span><span class="st">'red'</span>, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>              linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Add MODIS data</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>plt.plot_date(modisAVG.time, modisAVG, </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>              <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">3</span>, </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>              label<span class="op">=</span><span class="st">'MODIS'</span>, c<span class="op">=</span><span class="st">'blue'</span>, </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>              linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Add VIIRS data</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>plt.plot_date(viirsAVG.time, viirsAVG, </span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>              <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">3</span>, </span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>              label<span class="op">=</span><span class="st">'VIIRS'</span>, c<span class="op">=</span><span class="st">'green'</span>, </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>              linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="dv">0</span>, <span class="dv">3</span>])</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Chl-a (mg m-3)'</span>) </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="timeseries_compare_sensors_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="get-oc-cci-data" class="level2">
+<h2 class="anchored" data-anchor-id="get-oc-cci-data">Get OC-CCI data</h2>
+<p>If you needed a single time series from 1997 to present, you would have to use the plot above to devise some method to reconcile the difference in values where two datasets overlap. Alternatively, you could use the ESA OC-CCI (Ocean Color Climate Change Initiative) dataset, which blends data from many satellite missions into a single dataset, including data from SeaWiFS, MODIS, and VIIRS.</p>
+<p>Add the ESA OC-CCI dataset to the plot above to see how it compares with data from the individual satellite missions.<br>
+### Repeat the steps above to get data from the ESA OC-CCI chlorophyll dataset</p>
+<div id="cell-28" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>url_cci <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.pfeg.noaa.gov'</span>,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'erddap'</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'griddap'</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'pmlEsaCCI60OceanColorMonthly'</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>                    ])</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>cci_ds <span class="op">=</span> xr.open_dataset(url_cci)</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>cci_ds</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'earliest date ='</span>, cci_ds.time.values[<span class="dv">0</span>])</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'latest date ='</span>, cci_ds.time.values[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># From the 93 variables in the dataset, </span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="co"># display only those with chl in the name</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>subset_variables <span class="op">=</span> [ln <span class="cf">for</span> ln <span class="kw">in</span> <span class="bu">list</span>(cci_ds.data_vars.keys()) <span class="cf">if</span> <span class="st">'chl'</span> <span class="kw">in</span> ln]</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'variables with chl in name:'</span>, subset_variables, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Is the first latitude value --&gt;'</span>, cci_ds.latitude[<span class="dv">0</span>].item())</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'greater than the last latitude value --&gt;'</span>, cci_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item())</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cci_ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> cci_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item())</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>lat1 <span class="op">=</span> lat_min</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>lat2 <span class="op">=</span> lat_max</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> cci_ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> cci_ds.latitude[<span class="op">-</span><span class="dv">1</span>].item():</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    lat1 <span class="op">=</span> lat_max</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    lat2 <span class="op">=</span> lat_min</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>cci_subset <span class="op">=</span> cci_ds[<span class="st">'chlor_a'</span>].sel(time<span class="op">=</span><span class="bu">slice</span>(cci_ds.time[<span class="dv">0</span>], cci_ds.time[<span class="op">-</span><span class="dv">1</span>]),</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>                                   latitude<span class="op">=</span><span class="bu">slice</span>(lat1, lat2),</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>                                   longitude<span class="op">=</span><span class="bu">slice</span>(lon_min, lon_max)</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>                                   )</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>cciAVG <span class="op">=</span> cci_subset.mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>, <span class="st">'longitude'</span>])</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a><span class="co"># If you are running low on memory, uncomment the next line</span></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a><span class="co"># del cci_subset </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>earliest date = 1997-09-04T00:00:00.000000000
+latest date = 2023-03-01T00:00:00.000000000
+variables with chl in name: ['chlor_a', 'chlor_a_log10_bias', 'chlor_a_log10_rmsd'] 
+
+Is the first latitude value --&gt; 89.97916666666667
+greater than the last latitude value --&gt; -89.97916666666666
+True</code></pre>
+</div>
+</div>
+</section>
+<section id="replot-the-results-using-data-from-all-four-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="replot-the-results-using-data-from-all-four-datasets">Replot the results using data from all four datasets</h2>
+<div id="cell-30" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add SeaWiFS data</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>plt.plot_date(swAVG.time, swAVG, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>              <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>              label<span class="op">=</span><span class="st">'SeaWiFS'</span>, c<span class="op">=</span><span class="st">'red'</span>, </span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>              linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Add MODIS data</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>plt.plot_date(modisAVG.time, modisAVG, </span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>              <span class="st">'s'</span>, markersize<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>              label<span class="op">=</span><span class="st">'MODIS'</span>, c<span class="op">=</span><span class="st">'blue'</span>, </span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>              linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add VIIRS data</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>plt.plot_date(viirsAVG.time, viirsAVG, </span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>              <span class="st">'^'</span>, markersize<span class="op">=</span><span class="dv">0</span>, </span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>              label<span class="op">=</span><span class="st">'VIIRS'</span>, c<span class="op">=</span><span class="st">'green'</span>, </span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>              linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add CCI data</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>plt.plot_date(cciAVG.time, cciAVG, </span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>              <span class="st">'o'</span>, markersize<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>              label<span class="op">=</span><span class="st">'OC-CCI'</span>, c<span class="op">=</span><span class="st">'black'</span>, </span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>              linestyle<span class="op">=</span><span class="st">'-'</span>, linewidth<span class="op">=</span><span class="dv">1</span>) </span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>plt.ylim([<span class="dv">0</span>, <span class="dv">3</span>])</span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Chl-a (mg m-3)'</span>) </span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="timeseries_compare_sensors_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<ul>
+<li>CoastWatch Node websites have data catalogs containing documentation and links to all the datasets available:
+<ul>
+<li>https://oceanwatch.pifsc.noaa.gov/doc.html</li>
+<li>https://coastwatch.pfeg.noaa.gov/data.html</li>
+<li>https://polarwatch.noaa.gov/catalog/</li>
+</ul></li>
+</ul>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

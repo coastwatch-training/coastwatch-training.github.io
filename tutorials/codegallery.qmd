@@ -1,0 +1,58 @@
+---
+title: "Code Gallery"
+---
+
+This page lists CoastWatch code gallery tutorials.  
+Click the **eye** icon to view the tutorial or **download** to get the source file.
+
+```{python}
+import pandas as pd
+from IPython.display import HTML
+
+# CHANGE THESE IF YOU RENAME THE REPO
+REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
+
+df = pd.read_csv("code_gallery.csv").fillna("")
+
+def view_icon(path, label):
+    if not path:
+        return '<span class="text-muted">—</span>'
+    return (
+        f'<a href="{path}" aria-label="{label}">'
+        f'<i class="bi bi-eye-fill"></i></a>'
+    )
+
+def download_icon(repo_path, label):
+    if not repo_path:
+        return '<span class="text-muted">—</span>'
+    return (
+        f'<a href="{REPO_RAW_BASE}{repo_path}" aria-label="{label}">'
+        f'<i class="bi bi-download"></i></a>'
+    )
+
+rows = []
+for _, r in df.iterrows():
+    rows.append({
+        "Title": r["title"],
+        "Category": r["category"],
+        "Python": view_icon(r["py_view"], f"View Python: {r['title']}"),
+        "Python ↓": download_icon(r["py_download"], f"Download Python: {r['title']}"),
+        "R": view_icon(r["r_view"], f"View R: {r['title']}"),
+        "R ↓": download_icon(r["r_download"], f"Download R: {r['title']}"),
+    })
+
+out = pd.DataFrame(rows)
+
+HTML(
+    out.to_html(
+        index=False,
+        escape=False,
+        classes=["code-gallery-table"]
+    )
+)
+```
+
+
+
+
+
