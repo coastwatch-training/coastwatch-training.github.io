@@ -109,3 +109,15 @@
   outline:none;
   box-shadow:0 0 0 3px rgba(13,110,253,0.35);
 }
+
+.cg-carousel{position:relative}
+.cg-carousel img{display:none}
+.cg-carousel img.active{display:block}
+.cg-nav{
+  display:flex; gap:8px; align-items:center; justify-content:space-between;
+  margin-top:8px;
+}
+.cg-arrow{
+  border:0; background:#eee; padding:6px 10px; border-radius:10px; cursor:pointer;
+}
+.cg-count{font-size:0.9em; opacity:0.75}

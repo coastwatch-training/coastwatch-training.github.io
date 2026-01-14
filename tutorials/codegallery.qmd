@@ -19,7 +19,6 @@ from urllib.parse import quote
 REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
 REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
 
-
 df = pd.read_csv("code_gallery.csv", encoding="utf-8-sig").fillna("")
 
 EYE_SVG = (
@@ -76,14 +75,51 @@ def modal_eye(modal_id):
         f'class="cg-icon">{EYE_SVG}</a>'
     )
 
+
 def download_icon(path):
     if not path:
         return "—"
     filename = path.split("/")[-1]
-    url = f"{REPO_BLOB_BASE}{quote(path)}?raw=1"
+    url = f"{REPO_BLOB_BASE}{quote(path)}"
     return (
-        f'<a href="{url}" class="cg-icon" aria-label="Download {filename}" '
-        f'download="{filename}" target="_blank" rel="noopener">{DOWNLOAD_SVG}</a>'
+        f'<a href="{url}" class="cg-icon" aria-label="Open {filename} on GitHub" '
+        f'target="_blank" rel="noopener">{DOWNLOAD_SVG}</a>'
+    )
+
+
+def render_carousel(img_cell, carousel_id):
+    """
+    img_cell: CSV value like 'a.png|b.png|c.png' OR 'a.png'
+    carousel_id: unique DOM id for this carousel
+    """
+    if not img_cell:
+        return "<div class='text-muted'>No preview image</div>"
+
+    imgs = [x.strip() for x in str(img_cell).split("|") if x.strip()]
+    if not imgs:
+        return "<div class='text-muted'>No preview image</div>"
+
+    # root-relative so it works regardless of page location
+    img_tags = []
+    for j, fn in enumerate(imgs):
+        cls = "active" if j == 0 else ""
+        img_tags.append(f"<img class='{cls}' src='/images/{fn}' loading='lazy'>")
+
+    nav = ""
+    if len(imgs) > 1:
+        nav = (
+            f"<div class='cg-nav'>"
+            f"  <button class='cg-arrow' onclick=\"cgPrev('{carousel_id}')\">◀</button>"
+            f"  <span class='cg-count'>1 / {len(imgs)}</span>"
+            f"  <button class='cg-arrow' onclick=\"cgNext('{carousel_id}')\">▶</button>"
+            f"</div>"
+        )
+
+    return (
+        f"<div id='{carousel_id}' class='cg-carousel' data-idx='0'>"
+        f"{''.join(img_tags)}"
+        f"{nav}"
+        f"</div>"
     )
 
 rows = []
@@ -108,12 +144,12 @@ for i, r in df.iterrows():
       <div class="cg-grid">
         <div>
           <strong>Python output</strong>
-          <img src="images/{r["py_img"]}" loading="lazy">
+          {render_carousel(r["py_img"], f"py-carousel-{i}")}
           <p><a class="cg-btn" href="{r["py_view"]}">View Python tutorial</a></p>
         </div>
         <div>
           <strong>R output</strong>
-          <img src="images/{r["r_img"]}" loading="lazy">
+          {render_carousel(r["r_img"], f"py-carousel-{i}")}
           <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
         </div>
       </div>
@@ -162,6 +198,36 @@ HTML(CSS_JS + table + "".join(modals))
     if(e.key === "Escape") closeModal();
   });
 })();
+</script>
+
+<script>
+function cgShow(idx, id){
+  const root = document.getElementById(id);
+  if(!root) return;
+  const imgs = root.querySelectorAll("img");
+  if(!imgs.length) return;
+
+  const n = imgs.length;
+  idx = ((idx % n) + n) % n;
+
+  imgs.forEach((im, j) => im.classList.toggle("active", j === idx));
+  root.dataset.idx = String(idx);
+
+  const counter = root.querySelector(".cg-count");
+  if(counter) counter.textContent = (idx+1) + " / " + n;
+}
+
+function cgPrev(id){
+  const root = document.getElementById(id);
+  const idx = parseInt(root?.dataset?.idx || "0", 10);
+  cgShow(idx - 1, id);
+}
+
+function cgNext(id){
+  const root = document.getElementById(id);
+  const idx = parseInt(root?.dataset?.idx || "0", 10);
+  cgShow(idx + 1, id);
+}
 </script>
 
 <div id="cg-backdrop" class="cg-modal-backdrop" onclick="cgCloseModal()" aria-hidden="true"></div>
