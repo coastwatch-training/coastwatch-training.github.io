@@ -116,7 +116,7 @@
     "href": "tutorials/codegallery.html",
     "title": "Code Gallery",
     "section": "",
-    "text": "This page lists CoastWatch code gallery tutorials.\nClick the eye icon to view the tutorial or download to get the source file.\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nCategory\nPython\nPython ↓\nR\nR ↓\n\n\n\n\nAccess satellite data\nData Access\n\n\n\n\n\n\n\n\n\n\n—\n—\n\n\nCompare sensors\nTime Series",
+    "text": "This page lists CoastWatch code gallery tutorials.\nClick the eye icon to view the tutorial or download to get the source file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nCategory\nPreview\nPython ↓\nR ↓\n\n\n\n\nAccess satellite data\nData Access\n\n\n\n\n\n\n\n\n\n\n—\n\n\nCompare sensors\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n      Access satellite data\n      Description here\n\n      \n        \n          Python output\n          \n          View Python tutorial\n        \n        \n          R output\n          \n          View R tutorial\n        \n      \n\n      Close\n    \n    \n    \n      Compare sensors\n      Description here\n\n      \n        \n          Python output\n          \n          View Python tutorial\n        \n        \n          R output\n          \n          View R tutorial\n        \n      \n\n      Close",
     "crumbs": [
       "Training Tutorials",
       "Code Gallery"

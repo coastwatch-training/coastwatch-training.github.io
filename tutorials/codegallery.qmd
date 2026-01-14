@@ -7,6 +7,7 @@ Click the **eye** icon to view the tutorial or **download** to get the source fi
 
 
 ```{python}
+
 #| echo: false
 #| warning: false
 #| message: false
@@ -14,16 +15,14 @@ Click the **eye** icon to view the tutorial or **download** to get the source fi
 import pandas as pd
 from IPython.display import HTML
 
-# CHANGE THESE IF YOU RENAME THE REPO
 REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
 
 df = pd.read_csv("code_gallery.csv", encoding="utf-8-sig").fillna("")
 
-# Simple, reliable inline SVGs (no newlines in the output)
 EYE_SVG = (
     '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
     'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
-    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    'stroke-linecap="round" stroke-linejoin="round">'
     '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>'
     '<circle cx="12" cy="12" r="3"></circle>'
     '</svg>'
@@ -32,49 +31,132 @@ EYE_SVG = (
 DOWNLOAD_SVG = (
     '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
     'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
-    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+    'stroke-linecap="round" stroke-linejoin="round">'
     '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>'
     '<path d="M7 10l5 5 5-5"></path>'
     '<path d="M12 15V3"></path>'
     '</svg>'
 )
 
-def icon_link(url, label, svg):
-    if not url:
-        return '<span class="text-muted">—</span>'
-    return f'<a class="cg-icon" href="{url}" aria-label="{label}">{svg}</a>'
+CSS_JS = """
+<style>
+.cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
+.cg-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+width:min(900px,92vw);max-height:85vh;overflow:auto;background:#fff;
+border-radius:14px;padding:18px;display:none;z-index:1000;
+box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.cg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:750px){.cg-grid{grid-template-columns:1fr}}
+.cg-modal img{width:100%;border-radius:10px;border:1px solid #ddd}
+.cg-close{border:0;background:#eee;padding:8px 10px;border-radius:10px;cursor:pointer}
+.cg-btn{padding:8px 10px;border-radius:10px;border:1px solid #ccc;text-decoration:none}
+</style>
 
-def view_icon(path, label):
-    return icon_link(path, label, EYE_SVG)
+<script>
+function cgOpenModal(id){
+  document.getElementById("cg-backdrop").style.display="block";
+  document.getElementById(id).style.display="block";
+}
+function cgCloseModal(){
+  document.getElementById("cg-backdrop").style.display="none";
+  document.querySelectorAll(".cg-modal").forEach(m=>m.style.display="none");
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
+</script>
 
-def download_icon(repo_path, label):
-    if not repo_path:
-        return '<span class="text-muted">—</span>'
-    url = f"{REPO_RAW_BASE}{repo_path}"
-    return icon_link(url, label, DOWNLOAD_SVG)
+<div id="cg-backdrop" class="cg-backdrop" onclick="cgCloseModal()"></div>
+"""
+
+def modal_eye(modal_id):
+    return (
+        f'<a href="javascript:void(0)" onclick="cgOpenModal(\'{modal_id}\')" '
+        f'class="cg-icon">{EYE_SVG}</a>'
+    )
+
+def download_icon(path):
+    if not path:
+        return "—"
+    return f'<a href="{REPO_RAW_BASE}{path}" class="cg-icon">{DOWNLOAD_SVG}</a>'
 
 rows = []
-for _, r in df.iterrows():
+modals = []
+
+for i, r in df.iterrows():
+    mid = f"cg-modal-{i}"
+
     rows.append({
         "Title": r["title"],
         "Category": r["category"],
-        "Python": view_icon(r["py_view"], f"View Python: {r['title']}"),
-        "Python ↓": download_icon(r["py_download"], f"Download Python: {r['title']}"),
-        "R": view_icon(r["r_view"], f"View R: {r['title']}"),
-        "R ↓": download_icon(r["r_download"], f"Download R: {r['title']}"),
+        "Preview": modal_eye(mid),
+        "Python ↓": download_icon(r["py_download"]),
+        "R ↓": download_icon(r["r_download"]),
     })
 
-out = pd.DataFrame(rows)
+    modals.append(f"""
+    <div id="{mid}" class="cg-modal">
+      <h3>{r["title"]}</h3>
+      <p>{r["description"]}</p>
 
-HTML(
-    out.to_html(
-        index=False,
-        escape=False,
-        classes=["code-gallery-table"]
-    )
+      <div class="cg-grid">
+        <div>
+          <strong>Python output</strong>
+          <img src="{r["py_img"]}" loading="lazy">
+          <p><a class="cg-btn" href="{r["py_view"]}">View Python tutorial</a></p>
+        </div>
+        <div>
+          <strong>R output</strong>
+          <img src="{r["r_img"]}" loading="lazy">
+          <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
+        </div>
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    """)
+
+table = pd.DataFrame(rows).to_html(
+    index=False,
+    escape=False,
+    classes=["code-gallery-table"]
 )
+
+HTML(CSS_JS + table + "".join(modals))
+
 ```
 
+
+<script>
+(function(){
+  function openModal(id){
+    const backdrop = document.getElementById("cg-backdrop");
+    const modal = document.getElementById(id);
+    if(!backdrop || !modal) return;
+    backdrop.style.display = "block";
+    modal.style.display = "block";
+    modal.setAttribute("aria-hidden","false");
+  }
+
+  function closeModal(){
+    const backdrop = document.getElementById("cg-backdrop");
+    if(backdrop) backdrop.style.display = "none";
+    document.querySelectorAll(".cg-modal").forEach(m => {
+      m.style.display = "none";
+      m.setAttribute("aria-hidden","true");
+    });
+  }
+
+  // expose globally so inline onclick works
+  window.cgOpenModal = openModal;
+  window.cgCloseModal = closeModal;
+
+  // close on ESC
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeModal();
+  });
+})();
+</script>
+
+<div id="cg-backdrop" class="cg-modal-backdrop" onclick="cgCloseModal()" aria-hidden="true"></div>
 
 
 

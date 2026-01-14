@@ -355,24 +355,49 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="ea44c968" class="cell" data-message="false" data-execution_count="1">
+<div id="834c065d" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
+<style>
+.cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
+.cg-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+width:min(900px,92vw);max-height:85vh;overflow:auto;background:#fff;
+border-radius:14px;padding:18px;display:none;z-index:1000;
+box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.cg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:750px){.cg-grid{grid-template-columns:1fr}}
+.cg-modal img{width:100%;border-radius:10px;border:1px solid #ddd}
+.cg-close{border:0;background:#eee;padding:8px 10px;border-radius:10px;cursor:pointer}
+.cg-btn{padding:8px 10px;border-radius:10px;border:1px solid #ccc;text-decoration:none}
+</style>
+
+<script>
+function cgOpenModal(id){
+  document.getElementById("cg-backdrop").style.display="block";
+  document.getElementById(id).style.display="block";
+}
+function cgCloseModal(){
+  document.getElementById("cg-backdrop").style.display="none";
+  document.querySelectorAll(".cg-modal").forEach(m=>m.style.display="none");
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
+</script>
+
+<div id="cg-backdrop" class="cg-backdrop" onclick="cgCloseModal()"></div>
+
 <table class="dataframe code-gallery-table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th">Title</th>
 <th data-quarto-table-cell-role="th">Category</th>
-<th data-quarto-table-cell-role="th">Python</th>
+<th data-quarto-table-cell-role="th">Preview</th>
 <th data-quarto-table-cell-role="th">Python ↓</th>
-<th data-quarto-table-cell-role="th">R</th>
 <th data-quarto-table-cell-role="th">R ↓</th>
 </tr>
 </thead>
@@ -380,46 +405,113 @@ Click the <strong>eye</strong> icon to view the tutorial or <strong>download</st
 <tr class="odd">
 <td>Access satellite data</td>
 <td>Data Access</td>
-<td><a class="cg-icon" href="../tutorials/data-access/convert-180+180-to-0-360-longitude.html" aria-label="View Python: Access satellite data">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-0')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
 </svg>
 </a></td>
-<td><a class="cg-icon" href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/data-access/convert-180+180-to-0-360-longitude.ipynb" aria-label="Download Python: Access satellite data">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/data-access/convert-180+180-to-0-360-longitude.ipynb" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
-<td><span class="text-muted">—</span></td>
-<td><span class="text-muted">—</span></td>
+<td>—</td>
 </tr>
 <tr class="even">
 <td>Compare sensors</td>
 <td>Time Series</td>
-<td><a class="cg-icon" href="../tutorials/time-series/timeseries_compare_sensors.html" aria-label="View Python: Compare sensors">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-1')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
 </svg>
 </a></td>
-<td><a class="cg-icon" href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/time-series/timeseries_compare_sensors.ipynb" aria-label="Download Python: Compare sensors">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/time-series/timeseries_compare_sensors.ipynb" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
-<td><a class="cg-icon" href="time-series/compare-sensors.qmd" aria-label="View R: Compare sensors">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
-</svg>
-</a></td>
-<td><a class="cg-icon" href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/time-series/compare-sensors.Rmd" aria-label="Download R: Compare sensors">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/tutorials/time-series/compare-sensors.Rmd" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
 </tr>
 </tbody>
 </table>
+
+    <div id="cg-modal-0" class="cg-modal">
+      <h3 class="anchored">Access satellite data</h3>
+      <p>Description here</p>
+
+      <div class="cg-grid">
+        <div>
+          <strong>Python output</strong>
+          <img src="preview/lon.png" loading="lazy">
+          <p><a class="cg-btn" href="../tutorials/data-access/convert-180+180-to-0-360-longitude.html">View Python tutorial</a></p>
+        </div>
+        <div>
+          <strong>R output</strong>
+          <img src="" loading="lazy">
+          <p><a class="cg-btn" href="">View R tutorial</a></p>
+        </div>
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-1" class="cg-modal">
+      <h3 class="anchored">Compare sensors</h3>
+      <p>Description here</p>
+
+      <div class="cg-grid">
+        <div>
+          <strong>Python output</strong>
+          <img src="" loading="lazy">
+          <p><a class="cg-btn" href="../tutorials/time-series/timeseries_compare_sensors.html">View Python tutorial</a></p>
+        </div>
+        <div>
+          <strong>R output</strong>
+          <img src="preview/chla.png" loading="lazy">
+          <p><a class="cg-btn" href="time-series/compare-sensors.qmd">View R tutorial</a></p>
+        </div>
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
 </div>
+</div>
+<script>
+(function(){
+  function openModal(id){
+    const backdrop = document.getElementById("cg-backdrop");
+    const modal = document.getElementById(id);
+    if(!backdrop || !modal) return;
+    backdrop.style.display = "block";
+    modal.style.display = "block";
+    modal.setAttribute("aria-hidden","false");
+  }
+
+  function closeModal(){
+    const backdrop = document.getElementById("cg-backdrop");
+    if(backdrop) backdrop.style.display = "none";
+    document.querySelectorAll(".cg-modal").forEach(m => {
+      m.style.display = "none";
+      m.setAttribute("aria-hidden","true");
+    });
+  }
+
+  // expose globally so inline onclick works
+  window.cgOpenModal = openModal;
+  window.cgCloseModal = closeModal;
+
+  // close on ESC
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeModal();
+  });
+})();
+</script>
+<div id="cg-backdrop" class="cg-modal-backdrop" onclick="cgCloseModal()" aria-hidden="true">
+
 </div>
 
 
