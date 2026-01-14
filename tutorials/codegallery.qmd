@@ -87,6 +87,20 @@ def download_icon(path):
     )
 
 
+def view_link(path):
+    """
+    Use site path for HTML; use GitHub blob for Markdown so it renders nicely.
+    """
+    if not path:
+        return ""
+    p = str(path).strip()
+    if p.lower().endswith(".md"):
+        # GitHub renders markdown nicely on blob pages
+        return f"{REPO_BLOB_BASE}{quote(p.lstrip('/'))}"
+    # otherwise treat as a normal site link (root-relative)
+    return p if p.startswith("/") else f"/{p}"
+
+
 def render_carousel(img_cell, carousel_id):
     """
     img_cell: CSV value like 'a.png|b.png|c.png' OR 'a.png'
@@ -150,7 +164,7 @@ for i, r in df.iterrows():
         <div>
           <strong>R output</strong>
           {render_carousel(r["r_img"], f"r-carousel-{i}")}
-          <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
+          <p><a class="cg-btn" href="{view_link(r["r_view"])}" target="_blank" rel="noopener">View R tutorial</a></p>
         </div>
       </div>
 
