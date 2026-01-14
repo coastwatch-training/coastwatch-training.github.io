@@ -14,8 +14,11 @@ Click the **eye** icon to view the tutorial or **download** to get the source fi
 
 import pandas as pd
 from IPython.display import HTML
+from urllib.parse import quote
 
 REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
+REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
+
 
 df = pd.read_csv("code_gallery.csv", encoding="utf-8-sig").fillna("")
 
@@ -76,7 +79,12 @@ def modal_eye(modal_id):
 def download_icon(path):
     if not path:
         return "—"
-    return f'<a href="{REPO_RAW_BASE}{path}" class="cg-icon">{DOWNLOAD_SVG}</a>'
+    filename = path.split("/")[-1]
+    url = f"{REPO_BLOB_BASE}{quote(path)}?raw=1"
+    return (
+        f'<a href="{url}" class="cg-icon" aria-label="Download {filename}" '
+        f'download="{filename}" target="_blank" rel="noopener">{DOWNLOAD_SVG}</a>'
+    )
 
 rows = []
 modals = []
@@ -100,12 +108,12 @@ for i, r in df.iterrows():
       <div class="cg-grid">
         <div>
           <strong>Python output</strong>
-          <img src="{r["py_img"]}" loading="lazy">
+          <img src="images/{r["py_img"]}" loading="lazy">
           <p><a class="cg-btn" href="{r["py_view"]}">View Python tutorial</a></p>
         </div>
         <div>
           <strong>R output</strong>
-          <img src="{r["r_img"]}" loading="lazy">
+          <img src="images/{r["r_img"]}" loading="lazy">
           <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
         </div>
       </div>
