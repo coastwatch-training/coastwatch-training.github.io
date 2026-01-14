@@ -149,7 +149,7 @@ for i, r in df.iterrows():
         </div>
         <div>
           <strong>R output</strong>
-          {render_carousel(r["r_img"], f"py-carousel-{i}")}
+          {render_carousel(r["r_img"], f"r-carousel-{i}")}
           <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
         </div>
       </div>

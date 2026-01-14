@@ -14,10 +14,115 @@
     "href": "tutorials/codegallery.html",
     "title": "Code Gallery",
     "section": "",
-    "text": "This page lists CoastWatch code gallery tutorials.\nClick the eye icon to view the tutorial or download to get the source file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nCategory\nPreview\nPython ↓\nR ↓\n\n\n\n\nAccess satellite data\nData Access\n\n\n\n\n\n\n\n\n\n\n—\n\n\nCompare sensors\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMake a virtual buoy with satellite data\nTime Series & Trend Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n      Access satellite data\n      Description here\n\n      \n        \n          Python output\n          \n          View Python tutorial\n        \n        \n          R output\n          No preview image\n          View R tutorial\n        \n      \n\n      Close\n    \n    \n    \n      Compare sensors\n      Description here\n\n      \n        \n          Python output\n          No preview image\n          View Python tutorial\n        \n        \n          R output\n          \n          View R tutorial\n        \n      \n\n      Close\n    \n    \n    \n      Make a virtual buoy with satellite data\n      \"Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series using Python, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset.\"\n\n      \n        \n          Python output\n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n          R output\n            ◀  1 / 2  ▶\n          View R tutorial\n        \n      \n\n      Close",
+    "text": "This page lists CoastWatch code gallery tutorials.\nClick the eye icon to view the tutorial or download to get the source file.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nCategory\nPreview\nPython ↓\nR ↓\n\n\n\n\nAccess satellite data\nData Access\n\n\n\n\n\n\n\n\n\n\n—\n\n\nCompare sensors\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMake a virtual buoy with satellite data\nTime Series & Trend Analysis\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n      Access satellite data\n      Description here\n\n      \n        \n          Python output\n          \n          View Python tutorial\n        \n        \n          R output\n          No preview image\n          View R tutorial\n        \n      \n\n      Close\n    \n    \n    \n      Compare sensors\n      Description here\n\n      \n        \n          Python output\n          No preview image\n          View Python tutorial\n        \n        \n          R output\n          \n          View R tutorial\n        \n      \n\n      Close\n    \n    \n    \n      Make a virtual buoy with satellite data\n      Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series using Python, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset.\n\n      \n        \n          Python output\n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n          R output\n            ◀  1 / 2  ▶\n          View R tutorial\n        \n      \n\n      Close",
     "crumbs": [
       "Training Tutorials",
       "Code Gallery"
     ]
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "",
+    "text": "History | Updated August 2023 ## Background There are buoys in many locations around the world that provide data streams of oceanic and atmospheric parameters. The data are often available through data centers like the National Data Buoy Center (NDBC https://www.ndbc.noaa.gov) and ARGO floats program (http://www.argo.ucsd.edu). Despite these impressive efforts to monitor environmental conditions, in situ buoy data may not be available for your area of interest. Some locations are hard to access, making deploying and maintaining a buoy impractical. In addition, buoys are expensive to purchase, deploy and maintain. Therefore, limited funding may prevent installation of a buoy or the continued operation of a buoy already in place.\nUsing satellite data to create virtual buoys can provide a solution to monitoring surface environmental conditions at locations where it is not feasible to install a buoy. For example, the University of South Florida has developed a virtual buoy system for locations off the Florida coast (https://optics.marine.usf.edu/projects/vbs.html)."
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#objectives",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#objectives",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Objectives",
+    "text": "Objectives\nThe following exercise will demonstrate the use of the ERDDAP data server to create a virtual buoy. For the scenario, we will envision that a virtual buoy is needed to continue the datastream for an in situ buoy that was discontinued at the end of 2019. For this exercise we will use the National Data Buoy Center (NDBC) buoy # 46259, which is located off the California coast at 34.767N latitude and -121.497E longitude, and pretend that it was discontinued at the end of 2019. The buoy measures several oceanic variables, but we will continue the sea surface temperature (SST) datastream using NOAA GeoPolar Blended SST satellite dataset."
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#the-tutorial-demonstrates-the-following-skills",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#the-tutorial-demonstrates-the-following-skills",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "The tutorial demonstrates the following skills:",
+    "text": "The tutorial demonstrates the following skills:\n\nThe use of ERDDAP to create a virtual buoy\n\nThe use of the pandas and xarray modules to import and manipulate data\n\nResampling data to bin them into a lower resolution time steps\nGenerating a linear regression and statistics\nPlotting time-series data\n\nCleaning data to remove outlying data points"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#datasets-used",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#datasets-used",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Datasets used",
+    "text": "Datasets used\nNDBC Buoy Data\nThe National Data Buoy Center (NDBC) distributes meteorological data from moored buoys maintained by NDBC and others. They are deployed in the coastal and offshore waters from the western Atlantic to the Pacific Ocean around Hawaii, and from the Bering Sea to the South Pacific. For this tutorial we will use buoy number 46259. NDBC data are available from the CoastWatch West Coast Node ERDDAP. https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#import-required-modules",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#import-required-modules",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Import required modules",
+    "text": "Import required modules\n\nimport numpy as np\nimport xarray as xr\nfrom datetime import datetime\nimport os\nimport pandas as pd\nimport io\nimport requests\nimport matplotlib.pyplot as plt\nimport matplotlib.dates as mdates\nimport seaborn as sns\nfrom sklearn.metrics import r2_score\n\n# the %matplotlib is a magic function allow displaying results in notebooks\n%matplotlib inline\n\n# some tools for Pandas to work will with matplotlib\nfrom pandas.plotting import register_matplotlib_converters"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#a-note-about-tabledap",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#a-note-about-tabledap",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "A note about tabledap",
+    "text": "A note about tabledap\nMost of our examples in this course use gridded datasets. The NDBC data for this tutorial is a tabular dataset, served via the tabledap part of ERDDAP. The API for tabledap is a little different than for gridded datasets. You can go to the following URL and play around with subsetting. Then push the “Just generate the URL” button, copy the link, put it in a browser. See if you get what you expected. https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet\nA quick primer is below\nThe data request URL has three parts: 1. Base URL: https://url/erddap/tabledap/datasetID.fileType? * e.g. https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.csv?\n\nA list of variables you want to download that are separated by commas\n\n\n\ne.g. station,longitude,latitude,time,wtmp\n\n\nA list of constraints, each starting with an ampersand (&).\n\n\nThe constraints use =, &gt;, &gt;=, &lt;, and &lt;= to subset the data\ne.g. &station=“46259”, mean station # 46259\ne.g. &time&gt;=2017-01-01T&time&lt;=2020-12-31’, means time between and including Jan. 1, 2017 and Dec. 31, 2020.\n\nThe data request URL we will use for the NDBC data:\nndbc_url = 'https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.csv?station,longitude,latitude,time,wtmp&station=\"46259\"&time&gt;=2017-01-01T&time&lt;=2020-12-31"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#download-the-data-into-a-pandas-dataframe",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#download-the-data-into-a-pandas-dataframe",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Download the data into a Pandas dataframe",
+    "text": "Download the data into a Pandas dataframe\n\n# Break the url into part and rejoin it so that it is easier to see.\nndbc_url = ''.join(['https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.csv?',\n                    'station,longitude,latitude,time,wtmp',\n                    '&station=\"46259\"&time&gt;=2018-01-01&time&lt;=2019-12-31'\n                    ])\n\nreq = requests.get(ndbc_url).content\nbuoy_df = pd.read_csv(io.StringIO(req.decode('utf-8')), skiprows=[1], parse_dates=['time'])\nbuoy_df.head(2)\n\n\n\n\n\n\n\n\nstation\nlongitude\nlatitude\ntime\nwtmp\n\n\n\n\n0\n46259\n-121.664\n34.732\n2018-01-01 00:22:00+00:00\n14.6\n\n\n1\n46259\n-121.664\n34.732\n2018-01-01 00:52:00+00:00\n14.6\n\n\n\n\n\n\n\n\nExtract the longitude and latitude coordinates for the station\nAfter, clean up the dataframe by deleting unneeded columns.\n\nbuoy_lat = buoy_df.latitude[0]\nbuoy_lon = buoy_df.longitude[0]\n\n# Clean up the dataset by removing unneeded columns\ndel buoy_df['station']\ndel buoy_df['latitude']\ndel buoy_df['longitude'] \n\nprint('latitude', buoy_lat)\nprint('longitude', buoy_lon)\n\nlatitude 34.732\nlongitude -121.664"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#process-the-buoy-data",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#process-the-buoy-data",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Process the buoy data",
+    "text": "Process the buoy data\nThe measurement rate of the buoy is on the order of minutes. We need to downsample the dataset to the daily resolution of the satellite dataset.\nThere are a few cleanup steps that are needed:\n* The time data are associated with the UTC time zone. Panda operations often don’t like time zones so let’s get rid of it. * Rename the SST variable to something more intuitive\n\nprint('# of timesteps before =', buoy_df.shape[0] )\n\n# The resampling will put time as the df index\nbuoy_df_resampled = buoy_df.resample('D', on='time').mean()\nprint('# of timesteps after =', buoy_df_resampled.shape[0] )\n\n# Remove the timezone (UTC, GMT).\nbuoy_df_resampled = buoy_df_resampled.tz_localize(None)\n\n# Rename the SST variable\nbuoy_df_resampled.rename(columns={\"wtmp\": \"sst_buoy\"}, errors=\"raise\", inplace=True)\nbuoy_df_resampled\n\nbuoy_df_resampled.head(2)\n\n# of timesteps before = 34455\n# of timesteps after = 730\n\n\n\n\n\n\n\n\n\nsst_buoy\n\n\ntime\n\n\n\n\n\n2018-01-01\n14.679167\n\n\n2018-01-02\n14.891489"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#load-the-satellite-data-into-xarray-and-subset",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#load-the-satellite-data-into-xarray-and-subset",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Load the satellite data into xarray and subset",
+    "text": "Load the satellite data into xarray and subset\n\n# Put satellite data xarray dataset object\nsst_url = 'https://coastwatch.noaa.gov/erddap/griddap/noaacwBLENDEDCsstDaily'\nsst_ds = xr.open_dataset(sst_url)\n\n# Subset the dataset\nsst_ds_subset = sst_ds['analysed_sst'].sel(latitude=buoy_lat,\n                            longitude = buoy_lon, method='nearest'\n                            ).sel(time=slice('2018-01-01', \n                                             '2019-12-31'\n                                             ))\n\nsst_ds_subset\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n&lt;xarray.DataArray 'analysed_sst' (time: 692)&gt;\n[692 values with dtype=float32]\nCoordinates:\n  * time       (time) datetime64[ns] 2018-01-01T12:00:00 ... 2019-12-31T12:00:00\n    latitude   float32 34.72\n    longitude  float32 -121.7\nAttributes:\n    colorBarMaximum:  35.0\n    colorBarMinimum:  0.0\n    comment:          nighttime analysed SST for each ocean grid point\n    ioos_category:    Temperature\n    long_name:        analysed sea surface temperature\n    references:       Fieguth,P.W. et al. \"Mapping Mediterranean altimeter da...\n    standard_name:    sea_surface_foundation_temperature\n    units:            degree_Cxarray.DataArray'analysed_sst'time: 692...[692 values with dtype=float32]Coordinates: (3)time(time)datetime64[ns]2018-01-01T12:00:00 ... 2019-12-..._CoordinateAxisType :Timeactual_range :[1.0308816e+09 1.6938288e+09]axis :Tcomment :Nominal time of Level 4 analysisioos_category :Timelong_name :reference time of sst fieldstandard_name :timetime_origin :01-JAN-1970 00:00:00array(['2018-01-01T12:00:00.000000000', '2018-01-02T12:00:00.000000000',\n       '2018-01-03T12:00:00.000000000', ..., '2019-12-29T12:00:00.000000000',\n       '2019-12-30T12:00:00.000000000', '2019-12-31T12:00:00.000000000'],\n      dtype='datetime64[ns]')latitude()float3234.72_CoordinateAxisType :Latactual_range :[-89.975  89.975]axis :Ycomment :equirectangular projectionioos_category :Locationlong_name :Latitudestandard_name :latitudeunits :degrees_northvalid_max :90.0valid_min :-90.0array(34.725, dtype=float32)longitude()float32-121.7_CoordinateAxisType :Lonactual_range :[-179.975  179.975]axis :Xcomment :equirectangular projectionioos_category :Locationlong_name :Longitudestandard_name :longitudeunits :degrees_eastvalid_max :180.0valid_min :-180.0array(-121.675, dtype=float32)Indexes: (1)timePandasIndexPandasIndex(DatetimeIndex(['2018-01-01 12:00:00', '2018-01-02 12:00:00',\n               '2018-01-03 12:00:00', '2018-01-04 12:00:00',\n               '2018-01-05 12:00:00', '2018-01-06 12:00:00',\n               '2018-01-07 12:00:00', '2018-01-08 12:00:00',\n               '2018-01-09 12:00:00', '2018-02-09 12:00:00',\n               ...\n               '2019-12-22 12:00:00', '2019-12-23 12:00:00',\n               '2019-12-24 12:00:00', '2019-12-25 12:00:00',\n               '2019-12-26 12:00:00', '2019-12-27 12:00:00',\n               '2019-12-28 12:00:00', '2019-12-29 12:00:00',\n               '2019-12-30 12:00:00', '2019-12-31 12:00:00'],\n              dtype='datetime64[ns]', name='time', length=692, freq=None))Attributes: (8)colorBarMaximum :35.0colorBarMinimum :0.0comment :nighttime analysed SST for each ocean grid pointioos_category :Temperaturelong_name :analysed sea surface temperaturereferences :Fieguth,P.W. et al. \"Mapping Mediterranean altimeter data with a multiresolution optimal interpolation algorithm\", J. Atmos. Ocean Tech, 15\n (2): 535-546, 1998.     Fieguth, P. Multiply-Rooted Multiscale Models for Large-Scale Estimation, IEEE Image Processing, 10(11), 1676-1686, 2001.     Khellah, F., P.W. Fieguth, M.J. M\nurray and M.R. Allen, \"Statistical Processing of Large Image Sequences\", IEEE Transactions on Geoscience and Remote Sensing, 12 (1), 80-93, 2005.standard_name :sea_surface_foundation_temperatureunits :degree_C"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#process-the-satellite-data-to-make-them-compatible-with-the-buoy-data",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#process-the-satellite-data-to-make-them-compatible-with-the-buoy-data",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Process the satellite data to make them compatible with the buoy data",
+    "text": "Process the satellite data to make them compatible with the buoy data\n\nPut the satellite data into a Pandas dataframe\nResample the data to daily bins: The data are already daily, but resampling them makes the timestamp format the same as for the buoy data, and puts time into the index column of the dataframe.\nRemove the timezone localization from time\n\n\n# Initialize data\nsat_data = {'time': sst_ds_subset.time.values,\n            'sst_sat': sst_ds_subset.to_numpy()\n            }\n\n# Creates pandas DataFrame.\nsat_df = pd.DataFrame(sat_data)\n\n# Resample\nsat_df = sat_df.resample('D', on='time').mean()\n\n# Remove timezone\nsat_df = sat_df.tz_localize(None)\n\n\nsat_df.head(2)\n\n\n\n\n\n\n\n\nsst_sat\n\n\ntime\n\n\n\n\n\n2018-01-01\n14.18\n\n\n2018-01-02\n14.76"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#merge-the-datasets",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#merge-the-datasets",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Merge the datasets",
+    "text": "Merge the datasets\n\nmerged_df = pd.merge(buoy_df_resampled, \n                     sat_df, \n                     left_index=True, \n                     right_index=True).reset_index()\nmerged_df.head(2)\n\n\n\n\n\n\n\n\ntime\nsst_buoy\nsst_sat\n\n\n\n\n0\n2018-01-01\n14.679167\n14.18\n\n\n1\n2018-01-02\n14.891489\n14.76"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#plot-the-data-along-the-same-time-x-axis",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#plot-the-data-along-the-same-time-x-axis",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Plot the data along the same time (x) axis",
+    "text": "Plot the data along the same time (x) axis\nThe data from the buoy and satellite seem to track each other very well (below). * You will want to at least run a linear regression to determine how well satellite data reflects the in situ buoy measurements.\n\nplt.figure(figsize = (10, 5)) \n# Plot the SeaWiFS data\nplt.plot_date(merged_df.index, merged_df.sst_buoy, \n              'o', markersize=3, \n              label='Buoy', c='red', \n              linestyle='-', linewidth=1) \n\n# Add MODIS data\nplt.plot_date(merged_df.index, merged_df.sst_sat,  \n              's', markersize=3, \n              label='Satellite', c='blue', \n              linestyle='-', linewidth=1) \n\n#plt.ylim([0, 3])\nplt.ylabel('SST (degrees C)') \nplt.legend()"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#clean-up-the-merged-dataset",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#clean-up-the-merged-dataset",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Clean up the merged dataset",
+    "text": "Clean up the merged dataset\nRegression packages typically do not like nan’s. * Delete rows with nan\nThe data could contain data points that are outliers. Let’s remove those points from the data frame. * Apply a conservative allowable data range. - For the lower end of the range, the freezing point of seawater (ca. -2).\n- For the high end of the range, value unlikely to be seen in the area of interest (e.g. 45 degrees C).\n\n# Drop nan\nclean_merged_df = merged_df.dropna()\n\n# Drop &lt; -2 and &gt; 45\nclean_merged_df = clean_merged_df.drop(clean_merged_df[(clean_merged_df['sst_sat'] &lt; -2) \n                                       | (clean_merged_df['sst_sat'] &gt; 45)].index)"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#run-the-regression",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#run-the-regression",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "Run the regression",
+    "text": "Run the regression\n\n# Regression packages typically do not like nan's. Delete rows with nan\nclean_merged_df = merged_df.dropna()\n\n# Generate the regression plot\nsns.regplot(x='sst_buoy', y='sst_sat', data=clean_merged_df)\n\n# Calculate the slope and intercept\nslope, intercept = np.polyfit(clean_merged_df[\"sst_buoy\"], clean_merged_df[\"sst_sat\"], 1)\n\n# Calculate R2\nr2 = r2_score(clean_merged_df[\"sst_sat\"], clean_merged_df[\"sst_buoy\"])\n\n# Annotate the plot\nplt.annotate(f\"y = {slope:.2f}x + {intercept:.2f},  R2 = {r2:.2f}\", \n             xy=(12, 18), \n             #xytext=(30, 5), \n             fontsize=12, \n             color=\"black\", \n             ha=\"left\")\n\nprint(slope, intercept)\n\n# To save your data, uncomment the next line\n# clean_merged_df.to_csv(\"virtual_buoy_example.csv\", index=False)\n\n0.9338037509902803 0.9930764222028932"
+  },
+  {
+    "objectID": "tutorials/python/create-virtual-buoy-with-satellite-data.html#it-looks-like-your-virtual-buoy-is-ready-for-operations",
+    "href": "tutorials/python/create-virtual-buoy-with-satellite-data.html#it-looks-like-your-virtual-buoy-is-ready-for-operations",
+    "title": "Make a virtual buoy with satellite data",
+    "section": "It looks like your virtual buoy is ready for operations",
+    "text": "It looks like your virtual buoy is ready for operations\n\nThere is essentially a one-to-one relationship between buoy and satellite SST. The slope (0.93) is very close to 1\nThe R2 indicates that 90% of the variability of satellite SST is explained by the regression."
   }
 ]
