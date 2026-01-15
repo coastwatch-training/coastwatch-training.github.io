@@ -68,12 +68,11 @@
   box-shadow: 0 20px 60px rgba(0,0,0,.25);
 }
 
-
 .cg-modal h3{ margin: 0 0 8px; }
 .cg-modal .cg-desc{ margin: 0 0 12px; }
 .cg-modal .cg-grid{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
 }
 @media (max-width: 750px){

@@ -137,23 +137,6 @@ def render_carousel(img_cell, carousel_id):
         f"</div>"
     )
 
-    nav = ""
-    if len(imgs) > 1:
-        nav = (
-            f"<div class='cg-nav'>"
-            f"  <button class='cg-arrow' onclick=\"cgPrev('{carousel_id}')\">◀</button>"
-            f"  <span class='cg-count'>1 / {len(imgs)}</span>"
-            f"  <button class='cg-arrow' onclick=\"cgNext('{carousel_id}')\">▶</button>"
-            f"</div>"
-        )
-
-    return (
-        f"<div id='{carousel_id}' class='cg-carousel' data-idx='0'>"
-        f"{''.join(img_tags)}"
-        f"{nav}"
-        f"</div>"
-    )
-
 rows = []
 modals = []
 
@@ -166,8 +149,10 @@ for i, r in df.iterrows():
         "Preview": modal_eye(mid),
         "Python ↓": download_icon(r["py_download"]),
         "R ↓": download_icon(r["r_download"]),
+        "Matlab ↓": download_icon(r["m_download"]),
     })
 
+    
     modals.append(f"""
     <div id="{mid}" class="cg-modal">
       <h3>{r["title"]}</h3>
@@ -179,16 +164,24 @@ for i, r in df.iterrows():
           {render_carousel(r["py_img"], f"py-carousel-{i}")}
           <p><a class="cg-btn" href="{r["py_view"]}">View Python tutorial</a></p>
         </div>
+
         <div>
           <strong>R output</strong>
           {render_carousel(r["r_img"], f"r-carousel-{i}")}
           <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
+        </div>
+
+        <div>
+          <strong>Matlab output</strong>
+          {render_carousel(r.get("m_img",""), f"m-carousel-{i}")}   <!-- optional -->
+          <p><a class="cg-btn" href="{r["m_view"]}">View Matlab tutorial</a></p>
         </div>
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
     </div>
     """)
+
 
 table = pd.DataFrame(rows).to_html(
     index=False,
