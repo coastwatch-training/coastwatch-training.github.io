@@ -124,5 +124,124 @@
     "title": "Make a virtual buoy with satellite data",
     "section": "It looks like your virtual buoy is ready for operations",
     "text": "It looks like your virtual buoy is ready for operations\n\nThere is essentially a one-to-one relationship between buoy and satellite SST. The slope (0.93) is very close to 1\nThe R2 indicates that 90% of the variability of satellite SST is explained by the regression."
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html",
+    "href": "tutorials/r/virtual_buoy_example.html",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "Updated August 2023 \n\nThere are buoys in many locations around the world that provide data streams of oceanic and atmospheric parameters. The data are often available through data centers like the National Data Buoy Center (NDBC https://www.ndbc.noaa.gov), ARGO floats program (http://www.argo.ucsd.edu) or CoastWatch ERDDAP data servers (https://coastwatch.pfeg.noaa.gov/erddap/). In situ buoy data are widely used to monitor environmental conditions. In the absence of in situ buoy data - whether the buoy operation is discontinued, interrupted, or limited - satellite data within temporal and spatial coverage of the desired locationcan be used to create a time series of a parameter of interest.\n\n\nThis tutorial will demonstrate how to create a time series from satellite data to gap-fill or replace buoy data.\n\n\n\n\nDownloading the satellite and buoy data from ERDDAP data server\nVisualizing the datasets\nReshaping the satellite data into a buoy data format\nResampling buoy data (aggregation) to match satellite data temporal resolution\nValidating the satellite data with the actual buoy data\nPerforming a linear regression of satellite vs. buoy data\nCreating a scatter plot of satellite vs. buoy data with the regression line\n\n\n\n\nSea-Surface Temperature, NOAA Geo-polar Blended Analysis Day+Night, GHRSST,Near Real-Time, Global 5km, 2019-Present, Daily\n.\nNDBC Standard Meteorological Buoy Data, 1970-present  NDBC Standard Meteorological Buoy Data  from the buoy station no. 46259 are from off the California coast at 34.737N latitude and 121.664E longitude.\n\n\n\n\nNOAA CoastWatch Westcoast Node Data Catalog\nNOAA National Data Buoy Center\n\n\n\n\n# Function to check if pkgs are installed, and install any missing pkgs\npkgTest &lt;- function(x)\n{\n  if (!require(x,character.only = TRUE))\n  {\n    install.packages(x,dep=TRUE,repos='http://cran.us.r-project.org')\n    if(!require(x,character.only = TRUE)) stop(x, \" :Package not found\")\n  }\n}\n\n\n# Create list of required packages\nlist.of.packages &lt;- c(\"utils\", \"ggplot2\", \"dplyr\", \"lubridate\")\n\n# Create list of installed packages\npkges = installed.packages()[,\"Package\"]\n\n# Install and load all required pkgs\nfor (pk in list.of.packages) {\n  pkgTest(pk)\n}\n\n\n\nWe will download NDBC buoy data between January 16, 2022 and August 16, 2022 from the CoastWatch ERDDAP server.\nThe data can be downloaded by sending a data request to the ERDDAP server via URL. The data request URL includes the dataset ID of interest and other query conditions if subset of the data product is of interest.\nTo learn more about how to set up ERDDAP URL data requests, please go to the ERDDAP module page.\n# Set the ERDDAP data request URL\n \nbuoy_url &lt;- \"https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.csv?time%2Clongitude%2Clatitude%2Cwtmp&station%3E=%2246259%22&station%3C=%2246259%22&time%3E=2022-01-16T00%3A00%3A00Z&time%3C=2022-08-16T17%3A52%3A00Z\"\n\n# Set file name\nfname = 'buoy.csv'\n\n# Download file\ndownload.file(buoy_url, fname)\n\n\n# Read into data frame, skip first 2 rows that contain variable names and units\n \nbuoy_df &lt;- read.csv(fname, skip=2, header=TRUE)\n\n# Name the columns\nnames(buoy_df) &lt;- c(\"utc\", \"lon\", \"lat\", \"sst\" )\n\n# Add additional date column\nbuoy_df$date &lt;- as.Date(buoy_df$utc, tz = \"UTC\")\n\n# Show the first 3 rows\nhead(buoy_df, 3)\n\n##                    utc      lon    lat  sst       date\n## 1 2022-01-16T00:56:00Z -121.664 34.732 13.4 2022-01-16\n## 2 2022-01-16T01:26:00Z -121.664 34.732 13.4 2022-01-16\n## 3 2022-01-16T01:56:00Z -121.664 34.732 13.3 2022-01-16\n\n\n\noptions(repr.plot.width = 10)\n\nggplot(buoy_df, aes(x = date, y = sst)) +\n  geom_line(color='blue') +\n # geom_point(size=.2, color='red')+\n  theme(axis.text.x = element_text(angle = 90),plot.title=element_text(hjust=0.5))+\n   labs(x=\"Date\", y=\"Sea Surface Temp (Celsius)\", title=\"SST from NDBC Buoy Station: 46259 (Aug 2022- Aug 2023) \")\n\n\n\n\nThe satellite Sea Surface Temperature (SST) product we will use is the NOAA GeoPolar Blended SST dataset (in Celsius), which blends data from many satellite sensors to obtain good daily coverage of the globe at 5km resolution, and then an interpolation method is applied to fill in data gaps.\nThe data request can be sent to a CoastWatch ERDDAP server via URL with a query string to specify the temporal and spatial coverage of interest. In this case, we want to subset the satellite data to match the buoy station location and time range.\n\n\n# Set ERDDAP URL for the satellite data\nurl &lt;- \"https://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisBLENDEDsstDNDaily.csv?analysed_sst%5B(2022-01-16T12:00:00Z):1:(2022-08-16T12:00:00Z)%5D%5B(34.737):1:(34.737)%5D%5B(-121.664):1:(-121.664)%5D\"\n\n# Set file name\nfname = 'sst.csv'\n\n# Download file\ndownload.file(url, fname)\n\n\n# Read into data frame, skip first 2 rows that contain variable names and units\nsst_df &lt;- read.csv(fname, skip=2, header=TRUE)\nnames(sst_df) &lt;- c(\"utc\", \"lat\", \"lon\", \"sst\")\n\n# Add formatted data column\nsst_df$date &lt;- as.Date(sst_df$utc, tz = \"UTC\")\n\n# Show the first 3 rows\nhead(sst_df, 3)\n\n##                    utc    lat      lon      sst       date\n## 1 2022-01-18T12:00:00Z 34.725 -121.675 13.49999 2022-01-18\n## 2 2022-01-19T12:00:00Z 34.725 -121.675 13.44999 2022-01-19\n## 3 2022-01-20T12:00:00Z 34.725 -121.675 13.53999 2022-01-20\n\n\n\n\nApply a conservative allowable data range. For the lower end of the range, the freezing point of seawater (ca. -2). For the high end of the range, a value unlikely to be seen in the area of interest (e.g. 45 degrees C).\n# Filter data that are within the valid range (-2 and 45)\nsst_df_clean = sst_df %&gt;%\n  filter(sst &gt;=-2 & sst &lt;= 45)\n\n\n\n# Plot sea surface temperature values from satellite\np &lt;- ggplot(sst_df, aes(x = date, y = sst)) +\n  geom_line(color='blue') +\n  geom_point(size=.5, color='red')+\n  theme(axis.text.x = element_text(angle = 90),plot.title=element_text(hjust=0.5))+\n   labs(x=\"Date\", y=\"Sea Surface Temp (Celcius)\", title=\"Sea surface temperature from satellite\")\np\n\n\n\n\nThe sampling resolution for the buoy data is a sample every 30 minutes. However, the temporal resolution for the satellite dataset is daily. We will downsample the buoy data by computing daily mean to match the temporal resolution of the satellite data.\n# Aggregating (taking a mean value) grouped by day\nbuoy_ds &lt;- buoy_df %&gt;%\n  group_by(date = floor_date(date, unit=\"days\")) %&gt;%\n  summarise(mean_sst = mean(sst))\n\n# Show first 3 rows\nhead(buoy_ds, 3)\n\n## # A tibble: 3 × 2\n##   date       mean_sst\n##   &lt;date&gt;        &lt;dbl&gt;\n## 1 2022-01-16     13.4\n## 2 2022-01-17     13.5\n## 3 2022-01-18     13.6\n\n\n\nApply a conservative allowable data range. For the lower end of the range, the freezing point of seawater (ca. -2). For the high end of the range, value unlikely to be seen in the area of interest (e.g. 45 degrees C).\n# Remove outliers sst values outside of -2 and 45 deg C\nbuoy_ds_clean = buoy_ds %&gt;%\n  filter(mean_sst &gt;=-2 & mean_sst &lt;= 45)\n\n\n\n# Plot daily mean sst\nggplot(buoy_ds_clean, aes(x = date, y = mean_sst)) +\n  geom_line(color='blue') +\n  geom_point(size=.5, color='red')+\n  theme(axis.text.x = element_text(angle = 90),plot.title=element_text(hjust=0.5))+\n   labs(x=\"Date\", y=\"Sea Surface Temp (Celcius)\", title=\"2022 Aug- 2023 Aug Downsampled Buoy SST\")\n\n\n\n\nWe will use dplyr::inner_join() function to merge the two data frames (satellite and buoy data) based on the dates that appear in both data frames.\n# Combine two data frames with date column where dates exist in both data frames\nmerged_df &lt;- inner_join(sst_df_clean[c(\"date\", \"sst\")],  buoy_ds_clean, by = \"date\")\n\n\n\n# Plot satellite sst and buoy daily mean sst \np &lt;- ggplot(merged_df, aes(x = date)) +  \n    geom_line(aes(y = sst, color = \"Satellite\")) +   \n    geom_line(aes(y = mean_sst, color = \"NDBC Buoy\")) +   \n    scale_color_manual(name = \"Data source\", \n                       values = c(\"Satellite\" = \"blue\", \"NDBC Buoy\" = \"orange\"))+\n    labs( x = \"Date\", y = \"Temperature (in Celsius)\", title=\"SST from Satellite and NDBC Buoy\" )+\n    theme(axis.text.x = element_text(angle = 0),plot.title=element_text(hjust=0.5))\np\n ## Perform a simple linear regression\n# Run linear regression \nmodel &lt;- lm(mean_sst ~ sst, data = merged_df)   \nsummary(model)\n\n## \n## Call:\n## lm(formula = mean_sst ~ sst, data = merged_df)\n## \n## Residuals:\n##      Min       1Q   Median       3Q      Max \n## -1.48812 -0.21354 -0.02782  0.14581  1.67408 \n## \n## Coefficients:\n##             Estimate Std. Error t value Pr(&gt;|t|)    \n## (Intercept)  0.54793    0.30272    1.81   0.0718 .  \n## sst          0.96142    0.02221   43.29   &lt;2e-16 ***\n## ---\n## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n## \n## Residual standard error: 0.4462 on 203 degrees of freedom\n## Multiple R-squared:  0.9023, Adjusted R-squared:  0.9018 \n## F-statistic:  1874 on 1 and 203 DF,  p-value: &lt; 2.2e-16\n\n\n\nggplot(merged_df, aes(x=sst, y=mean_sst)) +\n  geom_point(color=\"black\", size=1) +                      # Plot the data points\n  geom_smooth(method=\"lm\", se=FALSE) +\n  labs(x = \"SST from Buoy\", y = \"SST from Satellite\", title = \"Satellite vs Buoy data with regression line\") +\n  theme(plot.title=element_text(hjust=0.5))\n\n## `geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#objective",
+    "href": "tutorials/r/virtual_buoy_example.html#objective",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "This tutorial will demonstrate how to create a time series from satellite data to gap-fill or replace buoy data."
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#the-tutorial-demonstrates-the-following-techniques",
+    "href": "tutorials/r/virtual_buoy_example.html#the-tutorial-demonstrates-the-following-techniques",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "Downloading the satellite and buoy data from ERDDAP data server\nVisualizing the datasets\nReshaping the satellite data into a buoy data format\nResampling buoy data (aggregation) to match satellite data temporal resolution\nValidating the satellite data with the actual buoy data\nPerforming a linear regression of satellite vs. buoy data\nCreating a scatter plot of satellite vs. buoy data with the regression line"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#datasets-used",
+    "href": "tutorials/r/virtual_buoy_example.html#datasets-used",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "Sea-Surface Temperature, NOAA Geo-polar Blended Analysis Day+Night, GHRSST,Near Real-Time, Global 5km, 2019-Present, Daily\n.\nNDBC Standard Meteorological Buoy Data, 1970-present  NDBC Standard Meteorological Buoy Data  from the buoy station no. 46259 are from off the California coast at 34.737N latitude and 121.664E longitude."
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#references",
+    "href": "tutorials/r/virtual_buoy_example.html#references",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "NOAA CoastWatch Westcoast Node Data Catalog\nNOAA National Data Buoy Center"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#install-required-packages-and-load-libraries",
+    "href": "tutorials/r/virtual_buoy_example.html#install-required-packages-and-load-libraries",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "# Function to check if pkgs are installed, and install any missing pkgs\npkgTest &lt;- function(x)\n{\n  if (!require(x,character.only = TRUE))\n  {\n    install.packages(x,dep=TRUE,repos='http://cran.us.r-project.org')\n    if(!require(x,character.only = TRUE)) stop(x, \" :Package not found\")\n  }\n}\n\n\n# Create list of required packages\nlist.of.packages &lt;- c(\"utils\", \"ggplot2\", \"dplyr\", \"lubridate\")\n\n# Create list of installed packages\npkges = installed.packages()[,\"Package\"]\n\n# Install and load all required pkgs\nfor (pk in list.of.packages) {\n  pkgTest(pk)\n}"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#download-ndbc-buoy-data",
+    "href": "tutorials/r/virtual_buoy_example.html#download-ndbc-buoy-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "We will download NDBC buoy data between January 16, 2022 and August 16, 2022 from the CoastWatch ERDDAP server.\nThe data can be downloaded by sending a data request to the ERDDAP server via URL. The data request URL includes the dataset ID of interest and other query conditions if subset of the data product is of interest.\nTo learn more about how to set up ERDDAP URL data requests, please go to the ERDDAP module page.\n# Set the ERDDAP data request URL\n \nbuoy_url &lt;- \"https://coastwatch.pfeg.noaa.gov/erddap/tabledap/cwwcNDBCMet.csv?time%2Clongitude%2Clatitude%2Cwtmp&station%3E=%2246259%22&station%3C=%2246259%22&time%3E=2022-01-16T00%3A00%3A00Z&time%3C=2022-08-16T17%3A52%3A00Z\"\n\n# Set file name\nfname = 'buoy.csv'\n\n# Download file\ndownload.file(buoy_url, fname)\n\n\n# Read into data frame, skip first 2 rows that contain variable names and units\n \nbuoy_df &lt;- read.csv(fname, skip=2, header=TRUE)\n\n# Name the columns\nnames(buoy_df) &lt;- c(\"utc\", \"lon\", \"lat\", \"sst\" )\n\n# Add additional date column\nbuoy_df$date &lt;- as.Date(buoy_df$utc, tz = \"UTC\")\n\n# Show the first 3 rows\nhead(buoy_df, 3)\n\n##                    utc      lon    lat  sst       date\n## 1 2022-01-16T00:56:00Z -121.664 34.732 13.4 2022-01-16\n## 2 2022-01-16T01:26:00Z -121.664 34.732 13.4 2022-01-16\n## 3 2022-01-16T01:56:00Z -121.664 34.732 13.3 2022-01-16"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#visualize-sst-from-the-buoy",
+    "href": "tutorials/r/virtual_buoy_example.html#visualize-sst-from-the-buoy",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "options(repr.plot.width = 10)\n\nggplot(buoy_df, aes(x = date, y = sst)) +\n  geom_line(color='blue') +\n # geom_point(size=.2, color='red')+\n  theme(axis.text.x = element_text(angle = 90),plot.title=element_text(hjust=0.5))+\n   labs(x=\"Date\", y=\"Sea Surface Temp (Celsius)\", title=\"SST from NDBC Buoy Station: 46259 (Aug 2022- Aug 2023) \")"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#download-the-satellite-sea-surface-temperature-sst-data",
+    "href": "tutorials/r/virtual_buoy_example.html#download-the-satellite-sea-surface-temperature-sst-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "The satellite Sea Surface Temperature (SST) product we will use is the NOAA GeoPolar Blended SST dataset (in Celsius), which blends data from many satellite sensors to obtain good daily coverage of the globe at 5km resolution, and then an interpolation method is applied to fill in data gaps.\nThe data request can be sent to a CoastWatch ERDDAP server via URL with a query string to specify the temporal and spatial coverage of interest. In this case, we want to subset the satellite data to match the buoy station location and time range.\n\n\n# Set ERDDAP URL for the satellite data\nurl &lt;- \"https://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisBLENDEDsstDNDaily.csv?analysed_sst%5B(2022-01-16T12:00:00Z):1:(2022-08-16T12:00:00Z)%5D%5B(34.737):1:(34.737)%5D%5B(-121.664):1:(-121.664)%5D\"\n\n# Set file name\nfname = 'sst.csv'\n\n# Download file\ndownload.file(url, fname)\n\n\n# Read into data frame, skip first 2 rows that contain variable names and units\nsst_df &lt;- read.csv(fname, skip=2, header=TRUE)\nnames(sst_df) &lt;- c(\"utc\", \"lat\", \"lon\", \"sst\")\n\n# Add formatted data column\nsst_df$date &lt;- as.Date(sst_df$utc, tz = \"UTC\")\n\n# Show the first 3 rows\nhead(sst_df, 3)\n\n##                    utc    lat      lon      sst       date\n## 1 2022-01-18T12:00:00Z 34.725 -121.675 13.49999 2022-01-18\n## 2 2022-01-19T12:00:00Z 34.725 -121.675 13.44999 2022-01-19\n## 3 2022-01-20T12:00:00Z 34.725 -121.675 13.53999 2022-01-20"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#clean-up-the-data",
+    "href": "tutorials/r/virtual_buoy_example.html#clean-up-the-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "Apply a conservative allowable data range. For the lower end of the range, the freezing point of seawater (ca. -2). For the high end of the range, a value unlikely to be seen in the area of interest (e.g. 45 degrees C).\n# Filter data that are within the valid range (-2 and 45)\nsst_df_clean = sst_df %&gt;%\n  filter(sst &gt;=-2 & sst &lt;= 45)"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#visualize-the-satellite-sst-data",
+    "href": "tutorials/r/virtual_buoy_example.html#visualize-the-satellite-sst-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "# Plot sea surface temperature values from satellite\np &lt;- ggplot(sst_df, aes(x = date, y = sst)) +\n  geom_line(color='blue') +\n  geom_point(size=.5, color='red')+\n  theme(axis.text.x = element_text(angle = 90),plot.title=element_text(hjust=0.5))+\n   labs(x=\"Date\", y=\"Sea Surface Temp (Celcius)\", title=\"Sea surface temperature from satellite\")\np"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#resample-the-buoy-data-to-match-the-satellite-data",
+    "href": "tutorials/r/virtual_buoy_example.html#resample-the-buoy-data-to-match-the-satellite-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "The sampling resolution for the buoy data is a sample every 30 minutes. However, the temporal resolution for the satellite dataset is daily. We will downsample the buoy data by computing daily mean to match the temporal resolution of the satellite data.\n# Aggregating (taking a mean value) grouped by day\nbuoy_ds &lt;- buoy_df %&gt;%\n  group_by(date = floor_date(date, unit=\"days\")) %&gt;%\n  summarise(mean_sst = mean(sst))\n\n# Show first 3 rows\nhead(buoy_ds, 3)\n\n## # A tibble: 3 × 2\n##   date       mean_sst\n##   &lt;date&gt;        &lt;dbl&gt;\n## 1 2022-01-16     13.4\n## 2 2022-01-17     13.5\n## 3 2022-01-18     13.6"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#clean-up-the-downsampled-data",
+    "href": "tutorials/r/virtual_buoy_example.html#clean-up-the-downsampled-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "Apply a conservative allowable data range. For the lower end of the range, the freezing point of seawater (ca. -2). For the high end of the range, value unlikely to be seen in the area of interest (e.g. 45 degrees C).\n# Remove outliers sst values outside of -2 and 45 deg C\nbuoy_ds_clean = buoy_ds %&gt;%\n  filter(mean_sst &gt;=-2 & mean_sst &lt;= 45)"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#visualize-the-downsampled-buoy-data",
+    "href": "tutorials/r/virtual_buoy_example.html#visualize-the-downsampled-buoy-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "# Plot daily mean sst\nggplot(buoy_ds_clean, aes(x = date, y = mean_sst)) +\n  geom_line(color='blue') +\n  geom_point(size=.5, color='red')+\n  theme(axis.text.x = element_text(angle = 90),plot.title=element_text(hjust=0.5))+\n   labs(x=\"Date\", y=\"Sea Surface Temp (Celcius)\", title=\"2022 Aug- 2023 Aug Downsampled Buoy SST\")"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#merge-satellite-and-buoy-data",
+    "href": "tutorials/r/virtual_buoy_example.html#merge-satellite-and-buoy-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "We will use dplyr::inner_join() function to merge the two data frames (satellite and buoy data) based on the dates that appear in both data frames.\n# Combine two data frames with date column where dates exist in both data frames\nmerged_df &lt;- inner_join(sst_df_clean[c(\"date\", \"sst\")],  buoy_ds_clean, by = \"date\")"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#plot-both-satellite-and-buoy-data",
+    "href": "tutorials/r/virtual_buoy_example.html#plot-both-satellite-and-buoy-data",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "# Plot satellite sst and buoy daily mean sst \np &lt;- ggplot(merged_df, aes(x = date)) +  \n    geom_line(aes(y = sst, color = \"Satellite\")) +   \n    geom_line(aes(y = mean_sst, color = \"NDBC Buoy\")) +   \n    scale_color_manual(name = \"Data source\", \n                       values = c(\"Satellite\" = \"blue\", \"NDBC Buoy\" = \"orange\"))+\n    labs( x = \"Date\", y = \"Temperature (in Celsius)\", title=\"SST from Satellite and NDBC Buoy\" )+\n    theme(axis.text.x = element_text(angle = 0),plot.title=element_text(hjust=0.5))\np\n ## Perform a simple linear regression\n# Run linear regression \nmodel &lt;- lm(mean_sst ~ sst, data = merged_df)   \nsummary(model)\n\n## \n## Call:\n## lm(formula = mean_sst ~ sst, data = merged_df)\n## \n## Residuals:\n##      Min       1Q   Median       3Q      Max \n## -1.48812 -0.21354 -0.02782  0.14581  1.67408 \n## \n## Coefficients:\n##             Estimate Std. Error t value Pr(&gt;|t|)    \n## (Intercept)  0.54793    0.30272    1.81   0.0718 .  \n## sst          0.96142    0.02221   43.29   &lt;2e-16 ***\n## ---\n## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n## \n## Residual standard error: 0.4462 on 203 degrees of freedom\n## Multiple R-squared:  0.9023, Adjusted R-squared:  0.9018 \n## F-statistic:  1874 on 1 and 203 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "tutorials/r/virtual_buoy_example.html#plot-satellite-vs.-buoy-data-and-overlay-the-regression-line",
+    "href": "tutorials/r/virtual_buoy_example.html#plot-satellite-vs.-buoy-data-and-overlay-the-regression-line",
+    "title": "Virtual Buoy example",
+    "section": "",
+    "text": "ggplot(merged_df, aes(x=sst, y=mean_sst)) +\n  geom_point(color=\"black\", size=1) +                      # Plot the data points\n  geom_smooth(method=\"lm\", se=FALSE) +\n  labs(x = \"SST from Buoy\", y = \"SST from Satellite\", title = \"Satellite vs Buoy data with regression line\") +\n  theme(plot.title=element_text(hjust=0.5))\n\n## `geom_smooth()` using formula = 'y ~ x'"
   }
 ]
