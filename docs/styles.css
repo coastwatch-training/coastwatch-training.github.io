@@ -121,3 +121,27 @@
   border:0; background:#eee; padding:6px 10px; border-radius:10px; cursor:pointer;
 }
 .cg-count{font-size:0.9em; opacity:0.75}
+
+/* A fixed preview frame so all images look consistent */
+.cg-figure{
+  width: 100%;
+  height: 260px;              /* <- pick a height you like */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Make image fill the frame consistently */
+.cg-figure img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;         /* use 'cover' if you prefer cropping */
+  display: block;
+}
+
+.cg-slide{display: none;}
+.cg-slide.active{display: flex;}

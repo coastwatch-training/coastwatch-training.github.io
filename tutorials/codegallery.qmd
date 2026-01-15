@@ -102,8 +102,9 @@ def render_carousel(img_cell, carousel_id):
     # root-relative so it works regardless of page location
     img_tags = []
     for j, fn in enumerate(imgs):
-        cls = "active" if j == 0 else ""
-        img_tags.append(f"<img class='{cls}' src='/tutorials/images/{fn}' loading='lazy'>")
+        wrap_cls = "cg-slide active" if j == 0 else "cg-slide"
+        img_tags.append(
+          f"<div class='{wrap_cls} cg-figure'><img src='/tutorials/images/{fn}' loading='lazy'></div>")
 
     nav = ""
     if len(imgs) > 1:
@@ -204,13 +205,15 @@ HTML(CSS_JS + table + "".join(modals))
 function cgShow(idx, id){
   const root = document.getElementById(id);
   if(!root) return;
-  const imgs = root.querySelectorAll("img");
-  if(!imgs.length) return;
 
-  const n = imgs.length;
+  // IMPORTANT: target slides, not imgs
+  const slides = root.querySelectorAll(".cg-slide");
+  if(!slides.length) return;
+
+  const n = slides.length;
   idx = ((idx % n) + n) % n;
 
-  imgs.forEach((im, j) => im.classList.toggle("active", j === idx));
+  slides.forEach((el, j) => el.classList.toggle("active", j === idx));
   root.dataset.idx = String(idx);
 
   const counter = root.querySelector(".cg-count");
