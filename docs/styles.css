@@ -157,3 +157,46 @@
 .cg-slide{display: none;}
 .cg-slide.active{display: flex;}
 
+
+.cg-imglightbox{
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 1200;              /* above cg-modal (1000) */
+  padding: 24px;
+  background: rgba(0,0,0,.75);
+}
+.cg-imglightbox img{
+  display: block;
+  max-width: min(1100px, 96vw);
+  max-height: 90vh;
+  margin: 0 auto;
+  border-radius: 14px;
+  background: #fff;
+}
+.cg-imgclose{
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  border: 0;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+.cg-modal img{ cursor: zoom-in; }
+
+
+.cg-caption{
+  margin-top: 6px;
+  font-size: 0.85rem;
+  color: #555;
+  text-align: center;
+}
+
+
+.cg-lightbox-caption{
+  margin-top: 12px;
+  text-align: center;
+  color: #eee;
+  font-size: 0.95rem;
+}

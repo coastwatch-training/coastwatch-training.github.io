@@ -355,8 +355,8 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="cc8838d8" class="cell" data-message="false" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="e2564455" class="cell" data-message="false" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
 .cg-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -465,7 +465,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <div class="cg-grid">
         <div>
           <strong>Python output</strong>
-          <div id="py-carousel-0" class="cg-carousel" data-idx="0"><div class="cg-slide active cg-figure"><img src="../tutorials/images/lon.png" loading="lazy"></div></div>
+          <div id="py-carousel-0" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <img src="../tutorials/images/lon.png" loading="lazy" data-caption="Lon">
+            <div class="cg-caption">Lon</div>
+          </div>
+          </div>
           <p><a class="cg-btn" href="../tutorials/python/convert-180+180-to-0-360-longitude.html">View Python tutorial</a></p>
         </div>
         <div>
@@ -490,7 +495,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         </div>
         <div>
           <strong>R output</strong>
-          <div id="r-carousel-1" class="cg-carousel" data-idx="0"><div class="cg-slide active cg-figure"><img src="../tutorials/images/chla.png" loading="lazy"></div></div>
+          <div id="r-carousel-1" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <img src="../tutorials/images/chla.png" loading="lazy" data-caption="Chla">
+            <div class="cg-caption">Chla</div>
+          </div>
+          </div>
           <p><a class="cg-btn" href="r/compare-sensors.qmd">View R tutorial</a></p>
         </div>
       </div>
@@ -505,12 +515,32 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <div class="cg-grid">
         <div>
           <strong>Python output</strong>
-          <div id="py-carousel-2" class="cg-carousel" data-idx="0"><div class="cg-slide active cg-figure"><img src="../tutorials/images/vbuoy_py.png" loading="lazy"></div><div class="cg-slide cg-figure"><img src="../tutorials/images/vbuoy2_py.png" loading="lazy"></div><div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-2')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-2')">▶</button></div></div>
+          <div id="py-carousel-2" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <img src="../tutorials/images/vbuoy_py.png" loading="lazy" data-caption="Vbuoy Py">
+            <div class="cg-caption">Vbuoy Py</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <img src="../tutorials/images/vbuoy2_py.png" loading="lazy" data-caption="Vbuoy2 Py">
+            <div class="cg-caption">Vbuoy2 Py</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-2')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-2')">▶</button></div></div>
           <p><a class="cg-btn" href="../tutorials/python/create-virtual-buoy-with-satellite-data.html">View Python tutorial</a></p>
         </div>
         <div>
           <strong>R output</strong>
-          <div id="r-carousel-2" class="cg-carousel" data-idx="0"><div class="cg-slide active cg-figure"><img src="../tutorials/images/vbuoy_r.png" loading="lazy"></div><div class="cg-slide cg-figure"><img src="../tutorials/images/vbuoy2_r.png" loading="lazy"></div><div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-2')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-2')">▶</button></div></div>
+          <div id="r-carousel-2" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <img src="../tutorials/images/vbuoy_r.png" loading="lazy" data-caption="Vbuoy R">
+            <div class="cg-caption">Vbuoy R</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <img src="../tutorials/images/vbuoy2_r.png" loading="lazy" data-caption="Vbuoy2 R">
+            <div class="cg-caption">Vbuoy2 R</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-2')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-2')">▶</button></div></div>
           <p><a class="cg-btn" href="r/virtual_buoy_example.html">View R tutorial</a></p>
         </div>
       </div>
@@ -580,8 +610,63 @@ function cgNext(id){
   cgShow(idx + 1, id);
 }
 </script>
-<div id="cg-backdrop" class="cg-modal-backdrop" onclick="cgCloseModal()" aria-hidden="true">
+<script>
+(function () {
+  function openImg(src, caption){
+    const lb = document.getElementById("cg-imglightbox");
+    const im = document.getElementById("cg-imglightbox-img");
+    const cap = document.getElementById("cg-imglightbox-caption");
+    if(!lb || !im || !cap) return;
 
+    im.src = src;
+    im.alt = caption || "";
+    cap.textContent = caption || "";
+
+    lb.style.display = "block";
+    lb.setAttribute("aria-hidden","false");
+  }
+
+  function closeImg(){
+    const lb = document.getElementById("cg-imglightbox");
+    const im = document.getElementById("cg-imglightbox-img");
+    if(!lb || !im) return;
+
+    lb.style.display = "none";
+    lb.setAttribute("aria-hidden","true");
+    im.src = "";
+  }
+
+  // expose so the close button works
+  window.cgCloseImg = closeImg;
+
+  // click any preview image inside a cg-modal to enlarge
+  document.addEventListener("click", (e) => {
+    const img = e.target.closest(".cg-modal img");
+    if(!img) return;
+
+    openImg(
+      img.getAttribute("src"),
+      img.getAttribute("data-caption")
+    );
+  });
+
+
+  // click the dark area to close
+  document.addEventListener("click", (e) => {
+    if(e.target && e.target.id === "cg-imglightbox") closeImg();
+  });
+
+  // ESC closes the image lightbox too
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeImg();
+  });
+})();
+</script>
+<div id="cg-imglightbox" class="cg-imglightbox" aria-hidden="true">
+<button class="cg-imgclose" onclick="cgCloseImg()">✕</button> <img id="cg-imglightbox-img" alt="">
+<div id="cg-imglightbox-caption" class="cg-lightbox-caption">
+
+</div>
 </div>
 
 

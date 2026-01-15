@@ -87,24 +87,53 @@ def download_icon(path):
     )
 
 
+
 def render_carousel(img_cell, carousel_id):
-    """
-    img_cell: CSV value like 'a.png|b.png|c.png' OR 'a.png'
-    carousel_id: unique DOM id for this carousel
-    """
     if not img_cell:
         return "<div class='text-muted'>No preview image</div>"
 
-    imgs = [x.strip() for x in str(img_cell).split("|") if x.strip()]
-    if not imgs:
+    items = [x.strip() for x in str(img_cell).split("|") if x.strip()]
+    if not items:
         return "<div class='text-muted'>No preview image</div>"
 
-    # root-relative so it works regardless of page location
-    img_tags = []
-    for j, fn in enumerate(imgs):
+    slides = []
+
+    for j, item in enumerate(items):
+        if "::" in item:
+            fn, caption = item.split("::", 1)
+        else:
+            fn = item
+            caption = ""
+
         wrap_cls = "cg-slide active" if j == 0 else "cg-slide"
-        img_tags.append(
-          f"<div class='{wrap_cls} cg-figure'><img src='/tutorials/images/{fn}' loading='lazy'></div>")
+
+        slides.append(
+            f"""
+            <div class="{wrap_cls} cg-figure">
+              <img src="/tutorials/images/{fn}"
+                   loading="lazy"
+                   data-caption="{caption}">
+              <div class="cg-caption">{caption}</div>
+            </div>
+            """
+        )
+
+    nav = ""
+    if len(items) > 1:
+        nav = (
+            f"<div class='cg-nav'>"
+            f"  <button class='cg-arrow' onclick=\"cgPrev('{carousel_id}')\">◀</button>"
+            f"  <span class='cg-count'>1 / {len(items)}</span>"
+            f"  <button class='cg-arrow' onclick=\"cgNext('{carousel_id}')\">▶</button>"
+            f"</div>"
+        )
+
+    return (
+        f"<div id='{carousel_id}' class='cg-carousel' data-idx='0'>"
+        f"{''.join(slides)}"
+        f"{nav}"
+        f"</div>"
+    )
 
     nav = ""
     if len(imgs) > 1:
@@ -235,7 +264,67 @@ function cgNext(id){
 </script>
 
 
-<div id="cg-backdrop" class="cg-modal-backdrop" onclick="cgCloseModal()" aria-hidden="true"></div>
+<script>
+(function () {
+  function openImg(src, caption){
+    const lb = document.getElementById("cg-imglightbox");
+    const im = document.getElementById("cg-imglightbox-img");
+    const cap = document.getElementById("cg-imglightbox-caption");
+    if(!lb || !im || !cap) return;
+
+    im.src = src;
+    im.alt = caption || "";
+    cap.textContent = caption || "";
+
+    lb.style.display = "block";
+    lb.setAttribute("aria-hidden","false");
+  }
+
+  function closeImg(){
+    const lb = document.getElementById("cg-imglightbox");
+    const im = document.getElementById("cg-imglightbox-img");
+    if(!lb || !im) return;
+
+    lb.style.display = "none";
+    lb.setAttribute("aria-hidden","true");
+    im.src = "";
+  }
+
+  // expose so the close button works
+  window.cgCloseImg = closeImg;
+
+  // click any preview image inside a cg-modal to enlarge
+  document.addEventListener("click", (e) => {
+    const img = e.target.closest(".cg-modal img");
+    if(!img) return;
+
+    openImg(
+      img.getAttribute("src"),
+      img.getAttribute("data-caption")
+    );
+  });
+
+
+  // click the dark area to close
+  document.addEventListener("click", (e) => {
+    if(e.target && e.target.id === "cg-imglightbox") closeImg();
+  });
+
+  // ESC closes the image lightbox too
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeImg();
+  });
+})();
+</script>
+
+<div id="cg-imglightbox" class="cg-imglightbox" aria-hidden="true">
+  <button class="cg-imgclose" onclick="cgCloseImg()">✕</button>
+  <img id="cg-imglightbox-img" alt="">
+  <div id="cg-imglightbox-caption" class="cg-lightbox-caption"></div>
+</div>
+
+
+
 
 
 
