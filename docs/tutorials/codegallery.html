@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="89cedcf9" class="cell" data-message="false" data-execution_count="1">
+<div id="f520ff8b" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -500,7 +500,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
     
     <div id="cg-modal-2" class="cg-modal">
       <h3 class="anchored">Make a virtual buoy with satellite data</h3>
-      <p>Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series using Python, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset.</p>
+      <p>Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset.</p>
 
       <div class="cg-grid">
         <div>
@@ -553,13 +553,15 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 function cgShow(idx, id){
   const root = document.getElementById(id);
   if(!root) return;
-  const imgs = root.querySelectorAll("img");
-  if(!imgs.length) return;
 
-  const n = imgs.length;
+  // IMPORTANT: target slides, not imgs
+  const slides = root.querySelectorAll(".cg-slide");
+  if(!slides.length) return;
+
+  const n = slides.length;
   idx = ((idx % n) + n) % n;
 
-  imgs.forEach((im, j) => im.classList.toggle("active", j === idx));
+  slides.forEach((el, j) => el.classList.toggle("active", j === idx));
   root.dataset.idx = String(idx);
 
   const counter = root.querySelector(".cg-count");

@@ -201,6 +201,7 @@ HTML(CSS_JS + table + "".join(modals))
 })();
 </script>
 
+
 <script>
 function cgShow(idx, id){
   const root = document.getElementById(id);
@@ -232,6 +233,7 @@ function cgNext(id){
   cgShow(idx + 1, id);
 }
 </script>
+
 
 <div id="cg-backdrop" class="cg-modal-backdrop" onclick="cgCloseModal()" aria-hidden="true"></div>
 
