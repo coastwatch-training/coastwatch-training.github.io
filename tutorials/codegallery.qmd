@@ -108,15 +108,17 @@ def render_carousel(img_cell, carousel_id):
         wrap_cls = "cg-slide active" if j == 0 else "cg-slide"
 
         slides.append(
-            f"""
-            <div class="{wrap_cls} cg-figure">
+          f"""
+          <div class="{wrap_cls} cg-figure">
+            <div class="cg-imgframe">
               <img src="/tutorials/images/{fn}"
-                   loading="lazy"
-                   data-caption="{caption}">
-              <div class="cg-caption">{caption}</div>
+                  loading="lazy"
+                  data-caption="{caption}">
             </div>
-            """
-        )
+            <div class="cg-caption">{caption}</div>
+          </div>
+          """
+      )
 
     nav = ""
     if len(items) > 1:
