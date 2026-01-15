@@ -87,63 +87,41 @@ def download_icon(path):
     )
 
 
-
 def render_carousel(img_cell, carousel_id):
     """
-    img_cell: 'a.png::Caption A|b.png::Caption B' OR 'a.png|b.png'
+    img_cell: CSV value like 'a.png|b.png|c.png' OR 'a.png'
     carousel_id: unique DOM id for this carousel
     """
     if not img_cell:
         return "<div class='text-muted'>No preview image</div>"
 
-    parts = [x.strip() for x in str(img_cell).split("|") if x.strip()]
-    if not parts:
+    imgs = [x.strip() for x in str(img_cell).split("|") if x.strip()]
+    if not imgs:
         return "<div class='text-muted'>No preview image</div>"
 
-    slides_html = []
-    for j, part in enumerate(parts):
-        # parse "file::caption" (caption optional)
-        if "::" in part:
-            fn, cap = part.split("::", 1)
-            fn = fn.strip()
-            cap = cap.strip()
-        else:
-            fn = part.strip()
-            cap = fn  # fallback caption
-
+    # root-relative so it works regardless of page location
+    img_tags = []
+    for j, fn in enumerate(imgs):
         wrap_cls = "cg-slide active" if j == 0 else "cg-slide"
-
-        # root-relative image path
-        src = f"/tutorials/images/{fn}"
-
-        slides_html.append(f"""
-          <div class="{wrap_cls}">
-            <figure class="cg-figure">
-              <button type="button" class="cg-zoom" onclick="cgLightboxOpen('{src}', {cap!r})">
-                <img src="{src}" loading="lazy" alt="{cap}">
-              </button>
-            </figure>
-            <figcaption class="cg-caption">{cap}</figcaption>
-          </div>
-        """)
+        img_tags.append(
+          f"<div class='{wrap_cls} cg-figure'><img src='/tutorials/images/{fn}' loading='lazy'></div>")
 
     nav = ""
-    if len(parts) > 1:
+    if len(imgs) > 1:
         nav = (
             f"<div class='cg-nav'>"
             f"  <button class='cg-arrow' onclick=\"cgPrev('{carousel_id}')\">◀</button>"
-            f"  <span class='cg-count'>1 / {len(parts)}</span>"
+            f"  <span class='cg-count'>1 / {len(imgs)}</span>"
             f"  <button class='cg-arrow' onclick=\"cgNext('{carousel_id}')\">▶</button>"
             f"</div>"
         )
 
     return (
         f"<div id='{carousel_id}' class='cg-carousel' data-idx='0'>"
-        f"{''.join(slides_html)}"
+        f"{''.join(img_tags)}"
         f"{nav}"
         f"</div>"
     )
-
 
 rows = []
 modals = []
@@ -260,50 +238,5 @@ function cgNext(id){
 <div id="cg-backdrop" class="cg-modal-backdrop" onclick="cgCloseModal()" aria-hidden="true"></div>
 
 
-
-<!-- Lightbox overlay (one per page) -->
-<div id="cg-lightbox" class="cg-lightbox" aria-hidden="true">
-  <div class="cg-lightbox-inner" role="dialog" aria-modal="true">
-    <button type="button" class="cg-lightbox-close" onclick="cgLightboxClose()">✕</button>
-    <img id="cg-lightbox-img" alt="">
-    <div id="cg-lightbox-cap" class="cg-lightbox-cap"></div>
-  </div>
-</div>
-
-<script>
-function cgLightboxOpen(src, caption){
-  const lb = document.getElementById("cg-lightbox");
-  const img = document.getElementById("cg-lightbox-img");
-  const cap = document.getElementById("cg-lightbox-cap");
-  if(!lb || !img || !cap) return;
-
-  img.src = src;
-  img.alt = caption || "";
-  cap.textContent = caption || "";
-
-  lb.style.display = "flex";
-  lb.setAttribute("aria-hidden","false");
-}
-
-function cgLightboxClose(){
-  const lb = document.getElementById("cg-lightbox");
-  const img = document.getElementById("cg-lightbox-img");
-  if(!lb || !img) return;
-
-  lb.style.display = "none";
-  lb.setAttribute("aria-hidden","true");
-
-  // clear to stop loading if user closes quickly
-  img.src = "";
-}
-
-document.addEventListener("keydown", (e) => {
-  if(e.key === "Escape") {
-    // close lightbox first if open
-    const lb = document.getElementById("cg-lightbox");
-    if(lb && lb.style.display === "flex") cgLightboxClose();
-  }
-});
-</script>
 
 
