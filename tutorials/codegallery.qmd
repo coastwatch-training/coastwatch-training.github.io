@@ -1,36 +1,498 @@
-.code-gallery-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.95rem;
-  table-layout: fixed;
+---
+title: "Code Gallery"
+---
+
+This page lists CoastWatch code gallery tutorials.  
+Click the **eye** icon to view the tutorial or **download** to get the source file.
+
+
+```{python}
+
+#| echo: false
+#| warning: false
+#| message: false
+
+import pandas as pd
+from IPython.display import HTML
+from urllib.parse import quote
+
+REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
+REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
+
+df = pd.read_csv("code_gallery.csv", encoding="utf-8-sig").fillna("")
+
+EYE_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
+    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    'stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>'
+    '<circle cx="12" cy="12" r="3"></circle>'
+    '</svg>'
+)
+
+DOWNLOAD_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
+    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    'stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>'
+    '<path d="M7 10l5 5 5-5"></path>'
+    '<path d="M12 15V3"></path>'
+    '</svg>'
+)
+
+CSS_JS = """
+<style>
+.cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
+.cg-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
+width:min(900px,92vw);max-height:85vh;overflow:auto;background:#fff;
+border-radius:14px;padding:18px;display:none;z-index:1000;
+box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.cg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:750px){.cg-grid{grid-template-columns:1fr}}
+.cg-modal img{width:100%;border-radius:10px;border:1px solid #ddd}
+.cg-close{border:0;background:#eee;padding:8px 10px;border-radius:10px;cursor:pointer}
+.cg-btn{padding:8px 10px;border-radius:10px;border:1px solid #ccc;text-decoration:none}
+</style>
+
+<script>
+function cgOpenModal(id){
+  document.getElementById("cg-backdrop").style.display="block";
+  document.getElementById(id).style.display="block";
+}
+function cgCloseModal(){
+  document.getElementById("cg-backdrop").style.display="none";
+  document.querySelectorAll(".cg-modal").forEach(m=>m.style.display="none");
+}
+document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
+</script>
+
+<div id="cg-backdrop" class="cg-backdrop" onclick="cgCloseModal()"></div>
+"""
+
+
+cats = sorted([c for c in df["category"].unique() if str(c).strip()])
+
+FILTER_UI = f"""
+<div class="cg-filterbar">
+  <div class="cg-filtergroup">
+    <span class="cg-filterlabel">Category</span>
+    <select id="cg-category" class="cg-select">
+      <option value="">All</option>
+      {''.join([f'<option value="{c}">{c}</option>' for c in cats])}
+    </select>
+  </div>
+
+  <div class="cg-filtergroup">
+    <span class="cg-filterlabel">Software</span>
+
+    <button type="button" class="cg-chip" data-soft="py" aria-pressed="false">
+      Python <span class="cg-chipx" aria-hidden="true">×</span>
+    </button>
+
+    <button type="button" class="cg-chip" data-soft="r" aria-pressed="false">
+      R <span class="cg-chipx" aria-hidden="true">×</span>
+    </button>
+
+    <button type="button" class="cg-chip" data-soft="m" aria-pressed="false">
+      Matlab <span class="cg-chipx" aria-hidden="true">×</span>
+    </button>
+
+    <button type="button" class="cg-chip cg-chipclear" id="cg-clear">
+      Clear
+    </button>
+  </div>
+
+  <div class="cg-filtercount" id="cg-count"></div>
+</div>
+"""
+
+
+def modal_eye(modal_id):
+    return (
+        f'<a href="javascript:void(0)" onclick="cgOpenModal(\'{modal_id}\')" '
+        f'class="cg-icon">{EYE_SVG}</a>'
+    )
+
+
+def download_icon(path):
+    if not path:
+        return "—"
+    filename = path.split("/")[-1]
+    url = f"{REPO_BLOB_BASE}{quote(path)}"
+    return (
+        f'<a href="{url}" class="cg-icon" aria-label="Open {filename} on GitHub" '
+        f'target="_blank" rel="noopener">{DOWNLOAD_SVG}</a>'
+    )
+
+
+
+def render_carousel(img_cell, carousel_id):
+    if not img_cell:
+        return "<div class='text-muted'>No preview image</div>"
+
+    items = [x.strip() for x in str(img_cell).split("|") if x.strip()]
+    if not items:
+        return "<div class='text-muted'>No preview image</div>"
+
+    slides = []
+
+    for j, item in enumerate(items):
+        if "::" in item:
+            fn, caption = item.split("::", 1)
+        else:
+            fn = item
+            caption = ""
+
+        wrap_cls = "cg-slide active" if j == 0 else "cg-slide"
+
+        slides.append(
+          f"""
+          <div class="{wrap_cls} cg-figure">
+            <div class="cg-imgframe">
+              <img src="/tutorials/images/{fn}"
+                  loading="lazy"
+                  data-caption="{caption}">
+            </div>
+            <div class="cg-caption">{caption}</div>
+          </div>
+          """
+      )
+
+    nav = ""
+    if len(items) > 1:
+        nav = (
+            f"<div class='cg-nav'>"
+            f"  <button class='cg-arrow' onclick=\"cgPrev('{carousel_id}')\">◀</button>"
+            f"  <span class='cg-count'>1 / {len(items)}</span>"
+            f"  <button class='cg-arrow' onclick=\"cgNext('{carousel_id}')\">▶</button>"
+            f"</div>"
+        )
+
+    return (
+        f"<div id='{carousel_id}' class='cg-carousel' data-idx='0'>"
+        f"{''.join(slides)}"
+        f"{nav}"
+        f"</div>"
+    )
+
+rows = []
+modals = []
+
+
+def has_any(*vals):
+    return any(str(v).strip() for v in vals)
+
+
+for i, r in df.iterrows():
+    mid = f"cg-modal-{i}"
+
+    rows.append({
+        "Title": r["title"],
+        "Category": r["category"],
+        "Preview": modal_eye(mid),
+        "Python ↓": download_icon(r["py_download"]),
+        "R ↓": download_icon(r["r_download"]),
+        "Matlab ↓": download_icon(r["m_download"]),
+    })
+
+    py_block = ""
+    if has_any(r["py_img"], r["py_view"], r["py_download"]):
+        py_block = f"""
+        <div>
+          <strong>Python output</strong>
+          {render_carousel(r["py_img"], f"py-carousel-{i}")}
+          <p><a class="cg-btn" href="{r["py_view"]}">View Python tutorial</a></p>
+        </div>
+        """
+
+    r_block = ""
+    if has_any(r["r_img"], r["r_view"], r["r_download"]):
+        r_block = f"""
+        <div>
+          <strong>R output</strong>
+          {render_carousel(r["r_img"], f"r-carousel-{i}")}
+          <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
+        </div>
+        """
+
+    m_block = ""
+    if has_any(r.get("m_img",""), r.get("m_view",""), r.get("m_download","")):
+        m_block = f"""
+        <div>
+          <strong>Matlab output</strong>
+          {render_carousel(r.get("m_img",""), f"m-carousel-{i}")}
+          <p><a class="cg-btn" href="{r["m_view"]}">View Matlab tutorial</a></p>
+        </div>
+        """
+    
+    
+    modals.append(f"""
+    <div id="{mid}" class="cg-modal">
+      <h3>{r["title"]}</h3>
+      <p>{r["description"]}</p>
+
+      <div class="cg-grid">
+        {py_block}
+        {r_block}
+        {m_block}
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    """)
+
+
+
+table_rows = []
+
+for i, r in df.iterrows():
+    mid = f"cg-modal-{i}"
+
+    # language availability flags
+    has_py = 1 if str(r.get("py_view","")).strip() or str(r.get("py_download","")).strip() else 0
+    has_r  = 1 if str(r.get("r_view","")).strip()  or str(r.get("r_download","")).strip()  else 0
+    has_m  = 1 if str(r.get("m_view","")).strip()  or str(r.get("m_download","")).strip()  else 0
+
+    title = str(r.get("title",""))
+    cat   = str(r.get("category",""))
+
+    table_rows.append(f"""
+      <tr class="cg-row"
+          data-category="{cat.replace('"','&quot;')}"
+          data-has-py="{has_py}"
+          data-has-r="{has_r}"
+          data-has-m="{has_m}">
+        <td>{title}</td>
+        <td>{cat}</td>
+        <td>{modal_eye(mid)}</td>
+        <td>{download_icon(r.get("py_download",""))}</td>
+        <td>{download_icon(r.get("r_download",""))}</td>
+        <td>{download_icon(r.get("m_download",""))}</td>
+      </tr>
+    """)
+
+table = f"""
+<table class="code-gallery-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Preview</th>
+      <th>Python ↓</th>
+      <th>R ↓</th>
+      <th>Matlab ↓</th>
+    </tr>
+  </thead>
+  <tbody>
+    {''.join(table_rows)}
+  </tbody>
+</table>
+"""
+
+HTML(CSS_JS + FILTER_UI + table + "".join(modals))
+
+```
+
+
+<script>
+(function(){
+  function openModal(id){
+    const backdrop = document.getElementById("cg-backdrop");
+    const modal = document.getElementById(id);
+    if(!backdrop || !modal) return;
+    backdrop.style.display = "block";
+    modal.style.display = "block";
+    modal.setAttribute("aria-hidden","false");
+  }
+
+  function closeModal(){
+    const backdrop = document.getElementById("cg-backdrop");
+    if(backdrop) backdrop.style.display = "none";
+    document.querySelectorAll(".cg-modal").forEach(m => {
+      m.style.display = "none";
+      m.setAttribute("aria-hidden","true");
+    });
+  }
+
+  // expose globally so inline onclick works
+  window.cgOpenModal = openModal;
+  window.cgCloseModal = closeModal;
+
+  // close on ESC
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeModal();
+  });
+})();
+</script>
+
+
+<script>
+function cgShow(idx, id){
+  const root = document.getElementById(id);
+  if(!root) return;
+
+  // IMPORTANT: target slides, not imgs
+  const slides = root.querySelectorAll(".cg-slide");
+  if(!slides.length) return;
+
+  const n = slides.length;
+  idx = ((idx % n) + n) % n;
+
+  slides.forEach((el, j) => el.classList.toggle("active", j === idx));
+  root.dataset.idx = String(idx);
+
+  const counter = root.querySelector(".cg-count");
+  if(counter) counter.textContent = (idx+1) + " / " + n;
 }
 
-.code-gallery-table th,
-.code-gallery-table td {
-  padding: 0.65rem 0.8rem;
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  vertical-align: middle;
+function cgPrev(id){
+  const root = document.getElementById(id);
+  const idx = parseInt(root?.dataset?.idx || "0", 10);
+  cgShow(idx - 1, id);
 }
 
-.code-gallery-table th {
-  text-align: left;
-  font-weight: 600;
+function cgNext(id){
+  const root = document.getElementById(id);
+  const idx = parseInt(root?.dataset?.idx || "0", 10);
+  cgShow(idx + 1, id);
 }
+</script>
 
-/* Title column */
-.code-gallery-table th:nth-child(1),
-.code-gallery-table td:nth-child(1) {
-  width: 42%;
-}
 
-.code-gallery-table td:nth-child(1) {
-  white-space: normal;
-  word-break: break-word;
-}
+<script>
+(function () {
+  function openImg(src, caption){
+    const lb = document.getElementById("cg-imglightbox");
+    const im = document.getElementById("cg-imglightbox-img");
+    const cap = document.getElementById("cg-imglightbox-caption");
+    if(!lb || !im || !cap) return;
 
-/* Preview + download columns */
-.code-gallery-table td:nth-child(n+3),
-.code-gallery-table th:nth-child(n+3) {
-  text-align: center;
-  width: 6rem;
-}
+    im.src = src;
+    im.alt = caption || "";
+    cap.textContent = caption || "";
+
+    lb.style.display = "block";
+    lb.setAttribute("aria-hidden","false");
+  }
+
+  function closeImg(){
+    const lb = document.getElementById("cg-imglightbox");
+    const im = document.getElementById("cg-imglightbox-img");
+    if(!lb || !im) return;
+
+    lb.style.display = "none";
+    lb.setAttribute("aria-hidden","true");
+    im.src = "";
+  }
+
+  // expose so the close button works
+  window.cgCloseImg = closeImg;
+
+  // click any preview image inside a cg-modal to enlarge
+  document.addEventListener("click", (e) => {
+    const img = e.target.closest(".cg-modal img");
+    if(!img) return;
+
+    openImg(
+      img.getAttribute("src"),
+      img.getAttribute("data-caption")
+    );
+  });
+
+
+  // click the dark area to close
+  document.addEventListener("click", (e) => {
+    if(e.target && e.target.id === "cg-imglightbox") closeImg();
+  });
+
+  // ESC closes the image lightbox too
+  document.addEventListener("keydown", (e) => {
+    if(e.key === "Escape") closeImg();
+  });
+})();
+</script>
+
+<div id="cg-imglightbox" class="cg-imglightbox" aria-hidden="true">
+  <button class="cg-imgclose" onclick="cgCloseImg()">✕</button>
+  <img id="cg-imglightbox-img" alt="">
+  <div id="cg-imglightbox-caption" class="cg-lightbox-caption"></div>
+</div>
+
+
+<script>
+(function(){
+  function activeSoftware(){
+    const active = { py:false, r:false, m:false };
+    document.querySelectorAll(".cg-chip[data-soft]").forEach(btn => {
+      const k = btn.dataset.soft;
+      active[k] = btn.getAttribute("aria-pressed") === "true";
+    });
+    return active;
+  }
+
+  function cgApplyFilters(){
+    const cat = document.getElementById("cg-category")?.value || "";
+    const soft = activeSoftware();
+
+    // if no chips active -> show all software
+    const anySoft = soft.py || soft.r || soft.m;
+
+    const rows = Array.from(document.querySelectorAll("tr.cg-row"));
+    let shown = 0;
+
+    rows.forEach(row => {
+      const rowCat = row.dataset.category || "";
+      const hasPy = row.dataset.hasPy === "1";
+      const hasR  = row.dataset.hasR  === "1";
+      const hasM  = row.dataset.hasM  === "1";
+
+      const matchesCat = !cat || rowCat === cat;
+
+      const matchesSoftware =
+        !anySoft ||
+        (soft.py && hasPy) ||
+        (soft.r  && hasR)  ||
+        (soft.m  && hasM);
+
+      const ok = matchesCat && matchesSoftware;
+
+      row.style.display = ok ? "" : "none";
+      if(ok) shown += 1;
+    });
+
+    const countEl = document.getElementById("cg-count");
+    if(countEl) countEl.textContent = `${shown} shown`;
+  }
+
+  // Toggle chip
+  document.addEventListener("click", (e) => {
+    const chip = e.target.closest(".cg-chip[data-soft]");
+    if(chip){
+      const isOn = chip.getAttribute("aria-pressed") === "true";
+      chip.setAttribute("aria-pressed", String(!isOn));
+      cgApplyFilters();
+      return;
+    }
+
+    // Clear button
+    if(e.target && e.target.id === "cg-clear"){
+      document.getElementById("cg-category").value = "";
+      document.querySelectorAll(".cg-chip[data-soft]").forEach(btn => btn.setAttribute("aria-pressed","false"));
+      cgApplyFilters();
+      return;
+    }
+  });
+
+  // Category change
+  document.addEventListener("change", (e) => {
+    if(e.target && e.target.id === "cg-category") cgApplyFilters();
+  });
+
+  document.addEventListener("DOMContentLoaded", cgApplyFilters);
+})();
+</script>
+
+
+
+
+
