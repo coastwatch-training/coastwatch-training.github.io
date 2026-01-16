@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="9e1cc9ec" class="cell" data-message="false" data-execution_count="1">
+<div id="cdad391c" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -389,7 +389,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
     <span class="cg-filterlabel">Category</span>
     <select id="cg-category" class="cg-select">
       <option value="">All</option>
-      <option value="Time Series &amp; Trend Analysis">Time Series &amp; Trend Analysis</option>
+      <option value="Getting Started &amp; ERDDAP Basics">Getting Started &amp; ERDDAP Basics</option><option value="Time Series &amp; Trend Analysis">Time Series &amp; Trend Analysis</option>
     </select>
   </div>
 
@@ -437,10 +437,34 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </tr>
 </thead>
 <tbody>
-<tr class="cg-row odd" data-category="Time Series &amp; Trend Analysis" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row odd" data-category="Getting Started &amp; ERDDAP Basics" data-has-py="1" data-has-r="1" data-has-m="1">
+<td>Tutorials 1 Basics</td>
+<td>Getting Started &amp; ERDDAP Basics</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-0')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/python/Tutorial1-basics.ipynb" class="cg-icon" aria-label="Open Tutorial1-basics.ipynb on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/Tutorial1-basics.qmd" class="cg-icon" aria-label="Open Tutorial1-basics.qmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/matlab/Tutorial1-basics.md" class="cg-icon" aria-label="Open Tutorial1-basics.md on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+</tr>
+<tr class="cg-row even" data-category="Time Series &amp; Trend Analysis" data-has-py="1" data-has-r="1" data-has-m="0">
 <td>Make a virtual buoy with satellite data</td>
 <td>Time Series &amp; Trend Analysis</td>
-<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-0')" class="cg-icon">
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-1')" class="cg-icon">
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
 </svg>
@@ -462,6 +486,79 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 
 
     <div id="cg-modal-0" class="cg-modal">
+      <h3 class="anchored">Tutorials 1 Basics</h3>
+      <p>Access and analyze satellite-derived sea surface temperature using ERDDAP and NetCDF-based workflows. This tutorial demonstrates how to locate and subset a satellite SST product in ERDDAP, download gridded NetCDF data, examine its structure, and create basic spatial maps and regional time series. Users work with the NOAA Coral Reef Watch CoralTemp monthly sea surface temperature product to explore coordinate conventions, generate SST maps, compute regional averages, and visualize temporal variability.</p>
+
+      <div class="cg-grid">
+        
+        <div>
+          <strong>Python output</strong>
+          <div id="py-carousel-0" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/tut1_1_py.png" loading="lazy" data-caption="Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.">
+            </div>
+            <div class="cg-caption">Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/tut1_2_py.png" loading="lazy" data-caption="Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.">
+            </div>
+            <div class="cg-caption">Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-0')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-0')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/python/Tutorial1-basics.html">View Python tutorial</a></p>
+        </div>
+        
+        
+        <div>
+          <strong>R output</strong>
+          <div id="r-carousel-0" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/tut1_1_r.png" loading="lazy" data-caption="Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.">
+            </div>
+            <div class="cg-caption">Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/tut1_2_r.png" loading="lazy" data-caption="Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.">
+            </div>
+            <div class="cg-caption">Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-0')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-0')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/r/Tutorial1-basics.html">View R tutorial</a></p>
+        </div>
+        
+        
+        <div>
+          <strong>Matlab output</strong>
+          <div id="m-carousel-0" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/tut1_1_m.png" loading="lazy" data-caption="Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.">
+            </div>
+            <div class="cg-caption">Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/tut1_2_m.png" loading="lazy" data-caption="Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.">
+            </div>
+            <div class="cg-caption">Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('m-carousel-0')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('m-carousel-0')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/matlab/Tutorial1-basics.html">View Matlab tutorial</a></p>
+        </div>
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-1" class="cg-modal">
       <h3 class="anchored">Make a virtual buoy with satellite data</h3>
       <p>Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset.</p>
 
@@ -469,7 +566,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         
         <div>
           <strong>Python output</strong>
-          <div id="py-carousel-0" class="cg-carousel" data-idx="0">
+          <div id="py-carousel-1" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/vbuoy_py.png" loading="lazy" data-caption="National Data Buoy Center buoy 46259 matched up with sea surface temperature data.">
@@ -483,14 +580,14 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             </div>
             <div class="cg-caption"> Trend analysis of buoy and satellite data.</div>
           </div>
-          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-0')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-0')">▶</button></div></div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-1')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-1')">▶</button></div></div>
           <p><a class="cg-btn" href="../tutorials/python/create-virtual-buoy-with-satellite-data.html">View Python tutorial</a></p>
         </div>
         
         
         <div>
           <strong>R output</strong>
-          <div id="r-carousel-0" class="cg-carousel" data-idx="0">
+          <div id="r-carousel-1" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/vbuoy_r.png" loading="lazy" data-caption="National Data Buoy Center buoy 46259 matched up with sea surface temperature data.">
@@ -504,7 +601,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             </div>
             <div class="cg-caption"> Trend analysis of buoy and satellite data.</div>
           </div>
-          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-0')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-0')">▶</button></div></div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-1')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-1')">▶</button></div></div>
           <p><a class="cg-btn" href="../tutorials/r/virtual_buoy_example.html">View R tutorial</a></p>
         </div>
         
