@@ -140,6 +140,11 @@ def render_carousel(img_cell, carousel_id):
 rows = []
 modals = []
 
+
+def has_any(*vals):
+    return any(str(v).strip() for v in vals)
+
+
 for i, r in df.iterrows():
     mid = f"cg-modal-{i}"
 
@@ -152,6 +157,36 @@ for i, r in df.iterrows():
         "Matlab ↓": download_icon(r["m_download"]),
     })
 
+    py_block = ""
+    if has_any(r["py_img"], r["py_view"], r["py_download"]):
+        py_block = f"""
+        <div>
+          <strong>Python output</strong>
+          {render_carousel(r["py_img"], f"py-carousel-{i}")}
+          <p><a class="cg-btn" href="{r["py_view"]}">View Python tutorial</a></p>
+        </div>
+        """
+
+    r_block = ""
+    if has_any(r["r_img"], r["r_view"], r["r_download"]):
+        r_block = f"""
+        <div>
+          <strong>R output</strong>
+          {render_carousel(r["r_img"], f"r-carousel-{i}")}
+          <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
+        </div>
+        """
+
+    m_block = ""
+    if has_any(r.get("m_img",""), r.get("m_view",""), r.get("m_download","")):
+        m_block = f"""
+        <div>
+          <strong>Matlab output</strong>
+          {render_carousel(r.get("m_img",""), f"m-carousel-{i}")}
+          <p><a class="cg-btn" href="{r["m_view"]}">View Matlab tutorial</a></p>
+        </div>
+        """
+    
     
     modals.append(f"""
     <div id="{mid}" class="cg-modal">
@@ -159,28 +194,15 @@ for i, r in df.iterrows():
       <p>{r["description"]}</p>
 
       <div class="cg-grid">
-        <div>
-          <strong>Python output</strong>
-          {render_carousel(r["py_img"], f"py-carousel-{i}")}
-          <p><a class="cg-btn" href="{r["py_view"]}">View Python tutorial</a></p>
-        </div>
-
-        <div>
-          <strong>R output</strong>
-          {render_carousel(r["r_img"], f"r-carousel-{i}")}
-          <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
-        </div>
-
-        <div>
-          <strong>Matlab output</strong>
-          {render_carousel(r.get("m_img",""), f"m-carousel-{i}")}   <!-- optional -->
-          <p><a class="cg-btn" href="{r["m_view"]}">View Matlab tutorial</a></p>
-        </div>
+        {py_block}
+        {r_block}
+        {m_block}
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
     </div>
     """)
+
 
 
 table = pd.DataFrame(rows).to_html(

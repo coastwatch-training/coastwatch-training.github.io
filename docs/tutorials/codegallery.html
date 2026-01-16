@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="7af9f428" class="cell" data-message="false" data-execution_count="1">
+<div id="b64ffd3b" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -386,11 +386,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 
 <table class="dataframe code-gallery-table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
 <colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -399,6 +400,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <th data-quarto-table-cell-role="th">Preview</th>
 <th data-quarto-table-cell-role="th">Python ↓</th>
 <th data-quarto-table-cell-role="th">R ↓</th>
+<th data-quarto-table-cell-role="th">Matlab ↓</th>
 </tr>
 </thead>
 <tbody>
@@ -415,6 +417,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+<td>—</td>
 <td>—</td>
 </tr>
 <tr class="even">
@@ -435,6 +438,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+<td>—</td>
 </tr>
 <tr class="odd">
 <td>Make a virtual buoy with satellite data</td>
@@ -454,6 +458,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -475,10 +480,17 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           <p><a class="cg-btn" href="../tutorials/python/convert-180+180-to-0-360-longitude.html">View Python tutorial</a></p>
         </div>
+
         <div>
           <strong>R output</strong>
           <div class="text-muted">No preview image</div>
           <p><a class="cg-btn" href="">View R tutorial</a></p>
+        </div>
+
+        <div>
+          <strong>Matlab output</strong>
+          <div class="text-muted">No preview image</div>   <!-- optional -->
+          <p><a class="cg-btn" href="">View Matlab tutorial</a></p>
         </div>
       </div>
 
@@ -495,6 +507,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <div class="text-muted">No preview image</div>
           <p><a class="cg-btn" href="../tutorials/python/timeseries_compare_sensors.html">View Python tutorial</a></p>
         </div>
+
         <div>
           <strong>R output</strong>
           <div id="r-carousel-1" class="cg-carousel" data-idx="0">
@@ -506,6 +519,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           </div>
           <p><a class="cg-btn" href="r/compare-sensors.qmd">View R tutorial</a></p>
+        </div>
+
+        <div>
+          <strong>Matlab output</strong>
+          <div class="text-muted">No preview image</div>   <!-- optional -->
+          <p><a class="cg-btn" href="">View Matlab tutorial</a></p>
         </div>
       </div>
 
@@ -536,6 +555,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-2')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-2')">▶</button></div></div>
           <p><a class="cg-btn" href="../tutorials/python/create-virtual-buoy-with-satellite-data.html">View Python tutorial</a></p>
         </div>
+
         <div>
           <strong>R output</strong>
           <div id="r-carousel-2" class="cg-carousel" data-idx="0">
@@ -554,6 +574,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-2')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-2')">▶</button></div></div>
           <p><a class="cg-btn" href="r/virtual_buoy_example.html">View R tutorial</a></p>
+        </div>
+
+        <div>
+          <strong>Matlab output</strong>
+          <div class="text-muted">No preview image</div>   <!-- optional -->
+          <p><a class="cg-btn" href="">View Matlab tutorial</a></p>
         </div>
       </div>
 
