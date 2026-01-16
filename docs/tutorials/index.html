@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Code Gallery – CoastWatch Training Materials</title>
+<title>Tutorials – CoastWatch Training Materials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -71,9 +71,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -275,7 +272,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/codegallery.html">Code Gallery</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/index.html">Software Tutorials</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -312,13 +309,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link">
+  <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Software Tutorials</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/codegallery.html" class="sidebar-item-text sidebar-link active">
+  <a href="../tutorials/codegallery.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Code Gallery</span></a>
   </div>
 </li>
@@ -334,9 +331,9 @@ ul.task-list li input[type="checkbox"] {
 <main class="content" id="quarto-document-content">
 
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/codegallery.html">Code Gallery</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/index.html">Software Tutorials</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Code Gallery</h1>
+<h1 class="title">Tutorials</h1>
 </div>
 
 
@@ -353,359 +350,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This page lists CoastWatch code gallery tutorials.<br>
-Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="29f6a698" class="cell" data-message="false" data-execution_count="1">
-<div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
-<style>
-.cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
-.cg-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
-width:min(900px,92vw);max-height:85vh;overflow:auto;background:#fff;
-border-radius:14px;padding:18px;display:none;z-index:1000;
-box-shadow:0 20px 60px rgba(0,0,0,.25)}
-.cg-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:750px){.cg-grid{grid-template-columns:1fr}}
-.cg-modal img{width:100%;border-radius:10px;border:1px solid #ddd}
-.cg-close{border:0;background:#eee;padding:8px 10px;border-radius:10px;cursor:pointer}
-.cg-btn{padding:8px 10px;border-radius:10px;border:1px solid #ccc;text-decoration:none}
-</style>
-
-<script>
-function cgOpenModal(id){
-  document.getElementById("cg-backdrop").style.display="block";
-  document.getElementById(id).style.display="block";
-}
-function cgCloseModal(){
-  document.getElementById("cg-backdrop").style.display="none";
-  document.querySelectorAll(".cg-modal").forEach(m=>m.style.display="none");
-}
-document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
-</script>
-
-<div id="cg-backdrop" class="cg-backdrop" onclick="cgCloseModal()"></div>
-
-<div class="cg-filterbar">
-  <div class="cg-filtergroup">
-    <span class="cg-filterlabel">Category</span>
-    <select id="cg-category" class="cg-select">
-      <option value="">All</option>
-      <option value="Time Series &amp; Trend Analysis">Time Series &amp; Trend Analysis</option>
-    </select>
-  </div>
-
-  <div class="cg-filtergroup">
-    <span class="cg-filterlabel">Software</span>
-
-    <button type="button" class="cg-chip" data-soft="py" aria-pressed="false">
-      Python <span class="cg-chipx" aria-hidden="true">×</span>
-    </button>
-
-    <button type="button" class="cg-chip" data-soft="r" aria-pressed="false">
-      R <span class="cg-chipx" aria-hidden="true">×</span>
-    </button>
-
-    <button type="button" class="cg-chip" data-soft="m" aria-pressed="false">
-      Matlab <span class="cg-chipx" aria-hidden="true">×</span>
-    </button>
-
-    <button type="button" class="cg-chip cg-chipclear" id="cg-clear">
-      Clear
-    </button>
-  </div>
-
-  <div class="cg-filtercount" id="cg-count"></div>
-</div>
-
-
-<table class="code-gallery-table caption-top table table-sm table-striped small" data-quarto-postprocess="true">
-<colgroup>
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-<col style="width: 16%">
-</colgroup>
-<thead>
-<tr class="header">
-<th data-quarto-table-cell-role="th">Title</th>
-<th data-quarto-table-cell-role="th">Category</th>
-<th data-quarto-table-cell-role="th">Preview</th>
-<th data-quarto-table-cell-role="th">Python ↓</th>
-<th data-quarto-table-cell-role="th">R ↓</th>
-<th data-quarto-table-cell-role="th">Matlab ↓</th>
-</tr>
-</thead>
-<tbody>
-<tr class="cg-row odd" data-category="Time Series &amp; Trend Analysis" data-has-py="1" data-has-r="1" data-has-m="0">
-<td>Make a virtual buoy with satellite data</td>
-<td>Time Series &amp; Trend Analysis</td>
-<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-0')" class="cg-icon">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
-</svg>
-</a></td>
-<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/python/create-virtual-buoy-with-satellite-data.ipynb" class="cg-icon" aria-label="Open create-virtual-buoy-with-satellite-data.ipynb on GitHub" target="_blank" rel="noopener">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
-</svg>
-</a></td>
-<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/virtual_buoy_example.Rmd" class="cg-icon" aria-label="Open virtual_buoy_example.Rmd on GitHub" target="_blank" rel="noopener">
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
-</svg>
-</a></td>
-<td>—</td>
-</tr>
-</tbody>
-</table>
-
-
-    <div id="cg-modal-0" class="cg-modal">
-      <h3 class="anchored">Make a virtual buoy with satellite data</h3>
-      <p>Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset.</p>
-
-      <div class="cg-grid">
-        
-        <div>
-          <strong>Python output</strong>
-          <div id="py-carousel-0" class="cg-carousel" data-idx="0">
-          <div class="cg-slide active cg-figure">
-            <div class="cg-imgframe">
-              <img src="../tutorials/images/vbuoy_py.png" loading="lazy" data-caption="National Data Buoy Center buoy 46259 matched up with sea surface temperature data.">
-            </div>
-            <div class="cg-caption">National Data Buoy Center buoy 46259 matched up with sea surface temperature data.</div>
-          </div>
-          
-          <div class="cg-slide cg-figure">
-            <div class="cg-imgframe">
-              <img src="../tutorials/images/vbuoy2_py.png" loading="lazy" data-caption=" Trend analysis of buoy and satellite data.">
-            </div>
-            <div class="cg-caption"> Trend analysis of buoy and satellite data.</div>
-          </div>
-          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-0')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-0')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/python/create-virtual-buoy-with-satellite-data.html">View Python tutorial</a></p>
-        </div>
-        
-        
-        <div>
-          <strong>R output</strong>
-          <div id="r-carousel-0" class="cg-carousel" data-idx="0">
-          <div class="cg-slide active cg-figure">
-            <div class="cg-imgframe">
-              <img src="../tutorials/images/vbuoy_r.png" loading="lazy" data-caption="National Data Buoy Center buoy 46259 matched up with sea surface temperature data.">
-            </div>
-            <div class="cg-caption">National Data Buoy Center buoy 46259 matched up with sea surface temperature data.</div>
-          </div>
-          
-          <div class="cg-slide cg-figure">
-            <div class="cg-imgframe">
-              <img src="../tutorials/images/vbuoy2_r.png" loading="lazy" data-caption=" Trend analysis of buoy and satellite data.">
-            </div>
-            <div class="cg-caption"> Trend analysis of buoy and satellite data.</div>
-          </div>
-          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-0')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-0')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/r/virtual_buoy_example.html">View R tutorial</a></p>
-        </div>
-        
-        
-      </div>
-
-      <button class="cg-close" onclick="cgCloseModal()">Close</button>
-    </div>
-</div>
-</div>
-<script>
-(function(){
-  function openModal(id){
-    const backdrop = document.getElementById("cg-backdrop");
-    const modal = document.getElementById(id);
-    if(!backdrop || !modal) return;
-    backdrop.style.display = "block";
-    modal.style.display = "block";
-    modal.setAttribute("aria-hidden","false");
-  }
-
-  function closeModal(){
-    const backdrop = document.getElementById("cg-backdrop");
-    if(backdrop) backdrop.style.display = "none";
-    document.querySelectorAll(".cg-modal").forEach(m => {
-      m.style.display = "none";
-      m.setAttribute("aria-hidden","true");
-    });
-  }
-
-  // expose globally so inline onclick works
-  window.cgOpenModal = openModal;
-  window.cgCloseModal = closeModal;
-
-  // close on ESC
-  document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape") closeModal();
-  });
-})();
-</script>
-<script>
-function cgShow(idx, id){
-  const root = document.getElementById(id);
-  if(!root) return;
-
-  // IMPORTANT: target slides, not imgs
-  const slides = root.querySelectorAll(".cg-slide");
-  if(!slides.length) return;
-
-  const n = slides.length;
-  idx = ((idx % n) + n) % n;
-
-  slides.forEach((el, j) => el.classList.toggle("active", j === idx));
-  root.dataset.idx = String(idx);
-
-  const counter = root.querySelector(".cg-count");
-  if(counter) counter.textContent = (idx+1) + " / " + n;
-}
-
-function cgPrev(id){
-  const root = document.getElementById(id);
-  const idx = parseInt(root?.dataset?.idx || "0", 10);
-  cgShow(idx - 1, id);
-}
-
-function cgNext(id){
-  const root = document.getElementById(id);
-  const idx = parseInt(root?.dataset?.idx || "0", 10);
-  cgShow(idx + 1, id);
-}
-</script>
-<script>
-(function () {
-  function openImg(src, caption){
-    const lb = document.getElementById("cg-imglightbox");
-    const im = document.getElementById("cg-imglightbox-img");
-    const cap = document.getElementById("cg-imglightbox-caption");
-    if(!lb || !im || !cap) return;
-
-    im.src = src;
-    im.alt = caption || "";
-    cap.textContent = caption || "";
-
-    lb.style.display = "block";
-    lb.setAttribute("aria-hidden","false");
-  }
-
-  function closeImg(){
-    const lb = document.getElementById("cg-imglightbox");
-    const im = document.getElementById("cg-imglightbox-img");
-    if(!lb || !im) return;
-
-    lb.style.display = "none";
-    lb.setAttribute("aria-hidden","true");
-    im.src = "";
-  }
-
-  // expose so the close button works
-  window.cgCloseImg = closeImg;
-
-  // click any preview image inside a cg-modal to enlarge
-  document.addEventListener("click", (e) => {
-    const img = e.target.closest(".cg-modal img");
-    if(!img) return;
-
-    openImg(
-      img.getAttribute("src"),
-      img.getAttribute("data-caption")
-    );
-  });
-
-
-  // click the dark area to close
-  document.addEventListener("click", (e) => {
-    if(e.target && e.target.id === "cg-imglightbox") closeImg();
-  });
-
-  // ESC closes the image lightbox too
-  document.addEventListener("keydown", (e) => {
-    if(e.key === "Escape") closeImg();
-  });
-})();
-</script>
-<div id="cg-imglightbox" class="cg-imglightbox" aria-hidden="true">
-<button class="cg-imgclose" onclick="cgCloseImg()">✕</button> <img id="cg-imglightbox-img" alt="">
-<div id="cg-imglightbox-caption" class="cg-lightbox-caption">
-
-</div>
-</div>
-<script>
-(function(){
-  function activeSoftware(){
-    const active = { py:false, r:false, m:false };
-    document.querySelectorAll(".cg-chip[data-soft]").forEach(btn => {
-      const k = btn.dataset.soft;
-      active[k] = btn.getAttribute("aria-pressed") === "true";
-    });
-    return active;
-  }
-
-  function cgApplyFilters(){
-    const cat = document.getElementById("cg-category")?.value || "";
-    const soft = activeSoftware();
-
-    // if no chips active -> show all software
-    const anySoft = soft.py || soft.r || soft.m;
-
-    const rows = Array.from(document.querySelectorAll("tr.cg-row"));
-    let shown = 0;
-
-    rows.forEach(row => {
-      const rowCat = row.dataset.category || "";
-      const hasPy = row.dataset.hasPy === "1";
-      const hasR  = row.dataset.hasR  === "1";
-      const hasM  = row.dataset.hasM  === "1";
-
-      const matchesCat = !cat || rowCat === cat;
-
-      const matchesSoftware =
-        !anySoft ||
-        (soft.py && hasPy) ||
-        (soft.r  && hasR)  ||
-        (soft.m  && hasM);
-
-      const ok = matchesCat && matchesSoftware;
-
-      row.style.display = ok ? "" : "none";
-      if(ok) shown += 1;
-    });
-
-    const countEl = document.getElementById("cg-count");
-    if(countEl) countEl.textContent = `${shown} shown`;
-  }
-
-  // Toggle chip
-  document.addEventListener("click", (e) => {
-    const chip = e.target.closest(".cg-chip[data-soft]");
-    if(chip){
-      const isOn = chip.getAttribute("aria-pressed") === "true";
-      chip.setAttribute("aria-pressed", String(!isOn));
-      cgApplyFilters();
-      return;
-    }
-
-    // Clear button
-    if(e.target && e.target.id === "cg-clear"){
-      document.getElementById("cg-category").value = "";
-      document.querySelectorAll(".cg-chip[data-soft]").forEach(btn => btn.setAttribute("aria-pressed","false"));
-      cgApplyFilters();
-      return;
-    }
-  });
-
-  // Category change
-  document.addEventListener("change", (e) => {
-    if(e.target && e.target.id === "cg-category") cgApplyFilters();
-  });
-
-  document.addEventListener("DOMContentLoaded", cgApplyFilters);
-})();
-</script>
+<p>Tutorials will live here.</p>
 
 
 
