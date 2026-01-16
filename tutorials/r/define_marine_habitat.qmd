@@ -129,7 +129,7 @@ SST$analysed_sst <- drop(SST$analysed_sst)
 plotBBox(SST, plotColor = 'thermal')
 ```
 
-![](images/qplot-1.png)<!-- -->
+![](images/definemarinehabitat1.png)<!-- -->
 
 ``` r
          #,maxpixels=1000000)
@@ -156,7 +156,7 @@ SST2$analysed_sst[SST2$analysed_sst >= min.temp & SST2$analysed_sst <= max.temp]
 plotBBox(SST2, plotColor = 'thermal')
 ```
 
-![](images/makeVar-1.png)<!-- -->
+![](images/definemarinehabitat2.png)<!-- -->
 
 It would be nicer to color in the TurtleWatch band (the NA values) with
 a different color. If you want to customize graphs, it’s better to use
@@ -190,4 +190,4 @@ myplot<-ggplot(data = SST2.lf, aes(x = x, y = y, fill = sst)) +
 myplot
 ```
 
-![](images/plot-1.png)<!-- -->
+![](images/definemarinehabitat3.png)<!-- -->

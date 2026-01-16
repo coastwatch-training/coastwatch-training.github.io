@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="4e5f9565" class="cell" data-message="false" data-execution_count="1">
+<div id="931992d6" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -539,6 +539,26 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
+</tr>
+<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<td>Define a marine habitat</td>
+<td>Spatial Analysis &amp; Mapping</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-5')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/python/define_marine_habitat.ipynb" class="cg-icon" aria-label="Open define_marine_habitat.ipynb on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/define_marine_habitat.Rmd" class="cg-icon" aria-label="Open define_marine_habitat.Rmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
 <td>—</td>
 </tr>
 </tbody>
@@ -809,6 +829,45 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <p><a class="cg-btn" href="../tutorials/python/convert-180+180-to-0-360-longitude.html">View Python tutorial</a></p>
         </div>
         
+        
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-5" class="cg-modal">
+      <h3 class="anchored">Define a marine habitat</h3>
+      <p>Define a marine habitat using satellite sea surface temperature to identify regions associated with species–environment interactions. This tutorial demonstrates how to retrieve satellite SST from ERDDAP, subset data for a region and time of interest, and apply temperature-based thresholds to delineate a habitat band. The resulting temperature contours are visualized on a map to highlight areas associated with increased likelihood of interaction. Sea surface temperature data from the NOAA Coral Reef Watch CoralTemp product are used to illustrate habitat definition in the central North Pacific as part of the TurtleWatch framework.</p>
+
+      <div class="cg-grid">
+        
+        <div>
+          <strong>Python output</strong>
+          <div id="py-carousel-5" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/marine1_py.png" loading="lazy" data-caption="Satellite sea surface temperature map with the TurtleWatch habitat band highlighted. The red band marks SST values between 17.5 °C and 18.5 °C, identifying regions associated with increased loggerhead sea turtle interactions based on the TurtleWatch framework.">
+            </div>
+            <div class="cg-caption">Satellite sea surface temperature map with the TurtleWatch habitat band highlighted. The red band marks SST values between 17.5 °C and 18.5 °C, identifying regions associated with increased loggerhead sea turtle interactions based on the TurtleWatch framework.</div>
+          </div>
+          </div>
+          <p><a class="cg-btn" href="../tutorials/python/define_marine_habitat.html">View Python tutorial</a></p>
+        </div>
+        
+        
+        <div>
+          <strong>R output</strong>
+          <div id="r-carousel-5" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/marine1_r.png" loading="lazy" data-caption="Satellite sea surface temperature map with the TurtleWatch habitat band highlighted. The red band marks SST values between 17.5 °C and 18.5 °C, identifying regions associated with increased loggerhead sea turtle interactions based on the TurtleWatch framework.">
+            </div>
+            <div class="cg-caption">Satellite sea surface temperature map with the TurtleWatch habitat band highlighted. The red band marks SST values between 17.5 °C and 18.5 °C, identifying regions associated with increased loggerhead sea turtle interactions based on the TurtleWatch framework.</div>
+          </div>
+          </div>
+          <p><a class="cg-btn" href="../tutorials/r/define_marine_habitat.html">View R tutorial</a></p>
+        </div>
         
         
       </div>

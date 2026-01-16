@@ -189,7 +189,7 @@ ggplot(data = sicd, aes(x = xgrid, y = ygrid, fill=sic) ) +
       ggtitle("Sea Ice Concentration on Polar Steregraphic projection")
 ```
 
-![](images/unnamed-chunk-4-1.png)<!-- -->
+![](images/seaice1.png)<!-- -->
 
 ## Download grid cell area values
 
@@ -330,7 +330,7 @@ legend("topright", legend=c("Sea ice Area", "Sea ice Extent"),
 box()
 ```
 
-![](images/unnamed-chunk-9-1.png)<!-- -->
+![](images/seaice2.png)<!-- -->
 
 ## References
 
