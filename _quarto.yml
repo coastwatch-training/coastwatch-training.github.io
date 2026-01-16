@@ -1,9 +1,10 @@
 project:
   type: website
   output-dir: docs
-  resources: 
-    - "tutorials/**/*.ipynb"
-    - "tutorials/**/*.Rmd"
+  render: 
+    - "**/*.qmd"
+    - "**/*.ipynb"
+    - "!**/*.Rmd"
 
 website:
   title: "CoastWatch Training Materials"
