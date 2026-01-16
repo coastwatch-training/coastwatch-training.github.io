@@ -69,6 +69,31 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <div id="cg-backdrop" class="cg-backdrop" onclick="cgCloseModal()"></div>
 """
 
+
+FILTER_UI = """
+<div class="cg-filters">
+  <input id="cg-search" class="cg-filter-input" type="search"
+         placeholder="Search title, description, category…">
+
+  <select id="cg-category" class="cg-filter-select">
+    <option value="">All categories</option>
+  </select>
+
+  <label class="cg-filter-check">
+    <input id="cg-has-py" type="checkbox"> Python
+  </label>
+  <label class="cg-filter-check">
+    <input id="cg-has-r" type="checkbox"> R
+  </label>
+  <label class="cg-filter-check">
+    <input id="cg-has-m" type="checkbox"> Matlab
+  </label>
+
+  <span id="cg-count" class="cg-filter-count"></span>
+</div>
+"""
+
+
 def modal_eye(modal_id):
     return (
         f'<a href="javascript:void(0)" onclick="cgOpenModal(\'{modal_id}\')" '
@@ -204,14 +229,63 @@ for i, r in df.iterrows():
     """)
 
 
+# Build category list for dropdown
+cats = sorted([c for c in df["category"].unique() if str(c).strip()])
 
-table = pd.DataFrame(rows).to_html(
-    index=False,
-    escape=False,
-    classes=["code-gallery-table"]
-)
+cat_options = "".join([f'<option value="{c}">{c}</option>' for c in cats])
+FILTER_UI = FILTER_UI.replace("</select>", f"{cat_options}</select>")
 
-HTML(CSS_JS + table + "".join(modals))
+table_rows = []
+
+for i, r in df.iterrows():
+    mid = f"cg-modal-{i}"
+
+    # language availability flags
+    has_py = 1 if str(r.get("py_view","")).strip() or str(r.get("py_download","")).strip() else 0
+    has_r  = 1 if str(r.get("r_view","")).strip()  or str(r.get("r_download","")).strip()  else 0
+    has_m  = 1 if str(r.get("m_view","")).strip()  or str(r.get("m_download","")).strip()  else 0
+
+    title = str(r.get("title",""))
+    desc  = str(r.get("description",""))
+    cat   = str(r.get("category",""))
+
+    table_rows.append(f"""
+      <tr class="cg-row"
+          data-title="{title.replace('"','&quot;')}"
+          data-desc="{desc.replace('"','&quot;')}"
+          data-category="{cat.replace('"','&quot;')}"
+          data-has-py="{has_py}"
+          data-has-r="{has_r}"
+          data-has-m="{has_m}">
+        <td>{title}</td>
+        <td>{cat}</td>
+        <td>{modal_eye(mid)}</td>
+        <td>{download_icon(r.get("py_download",""))}</td>
+        <td>{download_icon(r.get("r_download",""))}</td>
+        <td>{download_icon(r.get("m_download",""))}</td>
+      </tr>
+    """)
+
+table = f"""
+<table class="code-gallery-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Preview</th>
+      <th>Python ↓</th>
+      <th>R ↓</th>
+      <th>Matlab ↓</th>
+    </tr>
+  </thead>
+  <tbody>
+    {''.join(table_rows)}
+  </tbody>
+</table>
+"""
+
+
+HTML(CSS_JS + FILTER_UI + table + "".join(modals))
 
 ```
 
@@ -340,6 +414,53 @@ function cgNext(id){
   <div id="cg-imglightbox-caption" class="cg-lightbox-caption"></div>
 </div>
 
+
+<script>
+function cgApplyFilters(){
+  const q = (document.getElementById("cg-search")?.value || "").trim().toLowerCase();
+  const cat = document.getElementById("cg-category")?.value || "";
+
+  const wantPy = document.getElementById("cg-has-py")?.checked || false;
+  const wantR  = document.getElementById("cg-has-r")?.checked || false;
+  const wantM  = document.getElementById("cg-has-m")?.checked || false;
+
+  const rows = Array.from(document.querySelectorAll("tr.cg-row"));
+  let shown = 0;
+
+  rows.forEach(row => {
+    const title = (row.dataset.title || "").toLowerCase();
+    const desc  = (row.dataset.desc || "").toLowerCase();
+    const rowCat = row.dataset.category || "";
+
+    const hasPy = row.dataset.hasPy === "1";
+    const hasR  = row.dataset.hasR  === "1";
+    const hasM  = row.dataset.hasM  === "1";
+
+    const matchesText = !q || title.includes(q) || desc.includes(q) || rowCat.toLowerCase().includes(q);
+    const matchesCat  = !cat || rowCat === cat;
+
+    const matchesPy = !wantPy || hasPy;
+    const matchesR  = !wantR  || hasR;
+    const matchesM  = !wantM  || hasM;
+
+    const ok = matchesText && matchesCat && matchesPy && matchesR && matchesM;
+
+    row.style.display = ok ? "" : "none";
+    if(ok) shown += 1;
+  });
+
+  const countEl = document.getElementById("cg-count");
+  if(countEl) countEl.textContent = `${shown} shown`;
+}
+
+document.addEventListener("input", (e) => {
+  if(!e.target) return;
+  const ids = ["cg-search","cg-category","cg-has-py","cg-has-r","cg-has-m"];
+  if(ids.includes(e.target.id)) cgApplyFilters();
+});
+
+document.addEventListener("DOMContentLoaded", cgApplyFilters);
+</script>
 
 
 

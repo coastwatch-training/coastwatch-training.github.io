@@ -227,3 +227,31 @@
   color: #eee;
   font-size: 0.95rem;
 }
+
+.cg-filters{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin: 10px 0 14px;
+}
+
+.cg-filter-input, .cg-filter-select{
+  padding: 8px 10px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 10px;
+}
+
+.cg-filter-input{ min-width: 260px; }
+
+.cg-filter-check{
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.cg-filter-count{
+  margin-left: auto;
+  opacity: 0.75;
+  font-size: 0.9rem;
+}
