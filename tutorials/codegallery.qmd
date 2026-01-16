@@ -70,24 +70,24 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 """
 
 
-FILTER_UI = """
+cats = sorted([c for c in df["category"].unique() if str(c).strip()])
+
+FILTER_UI = f"""
 <div class="cg-filters">
-  <input id="cg-search" class="cg-filter-input" type="search"
-         placeholder="Search title, description, category…">
+  <div class="cg-filter-group">
+    <label for="cg-category"><strong>Category</strong></label>
+    <select id="cg-category" class="cg-filter-select">
+      <option value="">All</option>
+      {''.join([f'<option value="{c}">{c}</option>' for c in cats])}
+    </select>
+  </div>
 
-  <select id="cg-category" class="cg-filter-select">
-    <option value="">All categories</option>
-  </select>
-
-  <label class="cg-filter-check">
-    <input id="cg-has-py" type="checkbox"> Python
-  </label>
-  <label class="cg-filter-check">
-    <input id="cg-has-r" type="checkbox"> R
-  </label>
-  <label class="cg-filter-check">
-    <input id="cg-has-m" type="checkbox"> Matlab
-  </label>
+  <div class="cg-filter-group">
+    <strong>Software</strong>
+    <label class="cg-filter-check"><input id="cg-soft-py" type="checkbox"> Python</label>
+    <label class="cg-filter-check"><input id="cg-soft-r" type="checkbox"> R</label>
+    <label class="cg-filter-check"><input id="cg-soft-m" type="checkbox"> Matlab</label>
+  </div>
 
   <span id="cg-count" class="cg-filter-count"></span>
 </div>
@@ -229,11 +229,6 @@ for i, r in df.iterrows():
     """)
 
 
-# Build category list for dropdown
-cats = sorted([c for c in df["category"].unique() if str(c).strip()])
-
-cat_options = "".join([f'<option value="{c}">{c}</option>' for c in cats])
-FILTER_UI = FILTER_UI.replace("</select>", f"{cat_options}</select>")
 
 table_rows = []
 
@@ -246,13 +241,10 @@ for i, r in df.iterrows():
     has_m  = 1 if str(r.get("m_view","")).strip()  or str(r.get("m_download","")).strip()  else 0
 
     title = str(r.get("title",""))
-    desc  = str(r.get("description",""))
     cat   = str(r.get("category",""))
 
     table_rows.append(f"""
       <tr class="cg-row"
-          data-title="{title.replace('"','&quot;')}"
-          data-desc="{desc.replace('"','&quot;')}"
           data-category="{cat.replace('"','&quot;')}"
           data-has-py="{has_py}"
           data-has-r="{has_r}"
@@ -283,7 +275,6 @@ table = f"""
   </tbody>
 </table>
 """
-
 
 HTML(CSS_JS + FILTER_UI + table + "".join(modals))
 
@@ -414,36 +405,35 @@ function cgNext(id){
   <div id="cg-imglightbox-caption" class="cg-lightbox-caption"></div>
 </div>
 
-
 <script>
 function cgApplyFilters(){
-  const q = (document.getElementById("cg-search")?.value || "").trim().toLowerCase();
   const cat = document.getElementById("cg-category")?.value || "";
 
-  const wantPy = document.getElementById("cg-has-py")?.checked || false;
-  const wantR  = document.getElementById("cg-has-r")?.checked || false;
-  const wantM  = document.getElementById("cg-has-m")?.checked || false;
+  const wantPy = document.getElementById("cg-soft-py")?.checked || false;
+  const wantR  = document.getElementById("cg-soft-r")?.checked || false;
+  const wantM  = document.getElementById("cg-soft-m")?.checked || false;
+
+  // If no software boxes are checked, treat as "all software"
+  const softwareActive = wantPy || wantR || wantM;
 
   const rows = Array.from(document.querySelectorAll("tr.cg-row"));
   let shown = 0;
 
   rows.forEach(row => {
-    const title = (row.dataset.title || "").toLowerCase();
-    const desc  = (row.dataset.desc || "").toLowerCase();
     const rowCat = row.dataset.category || "";
-
     const hasPy = row.dataset.hasPy === "1";
     const hasR  = row.dataset.hasR  === "1";
     const hasM  = row.dataset.hasM  === "1";
 
-    const matchesText = !q || title.includes(q) || desc.includes(q) || rowCat.toLowerCase().includes(q);
-    const matchesCat  = !cat || rowCat === cat;
+    const matchesCat = !cat || rowCat === cat;
 
-    const matchesPy = !wantPy || hasPy;
-    const matchesR  = !wantR  || hasR;
-    const matchesM  = !wantM  || hasM;
+    const matchesSoftware =
+      !softwareActive ||
+      (wantPy && hasPy) ||
+      (wantR  && hasR)  ||
+      (wantM  && hasM);
 
-    const ok = matchesText && matchesCat && matchesPy && matchesR && matchesM;
+    const ok = matchesCat && matchesSoftware;
 
     row.style.display = ok ? "" : "none";
     if(ok) shown += 1;
@@ -453,15 +443,14 @@ function cgApplyFilters(){
   if(countEl) countEl.textContent = `${shown} shown`;
 }
 
-document.addEventListener("input", (e) => {
+document.addEventListener("change", (e) => {
   if(!e.target) return;
-  const ids = ["cg-search","cg-category","cg-has-py","cg-has-r","cg-has-m"];
+  const ids = ["cg-category","cg-soft-py","cg-soft-r","cg-soft-m"];
   if(ids.includes(e.target.id)) cgApplyFilters();
 });
 
 document.addEventListener("DOMContentLoaded", cgApplyFilters);
 </script>
-
 
 
 

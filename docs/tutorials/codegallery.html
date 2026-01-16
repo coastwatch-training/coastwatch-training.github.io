@@ -355,8 +355,8 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="bf7b6de3" class="cell" data-message="false" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="1">
+<div id="cc126c61" class="cell" data-message="false" data-execution_count="1">
+<div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
 .cg-modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);
@@ -384,7 +384,28 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 
 <div id="cg-backdrop" class="cg-backdrop" onclick="cgCloseModal()"></div>
 
-<table class="dataframe code-gallery-table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<div class="cg-filters">
+  <input id="cg-search" class="cg-filter-input" type="search" placeholder="Search title, description, category…">
+
+  <select id="cg-category" class="cg-filter-select">
+    <option value="">All categories</option>
+  <option value="Data Access">Data Access</option><option value="Time Series">Time Series</option><option value="Time Series &amp; Trend Analysis">Time Series &amp; Trend Analysis</option></select>
+
+  <label class="cg-filter-check">
+    <input id="cg-has-py" type="checkbox"> Python
+  </label>
+  <label class="cg-filter-check">
+    <input id="cg-has-r" type="checkbox"> R
+  </label>
+  <label class="cg-filter-check">
+    <input id="cg-has-m" type="checkbox"> Matlab
+  </label>
+
+  <span id="cg-count" class="cg-filter-count"></span>
+</div>
+
+
+<table class="code-gallery-table caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -404,7 +425,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr class="cg-row odd" data-title="Access satellite data" data-desc="Description here" data-category="Data Access" data-has-py="1" data-has-r="0" data-has-m="0">
 <td>Access satellite data</td>
 <td>Data Access</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-0')" class="cg-icon">
@@ -420,7 +441,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <td>—</td>
 <td>—</td>
 </tr>
-<tr class="even">
+<tr class="cg-row even" data-title="Compare sensors" data-desc="Description here" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0">
 <td>Compare sensors</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-1')" class="cg-icon">
@@ -440,7 +461,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 </tr>
-<tr class="odd">
+<tr class="cg-row odd" data-title="Make a virtual buoy with satellite data" data-desc="Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset." data-category="Time Series &amp; Trend Analysis" data-has-py="1" data-has-r="1" data-has-m="0">
 <td>Make a virtual buoy with satellite data</td>
 <td>Time Series &amp; Trend Analysis</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-2')" class="cg-icon">
@@ -462,6 +483,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </tr>
 </tbody>
 </table>
+
 
     <div id="cg-modal-0" class="cg-modal">
       <h3 class="anchored">Access satellite data</h3>
@@ -694,6 +716,52 @@ function cgNext(id){
 
 </div>
 </div>
+<script>
+function cgApplyFilters(){
+  const q = (document.getElementById("cg-search")?.value || "").trim().toLowerCase();
+  const cat = document.getElementById("cg-category")?.value || "";
+
+  const wantPy = document.getElementById("cg-has-py")?.checked || false;
+  const wantR  = document.getElementById("cg-has-r")?.checked || false;
+  const wantM  = document.getElementById("cg-has-m")?.checked || false;
+
+  const rows = Array.from(document.querySelectorAll("tr.cg-row"));
+  let shown = 0;
+
+  rows.forEach(row => {
+    const title = (row.dataset.title || "").toLowerCase();
+    const desc  = (row.dataset.desc || "").toLowerCase();
+    const rowCat = row.dataset.category || "";
+
+    const hasPy = row.dataset.hasPy === "1";
+    const hasR  = row.dataset.hasR  === "1";
+    const hasM  = row.dataset.hasM  === "1";
+
+    const matchesText = !q || title.includes(q) || desc.includes(q) || rowCat.toLowerCase().includes(q);
+    const matchesCat  = !cat || rowCat === cat;
+
+    const matchesPy = !wantPy || hasPy;
+    const matchesR  = !wantR  || hasR;
+    const matchesM  = !wantM  || hasM;
+
+    const ok = matchesText && matchesCat && matchesPy && matchesR && matchesM;
+
+    row.style.display = ok ? "" : "none";
+    if(ok) shown += 1;
+  });
+
+  const countEl = document.getElementById("cg-count");
+  if(countEl) countEl.textContent = `${shown} shown`;
+}
+
+document.addEventListener("input", (e) => {
+  if(!e.target) return;
+  const ids = ["cg-search","cg-category","cg-has-py","cg-has-r","cg-has-m"];
+  if(ids.includes(e.target.id)) cgApplyFilters();
+});
+
+document.addEventListener("DOMContentLoaded", cgApplyFilters);
+</script>
 
 
 
