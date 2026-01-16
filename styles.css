@@ -21,7 +21,7 @@
 /* Title column */
 .code-gallery-table th:nth-child(1),
 .code-gallery-table td:nth-child(1) {
-  width: 42%;
+  width: 40%;
 }
 
 .code-gallery-table td:nth-child(1) {

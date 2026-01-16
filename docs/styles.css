@@ -1,8 +1,9 @@
-/* css styles */
+
 .code-gallery-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
+  table-layout: fixed;
 }
 
 .code-gallery-table th,
@@ -17,6 +18,18 @@
   font-weight: 600;
 }
 
+/* Title column */
+.code-gallery-table th:nth-child(1),
+.code-gallery-table td:nth-child(1) {
+  width: 40%;
+}
+
+.code-gallery-table td:nth-child(1) {
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Preview + download columns */
 .code-gallery-table td:nth-child(n+3),
 .code-gallery-table th:nth-child(n+3) {
   text-align: center;
