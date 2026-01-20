@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="4f16954e" class="cell" data-message="false" data-execution_count="1">
+<div id="e477a96e" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -731,6 +731,26 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 <td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/mask-shallow-ocean-color.Rmd" class="cg-icon" aria-label="Open mask-shallow-ocean-color.Rmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td>—</td>
+</tr>
+<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<td>Matching polar data to animal track locations</td>
+<td>Spatial Analysis &amp; Mapping</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-16')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/python/matchup-polar-data-to-animal-track-locations.ipynb" class="cg-icon" aria-label="Open matchup-polar-data-to-animal-track-locations.ipynb on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/matchup-polar-data-to-animal-track-locations.Rmd" class="cg-icon" aria-label="Open matchup-polar-data-to-animal-track-locations.Rmd on GitHub" target="_blank" rel="noopener">
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
@@ -1481,6 +1501,73 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-15')">◀</button>  <span class="cg-count">1 / 4</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-15')">▶</button></div></div>
           <p><a class="cg-btn" href="../tutorials/r/mask-shallow-ocean-color.html">View R tutorial</a></p>
+        </div>
+        
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-16" class="cg-modal">
+      <h3 class="anchored">Matching polar data to animal track locations</h3>
+      <p>Extract and analyze satellite sea ice conditions along animal movement tracks in polar regions. This tutorial demonstrates how to combine satellite sea ice concentration data with animal telemetry observations to examine environmental conditions encountered along a tracked path. Using monthly sea ice concentration records from NOAA PolarWatch, the workflow shows how to subset gridded satellite data in polar stereographic coordinates, align it temporally and spatially with penguin telemetry locations, and extract coincident sea ice values along the track. The tutorial also illustrates how to visualize animal movement overlaid on sea ice maps and how to generate matched time series of satellite-derived sea ice concentration at each observation point.</p>
+
+      <div class="cg-grid">
+        
+        <div>
+          <strong>Python output</strong>
+          <div id="py-carousel-16" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/polartracks1.png" loading="lazy" data-caption="Monthly Antarctic sea ice concentration from the NOAA/NSIDC Climate Data Record is shown on a south polar stereographic map for the first available timestep.">
+            </div>
+            <div class="cg-caption">Monthly Antarctic sea ice concentration from the NOAA/NSIDC Climate Data Record is shown on a south polar stereographic map for the first available timestep.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/polartracks2.png" loading="lazy" data-caption="Monthly sea ice concentration maps for January, February, and March are overlaid with Adelie penguin telemetry tracks.">
+            </div>
+            <div class="cg-caption">Monthly sea ice concentration maps for January, February, and March are overlaid with Adelie penguin telemetry tracks.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/polartracks3.png" loading="lazy" data-caption="Penguin track locations are colored by collocated sea ice concentration values extracted from the satellite dataset.">
+            </div>
+            <div class="cg-caption">Penguin track locations are colored by collocated sea ice concentration values extracted from the satellite dataset.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-16')">◀</button>  <span class="cg-count">1 / 3</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-16')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/python/matchup-polar-data-to-animal-track-locations.html">View Python tutorial</a></p>
+        </div>
+        
+        
+        <div>
+          <strong>R output</strong>
+          <div id="r-carousel-16" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/polartracks1_r.png" loading="lazy" data-caption="Monthly sea ice concentration from the NOAA/NSIDC Climate Data Record is mapped for the first available time step to illustrate the polar stereographic satellite grid used for Antarctic matchups.">
+            </div>
+            <div class="cg-caption">Monthly sea ice concentration from the NOAA/NSIDC Climate Data Record is mapped for the first available time step to illustrate the polar stereographic satellite grid used for Antarctic matchups.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/polartracks2_r.png" loading="lazy" data-caption="The Adelie penguin telemetry track is plotted in geographic coordinates, highlighting the start and end points used to extract satellite sea ice values along the animal’s path.">
+            </div>
+            <div class="cg-caption">The Adelie penguin telemetry track is plotted in geographic coordinates, highlighting the start and end points used to extract satellite sea ice values along the animal’s path.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/polartracks3_r.png" loading="lazy" data-caption="The penguin track is colored by the extracted monthly sea ice concentration at each location and date, showing how satellite conditions are sampled along a moving trajectory in Antarctica.">
+            </div>
+            <div class="cg-caption">The penguin track is colored by the extracted monthly sea ice concentration at each location and date, showing how satellite conditions are sampled along a moving trajectory in Antarctica.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-16')">◀</button>  <span class="cg-count">1 / 3</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-16')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/r/matchup-polar-data-to-animal-track-locations.html">View R tutorial</a></p>
         </div>
         
         
