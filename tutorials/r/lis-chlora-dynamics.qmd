@@ -39,7 +39,7 @@ For more information on each product refer to:
 
 ## Install and load packages
 
-```{r}
+``` r
 pkgTest <- function(x)
 {
   if (!require(x,character.only = TRUE))
@@ -68,7 +68,7 @@ We will load the daily Chlorophyll-a dataset from the CoastWatch ERDDAP server. 
 
 We will use the `info` function from the `rerddap` package to first obtain information about the dataset of interest, then we will import the data.
 
-```{r}
+``` r
 # Set the ERDDAP URL
 erddap_url <- "https://coastwatch.noaa.gov/erddap"
 
@@ -83,7 +83,7 @@ dataInfo
 
 ```
 
-```{r}
+``` r
 ## <ERDDAP info> noaacwappsS3ABcolorLISDaily 
 ## Base URL: https://coastwatch.noaa.gov/erddap 
 ## Dataset Type: griddap 
@@ -106,7 +106,7 @@ dataInfo
 
 For this tutorial, we will be focusing on chloropyhll-a throughout 2022 in the Long Island Sound Range.
 
-```{r}
+``` r
 # Set the time range
 time_range <- c("2022-01-01", "2022-12-31")
 
@@ -121,7 +121,7 @@ parameter <- 'chlor_a'
 
 ## Extract the dataset
 
-```{r}
+``` r
 # Download the chlorophyll-a data
 chlor_data <- griddap(
   datasetx = dataset_id,
@@ -141,7 +141,7 @@ head(chlor_data)
 
 Converting to a tibble makes the dataset tidy-verse friendly, so we can manipulate the data without headaches.
 
-```{r}
+``` r
 # Convert to tibble and add date/month columns
 df <- chlor_data$data %>%
   as_tibble() %>%
@@ -158,7 +158,7 @@ print(df)
 
 We group the data by month, latitude, and longitude and compute the average chlorophyll-a for each pixel for each month. We also remove any missing values.
 
-```{r}
+``` r
 # Calculate monthly mean chlor_a
 monthly_mean <- df %>%
   group_by(month, latitude, longitude) %>%
@@ -173,12 +173,12 @@ print(monthly_mean)
 
 The dataset now has 12 time steps, one for each month between January 2022 and December 2022.
 
-```{r}
+``` r
 unique(monthly_mean$month)
 
 ```
 
-```{r}
+``` r
 ##[1] "2022-01-01" "2022-02-01" "2022-03-01" "2022-04-01" "2022-05-01" "2022-06-01" 
 ##"2022-07-01" "2022-08-01" "2022-09-01" "2022-10-01" "2022-11-01"
 ##[12] "2022-12-01"
@@ -190,7 +190,7 @@ Using `ggplot`, we create a faceted spatial plot of chlorophyll-a with tiles col
 
 `facet_wrap` tells ggplot to split the plot in 12 facets (one for each month) and **ncol = 4** puts the 12 plots into 3 rows and 4 columns.
 
-```{r}
+``` r
 ggplot(monthly_mean, aes(x = longitude, y = latitude, fill = chlor_a)) +
   geom_tile() +
   scale_fill_viridis(
@@ -218,7 +218,7 @@ ggplot(monthly_mean, aes(x = longitude, y = latitude, fill = chlor_a)) +
 
 Calculate the annual average chlorophyll-a at each pixel by grouping the monthly data by latitude and longitude, then taking the mean across all months. We also remove any missing values.
 
-```{r}
+``` r
 yearly_mean <- monthly_mean %>%
   group_by(latitude, longitude) %>%
   summarise(chlor_a = mean(chlor_a, na.rm = TRUE), .groups = "drop")
@@ -227,7 +227,7 @@ yearly_mean <- monthly_mean %>%
 
 ## Plot the map of the 2022 average chlorophyll-a in the region
 
-```{r}
+``` r
 ggplot(yearly_mean, aes(x = longitude, y = latitude, fill = chlor_a)) +
   geom_tile() +
   scale_fill_viridis(
@@ -257,7 +257,7 @@ Subset the data
 
 We are going to generate a time series of mean chlorophyll-a within each box.
 
-```{r}
+``` r
 # Subset West Long Island
 west_df <- df %>%
   filter(longitude >= -73.9, longitude <= -73.1)
@@ -270,7 +270,7 @@ east_df <- df %>%
 
 ## Examine the structure of the subsetted data
 
-```{r}
+``` r
 str(west_df)
 
 str(east_df)
@@ -278,7 +278,7 @@ str(east_df)
 
 ## Resample each subset to 8-day means
 
-```{r}
+``` r
 # Resample west_df
 west_df <- west_df %>%
   mutate(
@@ -299,7 +299,7 @@ east_df <- east_df %>%
 
 Now, we will average all data within each subset across the latitude and longitude dimensions to produce a single time series.
 
-```{r}
+``` r
 west_ts <- west_df %>%
   group_by(period) %>%
   summarise(chlor_a = mean(chlor_a, na.rm = TRUE), .groups = "drop") %>%
@@ -315,7 +315,7 @@ east_ts <- east_df %>%
 
 ## Plot the time series
 
-```{r}
+``` r
 # Combine for plotting
 ts_combined <- bind_rows(west_ts, east_ts)
 
