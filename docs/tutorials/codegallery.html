@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="53ac911c" class="cell" data-message="false" data-execution_count="1">
+<div id="4f16954e" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -715,6 +715,22 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/map-data-with-different-projections.Rmd" class="cg-icon" aria-label="Open map-data-with-different-projections.Rmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td>—</td>
+</tr>
+<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="0" data-has-r="1" data-has-m="0">
+<td>Mask shallow pixels for satellite ocean color datasets</td>
+<td>Spatial Analysis &amp; Mapping</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-15')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td>—</td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/mask-shallow-ocean-color.Rmd" class="cg-icon" aria-label="Open mask-shallow-ocean-color.Rmd on GitHub" target="_blank" rel="noopener">
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
@@ -1418,6 +1434,53 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-14')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-14')">▶</button></div></div>
           <p><a class="cg-btn" href="../tutorials/r/map-data-with-different-projections.html">View R tutorial</a></p>
+        </div>
+        
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-15" class="cg-modal">
+      <h3 class="anchored">Mask shallow pixels for satellite ocean color datasets</h3>
+      <p>Remove optically shallow-water contamination from satellite ocean color data to improve the accuracy of derived biogeochemical metrics. This tutorial demonstrates how to download bathymetry and monthly chlorophyll-a data from ERDDAP, quantify the fraction of shallow water within each ocean color pixel, and construct a threshold-based mask to exclude pixels affected by bottom reflectance. The masked and unmasked datasets are then used to compute and compare long-term chlorophyll-a climatologies. By combining high-resolution bathymetry with coarse-resolution ocean color observations, the workflow illustrates a practical approach for preparing satellite datasets for robust analysis in coastal and reef-adjacent regions.</p>
+
+      <div class="cg-grid">
+        
+        
+        <div>
+          <strong>R output</strong>
+          <div id="r-carousel-15" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/shallowpixels1.png" loading="lazy" data-caption="High-resolution ETOPO bathymetry for the Oʻahu region showing depth contours used to distinguish optically shallow and deep waters.">
+            </div>
+            <div class="cg-caption">High-resolution ETOPO bathymetry for the Oʻahu region showing depth contours used to distinguish optically shallow and deep waters.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/shallowpixels3.png" loading="lazy" data-caption="Percentage of shallow water (<30 m depth) contained within each coarse-resolution ocean color pixel, calculated by matching bathymetry to the chlorophyll grid.">
+            </div>
+            <div class="cg-caption">Percentage of shallow water (&lt;30 m depth) contained within each coarse-resolution ocean color pixel, calculated by matching bathymetry to the chlorophyll grid.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/shallowpixels4.png" loading="lazy" data-caption="Binary mask identifying ocean color pixels dominated by shallow water based on a user-defined shallow-area threshold.">
+            </div>
+            <div class="cg-caption">Binary mask identifying ocean color pixels dominated by shallow water based on a user-defined shallow-area threshold.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/shallowpixels6.png" loading="lazy" data-caption="Log-scaled chlorophyll-a climatology after applying the shallow-water mask, illustrating the removal of bottom-contaminated coastal pixels.">
+            </div>
+            <div class="cg-caption">Log-scaled chlorophyll-a climatology after applying the shallow-water mask, illustrating the removal of bottom-contaminated coastal pixels.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-15')">◀</button>  <span class="cg-count">1 / 4</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-15')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/r/mask-shallow-ocean-color.html">View R tutorial</a></p>
         </div>
         
         
