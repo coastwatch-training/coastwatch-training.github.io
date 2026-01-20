@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="eb499af5" class="cell" data-message="false" data-execution_count="1">
+<div id="53ac911c" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -695,6 +695,26 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/lis-chlora-dynamics.Rmd" class="cg-icon" aria-label="Open lis-chlora-dynamics.Rmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td>—</td>
+</tr>
+<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<td>Map geographical and polarstereographic data on a projected map</td>
+<td>Spatial Analysis &amp; Mapping</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-14')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/python/map-data-with-different-projections.ipynb" class="cg-icon" aria-label="Open map-data-with-different-projections.ipynb on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/map-data-with-different-projections.Rmd" class="cg-icon" aria-label="Open map-data-with-different-projections.Rmd on GitHub" target="_blank" rel="noopener">
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
@@ -1345,6 +1365,59 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-13')">◀</button>  <span class="cg-count">1 / 3</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-13')">▶</button></div></div>
           <p><a class="cg-btn" href="../tutorials/r/lis-chlora-dynamics.html">View R tutorial</a></p>
+        </div>
+        
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-14" class="cg-modal">
+      <h3 class="anchored">Map geographical and polarstereographic data on a projected map</h3>
+      <p>Plot polar satellite data correctly by working across coordinate systems and projections. This tutorial demonstrates how to access polar sea ice concentration data from an ERDDAP server, interpret the dataset’s polar stereographic metadata (or EPSG code), and display the gridded x–y product on a matching projected basemap. It then shows how to overlay a second dataset provided in geographic coordinates (latitude/longitude) here, polar bear GPS tracks by transforming those points into the same map projection for direct visual comparison with the sea ice field.</p>
+
+      <div class="cg-grid">
+        
+        <div>
+          <strong>Python output</strong>
+          <div id="py-carousel-14" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/mapproj_1.png" loading="lazy" data-caption="Sea ice concentration from the NOAA/NSIDC Climate Data Record is displayed on a North Polar Stereographic map using the dataset’s native EPSG:3411 projection.">
+            </div>
+            <div class="cg-caption">Sea ice concentration from the NOAA/NSIDC Climate Data Record is displayed on a North Polar Stereographic map using the dataset’s native EPSG:3411 projection.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/mapproj_2.png" loading="lazy" data-caption="Monthly sea ice concentration is shown on a polar stereographic basemap with overlaid polar bear GPS locations in latitude–longitude coordinates.">
+            </div>
+            <div class="cg-caption">Monthly sea ice concentration is shown on a polar stereographic basemap with overlaid polar bear GPS locations in latitude–longitude coordinates.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-14')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-14')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/python/map-data-with-different-projections.html">View Python tutorial</a></p>
+        </div>
+        
+        
+        <div>
+          <strong>R output</strong>
+          <div id="r-carousel-14" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/mapping_seaice-1.png" loading="lazy" data-caption="Sea ice concentration from the NOAA/NSIDC Climate Data Record is displayed on a Polar Stereographic projection, illustrating how gridded polar satellite data are mapped in projected x–y coordinates.">
+            </div>
+            <div class="cg-caption">Sea ice concentration from the NOAA/NSIDC Climate Data Record is displayed on a Polar Stereographic projection, illustrating how gridded polar satellite data are mapped in projected x–y coordinates.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/mapping_seaice-2.png" loading="lazy" data-caption=" Sea ice concentration mapped on a Polar Stereographic projection with polar bear GPS tracks overlaid.">
+            </div>
+            <div class="cg-caption"> Sea ice concentration mapped on a Polar Stereographic projection with polar bear GPS tracks overlaid.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-14')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-14')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/r/map-data-with-different-projections.html">View R tutorial</a></p>
         </div>
         
         
