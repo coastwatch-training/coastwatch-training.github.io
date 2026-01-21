@@ -359,3 +359,30 @@
   display: flex;
   align-items: center;
 }
+
+/* --- Single-language: shrink-wrap the whole preview block --- */
+.cg-one .cg-figure{
+  width: fit-content !important;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* The carousel container should not force full width either */
+.cg-one .cg-carousel{
+  width: fit-content !important;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Your frame can stay a fixed height, but don't force full width */
+.cg-one .cg-imgframe{
+  width: auto !important;       /* override width:100% */
+  display: inline-flex;         /* shrink to content */
+}
+
+/* Optional: keep the caption from stretching across the modal */
+.cg-one .cg-caption{
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
