@@ -172,6 +172,28 @@ def resources_icon_for_row(row) -> str:
     )
 
 
+def render_lang_block(label, carousel_html, view_url, single=False):
+    if single:
+        return f"""
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>{label} output</strong>
+            {carousel_html}
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="{view_url}">View {label} tutorial</a>
+          </div>
+        </div>
+        """
+    else:
+        return f"""
+        <div>
+          <strong>{label} output</strong>
+          {carousel_html}
+          <p><a class="cg-btn" href="{view_url}">View {label} tutorial</a></p>
+        </div>
+        """
+
 
 def render_carousel(img_cell, carousel_id):
     if not img_cell:
@@ -242,43 +264,48 @@ for i, r in df.iterrows():
         "Matlab ↓": download_icon(r["m_download"]),
     })
 
+    has_py_block = has_any(r["py_img"], r["py_view"], r["py_download"])
+    has_r_block  = has_any(r["r_img"], r["r_view"], r["r_download"])
+    has_m_block  = has_any(r.get("m_img",""), r.get("m_view",""), r.get("m_download",""))
+
+    n_blocks = sum([has_py_block, has_r_block, has_m_block])
+    single = (n_blocks == 1)
+
+    grid_class = "cg-grid cg-grid-single" if single else "cg-grid"
+
     py_block = ""
-    if has_any(r["py_img"], r["py_view"], r["py_download"]):
-        py_block = f"""
-        <div>
-          <strong>Python output</strong>
-          {render_carousel(r["py_img"], f"py-carousel-{i}")}
-          <p><a class="cg-btn" href="{r["py_view"]}">View Python tutorial</a></p>
-        </div>
-        """
+    if has_py_block:
+        py_block = render_lang_block(
+            "Python",
+            render_carousel(r["py_img"], f"py-carousel-{i}"),
+            r["py_view"],
+            single=single
+        )
 
     r_block = ""
-    if has_any(r["r_img"], r["r_view"], r["r_download"]):
-        r_block = f"""
-        <div>
-          <strong>R output</strong>
-          {render_carousel(r["r_img"], f"r-carousel-{i}")}
-          <p><a class="cg-btn" href="{r["r_view"]}">View R tutorial</a></p>
-        </div>
-        """
+    if has_r_block:
+        r_block = render_lang_block(
+            "R",
+            render_carousel(r["r_img"], f"r-carousel-{i}"),
+            r["r_view"],
+            single=single
+        )
 
     m_block = ""
-    if has_any(r.get("m_img",""), r.get("m_view",""), r.get("m_download","")):
-        m_block = f"""
-        <div>
-          <strong>Matlab output</strong>
-          {render_carousel(r.get("m_img",""), f"m-carousel-{i}")}
-          <p><a class="cg-btn" href="{r["m_view"]}">View Matlab tutorial</a></p>
-        </div>
-        """
-    
+    if has_m_block:
+        m_block = render_lang_block(
+            "Matlab",
+            render_carousel(r.get("m_img",""), f"m-carousel-{i}"),
+            r.get("m_view",""),
+            single=single
+        )
     
     modals.append(f"""
     <div id="{mid}" class="cg-modal">
       <h3>{r["title"]}</h3>
       <p>{r["description"]}</p>
 
-      <div class="cg-grid">
+      <div class="{grid_class}">
         {py_block}
         {r_block}
         {m_block}
@@ -312,7 +339,7 @@ for i, r in df.iterrows():
         <td>{title}</td>
         <td>{cat}</td>
         <td>{modal_eye(mid)}</td>
-        <td>{resources_icon_for_row(r)}
+        <td>{resources_icon_for_row(r)}</td>
         <td>{download_icon(r.get("py_download",""))}</td>
         <td>{download_icon(r.get("r_download",""))}</td>
         <td>{download_icon(r.get("m_download",""))}</td>

@@ -312,3 +312,43 @@
   opacity:0.75;
   font-size:0.95rem;
 }
+
+
+/* Single-language modal: keep things compact */
+.cg-grid-single{
+  grid-template-columns: 1fr;  /* one block */
+}
+
+/* Side-by-side wrapper for image + button */
+.cg-one{
+  display: flex;
+  gap: 14px;
+  align-items: center;         /* button centers vertically */
+  justify-content: center;     /* keeps the whole unit centered */
+  flex-wrap: wrap;             /* stacks on small screens */
+}
+
+/* Let media shrink-wrap */
+.cg-one-media{
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Prevent the frame from stretching full-width in single mode */
+.cg-one .cg-imgframe{
+  width: fit-content !important;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Carousel shouldn't force full width */
+.cg-one .cg-carousel{
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Button container */
+.cg-one-actions{
+  display: flex;
+  align-items: center;
+}
