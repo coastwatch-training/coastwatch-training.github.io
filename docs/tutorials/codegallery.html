@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="75e75c12" class="cell" data-message="false" data-execution_count="1">
+<div id="36bbaa18" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -836,6 +836,26 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+</tr>
+<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0">
+<td>Calculating anomaly and trend with sea ice thickness time series</td>
+<td>Time Series</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-21')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/python/seaice-thickness-climatology.ipynb" class="cg-icon" aria-label="Open seaice-thickness-climatology.ipynb on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/ice-thickness-climatology.Rmd" class="cg-icon" aria-label="Open ice-thickness-climatology.Rmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td>—</td>
 </tr>
 </tbody>
 </table>
@@ -1792,7 +1812,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <div id="r-carousel-20" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
-              <img src="../tutorials/images/turtleggplot_track202-1.png" loading="lazy" data-caption="Loggerhead turtle track locations colored by log-transformed ESA OC-CCI monthly chlorophyll-a values extracted from ERDDAP at each subsampled track point (May 2005–Aug 2008).">
+              <img src="../tutorials/images/turtleggplot_track2-1.png" loading="lazy" data-caption="Loggerhead turtle track locations colored by log-transformed ESA OC-CCI monthly chlorophyll-a values extracted from ERDDAP at each subsampled track point (May 2005–Aug 2008).">
             </div>
             <div class="cg-caption">Loggerhead turtle track locations colored by log-transformed ESA OC-CCI monthly chlorophyll-a values extracted from ERDDAP at each subsampled track point (May 2005–Aug 2008).</div>
           </div>
@@ -1813,6 +1833,45 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           <p><a class="cg-btn" href="../tutorials/matlab/matchup-satellite-data-to-track-locations.html">View Matlab tutorial</a></p>
         </div>
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-21" class="cg-modal">
+      <h3 class="anchored">Calculating anomaly and trend with sea ice thickness time series</h3>
+      <p>This tutorial demonstrates how to analyze variability and long-term change in Arctic sea ice thickness using gridded satellite data. Monthly mean sea ice thickness fields are derived from twice-daily observations accessed through the PolarWatch ERDDAP server, then compared against a multi-year climatological baseline to quantify anomalies. A 15-year reference period (2006–2020) is used to compute historical monthly means, which serve as the basis for anomaly calculations and trend assessment. Long-term trends in monthly sea ice thickness are estimated at each grid cell using the non-parametric Mann–Kendall method, allowing robust slope estimation without assumptions of normality.</p>
+
+      <div class="cg-grid">
+        
+        <div>
+          <strong>Python output</strong>
+          <div class="text-muted">No preview image</div>
+          <p><a class="cg-btn" href="../tutorials/python/seaice-thickness-climatology.html">View Python tutorial</a></p>
+        </div>
+        
+        
+        <div>
+          <strong>R output</strong>
+          <div id="r-carousel-21" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/seaiceanomalies1.png" loading="lazy" data-caption="Monthly sea ice thickness anomalies for February (left) and September (right) in 2021, calculated as departures from the 2005–2020 climatological mean using Arctic sea ice thickness data from the NOAA CDR Extended Polar Pathfinder dataset.">
+            </div>
+            <div class="cg-caption">Monthly sea ice thickness anomalies for February (left) and September (right) in 2021, calculated as departures from the 2005–2020 climatological mean using Arctic sea ice thickness data from the NOAA CDR Extended Polar Pathfinder dataset.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/seaiceanomalies2.png" loading="lazy" data-caption="Spatial distribution of the long-term September sea ice thickness trend across the Arctic, estimated for the 2006–2020 climatological period using a Mann–Kendall trend analysis applied to monthly mean sea ice thickness data.">
+            </div>
+            <div class="cg-caption">Spatial distribution of the long-term September sea ice thickness trend across the Arctic, estimated for the 2006–2020 climatological period using a Mann–Kendall trend analysis applied to monthly mean sea ice thickness data.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-21')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-21')">▶</button></div></div>
+          <p><a class="cg-btn" href="../tutorials/r/ice-thickness-climatology.html">View R tutorial</a></p>
+        </div>
+        
         
       </div>
 
