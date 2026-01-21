@@ -15,6 +15,7 @@ Click the **eye** icon to view the tutorial or **download** to get the source fi
 import pandas as pd
 from IPython.display import HTML
 from urllib.parse import quote
+from pathlib import Path
 
 REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
 REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
