@@ -18,6 +18,7 @@ from urllib.parse import quote
 
 REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
 REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
+RESOURCES_ROOT = Path("tutorials/resources")
 
 df = pd.read_csv("code_gallery.csv", encoding="utf-8-sig").fillna("")
 
@@ -135,7 +136,9 @@ def download_icon(path):
     )
 
 
+
 def resources_icon_for_row(row) -> str:
+    # pick any available tutorial path to infer the slug
     cand = (
         str(row.get("py_download","")).strip()
         or str(row.get("r_download","")).strip()
@@ -149,6 +152,16 @@ def resources_icon_for_row(row) -> str:
     if not slug:
         return "—"
 
+    # Only show icon if the folder exists AND has at least one file
+    folder = RESOURCES_ROOT / slug
+    if not folder.is_dir():
+        return "—"
+
+    has_files = any(p.is_file() for p in folder.rglob("*"))
+    if not has_files:
+        return "—"
+
+    # Link to GitHub folder
     folder_path = f"tutorials/resources/{slug}/"
     url = f"{REPO_BLOB_BASE}{quote(folder_path)}"
 
@@ -156,6 +169,7 @@ def resources_icon_for_row(row) -> str:
         f'<a href="{url}" class="cg-icon" aria-label="Open resources for {slug}" '
         f'target="_blank" rel="noopener">{RESOURCES_SVG}</a>'
     )
+
 
 
 def render_carousel(img_cell, carousel_id):
