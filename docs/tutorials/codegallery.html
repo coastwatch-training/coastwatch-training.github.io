@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="028044ec" class="cell" data-message="false" data-execution_count="1">
+<div id="b6c01195" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -1197,11 +1197,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Working with data that crosses the antimeridian</h3>
       <p>Work with satellite datasets that span the antimeridian by correcting longitude discontinuities for analysis and visualization. This tutorial demonstrates how to retrieve gridded satellite data defined on a −180° to +180° longitude system, subset regions that cross the antimeridian, convert longitude coordinates to a 0–360° system, and reorder the longitude axis to create a continuous spatial domain. The corrected data are then visualized on a map and saved for downstream analysis. Chlorophyll-a data from the NOAA gap-filled blended VIIRS ocean color dataset are used to illustrate antimeridian handling in the Bering Sea region.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
-        <div>
-          <strong>Python output</strong>
-          <div id="py-carousel-4" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>Python output</strong>
+            <div id="py-carousel-4" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/convert1801_py.png" loading="lazy" data-caption="Subset of satellite chlorophyll-a data crossing the antimeridian plotted using a −180° to +180° longitude convention. The map shows a visible discontinuity where data from opposite sides of the antimeridian are split and displayed at opposite edges of the domain.">
@@ -1216,7 +1217,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">The same satellite chlorophyll-a data after converting longitudes to a 0–360° convention and reordering the longitude axis. The antimeridian discontinuity is removed, resulting in a continuous spatial representation suitable for mapping and analysis.</div>
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-4')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-4')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/python/convert-180+180-to-0-360-longitude.html">View Python tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/python/convert-180+180-to-0-360-longitude.html">View Python tutorial</a>
+          </div>
         </div>
         
         
@@ -1335,13 +1339,14 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">How to work with satellite data in Matlab in the Great Lakes</h3>
       <p>Access and analyze satellite sea surface temperature data in MATLAB using ERDDAP and NetCDF workflows. This tutorial demonstrates how to construct ERDDAP download URLs, read NetCDF variables directly into MATLAB, convert time coordinates, and subset data spatially and temporally. The workflow includes creating daily SST maps, generating regional mean time series, and computing average SST over a selected period. Satellite sea surface temperature data from NOAA CoastWatch are used to illustrate spatial and temporal analysis across the Great Lakes region.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
         
         
-        <div>
-          <strong>Matlab output</strong>
-          <div id="m-carousel-7" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>Matlab output</strong>
+            <div id="m-carousel-7" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/matlab_gl1.png" loading="lazy" data-caption="Daily satellite sea surface temperature (SST) across the Great Lakes on 21 July 2021, extracted from ERDDAP and visualized in a Mercator projection.">
@@ -1363,7 +1368,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Mean satellite SST across the Great Lakes averaged over 21–28 July 2021, illustrating spatial temperature patterns derived from ERDDAP data.</div>
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('m-carousel-7')">◀</button>  <span class="cg-count">1 / 3</span>  <button class="cg-arrow" onclick="cgNext('m-carousel-7')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/matlab/matlab_basics_gl.html">View Matlab tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/matlab/matlab_basics_gl.html">View Matlab tutorial</a>
+          </div>
         </div>
         
       </div>
@@ -1375,11 +1383,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Working with Great Lakes Surface Temperature Data</h3>
       <p>Access and analyze Great Lakes surface temperature using satellite observations in Python. This tutorial demonstrates how to download water surface temperature data from an ERDDAP server, open and inspect NetCDF files using xarray, and convert time variables into usable date formats. The extracted data are used to generate spatial maps of surface temperature, compute regional averages within user-defined bounding boxes, and visualize temporal variability through daily time series and monthly mean maps. Water surface temperature data from the Great Lakes Surface Environmental Analysis (GLSEA) ACSPO dataset are used to illustrate satellite-based analysis of Lake Erie.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
-        <div>
-          <strong>Python output</strong>
-          <div id="py-carousel-8" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>Python output</strong>
+            <div id="py-carousel-8" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/surface_temp_gl1.png" loading="lazy" data-caption="Spatial subset of Lake Erie water surface temperature on June 1, 2023, extracted from ERDDAP and visualized for a focused region of interest.">
@@ -1401,7 +1410,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Monthly mean water surface temperature across Lake Erie for June 2023, computed from daily satellite observations downloaded via ERDDAP.</div>
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-8')">◀</button>  <span class="cg-count">1 / 3</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-8')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/python/gl-access-sat-surface-temp-data.html">View Python tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/python/gl-access-sat-surface-temp-data.html">View Python tutorial</a>
+          </div>
         </div>
         
         
@@ -1415,11 +1427,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Analyze Great Lakes Ice Concentration </h3>
       <p>Extract and summarize satellite-derived ice concentration to characterize seasonal ice conditions in the Great Lakes. This tutorial demonstrates how to download ice concentration data from ERDDAP, subset the data spatially and temporally for a region of interest, and handle missing values in NetCDF files. The extracted data are used to generate maps of ice concentration for specific dates and to compute regional daily mean ice concentration time series. Ice concentration data from the NOAA Great Lakes Surface Environmental Analysis (GLSEA) product are used to illustrate regional ice variability in western Lake Erie.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
-        <div>
-          <strong>Python output</strong>
-          <div id="py-carousel-9" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>Python output</strong>
+            <div id="py-carousel-9" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/ice_conc_gl1.png" loading="lazy" data-caption="Spatial distribution of ice concentration (%) in western Lake Erie on March 1, 2019, derived from the Great Lakes Ice Concentration product and visualized after subsetting the ERDDAP dataset to the region of interest.">
@@ -1434,7 +1447,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Time series of daily mean ice concentration (%) for western Lake Erie during March 2019, calculated by averaging satellite-derived ice concentration over the selected spatial domain.</div>
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-9')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-9')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/python/gl-ice-plot-timeseries-ice-conc.html">View Python tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/python/gl-ice-plot-timeseries-ice-conc.html">View Python tutorial</a>
+          </div>
         </div>
         
         
@@ -1448,11 +1464,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Multi-Sensor chlorophyll time series analysis for Lake Erie</h3>
       <p>Analyze long-term changes in lake chlorophyll concentrations by combining satellite observations from multiple sensors. This tutorial demonstrates how to download chlorophyll-a data from ERDDAP for Lake Erie, process daily observations from MODIS (2002–2017) and VIIRS (2018–2023), and compute spatially averaged monthly and daily time series. The workflow shows how to handle fill values, aggregate data across space and time, and visualize chlorophyll variability across the sensor transition. By merging MODIS and VIIRS records, the tutorial provides a practical approach for creating a continuous multi-sensor time series to support long-term water quality analysis in the Great Lakes.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
-        <div>
-          <strong>Python output</strong>
-          <div id="py-carousel-10" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>Python output</strong>
+            <div id="py-carousel-10" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/chl_gl1.png" loading="lazy" data-caption="Monthly mean chlorophyll-a concentration across Lake Erie for August 2009, illustrating the spatial distribution of phytoplankton biomass derived from satellite observations.">
@@ -1474,7 +1491,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Daily spatially averaged chlorophyll-a concentrations for Lake Erie in 2023, highlighting short-term variability and bloom dynamics observed by the VIIRS sensor.</div>
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-10')">◀</button>  <span class="cg-count">1 / 3</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-10')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/python/gl-timeseries-chloro-from-diff-sensors.html">View Python tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/python/gl-timeseries-chloro-from-diff-sensors.html">View Python tutorial</a>
+          </div>
         </div>
         
         
@@ -1488,11 +1508,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Long-term lake surface temperature variability from Great Lakes Satellite Records</h3>
       <p>Analyze long-term patterns in Great Lakes water surface temperature using lakewide satellite-derived averages. This tutorial demonstrates how to retrieve daily average surface temperature data from ERDDAP, assemble a multi-year record spanning 2007 to the present, and visualize seasonal temperature variability across years. Daily temperature records are aligned by day of year to highlight the warmest, coldest, and average conditions for a given date, with the current year shown in context of the historical record. Using Great Lakes Surface Environmental Analysis (GLSEA) satellite products, the workflow illustrates how long-term lake temperature climatologies can be used to assess seasonal extremes and interannual variability across the Great Lakes.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
-        <div>
-          <strong>Python output</strong>
-          <div id="py-carousel-11" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>Python output</strong>
+            <div id="py-carousel-11" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/timeseries_gl.png" loading="lazy" data-caption="Seasonal evolution of Lake Michigan average surface water temperature from 2007–2024, showing the current year in context of the long-term mean and highlighting the historically warmest and coldest years for the selected calendar day based on GLSEA satellite records.">
@@ -1500,7 +1521,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Seasonal evolution of Lake Michigan average surface water temperature from 2007–2024, showing the current year in context of the long-term mean and highlighting the historically warmest and coldest years for the selected calendar day based on GLSEA satellite records.</div>
           </div>
           </div>
-          <p><a class="cg-btn" href="../tutorials/python/gl-timeseries-surface-temp.html">View Python tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/python/gl-timeseries-surface-temp.html">View Python tutorial</a>
+          </div>
         </div>
         
         
@@ -1514,11 +1538,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Visualizing JPSS Sea Ice Concentration products using Google Colab</h3>
       <p>Visualize polar sea ice conditions by converting JPSS Sea Ice Concentration files into mapped images for quick inspection and reporting. This tutorial demonstrates how to obtain either Level-2 swath VIIRS ice concentration data or Level-3 daily gridded blended sea ice concentration products, load them into an analysis environment, and generate publication-ready maps for the Arctic or Antarctic. The workflow resamples swath observations onto a common polar grid when needed, applies consistent color scaling in percent ice concentration, and exports the final figures as PNGs.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
-        <div>
-          <strong>Python output</strong>
-          <div id="py-carousel-12" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>Python output</strong>
+            <div id="py-carousel-12" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/jpss_tut.png" loading="lazy" data-caption="Blended JPSS sea ice concentration for the Arctic on October 5, 2024, showing the spatial extent and intensity of ice cover derived from combined satellite observations and mapped onto a polar projection with ice concentration expressed as percent.">
@@ -1526,7 +1551,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Blended JPSS sea ice concentration for the Arctic on October 5, 2024, showing the spatial extent and intensity of ice cover derived from combined satellite observations and mapped onto a polar projection with ice concentration expressed as percent.</div>
           </div>
           </div>
-          <p><a class="cg-btn" href="../tutorials/python/sport-jpss-seaice.html">View Python tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/python/sport-jpss-seaice.html">View Python tutorial</a>
+          </div>
         </div>
         
         
@@ -1660,12 +1688,13 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Mask shallow pixels for satellite ocean color datasets</h3>
       <p>Remove optically shallow-water contamination from satellite ocean color data to improve the accuracy of derived biogeochemical metrics. This tutorial demonstrates how to download bathymetry and monthly chlorophyll-a data from ERDDAP, quantify the fraction of shallow water within each ocean color pixel, and construct a threshold-based mask to exclude pixels affected by bottom reflectance. The masked and unmasked datasets are then used to compute and compare long-term chlorophyll-a climatologies. By combining high-resolution bathymetry with coarse-resolution ocean color observations, the workflow illustrates a practical approach for preparing satellite datasets for robust analysis in coastal and reef-adjacent regions.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
         
-        <div>
-          <strong>R output</strong>
-          <div id="r-carousel-15" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>R output</strong>
+            <div id="r-carousel-15" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/shallowpixels1.png" loading="lazy" data-caption="High-resolution ETOPO bathymetry for the Oʻahu region showing depth contours used to distinguish optically shallow and deep waters.">
@@ -1694,7 +1723,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Log-scaled chlorophyll-a climatology after applying the shallow-water mask, illustrating the removal of bottom-contaminated coastal pixels.</div>
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-15')">◀</button>  <span class="cg-count">1 / 4</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-15')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/r/mask-shallow-ocean-color.html">View R tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/r/mask-shallow-ocean-color.html">View R tutorial</a>
+          </div>
         </div>
         
         
@@ -1813,12 +1845,13 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Comparing satellite and buoy sea surface temperature observations </h3>
       <p>This tutorial demonstrates how to match satellite-derived sea surface temperature (SST) with in situ buoy observations to evaluate satellite data accuracy. Using ERDDAP-hosted datasets, the workflow shows how to download and process buoy measurements, extract collocated satellite SST values, and compare the two datasets through statistical analysis and visualization.</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
         
-        <div>
-          <strong>R output</strong>
-          <div id="r-carousel-18" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>R output</strong>
+            <div id="r-carousel-18" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/xyplot-1.png" loading="lazy" data-caption="Daily averaged buoy sea surface temperatures are compared with colocated satellite SST values along the California coast from August 1–10, 2023.">
@@ -1833,7 +1866,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Satellite sea surface temperature fields for July 31, 2023 are shown with overlaid buoy locations colored by observed temperature.</div>
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-18')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-18')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/r/matchup_satellite_buoy_data.html">View R tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/r/matchup_satellite_buoy_data.html">View R tutorial</a>
+          </div>
         </div>
         
         
@@ -1976,11 +2012,12 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       <h3 class="anchored">Subset data in polar stereographic projection using a shapefile</h3>
       <p>This exercise demonstrates how to subset satellite data provided in a polar stereographic projection using a lake boundary defined in a different coordinate reference system. The workflow includes downloading polar satellite data from PolarWatch ERDDAP, transforming a shapefile to match the satellite projection, and clipping the dataset to the extent of Lake Iliamna in Alaska. The results are visualized to illustrate projection handling and spatial subsetting of polar remote sensing data</p>
 
-      <div class="cg-grid">
+      <div class="cg-grid cg-grid-single">
         
-        <div>
-          <strong>Python output</strong>
-          <div id="py-carousel-22" class="cg-carousel" data-idx="0">
+        <div class="cg-one">
+          <div class="cg-one-media">
+            <strong>Python output</strong>
+            <div id="py-carousel-22" class="cg-carousel" data-idx="0">
           <div class="cg-slide active cg-figure">
             <div class="cg-imgframe">
               <img src="../tutorials/images/polarshp1.png" loading="lazy" data-caption="IMS Snow and Ice Analysis data from PolarWatch for 30 July 2024 shown in its native polar stereographic projection, illustrating categorical surface conditions across the Northern Hemisphere.">
@@ -1995,7 +2032,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Subset of the IMS Snow and Ice Analysis clipped to the Lake Iliamna region after transforming the lake shapefile into the satellite data’s polar stereographic projection, demonstrating successful reprojection and spatial subsetting.</div>
           </div>
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('py-carousel-22')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('py-carousel-22')">▶</button></div></div>
-          <p><a class="cg-btn" href="../tutorials/python/subset-polar-data-with-shapefile.html">View Python tutorial</a></p>
+          </div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/python/subset-polar-data-with-shapefile.html">View Python tutorial</a>
+          </div>
         </div>
         
         
