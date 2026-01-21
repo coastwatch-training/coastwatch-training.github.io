@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists CoastWatch code gallery tutorials.<br>
 Click the <strong>eye</strong> icon to view the tutorial or <strong>download</strong> to get the source file.</p>
-<div id="46e82141" class="cell" data-message="false" data-execution_count="1">
+<div id="75e75c12" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <style>
 .cg-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;z-index:999}
@@ -794,7 +794,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <td>—</td>
 </tr>
 <tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
-<td>Satellite data matchups for telemetry and track data</td>
+<td>Matchup satellite data to ship, glider, or animal tracks</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-19')" class="cg-icon">
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -812,6 +812,30 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+</tr>
+<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="1">
+<td>Matching satellite chlorophyll to animal telemetry tracks</td>
+<td>Spatial Analysis &amp; Mapping</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-20')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/python/satellite_matchups_to_track_locations_xarray.ipynb" class="cg-icon" aria-label="Open satellite_matchups_to_track_locations_xarray.ipynb on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/r/matchup-satellite-data-to-track-locations.Rmd" class="cg-icon" aria-label="Open matchup-satellite-data-to-track-locations.Rmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/matlab/matchup-satellite-data-to-track-locations.md" class="cg-icon" aria-label="Open matchup-satellite-data-to-track-locations.md on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
 </tr>
 </tbody>
 </table>
@@ -1705,7 +1729,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
     </div>
     
     <div id="cg-modal-19" class="cg-modal">
-      <h3 class="anchored">Satellite data matchups for telemetry and track data</h3>
+      <h3 class="anchored">Matchup satellite data to ship, glider, or animal tracks</h3>
       <p>Extract and analyze satellite-derived environmental variables along moving platforms such as ship tracks, gliders, or animal telemetry paths. This tutorial demonstrates how to load track data defined by latitude, longitude, and time, visualize trajectories on a map, and retrieve colocated satellite observations from ERDDAP for each track position. Using a yellowfin tuna telemetry record as an example, satellite chlorophyll-a data from the ESA Ocean Colour Climate Change Initiative are matched to daily track locations, saved to a tabular format, and visualized to explore spatial and temporal variability along the track.</p>
 
       <div class="cg-grid">
@@ -1737,6 +1761,58 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <p><a class="cg-btn" href="../tutorials/r/matchup-satellite-data-to-ATN_track-locations.html">View R tutorial</a></p>
         </div>
         
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-20" class="cg-modal">
+      <h3 class="anchored">Matching satellite chlorophyll to animal telemetry tracks</h3>
+      <p>This tutorial demonstrates how satellite data can be matched to moving tracks defined by longitude, latitude, and time, such as those from ships, gliders, or animal telemetry. Using a subsampled loggerhead turtle track and the ESA Ocean Colour Climate Change Initiative (OC-CCI) monthly chlorophyll-a dataset (v6.0), the workflow loads track data from a file, visualizes the track and its start/end locations, extracts satellite chlorophyll values at each track point via ERDDAP, saves the matchup results to a CSV file, and maps the satellite-derived chlorophyll patterns along the track.</p>
+
+      <div class="cg-grid">
+        
+        <div>
+          <strong>Python output</strong>
+          <div id="py-carousel-20" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/turtletrack.png" loading="lazy" data-caption="Chlorophyll-a concentrations from the ESA OC-CCI monthly product matched to locations along animal track #25317, with points colored by satellite-derived chlorophyll values and start/end positions indicated along the track.">
+            </div>
+            <div class="cg-caption">Chlorophyll-a concentrations from the ESA OC-CCI monthly product matched to locations along animal track #25317, with points colored by satellite-derived chlorophyll values and start/end positions indicated along the track.</div>
+          </div>
+          </div>
+          <p><a class="cg-btn" href="../tutorials/python/satellite_matchups_to_track_locations_xarray.html">View Python tutorial</a></p>
+        </div>
+        
+        
+        <div>
+          <strong>R output</strong>
+          <div id="r-carousel-20" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/turtleggplot_track202-1.png" loading="lazy" data-caption="Loggerhead turtle track locations colored by log-transformed ESA OC-CCI monthly chlorophyll-a values extracted from ERDDAP at each subsampled track point (May 2005–Aug 2008).">
+            </div>
+            <div class="cg-caption">Loggerhead turtle track locations colored by log-transformed ESA OC-CCI monthly chlorophyll-a values extracted from ERDDAP at each subsampled track point (May 2005–Aug 2008).</div>
+          </div>
+          </div>
+          <p><a class="cg-btn" href="../tutorials/r/matchup-satellite-data-to-track-locations.html">View R tutorial</a></p>
+        </div>
+        
+        
+        <div>
+          <strong>Matlab output</strong>
+          <div id="m-carousel-20" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="../tutorials/images/turtle_chl_log_grn.png" loading="lazy" data-caption="Loggerhead turtle (#25317) track colored by log-transformed monthly chlorophyll-a averaged within ±0.1° of each tag location using ERDDAP matchup requests.">
+            </div>
+            <div class="cg-caption">Loggerhead turtle (#25317) track colored by log-transformed monthly chlorophyll-a averaged within ±0.1° of each tag location using ERDDAP matchup requests.</div>
+          </div>
+          </div>
+          <p><a class="cg-btn" href="../tutorials/matlab/matchup-satellite-data-to-track-locations.html">View Matlab tutorial</a></p>
+        </div>
         
       </div>
 
