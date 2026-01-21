@@ -33,7 +33,7 @@
 .code-gallery-table td:nth-child(n+3),
 .code-gallery-table th:nth-child(n+3) {
   text-align: center;
-  width: 6rem;
+  width: 4.25rem;
 }
 
 .cg-icon {
