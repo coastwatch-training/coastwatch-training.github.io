@@ -19,7 +19,7 @@ from pathlib import Path
 
 REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
 REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
-RESOURCES_ROOT = Path("tutorials/resources")
+RESOURCES_ROOT = Path("resources")
 
 df = pd.read_csv("code_gallery.csv", encoding="utf-8-sig").fillna("")
 
