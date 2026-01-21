@@ -1,4 +1,9 @@
 
+/* ==========================================================================
+   CODE GALLERY TABLE
+   ========================================================================== */
+
+/* Base table layout and typography */
 .code-gallery-table {
   width: 100%;
   border-collapse: collapse;
@@ -6,6 +11,7 @@
   table-layout: fixed;
 }
 
+/* Shared table cell spacing and separators */
 .code-gallery-table th,
 .code-gallery-table td {
   padding: 0.65rem 0.8rem;
@@ -13,29 +19,37 @@
   vertical-align: middle;
 }
 
+/* Table header styling */
 .code-gallery-table th {
   text-align: left;
   font-weight: 600;
 }
 
-/* Title column */
+/* Title column width (allows long tutorial titles) */
 .code-gallery-table th:nth-child(1),
 .code-gallery-table td:nth-child(1) {
   width: 35%;
 }
 
+/* Enable wrapping for long titles */
 .code-gallery-table td:nth-child(1) {
   white-space: normal;
   word-break: break-word;
 }
 
-/* Preview + download columns */
+/* Preview, resources, and download columns */
 .code-gallery-table td:nth-child(n+3),
 .code-gallery-table th:nth-child(n+3) {
   text-align: center;
   width: 4.25rem;
 }
 
+
+/* ==========================================================================
+   ICON LINKS (PREVIEW / DOWNLOAD / RESOURCES)
+   ========================================================================== */
+
+/* Icon link wrapper */
 .cg-icon {
   display: inline-flex;
   align-items: center;
@@ -45,15 +59,23 @@
   text-decoration: none;
 }
 
+/* Prevent SVG baseline alignment issues */
 .cg-icon svg {
-  display: block;      /* prevents baseline weirdness */
+  display: block;
 }
 
+/* Hover feedback for icon buttons */
 .cg-icon:hover {
   background: rgba(0,0,0,0.06);
   border-radius: 0.4rem;
 }
 
+
+/* ==========================================================================
+   MODAL BACKDROP (DIM OVERLAY)
+   ========================================================================== */
+
+/* Primary backdrop used by modal open/close logic */
 .cg-backdrop {
   position: fixed;
   inset: 0;
@@ -62,21 +84,30 @@
   z-index: 99998;
 }
 
-.cg-modal-backdrop{
-  position: fixed; inset: 0;
+/* Legacy/alternate backdrop (currently unused) */
+.cg-modal-backdrop {
+  position: fixed;
+  inset: 0;
   background: rgba(0,0,0,0.55);
-  display: none; z-index: 99998;
+  display: none;
+  z-index: 99998;
 }
 
-.cg-modal{
+
+/* ==========================================================================
+   MODAL CONTAINER AND CONTENT LAYOUT
+   ========================================================================== */
+
+/* Modal positioning, sizing, and container styling */
+.cg-modal {
   position: fixed;
   left: 50%;
-  top: 0;                         /* anchor to top */
-  transform: translateX(-50%);    /* only center horizontally */
-  margin-top: 40px;               
+  top: 0;
+  transform: translateX(-50%);    /* Center horizontally only */
+  margin-top: 40px;
 
   width: min(900px, 92vw);
-  max-height: calc(100vh - 120px); /* keeps it from going off-screen */
+  max-height: calc(100vh - 120px);
   overflow: auto;
 
   background: #fff;
@@ -84,33 +115,56 @@
   padding: 18px;
   display: none;
 
-  z-index: 99999;                 /* <-- important for Quarto */
+  z-index: 99999;
   box-shadow: 0 20px 60px rgba(0,0,0,.25);
 }
 
-.cg-modal h3{ margin: 0 0 8px; }
-.cg-modal .cg-desc{ margin: 0 0 12px; }
-.cg-modal .cg-grid{
+/* Modal heading spacing */
+.cg-modal h3 {
+  margin: 0 0 8px;
+}
+
+/* Optional description block spacing */
+.cg-modal .cg-desc {
+  margin: 0 0 12px;
+}
+
+/* Grid layout for multi-language outputs */
+.cg-modal .cg-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 12px;
 }
+
+/* Stack language blocks on smaller screens */
 @media (max-width: 750px){
-  .cg-modal .cg-grid{ grid-template-columns: 1fr; }
+  .cg-modal .cg-grid {
+    grid-template-columns: 1fr;
+  }
 }
-.cg-modal figure{ margin: 0; }
-.cg-modal img{
+
+/* Remove default figure margin */
+.cg-modal figure {
+  margin: 0;
+}
+
+/* Default modal image styling (overridden for framed previews) */
+.cg-modal img {
   width: 100%;
   border-radius: 10px;
   border: 1px solid rgba(0,0,0,0.08);
 }
-.cg-modal .cg-actions{
+
+/* Optional modal action row */
+.cg-modal .cg-actions {
   display: flex;
   justify-content: space-between;
   gap: 10px;
   margin-top: 12px;
 }
-.cg-modal .cg-close{
+
+/* Modal close button */
+.cg-modal .cg-close {
   border: 0;
   background: rgba(0,0,0,0.06);
   padding: 8px 10px;
@@ -118,73 +172,115 @@
   cursor: pointer;
 }
 
-.cg-btn{
-  display:inline-block;
-  padding:8px 14px;
-  border-radius:10px;
-  background:#0d6efd;        /* Bootstrap-style blue */
-  color:#ffffff;              /* white text */
-  border:1px solid #0d6efd;
-  text-decoration:none;
-  font-weight:500;
+
+/* ==========================================================================
+   PRIMARY ACTION BUTTON
+   ========================================================================== */
+
+/* Base button style */
+.cg-btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #0d6efd;
+  color: #ffffff;
+  border: 1px solid #0d6efd;
+  text-decoration: none;
+  font-weight: 500;
 }
 
-.cg-btn:hover{
-  background:#0b5ed7;         /* darker blue on hover */
-  border-color:#0b5ed7;
-  color:#ffffff;
+/* Button hover state */
+.cg-btn:hover {
+  background: #0b5ed7;
+  border-color: #0b5ed7;
+  color: #ffffff;
 }
 
-.cg-btn:focus{
-  outline:none;
-  box-shadow:0 0 0 3px rgba(13,110,253,0.35);
+/* Keyboard focus styling */
+.cg-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(13,110,253,0.35);
 }
 
-.cg-carousel{position:relative}
 
-.cg-nav{
-  display:flex; gap:8px; align-items:center; justify-content:space-between;
-  margin-top:8px;
-}
-.cg-arrow{
-  border:0; background:#eee; padding:6px 10px; border-radius:10px; cursor:pointer;
-}
-.cg-count{font-size:0.9em; opacity:0.75}
+/* ==========================================================================
+   CAROUSEL CONTROLS
+   ========================================================================== */
 
-/* A fixed preview frame so all images look consistent */
-.cg-figure{
+/* Carousel container */
+.cg-carousel {
+  position: relative;
+}
+
+/* Navigation row (prev/next + counter) */
+.cg-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+/* Navigation arrow buttons */
+.cg-arrow {
+  border: 0;
+  background: #eee;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Slide counter text */
+.cg-count {
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+
+
+/* ==========================================================================
+   PREVIEW SLIDES AND FRAMES
+   ========================================================================== */
+
+/* Preview slide wrapper */
+.cg-figure {
   width: 100%;
-  height: 260px;              /* <- pick a height you like */
+  height: 260px;
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
   background: #f8f9fa;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-/* Make image fill the frame consistently */
-.cg-figure img{
+/* Image sizing inside preview frame */
+.cg-figure img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;         /* use 'cover' if you prefer cropping */
+  object-fit: contain;
   width: auto;
   height: auto;
 }
 
-.cg-slide{display: none;}
-.cg-slide.active{display: flex;}
-.cg-slide.active{
+/* Hide inactive slides */
+.cg-slide {
+  display: none;
+}
+
+/* Show active slide */
+.cg-slide.active {
+  display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-/* Uniform preview frame (same size for all images) */
-.cg-imgframe{
+/* Uniform image frame */
+.cg-imgframe {
   width: 100%;
-  height: 260px;              /* choose a uniform height */
+  height: 260px;
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
@@ -195,8 +291,8 @@
   justify-content: center;
 }
 
-/* IMPORTANT: override .cg-modal img { width:100% } */
-.cg-modal .cg-imgframe img{
+/* Prevent framed images from stretching to full width */
+.cg-modal .cg-imgframe img {
   width: auto !important;
   height: auto !important;
   max-width: 100%;
@@ -205,15 +301,23 @@
   display: block;
 }
 
-.cg-imglightbox{
+
+/* ==========================================================================
+   IMAGE LIGHTBOX (CLICK-TO-ZOOM)
+   ========================================================================== */
+
+/* Fullscreen lightbox overlay */
+.cg-imglightbox {
   position: fixed;
   inset: 0;
   display: none;
-  z-index: 1200;              /* above cg-modal (1000) */
+  z-index: 100000;
   padding: 24px;
   background: rgba(0,0,0,.75);
 }
-.cg-imglightbox img{
+
+/* Enlarged image styling */
+.cg-imglightbox img {
   display: block;
   max-width: min(1100px, 96vw);
   max-height: 90vh;
@@ -221,7 +325,9 @@
   border-radius: 14px;
   background: #fff;
 }
-.cg-imgclose{
+
+/* Lightbox close button */
+.cg-imgclose {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -230,18 +336,27 @@
   padding: 8px 10px;
   cursor: pointer;
 }
-.cg-modal img{ cursor: zoom-in; }
+
+/* Cursor cue for zoomable images */
+.cg-modal img {
+  cursor: zoom-in;
+}
 
 
-.cg-caption{
+/* ==========================================================================
+   CAPTIONS
+   ========================================================================== */
+
+/* Caption under preview image */
+.cg-caption {
   margin-top: 6px;
   font-size: 0.85rem;
   color: #555;
   text-align: center;
 }
 
-
-.cg-lightbox-caption{
+/* Caption under lightbox image */
+.cg-lightbox-caption {
   margin-top: 12px;
   text-align: center;
   color: #eee;
@@ -249,12 +364,16 @@
 }
 
 
+/* ==========================================================================
+   FILTER BAR (CATEGORY + SOFTWARE)
+   ========================================================================== */
 
-.cg-filterbar{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px 18px;
-  align-items:center;
+/* Filter bar container */
+.cg-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
   margin: 10px 0 14px;
   padding: 10px 12px;
   border: 1px solid rgba(0,0,0,0.08);
@@ -262,100 +381,176 @@
   background: rgba(0,0,0,0.02);
 }
 
-.cg-filtergroup{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  align-items:center;
+/* Group wrapper for related controls */
+.cg-filtergroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
 }
 
-.cg-filterlabel{
-  font-weight:600;
-  opacity:0.85;
-  margin-right:2px;
+/* Filter group label */
+.cg-filterlabel {
+  font-weight: 600;
+  opacity: 0.85;
+  margin-right: 2px;
 }
 
-.cg-select{
+/* Category dropdown */
+.cg-select {
   padding: 8px 10px;
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 999px;
   background: #fff;
 }
 
-.cg-chip{
+/* Software filter chip */
+.cg-chip {
   border: 1px solid rgba(0,0,0,0.18);
   background: #fff;
   border-radius: 999px;
   padding: 7px 12px;
   cursor: pointer;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  user-select:none;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  user-select: none;
 }
 
-.cg-chip .cg-chipx{
-  display:none;             /* only show × when active */
-  font-weight:700;
-  opacity:0.7;
+/* Close icon inside chip (hidden until active) */
+.cg-chip .cg-chipx {
+  display: none;
+  font-weight: 700;
+  opacity: 0.7;
 }
 
-.cg-chip[aria-pressed="true"]{
+/* Active chip styling */
+.cg-chip[aria-pressed="true"] {
   background: rgba(13,110,253,0.10);
   border-color: rgba(13,110,253,0.35);
 }
 
-.cg-chip[aria-pressed="true"] .cg-chipx{
-  display:inline;
+/* Show close icon when active */
+.cg-chip[aria-pressed="true"] .cg-chipx {
+  display: inline;
 }
 
-.cg-chipclear{
+/* Clear filters chip */
+.cg-chipclear {
   background: rgba(0,0,0,0.05);
   border-color: rgba(0,0,0,0.12);
 }
 
-.cg-filtercount{
-  margin-left:auto;
-  opacity:0.75;
-  font-size:0.95rem;
+/* Results count indicator */
+.cg-filtercount {
+  margin-left: auto;
+  opacity: 0.75;
+  font-size: 0.95rem;
 }
 
 
-/* Single-language modal: keep things compact */
-.cg-grid-single{
-  grid-template-columns: 1fr;  /* one block */
+/* ==========================================================================
+   SINGLE-LANGUAGE MODAL VARIANTS
+   ========================================================================== */
+
+/* Force single-language modal grid to one column */
+.cg-grid-single {
+  grid-template-columns: 1fr;
 }
 
-/* Side-by-side wrapper for image + button */
-.cg-one{
+/* Side-by-side layout (image + button) */
+.cg-one {
   display: flex;
   gap: 14px;
-  align-items: center;         /* button centers vertically */
-  justify-content: center;     /* keeps the whole unit centered */
-  flex-wrap: wrap;             /* stacks on small screens */
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-/* Let media shrink-wrap */
-.cg-one-media{
+/* Side-by-side media wrapper */
+.cg-one-media {
   width: fit-content;
   max-width: 100%;
 }
 
-/* Prevent the frame from stretching full-width in single mode */
-.cg-one .cg-imgframe{
+/* Prevent frame stretching in side-by-side mode */
+.cg-one .cg-imgframe {
   width: fit-content !important;
   max-width: 100%;
   margin: 0 auto;
 }
 
-/* Carousel shouldn't force full width */
-.cg-one .cg-carousel{
+/* Prevent carousel stretching in side-by-side mode */
+.cg-one .cg-carousel {
   width: fit-content;
   max-width: 100%;
 }
 
-/* Button container */
-.cg-one-actions{
+/* Side-by-side button wrapper */
+.cg-one-actions {
   display: flex;
   align-items: center;
+}
+
+/* Shrink-wrap entire preview block */
+.cg-one .cg-figure {
+  width: fit-content !important;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Ensure carousel shrink-wraps as well */
+.cg-one .cg-carousel {
+  width: fit-content !important;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Override full-width frame in single-language mode */
+.cg-one .cg-imgframe {
+  width: auto !important;
+  display: inline-flex;
+}
+
+/* Prevent captions from spanning full modal width */
+.cg-one .cg-caption {
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ==========================================================================
+   SINGLE-LANGUAGE (VERTICAL) — BUTTON UNDER IMAGE
+   ========================================================================== */
+
+/* Vertical stack layout (image above button) */
+.cg-one-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;   /* LEFT-align image and button */
+  gap: 10px;
+}
+
+/* Shrink-wrap preview container */
+.cg-one-vertical .cg-figure,
+.cg-one-vertical .cg-carousel {
+  width: fit-content !important;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Prevent frame from forcing full width */
+.cg-one-vertical .cg-imgframe {
+  width: auto !important;
+  display: inline-flex;
+}
+
+/* Button container under image (left-aligned) */
+.cg-one-vertical .cg-one-actions {
+  width: auto;
+  display: flex;
+  justify-content: flex-start;
 }

@@ -106,6 +106,24 @@ FILTER_UI = f"""
 
 
 def modal_eye(modal_id):
+    """
+    Generate an HTML anchor element that opens a Code Gallery modal.
+
+    This function returns a clickable "eye" icon used in the Code Gallery
+    table. When clicked, it triggers the JavaScript `cgOpenModal()` function
+    and displays the modal associated with the provided modal ID.
+
+    Parameters
+    ----------
+    modal_id : str
+        The unique HTML ID of the modal to open (e.g., "cg-modal-3").
+
+    Returns
+    -------
+    str
+        An HTML string containing an anchor element with an embedded SVG
+        icon and an `onclick` handler for opening the modal.
+    """
     return (
         f'<a href="javascript:void(0)" onclick="cgOpenModal(\'{modal_id}\')" '
         f'class="cg-icon">{EYE_SVG}</a>'
@@ -113,6 +131,27 @@ def modal_eye(modal_id):
 
 
 def download_icon(path):
+    """
+    Generate an HTML anchor element linking to a tutorial source file on GitHub.
+
+    This function returns a clickable download icon used in the Code Gallery
+    table. If a valid file path is provided, the icon links to the corresponding
+    file in the GitHub repository and opens it in a new browser tab. If no path
+    is provided, a placeholder dash is returned to indicate that the file is
+    unavailable.
+
+    Parameters
+    ----------
+    path : str
+        Relative path to the tutorial source file within the GitHub repository.
+        If empty or missing, no download icon is rendered.
+
+    Returns
+    -------
+    str
+        An HTML string containing an anchor element with an embedded SVG icon
+        that links to the file on GitHub, or a dash ("—") if no file is available.
+    """
     if not path:
         return "—"
     filename = path.split("/")[-1]
@@ -123,8 +162,35 @@ def download_icon(path):
     )
 
 
-
 def resources_icon_for_row(row) -> str:
+    """
+    Generate an HTML anchor element linking to supplemental resource files
+    for a Code Gallery tutorial, if available.
+
+    This function inspects a row from the Code Gallery CSV to determine
+    whether supplemental resource files (e.g., CSV, NetCDF) exist for the
+    corresponding tutorial. A tutorial "slug" is inferred from the first
+    available source file (Python, R, or Matlab). If a matching resources
+    directory exists locally and contains at least one file, a clickable
+    resources icon is returned that links to the folder on GitHub.
+
+    If no valid tutorial path can be inferred, the resources directory does
+    not exist, or the directory is empty, a placeholder dash ("—") is
+    returned instead.
+
+    Parameters
+    ----------
+    row : pandas.Series
+        A single row from the Code Gallery CSV containing metadata and file
+        paths for a tutorial.
+
+    Returns
+    -------
+    str
+        An HTML string containing an anchor element with an embedded SVG
+        icon linking to the tutorial's resources folder on GitHub, or a
+        dash ("—") if no resources are available.
+    """
     # pick any available tutorial path to infer the slug
     cand = (
         str(row.get("py_download","")).strip()
@@ -159,13 +225,46 @@ def resources_icon_for_row(row) -> str:
 
 
 def render_lang_block(label, carousel_html, view_url, single=False):
+    """
+    Render an HTML block for a single programming-language tutorial output.
+
+    This function generates the HTML markup for displaying a tutorial’s
+    preview images (via a carousel) and its associated “View tutorial”
+    button inside a Code Gallery modal. The layout adapts based on whether
+    the tutorial is the only language available for that entry.
+
+    When `single` is True, the output is rendered in a compact, vertical
+    layout where the preview image is shrink-wrapped and the action button
+    appears directly beneath it. When `single` is False, the output is
+    rendered in the standard multi-language layout, suitable for side-by-
+    side display with other language blocks.
+
+    Parameters
+    ----------
+    label : str
+        Human-readable language label (e.g., "Python", "R", "Matlab") used
+        in headings and button text.
+    carousel_html : str
+        Pre-rendered HTML string for the preview image carousel associated
+        with this language.
+    view_url : str
+        URL linking to the full tutorial for this language.
+    single : bool, optional
+        Flag indicating whether this is the only language block for the
+        tutorial. If True, a compact single-language layout is used.
+        Defaults to False.
+
+    Returns
+    -------
+    str
+        An HTML string containing the rendered language block, including
+        preview images and a link to view the full tutorial.
+    """
     if single:
         return f"""
-        <div class="cg-one">
-          <div class="cg-one-media">
-            <strong>{label} output</strong>
-            {carousel_html}
-          </div>
+        <div class="cg-one cg-one-vertical">
+          <strong>{label} output</strong>
+          {carousel_html}
           <div class="cg-one-actions">
             <a class="cg-btn" href="{view_url}">View {label} tutorial</a>
           </div>
@@ -181,7 +280,40 @@ def render_lang_block(label, carousel_html, view_url, single=False):
         """
 
 
+
 def render_carousel(img_cell, carousel_id):
+    """
+    Render an HTML image carousel for tutorial preview outputs.
+
+    This function generates the HTML markup for a carousel of preview images
+    displayed inside a Code Gallery modal. The input image specification may
+    contain one or more image filenames, optionally paired with captions.
+    Multiple images are rendered as carousel slides with navigation controls,
+    while a single image is rendered without navigation.
+
+    Image specifications are expected to be provided as a pipe-delimited
+    string (e.g., "img1.png|img2.png"), with optional captions appended using
+    a double-colon separator (e.g., "img1.png::Caption text").
+
+    If no images are provided, a placeholder message indicating that no
+    preview image is available is returned.
+
+    Parameters
+    ----------
+    img_cell : str
+        Pipe-delimited string specifying preview image filenames, optionally
+        including captions using the "::" delimiter.
+    carousel_id : str
+        Unique HTML ID for the carousel instance, used to associate navigation
+        controls with the correct carousel.
+
+    Returns
+    -------
+    str
+        An HTML string containing the rendered carousel markup, including
+        slide containers, optional navigation controls, and image captions,
+        or a placeholder message if no images are available.
+    """
     if not img_cell:
         return "<div class='text-muted'>No preview image</div>"
 
@@ -230,11 +362,34 @@ def render_carousel(img_cell, carousel_id):
         f"</div>"
     )
 
+
 rows = []
 modals = []
 
 
 def has_any(*vals):
+    """
+    Check whether any provided values contain non-empty content.
+
+    This helper function evaluates an arbitrary number of input values and
+    returns True if at least one value, when converted to a string and
+    stripped of surrounding whitespace, is non-empty. It is commonly used
+    to determine whether a tutorial has any meaningful content available
+    for a given language (e.g., preview images, view links, or download
+    paths).
+
+    Parameters
+    ----------
+    *vals : tuple
+        One or more values to evaluate. Each value is converted to a string
+        and checked after stripping leading and trailing whitespace.
+
+    Returns
+    -------
+    bool
+        True if at least one value is non-empty after string conversion and
+        whitespace stripping; False otherwise.
+    """
     return any(str(v).strip() for v in vals)
 
 
@@ -300,7 +455,6 @@ for i, r in df.iterrows():
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
     </div>
     """)
-
 
 
 table_rows = []
