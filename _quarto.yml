@@ -11,6 +11,9 @@ website:
   repo-actions: [issue] #[edit, source, issue]
   favicon: images/coastwatch.png
 
+  page-footer: 
+    left: "&copy; CC-By CoastWatch, 2026"
+
   # Left sidebar navigation
   sidebar:
     background: "#D9E3E8"
@@ -31,15 +34,13 @@ website:
         href: trainings/index.qmd
         contents:
           - section: "Upcoming Trainings"
-            href: trainings/upcoming/index.qmd
             contents:
-              - href: trainings/upcoming/pgrsc26.md
+              - href: trainings/upcoming/pgrsc26.qmd
                 text: 2026 PGRSC Course
-              - href: trainings/upcoming/sat201_26.md
+              - href: trainings/upcoming/sat201_26.qmd
                 text: 2026 Satellite 201 Summer Series
 
       - section: "Training Tutorials"
-        href: tutorials/index.qmd
         contents:
           - href: tutorials/software.qmd
             text: "Software Tutorials"
