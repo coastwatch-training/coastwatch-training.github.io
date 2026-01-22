@@ -39,6 +39,21 @@ website:
                 text: 2026 PGRSC Course
               - href: trainings/upcoming/sat201_26.qmd
                 text: 2026 Satellite 201 Summer Series
+          - section: "Past Trainings"
+            contents:
+              - href: trainings/past/icft25.qmd
+                text: 2025 Satellite and Animal Telemetry
+              - href: trainings/past/longislandsound25.qmd
+                text: 2025 Long Island Sound
+              - href: trainings/past/pgrsc24.qmd
+                text: 2024 PGRSC Workshop
+              - href: trainings/past/seaice24.qmd
+                text: 2024 Sea Ice Data Course
+              - href: trainings/past/afs24.qmd
+                text: 2024 AFS Workshop
+              - href: officehours.qmd
+                text: Office Hours
+                
 
       - section: "Training Tutorials"
         contents:
