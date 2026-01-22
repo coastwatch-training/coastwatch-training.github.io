@@ -51,16 +51,18 @@ website:
                 text: 2024 Sea Ice Data Course
               - href: trainings/past/afs24.qmd
                 text: 2024 AFS Workshop
-              - href: officehours.qmd
-                text: Office Hours
                 
 
       - section: "Training Tutorials"
+        href: tutorials/index.qmd
         contents:
           - href: tutorials/software.qmd
             text: "Software Tutorials"
           - href: tutorials/codegallery.qmd
             text: "Code Gallery"
+
+      - text: "Office Hours"
+        href: officehours.qmd
   page-navigation: true
 
 

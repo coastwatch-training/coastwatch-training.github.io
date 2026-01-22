@@ -1633,63 +1633,102 @@
     ]
   },
   {
-    "objectID": "trainings/past/longislandsound25.html",
-    "href": "trainings/past/longislandsound25.html",
-    "title": "2025 Long Island Sound Class",
+    "objectID": "trainings/past/icft25.html",
+    "href": "trainings/past/icft25.html",
+    "title": "Satellite and Animal Telemetry Data Training",
     "section": "",
-    "text": "Virtual - Times vary daily, see schedule below (times are Eastern).\nNOAA CoastWatch is hosting this free, virtual training class:  Viewing and Analyzing Ocean/Coastal Events and Water Quality Using Satellites\nJoin Class Via Zoom Here",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Long Island Sound"
+      "2025 Satellite and Animal Telemetry"
     ]
   },
   {
-    "objectID": "trainings/past/longislandsound25.html#course-description",
-    "href": "trainings/past/longislandsound25.html#course-description",
-    "title": "2025 Long Island Sound Class",
-    "section": "Course Description",
-    "text": "Course Description\nMany satellite products are available for water quality applications and other uses from NOAA and other data providers. These include: chlorophyll, turbidity, sea surface temperature, organic matter, and more. In this course, learn how to use these satellite products for your region of interest using freely available tools. Address your needs and questions by creating maps and images, plotting a time series of varying conditions, or creating a virtual buoy for your study location. And other applications too!\nThis class is being offered in two Tiers as part of a larger Long Island Sound Project funded by New York/Connecticut Sea Grant.",
+    "objectID": "trainings/past/icft25.html#course-description",
+    "href": "trainings/past/icft25.html#course-description",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Long Island Sound"
+      "2025 Satellite and Animal Telemetry"
     ]
   },
   {
-    "objectID": "trainings/past/longislandsound25.html#objectives",
-    "href": "trainings/past/longislandsound25.html#objectives",
-    "title": "2025 Long Island Sound Class",
+    "objectID": "trainings/past/icft25.html#instructors",
+    "href": "trainings/past/icft25.html#instructors",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data manager\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#objectives",
+    "href": "trainings/past/icft25.html#objectives",
+    "title": "Satellite and Animal Telemetry Data Training",
     "section": "Objectives",
-    "text": "Objectives\n\nTier I: Creating Images\nLearn to use tools to create images and maps of ocean or coastal features in your area of interest. Tools taught: CoastWatch Data Portal, ArcGIS, ERDDAP visualization server, and more.\n\n\nTier II: Analyzing Data for Your Study or Region\nWork more analytically with oceanographic satellite data. Learn R and/or Python techniques to access data on ERDDAP data servers for data extraction, map creation, time series analysis, matching data to your study site locations or ship tracks, creating a virtual buoy using satellite data in your location of choice, and other application skills.",
+    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Long Island Sound"
+      "2025 Satellite and Animal Telemetry"
     ]
   },
   {
-    "objectID": "trainings/past/longislandsound25.html#schedule",
-    "href": "trainings/past/longislandsound25.html#schedule",
-    "title": "2025 Long Island Sound Class",
+    "objectID": "trainings/past/icft25.html#schedule",
+    "href": "trainings/past/icft25.html#schedule",
+    "title": "Satellite and Animal Telemetry Data Training",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\nDay\nTime (ET)\nTopic\nPresenter\n\n\n\n\nMonday - March 31\n\nTier I and Tier II\n\n\n\n\n9:00 - 9:15\nPresentation 1: Overview – SeaGrant-funded Satellite Project\nJonathan Sherman\n\n\n\n9:15 - 9:45\nPresentation 2: Data Portal\nMichael Soracco\n\n\n\n9:45 - 10:15\nPresentation 3: ArcGIS\nMichael Soracco\n\n\n\n10:15 - 10:30\nBreak\n\n\n\n\n10:30 - 11:15\nPresentation 4: CoastWatch Utilities - CDAT  Files\nRon Vogel\n\n\n\n11:15 - 11:30\nQ & A\n\n\n\n\n11:30 - 12:15\nParticipant Exercise 1: Choose a tool and make a map  ArcGIS files, CDAT files\n\n\n\n\n12:15 - 1:15\nLunch break\n\n\n\n\n1:15 - 1:45\nPresentation 5: Choosing a Dataset\nJonathan Sherman\n\n\n\n1:45 - 2:45\nPresentation 6: ERDDAP\nRon Vogel\n\n\n\n2:45 - 3:00\nBreak\n\n\n\n\n3:00 - 3:30\nQ & A and Resources for Participants\n\n\n\n\n3:30 - 4:30\nParticipant Exercise 2: Choose a dataset from ERDDAP, download, make a map and a time series  Sample data list\n\n\n\nTuesday - April 1\n\nTier II (April 1–4)\n\n\n\n\n9:00 - 9:30\nPresentation 7: Satellite 101\nShelly Tomlinson\n\n\n\n9:30 - 10:30\nPresentation 8: CoastWatch Training Code (R and Python) – Capabilities and Tutorials  Tutorials GitHub page\nJonathan Sherman\n\n\n\n10:30 - 10:45\nBreak\n\n\n\n\n10:45 - 11:30\nPresentation 9: CoastWatch Utilities - Command Line  Files\nRon Vogel\n\n\n\n11:30 - 12:00\nOffice Hours Logistics, Mini-project & Slide Info, Q & A\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nOffice Hours: One-on-One\n\n\n\nWednesday - April 2\n\nParticipants work on their mini-project on their own time\n\n\n\nThursday - April 3\n9:00 - 9:15\nGauge Progress Poll\nBetty Staugler\n\n\n\n9:15 - 9:30\nPresentation 10: HAB Forecasts\nShelly Tomlinson\n\n\n\n9:30 - 9:45\nPresentation 11: COVID Impacts\nJonathan Sherman\n\n\n\n9:45 - 10:00\nPresentation 12: Participant Slide Examples from Past Classes\nRon Vogel\n\n\n\n10:00 - 12:00\nOffice Hours: Group Discussion or One-on-One\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nParticipants work on their mini-project on their own time\n\n\n\nFriday - April 4\n1:00 - 3:00\nFinal Mini-project Presentations (1 slide each)\nParticipants",
+    "text": "Schedule\nThursday, August 14, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 11:30\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:15\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:15 - 12:45\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:45 - 1:00\nDay 1 wrap-up\n\n\n\n\nFriday, August 15, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:30\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n10:30 - 11:00\nDemo of ATN data portal\nMegan McKinzie\n\n\n11:00 - 11:30\nAccessing public ATN datasets\nMegan McKinzie\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:00\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n12:00 - 12:45\nWorkshop, part 2: Hand’s on time\n\n\n\n12:45 - 13:00\nWrap up and final discussion\nAll",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Long Island Sound"
+      "2025 Satellite and Animal Telemetry"
     ]
   },
   {
-    "objectID": "trainings/past/longislandsound25.html#resources",
-    "href": "trainings/past/longislandsound25.html#resources",
-    "title": "2025 Long Island Sound Class",
+    "objectID": "trainings/past/icft25.html#resources",
+    "href": "trainings/past/icft25.html#resources",
+    "title": "Satellite and Animal Telemetry Data Training",
     "section": "Resources",
-    "text": "Resources\n\nCoastWatch main website\nCoastWatch East Coast Regional Node website\nCoastWatch Data Access methods\nCoastwatch Coding Tutorials: R and Python (on GitHub)\nCoastwatch Lecture series\nCoastwatch Data Portal video tutorials\nCoastwatch ArcGIS lecture videos and tutorials\nCoastWatch Utilities\n\nCoastWatch Utilities Tutorials - CDAT and Command-Line\nCDAT demo videos on YouTube\n\nCoastWatch Help Desk\n\nEmail: coastwatch.info@noaa.gov\nPhone: +1-301-683-3335\nUser Forums",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Long Island Sound"
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CoastWatch Training Website",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "officehours.html",
+    "href": "officehours.html",
+    "title": "CoastWatch Office Hours",
+    "section": "",
+    "text": "Hosted by the West Coast Node and PolarWatch\nevery other Thursday at 11 am PST\nUpcoming dates: March 5, 12\nEveryone is welcome to come to the CoastWatch Office Hour where people can:\n\nAsk questions about satellite data\nRequest help with accessing satellite data products\nGet troubleshooting assistance with code examples for discovering, accessing and working with satellite data\n\nCoastWatch Lectures\nCoastWatch Tutorials",
+    "crumbs": [
+      "Office Hours"
     ]
   },
   {
@@ -1765,100 +1804,64 @@
     ]
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "CoastWatch Training Tutorials",
+    "objectID": "trainings/past/longislandsound25.html",
+    "href": "trainings/past/longislandsound25.html",
+    "title": "2025 Long Island Sound Class",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "trainings/past/icft25.html",
-    "href": "trainings/past/icft25.html",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
+    "text": "Virtual - Times vary daily, see schedule below (times are Eastern).\nNOAA CoastWatch is hosting this free, virtual training class:  Viewing and Analyzing Ocean/Coastal Events and Water Quality Using Satellites\nJoin Class Via Zoom Here",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
+      "2025 Long Island Sound"
     ]
   },
   {
-    "objectID": "trainings/past/icft25.html#course-description",
-    "href": "trainings/past/icft25.html#course-description",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
+    "objectID": "trainings/past/longislandsound25.html#course-description",
+    "href": "trainings/past/longislandsound25.html#course-description",
+    "title": "2025 Long Island Sound Class",
+    "section": "Course Description",
+    "text": "Course Description\nMany satellite products are available for water quality applications and other uses from NOAA and other data providers. These include: chlorophyll, turbidity, sea surface temperature, organic matter, and more. In this course, learn how to use these satellite products for your region of interest using freely available tools. Address your needs and questions by creating maps and images, plotting a time series of varying conditions, or creating a virtual buoy for your study location. And other applications too!\nThis class is being offered in two Tiers as part of a larger Long Island Sound Project funded by New York/Connecticut Sea Grant.",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
+      "2025 Long Island Sound"
     ]
   },
   {
-    "objectID": "trainings/past/icft25.html#instructors",
-    "href": "trainings/past/icft25.html#instructors",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data manager\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#objectives",
-    "href": "trainings/past/icft25.html#objectives",
-    "title": "Satellite and Animal Telemetry Data Training",
+    "objectID": "trainings/past/longislandsound25.html#objectives",
+    "href": "trainings/past/longislandsound25.html#objectives",
+    "title": "2025 Long Island Sound Class",
     "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
+    "text": "Objectives\n\nTier I: Creating Images\nLearn to use tools to create images and maps of ocean or coastal features in your area of interest. Tools taught: CoastWatch Data Portal, ArcGIS, ERDDAP visualization server, and more.\n\n\nTier II: Analyzing Data for Your Study or Region\nWork more analytically with oceanographic satellite data. Learn R and/or Python techniques to access data on ERDDAP data servers for data extraction, map creation, time series analysis, matching data to your study site locations or ship tracks, creating a virtual buoy using satellite data in your location of choice, and other application skills.",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
+      "2025 Long Island Sound"
     ]
   },
   {
-    "objectID": "trainings/past/icft25.html#schedule",
-    "href": "trainings/past/icft25.html#schedule",
-    "title": "Satellite and Animal Telemetry Data Training",
+    "objectID": "trainings/past/longislandsound25.html#schedule",
+    "href": "trainings/past/longislandsound25.html#schedule",
+    "title": "2025 Long Island Sound Class",
     "section": "Schedule",
-    "text": "Schedule\nThursday, August 14, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 11:30\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:15\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:15 - 12:45\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:45 - 1:00\nDay 1 wrap-up\n\n\n\n\nFriday, August 15, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:30\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n10:30 - 11:00\nDemo of ATN data portal\nMegan McKinzie\n\n\n11:00 - 11:30\nAccessing public ATN datasets\nMegan McKinzie\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:00\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n12:00 - 12:45\nWorkshop, part 2: Hand’s on time\n\n\n\n12:45 - 13:00\nWrap up and final discussion\nAll",
+    "text": "Schedule\n\n\n\nDay\nTime (ET)\nTopic\nPresenter\n\n\n\n\nMonday - March 31\n\nTier I and Tier II\n\n\n\n\n9:00 - 9:15\nPresentation 1: Overview – SeaGrant-funded Satellite Project\nJonathan Sherman\n\n\n\n9:15 - 9:45\nPresentation 2: Data Portal\nMichael Soracco\n\n\n\n9:45 - 10:15\nPresentation 3: ArcGIS\nMichael Soracco\n\n\n\n10:15 - 10:30\nBreak\n\n\n\n\n10:30 - 11:15\nPresentation 4: CoastWatch Utilities - CDAT  Files\nRon Vogel\n\n\n\n11:15 - 11:30\nQ & A\n\n\n\n\n11:30 - 12:15\nParticipant Exercise 1: Choose a tool and make a map  ArcGIS files, CDAT files\n\n\n\n\n12:15 - 1:15\nLunch break\n\n\n\n\n1:15 - 1:45\nPresentation 5: Choosing a Dataset\nJonathan Sherman\n\n\n\n1:45 - 2:45\nPresentation 6: ERDDAP\nRon Vogel\n\n\n\n2:45 - 3:00\nBreak\n\n\n\n\n3:00 - 3:30\nQ & A and Resources for Participants\n\n\n\n\n3:30 - 4:30\nParticipant Exercise 2: Choose a dataset from ERDDAP, download, make a map and a time series  Sample data list\n\n\n\nTuesday - April 1\n\nTier II (April 1–4)\n\n\n\n\n9:00 - 9:30\nPresentation 7: Satellite 101\nShelly Tomlinson\n\n\n\n9:30 - 10:30\nPresentation 8: CoastWatch Training Code (R and Python) – Capabilities and Tutorials  Tutorials GitHub page\nJonathan Sherman\n\n\n\n10:30 - 10:45\nBreak\n\n\n\n\n10:45 - 11:30\nPresentation 9: CoastWatch Utilities - Command Line  Files\nRon Vogel\n\n\n\n11:30 - 12:00\nOffice Hours Logistics, Mini-project & Slide Info, Q & A\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nOffice Hours: One-on-One\n\n\n\nWednesday - April 2\n\nParticipants work on their mini-project on their own time\n\n\n\nThursday - April 3\n9:00 - 9:15\nGauge Progress Poll\nBetty Staugler\n\n\n\n9:15 - 9:30\nPresentation 10: HAB Forecasts\nShelly Tomlinson\n\n\n\n9:30 - 9:45\nPresentation 11: COVID Impacts\nJonathan Sherman\n\n\n\n9:45 - 10:00\nPresentation 12: Participant Slide Examples from Past Classes\nRon Vogel\n\n\n\n10:00 - 12:00\nOffice Hours: Group Discussion or One-on-One\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nParticipants work on their mini-project on their own time\n\n\n\nFriday - April 4\n1:00 - 3:00\nFinal Mini-project Presentations (1 slide each)\nParticipants",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
+      "2025 Long Island Sound"
     ]
   },
   {
-    "objectID": "trainings/past/icft25.html#resources",
-    "href": "trainings/past/icft25.html#resources",
-    "title": "Satellite and Animal Telemetry Data Training",
+    "objectID": "trainings/past/longislandsound25.html#resources",
+    "href": "trainings/past/longislandsound25.html#resources",
+    "title": "2025 Long Island Sound Class",
     "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
+    "text": "Resources\n\nCoastWatch main website\nCoastWatch East Coast Regional Node website\nCoastWatch Data Access methods\nCoastwatch Coding Tutorials: R and Python (on GitHub)\nCoastwatch Lecture series\nCoastwatch Data Portal video tutorials\nCoastwatch ArcGIS lecture videos and tutorials\nCoastWatch Utilities\n\nCoastWatch Utilities Tutorials - CDAT and Command-Line\nCDAT demo videos on YouTube\n\nCoastWatch Help Desk\n\nEmail: coastwatch.info@noaa.gov\nPhone: +1-301-683-3335\nUser Forums",
     "crumbs": [
       "Training Classes",
       "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
+      "2025 Long Island Sound"
     ]
-  },
-  {
-    "objectID": "trainings/past/officehours.html",
-    "href": "trainings/past/officehours.html",
-    "title": "CoastWatch Office Hours",
-    "section": "",
-    "text": "Hosted by the West Coast Node and PolarWatch\nevery other Thursday at 11 am PST\nUpcoming dates: Dec 4, 18\nEveryone is welcome to come to the CoastWatch Office Hour where people can:\n\nAsk questions about satellite data\nRequest help with accessing satellite data products\nGet troubleshooting assistance with code examples for discovering, accessing and working with satellite data\n\nCoastWatch Lectures\nCoastWatch Tutorials"
   },
   {
     "objectID": "trainings/past/seaice24.html",
@@ -2906,5 +2909,15 @@
     "title": "Subset data in polar stereographic projection using a shape file fr",
     "section": "",
     "text": "Updated September 2024\n\n\nBackground\nRemote sensing data in polar regions commonly use a polar stereographic projection, where the georeferencing is in x and y coordinates instead of the more widely used latitudes and longitudes. Working with data from different projections can be challenging.\n\n\nObjectives\nIn this tutorial, we will demonstrate how to download remote sensing data in polar stereographic projection from PolarWatch and subset it within the boundaries of Lake Iliamna in Alaska, where the lake shape data is presented in a different projection.\nAs this tutorial focuses on satellite data transformation, a basic understanding of satellite data, map projections, and the ERDDAP data server is recommended. For additional learning, you can explore satellite data tutorials and video lectures available through introductory video lectures and tutorials hosted on the CoastWatch Learning Portal and GitHub repository.\n\nThe tutorial demonstrates the following techniques\n\nDownload sea ice satellite data from the PolarWatch ERDDAP data server\nImport geographical features of Lake Iliamna from a shapefile\nTransform data from one projection to another\nSubset the satellite data for Lake Iliamna\nVisualize data in different projection\n\n\n\n\nData Used\nWorld Lake shape data\nThe world lake shapefile can be downloaded from ArcGIS Hub at https://hub.arcgis.com, and is also available in the resource/ directory of this tutorial folder. The file includes geographical features of all world lakes. For this exercise, only the features of Lake Illemna will be used.\nIMS Snow and Ice Analysis, Arctic, 4km, 2004 - Present, Daily (PolarWatch Preview)\nThe IMS dataset includes daily snow and ice coverage data for the Arctic with a 4-km resolution, available starting from 2004. The values in the dataset are categorical, representing five categories: 0 for areas outside the coverage zone, 1 for open water, 2 for land without snow, 3 for sea ice or lake ice, and 4 for snow-covered land. Data with a 1-km resolution are also available. Please contact us for more information.\n\nLoad python packages\nFor this exercise, the following packages are required. The complete list of required packages for all CoastWatch tutorials is provided in the environment.yml located in the Python-setup/ folder.\n\n# Load packages\nimport xarray as xr\nimport geopandas as gpd\nimport pandas as pd\nimport rioxarray\nfrom shapely.geometry import mapping\n\n\n\nLoad Lake Illemna data\n\n# Load lake shape file into geopanda data frame\nshapefile_path = '../resources/Iliamna/Iliamna.shp'\nlakes_shp = gpd.read_file(shapefile_path)\n\n\n# Check column names\nprint(\"Lake Data Columns:\")\nprint(lakes_shp.columns)\nlakes_shp[\"Lake_name\"].unique()\n\nLake Data Columns:\nIndex(['Hylak_id', 'Lake_name', 'Country', 'Continent', 'Poly_src',\n       'Lake_type', 'Grand_id', 'Lake_area', 'Shore_len', 'Shore_dev',\n       'Vol_total', 'Vol_res', 'Vol_src', 'Depth_avg', 'Dis_avg', 'Res_time',\n       'Elevation', 'Slope_100', 'Wshd_area', 'Pour_long', 'Pour_lat',\n       'geometry'],\n      dtype='object')\n\n\narray([None, 'Iliamna'], dtype=object)\n\n\n\n# Look up Iliamna lake\nprint(\"Row(s) that contain lake name: Iliamna\")\nlakes_shp[lakes_shp['Lake_name'].str.contains('iliamna', case=False, na=False)]\n\nRow(s) that contain lake name: Iliamna\n\n\n\n\n\n\n\n\n\nHylak_id\nLake_name\nCountry\nContinent\nPoly_src\nLake_type\nGrand_id\nLake_area\nShore_len\nShore_dev\n...\nVol_src\nDepth_avg\nDis_avg\nRes_time\nElevation\nSlope_100\nWshd_area\nPour_long\nPour_lat\ngeometry\n\n\n\n\n287\n31\nIliamna\nUnited States of America\nNorth America\nNHD\n1\n0\n2634.62\n1006.79\n5.53\n...\n1\n43.8\n354.811\n3761.5\n13\n-1.0\n16869.4\n-155.884538\n59.331889\nPOLYGON ((-17336380.000 8247763.000, -17336837...\n\n\n\n\n1 rows × 22 columns\n\n\n\n\n# Extract Iliamna shape\niliamna_shp = lakes_shp[lakes_shp['Hylak_id'] == 31]\n\n# Examine coordinate referernce system (crs)\niliamna_shp.crs\n\n&lt;Projected CRS: EPSG:3857&gt;\nName: WGS 84 / Pseudo-Mercator\nAxis Info [cartesian]:\n- X[east]: Easting (metre)\n- Y[north]: Northing (metre)\nArea of Use:\n- name: World between 85.06°S and 85.06°N.\n- bounds: (-180.0, -85.06, 180.0, 85.06)\nCoordinate Operation:\n- name: Popular Visualisation Pseudo-Mercator\n- method: Popular Visualisation Pseudo Mercator\nDatum: World Geodetic System 1984 ensemble\n- Ellipsoid: WGS 84\n- Prime Meridian: Greenwich\n\n\n\n# Visualize the lake \niliamna_shp.plot()\n\n\n\n\n\n\n\n\n\n\nLoad IMS data from PolarWatch ERDDAP\n\n# Load IMS data from ERDDAP\nerddap_url = \"https://polarwatch.noaa.gov/erddap/griddap/usnic_ims_4km\"\nds = xr.open_dataset(erddap_url)\n\n# Select one day data\nds_date = '2024-07-30'\nds = ds.sel(time=ds_date)\n\n# Visualize the IMS data\nds[\"IMS_Surface_Values\"].plot()\n\n\n\n\n\n\n\n\n\n# Check the IMS data projection\nds.attrs['grid_mapping_proj4']\n\n'+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs'\n\n\n\n\n\nTransform the lake data crs to match the satellite data crs\nThe helper functions are provided for the projection transformation process\n\n# from PolarWatch helper functions\n\ndef set_geo_specs(dat: xr.DataArray, xdim: str, ydim: str, crs: str) -&gt; xr.DataArray:\n    \"\"\"Update the spatial dimensions and coordinate reference system (CRS) of an xarray DataArray.\n\n    Args:\n        dat (xr.DataArray): The data array to modify.\n        xdim (str): Name of the dimension representing the x-coordinate.\n        ydim (str): Name of the dimension representing the y-coordinate.\n        crs (str): String representation of the coordinate reference system to assign.\n\n    Returns:\n        xr.DataArray: The updated data array with specified spatial dimensions and CRS.\n    \"\"\"\n    dat = dat.rio.set_spatial_dims(x_dim=xdim, y_dim=ydim)\n    try:\n        dat = dat.rio.write_crs(crs)\n        print('CRS setup successful')\n    except Exception as e:\n        print(f'Error during crs setup: {e}')\n\n    return dat\n\n\ndef clip_data_to_shapefile(data_array: xr.DataArray, shapefile_geom, crs: str)-&gt; xr.DataArray:\n    \"\"\"Clip data array to the specified shapefile geometry with CRS.\n    \n    Args:\n        data_array (xr.DataArray): The data array to modify.\n        shapefile_geom : Shapefile geometry.\n        crs (str): CRS of the data.\n\n    Returns:\n        xr.DataArray: The updated data array with specified spatial dimensions and CRS.  \n    \n    \"\"\"\n    try:\n        clipped_data = data_array.rio.clip(shapefile_geom.apply(mapping), crs)\n        print(\"Clipping successful\")\n        return clipped_data\n    except Exception as e:\n        print(f\"Error during clipping: {e}\")\n        raise\n\ndef transform_shapes(shp: gpd.GeoDataFrame, crs:str)-&gt; gpd.GeoDataFrame:\n    \"\"\"\n    Transforms the projection of a GeoDataFrame to a specified coordinate reference system (CRS).\n    \n    This function takes a GeoDataFrame and transforms its projection to the specified CRS, typically used\n    for reprojecting geometries to match satellite data or other spatial datasets that require a specific CRS.\n    For example, transforming the shape to a Polar Stereographic Projection.\n    \n    Parameters:\n    shp : gpd.GeoDataFrame\n        The input GeoDataFrame containing geometries (e.g., shapes, boundaries) that need to be transformed.\n    crs : str\n        The target coordinate reference system (CRS) in string format (e.g., \"EPSG:3413\" for the Polar Stereographic Projection).\n    \n    Returns:\n    gpd.GeoDataFrame\n        A GeoDataFrame with geometries transformed to the specified CRS.\n\n    \"\"\"\n    try:\n        shp_proj_transformed = shp.to_crs(crs)\n        print(f\"Projection transformed to {crs}\")\n        return shp_proj_transformed\n    except Exception as e:\n        print(f\"Error transforming CRS: {e}\")\n        raise\n\n\n# Set crs_project as the data crs (based on xarray.Dataset.attrs)\ncrs_project = \"+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs\"\n\n# Set data crs\nds = set_geo_specs(ds, xdim=\"x\", ydim=\"y\", crs=crs_project)\n\n# Transform the shape into the data crs\niliamna_transformed = transform_shapes(iliamna_shp, crs_project)\n\nCRS setup successful\nProjection transformed to +proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs\n\n\n\n# Examine lake shape crs\niliamna_transformed.crs\n\n&lt;Projected CRS: +proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 + ...&gt;\nName: unknown\nAxis Info [cartesian]:\n- E[south]: Easting (metre)\n- N[south]: Northing (metre)\nArea of Use:\n- undefined\nCoordinate Operation:\n- name: unknown\n- method: Polar Stereographic (variant B)\nDatum: unknown\n- Ellipsoid: unknown\n- Prime Meridian: Greenwich\n\n\n\n# Visualized transformed iliamna shape\niliamna_transformed.plot()\n\n\n\n\n\n\n\n\n\nSubset the satellite data using the Lake shape\n\n# Clip data to the shape\nds_clipped = clip_data_to_shapefile(ds, iliamna_transformed.geometry, iliamna_transformed.crs)\n\nClipping successful\n\n\n\n# Visualized clipped data\nds_clipped[\"IMS_Surface_Values\"].plot()\n\n\n\n\n\n\n\n\n\n\n\nResources\n\nCoastWatch Learning Portal - Lectures, Videos, Other learning resources\nCoastWatch Tutorials on Github - Tutorial notebooks and code samples\nPolarWatch ERDDAP - Complete list of data available on PolarWatch ERDDAP Server\nPolarWatch Catalog - Preview data on polar map"
+  },
+  {
+    "objectID": "trainings/index.html",
+    "href": "trainings/index.html",
+    "title": "CoastWatch Workshops",
+    "section": "",
+    "text": "CoastWatch regularly organizes and offers in-person and online satellite training classes or workshops featuring lectures, tutorials, & tool demonstrations.\nDuring in-person and online satellite course, participants learn about environmental satellite data and how to easily obtain it. Participants also gain hands on experience working with the data of interest to them. A major goal of the course is to provide scientists who are not regular users of satellite data with the knowledge and tools they need to incorporate satellite data into their research and management projects.\nFor questions or more information about the upcoming satellite training classes, please contact coastwatch.info@noaa.gov.",
+    "crumbs": [
+      "Training Classes"
+    ]
   }
 ]

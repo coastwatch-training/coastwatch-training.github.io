@@ -1,5 +1,5 @@
 ---
-title: "CoastWatch Training Tutorials"
+title: "CoastWatch Training Website"
 ---
 
 This is a Quarto website.
