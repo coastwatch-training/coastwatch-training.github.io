@@ -7,35 +7,55 @@ project:
     - "!**/*.Rmd"
 
 website:
-  title: "CoastWatch Training Materials"
+  title: "CoastWatch Training"
+  repo-actions: [issue] #[edit, source, issue]
+  favicon: images/coastwatch.png
 
   # Left sidebar navigation
   sidebar:
+    background: "#D9E3E8"
+    logo: "images/coastwatch.png"
+    favicon: "images/coastwatch.png"
+    pinned: true
+    align: center
+    tools:
+      - icon: globe
+        href: https://coastwatch.noaa.gov/cwn
     style: "docked"
     search: true
     contents:
       - text: "Welcome"
         href: index.qmd
 
+      - section: "Training Classes"
+        href: training/index.qmd
+        contents:
+          - section: "Upcoming Trainings"
+            href: trainings/upcoming/index.qmd
+            contents:
+              - href: trainings/upcoming/pgrsc26.qmd
+                text: 2026 PGRSC Course
+              - href: trainings/upcoming/sat210_26.qmd
+                text: 2026 Satellite 201 Summer Series
+
       - section: "Training Tutorials"
-        contents: 
-          - href: tutorials/index.qmd
+        href: tutorials/index.qmd
+        contents:
+          - href: tutorials/software.qmd
             text: "Software Tutorials"
           - href: tutorials/codegallery.qmd
             text: "Code Gallery"
+  page-navigation: true
 
-  navbar:
-    right:
-      - icon: github
-        href: https://github.com/madrichardson/CoastWatch-Training-Tutorials
 
 format:
   html:
     theme:
-      light: cosmo
-      dark: darkly
-    toc: false
+      cosmo
+    toc: true
     css: styles.css
+
+callout-appearance: simple 
 
 
 

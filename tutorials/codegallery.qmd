@@ -3,7 +3,7 @@ title: "Code Gallery"
 ---
 
 This page lists CoastWatch code gallery tutorials.  
-Click the **eye** icon to view the tutorial or **download** to get the source file.
+Click the **eye** icon to view the tutorial, **box** icon to view the required resources, or **download** to get directed to the source file.
 
 
 ```{python}
