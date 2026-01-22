@@ -35,7 +35,7 @@ website:
             contents:
               - href: trainings/upcoming/pgrsc26.md
                 text: 2026 PGRSC Course
-              - href: trainings/upcoming/sat210_26.md
+              - href: trainings/upcoming/sat201_26.md
                 text: 2026 Satellite 201 Summer Series
 
       - section: "Training Tutorials"
