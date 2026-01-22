@@ -28,14 +28,14 @@ website:
         href: index.qmd
 
       - section: "Training Classes"
-        href: training/index.qmd
+        href: trainings/index.qmd
         contents:
           - section: "Upcoming Trainings"
             href: trainings/upcoming/index.qmd
             contents:
-              - href: trainings/upcoming/pgrsc26.qmd
+              - href: trainings/upcoming/pgrsc26.md
                 text: 2026 PGRSC Course
-              - href: trainings/upcoming/sat210_26.qmd
+              - href: trainings/upcoming/sat210_26.md
                 text: 2026 Satellite 201 Summer Series
 
       - section: "Training Tutorials"
