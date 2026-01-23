@@ -1,0 +1,2388 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Time series of chlorophyll data from different sensors – CoastWatch Training</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../images/coastwatch.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-973137e60ee60a7e9cda953a542133da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Time series of chlorophyll data from different sensors</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../../../index.html" class="sidebar-logo-link">
+      <img src="../../../images/coastwatch.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+    <a href="https://coastwatch.noaa.gov/cwn" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-globe"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../trainings/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Training Classes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Upcoming Trainings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/upcoming/pgrsc26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 PGRSC Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/upcoming/sat201_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 Satellite 201 Summer Series</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Past Trainings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/icft25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2025 Satellite and Animal Telemetry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/longislandsound25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2025 Long Island Sound</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/pgrsc24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 PGRSC Workshop</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/seaice24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 Sea Ice Data Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/afs24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 AFS Workshop</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../tutorials/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Training Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../tutorials/software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Tutorials</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../tutorials/codegallery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code Gallery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../officehours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Office Hours</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#get-lake-erie-dailly-average-viirs-data" id="toc-get-lake-erie-dailly-average-viirs-data" class="nav-link active" data-scroll-target="#get-lake-erie-dailly-average-viirs-data">Get Lake Erie Dailly Average VIIRS data</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Time series of chlorophyll data from different sensors</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Great Lakes color producing agents (CPA) are derived from two different sensors.</p>
+<p>As an example, we are going to plot time-series of mean chlorophyll a concentration from different sensors from 2002 to 2023. We are going to download MODIS data (2002-2017) and VIIRS data (2018-2023).</p>
+<p>First, let’s load all the packages needed:</p>
+<div id="cell-3" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4 <span class="im">as</span> nc</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> LinearSegmentedColormap </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>##Get Lake Erie Monthly Average MODIS data</p>
+<p>Go to ERDDAP to find the name of the dataset for dailly MODIS data: LE_CHL_MODIS_Daily</p>
+<p>You should always examine the dataset in ERDDAP to check the date range, names of the variables and dataset ID, to make sure your griddap calls are correct:</p>
+<p>https://apps.glerl.noaa.gov/erddap/griddap/LE_CHL_MODIS_Daily.graph</p>
+<ul>
+<li>let’s download data for Lake Erie:</li>
+</ul>
+<div id="cell-6" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># in Python code replace coastwatch.glerl.noaa.gov with apps.glerl.noaa.gov</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>url<span class="op">=</span><span class="st">'https://apps.glerl.noaa.gov/erddap/griddap/LE_CHL_MODIS_Daily.nc?chlorophyll%5B(2002-08-07T19:05:00Z):1:(2017-10-22T18:00:00Z)%5D%5B(41.0051550293714):1:(42.9950003885447)%5D%5B(-83.4950003885448):1:(-78.505388156246)%5D'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-7" class="cell" data-scrolled="true" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(url, <span class="st">"e_chl_modis.nc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>('e_chl_modis.nc', &lt;http.client.HTTPMessage at 0x1a2705704d0&gt;)</code></pre>
+</div>
+</div>
+<section id="lets-use-xarray-to-extract-the-data-from-the-downloaded-file" class="level4">
+<h4 class="anchored" data-anchor-id="lets-use-xarray-to-extract-the-data-from-the-downloaded-file">- let’s use xarray to extract the data from the downloaded file:</h4>
+<div id="cell-9" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>e_m_ds <span class="op">=</span> xr.open_dataset(<span class="st">'e_chl_modis.nc'</span>,decode_cf<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-10" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>e_m_ds.coords</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>Coordinates:
+  * time       (time) float64 1.029e+09 1.029e+09 ... 1.509e+09 1.509e+09
+  * latitude   (latitude) float64 41.01 41.02 41.03 41.04 ... 42.98 42.99 43.0
+  * longitude  (longitude) float64 -83.5 -83.49 -83.48 ... -78.53 -78.52 -78.51</code></pre>
+</div>
+</div>
+<div id="cell-11" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>e_m_ds.time.values</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>array([1.02874710e+09, 1.02883020e+09, 1.02891930e+09, 1.02900240e+09,
+       1.02960750e+09, 1.02986850e+09, 1.03030170e+09, 1.03047360e+09,
+       1.03064580e+09, 1.03081770e+09, 1.03090680e+09, 1.03125090e+09,
+       1.03142310e+09, 1.03151190e+09, 1.03159500e+09, 1.03220010e+09,
+       1.03228920e+09, 1.03263330e+09, 1.03323840e+09, 1.03341060e+09,
+       1.03392660e+09, 1.03462080e+09, 1.05457950e+09, 1.05613410e+09,
+       1.05673920e+09, 1.05708330e+09, 1.05717240e+09, 1.05812160e+09,
+       1.05820470e+09, 1.05838260e+09, 1.05855480e+09, 1.05863790e+09,
+       1.05907080e+09, 1.05950400e+09, 1.05958710e+09, 1.06028130e+09,
+       1.06079730e+09, 1.06088640e+09, 1.06123050e+09, 1.06157460e+09,
+       1.06166370e+09, 1.06200780e+09, 1.06226880e+09, 1.06278510e+09,
+       1.06287390e+09, 1.06304610e+09, 1.06321800e+09, 1.06373430e+09,
+       1.06382340e+09, 1.06408440e+09, 1.06416750e+09, 1.06554990e+09,
+       1.06563870e+09, 1.06581090e+09, 1.06589400e+09, 1.09138230e+09,
+       1.09147140e+09, 1.09173240e+09, 1.09181550e+09, 1.09319790e+09,
+       1.09397520e+09, 1.09406400e+09, 1.09414710e+09, 1.09484130e+09,
+       1.09501350e+09, 1.09510230e+09, 1.09527450e+09, 1.09561860e+09,
+       1.09587960e+09, 1.09700100e+09, 1.09717290e+09, 1.11816990e+09,
+       1.11920820e+09, 1.11946350e+09, 1.12032960e+09, 1.12076280e+09,
+       1.12084590e+09, 1.12093470e+09, 1.12179510e+09, 1.12275030e+09,
+       1.12292220e+09, 1.12343850e+09, 1.12352760e+09, 1.12421580e+09,
+       1.12491000e+09, 1.12525410e+09, 1.12559820e+09, 1.12568700e+09,
+       1.12585920e+09, 1.12594230e+09, 1.12603110e+09, 1.12629240e+09,
+       1.12637550e+09, 1.12724160e+09, 1.12732470e+09, 1.12758570e+09,
+       1.12784670e+09, 1.12819080e+09, 1.12853490e+09, 1.12940130e+09,
+       1.14953220e+09, 1.14979320e+09, 1.15039830e+09, 1.15281330e+09,
+       1.15411260e+09, 1.15445670e+09, 1.15471770e+09, 1.15532280e+09,
+       1.15540590e+09, 1.15549500e+09, 1.15566690e+09, 1.15575000e+09,
+       1.15627230e+09, 1.18037820e+09, 1.18115550e+09, 1.18141650e+09,
+       1.18158840e+09, 1.18176060e+09, 1.18236570e+09, 1.18244880e+09,
+       1.18374810e+09, 1.18383120e+09, 1.18513050e+09, 1.18573560e+09,
+       1.18590780e+09, 1.18616880e+09, 1.18694610e+09, 1.18702920e+09,
+       1.18823940e+09, 1.18841160e+09, 1.18850040e+09, 1.18858350e+09,
+       1.18867260e+09, 1.18875570e+09, 1.18884450e+09, 1.18927770e+09,
+       1.19022690e+09, 1.19066010e+09, 1.19100420e+09, 1.21303380e+09,
+       1.21398900e+09, 1.21416090e+09, 1.21493820e+09, 1.21528230e+09,
+       1.21537140e+09, 1.21571550e+09, 1.21632060e+09, 1.21709790e+09,
+       1.21770300e+09, 1.21778610e+09, 1.21804710e+09, 1.21848030e+09,
+       1.21882440e+09, 1.21891350e+09, 1.21908540e+09, 1.21925760e+09,
+       1.21977360e+09, 1.22012370e+09, 1.22020680e+09, 1.22029590e+09,
+       1.22037900e+09, 1.22046780e+09, 1.22158920e+09, 1.22167830e+09,
+       1.22219430e+09, 1.22306070e+09, 1.22323260e+09, 1.22357670e+09,
+       1.22366580e+09, 1.24578420e+09, 1.24603950e+09, 1.24681680e+09,
+       1.24751070e+09, 1.24811610e+09, 1.24906530e+09, 1.25010360e+09,
+       1.25018670e+09, 1.25027550e+09, 1.25122500e+09, 1.25183010e+09,
+       1.25209110e+09, 1.25217420e+09, 1.25304030e+09, 1.25338440e+09,
+       1.27472550e+09, 1.27481460e+09, 1.27524180e+09, 1.27680210e+09,
+       1.27697430e+09, 1.27809540e+09, 1.27818450e+09, 1.27930590e+09,
+       1.28008320e+09, 1.28025510e+09, 1.28103240e+09, 1.28163750e+09,
+       1.28189850e+09, 1.28198160e+09, 1.28284800e+09, 1.28301990e+09,
+       1.28310900e+09, 1.28319210e+09, 1.28328090e+09, 1.28336400e+09,
+       1.28440230e+09, 1.28578470e+09, 1.28647890e+09, 1.28656200e+09,
+       1.30678170e+09, 1.30686480e+09, 1.30703700e+09, 1.30704270e+09,
+       1.30738680e+09, 1.30876920e+09, 1.30911330e+09, 1.30937430e+09,
+       1.30945740e+09, 1.30954650e+09, 1.30971870e+09, 1.30980750e+09,
+       1.31015160e+09, 1.31023470e+09, 1.31049570e+09, 1.31057880e+09,
+       1.31058480e+09, 1.31075670e+09, 1.31083980e+09, 1.31092890e+09,
+       1.31170620e+09, 1.31205030e+09, 1.31213910e+09, 1.31256660e+09,
+       1.31291640e+09, 1.31308860e+09, 1.31326050e+09, 1.31352150e+09,
+       1.31369370e+09, 1.31377680e+09, 1.31395470e+09, 1.31403780e+09,
+       1.31438190e+09, 1.31447100e+09, 1.31464290e+09, 1.31507610e+09,
+       1.31576430e+09, 1.31585340e+09, 1.31775180e+09, 1.31784090e+09,
+       1.31792400e+09, 1.31801310e+09, 1.31809620e+09, 1.31818500e+09,
+       1.33710570e+09, 1.33719450e+09, 1.33727760e+09, 1.33736670e+09,
+       1.33744980e+09, 1.33762770e+09, 1.33779960e+09, 1.33797180e+09,
+       1.33918200e+09, 1.33926510e+09, 1.33935420e+09, 1.33952610e+09,
+       1.34013150e+09, 1.34021460e+09, 1.34030340e+09, 1.34039250e+09,
+       1.34073660e+09, 1.34090850e+09, 1.34125290e+09, 1.34142480e+09,
+       1.34159700e+09, 1.34185800e+09, 1.34194680e+09, 1.34202990e+09,
+       1.34211900e+09, 1.34220210e+09, 1.34229090e+09, 1.34238000e+09,
+       1.34255220e+09, 1.34289630e+09, 1.34315730e+09, 1.34341230e+09,
+       1.34350140e+09, 1.34358450e+09, 1.34367330e+09, 1.34427870e+09,
+       1.34436180e+09, 1.34505570e+09, 1.34522790e+09, 1.34548890e+09,
+       1.34557200e+09, 1.34566110e+09, 1.34574420e+09, 1.34583300e+09,
+       1.34592210e+09, 1.34617710e+09, 1.34626620e+09, 1.34634930e+09,
+       1.34643810e+09, 1.34721540e+09, 1.34730450e+09, 1.34738760e+09,
+       1.34755950e+09, 1.34764860e+09, 1.34773170e+09, 1.34782050e+09,
+       1.37037210e+09, 1.37123250e+09, 1.37149350e+09, 1.37175450e+09,
+       1.37235960e+09, 1.37357010e+09, 1.37374200e+09, 1.37391420e+09,
+       1.37477460e+09, 1.37486340e+09, 1.37520750e+09, 1.37537970e+09,
+       1.37555160e+09, 1.37607390e+09, 1.37624580e+09, 1.37658990e+09,
+       1.37667900e+09, 1.37685090e+09, 1.37693400e+09, 1.37702310e+09,
+       1.37711220e+09, 1.37728410e+09, 1.37736720e+09, 1.37745630e+09,
+       1.37780040e+09, 1.37840550e+09, 1.37883870e+09, 1.37901060e+09,
+       1.37918280e+09, 1.37944380e+09, 1.37996010e+09, 1.38004890e+09,
+       1.38022110e+09, 1.38030420e+09, 1.38039300e+09, 1.38065400e+09,
+       1.38073710e+09, 1.38125940e+09, 1.38134250e+09, 1.38143130e+09,
+       1.38151440e+09, 1.38160350e+09, 1.38177540e+09, 1.40095710e+09,
+       1.40104020e+09, 1.40147310e+09, 1.40156220e+09, 1.40182320e+09,
+       1.40199540e+09, 1.40216730e+09, 1.40277240e+09, 1.40294460e+09,
+       1.40337780e+09, 1.40398290e+09, 1.40432700e+09, 1.40449890e+09,
+       1.40458200e+09, 1.40458230e+09, 1.40476020e+09, 1.40493210e+09,
+       1.40510430e+09, 1.40536530e+09, 1.40562030e+09, 1.40683080e+09,
+       1.40709180e+09, 1.40743590e+09, 1.40760810e+09, 1.40769690e+09,
+       1.40795220e+09, 1.40830200e+09, 1.40838510e+09, 1.40899050e+09,
+       1.40907930e+09, 1.40916240e+09, 1.40925150e+09, 1.40976750e+09,
+       1.40985660e+09, 1.41011160e+09, 1.41020070e+09, 1.41088890e+09,
+       1.41089490e+09, 1.41097800e+09, 1.41106680e+09, 1.41114990e+09,
+       1.41123900e+09, 1.41149400e+09, 1.41150000e+09, 1.41158310e+09,
+       1.41167220e+09, 1.41175530e+09, 1.41184410e+09, 1.41201630e+09,
+       1.41313710e+09, 1.41313740e+09, 1.41313770e+09, 1.41408690e+09,
+       1.41434790e+09, 1.41573030e+09, 1.43050326e+09, 1.43050350e+09,
+       1.43050380e+09, 1.43059260e+09, 1.43067570e+09, 1.43102580e+09,
+       1.43136990e+09, 1.43240820e+09, 1.43335740e+09, 1.43396250e+09,
+       1.43741550e+09, 1.43750460e+09, 1.43767650e+09, 1.43801436e+09,
+       1.43802060e+09, 1.43802090e+09, 1.43810970e+09, 1.43854290e+09,
+       1.43949210e+09, 1.44026940e+09, 1.44156270e+09, 1.44225690e+09,
+       1.44251220e+09, 1.44251790e+09, 1.44286200e+09, 1.44294510e+09,
+       1.44303420e+09, 1.44311730e+09, 1.46083320e+09, 1.46143860e+09,
+       1.46255760e+09, 1.46359800e+09, 1.46402520e+09, 1.46575770e+09,
+       1.46619090e+09, 1.46636280e+09, 1.46653500e+09, 1.46679000e+09,
+       1.46731230e+09, 1.46774520e+09, 1.46835030e+09, 1.47007710e+09,
+       1.47059310e+09, 1.47085410e+09, 1.47163140e+09, 1.47500130e+09,
+       1.47672780e+09, 1.49167320e+09, 1.49202330e+09, 1.49219550e+09,
+       1.49297250e+09, 1.49418300e+09, 1.49426610e+09, 1.49487120e+09,
+       1.49496030e+09, 1.49634270e+09, 1.49651460e+09, 1.49694780e+09,
+       1.49720280e+09, 1.49720880e+09, 1.49798610e+09, 1.49833020e+09,
+       1.49901840e+09, 1.49919060e+09, 1.49962350e+09, 1.50014550e+09,
+       1.50031770e+09, 1.50040080e+09, 1.50048990e+09, 1.50100590e+09,
+       1.50135600e+09, 1.50152790e+09, 1.50170010e+09, 1.50291030e+09,
+       1.50325470e+09, 1.50368760e+09, 1.50385980e+09, 1.50412080e+09,
+       1.50463710e+09, 1.50498120e+09, 1.50550320e+09, 1.50558630e+09,
+       1.50567510e+09, 1.50593040e+09, 1.50601950e+09, 1.50610830e+09,
+       1.50619140e+09, 1.50628050e+09, 1.50645240e+09, 1.50687960e+09,
+       1.50696870e+09, 1.50705750e+09, 1.50722970e+09, 1.50757380e+09,
+       1.50817890e+09, 1.50826200e+09, 1.50835110e+09, 1.50843990e+09,
+       1.50852300e+09, 1.50869520e+09])</code></pre>
+</div>
+</div>
+<div id="cell-12" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>e_m_ds.data_vars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>Data variables:
+    chlorophyll  (time, latitude, longitude) float64 ...</code></pre>
+</div>
+</div>
+<div id="cell-13" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>e_m_ds.chlorophyll.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>(506, 200, 500)</code></pre>
+</div>
+</div>
+<p>The downloaded data contains only one variable: chlorophyll.</p>
+</section>
+<section id="extract-the-dates-corresponding-to-the-data-of-each-day" class="level4">
+<h4 class="anchored" data-anchor-id="extract-the-dates-corresponding-to-the-data-of-each-day">- Extract the dates corresponding to the data of each day:</h4>
+<div id="cell-15" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>e_m_dates<span class="op">=</span>nc.num2date(e_m_ds.time,e_m_ds.time.units, only_use_cftime_datetimes<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                        only_use_python_datetimes<span class="op">=</span><span class="va">True</span> )</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>e_m_dates</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#e_m_ds.time</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>array([real_datetime(2002, 8, 7, 19, 5),
+       real_datetime(2002, 8, 8, 18, 10),
+       real_datetime(2002, 8, 9, 18, 55),
+       real_datetime(2002, 8, 10, 18, 0),
+       real_datetime(2002, 8, 17, 18, 5),
+       real_datetime(2002, 8, 20, 18, 35),
+       real_datetime(2002, 8, 25, 18, 55),
+       real_datetime(2002, 8, 27, 18, 40),
+       real_datetime(2002, 8, 29, 18, 30),
+       real_datetime(2002, 8, 31, 18, 15),
+       real_datetime(2002, 9, 1, 19, 0),
+       real_datetime(2002, 9, 5, 18, 35),
+       real_datetime(2002, 9, 7, 18, 25),
+       real_datetime(2002, 9, 8, 19, 5),
+       real_datetime(2002, 9, 9, 18, 10),
+       real_datetime(2002, 9, 16, 18, 15),
+       real_datetime(2002, 9, 17, 19, 0),
+       real_datetime(2002, 9, 21, 18, 35),
+       real_datetime(2002, 9, 28, 18, 40),
+       real_datetime(2002, 9, 30, 18, 30),
+       real_datetime(2002, 10, 6, 17, 50),
+       real_datetime(2002, 10, 14, 18, 40),
+       real_datetime(2003, 6, 2, 18, 45),
+       real_datetime(2003, 6, 20, 18, 35),
+       real_datetime(2003, 6, 27, 18, 40),
+       real_datetime(2003, 7, 1, 18, 15),
+       real_datetime(2003, 7, 2, 19, 0),
+       real_datetime(2003, 7, 13, 18, 40),
+       real_datetime(2003, 7, 14, 17, 45),
+       real_datetime(2003, 7, 16, 19, 10),
+       real_datetime(2003, 7, 18, 19, 0),
+       real_datetime(2003, 7, 19, 18, 5),
+       real_datetime(2003, 7, 24, 18, 20),
+       real_datetime(2003, 7, 29, 18, 40),
+       real_datetime(2003, 7, 30, 17, 45),
+       real_datetime(2003, 8, 7, 18, 35),
+       real_datetime(2003, 8, 13, 17, 55),
+       real_datetime(2003, 8, 14, 18, 40),
+       real_datetime(2003, 8, 18, 18, 15),
+       real_datetime(2003, 8, 22, 17, 50),
+       real_datetime(2003, 8, 23, 18, 35),
+       real_datetime(2003, 8, 27, 18, 10),
+       real_datetime(2003, 8, 30, 18, 40),
+       real_datetime(2003, 9, 5, 18, 5),
+       real_datetime(2003, 9, 6, 18, 45),
+       real_datetime(2003, 9, 8, 18, 35),
+       real_datetime(2003, 9, 10, 18, 20),
+       real_datetime(2003, 9, 16, 17, 45),
+       real_datetime(2003, 9, 17, 18, 30),
+       real_datetime(2003, 9, 20, 19, 0),
+       real_datetime(2003, 9, 21, 18, 5),
+       real_datetime(2003, 10, 7, 18, 5),
+       real_datetime(2003, 10, 8, 18, 45),
+       real_datetime(2003, 10, 10, 18, 35),
+       real_datetime(2003, 10, 11, 17, 40),
+       real_datetime(2004, 8, 1, 17, 45),
+       real_datetime(2004, 8, 2, 18, 30),
+       real_datetime(2004, 8, 5, 19, 0), real_datetime(2004, 8, 6, 18, 5),
+       real_datetime(2004, 8, 22, 18, 5),
+       real_datetime(2004, 8, 31, 18, 0),
+       real_datetime(2004, 9, 1, 18, 40),
+       real_datetime(2004, 9, 2, 17, 45),
+       real_datetime(2004, 9, 10, 18, 35),
+       real_datetime(2004, 9, 12, 18, 25),
+       real_datetime(2004, 9, 13, 19, 5),
+       real_datetime(2004, 9, 15, 18, 55),
+       real_datetime(2004, 9, 19, 18, 30),
+       real_datetime(2004, 9, 22, 19, 0),
+       real_datetime(2004, 10, 5, 18, 30),
+       real_datetime(2004, 10, 7, 18, 15),
+       real_datetime(2005, 6, 7, 18, 45),
+       real_datetime(2005, 6, 19, 19, 10),
+       real_datetime(2005, 6, 22, 18, 5),
+       real_datetime(2005, 7, 2, 18, 40),
+       real_datetime(2005, 7, 7, 19, 0), real_datetime(2005, 7, 8, 18, 5),
+       real_datetime(2005, 7, 9, 18, 45),
+       real_datetime(2005, 7, 19, 17, 45),
+       real_datetime(2005, 7, 30, 19, 5),
+       real_datetime(2005, 8, 1, 18, 50),
+       real_datetime(2005, 8, 7, 18, 15),
+       real_datetime(2005, 8, 8, 19, 0),
+       real_datetime(2005, 8, 16, 18, 10),
+       real_datetime(2005, 8, 24, 19, 0),
+       real_datetime(2005, 8, 28, 18, 35),
+       real_datetime(2005, 9, 1, 18, 10),
+       real_datetime(2005, 9, 2, 18, 50),
+       real_datetime(2005, 9, 4, 18, 40),
+       real_datetime(2005, 9, 5, 17, 45),
+       real_datetime(2005, 9, 6, 18, 25),
+       real_datetime(2005, 9, 9, 19, 0),
+       real_datetime(2005, 9, 10, 18, 5),
+       real_datetime(2005, 9, 20, 18, 40),
+       real_datetime(2005, 9, 21, 17, 45),
+       real_datetime(2005, 9, 24, 18, 15),
+       real_datetime(2005, 9, 27, 18, 45),
+       real_datetime(2005, 10, 1, 18, 20),
+       real_datetime(2005, 10, 5, 17, 55),
+       real_datetime(2005, 10, 15, 18, 35),
+       real_datetime(2006, 6, 5, 18, 30),
+       real_datetime(2006, 6, 8, 19, 0),
+       real_datetime(2006, 6, 15, 19, 5),
+       real_datetime(2006, 7, 13, 17, 55),
+       real_datetime(2006, 7, 28, 18, 50),
+       real_datetime(2006, 8, 1, 18, 25),
+       real_datetime(2006, 8, 4, 18, 55),
+       real_datetime(2006, 8, 11, 19, 0),
+       real_datetime(2006, 8, 12, 18, 5),
+       real_datetime(2006, 8, 13, 18, 50),
+       real_datetime(2006, 8, 15, 18, 35),
+       real_datetime(2006, 8, 16, 17, 40),
+       real_datetime(2006, 8, 22, 18, 45),
+       real_datetime(2007, 5, 28, 18, 50),
+       real_datetime(2007, 6, 6, 18, 45),
+       real_datetime(2007, 6, 9, 19, 15),
+       real_datetime(2007, 6, 11, 19, 0),
+       real_datetime(2007, 6, 13, 18, 50),
+       real_datetime(2007, 6, 20, 18, 55),
+       real_datetime(2007, 6, 21, 18, 0),
+       real_datetime(2007, 7, 6, 18, 55),
+       real_datetime(2007, 7, 7, 18, 0),
+       real_datetime(2007, 7, 22, 18, 55),
+       real_datetime(2007, 7, 29, 19, 0),
+       real_datetime(2007, 7, 31, 18, 50),
+       real_datetime(2007, 8, 3, 19, 20),
+       real_datetime(2007, 8, 12, 19, 15),
+       real_datetime(2007, 8, 13, 18, 20),
+       real_datetime(2007, 8, 27, 18, 30),
+       real_datetime(2007, 8, 29, 18, 20),
+       real_datetime(2007, 8, 30, 19, 0),
+       real_datetime(2007, 8, 31, 18, 5),
+       real_datetime(2007, 9, 1, 18, 50),
+       real_datetime(2007, 9, 2, 17, 55),
+       real_datetime(2007, 9, 3, 18, 35),
+       real_datetime(2007, 9, 8, 18, 55),
+       real_datetime(2007, 9, 19, 18, 35),
+       real_datetime(2007, 9, 24, 18, 55),
+       real_datetime(2007, 9, 28, 18, 30),
+       real_datetime(2008, 6, 9, 17, 50),
+       real_datetime(2008, 6, 20, 19, 10),
+       real_datetime(2008, 6, 22, 18, 55),
+       real_datetime(2008, 7, 1, 18, 50),
+       real_datetime(2008, 7, 5, 18, 25),
+       real_datetime(2008, 7, 6, 19, 10),
+       real_datetime(2008, 7, 10, 18, 45),
+       real_datetime(2008, 7, 17, 18, 50),
+       real_datetime(2008, 7, 26, 18, 45),
+       real_datetime(2008, 8, 2, 18, 50),
+       real_datetime(2008, 8, 3, 17, 55),
+       real_datetime(2008, 8, 6, 18, 25),
+       real_datetime(2008, 8, 11, 18, 45),
+       real_datetime(2008, 8, 15, 18, 20),
+       real_datetime(2008, 8, 16, 19, 5),
+       real_datetime(2008, 8, 18, 18, 50),
+       real_datetime(2008, 8, 20, 18, 40),
+       real_datetime(2008, 8, 26, 18, 0),
+       real_datetime(2008, 8, 30, 19, 15),
+       real_datetime(2008, 8, 31, 18, 20),
+       real_datetime(2008, 9, 1, 19, 5),
+       real_datetime(2008, 9, 2, 18, 10),
+       real_datetime(2008, 9, 3, 18, 50),
+       real_datetime(2008, 9, 16, 18, 20),
+       real_datetime(2008, 9, 17, 19, 5),
+       real_datetime(2008, 9, 23, 18, 25),
+       real_datetime(2008, 10, 3, 19, 5),
+       real_datetime(2008, 10, 5, 18, 50),
+       real_datetime(2008, 10, 9, 18, 25),
+       real_datetime(2008, 10, 10, 19, 10),
+       real_datetime(2009, 6, 23, 19, 10),
+       real_datetime(2009, 6, 26, 18, 5),
+       real_datetime(2009, 7, 5, 18, 0),
+       real_datetime(2009, 7, 13, 18, 45),
+       real_datetime(2009, 7, 20, 18, 55),
+       real_datetime(2009, 7, 31, 18, 35),
+       real_datetime(2009, 8, 12, 19, 0),
+       real_datetime(2009, 8, 13, 18, 5),
+       real_datetime(2009, 8, 14, 18, 45),
+       real_datetime(2009, 8, 25, 18, 30),
+       real_datetime(2009, 9, 1, 18, 35),
+       real_datetime(2009, 9, 4, 19, 5),
+       real_datetime(2009, 9, 5, 18, 10),
+       real_datetime(2009, 9, 15, 18, 45),
+       real_datetime(2009, 9, 19, 18, 20),
+       real_datetime(2010, 5, 24, 18, 25),
+       real_datetime(2010, 5, 25, 19, 10),
+       real_datetime(2010, 5, 30, 17, 50),
+       real_datetime(2010, 6, 17, 19, 15),
+       real_datetime(2010, 6, 19, 19, 5),
+       real_datetime(2010, 7, 2, 18, 30),
+       real_datetime(2010, 7, 3, 19, 15),
+       real_datetime(2010, 7, 16, 18, 45),
+       real_datetime(2010, 7, 25, 18, 40),
+       real_datetime(2010, 7, 27, 18, 25),
+       real_datetime(2010, 8, 5, 18, 20),
+       real_datetime(2010, 8, 12, 18, 25),
+       real_datetime(2010, 8, 15, 18, 55),
+       real_datetime(2010, 8, 16, 18, 0),
+       real_datetime(2010, 8, 26, 18, 40),
+       real_datetime(2010, 8, 28, 18, 25),
+       real_datetime(2010, 8, 29, 19, 10),
+       real_datetime(2010, 8, 30, 18, 15),
+       real_datetime(2010, 8, 31, 18, 55),
+       real_datetime(2010, 9, 1, 18, 0),
+       real_datetime(2010, 9, 13, 18, 25),
+       real_datetime(2010, 9, 29, 18, 25),
+       real_datetime(2010, 10, 7, 19, 15),
+       real_datetime(2010, 10, 8, 18, 20),
+       real_datetime(2011, 5, 30, 18, 55),
+       real_datetime(2011, 5, 31, 18, 0),
+       real_datetime(2011, 6, 2, 17, 50),
+       real_datetime(2011, 6, 2, 19, 25),
+       real_datetime(2011, 6, 6, 19, 0),
+       real_datetime(2011, 6, 22, 19, 0),
+       real_datetime(2011, 6, 26, 18, 35),
+       real_datetime(2011, 6, 29, 19, 5),
+       real_datetime(2011, 6, 30, 18, 10),
+       real_datetime(2011, 7, 1, 18, 55),
+       real_datetime(2011, 7, 3, 18, 45),
+       real_datetime(2011, 7, 4, 19, 25),
+       real_datetime(2011, 7, 8, 19, 0), real_datetime(2011, 7, 9, 18, 5),
+       real_datetime(2011, 7, 12, 18, 35),
+       real_datetime(2011, 7, 13, 17, 40),
+       real_datetime(2011, 7, 13, 19, 20),
+       real_datetime(2011, 7, 15, 19, 5),
+       real_datetime(2011, 7, 16, 18, 10),
+       real_datetime(2011, 7, 17, 18, 55),
+       real_datetime(2011, 7, 26, 18, 50),
+       real_datetime(2011, 7, 30, 18, 25),
+       real_datetime(2011, 7, 31, 19, 5),
+       real_datetime(2011, 8, 5, 17, 50),
+       real_datetime(2011, 8, 9, 19, 0),
+       real_datetime(2011, 8, 11, 18, 50),
+       real_datetime(2011, 8, 13, 18, 35),
+       real_datetime(2011, 8, 16, 19, 5),
+       real_datetime(2011, 8, 18, 18, 55),
+       real_datetime(2011, 8, 19, 18, 0),
+       real_datetime(2011, 8, 21, 19, 25),
+       real_datetime(2011, 8, 22, 18, 30),
+       real_datetime(2011, 8, 26, 18, 5),
+       real_datetime(2011, 8, 27, 18, 50),
+       real_datetime(2011, 8, 29, 18, 35),
+       real_datetime(2011, 9, 3, 18, 55),
+       real_datetime(2011, 9, 11, 18, 5),
+       real_datetime(2011, 9, 12, 18, 50),
+       real_datetime(2011, 10, 4, 18, 10),
+       real_datetime(2011, 10, 5, 18, 55),
+       real_datetime(2011, 10, 6, 18, 0),
+       real_datetime(2011, 10, 7, 18, 45),
+       real_datetime(2011, 10, 8, 17, 50),
+       real_datetime(2011, 10, 9, 18, 30),
+       real_datetime(2012, 5, 15, 18, 15),
+       real_datetime(2012, 5, 16, 18, 55),
+       real_datetime(2012, 5, 17, 18, 0),
+       real_datetime(2012, 5, 18, 18, 45),
+       real_datetime(2012, 5, 19, 17, 50),
+       real_datetime(2012, 5, 21, 19, 15),
+       real_datetime(2012, 5, 23, 19, 0),
+       real_datetime(2012, 5, 25, 18, 50),
+       real_datetime(2012, 6, 8, 19, 0), real_datetime(2012, 6, 9, 18, 5),
+       real_datetime(2012, 6, 10, 18, 50),
+       real_datetime(2012, 6, 12, 18, 35),
+       real_datetime(2012, 6, 19, 18, 45),
+       real_datetime(2012, 6, 20, 17, 50),
+       real_datetime(2012, 6, 21, 18, 30),
+       real_datetime(2012, 6, 22, 19, 15),
+       real_datetime(2012, 6, 26, 18, 50),
+       real_datetime(2012, 6, 28, 18, 35),
+       real_datetime(2012, 7, 2, 18, 15),
+       real_datetime(2012, 7, 4, 18, 0),
+       real_datetime(2012, 7, 6, 17, 50),
+       real_datetime(2012, 7, 9, 18, 20),
+       real_datetime(2012, 7, 10, 19, 0),
+       real_datetime(2012, 7, 11, 18, 5),
+       real_datetime(2012, 7, 12, 18, 50),
+       real_datetime(2012, 7, 13, 17, 55),
+       real_datetime(2012, 7, 14, 18, 35),
+       real_datetime(2012, 7, 15, 19, 20),
+       real_datetime(2012, 7, 17, 19, 10),
+       real_datetime(2012, 7, 21, 18, 45),
+       real_datetime(2012, 7, 24, 19, 15),
+       real_datetime(2012, 7, 27, 18, 5),
+       real_datetime(2012, 7, 28, 18, 50),
+       real_datetime(2012, 7, 29, 17, 55),
+       real_datetime(2012, 7, 30, 18, 35),
+       real_datetime(2012, 8, 6, 18, 45),
+       real_datetime(2012, 8, 7, 17, 50),
+       real_datetime(2012, 8, 15, 18, 35),
+       real_datetime(2012, 8, 17, 18, 25),
+       real_datetime(2012, 8, 20, 18, 55),
+       real_datetime(2012, 8, 21, 18, 0),
+       real_datetime(2012, 8, 22, 18, 45),
+       real_datetime(2012, 8, 23, 17, 50),
+       real_datetime(2012, 8, 24, 18, 30),
+       real_datetime(2012, 8, 25, 19, 15),
+       real_datetime(2012, 8, 28, 18, 5),
+       real_datetime(2012, 8, 29, 18, 50),
+       real_datetime(2012, 8, 30, 17, 55),
+       real_datetime(2012, 8, 31, 18, 35),
+       real_datetime(2012, 9, 9, 18, 30),
+       real_datetime(2012, 9, 10, 19, 15),
+       real_datetime(2012, 9, 11, 18, 20),
+       real_datetime(2012, 9, 13, 18, 5),
+       real_datetime(2012, 9, 14, 18, 50),
+       real_datetime(2012, 9, 15, 17, 55),
+       real_datetime(2012, 9, 16, 18, 35),
+       real_datetime(2013, 6, 4, 18, 55),
+       real_datetime(2013, 6, 14, 17, 55),
+       real_datetime(2013, 6, 17, 18, 25),
+       real_datetime(2013, 6, 20, 18, 55),
+       real_datetime(2013, 6, 27, 19, 0),
+       real_datetime(2013, 7, 11, 19, 15),
+       real_datetime(2013, 7, 13, 19, 0),
+       real_datetime(2013, 7, 15, 18, 50),
+       real_datetime(2013, 7, 25, 17, 50),
+       real_datetime(2013, 7, 26, 18, 30),
+       real_datetime(2013, 7, 30, 18, 5),
+       real_datetime(2013, 8, 1, 17, 55),
+       real_datetime(2013, 8, 3, 17, 40),
+       real_datetime(2013, 8, 9, 18, 45),
+       real_datetime(2013, 8, 11, 18, 30),
+       real_datetime(2013, 8, 15, 18, 5),
+       real_datetime(2013, 8, 16, 18, 50),
+       real_datetime(2013, 8, 18, 18, 35),
+       real_datetime(2013, 8, 19, 17, 40),
+       real_datetime(2013, 8, 20, 18, 25),
+       real_datetime(2013, 8, 21, 19, 10),
+       real_datetime(2013, 8, 23, 18, 55),
+       real_datetime(2013, 8, 24, 18, 0),
+       real_datetime(2013, 8, 25, 18, 45),
+       real_datetime(2013, 8, 29, 18, 20),
+       real_datetime(2013, 9, 5, 18, 25),
+       real_datetime(2013, 9, 10, 18, 45),
+       real_datetime(2013, 9, 12, 18, 30),
+       real_datetime(2013, 9, 14, 18, 20),
+       real_datetime(2013, 9, 17, 18, 50),
+       real_datetime(2013, 9, 23, 18, 15),
+       real_datetime(2013, 9, 24, 18, 55),
+       real_datetime(2013, 9, 26, 18, 45),
+       real_datetime(2013, 9, 27, 17, 50),
+       real_datetime(2013, 9, 28, 18, 30),
+       real_datetime(2013, 10, 1, 19, 0),
+       real_datetime(2013, 10, 2, 18, 5),
+       real_datetime(2013, 10, 8, 19, 10),
+       real_datetime(2013, 10, 9, 18, 15),
+       real_datetime(2013, 10, 10, 18, 55),
+       real_datetime(2013, 10, 11, 18, 0),
+       real_datetime(2013, 10, 12, 18, 45),
+       real_datetime(2013, 10, 14, 18, 30),
+       real_datetime(2014, 5, 24, 18, 45),
+       real_datetime(2014, 5, 25, 17, 50),
+       real_datetime(2014, 5, 30, 18, 5),
+       real_datetime(2014, 5, 31, 18, 50),
+       real_datetime(2014, 6, 3, 19, 20),
+       real_datetime(2014, 6, 5, 19, 10),
+       real_datetime(2014, 6, 7, 18, 55),
+       real_datetime(2014, 6, 14, 19, 0),
+       real_datetime(2014, 6, 16, 18, 50),
+       real_datetime(2014, 6, 21, 19, 10),
+       real_datetime(2014, 6, 28, 19, 15),
+       real_datetime(2014, 7, 2, 18, 50),
+       real_datetime(2014, 7, 4, 18, 35),
+       real_datetime(2014, 7, 5, 17, 40),
+       real_datetime(2014, 7, 5, 17, 45),
+       real_datetime(2014, 7, 7, 19, 10),
+       real_datetime(2014, 7, 9, 18, 55),
+       real_datetime(2014, 7, 11, 18, 45),
+       real_datetime(2014, 7, 14, 19, 15),
+       real_datetime(2014, 7, 17, 18, 5),
+       real_datetime(2014, 7, 31, 18, 20),
+       real_datetime(2014, 8, 3, 18, 50),
+       real_datetime(2014, 8, 7, 18, 25),
+       real_datetime(2014, 8, 9, 18, 15),
+       real_datetime(2014, 8, 10, 18, 55),
+       real_datetime(2014, 8, 13, 17, 50),
+       real_datetime(2014, 8, 17, 19, 0),
+       real_datetime(2014, 8, 18, 18, 5),
+       real_datetime(2014, 8, 25, 18, 15),
+       real_datetime(2014, 8, 26, 18, 55),
+       real_datetime(2014, 8, 27, 18, 0),
+       real_datetime(2014, 8, 28, 18, 45),
+       real_datetime(2014, 9, 3, 18, 5),
+       real_datetime(2014, 9, 4, 18, 50),
+       real_datetime(2014, 9, 7, 17, 40),
+       real_datetime(2014, 9, 8, 18, 25),
+       real_datetime(2014, 9, 16, 17, 35),
+       real_datetime(2014, 9, 16, 19, 15),
+       real_datetime(2014, 9, 17, 18, 20),
+       real_datetime(2014, 9, 18, 19, 0),
+       real_datetime(2014, 9, 19, 18, 5),
+       real_datetime(2014, 9, 20, 18, 50),
+       real_datetime(2014, 9, 23, 17, 40),
+       real_datetime(2014, 9, 23, 19, 20),
+       real_datetime(2014, 9, 24, 18, 25),
+       real_datetime(2014, 9, 25, 19, 10),
+       real_datetime(2014, 9, 26, 18, 15),
+       real_datetime(2014, 9, 27, 18, 55),
+       real_datetime(2014, 9, 29, 18, 45),
+       real_datetime(2014, 10, 12, 18, 5),
+       real_datetime(2014, 10, 12, 18, 10),
+       real_datetime(2014, 10, 12, 18, 15),
+       real_datetime(2014, 10, 23, 17, 55),
+       real_datetime(2014, 10, 26, 18, 25),
+       real_datetime(2014, 11, 11, 18, 25),
+       real_datetime(2015, 5, 1, 18, 1), real_datetime(2015, 5, 1, 18, 5),
+       real_datetime(2015, 5, 1, 18, 10),
+       real_datetime(2015, 5, 2, 18, 50),
+       real_datetime(2015, 5, 3, 17, 55),
+       real_datetime(2015, 5, 7, 19, 10),
+       real_datetime(2015, 5, 11, 18, 45),
+       real_datetime(2015, 5, 23, 19, 10),
+       real_datetime(2015, 6, 3, 18, 50),
+       real_datetime(2015, 6, 10, 18, 55),
+       real_datetime(2015, 7, 20, 18, 5),
+       real_datetime(2015, 7, 21, 18, 50),
+       real_datetime(2015, 7, 23, 18, 35),
+       real_datetime(2015, 7, 27, 16, 26),
+       real_datetime(2015, 7, 27, 18, 10),
+       real_datetime(2015, 7, 27, 18, 15),
+       real_datetime(2015, 7, 28, 18, 55),
+       real_datetime(2015, 8, 2, 19, 15),
+       real_datetime(2015, 8, 13, 18, 55),
+       real_datetime(2015, 8, 22, 18, 50),
+       real_datetime(2015, 9, 6, 18, 5),
+       real_datetime(2015, 9, 14, 18, 55),
+       real_datetime(2015, 9, 17, 17, 50),
+       real_datetime(2015, 9, 17, 19, 25),
+       real_datetime(2015, 9, 21, 19, 0),
+       real_datetime(2015, 9, 22, 18, 5),
+       real_datetime(2015, 9, 23, 18, 50),
+       real_datetime(2015, 9, 24, 17, 55),
+       real_datetime(2016, 4, 16, 19, 0),
+       real_datetime(2016, 4, 23, 19, 10),
+       real_datetime(2016, 5, 6, 18, 0),
+       real_datetime(2016, 5, 18, 19, 0),
+       real_datetime(2016, 5, 23, 17, 40),
+       real_datetime(2016, 6, 12, 18, 55),
+       real_datetime(2016, 6, 17, 19, 15),
+       real_datetime(2016, 6, 19, 19, 0),
+       real_datetime(2016, 6, 21, 18, 50),
+       real_datetime(2016, 6, 24, 17, 40),
+       real_datetime(2016, 6, 30, 18, 45),
+       real_datetime(2016, 7, 5, 19, 0),
+       real_datetime(2016, 7, 12, 19, 5),
+       real_datetime(2016, 8, 1, 18, 45),
+       real_datetime(2016, 8, 7, 18, 5),
+       real_datetime(2016, 8, 10, 18, 35),
+       real_datetime(2016, 8, 19, 18, 30),
+       real_datetime(2016, 9, 27, 18, 35),
+       real_datetime(2016, 10, 17, 18, 10),
+       real_datetime(2017, 4, 8, 17, 40),
+       real_datetime(2017, 4, 12, 18, 55),
+       real_datetime(2017, 4, 14, 18, 45),
+       real_datetime(2017, 4, 23, 18, 35),
+       real_datetime(2017, 5, 7, 18, 50),
+       real_datetime(2017, 5, 8, 17, 55),
+       real_datetime(2017, 5, 15, 18, 0),
+       real_datetime(2017, 5, 16, 18, 45),
+       real_datetime(2017, 6, 1, 18, 45),
+       real_datetime(2017, 6, 3, 18, 30),
+       real_datetime(2017, 6, 8, 18, 50),
+       real_datetime(2017, 6, 11, 17, 40),
+       real_datetime(2017, 6, 11, 19, 20),
+       real_datetime(2017, 6, 20, 19, 15),
+       real_datetime(2017, 6, 24, 18, 50),
+       real_datetime(2017, 7, 2, 18, 0),
+       real_datetime(2017, 7, 4, 17, 50),
+       real_datetime(2017, 7, 9, 18, 5),
+       real_datetime(2017, 7, 15, 19, 5),
+       real_datetime(2017, 7, 17, 18, 55),
+       real_datetime(2017, 7, 18, 18, 0),
+       real_datetime(2017, 7, 19, 18, 45),
+       real_datetime(2017, 7, 25, 18, 5),
+       real_datetime(2017, 7, 29, 19, 20),
+       real_datetime(2017, 7, 31, 19, 5),
+       real_datetime(2017, 8, 2, 18, 55),
+       real_datetime(2017, 8, 16, 19, 5),
+       real_datetime(2017, 8, 20, 18, 45),
+       real_datetime(2017, 8, 25, 19, 0),
+       real_datetime(2017, 8, 27, 18, 50),
+       real_datetime(2017, 8, 30, 19, 20),
+       real_datetime(2017, 9, 5, 18, 45),
+       real_datetime(2017, 9, 9, 18, 20),
+       real_datetime(2017, 9, 15, 19, 20),
+       real_datetime(2017, 9, 16, 18, 25),
+       real_datetime(2017, 9, 17, 19, 5),
+       real_datetime(2017, 9, 20, 18, 0),
+       real_datetime(2017, 9, 21, 18, 45),
+       real_datetime(2017, 9, 22, 19, 25),
+       real_datetime(2017, 9, 23, 18, 30),
+       real_datetime(2017, 9, 24, 19, 15),
+       real_datetime(2017, 9, 26, 19, 0),
+       real_datetime(2017, 10, 1, 17, 40),
+       real_datetime(2017, 10, 2, 18, 25),
+       real_datetime(2017, 10, 3, 19, 5),
+       real_datetime(2017, 10, 5, 18, 55),
+       real_datetime(2017, 10, 9, 18, 30),
+       real_datetime(2017, 10, 16, 18, 35),
+       real_datetime(2017, 10, 17, 17, 40),
+       real_datetime(2017, 10, 18, 18, 25),
+       real_datetime(2017, 10, 19, 19, 5),
+       real_datetime(2017, 10, 20, 18, 10),
+       real_datetime(2017, 10, 22, 18, 0)], dtype=object)</code></pre>
+</div>
+</div>
+<div id="cell-16" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>e_m_ds.chlorophyll.attrs[<span class="st">'_FillValue'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>-999.0</code></pre>
+</div>
+</div>
+<div id="cell-17" class="cell" data-scrolled="true" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In chlorophyll array, replace -999 with nan</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>nan_e_m_ds_chlorophyll <span class="op">=</span> e_m_ds.chlorophyll.where(e_m_ds.chlorophyll.values <span class="op">!=</span> e_m_ds.chlorophyll.attrs[<span class="st">'_FillValue'</span>])</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(nan_e_m_ds_chlorophyll[0,100,:] )</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(nan_e_m_ds_chlorophyll)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;xarray.DataArray 'chlorophyll' (time: 506, latitude: 200, longitude: 500)&gt;
+array([[[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+...
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]],
+
+       [[nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        ...,
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan],
+        [nan, nan, nan, ..., nan, nan, nan]]])
+Coordinates:
+  * time       (time) float64 1.029e+09 1.029e+09 ... 1.509e+09 1.509e+09
+  * latitude   (latitude) float64 41.01 41.02 41.03 41.04 ... 42.98 42.99 43.0
+  * longitude  (longitude) float64 -83.5 -83.49 -83.48 ... -78.53 -78.52 -78.51
+Attributes:
+    _FillValue:       -999.0
+    colorBarMaximum:  30.0
+    colorBarMinimum:  1.0
+    grid_mapping:     crs
+    ioos_category:    Ocean Color
+    long_name:        Chlorophyll-a, Aqua MODIS, EXPERIMENTAL
+    standard_name:    concentration_of_chlorophyll_in_sea_water
+    units:            ug/L</code></pre>
+</div>
+</div>
+</section>
+<section id="compute-the-monthly-mean-over-the-region-data" class="level4">
+<h4 class="anchored" data-anchor-id="compute-the-monthly-mean-over-the-region-data">- Compute the monthly mean over the region data :</h4>
+<div id="cell-19" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create list of string contains 'year month day hours minutes seconds'</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>d_list <span class="op">=</span> []</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>[ d_list.append(dt.strftime(<span class="st">"%Y %m </span><span class="sc">%d</span><span class="st"> %H %M %S"</span>)) <span class="cf">for</span> dt <span class="kw">in</span> e_m_dates]</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#print(min(d_list))</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#print(max(d_list))</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>mn <span class="op">=</span> <span class="st">'08'</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>yr <span class="op">=</span> <span class="st">'2009'</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>i_list <span class="op">=</span> []</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> n, d <span class="kw">in</span> <span class="bu">enumerate</span>(d_list):</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    d_t <span class="op">=</span> d.split()</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> d_t[<span class="dv">0</span>] <span class="op">==</span> yr <span class="kw">and</span> d_t[<span class="dv">1</span>] <span class="op">==</span> mn:</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>        <span class="co"># print( n, d_t)</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>        i_list.append(n)  <span class="co"># get all index of data for yr and mn</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(n, d)</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">#print(i_list)</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># axis=0 is time line</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>chl_avg_img <span class="op">=</span> nan_e_m_ds_chlorophyll.values[i_list[<span class="dv">0</span>]:i_list[<span class="op">-</span><span class="dv">1</span>]].mean(axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(chl_avg_img.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(200, 500)</code></pre>
+</div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find max and min value in chl_avg_img</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.nanmin(chl_avg_img))</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.nanmax(chl_avg_img))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.4942583243052167
+100.5</code></pre>
+</div>
+</div>
+<div id="cell-21" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of colors</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>levs <span class="op">=</span> np.arange(np.nanmin(chl_avg_img), np.nanmax(chl_avg_img), <span class="fl">0.3</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(levs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<pre><code>334</code></pre>
+</div>
+</div>
+<div id="cell-22" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># init a color list</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>jet<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"#007FFF"</span>, <span class="st">"cyan"</span>,<span class="st">"#7FFF7F"</span>, <span class="st">"yellow"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"red"</span>, <span class="st">"#7F0000"</span>]</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> LinearSegmentedColormap.from_list(<span class="st">'my_jet'</span>, jet, N<span class="op">=</span><span class="bu">len</span>(levs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="draw-the-image-of-monthly-mean" class="level4">
+<h4 class="anchored" data-anchor-id="draw-the-image-of-monthly-mean">-Draw the image of monthly mean</h4>
+<div id="cell-24" class="cell" data-scrolled="true" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot image chl_avg_img</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>plt.contourf(e_m_ds.longitude, e_m_ds.latitude, chl_avg_img, levs,cmap<span class="op">=</span>cm)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co">#plot the color scale</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="co">#example of how to add points to the map</span></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.scatter(np.linspace(-82,-80.5,num=4),np.repeat(42,4),c='black')</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">#example of how to add a contour line</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co">#step = np.arange(1,100, 10)</span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#plt.contour(e_m_ds.longitude, e_m_ds.latitude, chl_avg_img,levels=step,linewidths=1)</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a><span class="co">#plot title</span></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Lake Erie Average CHL - "</span> <span class="op">+</span> yr <span class="op">+</span> <span class="st">'-'</span> <span class="op">+</span> mn)</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gl-timeseries-chloro-from-diff-sensors_files/figure-html/cell-17-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="compute-the-lake-erie-chlorophyll-monthly-mean-from-2002-to-2017" class="level4">
+<h4 class="anchored" data-anchor-id="compute-the-lake-erie-chlorophyll-monthly-mean-from-2002-to-2017">- Compute the Lake Erie chlorophyll monthly mean from 2002 to 2017</h4>
+<div id="cell-26" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>d_list <span class="op">=</span> []</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>[ d_list.append(dt.strftime(<span class="st">"%Y %m </span><span class="sc">%d</span><span class="st"> %H %M %S"</span>)) <span class="cf">for</span> dt <span class="kw">in</span> e_m_dates]</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(min(d_list))</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#print(max(d_list))</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>m_yr_list <span class="op">=</span> []</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>[ m_yr_list.append(<span class="bu">str</span>(dt.year)) <span class="cf">for</span> dt <span class="kw">in</span> e_m_dates <span class="cf">if</span> <span class="bu">str</span>(dt.year) <span class="kw">not</span> <span class="kw">in</span> m_yr_list ]</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m_yr_list)</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(m_yr_list))</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>mn_list <span class="op">=</span> [<span class="st">'01'</span>,<span class="st">'02'</span>,<span class="st">'03'</span>,<span class="st">'04'</span>,<span class="st">'05'</span>,<span class="st">'06'</span>,<span class="st">'07'</span>,<span class="st">'08'</span>,<span class="st">'09'</span>,<span class="st">'10'</span>,<span class="st">'11'</span>,<span class="st">'12'</span>]</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>m_chl_avg_list <span class="op">=</span> []</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> yr <span class="kw">in</span> m_yr_list:</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> mn <span class="kw">in</span> mn_list:</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>        i_list <span class="op">=</span> []</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> n, d <span class="kw">in</span> <span class="bu">enumerate</span>(d_list):</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>            d_t <span class="op">=</span> d.split()</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(type(yr), type(mn), d_t)</span></span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> d_t[<span class="dv">0</span>] <span class="op">==</span> yr <span class="kw">and</span> d_t[<span class="dv">1</span>] <span class="op">==</span> mn:</span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>                <span class="co">#print( n, d_t)</span></span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>                i_list.append(n)  <span class="co"># get all index of data for yr and mn</span></span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>        <span class="co">#print(i_list, 'aaa')</span></span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> i_list:</span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print('bbb')</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>            <span class="co"># axis=0 is time line</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>            m_chl_avg <span class="op">=</span> np.nanmean(nan_e_m_ds_chlorophyll.values[i_list[<span class="dv">0</span>]:i_list[<span class="op">-</span><span class="dv">1</span>]],axis<span class="op">=</span>(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print(i_list)</span></span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>            <span class="co">#print('ccc', chl_avg)</span></span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>            m_chl_avg <span class="op">=</span> np.NAN</span>
+<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>        <span class="co">#print(yr, mn, chl_avg)</span></span>
+<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>        m_chl_avg_list.append(m_chl_avg)  <span class="co"># add each month mean data into list</span></span>
+<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(m_chl_avg_list))</span>
+<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m_chl_avg_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>['2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017']
+16
+192
+[nan, nan, nan, nan, nan, nan, nan, 5.435731696799938, 5.390267233342085, 8.081265781572409, nan, nan, nan, nan, nan, nan, nan, 6.781491128619841, 6.109469974086832, 4.314376310517935, 6.79798886383254, 7.093404713878546, nan, nan, nan, nan, nan, nan, nan, nan, nan, 5.368433526104296, 7.64127887019175, 10.885647119544341, nan, nan, nan, nan, nan, nan, nan, 5.840624163588643, 5.249259500793706, 4.616988228955723, 7.096526864254263, 4.819230418185895, nan, nan, nan, nan, nan, nan, nan, 4.510100122676393, 4.086877241390418, 8.282441959350821, nan, nan, nan, nan, nan, nan, nan, nan, nan, 6.047208513833891, 4.158334577045406, 5.306521407370655, 4.870477621191157, nan, nan, nan, nan, nan, nan, nan, nan, 4.399793136125678, 4.948825492811119, 6.928067277764852, 7.537945121660116, 10.463871652015316, nan, nan, nan, nan, nan, nan, nan, 5.468607769352359, 4.331433124523354, 4.19491169121446, 5.51911800736798, nan, nan, nan, nan, nan, nan, nan, 7.118216527176936, 5.497184958386398, 6.816787462061543, 7.384876000467598, 8.352871379209835, 17.20921945662595, nan, nan, nan, nan, nan, nan, 8.273948811094096, 9.504673836426932, 6.30459248163054, 8.498188201950223, 4.757683522841076, 7.789956015198095, nan, nan, nan, nan, nan, nan, 5.350309186444175, 5.087124626496798, 5.466797826682114, 6.545372806489798, 10.046555535267995, nan, nan, nan, nan, nan, nan, nan, nan, 5.419905113305022, 6.579744183612031, 6.078049791451018, 12.294146096066456, 12.653713855241293, nan, nan, nan, nan, nan, nan, 5.380835510589356, 6.1975559710383115, 4.153931307969729, 4.164349087430823, 7.613671326357655, 11.032704445403692, nan, nan, nan, nan, nan, nan, 6.1890473994776, 9.137474061305161, 12.006564368910517, 13.846336174760882, 12.386790262293644, nan, nan, nan, nan, nan, nan, 10.048730617740274, 7.629785864421565, 5.541983322992535, 3.1488706872830643, 5.253753071859053, nan, nan, nan, nan, nan, nan, nan, 12.166465731425616, 11.707058952935256, 6.139350735676277, 5.360138504826018, 5.020559277856057, 7.541953126812535, 13.605299324152273, nan, nan]</code></pre>
+</div>
+</div>
+<div id="cell-27" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="dv">2002</span>, <span class="dv">2018</span>,num<span class="op">=</span><span class="dv">192</span>)   <span class="co"># contains data from 2002 to 2017 (not include 2018)</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co">#units = e_m_ds.chlorophyll.attrs['units']</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">5</span>)) </span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>plt.plot(x,m_chl_avg_list,label<span class="op">=</span><span class="st">'MODIS CHL'</span>,c<span class="op">=</span><span class="st">'red'</span>,marker<span class="op">=</span><span class="st">'.'</span>,linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Chl-a (mg/m^3)'</span>)</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Lake Erie Monthly Average CHL "</span> <span class="op">+</span> m_yr_list[<span class="dv">0</span>] <span class="op">+</span> <span class="st">'-'</span> <span class="op">+</span> m_yr_list[<span class="op">-</span><span class="dv">1</span>])</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gl-timeseries-chloro-from-diff-sensors_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="get-lake-erie-dailly-average-viirs-data" class="level2">
+<h2 class="anchored" data-anchor-id="get-lake-erie-dailly-average-viirs-data">Get Lake Erie Dailly Average VIIRS data</h2>
+<div id="cell-29" class="cell" data-execution_count="86">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>url2<span class="op">=</span><span class="st">'https://apps.glerl.noaa.gov/erddap/griddap/LE_CHL_VIIRS_Daily.nc?Chlorophyll%5B(2023-01-04T18:47:05Z):1:(2023-12-28T18:32:33Z)%5D%5B(41.2690208353804):1:(43.017997272827)%5D%5B(-83.6574899492178):1:(-78.4429490894234)%5D'</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(url2, <span class="st">"e_viirs_chl.nc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="86">
+<pre><code>('e_viirs_chl.nc', &lt;http.client.HTTPMessage at 0x1a20d832610&gt;)</code></pre>
+</div>
+</div>
+<div id="cell-30" class="cell" data-execution_count="87">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>e_v_ds <span class="op">=</span> xr.open_dataset(<span class="st">'e_viirs_chl.nc'</span>,decode_cf<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-31" class="cell" data-execution_count="88">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e_v_ds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;xarray.Dataset&gt;
+Dimensions:      (time: 544, latitude: 271, longitude: 806)
+Coordinates:
+  * time         (time) float64 1.673e+09 1.673e+09 ... 1.704e+09 1.704e+09
+  * latitude     (latitude) float64 41.27 41.28 41.28 ... 43.01 43.01 43.02
+  * longitude    (longitude) float64 -83.66 -83.65 -83.64 ... -78.45 -78.44
+Data variables:
+    Chlorophyll  (time, latitude, longitude) float32 ...
+Attributes: (12/34)
+    cdm_data_type:                  Grid
+    colorBarMaximum:                30.0
+    colorBarMinimum:                1.0
+    colorBarScale:                  Log
+    Conventions:                    CF-1.6, COARDS, ACDD-1.3
+    Easternmost_Easting:            -78.4429490894234
+    ...                             ...
+    summary:                        Color Producing Agent (CPA) Chlorophyll, ...
+    testOutOfDate:                  now-18days
+    time_coverage_end:              2023-12-28T18:32:33Z
+    time_coverage_start:            2023-01-04T18:47:05Z
+    title:                          Color Producing Agent (CPA) Chlorophyll, ...
+    Westernmost_Easting:            -83.6574899492178</code></pre>
+</div>
+</div>
+<div id="cell-32" class="cell" data-execution_count="89">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>nan_e_v_ds_chlorophyll <span class="op">=</span> e_v_ds.Chlorophyll.where(e_v_ds.Chlorophyll.values <span class="op">!=</span> e_v_ds.Chlorophyll.attrs[<span class="st">'_FillValue'</span>])</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>v_chl_avg <span class="op">=</span> np.nanmean(nan_e_v_ds_chlorophyll,axis<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#print(v_chl_avg)</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#print(len(v_chl_avg))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-33" class="cell" data-scrolled="true" data-execution_count="90">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>e_v_dates<span class="op">=</span>nc.num2date(e_v_ds.time,e_v_ds.time.units, only_use_cftime_datetimes<span class="op">=</span><span class="va">False</span>, </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>                        only_use_python_datetimes<span class="op">=</span><span class="va">True</span> )</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>e_v_dates</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="90">
+<pre><code>array([real_datetime(2023, 1, 4, 18, 47, 5),
+       real_datetime(2023, 1, 5, 18, 28, 10),
+       real_datetime(2023, 1, 7, 17, 50, 19),
+       real_datetime(2023, 1, 7, 19, 31, 19),
+       real_datetime(2023, 1, 8, 19, 12, 23),
+       real_datetime(2023, 1, 9, 17, 12, 27),
+       real_datetime(2023, 1, 9, 17, 13, 53),
+       real_datetime(2023, 1, 9, 18, 53, 28),
+       real_datetime(2023, 1, 10, 18, 34, 32),
+       real_datetime(2023, 1, 11, 18, 15, 36),
+       real_datetime(2023, 1, 14, 17, 18, 51),
+       real_datetime(2023, 1, 14, 18, 59, 52),
+       real_datetime(2023, 1, 15, 16, 59, 56),
+       real_datetime(2023, 1, 15, 17, 1, 21),
+       real_datetime(2023, 1, 15, 18, 40, 56),
+       real_datetime(2023, 1, 16, 18, 22),
+       real_datetime(2023, 1, 17, 18, 3, 5),
+       real_datetime(2023, 1, 19, 17, 25, 14),
+       real_datetime(2023, 1, 19, 19, 6, 14),
+       real_datetime(2023, 1, 24, 17, 31, 37),
+       real_datetime(2023, 1, 24, 19, 12, 38),
+       real_datetime(2023, 1, 31, 18, 41, 10),
+       real_datetime(2023, 2, 1, 18, 22, 15),
+       real_datetime(2023, 2, 2, 18, 3, 19),
+       real_datetime(2023, 2, 3, 17, 44, 23),
+       real_datetime(2023, 2, 3, 19, 25, 24),
+       real_datetime(2023, 2, 4, 17, 25, 28),
+       real_datetime(2023, 2, 4, 19, 6, 28),
+       real_datetime(2023, 2, 6, 18, 28, 37),
+       real_datetime(2023, 2, 7, 18, 9, 41),
+       real_datetime(2023, 2, 8, 17, 50, 47),
+       real_datetime(2023, 2, 8, 19, 31, 46),
+       real_datetime(2023, 2, 9, 17, 31, 52),
+       real_datetime(2023, 2, 9, 19, 12, 52),
+       real_datetime(2023, 2, 10, 18, 52, 31),
+       real_datetime(2023, 2, 10, 18, 53, 56),
+       real_datetime(2023, 2, 11, 18, 33, 35),
+       real_datetime(2023, 2, 11, 18, 35, 1),
+       real_datetime(2023, 2, 12, 18, 14, 40),
+       real_datetime(2023, 2, 12, 18, 16, 5),
+       real_datetime(2023, 2, 13, 17, 57, 9),
+       real_datetime(2023, 2, 13, 19, 36, 44),
+       real_datetime(2023, 2, 13, 19, 38, 10),
+       real_datetime(2023, 2, 14, 17, 38, 14),
+       real_datetime(2023, 2, 14, 19, 19, 14),
+       real_datetime(2023, 2, 15, 17, 19, 18),
+       real_datetime(2023, 2, 15, 18, 58, 53),
+       real_datetime(2023, 2, 15, 19, 0, 18),
+       real_datetime(2023, 2, 17, 18, 22, 29),
+       real_datetime(2023, 2, 18, 18, 2, 8),
+       real_datetime(2023, 2, 18, 18, 3, 33),
+       real_datetime(2023, 2, 19, 17, 44, 38),
+       real_datetime(2023, 2, 19, 19, 24, 12),
+       real_datetime(2023, 2, 19, 19, 25, 38),
+       real_datetime(2023, 2, 20, 17, 25, 42),
+       real_datetime(2023, 2, 20, 19, 5, 17),
+       real_datetime(2023, 2, 20, 19, 6, 42),
+       real_datetime(2023, 2, 21, 17, 6, 46),
+       real_datetime(2023, 2, 21, 18, 46, 21),
+       real_datetime(2023, 2, 21, 18, 47, 47),
+       real_datetime(2023, 2, 23, 18, 8, 30),
+       real_datetime(2023, 2, 24, 17, 51),
+       real_datetime(2023, 2, 24, 19, 30, 34),
+       real_datetime(2023, 2, 24, 19, 32),
+       real_datetime(2023, 2, 25, 19, 13, 4),
+       real_datetime(2023, 2, 26, 17, 13, 10),
+       real_datetime(2023, 2, 26, 18, 52, 45),
+       real_datetime(2023, 2, 28, 18, 14, 54),
+       real_datetime(2023, 3, 1, 17, 57, 23),
+       real_datetime(2023, 3, 1, 19, 38, 24),
+       real_datetime(2023, 3, 2, 17, 38, 28),
+       real_datetime(2023, 3, 2, 19, 18, 3),
+       real_datetime(2023, 3, 5, 18, 21, 17),
+       real_datetime(2023, 3, 5, 18, 22, 43),
+       real_datetime(2023, 3, 6, 18, 2, 22),
+       real_datetime(2023, 3, 7, 17, 44, 52),
+       real_datetime(2023, 3, 7, 19, 24, 26),
+       real_datetime(2023, 3, 7, 19, 25, 52),
+       real_datetime(2023, 3, 8, 17, 25, 56),
+       real_datetime(2023, 3, 11, 18, 10, 9),
+       real_datetime(2023, 3, 15, 16, 54, 28),
+       real_datetime(2023, 3, 15, 18, 35, 29),
+       real_datetime(2023, 3, 16, 18, 15, 8),
+       real_datetime(2023, 3, 16, 18, 16, 33),
+       real_datetime(2023, 3, 18, 19, 18, 16),
+       real_datetime(2023, 3, 19, 17, 19, 46),
+       real_datetime(2023, 3, 19, 18, 59, 21),
+       real_datetime(2023, 3, 20, 17, 0, 52),
+       real_datetime(2023, 3, 20, 18, 40, 25),
+       real_datetime(2023, 3, 21, 18, 21, 31),
+       real_datetime(2023, 3, 21, 18, 22, 57),
+       real_datetime(2023, 3, 24, 17, 26, 10),
+       real_datetime(2023, 3, 25, 17, 7, 14),
+       real_datetime(2023, 3, 25, 18, 46, 49),
+       real_datetime(2023, 3, 25, 18, 48, 14),
+       real_datetime(2023, 3, 26, 18, 27, 53),
+       real_datetime(2023, 3, 26, 18, 29, 19),
+       real_datetime(2023, 3, 27, 18, 10, 23),
+       real_datetime(2023, 3, 28, 17, 51, 29),
+       real_datetime(2023, 3, 29, 17, 32, 33),
+       real_datetime(2023, 3, 29, 19, 13, 34),
+       real_datetime(2023, 3, 30, 17, 13, 38),
+       real_datetime(2023, 3, 30, 18, 53, 13),
+       real_datetime(2023, 3, 30, 18, 54, 38),
+       real_datetime(2023, 4, 1, 18, 16, 47),
+       real_datetime(2023, 4, 2, 17, 57, 51),
+       real_datetime(2023, 4, 2, 19, 37, 26),
+       real_datetime(2023, 4, 2, 19, 38, 51),
+       real_datetime(2023, 4, 4, 17, 20, 2),
+       real_datetime(2023, 4, 4, 19, 1),
+       real_datetime(2023, 4, 6, 18, 23, 10),
+       real_datetime(2023, 4, 7, 18, 4, 15),
+       real_datetime(2023, 4, 8, 17, 45, 19),
+       real_datetime(2023, 4, 8, 19, 24, 54),
+       real_datetime(2023, 4, 8, 19, 26, 19),
+       real_datetime(2023, 4, 9, 17, 26, 23),
+       real_datetime(2023, 4, 9, 19, 5, 58),
+       real_datetime(2023, 4, 9, 19, 7, 24),
+       real_datetime(2023, 4, 10, 17, 7, 28),
+       real_datetime(2023, 4, 10, 18, 47, 3),
+       real_datetime(2023, 4, 10, 18, 48, 28),
+       real_datetime(2023, 4, 11, 18, 28, 7),
+       real_datetime(2023, 4, 11, 18, 29, 32),
+       real_datetime(2023, 4, 12, 18, 9, 13),
+       real_datetime(2023, 4, 12, 18, 10, 38),
+       real_datetime(2023, 4, 13, 17, 51, 43),
+       real_datetime(2023, 4, 13, 19, 31, 18),
+       real_datetime(2023, 4, 13, 19, 32, 43),
+       real_datetime(2023, 4, 14, 17, 32, 47),
+       real_datetime(2023, 4, 14, 19, 12, 22),
+       real_datetime(2023, 4, 14, 19, 13, 47),
+       real_datetime(2023, 4, 15, 17, 13, 52),
+       real_datetime(2023, 4, 15, 18, 53, 26),
+       real_datetime(2023, 4, 15, 18, 54, 52),
+       real_datetime(2023, 4, 16, 16, 54, 56),
+       real_datetime(2023, 4, 16, 18, 34, 31),
+       real_datetime(2023, 4, 16, 18, 35, 56),
+       real_datetime(2023, 4, 18, 17, 58, 5),
+       real_datetime(2023, 4, 19, 17, 39, 11),
+       real_datetime(2023, 4, 19, 19, 18, 44),
+       real_datetime(2023, 4, 19, 19, 20, 9),
+       real_datetime(2023, 4, 20, 18, 59, 50),
+       real_datetime(2023, 4, 21, 17, 1, 20),
+       real_datetime(2023, 4, 22, 18, 21, 59),
+       real_datetime(2023, 4, 23, 18, 3, 3),
+       real_datetime(2023, 4, 23, 18, 4, 28),
+       real_datetime(2023, 4, 24, 17, 44, 7),
+       real_datetime(2023, 4, 24, 17, 45, 33),
+       real_datetime(2023, 4, 24, 19, 25, 8),
+       real_datetime(2023, 4, 25, 17, 26, 37),
+       real_datetime(2023, 4, 26, 17, 7, 43),
+       real_datetime(2023, 4, 26, 18, 47, 16),
+       real_datetime(2023, 4, 27, 18, 28, 23),
+       real_datetime(2023, 4, 30, 17, 31, 36),
+       real_datetime(2023, 4, 30, 17, 33, 1),
+       real_datetime(2023, 4, 30, 19, 12, 36),
+       real_datetime(2023, 5, 1, 17, 14, 5),
+       real_datetime(2023, 5, 1, 18, 53, 40),
+       real_datetime(2023, 5, 3, 18, 15, 49),
+       real_datetime(2023, 5, 4, 17, 56, 53),
+       real_datetime(2023, 5, 4, 19, 37, 53),
+       real_datetime(2023, 5, 5, 17, 37, 59),
+       real_datetime(2023, 5, 5, 17, 39, 25),
+       real_datetime(2023, 5, 5, 19, 18, 58),
+       real_datetime(2023, 5, 6, 17, 19, 4),
+       real_datetime(2023, 5, 6, 17, 20, 29),
+       real_datetime(2023, 5, 6, 19, 0, 4),
+       real_datetime(2023, 5, 7, 18, 41, 8),
+       real_datetime(2023, 5, 8, 18, 22, 13),
+       real_datetime(2023, 5, 10, 17, 44, 21),
+       real_datetime(2023, 5, 10, 19, 25, 22),
+       real_datetime(2023, 5, 11, 17, 25, 26),
+       real_datetime(2023, 5, 11, 19, 6, 26),
+       real_datetime(2023, 5, 12, 17, 6, 32),
+       real_datetime(2023, 5, 12, 17, 7, 57),
+       real_datetime(2023, 5, 12, 18, 47, 30),
+       real_datetime(2023, 5, 13, 18, 28, 36),
+       real_datetime(2023, 5, 15, 17, 50, 45),
+       real_datetime(2023, 5, 15, 19, 31, 45),
+       real_datetime(2023, 5, 16, 19, 12, 50),
+       real_datetime(2023, 5, 17, 17, 12, 54),
+       real_datetime(2023, 5, 17, 18, 53, 54),
+       real_datetime(2023, 5, 18, 18, 34, 58),
+       real_datetime(2023, 5, 19, 18, 16, 3),
+       real_datetime(2023, 5, 20, 17, 57, 9),
+       real_datetime(2023, 5, 21, 17, 38, 13),
+       real_datetime(2023, 5, 23, 18, 41, 22),
+       real_datetime(2023, 5, 24, 18, 22, 27),
+       real_datetime(2023, 5, 25, 18, 3, 31),
+       real_datetime(2023, 5, 26, 17, 44, 35),
+       real_datetime(2023, 5, 26, 19, 24, 10),
+       real_datetime(2023, 5, 26, 19, 25, 35),
+       real_datetime(2023, 5, 27, 17, 25, 40),
+       real_datetime(2023, 5, 27, 19, 5, 14),
+       real_datetime(2023, 5, 27, 19, 6, 40),
+       real_datetime(2023, 5, 28, 18, 46, 19),
+       real_datetime(2023, 5, 28, 18, 47, 44),
+       real_datetime(2023, 5, 29, 18, 27, 25),
+       real_datetime(2023, 5, 29, 18, 28, 50),
+       real_datetime(2023, 5, 30, 18, 8, 29),
+       real_datetime(2023, 5, 30, 18, 9, 55),
+       real_datetime(2023, 5, 31, 17, 50, 59),
+       real_datetime(2023, 5, 31, 19, 30, 34),
+       real_datetime(2023, 5, 31, 19, 31, 59),
+       real_datetime(2023, 6, 1, 17, 32, 3),
+       real_datetime(2023, 6, 1, 19, 11, 38),
+       real_datetime(2023, 6, 1, 19, 13, 4),
+       real_datetime(2023, 6, 2, 17, 13, 8),
+       real_datetime(2023, 6, 2, 18, 52, 43),
+       real_datetime(2023, 6, 2, 18, 54, 8),
+       real_datetime(2023, 6, 3, 18, 33, 47),
+       real_datetime(2023, 6, 3, 18, 35, 12),
+       real_datetime(2023, 6, 4, 18, 14, 51),
+       real_datetime(2023, 6, 4, 18, 16, 17),
+       real_datetime(2023, 6, 5, 17, 57, 23),
+       real_datetime(2023, 6, 6, 17, 38, 27),
+       real_datetime(2023, 6, 6, 19, 18, 2),
+       real_datetime(2023, 6, 7, 17, 19, 32),
+       real_datetime(2023, 6, 7, 18, 59, 6),
+       real_datetime(2023, 6, 8, 18, 40, 11),
+       real_datetime(2023, 6, 9, 18, 21, 15),
+       real_datetime(2023, 6, 9, 18, 22, 40),
+       real_datetime(2023, 6, 10, 18, 2, 19),
+       real_datetime(2023, 6, 10, 18, 3, 45),
+       real_datetime(2023, 6, 11, 17, 44, 49),
+       real_datetime(2023, 6, 12, 19, 5, 28),
+       real_datetime(2023, 6, 13, 17, 7),
+       real_datetime(2023, 6, 13, 18, 46, 33),
+       real_datetime(2023, 6, 14, 18, 27, 39),
+       real_datetime(2023, 6, 15, 18, 8, 43),
+       real_datetime(2023, 6, 16, 17, 49, 48),
+       real_datetime(2023, 6, 17, 17, 30, 52),
+       real_datetime(2023, 6, 17, 17, 32, 17),
+       real_datetime(2023, 6, 17, 19, 11, 52),
+       real_datetime(2023, 6, 18, 17, 13, 22),
+       real_datetime(2023, 6, 18, 18, 52, 57),
+       real_datetime(2023, 6, 19, 18, 34, 1),
+       real_datetime(2023, 6, 20, 18, 15, 5),
+       real_datetime(2023, 6, 21, 17, 56, 10),
+       real_datetime(2023, 6, 21, 19, 37, 10),
+       real_datetime(2023, 6, 22, 17, 37, 16),
+       real_datetime(2023, 6, 22, 19, 18, 14),
+       real_datetime(2023, 6, 23, 18, 59, 20),
+       real_datetime(2023, 6, 24, 17, 0, 50),
+       real_datetime(2023, 6, 24, 18, 40, 25),
+       real_datetime(2023, 6, 25, 18, 21, 29),
+       real_datetime(2023, 6, 26, 18, 2, 34),
+       real_datetime(2023, 6, 27, 17, 43, 38),
+       real_datetime(2023, 6, 27, 19, 24, 38),
+       real_datetime(2023, 6, 28, 17, 24, 42),
+       real_datetime(2023, 6, 28, 17, 26, 8),
+       real_datetime(2023, 6, 28, 19, 5, 43),
+       real_datetime(2023, 6, 29, 17, 7, 14),
+       real_datetime(2023, 6, 29, 18, 46, 47),
+       real_datetime(2023, 6, 30, 18, 27, 53),
+       real_datetime(2023, 7, 2, 17, 50, 2),
+       real_datetime(2023, 7, 2, 19, 31, 2),
+       real_datetime(2023, 7, 3, 17, 31, 6),
+       real_datetime(2023, 7, 3, 17, 32, 32),
+       real_datetime(2023, 7, 3, 19, 12, 6),
+       real_datetime(2023, 7, 4, 17, 12, 10),
+       real_datetime(2023, 7, 4, 17, 13, 36),
+       real_datetime(2023, 7, 4, 18, 53, 11),
+       real_datetime(2023, 7, 5, 16, 54, 40),
+       real_datetime(2023, 7, 5, 18, 34, 15),
+       real_datetime(2023, 7, 6, 18, 15, 19),
+       real_datetime(2023, 7, 7, 17, 56, 24),
+       real_datetime(2023, 7, 7, 19, 37, 24),
+       real_datetime(2023, 7, 8, 17, 37, 30),
+       real_datetime(2023, 7, 8, 19, 18, 28),
+       real_datetime(2023, 7, 9, 17, 18, 34),
+       real_datetime(2023, 7, 9, 18, 59, 35),
+       real_datetime(2023, 7, 10, 17, 1, 4),
+       real_datetime(2023, 7, 10, 18, 40, 39),
+       real_datetime(2023, 7, 11, 18, 21, 43),
+       real_datetime(2023, 7, 12, 18, 2, 48),
+       real_datetime(2023, 7, 13, 17, 43, 52),
+       real_datetime(2023, 7, 13, 19, 24, 52),
+       real_datetime(2023, 7, 14, 17, 24, 56),
+       real_datetime(2023, 7, 14, 19, 5, 57),
+       real_datetime(2023, 7, 16, 18, 28, 5),
+       real_datetime(2023, 7, 17, 18, 9, 11),
+       real_datetime(2023, 7, 18, 17, 50, 16),
+       real_datetime(2023, 7, 18, 19, 31, 16),
+       real_datetime(2023, 7, 19, 17, 31, 20),
+       real_datetime(2023, 7, 19, 19, 12, 20),
+       real_datetime(2023, 7, 20, 17, 12, 25),
+       real_datetime(2023, 7, 20, 17, 13, 50),
+       real_datetime(2023, 7, 20, 18, 53, 25),
+       real_datetime(2023, 7, 21, 16, 54, 54),
+       real_datetime(2023, 7, 21, 18, 34, 29),
+       real_datetime(2023, 7, 22, 18, 15, 33),
+       real_datetime(2023, 7, 23, 17, 56, 38),
+       real_datetime(2023, 7, 24, 17, 37, 44),
+       real_datetime(2023, 7, 24, 19, 18, 42),
+       real_datetime(2023, 7, 25, 18, 59, 47),
+       real_datetime(2023, 7, 27, 18, 21, 56),
+       real_datetime(2023, 7, 28, 18, 3, 1),
+       real_datetime(2023, 7, 29, 17, 44, 7),
+       real_datetime(2023, 7, 29, 19, 25, 5),
+       real_datetime(2023, 7, 30, 17, 25, 11),
+       real_datetime(2023, 7, 30, 19, 6, 11),
+       real_datetime(2023, 7, 31, 17, 6, 16),
+       real_datetime(2023, 7, 31, 18, 47, 16),
+       real_datetime(2023, 8, 1, 18, 28, 20),
+       real_datetime(2023, 8, 2, 18, 9, 25),
+       real_datetime(2023, 8, 3, 17, 50, 29),
+       real_datetime(2023, 8, 3, 19, 31, 29),
+       real_datetime(2023, 8, 4, 17, 31, 33),
+       real_datetime(2023, 8, 4, 19, 12, 33),
+       real_datetime(2023, 8, 5, 18, 53, 38),
+       real_datetime(2023, 8, 6, 16, 53, 44),
+       real_datetime(2023, 8, 6, 18, 34, 44),
+       real_datetime(2023, 8, 7, 18, 15, 48),
+       real_datetime(2023, 8, 8, 17, 56, 53),
+       real_datetime(2023, 8, 8, 19, 37, 53),
+       real_datetime(2023, 8, 9, 17, 37, 57),
+       real_datetime(2023, 8, 10, 17, 19, 1),
+       real_datetime(2023, 8, 10, 18, 58, 36),
+       real_datetime(2023, 8, 10, 19, 0, 2),
+       real_datetime(2023, 8, 11, 17, 0, 6),
+       real_datetime(2023, 8, 11, 18, 39, 41),
+       real_datetime(2023, 8, 11, 18, 41, 6),
+       real_datetime(2023, 8, 12, 18, 20, 45),
+       real_datetime(2023, 8, 12, 18, 22, 10),
+       real_datetime(2023, 8, 13, 18, 3, 15),
+       real_datetime(2023, 8, 15, 17, 25, 25),
+       real_datetime(2023, 8, 15, 19, 5),
+       real_datetime(2023, 8, 15, 19, 6, 25),
+       real_datetime(2023, 8, 16, 17, 6, 30),
+       real_datetime(2023, 8, 16, 18, 46, 4),
+       real_datetime(2023, 8, 16, 18, 47, 30),
+       real_datetime(2023, 8, 17, 18, 27, 9),
+       real_datetime(2023, 8, 17, 18, 28, 34),
+       real_datetime(2023, 8, 18, 18, 8, 13),
+       real_datetime(2023, 8, 18, 18, 9, 39),
+       real_datetime(2023, 8, 19, 17, 50, 43),
+       real_datetime(2023, 8, 19, 19, 30, 18),
+       real_datetime(2023, 8, 19, 19, 31, 43),
+       real_datetime(2023, 8, 20, 17, 31, 47),
+       real_datetime(2023, 8, 20, 19, 11, 22),
+       real_datetime(2023, 8, 20, 19, 12, 47),
+       real_datetime(2023, 8, 21, 18, 52, 26),
+       real_datetime(2023, 8, 22, 16, 53, 58),
+       real_datetime(2023, 8, 22, 18, 33, 33),
+       real_datetime(2023, 8, 22, 18, 34, 56),
+       real_datetime(2023, 8, 24, 17, 55, 41),
+       real_datetime(2023, 8, 24, 17, 57, 7),
+       real_datetime(2023, 8, 25, 17, 38, 11),
+       real_datetime(2023, 8, 25, 19, 17, 46),
+       real_datetime(2023, 8, 26, 17, 19, 15),
+       real_datetime(2023, 8, 26, 18, 58, 50),
+       real_datetime(2023, 8, 26, 19, 0, 16),
+       real_datetime(2023, 8, 27, 17, 0, 20),
+       real_datetime(2023, 8, 27, 18, 39, 55),
+       real_datetime(2023, 8, 27, 18, 41, 20),
+       real_datetime(2023, 8, 28, 18, 20, 59),
+       real_datetime(2023, 8, 28, 18, 22, 24),
+       real_datetime(2023, 8, 29, 18, 2, 3),
+       real_datetime(2023, 8, 29, 18, 3, 29),
+       real_datetime(2023, 8, 30, 17, 44, 35),
+       real_datetime(2023, 8, 30, 19, 24, 8),
+       real_datetime(2023, 8, 31, 17, 25, 39),
+       real_datetime(2023, 8, 31, 19, 5, 14),
+       real_datetime(2023, 9, 1, 17, 6, 44),
+       real_datetime(2023, 9, 1, 18, 46, 18),
+       real_datetime(2023, 9, 2, 18, 27, 23),
+       real_datetime(2023, 9, 3, 18, 8, 27),
+       real_datetime(2023, 9, 4, 17, 49, 31),
+       real_datetime(2023, 9, 4, 17, 50, 57),
+       real_datetime(2023, 9, 4, 19, 30, 32),
+       real_datetime(2023, 9, 5, 17, 30, 36),
+       real_datetime(2023, 9, 5, 17, 32, 1),
+       real_datetime(2023, 9, 5, 19, 11, 36),
+       real_datetime(2023, 9, 6, 17, 13, 7),
+       real_datetime(2023, 9, 6, 18, 52, 40),
+       real_datetime(2023, 9, 7, 16, 54, 12),
+       real_datetime(2023, 9, 7, 18, 33, 47),
+       real_datetime(2023, 9, 8, 18, 14, 51),
+       real_datetime(2023, 9, 9, 17, 55, 55),
+       real_datetime(2023, 9, 10, 17, 37),
+       real_datetime(2023, 9, 10, 17, 38, 25),
+       real_datetime(2023, 9, 10, 19, 18),
+       real_datetime(2023, 9, 11, 17, 18, 4),
+       real_datetime(2023, 9, 11, 17, 19, 29),
+       real_datetime(2023, 9, 11, 18, 59, 4),
+       real_datetime(2023, 9, 12, 18, 40, 9),
+       real_datetime(2023, 9, 13, 18, 21, 13),
+       real_datetime(2023, 9, 14, 18, 2, 17),
+       real_datetime(2023, 9, 15, 17, 43, 23),
+       real_datetime(2023, 9, 15, 19, 24, 22),
+       real_datetime(2023, 9, 16, 17, 24, 28),
+       real_datetime(2023, 9, 16, 19, 5, 28),
+       real_datetime(2023, 9, 17, 17, 5, 32),
+       real_datetime(2023, 9, 17, 17, 6, 58),
+       real_datetime(2023, 9, 17, 18, 46, 32),
+       real_datetime(2023, 9, 18, 18, 27, 37),
+       real_datetime(2023, 9, 19, 18, 8, 41),
+       real_datetime(2023, 9, 20, 17, 49, 46),
+       real_datetime(2023, 9, 20, 19, 30, 46),
+       real_datetime(2023, 9, 21, 17, 30, 50),
+       real_datetime(2023, 9, 21, 19, 11, 50),
+       real_datetime(2023, 9, 22, 17, 11, 54),
+       real_datetime(2023, 9, 22, 18, 52, 54),
+       real_datetime(2023, 9, 23, 18, 33, 59),
+       real_datetime(2023, 9, 24, 18, 15, 5),
+       real_datetime(2023, 9, 25, 17, 56, 9),
+       real_datetime(2023, 9, 26, 17, 37, 14),
+       real_datetime(2023, 9, 26, 19, 18, 14),
+       real_datetime(2023, 9, 27, 18, 59, 18),
+       real_datetime(2023, 9, 28, 18, 40, 23),
+       real_datetime(2023, 9, 29, 18, 21, 27),
+       real_datetime(2023, 9, 30, 18, 2, 32),
+       real_datetime(2023, 10, 1, 17, 43, 36),
+       real_datetime(2023, 10, 1, 19, 23, 11),
+       real_datetime(2023, 10, 1, 19, 24, 36),
+       real_datetime(2023, 10, 2, 17, 24, 42),
+       real_datetime(2023, 10, 2, 19, 4, 15),
+       real_datetime(2023, 10, 2, 19, 5, 41),
+       real_datetime(2023, 10, 3, 17, 5, 46),
+       real_datetime(2023, 10, 3, 18, 45, 21),
+       real_datetime(2023, 10, 3, 18, 46, 47),
+       real_datetime(2023, 10, 4, 18, 26, 26),
+       real_datetime(2023, 10, 4, 18, 27, 51),
+       real_datetime(2023, 10, 5, 18, 8, 55),
+       real_datetime(2023, 10, 6, 17, 50),
+       real_datetime(2023, 10, 6, 19, 29, 35),
+       real_datetime(2023, 10, 6, 19, 31),
+       real_datetime(2023, 10, 7, 17, 31, 4),
+       real_datetime(2023, 10, 7, 19, 10, 39),
+       real_datetime(2023, 10, 7, 19, 12, 4),
+       real_datetime(2023, 10, 8, 17, 12, 9),
+       real_datetime(2023, 10, 8, 18, 51, 43),
+       real_datetime(2023, 10, 8, 18, 53, 9),
+       real_datetime(2023, 10, 9, 16, 53, 13),
+       real_datetime(2023, 10, 9, 18, 32, 48),
+       real_datetime(2023, 10, 9, 18, 34, 13),
+       real_datetime(2023, 10, 11, 17, 54, 57),
+       real_datetime(2023, 10, 11, 17, 56, 22),
+       real_datetime(2023, 10, 11, 19, 35, 57),
+       real_datetime(2023, 10, 12, 17, 37, 28),
+       real_datetime(2023, 10, 12, 19, 17, 1),
+       real_datetime(2023, 10, 13, 17, 18, 33),
+       real_datetime(2023, 10, 15, 18, 20, 16),
+       real_datetime(2023, 10, 16, 18, 1, 21),
+       real_datetime(2023, 10, 17, 17, 43, 50),
+       real_datetime(2023, 10, 18, 17, 24, 55),
+       real_datetime(2023, 10, 18, 19, 4, 30),
+       real_datetime(2023, 10, 20, 18, 26, 38),
+       real_datetime(2023, 10, 21, 18, 7, 43),
+       real_datetime(2023, 10, 21, 18, 9, 8),
+       real_datetime(2023, 10, 22, 17, 48, 49),
+       real_datetime(2023, 10, 22, 17, 50, 14),
+       real_datetime(2023, 10, 22, 19, 29, 47),
+       real_datetime(2023, 10, 23, 17, 29, 53),
+       real_datetime(2023, 10, 23, 17, 31, 19),
+       real_datetime(2023, 10, 23, 19, 10, 54),
+       real_datetime(2023, 10, 24, 17, 12, 23),
+       real_datetime(2023, 10, 24, 18, 51, 58),
+       real_datetime(2023, 10, 26, 18, 14, 7),
+       real_datetime(2023, 10, 27, 17, 55, 11),
+       real_datetime(2023, 10, 27, 17, 56, 37),
+       real_datetime(2023, 10, 27, 19, 36, 11),
+       real_datetime(2023, 10, 28, 17, 37, 41),
+       real_datetime(2023, 10, 28, 19, 17, 16),
+       real_datetime(2023, 10, 30, 18, 39, 25),
+       real_datetime(2023, 10, 31, 18, 20, 29),
+       real_datetime(2023, 11, 2, 17, 44, 4),
+       real_datetime(2023, 11, 2, 19, 23, 39),
+       real_datetime(2023, 11, 3, 17, 23, 45),
+       real_datetime(2023, 11, 3, 17, 25, 10),
+       real_datetime(2023, 11, 3, 19, 4, 43),
+       real_datetime(2023, 11, 4, 18, 45, 49),
+       real_datetime(2023, 11, 5, 18, 26, 54),
+       real_datetime(2023, 11, 6, 18, 7, 58),
+       real_datetime(2023, 11, 7, 17, 49, 2),
+       real_datetime(2023, 11, 7, 17, 50, 28),
+       real_datetime(2023, 11, 7, 19, 30, 3),
+       real_datetime(2023, 11, 9, 17, 12, 37),
+       real_datetime(2023, 11, 9, 18, 52, 11),
+       real_datetime(2023, 11, 10, 18, 33, 16),
+       real_datetime(2023, 11, 11, 18, 14, 20),
+       real_datetime(2023, 11, 12, 17, 55, 25),
+       real_datetime(2023, 11, 12, 17, 56, 50),
+       real_datetime(2023, 11, 12, 19, 36, 25),
+       real_datetime(2023, 11, 13, 17, 36, 31),
+       real_datetime(2023, 11, 13, 17, 37, 56),
+       real_datetime(2023, 11, 13, 19, 17, 29),
+       real_datetime(2023, 11, 14, 17, 17, 35),
+       real_datetime(2023, 11, 14, 17, 19, 1),
+       real_datetime(2023, 11, 14, 18, 58, 35),
+       real_datetime(2023, 11, 15, 17, 0, 5),
+       real_datetime(2023, 11, 15, 18, 39, 40),
+       real_datetime(2023, 11, 16, 18, 20, 44),
+       real_datetime(2023, 11, 18, 17, 42, 53),
+       real_datetime(2023, 11, 18, 17, 44, 19),
+       real_datetime(2023, 11, 18, 19, 23, 53),
+       real_datetime(2023, 11, 19, 17, 23, 58),
+       real_datetime(2023, 11, 19, 17, 25, 23),
+       real_datetime(2023, 11, 19, 19, 4, 58),
+       real_datetime(2023, 11, 20, 18, 46, 2),
+       real_datetime(2023, 11, 23, 17, 49, 15),
+       real_datetime(2023, 11, 23, 19, 30, 16),
+       real_datetime(2023, 11, 24, 17, 30, 22),
+       real_datetime(2023, 11, 24, 17, 31, 47),
+       real_datetime(2023, 11, 24, 19, 11, 20),
+       real_datetime(2023, 11, 25, 17, 11, 26),
+       real_datetime(2023, 11, 25, 17, 12, 51),
+       real_datetime(2023, 11, 25, 18, 52, 26),
+       real_datetime(2023, 11, 27, 18, 14, 35),
+       real_datetime(2023, 11, 28, 17, 55, 40),
+       real_datetime(2023, 11, 28, 19, 36, 40),
+       real_datetime(2023, 11, 29, 17, 36, 44),
+       real_datetime(2023, 11, 29, 19, 17, 44),
+       real_datetime(2023, 11, 30, 17, 17, 48),
+       real_datetime(2023, 11, 30, 18, 58, 49),
+       real_datetime(2023, 12, 3, 18, 2, 2),
+       real_datetime(2023, 12, 4, 17, 43, 6),
+       real_datetime(2023, 12, 6, 17, 5, 17),
+       real_datetime(2023, 12, 6, 18, 46, 17),
+       real_datetime(2023, 12, 7, 18, 27, 21),
+       real_datetime(2023, 12, 8, 18, 8, 26),
+       real_datetime(2023, 12, 9, 17, 49, 30),
+       real_datetime(2023, 12, 10, 17, 30, 35),
+       real_datetime(2023, 12, 11, 18, 52, 39),
+       real_datetime(2023, 12, 12, 18, 33, 44),
+       real_datetime(2023, 12, 13, 18, 14, 48),
+       real_datetime(2023, 12, 14, 17, 55, 53),
+       real_datetime(2023, 12, 15, 17, 36, 57),
+       real_datetime(2023, 12, 15, 19, 16, 32),
+       real_datetime(2023, 12, 15, 19, 17, 57),
+       real_datetime(2023, 12, 16, 17, 18, 3),
+       real_datetime(2023, 12, 16, 18, 57, 36),
+       real_datetime(2023, 12, 16, 18, 59, 2),
+       real_datetime(2023, 12, 19, 18, 2, 17),
+       real_datetime(2023, 12, 20, 17, 43, 21),
+       real_datetime(2023, 12, 20, 19, 22, 56),
+       real_datetime(2023, 12, 20, 19, 24, 21),
+       real_datetime(2023, 12, 21, 17, 24, 26),
+       real_datetime(2023, 12, 21, 19, 4),
+       real_datetime(2023, 12, 21, 19, 5, 26),
+       real_datetime(2023, 12, 25, 17, 49, 43),
+       real_datetime(2023, 12, 26, 19, 10, 23),
+       real_datetime(2023, 12, 28, 18, 32, 33)], dtype=object)</code></pre>
+</div>
+</div>
+<div id="cell-34" class="cell" data-execution_count="91">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>v_chl_avg <span class="op">=</span> np.nanmean(nan_e_v_ds_chlorophyll.values,axis<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>v_chl_avg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="91">
+<pre><code>array([ 3.8245378 , 17.05229   ,  0.77159315,  1.6202371 ,  2.068805  ,
+        1.7207391 ,  2.0681734 ,  9.915978  , 12.000377  , 60.60568   ,
+        2.9275532 , 15.261721  ,  2.1003587 ,  2.5391452 , 15.000816  ,
+       18.150581  ,  4.041805  ,  5.558531  , 14.340515  ,  7.0143795 ,
+       24.486782  , 10.351516  ,  9.925964  ,  8.393265  ,  7.0230336 ,
+       19.298477  , 13.378698  , 17.380596  ,  8.412001  , 18.604963  ,
+        9.874779  , 34.36881   ,  2.2588596 ,  3.6034255 ,  2.506503  ,
+        7.9039016 , 28.500935  , 15.452688  , 18.463425  , 11.424103  ,
+        8.926837  , 29.18119   , 15.104329  ,  7.305774  , 12.944991  ,
+       28.979595  , 31.491842  , 17.951267  ,  4.4605803 , 14.379     ,
+       28.11916   ,  9.264345  , 26.880186  , 46.661022  , 14.642408  ,
+       13.05799   , 13.633649  ,  1.418521  , 13.829434  ,  5.444851  ,
+       16.703632  , 20.848345  ,  5.0073376 , 43.061474  ,  4.4501486 ,
+       10.821825  , 13.9933815 , 31.618942  , 18.309826  ,  0.626642  ,
+        1.3072004 ,  0.5550653 , 18.288877  ,  8.388084  , 84.72084   ,
+       21.264292  , 30.243666  ,  8.217334  , 26.758741  , 12.297731  ,
+        1.0648437 ,  7.8218217 ,  6.743732  ,  8.725778  ,  0.37988   ,
+       20.73484   , 37.852497  , 23.765854  , 36.893124  , 43.02589   ,
+       21.644255  ,  7.4811535 ,  0.56276786, 21.756771  ,  8.571441  ,
+       34.194794  , 24.734491  , 20.891743  , 19.614132  , 20.337917  ,
+        0.89833146, 15.468415  , 23.633438  , 12.742027  , 10.469747  ,
+       19.536373  , 63.70876   , 31.262995  , 12.08394   ,  6.5038023 ,
+       23.642673  , 15.831917  ,  9.192328  , 18.234331  , 18.983482  ,
+       12.585856  , 19.876034  , 10.024232  ,  6.4187565 , 11.187998  ,
+        5.847157  , 15.026388  , 13.55039   , 57.649048  , 10.104386  ,
+       10.101064  , 25.943897  ,  9.368579  ,  6.515471  , 10.244264  ,
+        1.1295458 ,  7.0011516 , 10.233358  ,  6.5892057 ,  5.111359  ,
+        5.5639024 ,  4.002067  ,  2.6186795 , 20.945406  , 22.75246   ,
+       22.861576  , 26.649107  ,  3.9389431 ,  6.8372855 ,  4.1539216 ,
+        7.945154  ,  2.4636204 ,  2.8101442 ,  2.9989738 ,  3.761499  ,
+        4.040188  ,  6.779965  ,  4.0392694 ,  5.058976  ,  3.642377  ,
+        5.0899043 ,  1.535409  ,  5.489851  , 12.624435  , 14.986074  ,
+       19.135656  ,  8.674835  ,  1.8120102 ,  6.0505404 ,  4.0770435 ,
+        4.2323365 ,  4.5445585 ,  6.407044  ,  4.4135103 , 10.111502  ,
+        2.559734  ,  6.3161306 ,  4.1022396 ,  5.3999968 ,  5.693675  ,
+        4.2225466 ,  4.975449  ,  5.87973   ,  1.8912128 ,  4.844044  ,
+        8.326566  , 21.682102  ,  5.796414  ,  4.81131   ,  1.6386082 ,
+        4.858289  ,  1.0573728 ,  5.3810554 , 19.722094  , 12.00176   ,
+       23.595955  , 31.021114  ,  6.9326816 ,  5.9504557 ,  3.3385806 ,
+        4.8724666 ,  2.2861915 , 12.186277  ,  3.0852036 , 30.52236   ,
+        4.891082  ,  4.0605354 , 27.45894   , 12.472047  ,  3.3337376 ,
+        3.500256  ,  0.65000206,  1.3446043 ,  5.6772294 ,  2.0434697 ,
+        6.4364944 ,  3.82695   , 26.283665  ,  6.5254254 ,  0.35209   ,
+        1.7417568 ,  0.323401  ,  1.3526874 , 19.266989  , 16.352032  ,
+        4.9344935 ,  4.533328  ,  1.8704015 ,  1.9660938 ,  2.0816095 ,
+        0.31560874,  2.6231666 ,  6.254045  ,  3.8463306 ,  1.3136346 ,
+        2.3147666 ,  3.226815  ,  3.4912894 ,  9.928331  ,  5.029834  ,
+        7.1034536 ,  2.6826584 ,  3.407092  ,  5.1383185 ,  4.0941634 ,
+        3.3249714 ,  2.8196743 ,  1.0019007 ,  0.4673027 ,  6.095398  ,
+        2.4684315 ,  2.894028  ,  1.7736832 ,  0.53535175,  2.3534393 ,
+        5.9133415 ,  1.4854542 ,  0.98389864,  2.8314965 ,  3.388785  ,
+        1.7273644 ,  1.4295217 ,  3.9137824 ,  0.8343511 ,  5.592705  ,
+        4.1189713 ,  4.519481  ,  4.514461  ,  1.216034  ,  4.9332423 ,
+        4.501184  ,  5.48342   ,  5.1219296 ,  1.8448588 ,  1.8978752 ,
+        2.399244  ,  4.452588  ,  2.9473898 ,  4.242     ,  5.101925  ,
+        3.4773014 ,  4.1459665 ,  3.9358723 ,  4.571998  ,  4.4941797 ,
+        1.8119017 ,  1.184782  ,  3.4886737 ,  1.7374743 ,  5.519011  ,
+        4.1905513 ,  2.60639   ,  0.7090206 ,  4.3053236 ,  0.48008502,
+        4.8589377 ,  5.2264676 ,  4.044144  ,  3.4191263 ,  1.1011882 ,
+        3.1120796 ,  6.7359877 ,  2.9646623 ,  2.554451  ,  2.4505644 ,
+        2.142144  ,  4.9301887 ,  1.2831734 ,  2.7954278 ,  1.5539587 ,
+        5.100337  ,  3.3232377 ,  1.7723247 ,  4.5153937 ,  3.388878  ,
+        6.257826  ,  1.1053416 ,  3.9824939 ,  0.76826215,  4.1770864 ,
+        5.84404   ,  3.564656  ,  4.186695  ,  3.18334   ,  4.3410416 ,
+        2.4948015 ,  5.7432327 ,  3.2015507 ,  4.697011  ,  8.011776  ,
+        6.00471   ,  1.4959276 ,  3.4044938 ,  2.7345881 ,  3.1861002 ,
+        6.807063  ,  3.672278  ,  4.4842434 ,  4.369128  , 10.34134   ,
+        7.659503  ,  4.640015  ,  2.260385  ,  2.9616964 ,  5.770283  ,
+        5.8344135 ,  3.0287185 ,  4.6171303 ,  1.8015864 ,  3.3256059 ,
+        4.025933  , 15.307446  , 24.68179   ,  5.1921005 ,  0.95913076,
+        2.531541  ,  3.3621345 ,  5.42665   ,  2.610918  ,  7.0007544 ,
+        4.5238733 ,  6.4797854 ,  7.7474403 ,  8.129336  ,  6.065284  ,
+        6.313556  , 23.959946  ,  6.9332256 ,  7.346444  ,  3.9448545 ,
+        7.4828005 ,  9.371148  ,  6.901665  ,  6.0786414 ,  7.611087  ,
+        4.072118  ,  5.4114847 ,  5.8930087 ,  6.2145314 ,  3.5961418 ,
+        3.5599902 ,  0.31376082,  4.7233195 ,  1.835947  ,  1.3035926 ,
+        3.0226147 ,  0.4981069 ,  6.3224025 ,  3.036155  ,  2.8434775 ,
+        4.545952  , 18.239357  ,  6.450544  ,  6.273684  ,  6.03156   ,
+        3.223308  ,  3.63122   ,  2.694837  ,  2.6652293 ,  1.1407009 ,
+        4.5644073 ,  6.183016  ,  4.285992  ,  4.728611  ,  1.2699568 ,
+        3.6176095 ,  2.5436394 ,  2.7925599 ,  3.8075545 ,  8.981911  ,
+       22.87494   ,  7.5639124 ,  1.6238711 ,  0.5307012 ,  6.469891  ,
+        3.0692794 ,  4.6451344 ,  7.6391034 ,  6.2791705 ,  7.3014994 ,
+        4.254345  ,  6.4056168 ,  7.458692  ,  3.457129  ,  5.2672634 ,
+        9.947004  ,  4.4163375 , 10.526679  ,  4.949929  ,  1.9953364 ,
+        8.43534   ,  8.067071  ,  5.2787495 ,  3.2672718 , 14.374089  ,
+        1.9808887 , 36.714443  , 25.423502  , 10.191787  ,  2.9083974 ,
+       13.615338  ,  7.3216214 , 16.14564   ,  7.027708  ,  8.500385  ,
+        4.132675  ,  3.6679573 ,  1.4386141 , 35.34755   , 27.14011   ,
+        0.611455  ,  9.363178  , 12.209044  ,  7.530161  ,  8.551426  ,
+        1.8653786 ,  4.8010054 ,  5.6198926 , 35.149426  , 30.55753   ,
+        5.9123573 ,  2.7006626 ,  3.9975345 ,  6.327705  ,  5.3463564 ,
+        6.5932918 ,  6.520323  ,  3.5866342 ,  0.6119649 ,  0.34683716,
+        4.459534  ,  5.4071994 ,  6.77416   , 20.245544  ,  1.24846   ,
+       16.727642  , 34.44699   ,  3.2000692 ,  6.9570527 ,  4.8707566 ,
+        0.85470015,  1.5286115 ,  1.4164749 , 16.511541  , 23.00998   ,
+       11.719736  , 10.880672  ,  6.8268065 ,  1.6250918 ,  8.308749  ,
+       11.111537  , 24.678076  , 11.334251  ,  3.5857413 ,  6.996021  ,
+        4.5214167 ,  8.312405  ,  7.4295473 ,  7.6591887 , 10.038146  ,
+        1.7212489 ,  8.699176  ,  8.796391  ,  9.621361  ,  9.075598  ,
+        0.19450001, 14.5820675 , 18.2731    , 15.891861  ,  5.1796503 ,
+       23.901497  ,  6.602838  ,  8.11695   ,  5.7776127 ,  0.9575611 ,
+       19.564034  , 44.46723   ,  6.194875  , 20.724203  , 18.15552   ,
+       36.427177  ,  3.437948  ,  0.62041324,  0.78566986,  7.326401  ,
+       13.820853  ,  4.118893  ,  0.77267   ,  0.74762917,  0.88341135,
+       20.338709  , 18.454927  , 13.954808  , 11.78991   , 11.854942  ,
+       14.00589   ,  9.306969  ,  9.987267  ,  6.9419265 , 10.148791  ,
+        8.151923  , 18.923534  , 18.946314  ,  1.1267239 ,  1.1251845 ,
+        1.3136889 , 71.61      ,  1.9791391 ,  0.40409204], dtype=float32)</code></pre>
+</div>
+</div>
+<div id="cell-35" class="cell" data-execution_count="95">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>,<span class="dv">5</span>)) </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>plt.plot(e_v_dates,v_chl_avg,label<span class="op">=</span><span class="st">'VIIRS CHL'</span>,c<span class="op">=</span><span class="st">'red'</span>,marker<span class="op">=</span><span class="st">'.'</span>,linestyle<span class="op">=</span><span class="st">'-'</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Chl-a (mg/m^3)'</span>)</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Lake Erie Daily Average CHL - 2023"</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(v_chl_avg))</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(v_chl_avg.shape)</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e_v_dates.shape)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'numpy.ndarray'&gt;
+(544,)
+(544,)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="gl-timeseries-chloro-from-diff-sensors_files/figure-html/cell-26-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-36" class="cell" data-execution_count="93">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#e_v_ds.close()</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>jupyter nbconvert <span class="op">--</span>to html GL_python_tutorial2.ipynb</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>[NbConvertApp] Converting notebook GL_python_tutorial2.ipynb to html
+[NbConvertApp] Writing 878306 bytes to GL_python_tutorial2.html</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© CC-By CoastWatch, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

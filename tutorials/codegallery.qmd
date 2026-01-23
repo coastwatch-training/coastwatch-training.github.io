@@ -273,7 +273,7 @@ def render_carousel(img_cell, carousel_id, slug):
           f"""
           <div class="{wrap_cls} cg-figure">
             <div class="cg-imgframe">
-              <img src="/tutorials/{slug}/images/{fn}"
+              <img src="tutorials/{slug}/images/{fn}"
                   loading="lazy"
                   data-caption="{caption}">
             </div>
