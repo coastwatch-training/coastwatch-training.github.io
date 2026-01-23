@@ -2,7 +2,14 @@
 title: "Code Gallery"
 ---
 
-This page lists CoastWatch code gallery tutorials.  
+The Code Gallery provides a collection of coding-based tutorials that demonstrate how to access, analyze, and visualize CoastWatch satellite data using common programming languages. These tutorials focus on reproducible, hands-on workflows and are intended for users who want to work directly with data through code.
+
+Many tutorials are available in multiple software languages, such as Python, R, and MATLAB, allowing users to follow the same workflow using the tools they prefer.
+
+Each tutorial presents a complete example workflow, including data access (for example through ERDDAP), basic data processing and quality control steps, and the generation of common outputs such as maps, time series, or summary statistics.
+
+The Code Gallery is designed to support exploration, comparison, and reuse of coding workflows. Users are encouraged to adapt the example code to their own research, educational, or operational needs.
+
 Click the **eye** icon to view the tutorial, **box** icon to view the required resources, or **download** to get directed to the source file.
 
 
@@ -20,6 +27,7 @@ from pathlib import Path
 REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
 REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
 RESOURCES_ROOT = Path("resources")
+TUTORIALS_ROOT = Path("tutorials")
 
 df = pd.read_csv("code_gallery.csv", encoding="utf-8-sig").fillna("")
 
@@ -162,51 +170,13 @@ def download_icon(path):
     )
 
 
+
 def resources_icon_for_row(row) -> str:
-    """
-    Generate an HTML anchor element linking to supplemental resource files
-    for a Code Gallery tutorial, if available.
-
-    This function inspects a row from the Code Gallery CSV to determine
-    whether supplemental resource files (e.g., CSV, NetCDF) exist for the
-    corresponding tutorial. A tutorial "slug" is inferred from the first
-    available source file (Python, R, or Matlab). If a matching resources
-    directory exists locally and contains at least one file, a clickable
-    resources icon is returned that links to the folder on GitHub.
-
-    If no valid tutorial path can be inferred, the resources directory does
-    not exist, or the directory is empty, a placeholder dash ("—") is
-    returned instead.
-
-    Parameters
-    ----------
-    row : pandas.Series
-        A single row from the Code Gallery CSV containing metadata and file
-        paths for a tutorial.
-
-    Returns
-    -------
-    str
-        An HTML string containing an anchor element with an embedded SVG
-        icon linking to the tutorial's resources folder on GitHub, or a
-        dash ("—") if no resources are available.
-    """
-    # pick any available tutorial path to infer the slug
-    cand = (
-        str(row.get("py_download","")).strip()
-        or str(row.get("r_download","")).strip()
-        or str(row.get("m_download","")).strip()
-    )
-    if not cand:
-        return "—"
-
-    filename = cand.split("/")[-1]
-    slug = filename.rsplit(".", 1)[0].strip()
+    slug = str(row.get("slug", "")).strip()
     if not slug:
         return "—"
 
-    # Only show icon if the folder exists AND has at least one file
-    folder = RESOURCES_ROOT / slug
+    folder = TUTORIALS_ROOT / slug / "resources"
     if not folder.is_dir():
         return "—"
 
@@ -214,14 +184,14 @@ def resources_icon_for_row(row) -> str:
     if not has_files:
         return "—"
 
-    # Link to GitHub folder
-    folder_path = f"tutorials/resources/{slug}/"
+    folder_path = f"tutorials/{slug}/resources/"
     url = f"{REPO_BLOB_BASE}{quote(folder_path)}"
 
     return (
         f'<a href="{url}" class="cg-icon" aria-label="Open resources for {slug}" '
         f'target="_blank" rel="noopener">{RESOURCES_SVG}</a>'
     )
+
 
 
 def render_lang_block(label, carousel_html, view_url, single=False):
@@ -281,39 +251,8 @@ def render_lang_block(label, carousel_html, view_url, single=False):
 
 
 
-def render_carousel(img_cell, carousel_id):
-    """
-    Render an HTML image carousel for tutorial preview outputs.
 
-    This function generates the HTML markup for a carousel of preview images
-    displayed inside a Code Gallery modal. The input image specification may
-    contain one or more image filenames, optionally paired with captions.
-    Multiple images are rendered as carousel slides with navigation controls,
-    while a single image is rendered without navigation.
-
-    Image specifications are expected to be provided as a pipe-delimited
-    string (e.g., "img1.png|img2.png"), with optional captions appended using
-    a double-colon separator (e.g., "img1.png::Caption text").
-
-    If no images are provided, a placeholder message indicating that no
-    preview image is available is returned.
-
-    Parameters
-    ----------
-    img_cell : str
-        Pipe-delimited string specifying preview image filenames, optionally
-        including captions using the "::" delimiter.
-    carousel_id : str
-        Unique HTML ID for the carousel instance, used to associate navigation
-        controls with the correct carousel.
-
-    Returns
-    -------
-    str
-        An HTML string containing the rendered carousel markup, including
-        slide containers, optional navigation controls, and image captions,
-        or a placeholder message if no images are available.
-    """
+def render_carousel(img_cell, carousel_id, slug):
     if not img_cell:
         return "<div class='text-muted'>No preview image</div>"
 
@@ -322,13 +261,11 @@ def render_carousel(img_cell, carousel_id):
         return "<div class='text-muted'>No preview image</div>"
 
     slides = []
-
     for j, item in enumerate(items):
         if "::" in item:
             fn, caption = item.split("::", 1)
         else:
-            fn = item
-            caption = ""
+            fn, caption = item, ""
 
         wrap_cls = "cg-slide active" if j == 0 else "cg-slide"
 
@@ -336,14 +273,14 @@ def render_carousel(img_cell, carousel_id):
           f"""
           <div class="{wrap_cls} cg-figure">
             <div class="cg-imgframe">
-              <img src="/tutorials/images/{fn}"
+              <img src="/tutorials/{slug}/images/{fn}"
                   loading="lazy"
                   data-caption="{caption}">
             </div>
             <div class="cg-caption">{caption}</div>
           </div>
           """
-      )
+        )
 
     nav = ""
     if len(items) > 1:
@@ -413,33 +350,45 @@ for i, r in df.iterrows():
     single = (n_blocks == 1)
 
     grid_class = "cg-grid cg-grid-single" if single else "cg-grid"
+    
+    slug = str(r.get("slug", "")).strip()
 
+    # -----------------------
+    # Python block
+    # -----------------------
     py_block = ""
     if has_py_block:
         py_block = render_lang_block(
             "Python",
-            render_carousel(r["py_img"], f"py-carousel-{i}"),
-            r["py_view"],
+            render_carousel(r.get("py_img", ""), f"py-carousel-{i}", slug),
+            r.get("py_view", ""),
             single=single
         )
 
+    # -----------------------
+    # R block
+    # -----------------------
     r_block = ""
     if has_r_block:
         r_block = render_lang_block(
             "R",
-            render_carousel(r["r_img"], f"r-carousel-{i}"),
-            r["r_view"],
+            render_carousel(r.get("r_img", ""), f"r-carousel-{i}", slug),
+            r.get("r_view", ""),
             single=single
         )
 
+    # -----------------------
+    # Matlab block
+    # -----------------------
     m_block = ""
     if has_m_block:
         m_block = render_lang_block(
             "Matlab",
-            render_carousel(r.get("m_img",""), f"m-carousel-{i}"),
-            r.get("m_view",""),
+            render_carousel(r.get("m_img", ""), f"m-carousel-{i}", slug),
+            r.get("m_view", ""),
             single=single
         )
+
     
     modals.append(f"""
     <div id="{mid}" class="cg-modal">

@@ -4,13 +4,13 @@ title: "Training Tutorials"
 
 The CoastWatch tutorial collection is organized to support users working with satellite data at different stages of their workflow. Tutorials are grouped into two broad categories: **software-focused tutorials** and **coding-based tutorials**.
 
----
 
 ## Software tutorials
 
 Software tutorials provide guidance on installing, configuring, and using commonly supported tools for working with CoastWatch satellite data. These tutorials focus on foundational software and utilities that are often used to access, explore, or manage data prior to analysis.
 
 Topics include:
+
 - ERDDAP access and configuration  
 - CoastWatch utilities  
 - Working with NetCDF files  

@@ -29,6 +29,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../officehours.html" rel="next">
 <link href="../tutorials/software.html" rel="prev">
 <link href="../images/coastwatch.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -85,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/software.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/codegallery.html">Code Gallery</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/codegallery.html">Code Gallery</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -190,19 +191,13 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">2024 AFS Workshop</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../officehours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Office Hours</span></a>
-  </div>
-</li>
       </ul>
   </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+            <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Training Tutorials</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -223,6 +218,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../officehours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Office Hours</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -234,7 +235,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/software.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/codegallery.html">Code Gallery</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/codegallery.html">Code Gallery</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Code Gallery</h1>
 </div>
@@ -253,10 +254,13 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This page lists CoastWatch code gallery tutorials.<br>
-Click the <strong>eye</strong> icon to view the tutorial, <strong>box</strong> icon to view the required resources, or <strong>download</strong> to get directed to the source file.</p>
-<div id="66af5a6c" class="cell" data-message="false" data-execution_count="1">
-<div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
+<p>The Code Gallery provides a collection of coding-based tutorials that demonstrate how to access, analyze, and visualize CoastWatch satellite data using common programming languages. These tutorials focus on reproducible, hands-on workflows and are intended for users who want to work directly with data through code.</p>
+<p>Many tutorials are available in multiple software languages, such as Python, R, and MATLAB, allowing users to follow the same workflow using the tools they prefer.</p>
+<p>Each tutorial presents a complete example workflow, including data access (for example through ERDDAP), basic data processing and quality control steps, and the generation of common outputs such as maps, time series, or summary statistics.</p>
+<p>The Code Gallery is designed to support exploration, comparison, and reuse of coding workflows. Users are encouraged to adapt the example code to their own research, educational, or operational needs.</p>
+<p>Click the <strong>eye</strong> icon to view the tutorial, <strong>box</strong> icon to view the required resources, or <strong>download</strong> to get directed to the source file.</p>
+<div id="4d69ae1c" class="cell" data-message="false" data-execution_count="1">
+<div class="cell-output cell-output-display no-overflow-x" data-execution_count="2">
 <script>
 function cgOpenModal(id){
   document.getElementById("cg-backdrop").style.display="block";
@@ -2567,6 +2571,9 @@ function cgNext(id){
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../officehours.html" class="pagination-link" aria-label="Office Hours">
+        <span class="nav-page-text">Office Hours</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

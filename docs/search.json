@@ -1442,14 +1442,500 @@
     "text": "As an example, we are going to plot time-series of mean chlorophyll-a concentration from various sensors from 1997 to 2018 to look at the periods of overlap.\nWe are going to download data from SeaWiFS (1997-2010), MODIS (2002-present) and VIIRS (2012-present) and compare it to the ESA-CCI data which combines all 3 sensors into a homogeneous time-series.\nIn this tutorial, the URLs to the data are provided so you don’t have to search for them. But, if you weren’t sure what the URLs were, you could find them by searing the list of datasets hosted on the OceanWatch ERDDAP (https://oceanwatch.pifsc.noaa.gov/erddap/index.html) and following the steps at the beginning of Tutoral 1.\nFor this tutoral, we’re interested in all time steps in the area bounded by 15 - 25N, 198 - 208E.\n\n\nIn Matlab, run the following code to view details about the data:\n% View data attributes and variables\nncdisp('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/sw_chla_monthly_2018_0');\nThis allows us to see the variable names that we need for the code below, which downloads the data we’re interested in. After we download the data, we’re going to average the values of the area of interest for each month.\n% Download the data over area of interest\n% Read the time indices, in their native units (seconds since\n% 1970-01-01T00:00:00Z')\nsw_time = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/sw_chla_monthly_2018_0', 'time');\n\n% Convert this to [Y M D H M S]\nsw_time_ymdhms = datevec(sw_time/86400 + datenum([1970 1 1 0 0 0])); \nlat_full = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/sw_chla_monthly_2018_0', 'latitude');\nlon_full = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/sw_chla_monthly_2018_0', 'longitude');\n\n% Find longitudes from 198 - 208 E\nlon_aoi = find(lon_full &gt;= 198 & lon_full &lt;= 208);\n\n% Find latitudes from 15 - 25 N\nlat_aoi = find(lat_full &gt;= 15 & lat_full &lt;= 25);\n\n% Start coordinates\naoi_start = [lon_aoi(1) lat_aoi(1) 1];\n\n% Coordinates to span\naoi_span = [length(lon_aoi) length(lat_aoi) length(sw_time)];\n% Download the data of interest\nsw = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/sw_chla_monthly_2018_0', ...\n    'chlor_a', aoi_start, aoi_span);\n\n% Spatially average\nswAVG(1:length(sw_time),1) = NaN;\nfor m = 1:1:length(sw_time)\n    swAVG(m,1) = mean(sw(:,:,m), \"all\", \"omitnan\");\nend\n\n% Tidy up by deleting the variables we won't need again\nclear lat* lon* aoi* sw m \n\n\n\nIn Matlab, run the following code to view details about the data:\n% View data attributes and variables\nncdisp('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/aqua_chla_monthly_2018_0');\nThis allows us to see the variable names that we need for the code below, which downloads the data we’re interested in. After we download the data, we’re going to average the values of the area of interest for each month.\n% Download the data over area of interest\n% Read the time indices, in their native units (seconds since\n% 1970-01-01T00:00:00Z')\nmodis_time = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/aqua_chla_monthly_2018_0', 'time'); \n\n% Convert this to [Y M D H M S]\nmodis_time_ymdhms = datevec(modis_time/86400 + datenum([1970 1 1 0 0 0])); \nlat_full = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/aqua_chla_monthly_2018_0', 'latitude');\nlon_full = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/aqua_chla_monthly_2018_0', 'longitude');\n\n% Find longitudes from 198 - 208 E\nlon_aoi = find(lon_full &gt;= 198 & lon_full &lt;= 208);\n% Find latitudes from 15 - 25 N\nlat_aoi = find(lat_full &gt;= 15 & lat_full &lt;= 25);\n\n% Start coordinates\naoi_start = [lon_aoi(1) lat_aoi(1) 1];\n\n% Coordinates to span\naoi_span = [length(lon_aoi) length(lat_aoi) length(modis_time)];\n\n% Download the data of interest\nmodis = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/aqua_chla_monthly_2018_0', ...\n    'chlor_a', aoi_start, aoi_span);\n\n% Spatially average\nmodisAVG(1:length(modis_time),1) = NaN;\nfor m = 1:1:length(modis_time)\n    modisAVG(m,1) = mean(modis(:,:,m), \"all\", \"omitnan\");\nend\n\n% Tidy up by deleting the variables we won't need again\nclear lat* lon* aoi* modis m \n\n\n\nIn Matlab, run the following code to view details about the data:\n% View data attributes and variables\nncdisp('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/noaa_snpp_chla_monthly');\nThis allows us to see the variable names that we need for the code below, which downloads the data we’re interested in. After we download the data, we’re going to average the values of the area of interest for each month.\n% Download the data over area of interest\n% Read the time indices, in their native units (seconds since\n% 1970-01-01T00:00:00Z')\nviirs_time = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/noaa_snpp_chla_monthly', 'time');\n\n% Convert this to [Y M D H M S]\nviirs_time_ymdhms = datevec(viirs_time/86400 + datenum([1970 1 1 0 0 0])); \nlat_full = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/noaa_snpp_chla_monthly', 'latitude');\nlon_full = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/noaa_snpp_chla_monthly', 'longitude');\n\n% Find longitudes from 198 - 208 E\nlon_aoi = find(lon_full &gt;= 198 & lon_full &lt;= 208);\n\n% Find latitudes from 15 - 25 N\nlat_aoi = find(lat_full &gt;= 15 & lat_full &lt;= 25);\n\n% Start coordinates\naoi_start = [lon_aoi(1) lat_aoi(1) 1];\n\n% Coordinates to span\naoi_span = [length(lon_aoi) length(lat_aoi) length(viirs_time)];\n% Download the data of interest\nviirs = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/noaa_snpp_chla_monthly', ...\n    'chlor_a', aoi_start, aoi_span);\n\n% Spatially average\nviirsAVG(1:length(viirs_time),1) = NaN;\nfor m = 1:1:length(viirs_time)\n    viirsAVG(m,1) = mean(viirs(:,:,m), \"all\", \"omitnan\");\nend\n\n% Tidy up by deleting the variables we won't need again\nclear lat* lon* aoi* viirs m \n\n\n\nIn Matlab, run the following code to view details about the data:\n% View data attributes and variables\nncdisp('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v5-0');\nThis allows us to see the variable names that we need for the code below, which downloads the data we’re interested in. After we download the data, we’re going to average the values of the area of interest for each month.\n% Download the data over area of interest\n% Read the time indices, in their native units (seconds since\n% 1970-01-01T00:00:00Z')\nesa_time = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v5-0', 'time');\n\n% Convert this to [Y M D H M S]\nesa_time_ymdhms = datevec(esa_time/86400 + datenum([1970 1 1 0 0 0])); \nlat_full = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v5-0', 'latitude');\nlon_full = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v5-0', 'longitude');\n\n% Find longitudes from 198 - 208 E\nlon_aoi = find(lon_full &gt;= 198 & lon_full &lt;= 208);\n\n% Find latitudes from 15 - 25 N\nlat_aoi = find(lat_full &gt;= 15 & lat_full &lt;= 25);\n\n% Start coordinates\naoi_start = [lon_aoi(1) lat_aoi(1) 1];\n\n% Coordinates to span\naoi_span = [length(lon_aoi) length(lat_aoi) length(esa_time)];\n\n% Download the data of interest\nesa = ncread('https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v5-0', ...\n    'chlor_a', aoi_start, aoi_span);\n\n% Spatially average\nesaAVG(1:length(esa_time),1) = NaN;\nfor m = 1:1:length(esa_time)\n    esaAVG(m,1) = mean(esa(:,:,m), \"all\", \"omitnan\");\nend\n\n% Tidy up by deleting the variables we won't need again\nclear lat* lon* aoi* esa m \n\n\n\nNow we can compare the spatial averages across the three sensors: SeaWiFS, MODIS, and VIIRS. We’ll do this by generating a plot the includes all three time series, which overlap to varying degrees.\nfigure\nplot(datenum(sw_time_ymdhms), swAVG, 'Color', [0 70 127]/255);\nhold on\nplot(datenum(modis_time_ymdhms), modisAVG, 'Color', [147 213 0]/255);\nplot(datenum(viirs_time_ymdhms), viirsAVG, 'Color', [127 127 255]/255);\nset(gca,'XTick', datenum([2000 1 1 0 0 0]):5*365:datenum([2020 1 1 0 0 0]));\nset(gca,'XTickLabel', 2000:5:2020);\nlegend('SeaWiFS', 'MODIS', 'VIIRS', 'Location', 'southwest');\nylabel('Chlorophyll-a');\n\n\n\nChloraophyll-a from MODIS and VIIRS\n\n\nYou can see that the values of chlorophyll-a concentration don’t match across sensors.\n\n\n\nThe OC-CCI data are from a blended product, that merges the three sensors.\nfigure\nplot(datenum(sw_time_ymdhms), swAVG, 'o', 'MarkerFaceColor', [0 70 127]/255, 'MarkerEdgeColor', ...\n    [0 70 127]/255); \nhold on\nplot(datenum(modis_time_ymdhms), modisAVG, 'o', 'MarkerFaceColor', [147 213 0]/255, ...\n    'MarkerEdgeColor', [147 213 0]/255);\nplot(datenum(viirs_time_ymdhms), viirsAVG, 'o', 'MarkerFaceColor', [127 127 255]/255, ...\n    'MarkerEdgeColor', [127 127 255]/255);\nplot(datenum(esa_time_ymdhms), esaAVG, 'k', 'LineWidth', 2);\nset(gca,'XTick', datenum([2000 1 1 0 0 0]):5*365:datenum([2020 1 1 0 0 0]));\nset(gca,'XTickLabel', 2000:5:2020);\nlegend('SeaWiFS', 'MODIS', 'VIIRS', 'OC-CCI', 'Location', 'southwest');\nylabel('Chlorophyll-a');\n\n\n\nChlorphyll from ESA OC-CCI"
   },
   {
-    "objectID": "tutorials/codegallery.html",
-    "href": "tutorials/codegallery.html",
-    "title": "Code Gallery",
+    "objectID": "tutorials/index.html",
+    "href": "tutorials/index.html",
+    "title": "Training Tutorials",
     "section": "",
-    "text": "This page lists CoastWatch code gallery tutorials.\nClick the eye icon to view the tutorial, box icon to view the required resources, or download to get directed to the source file.\n\n\n\n\n\n\n\n  \n    Category\n    \n      All\n      Data Access & SubsettingERDDAP BasicsSpatial Analysis & MappingTime Series\n    \n  \n\n  \n    Software\n\n    \n      Python ×\n    \n\n    \n      R ×\n    \n\n    \n      Matlab ×\n    \n\n    \n      Clear\n    \n  \n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nCategory\nPreview\nResources\nPython ↓\nR ↓\nMatlab ↓\n\n\n\n\nBasics of working with satellite data\nERDDAP Basics\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompare time series from different sensors\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMake a virtual buoy with satellite data\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n\n\nCalculating sea ice area and extent\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nWorking with data that crosses the antimeridian\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nDefine a marine habitat\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nExtract data within a boundary\nData Access & Subsetting\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow to work with satellite data in Matlab in the Great Lakes\nERDDAP Basics\n\n\n\n\n\n—\n—\n—\n\n\n\n\n\n\n\nWorking with Great Lakes Surface Temperature Data\nData Access & Subsetting\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nAnalyze Great Lakes Ice Concentration\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nMulti-Sensor chlorophyll time series analysis for Lake Erie\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nLong-term lake surface temperature variability from Great Lakes Satellite Records\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nVisualizing JPSS Sea Ice Concentration products using Google Colab\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nLong Island Sound Chlorophyll-a Dynamics\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nMap geographical and polarstereographic data on a projected map\nSpatial Analysis & Mapping\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n\n\nMask shallow pixels for satellite ocean color datasets\nSpatial Analysis & Mapping\n\n\n\n\n\n\n\n\n\n\n—\n\n\n\n\n\n—\n\n\nMatching polar data to animal track locations\nSpatial Analysis & Mapping\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n\n\nMatching satellite and buoy surface temperature data in polar regions\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nComparing satellite and buoy sea surface temperature observations\nTime Series\n\n\n\n\n\n—\n—\n\n\n\n\n\n—\n\n\nMatchup satellite data to ship, glider, or animal tracks\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nMatching satellite chlorophyll to animal telemetry tracks\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCalculating anomaly and trend with sea ice thickness time series\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n\n\nSubset data in polar stereographic projection using a shapefile\nData Access & Subsetting\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n—\n\n\nTransforming satellite data from one map to another\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\n\n\n\n    \n      Basics of working with satellite data\n      Access and analyze satellite-derived sea surface temperature using ERDDAP and NetCDF-based workflows. This tutorial demonstrates how to locate and subset a satellite SST product in ERDDAP, download gridded NetCDF data, examine its structure, and create basic spatial maps and regional time series. Users work with the NOAA Coral Reef Watch CoralTemp monthly sea surface temperature product to explore coordinate conventions, generate SST maps, compute regional averages, and visualize temporal variability.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.\n          \n          \n          \n            \n              \n            \n            Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.\n          \n          \n          \n            \n              \n            \n            Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Time series of sea surface temperature around the Hawaiian Islands in 2018.\n          \n          \n          \n            \n              \n            \n            Map of the 2018 average sea surface temperature in the Hawaiian Islands.\n          \n            ◀  1 / 2  ▶\n          View Matlab tutorial\n        \n        \n      \n\n      Close\n    \n    \n    \n      Compare time series from different sensors\n      Compare satellite chlorophyll-a time series from multiple ocean color sensors to understand differences during overlapping observation periods. This tutorial demonstrates how to use ERDDAP to extract spatially averaged chlorophyll-a time series from a defined region, examine dataset metadata, handle differences in coordinate conventions, and compare measurements across sensors through visualization. Monthly chlorophyll-a data from SeaWiFS, MODIS Aqua, NOAA VIIRS S-NPP, and the ESA Ocean Colour Climate Change Initiative (OC-CCI) are used to evaluate consistency and variability among sensors from 1997 to the present.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly chlorophyll-a time series from SeaWiFS, MODIS Aqua, VIIRS S-NPP, and the ESA OC-CCI dataset averaged over a Gulf of Mexico region, illustrating differences among sensors during periods of overlap.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly chlorophyll-a time series from SeaWiFS, MODIS Aqua, VIIRS S-NPP, and the ESA OC-CCI dataset averaged over a Gulf of Mexico region, illustrating differences among sensors during periods of overlap.\n          \n          \n          \n            \n              \n            \n            Mean log-transformed chlorophyll-a concentration for the Gulf of Mexico region derived from SeaWiFS, MODIS Aqua, NOAA VIIRS S-NPP, and the ESA OC-CCI blended dataset.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Monthly chlorophyll-a time series from SeaWiFS, MODIS Aqua, VIIRS S-NPP, and the ESA OC-CCI dataset averaged over a Gulf of Mexico region, illustrating differences among sensors during periods of overlap.\n          \n          \n          View Matlab tutorial\n        \n        \n      \n\n      Close\n    \n    \n    \n      Make a virtual buoy with satellite data\n      Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            National Data Buoy Center buoy 46259 matched up with sea surface temperature data.\n          \n          \n          \n            \n              \n            \n             Trend analysis of buoy and satellite data.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            National Data Buoy Center buoy 46259 matched up with sea surface temperature data.\n          \n          \n          \n            \n              \n            \n             Trend analysis of buoy and satellite data.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Calculating sea ice area and extent\n      Calculate sea ice area and extent from satellite-derived sea ice concentration to quantify seasonal and interannual variability in Arctic ice cover. This tutorial demonstrates how to use PolarWatch ERDDAP to retrieve gridded sea ice concentration data, incorporate grid cell area information, and apply standard concentration thresholds to compute sea ice area and extent. Users visualize sea ice concentration maps and generate monthly time series to examine changes in Arctic sea ice over time. Data from the NOAA/NSIDC Sea Ice Concentration Climate Data Record (Version 4) and a polar stereographic grid cell area dataset are used to perform the calculations for the Northern Hemisphere.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly mean sea ice concentration in the Northern Hemisphere derived from the NOAA/NSIDC Sea Ice Concentration Climate Data Record.\n          \n          \n          \n            \n              \n            \n            Monthly time series of Arctic sea ice area and sea ice extent computed from satellite-derived sea ice concentration using a 15% concentration threshold.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly mean sea ice concentration for the Arctic in 2021 shown in a Northern Polar Stereographic projection.\n          \n          \n          \n            \n              \n            \n            Monthly time series of Arctic sea ice area and sea ice extent for 2021 computed from satellite-derived sea ice concentration using a 15% concentration threshold.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Working with data that crosses the antimeridian\n      Work with satellite datasets that span the antimeridian by correcting longitude discontinuities for analysis and visualization. This tutorial demonstrates how to retrieve gridded satellite data defined on a −180° to +180° longitude system, subset regions that cross the antimeridian, convert longitude coordinates to a 0–360° system, and reorder the longitude axis to create a continuous spatial domain. The corrected data are then visualized on a map and saved for downstream analysis. Chlorophyll-a data from the NOAA gap-filled blended VIIRS ocean color dataset are used to illustrate antimeridian handling in the Bering Sea region.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Subset of satellite chlorophyll-a data crossing the antimeridian plotted using a −180° to +180° longitude convention. The map shows a visible discontinuity where data from opposite sides of the antimeridian are split and displayed at opposite edges of the domain.\n          \n          \n          \n            \n              \n            \n            The same satellite chlorophyll-a data after converting longitudes to a 0–360° convention and reordering the longitude axis. The antimeridian discontinuity is removed, resulting in a continuous spatial representation suitable for mapping and analysis.\n          \n            ◀  1 / 2  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Define a marine habitat\n      Define a marine habitat using satellite sea surface temperature to identify regions associated with species–environment interactions. This tutorial demonstrates how to retrieve satellite SST from ERDDAP, subset data for a region and time of interest, and apply temperature-based thresholds to delineate a habitat band. The resulting temperature contours are visualized on a map to highlight areas associated with increased likelihood of interaction. Sea surface temperature data from the NOAA Coral Reef Watch CoralTemp product are used to illustrate habitat definition in the central North Pacific as part of the TurtleWatch framework.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Satellite sea surface temperature map with the TurtleWatch habitat band highlighted. The red band marks SST values between 17.5 °C and 18.5 °C, identifying regions associated with increased loggerhead sea turtle interactions based on the TurtleWatch framework.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Satellite sea surface temperature map with the TurtleWatch habitat band highlighted. The red band marks SST values between 17.5 °C and 18.5 °C, identifying regions associated with increased loggerhead sea turtle interactions based on the TurtleWatch framework.\n          \n          \n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Extract data within a boundary\n      Extract and analyze satellite data within an irregular geographic boundary to better represent real-world marine regions. This tutorial demonstrates how to download sea surface temperature data from ERDDAP, subset it using a bounding box, and apply a polygon mask to retain values only within a defined boundary. The masked data are then used to compute and visualize a seasonal temperature cycle for the region of interest. Sea surface temperature data from the NOAA Geo-Polar Blended SST product are combined with Longhurst Marine Province boundaries to illustrate region-based satellite analysis.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Satellite sea surface temperature masked to the Gulf Stream Longhurst Province (GFST).\n          \n          \n          \n            \n              \n            \n            Monthly mean sea surface temperature within the Gulf Stream Province for 2020.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Satellite sea surface temperature masked to the Gulf Stream Longhurst Province (GFST).\n          \n          \n          \n            \n              \n            \n            Monthly mean sea surface temperature within the Gulf Stream Province for 2020.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Monthly sea surface temperature within the Papahānaumokuākea Marine National Monument (PMNM) for April 2015.\n          \n          \n          View Matlab tutorial\n        \n        \n      \n\n      Close\n    \n    \n    \n      How to work with satellite data in Matlab in the Great Lakes\n      Access and analyze satellite sea surface temperature data in MATLAB using ERDDAP and NetCDF workflows. This tutorial demonstrates how to construct ERDDAP download URLs, read NetCDF variables directly into MATLAB, convert time coordinates, and subset data spatially and temporally. The workflow includes creating daily SST maps, generating regional mean time series, and computing average SST over a selected period. Satellite sea surface temperature data from NOAA CoastWatch are used to illustrate spatial and temporal analysis across the Great Lakes region.\n\n      \n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Daily satellite sea surface temperature (SST) across the Great Lakes on 21 July 2021, extracted from ERDDAP and visualized in a Mercator projection.\n          \n          \n          \n            \n              \n            \n            Time series of mean SST within a Lake Superior subregion showing daily temperature variability from 21–28 July 2021.\n          \n          \n          \n            \n              \n            \n            Mean satellite SST across the Great Lakes averaged over 21–28 July 2021, illustrating spatial temperature patterns derived from ERDDAP data.\n          \n            ◀  1 / 3  ▶\n          \n            View Matlab tutorial\n          \n        \n        \n      \n\n      Close\n    \n    \n    \n      Working with Great Lakes Surface Temperature Data\n      Access and analyze Great Lakes surface temperature using satellite observations in Python. This tutorial demonstrates how to download water surface temperature data from an ERDDAP server, open and inspect NetCDF files using xarray, and convert time variables into usable date formats. The extracted data are used to generate spatial maps of surface temperature, compute regional averages within user-defined bounding boxes, and visualize temporal variability through daily time series and monthly mean maps. Water surface temperature data from the Great Lakes Surface Environmental Analysis (GLSEA) ACSPO dataset are used to illustrate satellite-based analysis of Lake Erie.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Spatial subset of Lake Erie water surface temperature on June 1, 2023, extracted from ERDDAP and visualized for a focused region of interest.\n          \n          \n          \n            \n              \n            \n            Daily mean water surface temperature time series for a selected Lake Erie subregion during June 2023, illustrating short-term temporal variability.\n          \n          \n          \n            \n              \n            \n            Monthly mean water surface temperature across Lake Erie for June 2023, computed from daily satellite observations downloaded via ERDDAP.\n          \n            ◀  1 / 3  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Analyze Great Lakes Ice Concentration \n      Extract and summarize satellite-derived ice concentration to characterize seasonal ice conditions in the Great Lakes. This tutorial demonstrates how to download ice concentration data from ERDDAP, subset the data spatially and temporally for a region of interest, and handle missing values in NetCDF files. The extracted data are used to generate maps of ice concentration for specific dates and to compute regional daily mean ice concentration time series. Ice concentration data from the NOAA Great Lakes Surface Environmental Analysis (GLSEA) product are used to illustrate regional ice variability in western Lake Erie.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Spatial distribution of ice concentration (%) in western Lake Erie on March 1, 2019, derived from the Great Lakes Ice Concentration product and visualized after subsetting the ERDDAP dataset to the region of interest.\n          \n          \n          \n            \n              \n            \n            Time series of daily mean ice concentration (%) for western Lake Erie during March 2019, calculated by averaging satellite-derived ice concentration over the selected spatial domain.\n          \n            ◀  1 / 2  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Multi-Sensor chlorophyll time series analysis for Lake Erie\n      Analyze long-term changes in lake chlorophyll concentrations by combining satellite observations from multiple sensors. This tutorial demonstrates how to download chlorophyll-a data from ERDDAP for Lake Erie, process daily observations from MODIS (2002–2017) and VIIRS (2018–2023), and compute spatially averaged monthly and daily time series. The workflow shows how to handle fill values, aggregate data across space and time, and visualize chlorophyll variability across the sensor transition. By merging MODIS and VIIRS records, the tutorial provides a practical approach for creating a continuous multi-sensor time series to support long-term water quality analysis in the Great Lakes.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly mean chlorophyll-a concentration across Lake Erie for August 2009, illustrating the spatial distribution of phytoplankton biomass derived from satellite observations.\n          \n          \n          \n            \n              \n            \n            Spatially averaged monthly chlorophyll-a time series for Lake Erie from 2002–2017, showing seasonal variability and interannual changes captured by the MODIS sensor.\n          \n          \n          \n            \n              \n            \n            Daily spatially averaged chlorophyll-a concentrations for Lake Erie in 2023, highlighting short-term variability and bloom dynamics observed by the VIIRS sensor.\n          \n            ◀  1 / 3  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Long-term lake surface temperature variability from Great Lakes Satellite Records\n      Analyze long-term patterns in Great Lakes water surface temperature using lakewide satellite-derived averages. This tutorial demonstrates how to retrieve daily average surface temperature data from ERDDAP, assemble a multi-year record spanning 2007 to the present, and visualize seasonal temperature variability across years. Daily temperature records are aligned by day of year to highlight the warmest, coldest, and average conditions for a given date, with the current year shown in context of the historical record. Using Great Lakes Surface Environmental Analysis (GLSEA) satellite products, the workflow illustrates how long-term lake temperature climatologies can be used to assess seasonal extremes and interannual variability across the Great Lakes.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Seasonal evolution of Lake Michigan average surface water temperature from 2007–2024, showing the current year in context of the long-term mean and highlighting the historically warmest and coldest years for the selected calendar day based on GLSEA satellite records.\n          \n          \n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Visualizing JPSS Sea Ice Concentration products using Google Colab\n      Visualize polar sea ice conditions by converting JPSS Sea Ice Concentration files into mapped images for quick inspection and reporting. This tutorial demonstrates how to obtain either Level-2 swath VIIRS ice concentration data or Level-3 daily gridded blended sea ice concentration products, load them into an analysis environment, and generate publication-ready maps for the Arctic or Antarctic. The workflow resamples swath observations onto a common polar grid when needed, applies consistent color scaling in percent ice concentration, and exports the final figures as PNGs.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Blended JPSS sea ice concentration for the Arctic on October 5, 2024, showing the spatial extent and intensity of ice cover derived from combined satellite observations and mapped onto a polar projection with ice concentration expressed as percent.\n          \n          \n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Long Island Sound Chlorophyll-a Dynamics\n      Analyze seasonal and spatial patterns in coastal chlorophyll-a by working with daily satellite observations from Long Island Sound. This tutorial demonstrates how to download chlorophyll-a data from ERDDAP, generate temporal composites at monthly and 8-day intervals, and subset the data to compare regional variability within the Sound. The workflow illustrates how to examine gridded satellite datasets, compute spatial averages, and visualize chlorophyll dynamics through maps and time-series plots. Chlorophyll-a data from Sentinel-3 OLCI, processed with Long Island Sound–optimized algorithms, are used to highlight differences between western and eastern regions and to explore seasonal water-quality variability in a complex coastal environment.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly mean chlorophyll-a concentrations in Long Island Sound during 2022, illustrating the seasonal evolution of phytoplankton biomass derived from daily Sentinel-3 OLCI observations.\n          \n          \n          \n            \n              \n            \n            Spatial distribution of mean chlorophyll-a concentration in Long Island Sound averaged over January–December 2022, highlighting persistent regional gradients across the estuary.\n          \n          \n          \n            \n              \n            \n            Eight-day averaged chlorophyll-a time series comparing western and eastern Long Island Sound, showing contrasting seasonal cycles and peak bloom timing during 2022.\n          \n            ◀  1 / 3  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly mean chlorophyll-a concentrations in Long Island Sound during 2022, illustrating the seasonal evolution of phytoplankton biomass derived from daily Sentinel-3 OLCI observations.\n          \n          \n          \n            \n              \n            \n            Spatial distribution of mean chlorophyll-a concentration in Long Island Sound averaged over January–December 2022, highlighting persistent regional gradients across the estuary.\n          \n          \n          \n            \n              \n            \n            Eight-day averaged chlorophyll-a time series comparing western and eastern Long Island Sound, showing contrasting seasonal cycles and peak bloom timing during 2022.\n          \n            ◀  1 / 3  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Map geographical and polarstereographic data on a projected map\n      Plot polar satellite data correctly by working across coordinate systems and projections. This tutorial demonstrates how to access polar sea ice concentration data from an ERDDAP server, interpret the dataset’s polar stereographic metadata (or EPSG code), and display the gridded x–y product on a matching projected basemap. It then shows how to overlay a second dataset provided in geographic coordinates (latitude/longitude) here, polar bear GPS tracks by transforming those points into the same map projection for direct visual comparison with the sea ice field.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Sea ice concentration from the NOAA/NSIDC Climate Data Record is displayed on a North Polar Stereographic map using the dataset’s native EPSG:3411 projection.\n          \n          \n          \n            \n              \n            \n            Monthly sea ice concentration is shown on a polar stereographic basemap with overlaid polar bear GPS locations in latitude–longitude coordinates.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Sea ice concentration from the NOAA/NSIDC Climate Data Record is displayed on a Polar Stereographic projection, illustrating how gridded polar satellite data are mapped in projected x–y coordinates.\n          \n          \n          \n            \n              \n            \n             Sea ice concentration mapped on a Polar Stereographic projection with polar bear GPS tracks overlaid.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Mask shallow pixels for satellite ocean color datasets\n      Remove optically shallow-water contamination from satellite ocean color data to improve the accuracy of derived biogeochemical metrics. This tutorial demonstrates how to download bathymetry and monthly chlorophyll-a data from ERDDAP, quantify the fraction of shallow water within each ocean color pixel, and construct a threshold-based mask to exclude pixels affected by bottom reflectance. The masked and unmasked datasets are then used to compute and compare long-term chlorophyll-a climatologies. By combining high-resolution bathymetry with coarse-resolution ocean color observations, the workflow illustrates a practical approach for preparing satellite datasets for robust analysis in coastal and reef-adjacent regions.\n\n      \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            High-resolution ETOPO bathymetry for the Oʻahu region showing depth contours used to distinguish optically shallow and deep waters.\n          \n          \n          \n            \n              \n            \n            Percentage of shallow water (&lt;30 m depth) contained within each coarse-resolution ocean color pixel, calculated by matching bathymetry to the chlorophyll grid.\n          \n          \n          \n            \n              \n            \n            Binary mask identifying ocean color pixels dominated by shallow water based on a user-defined shallow-area threshold.\n          \n          \n          \n            \n              \n            \n            Log-scaled chlorophyll-a climatology after applying the shallow-water mask, illustrating the removal of bottom-contaminated coastal pixels.\n          \n            ◀  1 / 4  ▶\n          \n            View R tutorial\n          \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Matching polar data to animal track locations\n      Extract and analyze satellite sea ice conditions along animal movement tracks in polar regions. This tutorial demonstrates how to combine satellite sea ice concentration data with animal telemetry observations to examine environmental conditions encountered along a tracked path. Using monthly sea ice concentration records from NOAA PolarWatch, the workflow shows how to subset gridded satellite data in polar stereographic coordinates, align it temporally and spatially with penguin telemetry locations, and extract coincident sea ice values along the track. The tutorial also illustrates how to visualize animal movement overlaid on sea ice maps and how to generate matched time series of satellite-derived sea ice concentration at each observation point.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly Antarctic sea ice concentration from the NOAA/NSIDC Climate Data Record is shown on a south polar stereographic map for the first available timestep.\n          \n          \n          \n            \n              \n            \n            Monthly sea ice concentration maps for January, February, and March are overlaid with Adelie penguin telemetry tracks.\n          \n          \n          \n            \n              \n            \n            Penguin track locations are colored by collocated sea ice concentration values extracted from the satellite dataset.\n          \n            ◀  1 / 3  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly sea ice concentration from the NOAA/NSIDC Climate Data Record is mapped for the first available time step to illustrate the polar stereographic satellite grid used for Antarctic matchups.\n          \n          \n          \n            \n              \n            \n            The Adelie penguin telemetry track is plotted in geographic coordinates, highlighting the start and end points used to extract satellite sea ice values along the animal’s path.\n          \n          \n          \n            \n              \n            \n            The penguin track is colored by the extracted monthly sea ice concentration at each location and date, showing how satellite conditions are sampled along a moving trajectory in Antarctica.\n          \n            ◀  1 / 3  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Matching satellite and buoy surface temperature data in polar regions\n      Combine satellite ice surface temperature composites with in situ buoy observations by matching satellite pixels to buoy locations and dates in the Arctic. This tutorial walks through how to query buoy surface temperature records from ERDDAP in tabular format, download polar-projected satellite Ice Surface Temperature (IST) data in NetCDF, and resample the buoy time series to comparable time steps. It then demonstrates how to convert buoy latitude/longitude positions into the satellite’s polar stereographic coordinate system, extract the nearest satellite IST values at each buoy time and location, and merge the two datasets for side-by-side comparison and visualization.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Time series comparison of buoy-measured surface temperature and collocated VIIRS ice surface temperature.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Time series comparison of buoy-measured surface temperature and collocated VIIRS ice surface temperature.\n          \n          \n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Comparing satellite and buoy sea surface temperature observations \n      This tutorial demonstrates how to match satellite-derived sea surface temperature (SST) with in situ buoy observations to evaluate satellite data accuracy. Using ERDDAP-hosted datasets, the workflow shows how to download and process buoy measurements, extract collocated satellite SST values, and compare the two datasets through statistical analysis and visualization.\n\n      \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Daily averaged buoy sea surface temperatures are compared with colocated satellite SST values along the California coast from August 1–10, 2023.\n          \n          \n          \n            \n              \n            \n            Satellite sea surface temperature fields for July 31, 2023 are shown with overlaid buoy locations colored by observed temperature.\n          \n            ◀  1 / 2  ▶\n          \n            View R tutorial\n          \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Matchup satellite data to ship, glider, or animal tracks\n      Extract and analyze satellite-derived environmental variables along moving platforms such as ship tracks, gliders, or animal telemetry paths. This tutorial demonstrates how to load track data defined by latitude, longitude, and time, visualize trajectories on a map, and retrieve colocated satellite observations from ERDDAP for each track position. Using a yellowfin tuna telemetry record as an example, satellite chlorophyll-a data from the ESA Ocean Colour Climate Change Initiative are matched to daily track locations, saved to a tabular format, and visualized to explore spatial and temporal variability along the track.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Chlorophyll-a concentrations extracted from satellite observations along a Yellowfin tuna telemetry track, with points colored by matched monthly chlorophyll values and symbols indicating the start and end of the track.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Yellowfin tuna track locations colored by the log of satellite-derived chlorophyll-a values extracted from the ESA OC-CCI monthly dataset.\n          \n          \n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Matching satellite chlorophyll to animal telemetry tracks\n      This tutorial demonstrates how satellite data can be matched to moving tracks defined by longitude, latitude, and time, such as those from ships, gliders, or animal telemetry. Using a subsampled loggerhead turtle track and the ESA Ocean Colour Climate Change Initiative (OC-CCI) monthly chlorophyll-a dataset (v6.0), the workflow loads track data from a file, visualizes the track and its start/end locations, extracts satellite chlorophyll values at each track point via ERDDAP, saves the matchup results to a CSV file, and maps the satellite-derived chlorophyll patterns along the track.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Chlorophyll-a concentrations from the ESA OC-CCI monthly product matched to locations along animal track #25317, with points colored by satellite-derived chlorophyll values and start/end positions indicated along the track.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Loggerhead turtle track locations colored by log-transformed ESA OC-CCI monthly chlorophyll-a values extracted from ERDDAP at each subsampled track point (May 2005–Aug 2008).\n          \n          \n          View R tutorial\n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Loggerhead turtle (#25317) track colored by log-transformed monthly chlorophyll-a averaged within ±0.1° of each tag location using ERDDAP matchup requests.\n          \n          \n          View Matlab tutorial\n        \n        \n      \n\n      Close\n    \n    \n    \n      Calculating anomaly and trend with sea ice thickness time series\n      This tutorial demonstrates how to analyze variability and long-term change in Arctic sea ice thickness using gridded satellite data. Monthly mean sea ice thickness fields are derived from twice-daily observations accessed through the PolarWatch ERDDAP server, then compared against a multi-year climatological baseline to quantify anomalies. A 15-year reference period (2006–2020) is used to compute historical monthly means, which serve as the basis for anomaly calculations and trend assessment. Long-term trends in monthly sea ice thickness are estimated at each grid cell using the non-parametric Mann–Kendall method, allowing robust slope estimation without assumptions of normality.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly sea ice thickness anomalies for February (left) and September (right) in 2021, calculated as departures from the 2005–2020 climatological mean using Arctic sea ice thickness data from the NOAA CDR Extended Polar Pathfinder dataset.\n          \n          \n          \n            \n              \n            \n            Spatial distribution of the long-term September sea ice thickness trend across the Arctic, estimated for the 2006–2020 climatological period using a Mann–Kendall trend analysis applied to monthly mean sea ice thickness data.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          No preview image\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Subset data in polar stereographic projection using a shapefile\n      This exercise demonstrates how to subset satellite data provided in a polar stereographic projection using a lake boundary defined in a different coordinate reference system. The workflow includes downloading polar satellite data from PolarWatch ERDDAP, transforming a shapefile to match the satellite projection, and clipping the dataset to the extent of Lake Iliamna in Alaska. The results are visualized to illustrate projection handling and spatial subsetting of polar remote sensing data\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            IMS Snow and Ice Analysis data from PolarWatch for 30 July 2024 shown in its native polar stereographic projection, illustrating categorical surface conditions across the Northern Hemisphere.\n          \n          \n          \n            \n              \n            \n            Subset of the IMS Snow and Ice Analysis clipped to the Lake Iliamna region after transforming the lake shapefile into the satellite data’s polar stereographic projection, demonstrating successful reprojection and spatial subsetting.\n          \n            ◀  1 / 2  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Transforming satellite data from one map to another\n      This exercise demonstrates how to transform satellite data coordinates from one map projection to another in order to work consistently with datasets that use different coordinate reference systems. It walks through downloading sea ice concentration data from PolarWatch ERDDAP, inspecting CRS definitions, applying EPSG-based coordinate transformations, and adding the transformed coordinates back into a NetCDF dataset.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly mean sea ice concentration for December 2022 from the NOAA/NSIDC Climate Data Record, displayed using transformed latitude–longitude coordinates on a global (Plate Carrée) map projection.\n          \n          \n          \n            \n              \n            \n            The same December 2022 sea ice concentration data visualized on a Southern Hemisphere polar stereographic projection.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly mean sea ice concentration for December 2022 from the NOAA/NSIDC Climate Data Record, displayed using transformed latitude–longitude coordinates on a global (Plate Carrée) map projection.\n          \n          \n          \n            \n              \n            \n            The same December 2022 sea ice concentration data visualized on a Southern Hemisphere polar stereographic projection, illustrating the improved representation of Antarctic sea ice when using a projection optimized for polar regions.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n\n\n\n\n\n\n✕",
+    "text": "The CoastWatch tutorial collection is organized to support users working with satellite data at different stages of their workflow. Tutorials are grouped into two broad categories: software-focused tutorials and coding-based tutorials.",
     "crumbs": [
-      "Training Tutorials",
-      "Code Gallery"
+      "Training Tutorials"
+    ]
+  },
+  {
+    "objectID": "tutorials/index.html#software-tutorials",
+    "href": "tutorials/index.html#software-tutorials",
+    "title": "Training Tutorials",
+    "section": "Software tutorials",
+    "text": "Software tutorials\nSoftware tutorials provide guidance on installing, configuring, and using commonly supported tools for working with CoastWatch satellite data. These tutorials focus on foundational software and utilities that are often used to access, explore, or manage data prior to analysis.\nTopics include:\n\nERDDAP access and configuration\n\nCoastWatch utilities\n\nWorking with NetCDF files\n\nUsing data visualization tools such as Panoply",
+    "crumbs": [
+      "Training Tutorials"
+    ]
+  },
+  {
+    "objectID": "tutorials/index.html#coding-tutorials-code-gallery",
+    "href": "tutorials/index.html#coding-tutorials-code-gallery",
+    "title": "Training Tutorials",
+    "section": "Coding tutorials (Code Gallery)",
+    "text": "Coding tutorials (Code Gallery)\nCoding tutorials demonstrate how to access, subset, analyze, and visualize CoastWatch satellite data using common programming languages. These tutorials are organized by exercise or topic, and many are available in multiple software languages such as Python, R, and MATLAB.\nThe Code Gallery provides an overview of available coding tutorials and direct links to each language-specific implementation.\nView Code Gallery\n\n\n\n\n\n\n\nEducational use\n\n\n\nAll tutorials are provided for educational and demonstrative purposes. Code examples are intended to illustrate workflows and techniques and should be reviewed, tested, and adapted as needed before being used for research or operational applications.",
+    "crumbs": [
+      "Training Tutorials"
+    ]
+  },
+  {
+    "objectID": "tutorials/index.html#acknowledgement",
+    "href": "tutorials/index.html#acknowledgement",
+    "title": "Training Tutorials",
+    "section": "Acknowledgement",
+    "text": "Acknowledgement\nThe training materials for the CoastWatch Program have been developed, reviewed, and edited with the contributions of many dedicated individuals.\nContributors:\nMelanie Abecassis, Dave Foley, Peter Hollemans, Sun Bak Hospital, Songzhi Liu, Roy Mendelssohn, Madison Richardson, Dale Robinson, Jennifer Sevadjian, Jonathan Sherman, Hui (Daisy) Shi, Michael Soracco, Shelly Tomlinson, Ron Vogel, Victoria Wegman, Cara Wilson\nWe also extend our gratitude to other external contributors whose specific acknowledgements are included within the training materials they helped to create.",
+    "crumbs": [
+      "Training Tutorials"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html",
+    "href": "trainings/upcoming/sat201_26.html",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "",
+    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#course-description",
+    "href": "trainings/upcoming/sat201_26.html#course-description",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "",
+    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#schedule-attendance",
+    "href": "trainings/upcoming/sat201_26.html#schedule-attendance",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Schedule & Attendance",
+    "text": "Schedule & Attendance\nFrequency: Sessions are held every Friday for one month.\nDuration: Approximately 2.5 hours per session.\nFlexibility: Attendance for all sessions is not required; feel free to join the topics most relevant to you.",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#curriculum",
+    "href": "trainings/upcoming/sat201_26.html#curriculum",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "2026 Curriculum",
+    "text": "2026 Curriculum\nThe inaugural 2026 course will cover the following subjects: * Alternative Data Access: Methods for accessing data not hosted on ERDDAP servers. * CoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite. * Beyond Chlorophyll: Exploring ocean color products other than chlorophyll. * SAR Data: An introduction to Synthetic Aperture Radar.",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#schedule",
+    "href": "trainings/upcoming/sat201_26.html#schedule",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Schedule",
+    "text": "Schedule\nFriday, July 10, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nAccessing data not on ERDDAP servers\nDale Robinson\n\n\n11:45 - 12:30\na demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 17, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to using Coastwatch Utilities software\nPeter Hollemans\n\n\n11:45 - 12:30\na demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 24, 2026 | Time (PST) | Topic | Presenter | |:————-|:—————————————————————————–|:—————————-| | 11:00 - 11:45 | Beyond Chlorophyll | Ryan Vandermeulan | | 11:45 - 12:30 | Beyond Chlorophyll Case Study | | | 12:30 - 12:45 | Break | |\n| 12:45 - 1:30 | Question & Answer and hand’s on session | |\nFriday, July 31, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to SAR Data\n\n\n\n11:45 - 12:30\nSAR Case Study\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#instructors",
+    "href": "trainings/upcoming/sat201_26.html#instructors",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nPeter Hollemans\nCoastWatch/Pacific OceanWatch, node manager",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#resources",
+    "href": "trainings/upcoming/sat201_26.html#resources",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html",
+    "href": "trainings/past/seaice24.html",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "",
+    "text": "PolarWatch node of the CoastWatch is hosting a free, virtual training class on October 21, 2024 (9am-4pm Pacific Time).",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html#course-description",
+    "href": "trainings/past/seaice24.html#course-description",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Course Description",
+    "text": "Course Description\nMany satellite sea ice products are available for download from NOAA and many other data providers: e.g. sea ice concentration, sea ice thickness, sea ice age, sea ice temperature, and sea ice extent. It can often be challenging to know the differences between the products and how each can be applied to a user’s specific application. For example, the spatial resolutions of the products can vary widely, largely dependent on the type of satellite measurement the product is derived from (passive microwave, visible radiometry or synthetic aperture radar). Additionally, when working with data in the high-latitudes issues of data projection invariably arise and can complicate accessing and working with data. To address these issues, NOAA’s PolarWatch node has developed a 1-day (6 hour) online course with the following training objectives.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html#objectives",
+    "href": "trainings/past/seaice24.html#objectives",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of sea-ice products available from satellite data\nGive an overview of working with different projections\nExplore the data available on the PolarWatch portal\nProvide hands-on time to access data and try tutorials\nIntroduce CoastWatch and other sea ice satellite data training resources",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html#schedule",
+    "href": "trainings/past/seaice24.html#schedule",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n9:00 - 9:30\nPresentation 1: Introduction to NOAA CoastWatch\nCara Wilson\n\n\n9:30 - 10:00\nPresentation 2: Overview of Sea Ice Remote Sensing\nLudovic Brucker\n\n\n10:00 - 10:30\nPresentation 3: JPSS Sea Ice Microlesson\nKevin Fuell\n\n\n10:30 - 10:45\nBreak\n\n\n\n10:45 - 11:15\nPresentation 4: Sea Ice from SAR\nChris Jackson\n\n\n11:15 - 11:30\nPresentation 5: Projections - Why they Matter\nMichael Soracco\n\n\n11:30 - 11:45\nPresentation 6: Ice in the Great Lakes\nAndrea VanderWoude\n\n\n11:45 - 12:45\nLunch break\n\n\n\n12:45 - 13:00\nPresentation 7: Projections in Action (Watch Video)\nPeter Hollemans\n\n\n13:00 - 13:30\nPresentation 8: ERDDAP Demo\nCara Wilson\n\n\n13:30 - 13:45\nPresentation 9: PolarWatch Portal Demo\nSunny Hospital\n\n\n13:45 - 14:00\nPresentation 10: CoastWatch Viewer Demo\nMichael Soracco\n\n\n14:00 - 14:15\nBreak\n\n\n\n14:15 - 14:30\nPresentation 11: Overview of Tutorials\nCara Wilson, Matthew Smith\n\n\n14:30 - 16:00\nHand’s on time, with instuctor’s guidance available",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html#resources",
+    "href": "trainings/past/seaice24.html#resources",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nJPSS Sea Ice Microlesson",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html",
+    "href": "trainings/past/longislandsound25.html",
+    "title": "2025 Long Island Sound Class",
+    "section": "",
+    "text": "Virtual - Times vary daily, see schedule below (times are Eastern).\nNOAA CoastWatch is hosting this free, virtual training class:  Viewing and Analyzing Ocean/Coastal Events and Water Quality Using Satellites\nJoin Class Via Zoom Here",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html#course-description",
+    "href": "trainings/past/longislandsound25.html#course-description",
+    "title": "2025 Long Island Sound Class",
+    "section": "Course Description",
+    "text": "Course Description\nMany satellite products are available for water quality applications and other uses from NOAA and other data providers. These include: chlorophyll, turbidity, sea surface temperature, organic matter, and more. In this course, learn how to use these satellite products for your region of interest using freely available tools. Address your needs and questions by creating maps and images, plotting a time series of varying conditions, or creating a virtual buoy for your study location. And other applications too!\nThis class is being offered in two Tiers as part of a larger Long Island Sound Project funded by New York/Connecticut Sea Grant.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html#objectives",
+    "href": "trainings/past/longislandsound25.html#objectives",
+    "title": "2025 Long Island Sound Class",
+    "section": "Objectives",
+    "text": "Objectives\n\nTier I: Creating Images\nLearn to use tools to create images and maps of ocean or coastal features in your area of interest. Tools taught: CoastWatch Data Portal, ArcGIS, ERDDAP visualization server, and more.\n\n\nTier II: Analyzing Data for Your Study or Region\nWork more analytically with oceanographic satellite data. Learn R and/or Python techniques to access data on ERDDAP data servers for data extraction, map creation, time series analysis, matching data to your study site locations or ship tracks, creating a virtual buoy using satellite data in your location of choice, and other application skills.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html#schedule",
+    "href": "trainings/past/longislandsound25.html#schedule",
+    "title": "2025 Long Island Sound Class",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nDay\nTime (ET)\nTopic\nPresenter\n\n\n\n\nMonday - March 31\n\nTier I and Tier II\n\n\n\n\n9:00 - 9:15\nPresentation 1: Overview – SeaGrant-funded Satellite Project\nJonathan Sherman\n\n\n\n9:15 - 9:45\nPresentation 2: Data Portal\nMichael Soracco\n\n\n\n9:45 - 10:15\nPresentation 3: ArcGIS\nMichael Soracco\n\n\n\n10:15 - 10:30\nBreak\n\n\n\n\n10:30 - 11:15\nPresentation 4: CoastWatch Utilities - CDAT  Files\nRon Vogel\n\n\n\n11:15 - 11:30\nQ & A\n\n\n\n\n11:30 - 12:15\nParticipant Exercise 1: Choose a tool and make a map  ArcGIS files, CDAT files\n\n\n\n\n12:15 - 1:15\nLunch break\n\n\n\n\n1:15 - 1:45\nPresentation 5: Choosing a Dataset\nJonathan Sherman\n\n\n\n1:45 - 2:45\nPresentation 6: ERDDAP\nRon Vogel\n\n\n\n2:45 - 3:00\nBreak\n\n\n\n\n3:00 - 3:30\nQ & A and Resources for Participants\n\n\n\n\n3:30 - 4:30\nParticipant Exercise 2: Choose a dataset from ERDDAP, download, make a map and a time series  Sample data list\n\n\n\nTuesday - April 1\n\nTier II (April 1–4)\n\n\n\n\n9:00 - 9:30\nPresentation 7: Satellite 101\nShelly Tomlinson\n\n\n\n9:30 - 10:30\nPresentation 8: CoastWatch Training Code (R and Python) – Capabilities and Tutorials  Tutorials GitHub page\nJonathan Sherman\n\n\n\n10:30 - 10:45\nBreak\n\n\n\n\n10:45 - 11:30\nPresentation 9: CoastWatch Utilities - Command Line  Files\nRon Vogel\n\n\n\n11:30 - 12:00\nOffice Hours Logistics, Mini-project & Slide Info, Q & A\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nOffice Hours: One-on-One\n\n\n\nWednesday - April 2\n\nParticipants work on their mini-project on their own time\n\n\n\nThursday - April 3\n9:00 - 9:15\nGauge Progress Poll\nBetty Staugler\n\n\n\n9:15 - 9:30\nPresentation 10: HAB Forecasts\nShelly Tomlinson\n\n\n\n9:30 - 9:45\nPresentation 11: COVID Impacts\nJonathan Sherman\n\n\n\n9:45 - 10:00\nPresentation 12: Participant Slide Examples from Past Classes\nRon Vogel\n\n\n\n10:00 - 12:00\nOffice Hours: Group Discussion or One-on-One\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nParticipants work on their mini-project on their own time\n\n\n\nFriday - April 4\n1:00 - 3:00\nFinal Mini-project Presentations (1 slide each)\nParticipants",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html#resources",
+    "href": "trainings/past/longislandsound25.html#resources",
+    "title": "2025 Long Island Sound Class",
+    "section": "Resources",
+    "text": "Resources\n\nCoastWatch main website\nCoastWatch East Coast Regional Node website\nCoastWatch Data Access methods\nCoastwatch Coding Tutorials: R and Python (on GitHub)\nCoastwatch Lecture series\nCoastwatch Data Portal video tutorials\nCoastwatch ArcGIS lecture videos and tutorials\nCoastWatch Utilities\n\nCoastWatch Utilities Tutorials - CDAT and Command-Line\nCDAT demo videos on YouTube\n\nCoastWatch Help Desk\n\nEmail: coastwatch.info@noaa.gov\nPhone: +1-301-683-3335\nUser Forums",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html",
+    "href": "trainings/past/afs24.html",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has been rescheduled to be an online course, open to all.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#course-description",
+    "href": "trainings/past/afs24.html#course-description",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has been rescheduled to be an online course, open to all.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#instructors",
+    "href": "trainings/past/afs24.html#instructors",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data Coordinator\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#objectives",
+    "href": "trainings/past/afs24.html#objectives",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#schedule",
+    "href": "trainings/past/afs24.html#schedule",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 10:30\nGroup Introductions\nCara Wilson\n\n\n10:30 - 11:15\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:15 - 11:30\nBreak\n\n\n\n11:30 - 12:00\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:00 - 12:30\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:30 - 1:30\nLunch break\n\n\n\n1:30 - 2:00\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n2:00 - 2:30\nDemo of ATN data portal\nMegan McKinzie\n\n\n2:30 - 3:00\nAccessing public ATN datasets\nMegan McKinzie\n\n\n3:00 - 3:15\nBreak\n\n\n\n3:15 - 3:30\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n3:30 - 4:45\nWorkshop, part 2: Hand’s on time\n\n\n\n4:45 - 5:00\nWrap up and final discussion\nAll",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#resources",
+    "href": "trainings/past/afs24.html#resources",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "officehours.html",
+    "href": "officehours.html",
+    "title": "CoastWatch Office Hours",
+    "section": "",
+    "text": "Hosted by the West Coast Node and PolarWatch\nevery other Thursday at 11 am PST\nUpcoming dates: March 5, 12\nEveryone is welcome to come to the CoastWatch Office Hour where people can:\n\nAsk questions about satellite data\nRequest help with accessing satellite data products\nGet troubleshooting assistance with code examples for discovering, accessing and working with satellite data\n\nCoastWatch Lectures\nCoastWatch Tutorials",
+    "crumbs": [
+      "Office Hours"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CoastWatch Training Website",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "trainings/index.html",
+    "href": "trainings/index.html",
+    "title": "CoastWatch Workshops",
+    "section": "",
+    "text": "CoastWatch regularly organizes and offers in-person and online satellite training classes or workshops featuring lectures, tutorials, & tool demonstrations.\nDuring in-person and online satellite course, participants learn about environmental satellite data and how to easily obtain it. Participants also gain hands on experience working with the data of interest to them. A major goal of the course is to provide scientists who are not regular users of satellite data with the knowledge and tools they need to incorporate satellite data into their research and management projects.\nFor questions or more information about the upcoming satellite training classes, please contact coastwatch.info@noaa.gov.",
+    "crumbs": [
+      "Training Classes"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html",
+    "href": "trainings/past/icft25.html",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#course-description",
+    "href": "trainings/past/icft25.html#course-description",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#instructors",
+    "href": "trainings/past/icft25.html#instructors",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data manager\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#objectives",
+    "href": "trainings/past/icft25.html#objectives",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#schedule",
+    "href": "trainings/past/icft25.html#schedule",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Schedule",
+    "text": "Schedule\nThursday, August 14, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 11:30\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:15\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:15 - 12:45\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:45 - 1:00\nDay 1 wrap-up\n\n\n\n\nFriday, August 15, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:30\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n10:30 - 11:00\nDemo of ATN data portal\nMegan McKinzie\n\n\n11:00 - 11:30\nAccessing public ATN datasets\nMegan McKinzie\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:00\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n12:00 - 12:45\nWorkshop, part 2: Hand’s on time\n\n\n\n12:45 - 13:00\nWrap up and final discussion\nAll",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#resources",
+    "href": "trainings/past/icft25.html#resources",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html",
+    "href": "trainings/past/pgrsc24.html",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using information tools from PacIOOS for applications in the Pacific Islands region. This training will be held during the 2024 Pacific Islands GIS and Remote Sensing Users Conference in Suva, Fiji.\nClick here to Register.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#course-description",
+    "href": "trainings/past/pgrsc24.html#course-description",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using information tools from PacIOOS for applications in the Pacific Islands region. This training will be held during the 2024 Pacific Islands GIS and Remote Sensing Users Conference in Suva, Fiji.\nClick here to Register.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#instructors",
+    "href": "trainings/past/pgrsc24.html#instructors",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager\n\n\nLauren Kaiser\nPacIOOS, data management specialist\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#objectives",
+    "href": "trainings/past/pgrsc24.html#objectives",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstrate how to access data on ERDDAP servers\nIntroduce CoastWatch satellite data and training resources\nExplore additional data and information tools available at PacIOOS\nProvide hands-on time to access data and run tutorials",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#schedule",
+    "href": "trainings/past/pgrsc24.html#schedule",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nTime (Fiji Standard Time)\nTopic\nPresenter\n\n\n\n\n1:00 - 1:10\nWelcome & Introductions\nDaisy Shi & Lauren Kaiser\n\n\n1:10 - 1:20\nInteractive Questions\n\n\n\n1:20 - 1:35\nIntro to CoastWatch, Satellite Datasets & Data Portal\nDaisy Shi\n\n\n1:35 - 1:50\nIntro to OceanWatch, Data Accessibility & Usability\nDaisy Shi\n\n\n1:50 - 2:20\nIntro to PacIOOS, Website Walkthrough & Data Search\nLauren Kaiser\n\n\n2:20 - 2:30\nInteractive Questions\n\n\n\n2:30 - 2:45\nBreak\n\n\n\n2:45 - 2:55\nOverview of CoastWatch Tutorials\nDaisy Shi\n\n\n2:55 - 3:15\nERDDAP Demos\nDaisy Shi\n\n\n3:15 - 3:45\nArcGIS & QGIS Demos\nLauren Kaiser\n\n\n3:45 - 4:00\nBreak\n\n\n\n4:00 - 5:50\nHands-On time\nAll\n\n\n5:50 - 6:00\nInteractive Questions & Feedback",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#resources",
+    "href": "trainings/past/pgrsc24.html#resources",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nGeostationary satellites covering Western Pacific\nPacIOOS\nPacIOOS Voyager",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
     ]
   },
   {
@@ -1561,450 +2047,14 @@
     ]
   },
   {
-    "objectID": "trainings/past/pgrsc24.html",
-    "href": "trainings/past/pgrsc24.html",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "objectID": "tutorials/codegallery.html",
+    "href": "tutorials/codegallery.html",
+    "title": "Code Gallery",
     "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using information tools from PacIOOS for applications in the Pacific Islands region. This training will be held during the 2024 Pacific Islands GIS and Remote Sensing Users Conference in Suva, Fiji.\nClick here to Register.",
+    "text": "The Code Gallery provides a collection of coding-based tutorials that demonstrate how to access, analyze, and visualize CoastWatch satellite data using common programming languages. These tutorials focus on reproducible, hands-on workflows and are intended for users who want to work directly with data through code.\nMany tutorials are available in multiple software languages, such as Python, R, and MATLAB, allowing users to follow the same workflow using the tools they prefer.\nEach tutorial presents a complete example workflow, including data access (for example through ERDDAP), basic data processing and quality control steps, and the generation of common outputs such as maps, time series, or summary statistics.\nThe Code Gallery is designed to support exploration, comparison, and reuse of coding workflows. Users are encouraged to adapt the example code to their own research, educational, or operational needs.\nClick the eye icon to view the tutorial, box icon to view the required resources, or download to get directed to the source file.\n\n\n\n\n\n\n\n  \n    Category\n    \n      All\n      Data Access & SubsettingERDDAP BasicsSpatial Analysis & MappingTime Series\n    \n  \n\n  \n    Software\n\n    \n      Python ×\n    \n\n    \n      R ×\n    \n\n    \n      Matlab ×\n    \n\n    \n      Clear\n    \n  \n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nCategory\nPreview\nResources\nPython ↓\nR ↓\nMatlab ↓\n\n\n\n\nBasics of working with satellite data\nERDDAP Basics\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCompare time series from different sensors\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMake a virtual buoy with satellite data\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n\n\nCalculating sea ice area and extent\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nWorking with data that crosses the antimeridian\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nDefine a marine habitat\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nExtract data within a boundary\nData Access & Subsetting\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nHow to work with satellite data in Matlab in the Great Lakes\nERDDAP Basics\n\n\n\n\n\n—\n—\n—\n\n\n\n\n\n\n\nWorking with Great Lakes Surface Temperature Data\nData Access & Subsetting\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nAnalyze Great Lakes Ice Concentration\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nMulti-Sensor chlorophyll time series analysis for Lake Erie\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nLong-term lake surface temperature variability from Great Lakes Satellite Records\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nVisualizing JPSS Sea Ice Concentration products using Google Colab\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n—\n—\n\n\nLong Island Sound Chlorophyll-a Dynamics\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nMap geographical and polarstereographic data on a projected map\nSpatial Analysis & Mapping\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n\n\nMask shallow pixels for satellite ocean color datasets\nSpatial Analysis & Mapping\n\n\n\n\n\n\n\n\n\n\n—\n\n\n\n\n\n—\n\n\nMatching polar data to animal track locations\nSpatial Analysis & Mapping\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n\n\nMatching satellite and buoy surface temperature data in polar regions\nTime Series\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nComparing satellite and buoy sea surface temperature observations\nTime Series\n\n\n\n\n\n—\n—\n\n\n\n\n\n—\n\n\nMatchup satellite data to ship, glider, or animal tracks\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\nMatching satellite chlorophyll to animal telemetry tracks\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCalculating anomaly and trend with sea ice thickness time series\nTime Series\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n\n\nSubset data in polar stereographic projection using a shapefile\nData Access & Subsetting\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n—\n—\n\n\nTransforming satellite data from one map to another\nSpatial Analysis & Mapping\n\n\n\n\n\n—\n\n\n\n\n\n\n\n\n\n\n—\n\n\n\n\n\n    \n      Basics of working with satellite data\n      Access and analyze satellite-derived sea surface temperature using ERDDAP and NetCDF-based workflows. This tutorial demonstrates how to locate and subset a satellite SST product in ERDDAP, download gridded NetCDF data, examine its structure, and create basic spatial maps and regional time series. Users work with the NOAA Coral Reef Watch CoralTemp monthly sea surface temperature product to explore coordinate conventions, generate SST maps, compute regional averages, and visualize temporal variability.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.\n          \n          \n          \n            \n              \n            \n            Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Time series of sea surface temperature in the western North Atlantic Ocean along the US East Coast in 2022.\n          \n          \n          \n            \n              \n            \n            Map of the 2022 average sea surface temperature in the western North Atlantic Ocean along the US East Coast.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Time series of sea surface temperature around the Hawaiian Islands in 2018.\n          \n          \n          \n            \n              \n            \n            Map of the 2018 average sea surface temperature in the Hawaiian Islands.\n          \n            ◀  1 / 2  ▶\n          View Matlab tutorial\n        \n        \n      \n\n      Close\n    \n    \n    \n      Compare time series from different sensors\n      Compare satellite chlorophyll-a time series from multiple ocean color sensors to understand differences during overlapping observation periods. This tutorial demonstrates how to use ERDDAP to extract spatially averaged chlorophyll-a time series from a defined region, examine dataset metadata, handle differences in coordinate conventions, and compare measurements across sensors through visualization. Monthly chlorophyll-a data from SeaWiFS, MODIS Aqua, NOAA VIIRS S-NPP, and the ESA Ocean Colour Climate Change Initiative (OC-CCI) are used to evaluate consistency and variability among sensors from 1997 to the present.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly chlorophyll-a time series from SeaWiFS, MODIS Aqua, VIIRS S-NPP, and the ESA OC-CCI dataset averaged over a Gulf of Mexico region, illustrating differences among sensors during periods of overlap.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly chlorophyll-a time series from SeaWiFS, MODIS Aqua, VIIRS S-NPP, and the ESA OC-CCI dataset averaged over a Gulf of Mexico region, illustrating differences among sensors during periods of overlap.\n          \n          \n          \n            \n              \n            \n            Mean log-transformed chlorophyll-a concentration for the Gulf of Mexico region derived from SeaWiFS, MODIS Aqua, NOAA VIIRS S-NPP, and the ESA OC-CCI blended dataset.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Monthly chlorophyll-a time series from SeaWiFS, MODIS Aqua, VIIRS S-NPP, and the ESA OC-CCI dataset averaged over a Gulf of Mexico region, illustrating differences among sensors during periods of overlap.\n          \n          \n          View Matlab tutorial\n        \n        \n      \n\n      Close\n    \n    \n    \n      Make a virtual buoy with satellite data\n      Create a virtual ocean buoy using satellite data to extend or replace discontinued in situ observations. This tutorial demonstrates how to use ERDDAP to extract satellite sea surface temperature at a fixed location, build and clean a virtual buoy time series, resample the data to a lower temporal resolution, and analyze trends through visualization and linear regression. Data from NDBC Buoy 46259 are used alongside the NOAA GeoPolar Blended SST satellite dataset.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            National Data Buoy Center buoy 46259 matched up with sea surface temperature data.\n          \n          \n          \n            \n              \n            \n             Trend analysis of buoy and satellite data.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            National Data Buoy Center buoy 46259 matched up with sea surface temperature data.\n          \n          \n          \n            \n              \n            \n             Trend analysis of buoy and satellite data.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Calculating sea ice area and extent\n      Calculate sea ice area and extent from satellite-derived sea ice concentration to quantify seasonal and interannual variability in Arctic ice cover. This tutorial demonstrates how to use PolarWatch ERDDAP to retrieve gridded sea ice concentration data, incorporate grid cell area information, and apply standard concentration thresholds to compute sea ice area and extent. Users visualize sea ice concentration maps and generate monthly time series to examine changes in Arctic sea ice over time. Data from the NOAA/NSIDC Sea Ice Concentration Climate Data Record (Version 4) and a polar stereographic grid cell area dataset are used to perform the calculations for the Northern Hemisphere.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly mean sea ice concentration in the Northern Hemisphere derived from the NOAA/NSIDC Sea Ice Concentration Climate Data Record.\n          \n          \n          \n            \n              \n            \n            Monthly time series of Arctic sea ice area and sea ice extent computed from satellite-derived sea ice concentration using a 15% concentration threshold.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly mean sea ice concentration for the Arctic in 2021 shown in a Northern Polar Stereographic projection.\n          \n          \n          \n            \n              \n            \n            Monthly time series of Arctic sea ice area and sea ice extent for 2021 computed from satellite-derived sea ice concentration using a 15% concentration threshold.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Working with data that crosses the antimeridian\n      Work with satellite datasets that span the antimeridian by correcting longitude discontinuities for analysis and visualization. This tutorial demonstrates how to retrieve gridded satellite data defined on a −180° to +180° longitude system, subset regions that cross the antimeridian, convert longitude coordinates to a 0–360° system, and reorder the longitude axis to create a continuous spatial domain. The corrected data are then visualized on a map and saved for downstream analysis. Chlorophyll-a data from the NOAA gap-filled blended VIIRS ocean color dataset are used to illustrate antimeridian handling in the Bering Sea region.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Subset of satellite chlorophyll-a data crossing the antimeridian plotted using a −180° to +180° longitude convention. The map shows a visible discontinuity where data from opposite sides of the antimeridian are split and displayed at opposite edges of the domain.\n          \n          \n          \n            \n              \n            \n            The same satellite chlorophyll-a data after converting longitudes to a 0–360° convention and reordering the longitude axis. The antimeridian discontinuity is removed, resulting in a continuous spatial representation suitable for mapping and analysis.\n          \n            ◀  1 / 2  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Define a marine habitat\n      Define a marine habitat using satellite sea surface temperature to identify regions associated with species–environment interactions. This tutorial demonstrates how to retrieve satellite SST from ERDDAP, subset data for a region and time of interest, and apply temperature-based thresholds to delineate a habitat band. The resulting temperature contours are visualized on a map to highlight areas associated with increased likelihood of interaction. Sea surface temperature data from the NOAA Coral Reef Watch CoralTemp product are used to illustrate habitat definition in the central North Pacific as part of the TurtleWatch framework.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Satellite sea surface temperature map with the TurtleWatch habitat band highlighted. The red band marks SST values between 17.5 °C and 18.5 °C, identifying regions associated with increased loggerhead sea turtle interactions based on the TurtleWatch framework.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Satellite sea surface temperature map with the TurtleWatch habitat band highlighted. The red band marks SST values between 17.5 °C and 18.5 °C, identifying regions associated with increased loggerhead sea turtle interactions based on the TurtleWatch framework.\n          \n          \n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Extract data within a boundary\n      Extract and analyze satellite data within an irregular geographic boundary to better represent real-world marine regions. This tutorial demonstrates how to download sea surface temperature data from ERDDAP, subset it using a bounding box, and apply a polygon mask to retain values only within a defined boundary. The masked data are then used to compute and visualize a seasonal temperature cycle for the region of interest. Sea surface temperature data from the NOAA Geo-Polar Blended SST product are combined with Longhurst Marine Province boundaries to illustrate region-based satellite analysis.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Satellite sea surface temperature masked to the Gulf Stream Longhurst Province (GFST).\n          \n          \n          \n            \n              \n            \n            Monthly mean sea surface temperature within the Gulf Stream Province for 2020.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Satellite sea surface temperature masked to the Gulf Stream Longhurst Province (GFST).\n          \n          \n          \n            \n              \n            \n            Monthly mean sea surface temperature within the Gulf Stream Province for 2020.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Monthly sea surface temperature within the Papahānaumokuākea Marine National Monument (PMNM) for April 2015.\n          \n          \n          View Matlab tutorial\n        \n        \n      \n\n      Close\n    \n    \n    \n      How to work with satellite data in Matlab in the Great Lakes\n      Access and analyze satellite sea surface temperature data in MATLAB using ERDDAP and NetCDF workflows. This tutorial demonstrates how to construct ERDDAP download URLs, read NetCDF variables directly into MATLAB, convert time coordinates, and subset data spatially and temporally. The workflow includes creating daily SST maps, generating regional mean time series, and computing average SST over a selected period. Satellite sea surface temperature data from NOAA CoastWatch are used to illustrate spatial and temporal analysis across the Great Lakes region.\n\n      \n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Daily satellite sea surface temperature (SST) across the Great Lakes on 21 July 2021, extracted from ERDDAP and visualized in a Mercator projection.\n          \n          \n          \n            \n              \n            \n            Time series of mean SST within a Lake Superior subregion showing daily temperature variability from 21–28 July 2021.\n          \n          \n          \n            \n              \n            \n            Mean satellite SST across the Great Lakes averaged over 21–28 July 2021, illustrating spatial temperature patterns derived from ERDDAP data.\n          \n            ◀  1 / 3  ▶\n          \n            View Matlab tutorial\n          \n        \n        \n      \n\n      Close\n    \n    \n    \n      Working with Great Lakes Surface Temperature Data\n      Access and analyze Great Lakes surface temperature using satellite observations in Python. This tutorial demonstrates how to download water surface temperature data from an ERDDAP server, open and inspect NetCDF files using xarray, and convert time variables into usable date formats. The extracted data are used to generate spatial maps of surface temperature, compute regional averages within user-defined bounding boxes, and visualize temporal variability through daily time series and monthly mean maps. Water surface temperature data from the Great Lakes Surface Environmental Analysis (GLSEA) ACSPO dataset are used to illustrate satellite-based analysis of Lake Erie.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Spatial subset of Lake Erie water surface temperature on June 1, 2023, extracted from ERDDAP and visualized for a focused region of interest.\n          \n          \n          \n            \n              \n            \n            Daily mean water surface temperature time series for a selected Lake Erie subregion during June 2023, illustrating short-term temporal variability.\n          \n          \n          \n            \n              \n            \n            Monthly mean water surface temperature across Lake Erie for June 2023, computed from daily satellite observations downloaded via ERDDAP.\n          \n            ◀  1 / 3  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Analyze Great Lakes Ice Concentration \n      Extract and summarize satellite-derived ice concentration to characterize seasonal ice conditions in the Great Lakes. This tutorial demonstrates how to download ice concentration data from ERDDAP, subset the data spatially and temporally for a region of interest, and handle missing values in NetCDF files. The extracted data are used to generate maps of ice concentration for specific dates and to compute regional daily mean ice concentration time series. Ice concentration data from the NOAA Great Lakes Surface Environmental Analysis (GLSEA) product are used to illustrate regional ice variability in western Lake Erie.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Spatial distribution of ice concentration (%) in western Lake Erie on March 1, 2019, derived from the Great Lakes Ice Concentration product and visualized after subsetting the ERDDAP dataset to the region of interest.\n          \n          \n          \n            \n              \n            \n            Time series of daily mean ice concentration (%) for western Lake Erie during March 2019, calculated by averaging satellite-derived ice concentration over the selected spatial domain.\n          \n            ◀  1 / 2  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Multi-Sensor chlorophyll time series analysis for Lake Erie\n      Analyze long-term changes in lake chlorophyll concentrations by combining satellite observations from multiple sensors. This tutorial demonstrates how to download chlorophyll-a data from ERDDAP for Lake Erie, process daily observations from MODIS (2002–2017) and VIIRS (2018–2023), and compute spatially averaged monthly and daily time series. The workflow shows how to handle fill values, aggregate data across space and time, and visualize chlorophyll variability across the sensor transition. By merging MODIS and VIIRS records, the tutorial provides a practical approach for creating a continuous multi-sensor time series to support long-term water quality analysis in the Great Lakes.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly mean chlorophyll-a concentration across Lake Erie for August 2009, illustrating the spatial distribution of phytoplankton biomass derived from satellite observations.\n          \n          \n          \n            \n              \n            \n            Spatially averaged monthly chlorophyll-a time series for Lake Erie from 2002–2017, showing seasonal variability and interannual changes captured by the MODIS sensor.\n          \n          \n          \n            \n              \n            \n            Daily spatially averaged chlorophyll-a concentrations for Lake Erie in 2023, highlighting short-term variability and bloom dynamics observed by the VIIRS sensor.\n          \n            ◀  1 / 3  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Long-term lake surface temperature variability from Great Lakes Satellite Records\n      Analyze long-term patterns in Great Lakes water surface temperature using lakewide satellite-derived averages. This tutorial demonstrates how to retrieve daily average surface temperature data from ERDDAP, assemble a multi-year record spanning 2007 to the present, and visualize seasonal temperature variability across years. Daily temperature records are aligned by day of year to highlight the warmest, coldest, and average conditions for a given date, with the current year shown in context of the historical record. Using Great Lakes Surface Environmental Analysis (GLSEA) satellite products, the workflow illustrates how long-term lake temperature climatologies can be used to assess seasonal extremes and interannual variability across the Great Lakes.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Seasonal evolution of Lake Michigan average surface water temperature from 2007–2024, showing the current year in context of the long-term mean and highlighting the historically warmest and coldest years for the selected calendar day based on GLSEA satellite records.\n          \n          \n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Visualizing JPSS Sea Ice Concentration products using Google Colab\n      Visualize polar sea ice conditions by converting JPSS Sea Ice Concentration files into mapped images for quick inspection and reporting. This tutorial demonstrates how to obtain either Level-2 swath VIIRS ice concentration data or Level-3 daily gridded blended sea ice concentration products, load them into an analysis environment, and generate publication-ready maps for the Arctic or Antarctic. The workflow resamples swath observations onto a common polar grid when needed, applies consistent color scaling in percent ice concentration, and exports the final figures as PNGs.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Blended JPSS sea ice concentration for the Arctic on October 5, 2024, showing the spatial extent and intensity of ice cover derived from combined satellite observations and mapped onto a polar projection with ice concentration expressed as percent.\n          \n          \n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Long Island Sound Chlorophyll-a Dynamics\n      Analyze seasonal and spatial patterns in coastal chlorophyll-a by working with daily satellite observations from Long Island Sound. This tutorial demonstrates how to download chlorophyll-a data from ERDDAP, generate temporal composites at monthly and 8-day intervals, and subset the data to compare regional variability within the Sound. The workflow illustrates how to examine gridded satellite datasets, compute spatial averages, and visualize chlorophyll dynamics through maps and time-series plots. Chlorophyll-a data from Sentinel-3 OLCI, processed with Long Island Sound–optimized algorithms, are used to highlight differences between western and eastern regions and to explore seasonal water-quality variability in a complex coastal environment.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly mean chlorophyll-a concentrations in Long Island Sound during 2022, illustrating the seasonal evolution of phytoplankton biomass derived from daily Sentinel-3 OLCI observations.\n          \n          \n          \n            \n              \n            \n            Spatial distribution of mean chlorophyll-a concentration in Long Island Sound averaged over January–December 2022, highlighting persistent regional gradients across the estuary.\n          \n          \n          \n            \n              \n            \n            Eight-day averaged chlorophyll-a time series comparing western and eastern Long Island Sound, showing contrasting seasonal cycles and peak bloom timing during 2022.\n          \n            ◀  1 / 3  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly mean chlorophyll-a concentrations in Long Island Sound during 2022, illustrating the seasonal evolution of phytoplankton biomass derived from daily Sentinel-3 OLCI observations.\n          \n          \n          \n            \n              \n            \n            Spatial distribution of mean chlorophyll-a concentration in Long Island Sound averaged over January–December 2022, highlighting persistent regional gradients across the estuary.\n          \n          \n          \n            \n              \n            \n            Eight-day averaged chlorophyll-a time series comparing western and eastern Long Island Sound, showing contrasting seasonal cycles and peak bloom timing during 2022.\n          \n            ◀  1 / 3  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Map geographical and polarstereographic data on a projected map\n      Plot polar satellite data correctly by working across coordinate systems and projections. This tutorial demonstrates how to access polar sea ice concentration data from an ERDDAP server, interpret the dataset’s polar stereographic metadata (or EPSG code), and display the gridded x–y product on a matching projected basemap. It then shows how to overlay a second dataset provided in geographic coordinates (latitude/longitude) here, polar bear GPS tracks by transforming those points into the same map projection for direct visual comparison with the sea ice field.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Sea ice concentration from the NOAA/NSIDC Climate Data Record is displayed on a North Polar Stereographic map using the dataset’s native EPSG:3411 projection.\n          \n          \n          \n            \n              \n            \n            Monthly sea ice concentration is shown on a polar stereographic basemap with overlaid polar bear GPS locations in latitude–longitude coordinates.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Sea ice concentration from the NOAA/NSIDC Climate Data Record is displayed on a Polar Stereographic projection, illustrating how gridded polar satellite data are mapped in projected x–y coordinates.\n          \n          \n          \n            \n              \n            \n             Sea ice concentration mapped on a Polar Stereographic projection with polar bear GPS tracks overlaid.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Mask shallow pixels for satellite ocean color datasets\n      Remove optically shallow-water contamination from satellite ocean color data to improve the accuracy of derived biogeochemical metrics. This tutorial demonstrates how to download bathymetry and monthly chlorophyll-a data from ERDDAP, quantify the fraction of shallow water within each ocean color pixel, and construct a threshold-based mask to exclude pixels affected by bottom reflectance. The masked and unmasked datasets are then used to compute and compare long-term chlorophyll-a climatologies. By combining high-resolution bathymetry with coarse-resolution ocean color observations, the workflow illustrates a practical approach for preparing satellite datasets for robust analysis in coastal and reef-adjacent regions.\n\n      \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            High-resolution ETOPO bathymetry for the Oʻahu region showing depth contours used to distinguish optically shallow and deep waters.\n          \n          \n          \n            \n              \n            \n            Percentage of shallow water (&lt;30 m depth) contained within each coarse-resolution ocean color pixel, calculated by matching bathymetry to the chlorophyll grid.\n          \n          \n          \n            \n              \n            \n            Binary mask identifying ocean color pixels dominated by shallow water based on a user-defined shallow-area threshold.\n          \n          \n          \n            \n              \n            \n            Log-scaled chlorophyll-a climatology after applying the shallow-water mask, illustrating the removal of bottom-contaminated coastal pixels.\n          \n            ◀  1 / 4  ▶\n          \n            View R tutorial\n          \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Matching polar data to animal track locations\n      Extract and analyze satellite sea ice conditions along animal movement tracks in polar regions. This tutorial demonstrates how to combine satellite sea ice concentration data with animal telemetry observations to examine environmental conditions encountered along a tracked path. Using monthly sea ice concentration records from NOAA PolarWatch, the workflow shows how to subset gridded satellite data in polar stereographic coordinates, align it temporally and spatially with penguin telemetry locations, and extract coincident sea ice values along the track. The tutorial also illustrates how to visualize animal movement overlaid on sea ice maps and how to generate matched time series of satellite-derived sea ice concentration at each observation point.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly Antarctic sea ice concentration from the NOAA/NSIDC Climate Data Record is shown on a south polar stereographic map for the first available timestep.\n          \n          \n          \n            \n              \n            \n            Monthly sea ice concentration maps for January, February, and March are overlaid with Adelie penguin telemetry tracks.\n          \n          \n          \n            \n              \n            \n            Penguin track locations are colored by collocated sea ice concentration values extracted from the satellite dataset.\n          \n            ◀  1 / 3  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly sea ice concentration from the NOAA/NSIDC Climate Data Record is mapped for the first available time step to illustrate the polar stereographic satellite grid used for Antarctic matchups.\n          \n          \n          \n            \n              \n            \n            The Adelie penguin telemetry track is plotted in geographic coordinates, highlighting the start and end points used to extract satellite sea ice values along the animal’s path.\n          \n          \n          \n            \n              \n            \n            The penguin track is colored by the extracted monthly sea ice concentration at each location and date, showing how satellite conditions are sampled along a moving trajectory in Antarctica.\n          \n            ◀  1 / 3  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Matching satellite and buoy surface temperature data in polar regions\n      Combine satellite ice surface temperature composites with in situ buoy observations by matching satellite pixels to buoy locations and dates in the Arctic. This tutorial walks through how to query buoy surface temperature records from ERDDAP in tabular format, download polar-projected satellite Ice Surface Temperature (IST) data in NetCDF, and resample the buoy time series to comparable time steps. It then demonstrates how to convert buoy latitude/longitude positions into the satellite’s polar stereographic coordinate system, extract the nearest satellite IST values at each buoy time and location, and merge the two datasets for side-by-side comparison and visualization.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Time series comparison of buoy-measured surface temperature and collocated VIIRS ice surface temperature.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Time series comparison of buoy-measured surface temperature and collocated VIIRS ice surface temperature.\n          \n          \n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Comparing satellite and buoy sea surface temperature observations \n      This tutorial demonstrates how to match satellite-derived sea surface temperature (SST) with in situ buoy observations to evaluate satellite data accuracy. Using ERDDAP-hosted datasets, the workflow shows how to download and process buoy measurements, extract collocated satellite SST values, and compare the two datasets through statistical analysis and visualization.\n\n      \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Daily averaged buoy sea surface temperatures are compared with colocated satellite SST values along the California coast from August 1–10, 2023.\n          \n          \n          \n            \n              \n            \n            Satellite sea surface temperature fields for July 31, 2023 are shown with overlaid buoy locations colored by observed temperature.\n          \n            ◀  1 / 2  ▶\n          \n            View R tutorial\n          \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Matchup satellite data to ship, glider, or animal tracks\n      Extract and analyze satellite-derived environmental variables along moving platforms such as ship tracks, gliders, or animal telemetry paths. This tutorial demonstrates how to load track data defined by latitude, longitude, and time, visualize trajectories on a map, and retrieve colocated satellite observations from ERDDAP for each track position. Using a yellowfin tuna telemetry record as an example, satellite chlorophyll-a data from the ESA Ocean Colour Climate Change Initiative are matched to daily track locations, saved to a tabular format, and visualized to explore spatial and temporal variability along the track.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Chlorophyll-a concentrations extracted from satellite observations along a Yellowfin tuna telemetry track, with points colored by matched monthly chlorophyll values and symbols indicating the start and end of the track.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Yellowfin tuna track locations colored by the log of satellite-derived chlorophyll-a values extracted from the ESA OC-CCI monthly dataset.\n          \n          \n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Matching satellite chlorophyll to animal telemetry tracks\n      This tutorial demonstrates how satellite data can be matched to moving tracks defined by longitude, latitude, and time, such as those from ships, gliders, or animal telemetry. Using a subsampled loggerhead turtle track and the ESA Ocean Colour Climate Change Initiative (OC-CCI) monthly chlorophyll-a dataset (v6.0), the workflow loads track data from a file, visualizes the track and its start/end locations, extracts satellite chlorophyll values at each track point via ERDDAP, saves the matchup results to a CSV file, and maps the satellite-derived chlorophyll patterns along the track.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Chlorophyll-a concentrations from the ESA OC-CCI monthly product matched to locations along animal track #25317, with points colored by satellite-derived chlorophyll values and start/end positions indicated along the track.\n          \n          \n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Loggerhead turtle track locations colored by log-transformed ESA OC-CCI monthly chlorophyll-a values extracted from ERDDAP at each subsampled track point (May 2005–Aug 2008).\n          \n          \n          View R tutorial\n        \n        \n        \n        \n          Matlab output\n          \n          \n            \n              \n            \n            Loggerhead turtle (#25317) track colored by log-transformed monthly chlorophyll-a averaged within ±0.1° of each tag location using ERDDAP matchup requests.\n          \n          \n          View Matlab tutorial\n        \n        \n      \n\n      Close\n    \n    \n    \n      Calculating anomaly and trend with sea ice thickness time series\n      This tutorial demonstrates how to analyze variability and long-term change in Arctic sea ice thickness using gridded satellite data. Monthly mean sea ice thickness fields are derived from twice-daily observations accessed through the PolarWatch ERDDAP server, then compared against a multi-year climatological baseline to quantify anomalies. A 15-year reference period (2006–2020) is used to compute historical monthly means, which serve as the basis for anomaly calculations and trend assessment. Long-term trends in monthly sea ice thickness are estimated at each grid cell using the non-parametric Mann–Kendall method, allowing robust slope estimation without assumptions of normality.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly sea ice thickness anomalies for February (left) and September (right) in 2021, calculated as departures from the 2005–2020 climatological mean using Arctic sea ice thickness data from the NOAA CDR Extended Polar Pathfinder dataset.\n          \n          \n          \n            \n              \n            \n            Spatial distribution of the long-term September sea ice thickness trend across the Arctic, estimated for the 2006–2020 climatological period using a Mann–Kendall trend analysis applied to monthly mean sea ice thickness data.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          No preview image\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Subset data in polar stereographic projection using a shapefile\n      This exercise demonstrates how to subset satellite data provided in a polar stereographic projection using a lake boundary defined in a different coordinate reference system. The workflow includes downloading polar satellite data from PolarWatch ERDDAP, transforming a shapefile to match the satellite projection, and clipping the dataset to the extent of Lake Iliamna in Alaska. The results are visualized to illustrate projection handling and spatial subsetting of polar remote sensing data\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            IMS Snow and Ice Analysis data from PolarWatch for 30 July 2024 shown in its native polar stereographic projection, illustrating categorical surface conditions across the Northern Hemisphere.\n          \n          \n          \n            \n              \n            \n            Subset of the IMS Snow and Ice Analysis clipped to the Lake Iliamna region after transforming the lake shapefile into the satellite data’s polar stereographic projection, demonstrating successful reprojection and spatial subsetting.\n          \n            ◀  1 / 2  ▶\n          \n            View Python tutorial\n          \n        \n        \n        \n        \n      \n\n      Close\n    \n    \n    \n      Transforming satellite data from one map to another\n      This exercise demonstrates how to transform satellite data coordinates from one map projection to another in order to work consistently with datasets that use different coordinate reference systems. It walks through downloading sea ice concentration data from PolarWatch ERDDAP, inspecting CRS definitions, applying EPSG-based coordinate transformations, and adding the transformed coordinates back into a NetCDF dataset.\n\n      \n        \n        \n          Python output\n          \n          \n            \n              \n            \n            Monthly mean sea ice concentration for December 2022 from the NOAA/NSIDC Climate Data Record, displayed using transformed latitude–longitude coordinates on a global (Plate Carrée) map projection.\n          \n          \n          \n            \n              \n            \n            The same December 2022 sea ice concentration data visualized on a Southern Hemisphere polar stereographic projection.\n          \n            ◀  1 / 2  ▶\n          View Python tutorial\n        \n        \n        \n        \n          R output\n          \n          \n            \n              \n            \n            Monthly mean sea ice concentration for December 2022 from the NOAA/NSIDC Climate Data Record, displayed using transformed latitude–longitude coordinates on a global (Plate Carrée) map projection.\n          \n          \n          \n            \n              \n            \n            The same December 2022 sea ice concentration data visualized on a Southern Hemisphere polar stereographic projection, illustrating the improved representation of Antarctic sea ice when using a projection optimized for polar regions.\n          \n            ◀  1 / 2  ▶\n          View R tutorial\n        \n        \n        \n      \n\n      Close\n    \n\n\n\n\n\n\n✕",
     "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/pgrsc24.html#course-description",
-    "href": "trainings/past/pgrsc24.html#course-description",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using information tools from PacIOOS for applications in the Pacific Islands region. This training will be held during the 2024 Pacific Islands GIS and Remote Sensing Users Conference in Suva, Fiji.\nClick here to Register.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/pgrsc24.html#instructors",
-    "href": "trainings/past/pgrsc24.html#instructors",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager\n\n\nLauren Kaiser\nPacIOOS, data management specialist\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/pgrsc24.html#objectives",
-    "href": "trainings/past/pgrsc24.html#objectives",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstrate how to access data on ERDDAP servers\nIntroduce CoastWatch satellite data and training resources\nExplore additional data and information tools available at PacIOOS\nProvide hands-on time to access data and run tutorials",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/pgrsc24.html#schedule",
-    "href": "trainings/past/pgrsc24.html#schedule",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\nTime (Fiji Standard Time)\nTopic\nPresenter\n\n\n\n\n1:00 - 1:10\nWelcome & Introductions\nDaisy Shi & Lauren Kaiser\n\n\n1:10 - 1:20\nInteractive Questions\n\n\n\n1:20 - 1:35\nIntro to CoastWatch, Satellite Datasets & Data Portal\nDaisy Shi\n\n\n1:35 - 1:50\nIntro to OceanWatch, Data Accessibility & Usability\nDaisy Shi\n\n\n1:50 - 2:20\nIntro to PacIOOS, Website Walkthrough & Data Search\nLauren Kaiser\n\n\n2:20 - 2:30\nInteractive Questions\n\n\n\n2:30 - 2:45\nBreak\n\n\n\n2:45 - 2:55\nOverview of CoastWatch Tutorials\nDaisy Shi\n\n\n2:55 - 3:15\nERDDAP Demos\nDaisy Shi\n\n\n3:15 - 3:45\nArcGIS & QGIS Demos\nLauren Kaiser\n\n\n3:45 - 4:00\nBreak\n\n\n\n4:00 - 5:50\nHands-On time\nAll\n\n\n5:50 - 6:00\nInteractive Questions & Feedback",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/pgrsc24.html#resources",
-    "href": "trainings/past/pgrsc24.html#resources",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nGeostationary satellites covering Western Pacific\nPacIOOS\nPacIOOS Voyager",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html",
-    "href": "trainings/past/icft25.html",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#course-description",
-    "href": "trainings/past/icft25.html#course-description",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#instructors",
-    "href": "trainings/past/icft25.html#instructors",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data manager\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#objectives",
-    "href": "trainings/past/icft25.html#objectives",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#schedule",
-    "href": "trainings/past/icft25.html#schedule",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Schedule",
-    "text": "Schedule\nThursday, August 14, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 11:30\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:15\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:15 - 12:45\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:45 - 1:00\nDay 1 wrap-up\n\n\n\n\nFriday, August 15, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:30\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n10:30 - 11:00\nDemo of ATN data portal\nMegan McKinzie\n\n\n11:00 - 11:30\nAccessing public ATN datasets\nMegan McKinzie\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:00\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n12:00 - 12:45\nWorkshop, part 2: Hand’s on time\n\n\n\n12:45 - 13:00\nWrap up and final discussion\nAll",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#resources",
-    "href": "trainings/past/icft25.html#resources",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "CoastWatch Training Website",
-    "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "officehours.html",
-    "href": "officehours.html",
-    "title": "CoastWatch Office Hours",
-    "section": "",
-    "text": "Hosted by the West Coast Node and PolarWatch\nevery other Thursday at 11 am PST\nUpcoming dates: March 5, 12\nEveryone is welcome to come to the CoastWatch Office Hour where people can:\n\nAsk questions about satellite data\nRequest help with accessing satellite data products\nGet troubleshooting assistance with code examples for discovering, accessing and working with satellite data\n\nCoastWatch Lectures\nCoastWatch Tutorials",
-    "crumbs": [
-      "Office Hours"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html",
-    "href": "trainings/past/afs24.html",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has been rescheduled to be an online course, open to all.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#course-description",
-    "href": "trainings/past/afs24.html#course-description",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has been rescheduled to be an online course, open to all.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#instructors",
-    "href": "trainings/past/afs24.html#instructors",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data Coordinator\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#objectives",
-    "href": "trainings/past/afs24.html#objectives",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#schedule",
-    "href": "trainings/past/afs24.html#schedule",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 10:30\nGroup Introductions\nCara Wilson\n\n\n10:30 - 11:15\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:15 - 11:30\nBreak\n\n\n\n11:30 - 12:00\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:00 - 12:30\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:30 - 1:30\nLunch break\n\n\n\n1:30 - 2:00\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n2:00 - 2:30\nDemo of ATN data portal\nMegan McKinzie\n\n\n2:30 - 3:00\nAccessing public ATN datasets\nMegan McKinzie\n\n\n3:00 - 3:15\nBreak\n\n\n\n3:15 - 3:30\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n3:30 - 4:45\nWorkshop, part 2: Hand’s on time\n\n\n\n4:45 - 5:00\nWrap up and final discussion\nAll",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#resources",
-    "href": "trainings/past/afs24.html#resources",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html",
-    "href": "trainings/past/longislandsound25.html",
-    "title": "2025 Long Island Sound Class",
-    "section": "",
-    "text": "Virtual - Times vary daily, see schedule below (times are Eastern).\nNOAA CoastWatch is hosting this free, virtual training class:  Viewing and Analyzing Ocean/Coastal Events and Water Quality Using Satellites\nJoin Class Via Zoom Here",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html#course-description",
-    "href": "trainings/past/longislandsound25.html#course-description",
-    "title": "2025 Long Island Sound Class",
-    "section": "Course Description",
-    "text": "Course Description\nMany satellite products are available for water quality applications and other uses from NOAA and other data providers. These include: chlorophyll, turbidity, sea surface temperature, organic matter, and more. In this course, learn how to use these satellite products for your region of interest using freely available tools. Address your needs and questions by creating maps and images, plotting a time series of varying conditions, or creating a virtual buoy for your study location. And other applications too!\nThis class is being offered in two Tiers as part of a larger Long Island Sound Project funded by New York/Connecticut Sea Grant.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html#objectives",
-    "href": "trainings/past/longislandsound25.html#objectives",
-    "title": "2025 Long Island Sound Class",
-    "section": "Objectives",
-    "text": "Objectives\n\nTier I: Creating Images\nLearn to use tools to create images and maps of ocean or coastal features in your area of interest. Tools taught: CoastWatch Data Portal, ArcGIS, ERDDAP visualization server, and more.\n\n\nTier II: Analyzing Data for Your Study or Region\nWork more analytically with oceanographic satellite data. Learn R and/or Python techniques to access data on ERDDAP data servers for data extraction, map creation, time series analysis, matching data to your study site locations or ship tracks, creating a virtual buoy using satellite data in your location of choice, and other application skills.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html#schedule",
-    "href": "trainings/past/longislandsound25.html#schedule",
-    "title": "2025 Long Island Sound Class",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\nDay\nTime (ET)\nTopic\nPresenter\n\n\n\n\nMonday - March 31\n\nTier I and Tier II\n\n\n\n\n9:00 - 9:15\nPresentation 1: Overview – SeaGrant-funded Satellite Project\nJonathan Sherman\n\n\n\n9:15 - 9:45\nPresentation 2: Data Portal\nMichael Soracco\n\n\n\n9:45 - 10:15\nPresentation 3: ArcGIS\nMichael Soracco\n\n\n\n10:15 - 10:30\nBreak\n\n\n\n\n10:30 - 11:15\nPresentation 4: CoastWatch Utilities - CDAT  Files\nRon Vogel\n\n\n\n11:15 - 11:30\nQ & A\n\n\n\n\n11:30 - 12:15\nParticipant Exercise 1: Choose a tool and make a map  ArcGIS files, CDAT files\n\n\n\n\n12:15 - 1:15\nLunch break\n\n\n\n\n1:15 - 1:45\nPresentation 5: Choosing a Dataset\nJonathan Sherman\n\n\n\n1:45 - 2:45\nPresentation 6: ERDDAP\nRon Vogel\n\n\n\n2:45 - 3:00\nBreak\n\n\n\n\n3:00 - 3:30\nQ & A and Resources for Participants\n\n\n\n\n3:30 - 4:30\nParticipant Exercise 2: Choose a dataset from ERDDAP, download, make a map and a time series  Sample data list\n\n\n\nTuesday - April 1\n\nTier II (April 1–4)\n\n\n\n\n9:00 - 9:30\nPresentation 7: Satellite 101\nShelly Tomlinson\n\n\n\n9:30 - 10:30\nPresentation 8: CoastWatch Training Code (R and Python) – Capabilities and Tutorials  Tutorials GitHub page\nJonathan Sherman\n\n\n\n10:30 - 10:45\nBreak\n\n\n\n\n10:45 - 11:30\nPresentation 9: CoastWatch Utilities - Command Line  Files\nRon Vogel\n\n\n\n11:30 - 12:00\nOffice Hours Logistics, Mini-project & Slide Info, Q & A\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nOffice Hours: One-on-One\n\n\n\nWednesday - April 2\n\nParticipants work on their mini-project on their own time\n\n\n\nThursday - April 3\n9:00 - 9:15\nGauge Progress Poll\nBetty Staugler\n\n\n\n9:15 - 9:30\nPresentation 10: HAB Forecasts\nShelly Tomlinson\n\n\n\n9:30 - 9:45\nPresentation 11: COVID Impacts\nJonathan Sherman\n\n\n\n9:45 - 10:00\nPresentation 12: Participant Slide Examples from Past Classes\nRon Vogel\n\n\n\n10:00 - 12:00\nOffice Hours: Group Discussion or One-on-One\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nParticipants work on their mini-project on their own time\n\n\n\nFriday - April 4\n1:00 - 3:00\nFinal Mini-project Presentations (1 slide each)\nParticipants",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html#resources",
-    "href": "trainings/past/longislandsound25.html#resources",
-    "title": "2025 Long Island Sound Class",
-    "section": "Resources",
-    "text": "Resources\n\nCoastWatch main website\nCoastWatch East Coast Regional Node website\nCoastWatch Data Access methods\nCoastwatch Coding Tutorials: R and Python (on GitHub)\nCoastwatch Lecture series\nCoastwatch Data Portal video tutorials\nCoastwatch ArcGIS lecture videos and tutorials\nCoastWatch Utilities\n\nCoastWatch Utilities Tutorials - CDAT and Command-Line\nCDAT demo videos on YouTube\n\nCoastWatch Help Desk\n\nEmail: coastwatch.info@noaa.gov\nPhone: +1-301-683-3335\nUser Forums",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html",
-    "href": "trainings/past/seaice24.html",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "",
-    "text": "PolarWatch node of the CoastWatch is hosting a free, virtual training class on October 21, 2024 (9am-4pm Pacific Time).",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html#course-description",
-    "href": "trainings/past/seaice24.html#course-description",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Course Description",
-    "text": "Course Description\nMany satellite sea ice products are available for download from NOAA and many other data providers: e.g. sea ice concentration, sea ice thickness, sea ice age, sea ice temperature, and sea ice extent. It can often be challenging to know the differences between the products and how each can be applied to a user’s specific application. For example, the spatial resolutions of the products can vary widely, largely dependent on the type of satellite measurement the product is derived from (passive microwave, visible radiometry or synthetic aperture radar). Additionally, when working with data in the high-latitudes issues of data projection invariably arise and can complicate accessing and working with data. To address these issues, NOAA’s PolarWatch node has developed a 1-day (6 hour) online course with the following training objectives.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html#objectives",
-    "href": "trainings/past/seaice24.html#objectives",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of sea-ice products available from satellite data\nGive an overview of working with different projections\nExplore the data available on the PolarWatch portal\nProvide hands-on time to access data and try tutorials\nIntroduce CoastWatch and other sea ice satellite data training resources",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html#schedule",
-    "href": "trainings/past/seaice24.html#schedule",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n9:00 - 9:30\nPresentation 1: Introduction to NOAA CoastWatch\nCara Wilson\n\n\n9:30 - 10:00\nPresentation 2: Overview of Sea Ice Remote Sensing\nLudovic Brucker\n\n\n10:00 - 10:30\nPresentation 3: JPSS Sea Ice Microlesson\nKevin Fuell\n\n\n10:30 - 10:45\nBreak\n\n\n\n10:45 - 11:15\nPresentation 4: Sea Ice from SAR\nChris Jackson\n\n\n11:15 - 11:30\nPresentation 5: Projections - Why they Matter\nMichael Soracco\n\n\n11:30 - 11:45\nPresentation 6: Ice in the Great Lakes\nAndrea VanderWoude\n\n\n11:45 - 12:45\nLunch break\n\n\n\n12:45 - 13:00\nPresentation 7: Projections in Action (Watch Video)\nPeter Hollemans\n\n\n13:00 - 13:30\nPresentation 8: ERDDAP Demo\nCara Wilson\n\n\n13:30 - 13:45\nPresentation 9: PolarWatch Portal Demo\nSunny Hospital\n\n\n13:45 - 14:00\nPresentation 10: CoastWatch Viewer Demo\nMichael Soracco\n\n\n14:00 - 14:15\nBreak\n\n\n\n14:15 - 14:30\nPresentation 11: Overview of Tutorials\nCara Wilson, Matthew Smith\n\n\n14:30 - 16:00\nHand’s on time, with instuctor’s guidance available",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html#resources",
-    "href": "trainings/past/seaice24.html#resources",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nJPSS Sea Ice Microlesson",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html",
-    "href": "trainings/upcoming/sat201_26.html",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "",
-    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#course-description",
-    "href": "trainings/upcoming/sat201_26.html#course-description",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "",
-    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#schedule-attendance",
-    "href": "trainings/upcoming/sat201_26.html#schedule-attendance",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Schedule & Attendance",
-    "text": "Schedule & Attendance\nFrequency: Sessions are held every Friday for one month.\nDuration: Approximately 2.5 hours per session.\nFlexibility: Attendance for all sessions is not required; feel free to join the topics most relevant to you.",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#curriculum",
-    "href": "trainings/upcoming/sat201_26.html#curriculum",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "2026 Curriculum",
-    "text": "2026 Curriculum\nThe inaugural 2026 course will cover the following subjects: * Alternative Data Access: Methods for accessing data not hosted on ERDDAP servers. * CoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite. * Beyond Chlorophyll: Exploring ocean color products other than chlorophyll. * SAR Data: An introduction to Synthetic Aperture Radar.",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#schedule",
-    "href": "trainings/upcoming/sat201_26.html#schedule",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Schedule",
-    "text": "Schedule\nFriday, July 10, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nAccessing data not on ERDDAP servers\nDale Robinson\n\n\n11:45 - 12:30\na demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 17, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to using Coastwatch Utilities software\nPeter Hollemans\n\n\n11:45 - 12:30\na demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 24, 2026 | Time (PST) | Topic | Presenter | |:————-|:—————————————————————————–|:—————————-| | 11:00 - 11:45 | Beyond Chlorophyll | Ryan Vandermeulan | | 11:45 - 12:30 | Beyond Chlorophyll Case Study | | | 12:30 - 12:45 | Break | |\n| 12:45 - 1:30 | Question & Answer and hand’s on session | |\nFriday, July 31, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to SAR Data\n\n\n\n11:45 - 12:30\nSAR Case Study\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#instructors",
-    "href": "trainings/upcoming/sat201_26.html#instructors",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nPeter Hollemans\nCoastWatch/Pacific OceanWatch, node manager",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#resources",
-    "href": "trainings/upcoming/sat201_26.html#resources",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
+      "Training Tutorials",
+      "Code Gallery"
     ]
   },
   {
@@ -2909,15 +2959,5 @@
     "title": "Subset data in polar stereographic projection using a shape file fr",
     "section": "",
     "text": "Updated September 2024\n\n\nBackground\nRemote sensing data in polar regions commonly use a polar stereographic projection, where the georeferencing is in x and y coordinates instead of the more widely used latitudes and longitudes. Working with data from different projections can be challenging.\n\n\nObjectives\nIn this tutorial, we will demonstrate how to download remote sensing data in polar stereographic projection from PolarWatch and subset it within the boundaries of Lake Iliamna in Alaska, where the lake shape data is presented in a different projection.\nAs this tutorial focuses on satellite data transformation, a basic understanding of satellite data, map projections, and the ERDDAP data server is recommended. For additional learning, you can explore satellite data tutorials and video lectures available through introductory video lectures and tutorials hosted on the CoastWatch Learning Portal and GitHub repository.\n\nThe tutorial demonstrates the following techniques\n\nDownload sea ice satellite data from the PolarWatch ERDDAP data server\nImport geographical features of Lake Iliamna from a shapefile\nTransform data from one projection to another\nSubset the satellite data for Lake Iliamna\nVisualize data in different projection\n\n\n\n\nData Used\nWorld Lake shape data\nThe world lake shapefile can be downloaded from ArcGIS Hub at https://hub.arcgis.com, and is also available in the resource/ directory of this tutorial folder. The file includes geographical features of all world lakes. For this exercise, only the features of Lake Illemna will be used.\nIMS Snow and Ice Analysis, Arctic, 4km, 2004 - Present, Daily (PolarWatch Preview)\nThe IMS dataset includes daily snow and ice coverage data for the Arctic with a 4-km resolution, available starting from 2004. The values in the dataset are categorical, representing five categories: 0 for areas outside the coverage zone, 1 for open water, 2 for land without snow, 3 for sea ice or lake ice, and 4 for snow-covered land. Data with a 1-km resolution are also available. Please contact us for more information.\n\nLoad python packages\nFor this exercise, the following packages are required. The complete list of required packages for all CoastWatch tutorials is provided in the environment.yml located in the Python-setup/ folder.\n\n# Load packages\nimport xarray as xr\nimport geopandas as gpd\nimport pandas as pd\nimport rioxarray\nfrom shapely.geometry import mapping\n\n\n\nLoad Lake Illemna data\n\n# Load lake shape file into geopanda data frame\nshapefile_path = '../resources/Iliamna/Iliamna.shp'\nlakes_shp = gpd.read_file(shapefile_path)\n\n\n# Check column names\nprint(\"Lake Data Columns:\")\nprint(lakes_shp.columns)\nlakes_shp[\"Lake_name\"].unique()\n\nLake Data Columns:\nIndex(['Hylak_id', 'Lake_name', 'Country', 'Continent', 'Poly_src',\n       'Lake_type', 'Grand_id', 'Lake_area', 'Shore_len', 'Shore_dev',\n       'Vol_total', 'Vol_res', 'Vol_src', 'Depth_avg', 'Dis_avg', 'Res_time',\n       'Elevation', 'Slope_100', 'Wshd_area', 'Pour_long', 'Pour_lat',\n       'geometry'],\n      dtype='object')\n\n\narray([None, 'Iliamna'], dtype=object)\n\n\n\n# Look up Iliamna lake\nprint(\"Row(s) that contain lake name: Iliamna\")\nlakes_shp[lakes_shp['Lake_name'].str.contains('iliamna', case=False, na=False)]\n\nRow(s) that contain lake name: Iliamna\n\n\n\n\n\n\n\n\n\nHylak_id\nLake_name\nCountry\nContinent\nPoly_src\nLake_type\nGrand_id\nLake_area\nShore_len\nShore_dev\n...\nVol_src\nDepth_avg\nDis_avg\nRes_time\nElevation\nSlope_100\nWshd_area\nPour_long\nPour_lat\ngeometry\n\n\n\n\n287\n31\nIliamna\nUnited States of America\nNorth America\nNHD\n1\n0\n2634.62\n1006.79\n5.53\n...\n1\n43.8\n354.811\n3761.5\n13\n-1.0\n16869.4\n-155.884538\n59.331889\nPOLYGON ((-17336380.000 8247763.000, -17336837...\n\n\n\n\n1 rows × 22 columns\n\n\n\n\n# Extract Iliamna shape\niliamna_shp = lakes_shp[lakes_shp['Hylak_id'] == 31]\n\n# Examine coordinate referernce system (crs)\niliamna_shp.crs\n\n&lt;Projected CRS: EPSG:3857&gt;\nName: WGS 84 / Pseudo-Mercator\nAxis Info [cartesian]:\n- X[east]: Easting (metre)\n- Y[north]: Northing (metre)\nArea of Use:\n- name: World between 85.06°S and 85.06°N.\n- bounds: (-180.0, -85.06, 180.0, 85.06)\nCoordinate Operation:\n- name: Popular Visualisation Pseudo-Mercator\n- method: Popular Visualisation Pseudo Mercator\nDatum: World Geodetic System 1984 ensemble\n- Ellipsoid: WGS 84\n- Prime Meridian: Greenwich\n\n\n\n# Visualize the lake \niliamna_shp.plot()\n\n\n\n\n\n\n\n\n\n\nLoad IMS data from PolarWatch ERDDAP\n\n# Load IMS data from ERDDAP\nerddap_url = \"https://polarwatch.noaa.gov/erddap/griddap/usnic_ims_4km\"\nds = xr.open_dataset(erddap_url)\n\n# Select one day data\nds_date = '2024-07-30'\nds = ds.sel(time=ds_date)\n\n# Visualize the IMS data\nds[\"IMS_Surface_Values\"].plot()\n\n\n\n\n\n\n\n\n\n# Check the IMS data projection\nds.attrs['grid_mapping_proj4']\n\n'+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs'\n\n\n\n\n\nTransform the lake data crs to match the satellite data crs\nThe helper functions are provided for the projection transformation process\n\n# from PolarWatch helper functions\n\ndef set_geo_specs(dat: xr.DataArray, xdim: str, ydim: str, crs: str) -&gt; xr.DataArray:\n    \"\"\"Update the spatial dimensions and coordinate reference system (CRS) of an xarray DataArray.\n\n    Args:\n        dat (xr.DataArray): The data array to modify.\n        xdim (str): Name of the dimension representing the x-coordinate.\n        ydim (str): Name of the dimension representing the y-coordinate.\n        crs (str): String representation of the coordinate reference system to assign.\n\n    Returns:\n        xr.DataArray: The updated data array with specified spatial dimensions and CRS.\n    \"\"\"\n    dat = dat.rio.set_spatial_dims(x_dim=xdim, y_dim=ydim)\n    try:\n        dat = dat.rio.write_crs(crs)\n        print('CRS setup successful')\n    except Exception as e:\n        print(f'Error during crs setup: {e}')\n\n    return dat\n\n\ndef clip_data_to_shapefile(data_array: xr.DataArray, shapefile_geom, crs: str)-&gt; xr.DataArray:\n    \"\"\"Clip data array to the specified shapefile geometry with CRS.\n    \n    Args:\n        data_array (xr.DataArray): The data array to modify.\n        shapefile_geom : Shapefile geometry.\n        crs (str): CRS of the data.\n\n    Returns:\n        xr.DataArray: The updated data array with specified spatial dimensions and CRS.  \n    \n    \"\"\"\n    try:\n        clipped_data = data_array.rio.clip(shapefile_geom.apply(mapping), crs)\n        print(\"Clipping successful\")\n        return clipped_data\n    except Exception as e:\n        print(f\"Error during clipping: {e}\")\n        raise\n\ndef transform_shapes(shp: gpd.GeoDataFrame, crs:str)-&gt; gpd.GeoDataFrame:\n    \"\"\"\n    Transforms the projection of a GeoDataFrame to a specified coordinate reference system (CRS).\n    \n    This function takes a GeoDataFrame and transforms its projection to the specified CRS, typically used\n    for reprojecting geometries to match satellite data or other spatial datasets that require a specific CRS.\n    For example, transforming the shape to a Polar Stereographic Projection.\n    \n    Parameters:\n    shp : gpd.GeoDataFrame\n        The input GeoDataFrame containing geometries (e.g., shapes, boundaries) that need to be transformed.\n    crs : str\n        The target coordinate reference system (CRS) in string format (e.g., \"EPSG:3413\" for the Polar Stereographic Projection).\n    \n    Returns:\n    gpd.GeoDataFrame\n        A GeoDataFrame with geometries transformed to the specified CRS.\n\n    \"\"\"\n    try:\n        shp_proj_transformed = shp.to_crs(crs)\n        print(f\"Projection transformed to {crs}\")\n        return shp_proj_transformed\n    except Exception as e:\n        print(f\"Error transforming CRS: {e}\")\n        raise\n\n\n# Set crs_project as the data crs (based on xarray.Dataset.attrs)\ncrs_project = \"+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs\"\n\n# Set data crs\nds = set_geo_specs(ds, xdim=\"x\", ydim=\"y\", crs=crs_project)\n\n# Transform the shape into the data crs\niliamna_transformed = transform_shapes(iliamna_shp, crs_project)\n\nCRS setup successful\nProjection transformed to +proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs\n\n\n\n# Examine lake shape crs\niliamna_transformed.crs\n\n&lt;Projected CRS: +proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 + ...&gt;\nName: unknown\nAxis Info [cartesian]:\n- E[south]: Easting (metre)\n- N[south]: Northing (metre)\nArea of Use:\n- undefined\nCoordinate Operation:\n- name: unknown\n- method: Polar Stereographic (variant B)\nDatum: unknown\n- Ellipsoid: unknown\n- Prime Meridian: Greenwich\n\n\n\n# Visualized transformed iliamna shape\niliamna_transformed.plot()\n\n\n\n\n\n\n\n\n\nSubset the satellite data using the Lake shape\n\n# Clip data to the shape\nds_clipped = clip_data_to_shapefile(ds, iliamna_transformed.geometry, iliamna_transformed.crs)\n\nClipping successful\n\n\n\n# Visualized clipped data\nds_clipped[\"IMS_Surface_Values\"].plot()\n\n\n\n\n\n\n\n\n\n\n\nResources\n\nCoastWatch Learning Portal - Lectures, Videos, Other learning resources\nCoastWatch Tutorials on Github - Tutorial notebooks and code samples\nPolarWatch ERDDAP - Complete list of data available on PolarWatch ERDDAP Server\nPolarWatch Catalog - Preview data on polar map"
-  },
-  {
-    "objectID": "trainings/index.html",
-    "href": "trainings/index.html",
-    "title": "CoastWatch Workshops",
-    "section": "",
-    "text": "CoastWatch regularly organizes and offers in-person and online satellite training classes or workshops featuring lectures, tutorials, & tool demonstrations.\nDuring in-person and online satellite course, participants learn about environmental satellite data and how to easily obtain it. Participants also gain hands on experience working with the data of interest to them. A major goal of the course is to provide scientists who are not regular users of satellite data with the knowledge and tools they need to incorporate satellite data into their research and management projects.\nFor questions or more information about the upcoming satellite training classes, please contact coastwatch.info@noaa.gov.",
-    "crumbs": [
-      "Training Classes"
-    ]
   }
 ]
