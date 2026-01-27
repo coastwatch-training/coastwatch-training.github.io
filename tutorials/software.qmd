@@ -26,7 +26,7 @@ BACKGROUND_PAGE = "softwarebackground.html"
 # Gallery page location: softwaretutorials/
 # Tutorials location:     tutorials/<slug>/
 # -----------------------------
-TUTORIALS_BASE = ""
+TUTORIALS_BASE = "tutorials"
 
 # -----------------------------
 # Load CSV
@@ -119,7 +119,7 @@ def render_carousel(img_cell, carousel_id, slug):
             fn, caption = item, ""
 
         cls = "cg-slide active" if j == 0 else "cg-slide"
-        img_src = f"{TUTORIALS_BASE}/{slug}/images/{fn}"
+        img_src = f"{slug}/images/{fn}"
 
         slides.append(f"""
           <div class="{cls} cg-figure">
