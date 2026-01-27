@@ -7,7 +7,7 @@ This page provides background information on common tools and formats used throu
 If you’re looking for hands-on, step-by-step lessons, go to the **[Software Code Gallery](software.qmd)** page.
 
 
-## ERDDAP basics: What is ERDDAP?
+## ERDDAP basics: What is ERDDAP? {#erddap}
 
 For many users, obtaining the ocean satellite data they need requires downloading data from several data providers, each with its own file formats, download protocols, subset abilities, and preview abilities.
 
@@ -71,7 +71,7 @@ A more complete list is available here:
 https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations
 
 
-## NetCDF files
+## NetCDF files {#netcdf}
 
 **NetCDF (Network Common Data Form)** is a file format for storing multidimensional scientific data (variables), including common satellite observations (e.g., sea surface temperature, salinity, chlorophyll, winds). Many organizations and scientific groups in different countries have adopted netCDF as a standard way to represent some forms of scientific data.
 
@@ -80,7 +80,7 @@ The NetCDF format has many advantages, the most important of which is that it is
 ![](images/netcdf1.png){width=40%} ![](images/netcdf2.png){width=40%}
 
 
-## NASA Panoply
+## NASA Panoply {#panoply}
 
 NASA developed the Panoply viewer that allows users to view and visualize data held in NetCDF files. Some features the software includes are:
 
@@ -102,7 +102,7 @@ Below are a few examples to try out to get you used to visualizing data with the
 💡 **Panoply Version Note:** The examples provided in CoastWatch materials are based on Panoply **Version 5.3.3** (interfaces may differ slightly across versions).
 
 
-## CoastWatch Utilities
+## CoastWatch Utilities {#cwutils}
 
 The **CoastWatch Utilities** (CWUtils) are software tools designed to help users work with NOAA/NESDIS CoastWatch satellite data—especially because these scientific data files aren’t meant to be opened in standard image viewers.
 

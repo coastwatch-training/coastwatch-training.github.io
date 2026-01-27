@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Software Information – CoastWatch Training</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../tutorials/software.html" rel="next">
+<link href="../tutorials/codegallery.html" rel="prev">
+<link href="../images/coastwatch.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-973137e60ee60a7e9cda953a542133da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Information</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/coastwatch.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+    <a href="https://coastwatch.noaa.gov/cwn" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-globe"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../trainings/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Training Classes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Upcoming Trainings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../trainings/upcoming/pgrsc26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 PGRSC Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../trainings/upcoming/sat201_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 Satellite 201 Summer Series</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Past Trainings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../trainings/past/icft25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2025 Satellite and Animal Telemetry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../trainings/past/longislandsound25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2025 Long Island Sound</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../trainings/past/pgrsc24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 PGRSC Workshop</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../trainings/past/seaice24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 Sea Ice Data Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../trainings/past/afs24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 AFS Workshop</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../tutorials/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Training Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/codegallery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code Gallery</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Software Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/softwarebackground.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Software Information</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Code Gallery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../officehours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Office Hours</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#erddap-basics-what-is-erddap" id="toc-erddap-basics-what-is-erddap" class="nav-link active" data-scroll-target="#erddap-basics-what-is-erddap">ERDDAP basics: What is ERDDAP?</a>
+  <ul class="collapse">
+  <li><a href="#tutorials-on-how-to-use-erddap-servers" id="toc-tutorials-on-how-to-use-erddap-servers" class="nav-link" data-scroll-target="#tutorials-on-how-to-use-erddap-servers">Tutorials on how to use ERDDAP servers</a></li>
+  <li><a href="#coastwatch-erddap-servers" id="toc-coastwatch-erddap-servers" class="nav-link" data-scroll-target="#coastwatch-erddap-servers">CoastWatch ERDDAP servers</a></li>
+  </ul></li>
+  <li><a href="#netcdf-files" id="toc-netcdf-files" class="nav-link" data-scroll-target="#netcdf-files">NetCDF files</a></li>
+  <li><a href="#nasa-panoply" id="toc-nasa-panoply" class="nav-link" data-scroll-target="#nasa-panoply">NASA Panoply</a></li>
+  <li><a href="#coastwatch-utilities" id="toc-coastwatch-utilities" class="nav-link" data-scroll-target="#coastwatch-utilities">CoastWatch Utilities</a>
+  <ul class="collapse">
+  <li><a href="#what-coastwatch-utilities-includes" id="toc-what-coastwatch-utilities-includes" class="nav-link" data-scroll-target="#what-coastwatch-utilities-includes">What CoastWatch Utilities includes</a></li>
+  <li><a href="#getting-coastwatch-utilities" id="toc-getting-coastwatch-utilities" class="nav-link" data-scroll-target="#getting-coastwatch-utilities">Getting CoastWatch Utilities</a></li>
+  <li><a href="#coastwatch-utilities-online-course" id="toc-coastwatch-utilities-online-course" class="nav-link" data-scroll-target="#coastwatch-utilities-online-course">CoastWatch Utilities Online Course</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Information</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Software Information</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This page provides background information on common tools and formats used throughout the CoastWatch training materials, including <strong>ERDDAP</strong>, <strong>NetCDF</strong>, <strong>NASA Panoply</strong>, and the <strong>CoastWatch Utilities (CWUtils)</strong>.</p>
+<p>If you’re looking for hands-on, step-by-step lessons, go to the <strong><a href="../tutorials/software.html">Software Code Gallery</a></strong> page.</p>
+<section id="erddap-basics-what-is-erddap" class="level2">
+<h2 class="anchored" data-anchor-id="erddap-basics-what-is-erddap">ERDDAP basics: What is ERDDAP?</h2>
+<p>For many users, obtaining the ocean satellite data they need requires downloading data from several data providers, each with its own file formats, download protocols, subset abilities, and preview abilities.</p>
+<p><strong>A short list of ocean satellite data providers:</strong></p>
+<ul>
+<li>Jet Propulsion Laboratory (PO.DAAC)</li>
+<li>NASA Ocean Biology (OB.DAAC)</li>
+<li>NASA Goddard Space Flight Center</li>
+<li>NOAA Center for Satellite Applications and Research</li>
+<li>NOAA CoastWatch Central Operations</li>
+<li>NOAA Office of Satellite and Product Operations</li>
+<li>NOAA National Centers for Environmental Information (NCEI)</li>
+<li>NOAA Comprehensive Large Array-data Stewardship System (CLASS)</li>
+<li>European Space Agency (ESA)</li>
+<li>Japan Aerospace Exploration Agency (JAXA)</li>
+</ul>
+<p><img src="images/erddap1.png" class="img-fluid" style="width:50.0%"></p>
+<p>The goal behind ERDDAP is to make it easier for you to get scientific data. To accomplish that goal, ERDDAP acts as a middleman, selectively channeling datasets from remote and local data sources to a single data portal. With ERDDAP as the single-source portal, you have access to a simple, consistent way to download subsets of gridded and tabular scientific datasets in common file formats, with options and make graphs and maps.</p>
+<p><em>Features of ERDDAP:</em></p>
+<ul>
+<li>Data in the common file format of your choice. ERDDAP offers all data as .html table, ESRI .asc and .csv, Google Earth .kml, OPeNDAP binary, .mat, .nc, ODV .txt, .csv, .tsv, .json, and .xhtml</li>
+<li>ERDDAP can also return a .png or .pdf image with a customized graph or map</li>
+<li>Standardized dates/times (“seconds since 1970-01-01T00:00:00Z” in UTC)</li>
+<li>A graphical interface for humans with browsers</li>
+<li>RESTful web services for machine-to-machine data exchange and downloading data directly into your software applications (e.g.Matlab, R, Python…) and even into web pages.</li>
+</ul>
+<section id="tutorials-on-how-to-use-erddap-servers" class="level3">
+<h3 class="anchored" data-anchor-id="tutorials-on-how-to-use-erddap-servers">Tutorials on how to use ERDDAP servers</h3>
+<p>On the <a href="../tutorials/software.html">Software Code Gallery</a> page, you’ll find individual lessons such as:</p>
+<ul>
+<li>Using the ERDDAP Data Catalog</li>
+<li>Visualizing data</li>
+<li>Understanding the ERDDAP URL</li>
+<li>Creating a Hovmöller plot</li>
+<li>Working with wind vectors</li>
+<li>Using tabular data</li>
+<li>Additional resources</li>
+</ul>
+</section>
+<section id="coastwatch-erddap-servers" class="level3">
+<h3 class="anchored" data-anchor-id="coastwatch-erddap-servers">CoastWatch ERDDAP servers</h3>
+<p><strong>CoastWatch</strong></p>
+<ul>
+<li>CoastWatch West Coast Node: https://coastwatch.pfeg.noaa.gov/erddap/</li>
+<li>CoastWatch Central Pacific Node: https://oceanwatch.pifsc.noaa.gov/erddap/</li>
+<li>CoastWatch Gulf of Mexico Node: https://cwcgom.aoml.noaa.gov/erddap/</li>
+<li>CoastWatch Great Lakes Node: https://coastwatch.glerl.noaa.gov/erddap/</li>
+<li>CoastWatch Central: https://coastwatch.noaa.gov/erddap/</li>
+</ul>
+<p><strong>Other organizations</strong></p>
+<ul>
+<li>Southern California Coastal Ocean Observing System (SCCOOS): http://sccoos.org/erddap/</li>
+<li>Rutgers: http://tds.marine.rutgers.edu/erddap/</li>
+<li>NOAA GEO-IDE UAF: https://upwell.pfeg.noaa.gov/erddap/</li>
+<li>NCEI: https://www.ncei.noaa.gov/erddap/</li>
+<li>IFREMER: http://www.ifremer.fr/erddap/</li>
+<li>Marine Institute Ireland: https://erddap.marine.ie/erddap/</li>
+</ul>
+<p>A more complete list is available here:<br>
+https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations</p>
+</section>
+</section>
+<section id="netcdf-files" class="level2">
+<h2 class="anchored" data-anchor-id="netcdf-files">NetCDF files</h2>
+<p><strong>NetCDF (Network Common Data Form)</strong> is a file format for storing multidimensional scientific data (variables), including common satellite observations (e.g., sea surface temperature, salinity, chlorophyll, winds). Many organizations and scientific groups in different countries have adopted netCDF as a standard way to represent some forms of scientific data.</p>
+<p>The NetCDF format has many advantages, the most important of which is that it is self-describing, meaning that software packages can directly read the data and determine its structure, the variable names and essential metadata such as the units. This self-describing aspect of the netCDF file format means that the information needed to ensure accurate work (reduce the incidence of errors) is available within the data itself (no need for additional files). Secondly, it means that different analysis software, like Matlab, R, Python or ArcGIS (among many others), have utilities to read and work with NetCDF files. Thirdly, plotting software (e.g.&nbsp;Ferret, Panoply, ncview) can directly read the netCDF files for visualization.</p>
+<p><img src="images/netcdf1.png" class="img-fluid" style="width:40.0%"> <img src="images/netcdf2.png" class="img-fluid" style="width:40.0%"></p>
+</section>
+<section id="nasa-panoply" class="level2">
+<h2 class="anchored" data-anchor-id="nasa-panoply">NASA Panoply</h2>
+<p>NASA developed the Panoply viewer that allows users to view and visualize data held in NetCDF files. Some features the software includes are:</p>
+<ul>
+<li>Visualize data from netCDF and HDF files</li>
+<li>View the metadata</li>
+<li>View the data</li>
+<li>Display the data in many different map projections</li>
+<li>Download visualization as images</li>
+<li>Create animations</li>
+<li>Freeware</li>
+</ul>
+<p><img src="images/panoply1.png" class="img-fluid" style="width:60.0%"></p>
+<p>Panoply is available for download at: https://www.giss.nasa.gov/tools/panoply/ and can be run on Windows, Mac and Linux computers.</p>
+<p>A set of “how to” instructions can be found to the following URL https://www.giss.nasa.gov/tools/panoply/help/ Below are a few examples to try out to get you used to visualizing data with the Panoply Viewer.</p>
+<p>💡 <strong>Panoply Version Note:</strong> The examples provided in CoastWatch materials are based on Panoply <strong>Version 5.3.3</strong> (interfaces may differ slightly across versions).</p>
+</section>
+<section id="coastwatch-utilities" class="level2">
+<h2 class="anchored" data-anchor-id="coastwatch-utilities">CoastWatch Utilities</h2>
+<p>The <strong>CoastWatch Utilities</strong> (CWUtils) are software tools designed to help users work with NOAA/NESDIS CoastWatch satellite data—especially because these scientific data files aren’t meant to be opened in standard image viewers.</p>
+<section id="what-coastwatch-utilities-includes" class="level3">
+<h3 class="anchored" data-anchor-id="what-coastwatch-utilities-includes">What CoastWatch Utilities includes</h3>
+<p>CWUtils provides both: - Graphical tools for interactive exploration - Command-line tools for scripting and repeatable processing workflows</p>
+<p>The tools commonly support workflows like: - Information and statistics (inspect file contents, compute summary stats) - Data processing (format conversions, compositing, variable math, sampling) - Graphics and visualization (interactive visualization + batch rendering) - Registration and navigation (resampling between projections; navigation correction)</p>
+</section>
+<section id="getting-coastwatch-utilities" class="level3">
+<h3 class="anchored" data-anchor-id="getting-coastwatch-utilities">Getting CoastWatch Utilities</h3>
+<p>CWUtils is available for <strong>Windows, macOS, and Linux</strong>. The <a href="https://github.com/coastwatch-training/CoastWatch-Utilities/blob/main/downloads/cwutils_ug_4_0_0.pdf">User’s Guide notes</a> (minimum recommendations): <strong>~400 MB disk</strong> (1 GB recommended total workspace) and <strong>4 GB RAM</strong>.</p>
+<p>To download, the guide directs users to the CoastWatch site and to look for <strong>CoastWatch Utilities</strong> under Data Tools (or search “utilities”).</p>
+</section>
+<section id="coastwatch-utilities-online-course" class="level3">
+<h3 class="anchored" data-anchor-id="coastwatch-utilities-online-course">CoastWatch Utilities Online Course</h3>
+<p>The <a href="http://coastwatch-training.github.io/CoastWatch-Utilities/">CoastWatch Utilities Online Course</a> is about using the CoastWatch Utilities software package to help with processing satellite imagery and derived data products. The course covers working with data files (i) visually using a graphical user interface, and (ii) by typing commands at the Unix or Windows command prompts. No programming experience is needed, though it can be helpful when automating data processing.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../tutorials/codegallery.html" class="pagination-link" aria-label="Code Gallery">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Code Gallery</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../tutorials/software.html" class="pagination-link" aria-label="Software Code Gallery">
+        <span class="nav-page-text">Software Code Gallery</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© CC-By CoastWatch, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
