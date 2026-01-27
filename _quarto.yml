@@ -56,10 +56,14 @@ website:
       - section: "Training Tutorials"
         href: tutorials/index.qmd
         contents:
-          - href: tutorials/software.qmd
-            text: "Software Tutorials"
           - href: tutorials/codegallery.qmd
             text: "Code Gallery"
+          - section: "Software Tutorials"
+            contents:
+              - href: tutorials/softwarebackground.qmd
+                text: Software Information
+              - href: tutorials/software.qmd
+                text: "Software Code Gallery"
 
       - text: "Office Hours"
         href: officehours.qmd

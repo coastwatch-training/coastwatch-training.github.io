@@ -1,1271 +1,0 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
-<title>matchup-satellite-data-to-atn_track-locations – CoastWatch Training</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-</style>
-
-
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../images/coastwatch.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-973137e60ee60a7e9cda953a542133da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "sidebar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "start",
-  "type": "textbox",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
-  }
-}</script>
-
-
-<link rel="stylesheet" href="../../styles.css">
-</head>
-
-<body class="nav-sidebar docked quarto-light">
-
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
-        <i class="bi bi-search"></i>
-      </button>
-    </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
-<!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-    <div class="pt-lg-2 mt-2 text-center sidebar-header">
-      <a href="../../index.html" class="sidebar-logo-link">
-      <img src="../../images/coastwatch.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
-      </a>
-      <div class="sidebar-tools-main">
-    <a href="https://coastwatch.noaa.gov/cwn" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-globe"></i></a>
-</div>
-      </div>
-        <div class="mt-2 flex-shrink-0 align-items-center">
-        <div class="sidebar-search">
-        <div id="quarto-search" class="" title="Search"></div>
-        </div>
-        </div>
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Welcome</span></a>
-  </div>
-</li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../trainings/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Training Classes</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
- <span class="menu-text">Upcoming Trainings</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../trainings/upcoming/pgrsc26.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2026 PGRSC Course</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../trainings/upcoming/sat201_26.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2026 Satellite 201 Summer Series</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
- <span class="menu-text">Past Trainings</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../trainings/past/icft25.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2025 Satellite and Animal Telemetry</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../trainings/past/longislandsound25.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2025 Long Island Sound</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../trainings/past/pgrsc24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2024 PGRSC Workshop</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../trainings/past/seaice24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2024 Sea Ice Data Course</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../trainings/past/afs24.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2024 AFS Workshop</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-      </ul>
-  </li>
-        <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../tutorials/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Training Tutorials</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/software.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Software Tutorials</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../tutorials/codegallery.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Code Gallery</span></a>
-  </div>
-</li>
-      </ul>
-  </li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../officehours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Office Hours</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#matchup-satellite-data-to-track-locations" id="toc-matchup-satellite-data-to-track-locations" class="nav-link active" data-scroll-target="#matchup-satellite-data-to-track-locations">Matchup Satellite data to track locations</a>
-  <ul class="collapse">
-  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
-  <li><a href="#the-tutorial-demonstrates-the-following-techniques" id="toc-the-tutorial-demonstrates-the-following-techniques" class="nav-link" data-scroll-target="#the-tutorial-demonstrates-the-following-techniques">The tutorial demonstrates the following techniques</a></li>
-  <li><a href="#datasets-used-in-this-exercise" id="toc-datasets-used-in-this-exercise" class="nav-link" data-scroll-target="#datasets-used-in-this-exercise">Datasets used in this exercise</a></li>
-  <li><a href="#install-required-packages-and-load-libraries" id="toc-install-required-packages-and-load-libraries" class="nav-link" data-scroll-target="#install-required-packages-and-load-libraries">Install required packages and load libraries</a></li>
-  <li><a href="#download-animal-track-data-from-the-atn-website" id="toc-download-animal-track-data-from-the-atn-website" class="nav-link" data-scroll-target="#download-animal-track-data-from-the-atn-website">Download animal track data from the ATN website</a>
-  <ul class="collapse">
-  <li><a href="#atn-portal" id="toc-atn-portal" class="nav-link" data-scroll-target="#atn-portal">ATN Portal</a></li>
-  <li><a href="#detail-page-for-the-yellowfin-tuna-233568" id="toc-detail-page-for-the-yellowfin-tuna-233568" class="nav-link" data-scroll-target="#detail-page-for-the-yellowfin-tuna-233568">Detail page for the Yellowfin tuna (233568)</a></li>
-  <li><a href="#data-download-page" id="toc-data-download-page" class="nav-link" data-scroll-target="#data-download-page">Data Download Page</a></li>
-  <li><a href="#the-downloaded-data-file" id="toc-the-downloaded-data-file" class="nav-link" data-scroll-target="#the-downloaded-data-file">The Downloaded Data File</a></li>
-  </ul></li>
-  <li><a href="#import-the-track-data-into-a-data-frame" id="toc-import-the-track-data-into-a-data-frame" class="nav-link" data-scroll-target="#import-the-track-data-into-a-data-frame">Import the track data into a data frame</a></li>
-  <li><a href="#convert-date-string-to-a-date-object" id="toc-convert-date-string-to-a-date-object" class="nav-link" data-scroll-target="#convert-date-string-to-a-date-object">Convert date string to a date object</a></li>
-  <li><a href="#bin-multiple-observations-from-each-day-into-daily-mean-values" id="toc-bin-multiple-observations-from-each-day-into-daily-mean-values" class="nav-link" data-scroll-target="#bin-multiple-observations-from-each-day-into-daily-mean-values">Bin multiple observations from each day into daily mean values</a></li>
-  <li><a href="#plot-the-track-on-a-map" id="toc-plot-the-track-on-a-map" class="nav-link" data-scroll-target="#plot-the-track-on-a-map">Plot the track on a map</a>
-  <ul class="collapse">
-  <li><a href="#extracting-xyt-data-using-the-rerddapxtracto-package" id="toc-extracting-xyt-data-using-the-rerddapxtracto-package" class="nav-link" data-scroll-target="#extracting-xyt-data-using-the-rerddapxtracto-package">Extracting XYT data using the <strong>rerddapXtracto</strong> package</a></li>
-  </ul></li>
-  <li><a href="#examine-metadata" id="toc-examine-metadata" class="nav-link" data-scroll-target="#examine-metadata">Examine metadata</a>
-  <ul class="collapse">
-  <li><a href="#extract-data-using-the-rxtracto-function" id="toc-extract-data-using-the-rxtracto-function" class="nav-link" data-scroll-target="#extract-data-using-the-rxtracto-function">Extract data using the rxtracto function</a></li>
-  </ul></li>
-  <li><a href="#check-the-output-of-the-rxtracto-function" id="toc-check-the-output-of-the-rxtracto-function" class="nav-link" data-scroll-target="#check-the-output-of-the-rxtracto-function">Check the output of the rxtracto function</a></li>
-  <li><a href="#plotting-the-results-using-plottrack" id="toc-plotting-the-results-using-plottrack" class="nav-link" data-scroll-target="#plotting-the-results-using-plottrack">Plotting the results using plotTrack</a></li>
-  <li><a href="#animating-the-track" id="toc-animating-the-track" class="nav-link" data-scroll-target="#animating-the-track">Animating the track</a></li>
-  <li><a href="#plotting-the-results-using-ggplot" id="toc-plotting-the-results-using-ggplot" class="nav-link" data-scroll-target="#plotting-the-results-using-ggplot">Plotting the results using ggplot</a>
-  <ul class="collapse">
-  <li><a href="#create-a-data-frame-with-the-tuna-track-and-the-output-of-rxtracto" id="toc-create-a-data-frame-with-the-tuna-track-and-the-output-of-rxtracto" class="nav-link" data-scroll-target="#create-a-data-frame-with-the-tuna-track-and-the-output-of-rxtracto">Create a data frame with the tuna track and the output of rxtracto</a></li>
-  <li><a href="#plot-using-ggplot" id="toc-plot-using-ggplot" class="nav-link" data-scroll-target="#plot-using-ggplot">Plot using ggplot</a></li>
-  <li><a href="#extracting-xyt-data-by-constructing-the-url-data-requests-manually" id="toc-extracting-xyt-data-by-constructing-the-url-data-requests-manually" class="nav-link" data-scroll-target="#extracting-xyt-data-by-constructing-the-url-data-requests-manually">Extracting XYT data by constructing the URL data requests manually</a></li>
-  <li><a href="#make-a-map-of-the-data-extracted-using-ggplot" id="toc-make-a-map-of-the-data-extracted-using-ggplot" class="nav-link" data-scroll-target="#make-a-map-of-the-data-extracted-using-ggplot">Make a map of the data extracted using ggplot</a></li>
-  <li><a href="#plot-histogram-of-chlorophyll" id="toc-plot-histogram-of-chlorophyll" class="nav-link" data-scroll-target="#plot-histogram-of-chlorophyll">Plot histogram of chlorophyll</a></li>
-  </ul></li>
-  </ul></li>
-  </ul>
-</nav>
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
-
-
-
-
-<section id="matchup-satellite-data-to-track-locations" class="level1">
-<h1>Matchup Satellite data to track locations</h1>
-<p>history | Modified July 2024</p>
-<section id="objective" class="level2">
-<h2 class="anchored" data-anchor-id="objective">Objective</h2>
-<p>This tutorial will demonstrate how to extract satellite data around a set of points defined by longitude, latitude, and time coordinates from an animal telemetry tag that was acquired from the Animal Telemetry Network (<a href="https://ioos.noaa.gov/project/atn/" class="uri">https://ioos.noaa.gov/project/atn/</a>).</p>
-</section>
-<section id="the-tutorial-demonstrates-the-following-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="the-tutorial-demonstrates-the-following-techniques">The tutorial demonstrates the following techniques</h2>
-<ul>
-<li>Importing track data in csv file to data frame</li>
-<li>Plotting the latitude/longitude points onto a map</li>
-<li>Using rerddapXtraco function to extract satellite data from an ERDDAP data server along a track</li>
-<li>Plotting the satellite data onto a map</li>
-</ul>
-</section>
-<section id="datasets-used-in-this-exercise" class="level2">
-<h2 class="anchored" data-anchor-id="datasets-used-in-this-exercise">Datasets used in this exercise</h2>
-<p><strong>Chlorophyll a concentration, the European Space Agency’s Ocean Colour Climate Change Initiative (OC-CCI) Monthly dataset v6.0</strong></p>
-<p>We’ll use the European Space Agency’s OC-CCI product (<a href="https://climate.esa.int/en/projects/ocean-colour/" class="uri">https://climate.esa.int/en/projects/ocean-colour/</a>) to obtain chlorophyll data. This is a merged product combining data from many ocean color sensors to create a long time series (1997-present).</p>
-<p><strong>Yellowfin tuna telemetry track data</strong></p>
-<p>Marine protected areas (MPAs) in pelagic regions is also called Blue Water. The Palmyra Bluewater Research (PBR) project seeks to understand the impact of MPAs on species and ecosystems by tracking at-sea movements of ten marine animal species at Palmyra Atoll (part of the U.S. Pacific Remote Islands Marine National Monument). All data were being collected from adult individuals between May 2022 and June 2023. They can be accessed via the Animal Telemetry Network (ATN) data portal for the PBR project under “Project Data”: (<a href="https://portal.atn.ioos.us/?ls=861Wqpd2#metadata/1f877c4c-7b50-49f5-be86-3354664e0cff/project/files" class="uri">https://portal.atn.ioos.us/?ls=861Wqpd2#metadata/1f877c4c-7b50-49f5-be86-3354664e0cff/project/files</a>)</p>
-<p>The yellowfin tuna geolocation data is developed as part of the PBR project. This example track used in the tutorial is from May 2022 to November 2022. The track data has been previously downloaded, extracted, and stored in the data folder of this training module.</p>
-</section>
-<section id="install-required-packages-and-load-libraries" class="level2">
-<h2 class="anchored" data-anchor-id="install-required-packages-and-load-libraries">Install required packages and load libraries</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to check if pkgs are installed, and install any missing pkgs</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pkgTest <span class="ot">&lt;-</span> <span class="cf">function</span>(x)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(x,<span class="at">character.only =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(x,<span class="at">dep=</span><span class="cn">TRUE</span>,<span class="at">repos=</span><span class="st">'http://cran.us.r-project.org'</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="sc">!</span><span class="fu">require</span>(x,<span class="at">character.only =</span> <span class="cn">TRUE</span>)) <span class="fu">stop</span>(x, <span class="st">" :Package not found"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create list of required packages</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>list.of.packages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"rerddap"</span>, <span class="st">"plotdap"</span>, <span class="st">"parsedate"</span>, <span class="st">"ggplot2"</span>, <span class="st">"rerddapXtracto"</span>,</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                       <span class="st">"date"</span>, <span class="st">"maps"</span>, <span class="st">"mapdata"</span>, <span class="st">"RColorBrewer"</span>,<span class="st">"viridis"</span>, <span class="st">"stringr"</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Create list of installed packages</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>pkges <span class="ot">=</span> <span class="fu">installed.packages</span>()[,<span class="st">"Package"</span>]</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Install and load all required pkgs</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (pk <span class="cf">in</span> list.of.packages) {</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pkgTest</span>(pk)</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="download-animal-track-data-from-the-atn-website" class="level2">
-<h2 class="anchored" data-anchor-id="download-animal-track-data-from-the-atn-website">Download animal track data from the ATN website</h2>
-<ul>
-<li><p><strong>The data you need for this exercise are already in the GitHub repository</strong></p></li>
-<li><p><strong>The following step are show you how to download the data yourself</strong></p></li>
-</ul>
-<section id="atn-portal" class="level3">
-<h3 class="anchored" data-anchor-id="atn-portal">ATN Portal</h3>
-<ul>
-<li>Follow the link to the ATN website: <a href="https://portal.atn.ioos.us/?ls=O6vlufm7#map" class="uri">https://portal.atn.ioos.us/?ls=O6vlufm7#map</a><br>
-</li>
-<li>On the right navigational panel, look for the “Palmyra Bluewater Research (PBR) Megafauna Movement Ecology Project, 2022-2023” tab.</li>
-<li>Within the tab, scroll to find the telemetry tag labeled “Yellowfin tuna (233568)”.</li>
-<li>Click the search icon (maginifying glass) label next to the label to zoom into the area the area of the animal track.</li>
-</ul>
-<figure class="figure">
-<img src="images/atn_map.png" alt="Image of the ATN portal webpage" class="figure-img">
-<figcaption aria-hidden="true">
-Image of the ATN portal webpage
-</figcaption>
-</figure>
-</section>
-<section id="detail-page-for-the-yellowfin-tuna-233568" class="level3">
-<h3 class="anchored" data-anchor-id="detail-page-for-the-yellowfin-tuna-233568">Detail page for the Yellowfin tuna (233568)</h3>
-<ul>
-<li>Next click the tag icon to the right of the search icon.</li>
-<li>This page shows you details about the animal and the track.</li>
-</ul>
-<figure class="figure">
-<img src="images/atn_detail.png" alt="Image of the detail page for the Yellowfin Tuna #233568" class="figure-img">
-<figcaption aria-hidden="true">
-Image of the detail page for the Yellowfin Tuna #233568
-</figcaption>
-</figure>
-</section>
-<section id="data-download-page" class="level3">
-<h3 class="anchored" data-anchor-id="data-download-page">Data Download Page</h3>
-<ul>
-<li>Press the “Project Data” tab near the top of the webpage to bring up the data file list.</li>
-<li>Search for the animal id number (233568).</li>
-<li>Click on the link “THUALB_2022_04-PTT_233568.zip (8.6 MB)” to download the data.</li>
-</ul>
-<figure class="figure">
-<img src="images/atn_data.png" alt="Data download page" class="figure-img">
-<figcaption aria-hidden="true">
-Data download page
-</figcaption>
-</figure>
-</section>
-<section id="the-downloaded-data-file" class="level3">
-<h3 class="anchored" data-anchor-id="the-downloaded-data-file">The Downloaded Data File</h3>
-<ul>
-<li>The download will be a zip file. You will need to unzip it.</li>
-<li>The unzipped file folder contains many ancillary data files, but the one you are looking for is the CSV file (THUALB_2022_04-233568-4-GPE3.csv).</li>
-<li>You don’t have to move this file into the data folder for this exercise. It is already there.<br>
-</li>
-<li>But if you download the file for a different animal track you would need to put the CSV file into the folder.</li>
-</ul>
-</section>
-</section>
-<section id="import-the-track-data-into-a-data-frame" class="level2">
-<h2 class="anchored" data-anchor-id="import-the-track-data-into-a-data-frame">Import the track data into a data frame</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import csv file into a data frame</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>file <span class="ot">=</span> <span class="st">"../data/THUALB_2022_04-233568-5-GPE3.csv"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pre_tuna_df <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(file, <span class="at">skip =</span> <span class="dv">5</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show 3 rows from the data frame</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pre_tuna_df, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>##         DeployID    Ptt                 Date Most.Likely.Latitude
-## 1 THUALB_2022_04 233568 31-May-2022 19:00:00                5.875
-## 2 THUALB_2022_04 233568 01-Jun-2022 00:00:00                5.875
-## 3 THUALB_2022_04 233568 01-Jun-2022 04:56:15                5.850
-##   Most.Likely.Longitude Observation.Type Observed.SST Satellite.SST
-## 1              -162.125             User           NA            NA
-## 2              -162.100             None           NA            NA
-## 3              -161.975     Light - Dusk           NA            NA
-##   Observed.Depth Bathymetry.Depth Observation.LL..MSS. Observation.Score
-## 1             NA               NA                   NA          68.60585
-## 2             NA               NA                   NA                NA
-## 3            144             2908                   NA          43.16747
-##                Sunrise               Sunset
-## 1                                          
-## 2 01-Jun-2022 16:33:04 02-Jun-2022 04:59:36
-## 3</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert longitudes to 0~360 (Re-center map to the dateline)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pre_tuna_df[<span class="st">'Most.Likely.Longitude'</span>] <span class="ot">&lt;-</span> pre_tuna_df[<span class="st">'Most.Likely.Longitude'</span>] <span class="sc">+</span> <span class="dv">360</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Show converted data frame</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pre_tuna_df, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>##         DeployID    Ptt                 Date Most.Likely.Latitude
-## 1 THUALB_2022_04 233568 31-May-2022 19:00:00                5.875
-## 2 THUALB_2022_04 233568 01-Jun-2022 00:00:00                5.875
-## 3 THUALB_2022_04 233568 01-Jun-2022 04:56:15                5.850
-##   Most.Likely.Longitude Observation.Type Observed.SST Satellite.SST
-## 1               197.875             User           NA            NA
-## 2               197.900             None           NA            NA
-## 3               198.025     Light - Dusk           NA            NA
-##   Observed.Depth Bathymetry.Depth Observation.LL..MSS. Observation.Score
-## 1             NA               NA                   NA          68.60585
-## 2             NA               NA                   NA                NA
-## 3            144             2908                   NA          43.16747
-##                Sunrise               Sunset
-## 1                                          
-## 2 01-Jun-2022 16:33:04 02-Jun-2022 04:59:36
-## 3</code></pre>
-</section>
-<section id="convert-date-string-to-a-date-object" class="level2">
-<h2 class="anchored" data-anchor-id="convert-date-string-to-a-date-object">Convert date string to a date object</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pre_tuna_df<span class="sc">$</span>Date <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(pre_tuna_df<span class="sc">$</span>Date, <span class="at">format =</span> <span class="st">"%d-%b-%Y"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pre_tuna_df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>##         DeployID    Ptt       Date Most.Likely.Latitude Most.Likely.Longitude
-## 1 THUALB_2022_04 233568 2022-05-31                5.875               197.875
-## 2 THUALB_2022_04 233568 2022-06-01                5.875               197.900
-## 3 THUALB_2022_04 233568 2022-06-01                5.850               198.025
-## 4 THUALB_2022_04 233568 2022-06-01                5.900               198.025
-## 5 THUALB_2022_04 233568 2022-06-01                5.900               198.025
-## 6 THUALB_2022_04 233568 2022-06-01                5.900               198.025
-##   Observation.Type Observed.SST Satellite.SST Observed.Depth Bathymetry.Depth
-## 1             User           NA            NA             NA               NA
-## 2             None           NA            NA             NA               NA
-## 3     Light - Dusk           NA            NA            144             2908
-## 4             None           NA            NA             NA               NA
-## 5              SST         28.2      28.32458              1             2908
-## 6     Light - Dawn           NA            NA            112             2908
-##   Observation.LL..MSS. Observation.Score              Sunrise
-## 1                   NA          68.60585                     
-## 2                   NA                NA 01-Jun-2022 16:33:04
-## 3                   NA          43.16747                     
-## 4                   NA                NA                     
-## 5                   NA          76.62995                     
-## 6                   NA          54.92253                     
-##                 Sunset
-## 1                     
-## 2 02-Jun-2022 04:59:36
-## 3                     
-## 4                     
-## 5                     
-## 6</code></pre>
-</section>
-<section id="bin-multiple-observations-from-each-day-into-daily-mean-values" class="level2">
-<h2 class="anchored" data-anchor-id="bin-multiple-observations-from-each-day-into-daily-mean-values">Bin multiple observations from each day into daily mean values</h2>
-<p>The track data has multiple longitude/latitude/time points for each date. That temporal resolution is much higher than the daily and month satellite datasets that are available. So, let’s reduce the multiple daily values for the animal track data to a single value for each day. The code below creates a new dataframe that bins data for each date and calculates the mean for selected columns.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tuna_df <span class="ot">&lt;-</span> pre_tuna_df <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">Most.Likely.Latitude =</span> <span class="fu">mean</span>(Most.Likely.Latitude),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Most.Likely.Longitude =</span> <span class="fu">mean</span>(Most.Likely.Longitude),</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Satellite.SST =</span> <span class="fu">mean</span>(Satellite.SST, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Observed.SST =</span> <span class="fu">mean</span>(Observed.SST, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Observed.Depth =</span> <span class="fu">mean</span>(Observed.Depth, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                                         <span class="at">Bathymetry.Depth =</span> <span class="fu">mean</span>(Bathymetry.Depth, <span class="at">na.rm=</span><span class="cn">TRUE</span>),</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                         )</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>tuna_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>## # A tibble: 177 × 7
-##    Date       Most.Likely.Latitude Most.Likely.Longitude Satellite.SST
-##    &lt;date&gt;                    &lt;dbl&gt;                 &lt;dbl&gt;         &lt;dbl&gt;
-##  1 2022-05-31                 5.88                  198.         NaN  
-##  2 2022-06-01                 5.88                  198           28.3
-##  3 2022-06-02                 5.92                  198.          28.3
-##  4 2022-06-03                 5.92                  198.          28.3
-##  5 2022-06-04                 5.98                  198.          28.3
-##  6 2022-06-05                 6.11                  198.          28.4
-##  7 2022-06-06                 6.28                  198.          28.3
-##  8 2022-06-07                 6.45                  197.          28.3
-##  9 2022-06-08                 6.51                  197.          28.2
-## 10 2022-06-09                 6.78                  197.          28.2
-## # ℹ 167 more rows
-## # ℹ 3 more variables: Observed.SST &lt;dbl&gt;, Observed.Depth &lt;dbl&gt;,
-## #   Bathymetry.Depth &lt;dbl&gt;</code></pre>
-</section>
-<section id="plot-the-track-on-a-map" class="level2">
-<h2 class="anchored" data-anchor-id="plot-the-track-on-a-map">Plot the track on a map</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download world map</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mapWorld <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>, <span class="at">wrap=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">360</span>))</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Map tuna tracks</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tuna_df, <span class="fu">aes</span>(Most.Likely.Longitude,Most.Likely.Latitude)) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_path</span>(<span class="at">group=</span><span class="dv">1</span>)<span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Most.Likely.Longitude,<span class="at">y=</span>Most.Likely.Latitude), <span class="at">pch=</span><span class="dv">1</span>, <span class="at">size=</span><span class="dv">2</span> )<span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Most.Likely.Longitude[<span class="dv">1</span>],<span class="at">y=</span>Most.Likely.Latitude[<span class="dv">1</span>]),<span class="at">fill=</span><span class="st">"green"</span>, <span class="at">shape=</span><span class="dv">24</span>, <span class="at">size=</span><span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>Most.Likely.Longitude[<span class="fu">length</span>(Most.Likely.Longitude)],<span class="at">y=</span>Most.Likely.Latitude[<span class="fu">length</span>(Most.Likely.Latitude)]), <span class="at">shape=</span><span class="dv">22</span>, <span class="at">size=</span><span class="dv">3</span>, <span class="at">fill=</span><span class="st">"red"</span>)<span class="sc">+</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> mapWorld, <span class="fu">aes</span>(<span class="at">x=</span>long, <span class="at">y =</span> lat, <span class="at">group =</span> group)) <span class="sc">+</span> </span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">180</span>,<span class="dv">220</span>),<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">26</span>))<span class="sc">+</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Longitude (deg)"</span>, <span class="at">y=</span><span class="st">"Latitude (deg)"</span>, <span class="at">title=</span><span class="st">"Yellowfin Tuna Track with start (green) and end location (red)"</span>)<span class="sc">+</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>), <span class="at">aspect.ratio=</span><span class="fl">0.6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="images/trackplot-1.png" class="img-fluid"><!-- --></p>
-<p>In this exercise, two different ways of extracting data from ERDDAP data server along a track of xyt points are demonstrated:</p>
-<ol type="1">
-<li>Using the <strong>rerddapXtracto</strong> package which was written specifically for this task</li>
-<li>For those who want to know what goes on “under the hood”, we will show how to manually construct ERDDAP data-request URLs to download the data.</li>
-</ol>
-<section id="extracting-xyt-data-using-the-rerddapxtracto-package" class="level3">
-<h3 class="anchored" data-anchor-id="extracting-xyt-data-using-the-rerddapxtracto-package">Extracting XYT data using the <strong>rerddapXtracto</strong> package</h3>
-<p>We will use the `<code>rxtracto</code> function of the <strong>rerddapXtracto</strong> package, which was written to simplify data extraction from ERDDAP servers.</p>
-<p><strong>Let’s use data from the monthly product of the OC-CCI datasets.</strong></p>
-<p>Ideally, we would work with daily data since we have one location per day. But chlorophyll data are severely affected by clouds (i.e.&nbsp;lots of missing data), so you might need to use weekly or even monthly data to get sufficient non-missing data. We will start with the monthly chl-a data since it contains fewer data gaps.</p>
-<p>The ERDDAP URL to the monthly product is below:<br>
-<a href="https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v6-0" class="uri">https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v6-0</a></p>
-<p><strong>A note on dataset selection</strong><br>
-We have preselected the dataset because we know it will work with this exercise. If you were selecting datasets on your own, you would want to check out the dataset to determine if its spatial and temporal coverages are suitable for your application. Following the link above you will find:</p>
-<p>The latitude range is -89.97916 to 89.97916 and the longitude range is 0.020833 to 359.97916, which covers the track latitude range of 23.72 to 41.77 and longitude range of 175.86 to 248.57.</p>
-<p>The time range is 1997-09-04 to 2023-12-01 (at the day of this writing), which covers the track time range of 2022-05-30 to 2023-01-18.</p>
-<p>You should also note the name of the variable you will be downloading. For this dataset it is “<strong>chlor_a</strong>”</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set dataset ID</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="st">'esa-cci-chla-monthly-v6-0'</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get data information from ERDDAP server</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>dataInfo <span class="ot">&lt;-</span> rerddap<span class="sc">::</span><span class="fu">info</span>(dataset, <span class="at">url=</span> <span class="st">"https://oceanwatch.pifsc.noaa.gov/erddap"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="examine-metadata" class="level2">
-<h2 class="anchored" data-anchor-id="examine-metadata">Examine metadata</h2>
-<p><code>rerddap::info</code> returns the metadata of the requested dataset. We can first understand the attributes dataInfo includes then examine each attribute.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the metadata</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dataInfo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>## &lt;ERDDAP info&gt; esa-cci-chla-monthly-v6-0 
-##  Base URL: https://oceanwatch.pifsc.noaa.gov/erddap 
-##  Dataset Type: griddap 
-##  Dimensions (range):  
-##      time: (1997-09-04T00:00:00Z, 2023-12-01T00:00:00Z) 
-##      latitude: (-89.97916666666666, 89.97916666666667) 
-##      longitude: (0.020833333333314386, 359.97916666666663) 
-##  Variables:  
-##      chlor_a: 
-##          Units: mg m-3 
-##      chlor_a_log10_bias: 
-##      chlor_a_log10_rmsd: 
-##      MERIS_nobs_sum: 
-##      MODISA_nobs_sum: 
-##      OLCI_A_nobs_sum: 
-##      OLCI_B_nobs_sum: 
-##      SeaWiFS_nobs_sum: 
-##      total_nobs_sum: 
-##      VIIRS_nobs_sum:</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display data attributes</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataInfo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>## [1] "variables" "alldata"   "base_url"</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Examine attribute: variables</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>dataInfo<span class="sc">$</span>variables</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>##         variable_name data_type actual_range
-## 1             chlor_a     float             
-## 2  chlor_a_log10_bias     float             
-## 3  chlor_a_log10_rmsd     float             
-## 4      MERIS_nobs_sum     float             
-## 5     MODISA_nobs_sum     float             
-## 6     OLCI_A_nobs_sum     float             
-## 7     OLCI_B_nobs_sum     float             
-## 8    SeaWiFS_nobs_sum     float             
-## 9      total_nobs_sum     float             
-## 10     VIIRS_nobs_sum     float</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribute attributes of dataInfo$alldata</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(dataInfo<span class="sc">$</span>alldata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>##  [1] "NC_GLOBAL"          "time"               "latitude"          
-##  [4] "longitude"          "chlor_a"            "MERIS_nobs_sum"    
-##  [7] "MODISA_nobs_sum"    "OLCI_A_nobs_sum"    "OLCI_B_nobs_sum"   
-## [10] "SeaWiFS_nobs_sum"   "VIIRS_nobs_sum"     "chlor_a_log10_bias"
-## [13] "chlor_a_log10_rmsd" "total_nobs_sum"</code></pre>
-<section id="extract-data-using-the-rxtracto-function" class="level3">
-<h3 class="anchored" data-anchor-id="extract-data-using-the-rxtracto-function">Extract data using the rxtracto function</h3>
-<p>First we need to define the bounding box within which to search for coordinates. The <strong>rxtracto</strong> function allows you to set the size of the box used to collect data around the track points using the xlen and ylen arguments. The values for xlen and ylen are in degrees. For our example, we can use 0.2 degrees for both arguments. Note: You can also submit vectors for xlen and ylen, as long as they are the same length as xcoord, ycoord, and tcoord if you want to set a different search radius around each track point.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the variable we want to extract data from:</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>parameter <span class="ot">&lt;-</span> <span class="st">'chlor_a'</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set xlen, ylen to 0.2 degree</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>xlen <span class="ot">&lt;-</span> <span class="fl">0.2</span> </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>ylen <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Create date column using year, month and day in a format ERDDAP will understand (eg. 2008-12-15)</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#tuna_df$date &lt;-as.Date(tuna_df$Date, format = "%d-%b-%Y")</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Get variables x, y, t coordinates from tuna track data</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>xcoords <span class="ot">&lt;-</span> tuna_df<span class="sc">$</span>Most.Likely.Longitude</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>ycoords <span class="ot">&lt;-</span> tuna_df<span class="sc">$</span>Most.Likely.Latitude</span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>tcoords <span class="ot">&lt;-</span> tuna_df<span class="sc">$</span>Date</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract satellite data using x, y, t coordinates from tuna track data</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>chl_track <span class="ot">&lt;-</span> <span class="fu">rxtracto</span>(dataInfo, </span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parameter=</span>parameter, </span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>                  <span class="at">xcoord=</span>xcoords, <span class="at">ycoord=</span>ycoords, </span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tcoord=</span>tcoords, <span class="at">xlen=</span>xlen, <span class="at">ylen=</span>ylen)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-</section>
-<section id="check-the-output-of-the-rxtracto-function" class="level2">
-<h2 class="anchored" data-anchor-id="check-the-output-of-the-rxtracto-function">Check the output of the rxtracto function</h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check all variables extracted using rxtracto</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(chl_track)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>## List of 13
-##  $ mean chlor_a     : num [1:177] 0.35 0.34 0.349 0.367 0.276 ...
-##  $ stdev chlor_a    : num [1:177] 0.373 0.372 0.373 0.407 0.154 ...
-##  $ n                : int [1:177] 36 36 36 30 25 36 30 36 36 30 ...
-##  $ satellite date   : chr [1:177] "2022-06-01T00:00:00Z" "2022-06-01T00:00:00Z" "2022-06-01T00:00:00Z" "2022-06-01T00:00:00Z" ...
-##  $ requested lon min: num [1:177] 198 198 198 198 198 ...
-##  $ requested lon max: num [1:177] 198 198 198 198 198 ...
-##  $ requested lat min: num [1:177] 5.78 5.79 5.83 5.83 5.88 ...
-##  $ requested lat max: num [1:177] 5.97 5.98 6.02 6.02 6.08 ...
-##  $ requested z min  : logi [1:177] NA NA NA NA NA NA ...
-##  $ requested z max  : logi [1:177] NA NA NA NA NA NA ...
-##  $ requested date   : chr [1:177] "2022-05-31" "2022-06-01" "2022-06-02" "2022-06-03" ...
-##  $ median chlor_a   : num [1:177] 0.235 0.227 0.232 0.236 0.232 ...
-##  $ mad chlor_a      : num [1:177] 0.017 0.0148 0.0172 0.0151 0.0192 ...
-##  - attr(*, "row.names")= chr [1:177] "1" "2" "3" "4" ...
-##  - attr(*, "class")= chr [1:2] "list" "rxtractoTrack"
-##  - attr(*, "base_url")= chr "https://oceanwatch.pifsc.noaa.gov/erddap/"
-##  - attr(*, "datasetid")= chr "esa-cci-chla-monthly-v6-0"</code></pre>
-<p><strong>rxtracto</strong> computes statistics using all the pixels found in the search radius around each track point.</p>
-</section>
-<section id="plotting-the-results-using-plottrack" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-the-results-using-plottrack">Plotting the results using plotTrack</h2>
-<p>We will use the “plotTrack” function to plot the results. “plotTrack” is a function of the “rerddapXtracto” package designed specifically to plot the results of the “rxtracto” function. It provides an easy way to make a quick plot, however it’s not very customizable.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot tracks with color: algae specifically designed for chlorophyll</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotTrack</span>(chl_track, xcoords, ycoords, tcoords, <span class="at">size=</span><span class="dv">3</span>, <span class="at">plotColor =</span> <span class="st">'viridis'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="images/chltrackmap1-1.png" class="img-fluid"><!-- --></p>
-</section>
-<section id="animating-the-track" class="level2">
-<h2 class="anchored" data-anchor-id="animating-the-track">Animating the track</h2>
-<p>One of the nice features of the “plotTrack” function is that it is very easy to make an animation of the track data. This will take a minute to run. It creates an animated gif that will display in the Rstudio viewer window once the encoding to gif is done. Note: this works with but doesn’t require the latest versions of R Studio or rerddapXtracto package (e.g., it works with R Studio Version 2023.12.1+402 and rerddapXtracto version 1.1.5).</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Animate tracks</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>make180 <span class="ot">&lt;-</span> <span class="cf">function</span>(lon) {</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    ind <span class="ot">&lt;-</span> <span class="fu">which</span>(lon <span class="sc">&gt;</span> <span class="dv">180</span>)</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    lon[ind] <span class="ot">&lt;-</span> lon[ind] <span class="sc">-</span> <span class="dv">360</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>   <span class="fu">return</span>(lon)</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plotTrack</span>(chl_track,</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>          <span class="fu">make180</span>(xcoords),</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>          ycoords, tcoords,</span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>          <span class="at">plotColor =</span> <span class="st">'viridis'</span>,</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>          <span class="at">animate =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>          <span class="at">cumulative =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>## # A tibble: 177 × 7
-##    format width height colorspace matte filesize density
-##    &lt;chr&gt;  &lt;int&gt;  &lt;int&gt; &lt;chr&gt;      &lt;lgl&gt;    &lt;int&gt; &lt;chr&gt;  
-##  1 gif      672    480 sRGB       TRUE         0 72x72  
-##  2 gif      672    480 sRGB       TRUE         0 72x72  
-##  3 gif      672    480 sRGB       TRUE         0 72x72  
-##  4 gif      672    480 sRGB       TRUE         0 72x72  
-##  5 gif      672    480 sRGB       TRUE         0 72x72  
-##  6 gif      672    480 sRGB       TRUE         0 72x72  
-##  7 gif      672    480 sRGB       TRUE         0 72x72  
-##  8 gif      672    480 sRGB       TRUE         0 72x72  
-##  9 gif      672    480 sRGB       TRUE         0 72x72  
-## 10 gif      672    480 sRGB       TRUE         0 72x72  
-## # ℹ 167 more rows</code></pre>
-</section>
-<section id="plotting-the-results-using-ggplot" class="level2">
-<h2 class="anchored" data-anchor-id="plotting-the-results-using-ggplot">Plotting the results using ggplot</h2>
-<section id="create-a-data-frame-with-the-tuna-track-and-the-output-of-rxtracto" class="level3">
-<h3 class="anchored" data-anchor-id="create-a-data-frame-with-the-tuna-track-and-the-output-of-rxtracto">Create a data frame with the tuna track and the output of rxtracto</h3>
-<p>If we to do an customization of the plot, its better to plot the data using ggplot. We will first create a data frame that contains longitudes and latitudes from the tuna and associated satellite chlor-a values.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a data frame of coords from tuna and chlor_a values </span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>new_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">cbind</span>(xcoords, ycoords,  </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                              chl_track<span class="sc">$</span><span class="st">`</span><span class="at">requested lon min</span><span class="st">`</span>, </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                              chl_track<span class="sc">$</span><span class="st">`</span><span class="at">requested lon max</span><span class="st">`</span>, </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                              chl_track<span class="sc">$</span><span class="st">`</span><span class="at">requested lat min</span><span class="st">`</span>, </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>                              chl_track<span class="sc">$</span><span class="st">`</span><span class="at">requested lon max</span><span class="st">`</span>,  </span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>                              chl_track<span class="sc">$</span><span class="st">`</span><span class="at">mean chlor_a</span><span class="st">`</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>                        )</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Set variable names</span></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(new_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Lon"</span>, </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Lat"</span>, </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Matchup_Lon_Lower"</span>,</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Matchup_Lon_Upper"</span>,</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Matchup_Lat_Lower"</span>,</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Matchup_Lat_Upper"</span>, </span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"Chlor_a"</span>)</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(new_df, <span class="st">"tuna_matchup_df.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="plot-using-ggplot" class="level3">
-<h3 class="anchored" data-anchor-id="plot-using-ggplot">Plot using ggplot</h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import world map</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>mapWorld <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>, <span class="at">wrap=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">360</span>))</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the track positions with associated chlora values</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(new_df) <span class="sc">+</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(Lon,Lat,<span class="at">color=</span><span class="fu">log</span>(Chlor_a))) <span class="sc">+</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> mapWorld, <span class="fu">aes</span>(<span class="at">x=</span>long, <span class="at">y =</span> lat, <span class="at">group =</span> group)) <span class="sc">+</span> </span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">180</span>,<span class="dv">220</span>),<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">26</span>)) <span class="sc">+</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Longitude (deg)"</span>, <span class="at">y=</span><span class="st">"Latitude (deg)"</span>, <span class="at">title=</span><span class="st">"Yellowfin Tuna Track with chlor-a values"</span>) <span class="sc">+</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="images_ATN/ggplot_track-1.png" class="img-fluid"><!-- --></p>
-</section>
-<section id="extracting-xyt-data-by-constructing-the-url-data-requests-manually" class="level3">
-<h3 class="anchored" data-anchor-id="extracting-xyt-data-by-constructing-the-url-data-requests-manually">Extracting XYT data by constructing the URL data requests manually</h3>
-<p>First we need to set up the ERDDAP URL using the datasets ID and the name of the variable we are interested in. Note that we are requesting the data as .csv</p>
-<p><code>data_url = "https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v6-0.csv?chlor_a"</code></p>
-<p>For a refresher of how to construct an ERDDAP data-request URL, please review the ERDDAP tutorial “04-Erddapurl.md” at the following link: <a href="https://github.com/coastwatch-training/CoastWatch-Tutorials/blob/main/ERDDAP-basics/lessons/" class="uri">https://github.com/coastwatch-training/CoastWatch-Tutorials/blob/main/ERDDAP-basics/lessons/</a></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set erddap address</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>erddap_base_url <span class="ot">&lt;-</span> <span class="st">"https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v6-0.csv?chlor_a"</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Get longitude and latitude from tuna track data</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>lon <span class="ot">&lt;-</span> tuna_df<span class="sc">$</span>Most.Likely.Longitude</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>lat <span class="ot">&lt;-</span> tuna_df<span class="sc">$</span>Most.Likely.Latitude</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get time from tuna track data and convert into ERDDAP date format</span></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>dates2 <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(tuna_df<span class="sc">$</span>Date, <span class="at">format =</span> <span class="st">"%d-%b-%Y"</span>)</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Initatilize tot variable where data will be downloaded to</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>tot <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">4</span>)</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each tuna track data</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(tuna_df)[<span class="dv">1</span>]) {</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># follow the progress of the loop</span></span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"</span><span class="sc">\014</span><span class="st">"</span>)</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">" Loop "</span>, i, <span class="st">" of "</span>, <span class="fu">dim</span>(tuna_df)[<span class="dv">1</span>])</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create erddap URL by adding lat, lon, dates of each track point </span></span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>   url <span class="ot">&lt;-</span>  <span class="fu">paste</span>(erddap_base_url,</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"[("</span>, dates2[i], <span class="st">"):1:("</span>, dates2[i],</span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>                 <span class="st">")][("</span>, lat[i], <span class="st">"):1:("</span>, lat[i],</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>                 <span class="st">")][("</span>, lon[i], <span class="st">"):1:("</span>, lon[i], <span class="st">")]"</span>, <span class="at">sep =</span> <span class="st">""</span>)  </span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Request and load satelite data from ERDDAP</span></span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>   new <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(url, <span class="at">skip=</span><span class="dv">2</span>, <span class="at">header =</span> <span class="cn">FALSE</span>) </span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>   <span class="co"># Append the data</span></span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>   tot <span class="ot">&lt;-</span> <span class="fu">rbind</span>(tot, new)   </span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<pre><code>##  Loop  1  of  177 Loop  2  of  177 Loop  3  of  177 Loop  4  of  177 Loop  5  of  177 Loop  6  of  177 Loop  7  of  177 Loop  8  of  177 Loop  9  of  177 Loop  10  of  177 Loop  11  of  177 Loop  12  of  177 Loop  13  of  177 Loop  14  of  177 Loop  15  of  177 Loop  16  of  177 Loop  17  of  177 Loop  18  of  177 Loop  19  of  177 Loop  20  of  177 Loop  21  of  177 Loop  22  of  177 Loop  23  of  177 Loop  24  of  177 Loop  25  of  177 Loop  26  of  177 Loop  27  of  177 Loop  28  of  177 Loop  29  of  177 Loop  30  of  177 Loop  31  of  177 Loop  32  of  177 Loop  33  of  177 Loop  34  of  177 Loop  35  of  177 Loop  36  of  177 Loop  37  of  177 Loop  38  of  177 Loop  39  of  177 Loop  40  of  177 Loop  41  of  177 Loop  42  of  177 Loop  43  of  177 Loop  44  of  177 Loop  45  of  177 Loop  46  of  177 Loop  47  of  177 Loop  48  of  177 Loop  49  of  177 Loop  50  of  177 Loop  51  of  177 Loop  52  of  177 Loop  53  of  177 Loop  54  of  177 Loop  55  of  177 Loop  56  of  177 Loop  57  of  177 Loop  58  of  177 Loop  59  of  177 Loop  60  of  177 Loop  61  of  177 Loop  62  of  177 Loop  63  of  177 Loop  64  of  177 Loop  65  of  177 Loop  66  of  177 Loop  67  of  177 Loop  68  of  177 Loop  69  of  177 Loop  70  of  177 Loop  71  of  177 Loop  72  of  177 Loop  73  of  177 Loop  74  of  177 Loop  75  of  177 Loop  76  of  177 Loop  77  of  177 Loop  78  of  177 Loop  79  of  177 Loop  80  of  177 Loop  81  of  177 Loop  82  of  177 Loop  83  of  177 Loop  84  of  177 Loop  85  of  177 Loop  86  of  177 Loop  87  of  177 Loop  88  of  177 Loop  89  of  177 Loop  90  of  177 Loop  91  of  177 Loop  92  of  177 Loop  93  of  177 Loop  94  of  177 Loop  95  of  177 Loop  96  of  177 Loop  97  of  177 Loop  98  of  177 Loop  99  of  177 Loop  100  of  177 Loop  101  of  177 Loop  102  of  177 Loop  103  of  177 Loop  104  of  177 Loop  105  of  177 Loop  106  of  177 Loop  107  of  177 Loop  108  of  177 Loop  109  of  177 Loop  110  of  177 Loop  111  of  177 Loop  112  of  177 Loop  113  of  177 Loop  114  of  177 Loop  115  of  177 Loop  116  of  177 Loop  117  of  177 Loop  118  of  177 Loop  119  of  177 Loop  120  of  177 Loop  121  of  177 Loop  122  of  177 Loop  123  of  177 Loop  124  of  177 Loop  125  of  177 Loop  126  of  177 Loop  127  of  177 Loop  128  of  177 Loop  129  of  177 Loop  130  of  177 Loop  131  of  177 Loop  132  of  177 Loop  133  of  177 Loop  134  of  177 Loop  135  of  177 Loop  136  of  177 Loop  137  of  177 Loop  138  of  177 Loop  139  of  177 Loop  140  of  177 Loop  141  of  177 Loop  142  of  177 Loop  143  of  177 Loop  144  of  177 Loop  145  of  177 Loop  146  of  177 Loop  147  of  177 Loop  148  of  177 Loop  149  of  177 Loop  150  of  177 Loop  151  of  177 Loop  152  of  177 Loop  153  of  177 Loop  154  of  177 Loop  155  of  177 Loop  156  of  177 Loop  157  of  177 Loop  158  of  177 Loop  159  of  177 Loop  160  of  177 Loop  161  of  177 Loop  162  of  177 Loop  163  of  177 Loop  164  of  177 Loop  165  of  177 Loop  166  of  177 Loop  167  of  177 Loop  168  of  177 Loop  169  of  177 Loop  170  of  177 Loop  171  of  177 Loop  172  of  177 Loop  173  of  177 Loop  174  of  177 Loop  175  of  177 Loop  176  of  177 Loop  177  of  177</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Delete the first row (default column names)</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>tot <span class="ot">&lt;-</span> tot[<span class="sc">-</span><span class="dv">1</span>, ]</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(tot) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"chlo_date"</span>, <span class="st">"matched_lat"</span>, <span class="st">"matched_lon"</span>, <span class="st">"matched_chl.m"</span>)</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frame combining tuna track data and the chlo-a data</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>chl_track2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(tuna_df, tot)</span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Write the data frame to csv file</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(chl_track2, <span class="st">'tuna-track-chl.m.csv'</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="make-a-map-of-the-data-extracted-using-ggplot" class="level3">
-<h3 class="anchored" data-anchor-id="make-a-map-of-the-data-extracted-using-ggplot">Make a map of the data extracted using ggplot</h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the track positions with associated chlora values</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(chl_track2) <span class="sc">+</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(Most.Likely.Longitude,Most.Likely.Latitude,<span class="at">color=</span><span class="fu">log</span>(matched_chl.m))) <span class="sc">+</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> mapWorld, <span class="fu">aes</span>(<span class="at">x=</span>long, <span class="at">y =</span> lat, <span class="at">group =</span> group)) <span class="sc">+</span> </span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">180</span>,<span class="dv">220</span>),<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">26</span>)) <span class="sc">+</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis</span>(<span class="at">discrete =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Longitude (deg)"</span>, <span class="at">y=</span><span class="st">"Latitude (deg)"</span>, <span class="at">title=</span><span class="st">"Yellowfin Tuna Track with chlor-a values"</span>)<span class="sc">+</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title=</span><span class="fu">element_text</span>(<span class="at">hjust=</span><span class="fl">0.5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="images/ggplot_track2-1.png" class="img-fluid"><!-- --></p>
-</section>
-<section id="plot-histogram-of-chlorophyll" class="level3">
-<h3 class="anchored" data-anchor-id="plot-histogram-of-chlorophyll">Plot histogram of chlorophyll</h3>
-<p>How do the chlorophyll values of the tuna track compare to values in the surrounding environment? Meaning does the tuna seem to have a preference for certain chlorophyll values? To look at this we will plot a histograms of the track chl valuesand those of the surrounding area.</p>
-<p>First we will get a 3D block of chl data from the region and of the tuna track over the span of time the tuna was in that area. We will use the ‘xtracto_3d’ function of rerddapXtracto to get the data. This data call will take a few minutes.</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>chl_grid <span class="ot">&lt;-</span> <span class="fu">rxtracto_3D</span>(dataInfo, </span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">parameter=</span>parameter, </span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">xcoord=</span><span class="fu">c</span>(<span class="fu">min</span>(xcoords),<span class="fu">max</span>(xcoords)), </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ycoord=</span><span class="fu">c</span>(<span class="fu">min</span>(ycoords),<span class="fu">max</span>(ycoords)), </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                  <span class="at">tcoord=</span><span class="fu">c</span>(<span class="fu">min</span>(tcoords),<span class="fu">max</span>(tcoords)))</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>chl_area <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(chl_grid<span class="sc">$</span>chlor_a) </span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co"># remove NA values </span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>chl_area <span class="ot">&lt;-</span> chl_area[<span class="sc">!</span><span class="fu">is.na</span>(chl_area)]</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co"># vector or tuna chlorophyll </span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>chl_tuna <span class="ot">&lt;-</span> chl_track<span class="sc">$</span><span class="st">`</span><span class="at">mean chlor_a</span><span class="st">`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Now we we plot histograms of all the chlorphyll values in the area, and those of the tuna track.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">as.data.frame</span>(chl_area)) <span class="sc">+</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x=</span>chl_area,<span class="at">y=</span><span class="fu">after_stat</span>(density),<span class="at">color =</span> <span class="st">"darkgray"</span>,<span class="at">fill=</span><span class="st">'Area'</span>),<span class="at">color=</span><span class="st">'black'</span>, <span class="at">bins=</span><span class="dv">50</span>) <span class="sc">+</span> </span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>      <span class="fu">geom_histogram</span>(<span class="at">data=</span><span class="fu">as.data.frame</span>(chl_tuna), <span class="fu">aes</span>(<span class="at">x=</span>chl_tuna,<span class="at">y=</span><span class="fu">after_stat</span>(density),<span class="at">color=</span><span class="st">'green'</span>, <span class="at">fill=</span><span class="st">'Tuna'</span>),<span class="at">color=</span><span class="st">'black'</span>,<span class="at">bins=</span><span class="dv">50</span>, <span class="at">alpha=</span>.<span class="dv">4</span>) <span class="sc">+</span> </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,.<span class="dv">9</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span> </span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">15</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="sc">+</span></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>      <span class="fu">labs</span>(<span class="at">x=</span><span class="st">'Chlorophyll values'</span>,<span class="at">y=</span><span class="st">'Density'</span>) <span class="sc">+</span> </span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">theme_bw</span>() <span class="sc">+</span> </span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"darkgray"</span>,<span class="st">"green"</span>),<span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="images/Plothistogramofchlorophyll-1.png" class="img-fluid"><!-- --></p>
-<section id="exercise-1" class="level5">
-<h5 class="anchored" data-anchor-id="exercise-1">Exercise 1:</h5>
-<p>Repeat the steps above with a different satellite dataset. For example, extract sea surface temperature data using the following dataset: <a href="https://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisGeoPolarSSTN5NRT_Lon0360.html" class="uri">https://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisGeoPolarSSTN5NRT_Lon0360.html</a> \ This dataset is a different ERDDAP, so remember to change the base URL. \ Set the new dataset ID and variable name.</p>
-</section>
-<section id="exercise-2" class="level5">
-<h5 class="anchored" data-anchor-id="exercise-2">Exercise 2:</h5>
-<p>Go to an ERDDAP of your choice, find a dataset of interest, generate the URL, copy it and edit the script above to run a match up on that dataset. To find other ERDDAP servers, you can use this search engine: <a href="http://erddap.com/" class="uri">http://erddap.com/</a> \ This dataset will likely be on a different ERDDAP, so remember to change the base URL. \ Set the new dataset ID and variable name. \ Check the metadata to make sure the dataset covers the spatial and temporal range of the track dataset.</p>
-</section>
-<section id="optional" class="level5">
-<h5 class="anchored" data-anchor-id="optional">Optional</h5>
-<p>Repeat the steps above with a daily version of the OC-CCI dataset to see how cloud cover can reduce the data you retrieve. <a href="https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorDaily_Lon0360.html" class="uri">https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorDaily_Lon0360.html</a></p>
-
-
-</section>
-</section>
-</section>
-</section>
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-    const icon = "";
-    const anchorJS = new window.AnchorJS();
-    anchorJS.options = {
-      placement: 'right',
-      icon: icon
-    };
-    anchorJS.add('.anchored');
-    const isCodeAnnotation = (el) => {
-      for (const clz of el.classList) {
-        if (clz.startsWith('code-annotation-')) {                     
-          return true;
-        }
-      }
-      return false;
-    }
-    const onCopySuccess = function(e) {
-      // button target
-      const button = e.trigger;
-      // don't keep focus
-      button.blur();
-      // flash "checked"
-      button.classList.add('code-copy-button-checked');
-      var currentTitle = button.getAttribute("title");
-      button.setAttribute("title", "Copied!");
-      let tooltip;
-      if (window.bootstrap) {
-        button.setAttribute("data-bs-toggle", "tooltip");
-        button.setAttribute("data-bs-placement", "left");
-        button.setAttribute("data-bs-title", "Copied!");
-        tooltip = new bootstrap.Tooltip(button, 
-          { trigger: "manual", 
-            customClass: "code-copy-button-tooltip",
-            offset: [0, -8]});
-        tooltip.show();    
-      }
-      setTimeout(function() {
-        if (tooltip) {
-          tooltip.hide();
-          button.removeAttribute("data-bs-title");
-          button.removeAttribute("data-bs-toggle");
-          button.removeAttribute("data-bs-placement");
-        }
-        button.setAttribute("title", currentTitle);
-        button.classList.remove('code-copy-button-checked');
-      }, 1000);
-      // clear code selection
-      e.clearSelection();
-    }
-    const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
-        }
-        return codeEl.innerText;
-    }
-    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-      text: getTextToCopy
-    });
-    clipboard.on('success', onCopySuccess);
-    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-        text: getTextToCopy,
-        container: window.document.getElementById('quarto-embedded-source-code-modal')
-      });
-      clipboardModal.on('success', onCopySuccess);
-    }
-      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-      var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
-      var isInternal = (href) => {
-          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-      }
-      // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-      for (var i=0; i<links.length; i++) {
-        const link = links[i];
-        if (!isInternal(link.href)) {
-          // undo the damage that might have been done by quarto-nav.js in the case of
-          // links that we want to consider external
-          if (link.dataset.originalHref !== undefined) {
-            link.href = link.dataset.originalHref;
-          }
-        }
-      }
-    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-      const config = {
-        allowHTML: true,
-        maxWidth: 500,
-        delay: 100,
-        arrow: false,
-        appendTo: function(el) {
-            return el.parentElement;
-        },
-        interactive: true,
-        interactiveBorder: 10,
-        theme: 'quarto',
-        placement: 'bottom-start',
-      };
-      if (contentFn) {
-        config.content = contentFn;
-      }
-      if (onTriggerFn) {
-        config.onTrigger = onTriggerFn;
-      }
-      if (onUntriggerFn) {
-        config.onUntrigger = onUntriggerFn;
-      }
-      window.tippy(el, config); 
-    }
-    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-    for (var i=0; i<noterefs.length; i++) {
-      const ref = noterefs[i];
-      tippyHover(ref, function() {
-        // use id or data attribute instead here
-        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-        try { href = new URL(href).hash; } catch {}
-        const id = href.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note) {
-          return note.innerHTML;
-        } else {
-          return "";
-        }
-      });
-    }
-    const xrefs = window.document.querySelectorAll('a.quarto-xref');
-    const processXRef = (id, note) => {
-      // Strip column container classes
-      const stripColumnClz = (el) => {
-        el.classList.remove("page-full", "page-columns");
-        if (el.children) {
-          for (const child of el.children) {
-            stripColumnClz(child);
-          }
-        }
-      }
-      stripColumnClz(note)
-      if (id === null || id.startsWith('sec-')) {
-        // Special case sections, only their first couple elements
-        const container = document.createElement("div");
-        if (note.children && note.children.length > 2) {
-          container.appendChild(note.children[0].cloneNode(true));
-          for (let i = 1; i < note.children.length; i++) {
-            const child = note.children[i];
-            if (child.tagName === "P" && child.innerText === "") {
-              continue;
-            } else {
-              container.appendChild(child.cloneNode(true));
-              break;
-            }
-          }
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(container);
-          }
-          return container.innerHTML
-        } else {
-          if (window.Quarto?.typesetMath) {
-            window.Quarto.typesetMath(note);
-          }
-          return note.innerHTML;
-        }
-      } else {
-        // Remove any anchor links if they are present
-        const anchorLink = note.querySelector('a.anchorjs-link');
-        if (anchorLink) {
-          anchorLink.remove();
-        }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
-        if (note.classList.contains("callout")) {
-          return note.outerHTML;
-        } else {
-          return note.innerHTML;
-        }
-      }
-    }
-    for (var i=0; i<xrefs.length; i++) {
-      const xref = xrefs[i];
-      tippyHover(xref, undefined, function(instance) {
-        instance.disable();
-        let url = xref.getAttribute('href');
-        let hash = undefined; 
-        if (url.startsWith('#')) {
-          hash = url;
-        } else {
-          try { hash = new URL(url).hash; } catch {}
-        }
-        if (hash) {
-          const id = hash.replace(/^#\/?/, "");
-          const note = window.document.getElementById(id);
-          if (note !== null) {
-            try {
-              const html = processXRef(id, note.cloneNode(true));
-              instance.setContent(html);
-            } finally {
-              instance.enable();
-              instance.show();
-            }
-          } else {
-            // See if we can fetch this
-            fetch(url.split('#')[0])
-            .then(res => res.text())
-            .then(html => {
-              const parser = new DOMParser();
-              const htmlDoc = parser.parseFromString(html, "text/html");
-              const note = htmlDoc.getElementById(id);
-              if (note !== null) {
-                const html = processXRef(id, note);
-                instance.setContent(html);
-              } 
-            }).finally(() => {
-              instance.enable();
-              instance.show();
-            });
-          }
-        } else {
-          // See if we can fetch a full url (with no hash to target)
-          // This is a special case and we should probably do some content thinning / targeting
-          fetch(url)
-          .then(res => res.text())
-          .then(html => {
-            const parser = new DOMParser();
-            const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.querySelector('main.content');
-            if (note !== null) {
-              // This should only happen for chapter cross references
-              // (since there is no id in the URL)
-              // remove the first header
-              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-                note.children[0].remove();
-              }
-              const html = processXRef(null, note);
-              instance.setContent(html);
-            } 
-          }).finally(() => {
-            instance.enable();
-            instance.show();
-          });
-        }
-      }, function(instance) {
-      });
-    }
-        let selectedAnnoteEl;
-        const selectorForAnnotation = ( cell, annotation) => {
-          let cellAttr = 'data-code-cell="' + cell + '"';
-          let lineAttr = 'data-code-annotation="' +  annotation + '"';
-          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-          return selector;
-        }
-        const selectCodeLines = (annoteEl) => {
-          const doc = window.document;
-          const targetCell = annoteEl.getAttribute("data-target-cell");
-          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-          const lineIds = lines.map((line) => {
-            return targetCell + "-" + line;
-          })
-          let top = null;
-          let height = null;
-          let parent = null;
-          if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
-            }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
-            }
-            selectedAnnoteEl = annoteEl;
-          }
-        };
-        const unselectCodeLines = () => {
-          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-          elementsIds.forEach((elId) => {
-            const div = window.document.getElementById(elId);
-            if (div) {
-              div.remove();
-            }
-          });
-          selectedAnnoteEl = undefined;
-        };
-          // Handle positioning of the toggle
-      window.addEventListener(
-        "resize",
-        throttle(() => {
-          elRect = undefined;
-          if (selectedAnnoteEl) {
-            selectCodeLines(selectedAnnoteEl);
-          }
-        }, 10)
-      );
-      function throttle(fn, ms) {
-      let throttle = false;
-      let timer;
-        return (...args) => {
-          if(!throttle) { // first call gets through
-              fn.apply(this, args);
-              throttle = true;
-          } else { // all the others get throttled
-              if(timer) clearTimeout(timer); // cancel #2
-              timer = setTimeout(() => {
-                fn.apply(this, args);
-                timer = throttle = false;
-              }, ms);
-          }
-        };
-      }
-        // Attach click handler to the DT
-        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-        for (const annoteDlNode of annoteDls) {
-          annoteDlNode.addEventListener('click', (event) => {
-            const clickedEl = event.target;
-            if (clickedEl !== selectedAnnoteEl) {
-              unselectCodeLines();
-              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-              if (activeEl) {
-                activeEl.classList.remove('code-annotation-active');
-              }
-              selectCodeLines(clickedEl);
-              clickedEl.classList.add('code-annotation-active');
-            } else {
-              // Unselect the line
-              unselectCodeLines();
-              clickedEl.classList.remove('code-annotation-active');
-            }
-          });
-        }
-    const findCites = (el) => {
-      const parentEl = el.parentElement;
-      if (parentEl) {
-        const cites = parentEl.dataset.cites;
-        if (cites) {
-          return {
-            el,
-            cites: cites.split(' ')
-          };
-        } else {
-          return findCites(el.parentElement)
-        }
-      } else {
-        return undefined;
-      }
-    };
-    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-    for (var i=0; i<bibliorefs.length; i++) {
-      const ref = bibliorefs[i];
-      const citeInfo = findCites(ref);
-      if (citeInfo) {
-        tippyHover(citeInfo.el, function() {
-          var popup = window.document.createElement('div');
-          citeInfo.cites.forEach(function(cite) {
-            var citeDiv = window.document.createElement('div');
-            citeDiv.classList.add('hanging-indent');
-            citeDiv.classList.add('csl-entry');
-            var biblioDiv = window.document.getElementById('ref-' + cite);
-            if (biblioDiv) {
-              citeDiv.innerHTML = biblioDiv.innerHTML;
-            }
-            popup.appendChild(citeDiv);
-          });
-          return popup.innerHTML;
-        });
-      }
-    }
-  });
-  </script>
-</div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
-    <div class="nav-footer-left">
-<p>© CC-By CoastWatch, 2026</p>
-</div>   
-    <div class="nav-footer-center">
-      &nbsp;
-    </div>
-    <div class="nav-footer-right">
-      &nbsp;
-    </div>
-  </div>
-</footer>
-
-
-
-
-</body></html>
