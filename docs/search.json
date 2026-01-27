@@ -718,7 +718,7 @@
     "href": "tutorials/software.html",
     "title": "Software Code Gallery",
     "section": "",
-    "text": "This page lists software-based tutorials.\nClick the eye icon to preview outputs, or download to open the source file on GitHub.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nMore Info\nPreview\nDownload ↓\n\n\n\n\nERDDAP Basics - Using the ERDDAP data catalog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nERDDAP Basics - Visualize and download data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n      ERDDAP Basics - Using the ERDDAP data catalog\n      Learn how to navigate the ERDDAP data catalog to discover datasets of interest. This tutorial walks through browsing available datasets, using full-text search to refine results, and examining dataset summaries and metadata to evaluate spatial coverage, resolution, time range, and data provenance.\n\n      \n        \n          \n            \n              \n            \n            Global SST & Sea Ice Analysis (OSTIA) dataset from the UK Met Office on an ERDDAP server.\n          \n        \n        View tutorial\n      \n\n      Close\n    \n    \n    \n      ERDDAP Basics - Visualize and download data\n      This tutorial demonstrates how to use ERDDAP’s Make A Graph feature to visualize gridded data, subset by time and region, customize map appearance, and download results in common image and data formats. Users learn how to generate reproducible URLs for sharing or importing data directly into analysis tools such as Python, R, or Matlab.\n\n      \n        \n          \n            \n              \n            \n            The ERDDAP Make A Graph page for the OSTIA global sea surface temperature dataset. The interface allows users to select the displayed variable, subset data by time, latitude, and longitude, adjust graph and color-bar settings, choose output file formats, and generate reproducible RESTful URLs for visualization and data download.\n          \n        \n          \n            \n              \n            \n            Sea surface temperature map for the Washington coast on July 15, 2015, generated using ERDDAP’s Make A Graph tool.\n          \n        ◀1 / 2▶\n        View tutorial\n      \n\n      Close\n    \n\n\n\n\n✕",
+    "text": "This page lists software-based tutorials.\nClick the eye icon to preview outputs, or download to open the source file on GitHub.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nInfo\nPreview\nDownload ↓\n\n\n\n\nERDDAP Basics - Using the ERDDAP data catalog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nERDDAP Basics - Visualize and download data\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nERDDAP Basics - Understanding the ERDDAP URL\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n      ERDDAP Basics - Using the ERDDAP data catalog\n      Learn how to navigate the ERDDAP data catalog to discover datasets of interest. This tutorial walks through browsing available datasets, using full-text search to refine results, and examining dataset summaries and metadata to evaluate spatial coverage, resolution, time range, and data provenance.\n\n      \n        \n          \n            \n              \n            \n            Global SST & Sea Ice Analysis (OSTIA) dataset from the UK Met Office on an ERDDAP server.\n          \n        \n        View tutorial\n      \n\n      Close\n    \n    \n    \n      ERDDAP Basics - Visualize and download data\n      This tutorial demonstrates how to use ERDDAP’s Make A Graph feature to visualize gridded data, subset by time and region, customize map appearance, and download results in common image and data formats. Users learn how to generate reproducible URLs for sharing or importing data directly into analysis tools such as Python, R, or Matlab.\n\n      \n        \n          \n            \n              \n            \n            The ERDDAP Make A Graph page for the OSTIA global sea surface temperature dataset. The interface allows users to select the displayed variable, subset data by time, latitude, and longitude, adjust graph and color-bar settings, choose output file formats, and generate reproducible RESTful URLs for visualization and data download.\n          \n        \n          \n            \n              \n            \n            Sea surface temperature map for the Washington coast on July 15, 2015, generated using ERDDAP’s Make A Graph tool.\n          \n        ◀1 / 2▶\n        View tutorial\n      \n\n      Close\n    \n    \n    \n      ERDDAP Basics - Understanding the ERDDAP URL\n      This tutorial explains how ERDDAP data requests are fully defined within a URL and how those URLs can be edited to control dataset selection, spatial and temporal subsetting, output formats, and visualization settings. You will learn how to modify URL components by hand to retrieve different maps, images, and data files, including accessing the most recent available data. The tutorial concludes by showing how ERDDAP URLs can be generated and used within scripts to automate data downloads and integrate ERDDAP directly into analysis workflows.\n\n      \n        \n          \n            \n              \n            \n            Sea surface temperature map for the Washington coast generated by directly editing an ERDDAP request URL. The spatial extent and date were modified in the URL to retrieve SST for July 15, 2015, and the output was returned as a PNG image using the KT_thermal color palette.\n          \n        \n          \n            \n              \n            \n            Sea surface temperature map generated after updating the time component of the ERDDAP URL to request data from one month earlier (June 15, 2015).\n          \n        ◀1 / 2▶\n        View tutorial\n      \n\n      Close\n    \n\n\n\n\n✕",
     "crumbs": [
       "Training Tutorials",
       "Software Tutorials",
@@ -1200,6 +1200,463 @@
     "text": "Within the search results you have access to information about each dataset to help you decide with which dataset is useful for your application. The search results For this example we will use the global SST & Sea Ice Analysis (OSTIA) from the UK Met Office.\n\nAdd “ostia” in the search box (e.g. sst global ostia) and click the “Search’ button.\nIn the results you should several datasets, including the one displayed below.\n\n\n\n\nOSTIA search result\n\n\n\nThe listing (pictured above) gives access to a lot of information about the dataset. In a browser, try the following:\n\nMouse over the question mark ? under \"Summary\" to get an overview of the dataset.\nClick \"background\" to get more complete information from the data provider about the dataset. Now go back to the search results page.\nClick the \"M\" under \"FGDC,ISO,Metadata\" to see all of the dataset metadata. A lot of information is displayed. Some important fields are:\n\n\"geospatial_lat_min\", \"geospatial_lat_max\", \"geospatial_lon_min\", and \"geospatial_lon_max\" for the spatial coverage\n\"geospatial_lat_resolution\" and \"geospatial_lon_resolution\" for the size of each pixel\n\"time_coverage_start\" and \"time_coverage_end\" for the temporal coverage\n\"references\" for citing the dataset in publications\n\"license\" for restrictions on using the data\n\"acknowledgement\" often used to describe how to acknowledge use of the dataset\n\"creator_name\" for the entity that created the dataset\n\n\nWhen you are finished exploring the metadata, go back to the search results page."
   },
   {
+    "objectID": "trainings/upcoming/sat201_26.html",
+    "href": "trainings/upcoming/sat201_26.html",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "",
+    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#course-description",
+    "href": "trainings/upcoming/sat201_26.html#course-description",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "",
+    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#schedule-attendance",
+    "href": "trainings/upcoming/sat201_26.html#schedule-attendance",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Schedule & Attendance",
+    "text": "Schedule & Attendance\nFrequency: Sessions are held every Friday for one month.\nDuration: Approximately 2.5 hours per session.\nFlexibility: Attendance for all sessions is not required; feel free to join the topics most relevant to you.",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#curriculum",
+    "href": "trainings/upcoming/sat201_26.html#curriculum",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "2026 Curriculum",
+    "text": "2026 Curriculum\nThe inaugural 2026 course will cover the following subjects: * Alternative Data Access: Methods for accessing data not hosted on ERDDAP servers. * CoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite. * Beyond Chlorophyll: Exploring ocean color products other than chlorophyll. * SAR Data: An introduction to Synthetic Aperture Radar.",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#schedule",
+    "href": "trainings/upcoming/sat201_26.html#schedule",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Schedule",
+    "text": "Schedule\nFriday, July 10, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nAccessing data not on ERDDAP servers\nDale Robinson\n\n\n11:45 - 12:30\na demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 17, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to using Coastwatch Utilities software\nPeter Hollemans\n\n\n11:45 - 12:30\na demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 24, 2026 | Time (PST) | Topic | Presenter | |:————-|:—————————————————————————–|:—————————-| | 11:00 - 11:45 | Beyond Chlorophyll | Ryan Vandermeulan | | 11:45 - 12:30 | Beyond Chlorophyll Case Study | | | 12:30 - 12:45 | Break | |\n| 12:45 - 1:30 | Question & Answer and hand’s on session | |\nFriday, July 31, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to SAR Data\n\n\n\n11:45 - 12:30\nSAR Case Study\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#instructors",
+    "href": "trainings/upcoming/sat201_26.html#instructors",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nPeter Hollemans\nCoastWatch/Pacific OceanWatch, node manager",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/upcoming/sat201_26.html#resources",
+    "href": "trainings/upcoming/sat201_26.html#resources",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series",
+    "crumbs": [
+      "Training Classes",
+      "Upcoming Trainings",
+      "2026 Satellite 201 Summer Series"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html",
+    "href": "trainings/past/seaice24.html",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "",
+    "text": "PolarWatch node of the CoastWatch is hosting a free, virtual training class on October 21, 2024 (9am-4pm Pacific Time).",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html#course-description",
+    "href": "trainings/past/seaice24.html#course-description",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Course Description",
+    "text": "Course Description\nMany satellite sea ice products are available for download from NOAA and many other data providers: e.g. sea ice concentration, sea ice thickness, sea ice age, sea ice temperature, and sea ice extent. It can often be challenging to know the differences between the products and how each can be applied to a user’s specific application. For example, the spatial resolutions of the products can vary widely, largely dependent on the type of satellite measurement the product is derived from (passive microwave, visible radiometry or synthetic aperture radar). Additionally, when working with data in the high-latitudes issues of data projection invariably arise and can complicate accessing and working with data. To address these issues, NOAA’s PolarWatch node has developed a 1-day (6 hour) online course with the following training objectives.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html#objectives",
+    "href": "trainings/past/seaice24.html#objectives",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of sea-ice products available from satellite data\nGive an overview of working with different projections\nExplore the data available on the PolarWatch portal\nProvide hands-on time to access data and try tutorials\nIntroduce CoastWatch and other sea ice satellite data training resources",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html#schedule",
+    "href": "trainings/past/seaice24.html#schedule",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n9:00 - 9:30\nPresentation 1: Introduction to NOAA CoastWatch\nCara Wilson\n\n\n9:30 - 10:00\nPresentation 2: Overview of Sea Ice Remote Sensing\nLudovic Brucker\n\n\n10:00 - 10:30\nPresentation 3: JPSS Sea Ice Microlesson\nKevin Fuell\n\n\n10:30 - 10:45\nBreak\n\n\n\n10:45 - 11:15\nPresentation 4: Sea Ice from SAR\nChris Jackson\n\n\n11:15 - 11:30\nPresentation 5: Projections - Why they Matter\nMichael Soracco\n\n\n11:30 - 11:45\nPresentation 6: Ice in the Great Lakes\nAndrea VanderWoude\n\n\n11:45 - 12:45\nLunch break\n\n\n\n12:45 - 13:00\nPresentation 7: Projections in Action (Watch Video)\nPeter Hollemans\n\n\n13:00 - 13:30\nPresentation 8: ERDDAP Demo\nCara Wilson\n\n\n13:30 - 13:45\nPresentation 9: PolarWatch Portal Demo\nSunny Hospital\n\n\n13:45 - 14:00\nPresentation 10: CoastWatch Viewer Demo\nMichael Soracco\n\n\n14:00 - 14:15\nBreak\n\n\n\n14:15 - 14:30\nPresentation 11: Overview of Tutorials\nCara Wilson, Matthew Smith\n\n\n14:30 - 16:00\nHand’s on time, with instuctor’s guidance available",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/seaice24.html#resources",
+    "href": "trainings/past/seaice24.html#resources",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nJPSS Sea Ice Microlesson",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html",
+    "href": "trainings/past/longislandsound25.html",
+    "title": "2025 Long Island Sound Class",
+    "section": "",
+    "text": "Virtual - Times vary daily, see schedule below (times are Eastern).\nNOAA CoastWatch is hosting this free, virtual training class:  Viewing and Analyzing Ocean/Coastal Events and Water Quality Using Satellites\nJoin Class Via Zoom Here",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html#course-description",
+    "href": "trainings/past/longislandsound25.html#course-description",
+    "title": "2025 Long Island Sound Class",
+    "section": "Course Description",
+    "text": "Course Description\nMany satellite products are available for water quality applications and other uses from NOAA and other data providers. These include: chlorophyll, turbidity, sea surface temperature, organic matter, and more. In this course, learn how to use these satellite products for your region of interest using freely available tools. Address your needs and questions by creating maps and images, plotting a time series of varying conditions, or creating a virtual buoy for your study location. And other applications too!\nThis class is being offered in two Tiers as part of a larger Long Island Sound Project funded by New York/Connecticut Sea Grant.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html#objectives",
+    "href": "trainings/past/longislandsound25.html#objectives",
+    "title": "2025 Long Island Sound Class",
+    "section": "Objectives",
+    "text": "Objectives\n\nTier I: Creating Images\nLearn to use tools to create images and maps of ocean or coastal features in your area of interest. Tools taught: CoastWatch Data Portal, ArcGIS, ERDDAP visualization server, and more.\n\n\nTier II: Analyzing Data for Your Study or Region\nWork more analytically with oceanographic satellite data. Learn R and/or Python techniques to access data on ERDDAP data servers for data extraction, map creation, time series analysis, matching data to your study site locations or ship tracks, creating a virtual buoy using satellite data in your location of choice, and other application skills.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html#schedule",
+    "href": "trainings/past/longislandsound25.html#schedule",
+    "title": "2025 Long Island Sound Class",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nDay\nTime (ET)\nTopic\nPresenter\n\n\n\n\nMonday - March 31\n\nTier I and Tier II\n\n\n\n\n9:00 - 9:15\nPresentation 1: Overview – SeaGrant-funded Satellite Project\nJonathan Sherman\n\n\n\n9:15 - 9:45\nPresentation 2: Data Portal\nMichael Soracco\n\n\n\n9:45 - 10:15\nPresentation 3: ArcGIS\nMichael Soracco\n\n\n\n10:15 - 10:30\nBreak\n\n\n\n\n10:30 - 11:15\nPresentation 4: CoastWatch Utilities - CDAT  Files\nRon Vogel\n\n\n\n11:15 - 11:30\nQ & A\n\n\n\n\n11:30 - 12:15\nParticipant Exercise 1: Choose a tool and make a map  ArcGIS files, CDAT files\n\n\n\n\n12:15 - 1:15\nLunch break\n\n\n\n\n1:15 - 1:45\nPresentation 5: Choosing a Dataset\nJonathan Sherman\n\n\n\n1:45 - 2:45\nPresentation 6: ERDDAP\nRon Vogel\n\n\n\n2:45 - 3:00\nBreak\n\n\n\n\n3:00 - 3:30\nQ & A and Resources for Participants\n\n\n\n\n3:30 - 4:30\nParticipant Exercise 2: Choose a dataset from ERDDAP, download, make a map and a time series  Sample data list\n\n\n\nTuesday - April 1\n\nTier II (April 1–4)\n\n\n\n\n9:00 - 9:30\nPresentation 7: Satellite 101\nShelly Tomlinson\n\n\n\n9:30 - 10:30\nPresentation 8: CoastWatch Training Code (R and Python) – Capabilities and Tutorials  Tutorials GitHub page\nJonathan Sherman\n\n\n\n10:30 - 10:45\nBreak\n\n\n\n\n10:45 - 11:30\nPresentation 9: CoastWatch Utilities - Command Line  Files\nRon Vogel\n\n\n\n11:30 - 12:00\nOffice Hours Logistics, Mini-project & Slide Info, Q & A\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nOffice Hours: One-on-One\n\n\n\nWednesday - April 2\n\nParticipants work on their mini-project on their own time\n\n\n\nThursday - April 3\n9:00 - 9:15\nGauge Progress Poll\nBetty Staugler\n\n\n\n9:15 - 9:30\nPresentation 10: HAB Forecasts\nShelly Tomlinson\n\n\n\n9:30 - 9:45\nPresentation 11: COVID Impacts\nJonathan Sherman\n\n\n\n9:45 - 10:00\nPresentation 12: Participant Slide Examples from Past Classes\nRon Vogel\n\n\n\n10:00 - 12:00\nOffice Hours: Group Discussion or One-on-One\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nParticipants work on their mini-project on their own time\n\n\n\nFriday - April 4\n1:00 - 3:00\nFinal Mini-project Presentations (1 slide each)\nParticipants",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/longislandsound25.html#resources",
+    "href": "trainings/past/longislandsound25.html#resources",
+    "title": "2025 Long Island Sound Class",
+    "section": "Resources",
+    "text": "Resources\n\nCoastWatch main website\nCoastWatch East Coast Regional Node website\nCoastWatch Data Access methods\nCoastwatch Coding Tutorials: R and Python (on GitHub)\nCoastwatch Lecture series\nCoastwatch Data Portal video tutorials\nCoastwatch ArcGIS lecture videos and tutorials\nCoastWatch Utilities\n\nCoastWatch Utilities Tutorials - CDAT and Command-Line\nCDAT demo videos on YouTube\n\nCoastWatch Help Desk\n\nEmail: coastwatch.info@noaa.gov\nPhone: +1-301-683-3335\nUser Forums",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Long Island Sound"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html",
+    "href": "trainings/past/afs24.html",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has been rescheduled to be an online course, open to all.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#course-description",
+    "href": "trainings/past/afs24.html#course-description",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has been rescheduled to be an online course, open to all.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#instructors",
+    "href": "trainings/past/afs24.html#instructors",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data Coordinator\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#objectives",
+    "href": "trainings/past/afs24.html#objectives",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#schedule",
+    "href": "trainings/past/afs24.html#schedule",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 10:30\nGroup Introductions\nCara Wilson\n\n\n10:30 - 11:15\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:15 - 11:30\nBreak\n\n\n\n11:30 - 12:00\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:00 - 12:30\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:30 - 1:30\nLunch break\n\n\n\n1:30 - 2:00\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n2:00 - 2:30\nDemo of ATN data portal\nMegan McKinzie\n\n\n2:30 - 3:00\nAccessing public ATN datasets\nMegan McKinzie\n\n\n3:00 - 3:15\nBreak\n\n\n\n3:15 - 3:30\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n3:30 - 4:45\nWorkshop, part 2: Hand’s on time\n\n\n\n4:45 - 5:00\nWrap up and final discussion\nAll",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/afs24.html#resources",
+    "href": "trainings/past/afs24.html#resources",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 AFS Workshop"
+    ]
+  },
+  {
+    "objectID": "officehours.html",
+    "href": "officehours.html",
+    "title": "CoastWatch Office Hours",
+    "section": "",
+    "text": "Hosted by the West Coast Node and PolarWatch\nevery other Thursday at 11 am PST\nUpcoming dates: March 5, 12\nEveryone is welcome to come to the CoastWatch Office Hour where people can:\n\nAsk questions about satellite data\nRequest help with accessing satellite data products\nGet troubleshooting assistance with code examples for discovering, accessing and working with satellite data\n\nCoastWatch Lectures\nCoastWatch Tutorials",
+    "crumbs": [
+      "Office Hours"
+    ]
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "CoastWatch Training Website",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "trainings/index.html",
+    "href": "trainings/index.html",
+    "title": "CoastWatch Workshops",
+    "section": "",
+    "text": "CoastWatch regularly organizes and offers in-person and online satellite training classes or workshops featuring lectures, tutorials, & tool demonstrations.\nDuring in-person and online satellite course, participants learn about environmental satellite data and how to easily obtain it. Participants also gain hands on experience working with the data of interest to them. A major goal of the course is to provide scientists who are not regular users of satellite data with the knowledge and tools they need to incorporate satellite data into their research and management projects.\nFor questions or more information about the upcoming satellite training classes, please contact coastwatch.info@noaa.gov.",
+    "crumbs": [
+      "Training Classes"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html",
+    "href": "trainings/past/icft25.html",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#course-description",
+    "href": "trainings/past/icft25.html#course-description",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#instructors",
+    "href": "trainings/past/icft25.html#instructors",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data manager\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#objectives",
+    "href": "trainings/past/icft25.html#objectives",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#schedule",
+    "href": "trainings/past/icft25.html#schedule",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Schedule",
+    "text": "Schedule\nThursday, August 14, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 11:30\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:15\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:15 - 12:45\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:45 - 1:00\nDay 1 wrap-up\n\n\n\n\nFriday, August 15, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:30\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n10:30 - 11:00\nDemo of ATN data portal\nMegan McKinzie\n\n\n11:00 - 11:30\nAccessing public ATN datasets\nMegan McKinzie\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:00\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n12:00 - 12:45\nWorkshop, part 2: Hand’s on time\n\n\n\n12:45 - 13:00\nWrap up and final discussion\nAll",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/icft25.html#resources",
+    "href": "trainings/past/icft25.html#resources",
+    "title": "Satellite and Animal Telemetry Data Training",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2025 Satellite and Animal Telemetry"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html",
+    "href": "trainings/past/pgrsc24.html",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using information tools from PacIOOS for applications in the Pacific Islands region. This training will be held during the 2024 Pacific Islands GIS and Remote Sensing Users Conference in Suva, Fiji.\nClick here to Register.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#course-description",
+    "href": "trainings/past/pgrsc24.html#course-description",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "",
+    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using information tools from PacIOOS for applications in the Pacific Islands region. This training will be held during the 2024 Pacific Islands GIS and Remote Sensing Users Conference in Suva, Fiji.\nClick here to Register.",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#instructors",
+    "href": "trainings/past/pgrsc24.html#instructors",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager\n\n\nLauren Kaiser\nPacIOOS, data management specialist\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#objectives",
+    "href": "trainings/past/pgrsc24.html#objectives",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstrate how to access data on ERDDAP servers\nIntroduce CoastWatch satellite data and training resources\nExplore additional data and information tools available at PacIOOS\nProvide hands-on time to access data and run tutorials",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#schedule",
+    "href": "trainings/past/pgrsc24.html#schedule",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "Schedule",
+    "text": "Schedule\n\n\n\nTime (Fiji Standard Time)\nTopic\nPresenter\n\n\n\n\n1:00 - 1:10\nWelcome & Introductions\nDaisy Shi & Lauren Kaiser\n\n\n1:10 - 1:20\nInteractive Questions\n\n\n\n1:20 - 1:35\nIntro to CoastWatch, Satellite Datasets & Data Portal\nDaisy Shi\n\n\n1:35 - 1:50\nIntro to OceanWatch, Data Accessibility & Usability\nDaisy Shi\n\n\n1:50 - 2:20\nIntro to PacIOOS, Website Walkthrough & Data Search\nLauren Kaiser\n\n\n2:20 - 2:30\nInteractive Questions\n\n\n\n2:30 - 2:45\nBreak\n\n\n\n2:45 - 2:55\nOverview of CoastWatch Tutorials\nDaisy Shi\n\n\n2:55 - 3:15\nERDDAP Demos\nDaisy Shi\n\n\n3:15 - 3:45\nArcGIS & QGIS Demos\nLauren Kaiser\n\n\n3:45 - 4:00\nBreak\n\n\n\n4:00 - 5:50\nHands-On time\nAll\n\n\n5:50 - 6:00\nInteractive Questions & Feedback",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
+    "objectID": "trainings/past/pgrsc24.html#resources",
+    "href": "trainings/past/pgrsc24.html#resources",
+    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nGeostationary satellites covering Western Pacific\nPacIOOS\nPacIOOS Voyager",
+    "crumbs": [
+      "Training Classes",
+      "Past Trainings",
+      "2024 PGRSC Workshop"
+    ]
+  },
+  {
     "objectID": "trainings/upcoming/pgrsc26.html",
     "href": "trainings/upcoming/pgrsc26.html",
     "title": "NOAA CoastWatch/PacIOOS Satellite and Ocean Data Training Course",
@@ -1308,461 +1765,46 @@
     ]
   },
   {
-    "objectID": "trainings/past/pgrsc24.html",
-    "href": "trainings/past/pgrsc24.html",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "objectID": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html",
+    "href": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html",
+    "title": "Automating ERDDAP requests",
     "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using information tools from PacIOOS for applications in the Pacific Islands region. This training will be held during the 2024 Pacific Islands GIS and Remote Sensing Users Conference in Suva, Fiji.\nClick here to Register.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
+    "text": "Download requests to ERDDAP are completely defined within a URL, allowing:\n\nmachine-to-machine data exchange,\n\nbringing data directly into analysis tools,\n\nand the use ERDDAP as a back end to drive customized online interfaces.\n\n\n\nThe URL is composed of several parts that define the data request. Let’s try breaking the URL down into its component parts.\nCopy the following URL paste it into a browser to see what the data looks like. https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplUKMO_OSTIAv20.largePng?analysed_sst[(2015-07-17T12:00:00Z):(2015-07-17T12:00:00Z)][(45.025):(52.025)][(-128.975):(-121.975)]&.draw=surface&.trim=2&.vars=longitude|latitude|analysed_sst&.colorBar=KT_thermal|||12|20|&.bgColor=0xffccccff\nNOTE: If you get an error similar to “code=404, Not Found: Currently unknown datasetID=jplUKMO_OSTIAv20.nc”, it means that the dataset is temporarily not available. Try using the following URL, which switches to the “nesdisGeoPolarSSTN5SQ” dataset, instead of the one above:\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisGeoPolarSSTN5SQ.largePng?analysed_sst[(2015-07-17T12:00:00Z):(2015-07-17T12:00:00Z)][(45.025):(52.025)][(-128.975):(-121.975)]&.draw=surface&.trim=2&.vars=longitude|latitude|analysed_sst&.colorBar=KT_thermal|||12|20|&.bgColor=0xffccccff\nOpen simple word processor (not Word) and paste in the URL\nTry breaking the URL down into its component parts as described below.\n\nBase URL\n\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/\n\n\ndataset ID\n\njplUKMO_OSTIAv20 (or nesdisGeoPolarSSTN5SQ if you changed the URL above)\n\nFile type\n\n.largePng\n\nEverything after ? is the data request -&gt; ?\nVariable of interest\n\nanalysed_sst\n\nTime\n\n[(2015-07-17T12:00:00Z):(2015-07-17T12:00:00Z)]\n\nLatitude range\n\n[(45.025):(52.025)]\n\nLongitude range\n\n[(-128.975):(-121.975)]\n\nEverything beginning with &.draw adjusts the look of the image\n\n&.draw=surface&.trim=2&.vars=longitude|latitude|analysed_sst&.colorBar=KT_thermal|||12|20|&.bgColor=0xffccccff\n\n\n\n\n\nNOTE: You could do the following on the ERDDAP “Data Access Form” page and have ERDDAP generate the modified URL, but we will do it by hand in the browser.\nChange the latitude range to remove Oregon and most of Canada from the map. In the browser, look through the URL and find the part that defines the latitude. Change the lower latitude value from 45.025 to 46.5 and the higher latitude value from 52.025 to 50.0.\n\nChange this: [(45.025):(52.025)]\n\nTo this: [(46.5):(50.0)]\nHit return in the browser to see the new edited map.\n\n\n\n\nWA coast, July 15, 2015\n\n\n\n\n\nThe time is adjusted the similarly to the latitude.\nIn the browser, look through the URL and find the part that defines the time. Change the both values to be one (1) month earlier.\n\nChange this: [(2015-07-17T12:00:00Z):(2015-07-17T12:00:00Z)]\nTo this: [(2015-06-17T12:00:00Z):(2015-06-17T12:00:00Z)]\nHit return in the browser to see the new edited map.\n\n\n\n\nWA coast, June 15, 2015\n\n\nGetting the most recent data\nERDDAP allows you to call the most recent image without knowing the date of the most recent data.\nIn the browser, look through the URL and find the part that defines the time. Change the both values \"last\".\n\nChange this: [(2015-06-17T12:00:00Z):(2015-06-17T12:00:00Z)]\n\nTo this: [(last):(last)]\nHit return in the browser to see the new edited map.\n\nThe image that appears is most recent data. You can even due math while using \"last\". For example, to get the image one week before the most recent image.\n\nChange this: [(last):(last)]\n\nTo this: [(last-7):(last-7)]\nHit return in the browser to see the new edited map.\n\nYou may have to adjust the color bar minimum and maximum a little. If so, find the part of the URL that defines the color bar\n\ncolorBar=KT_thermal|||12|20|\n\nThe minimum is set to 12 and maximum is set to 20. Play around with the numbers until your image looks good.\n\n\n\nSo far we have been downloading PGN files in our URL requests to visualize the changes brought about by altering the URL. In the URL the PGN format is represented in the URL by “.png”\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/jplUKMO_OSTIAv20__.png__?analysed_sst[(last):(last)][(46.5):(50.0)][(-128.975):(-121.975)]&.draw=surface&.trim=2&.vars=longitude|latitude|analysed_sst&.colorBar=KT_thermal|||12|20|&.bgColor=0xffccccff\nTo download the data, we need to change the file type section of the URL request. There are over 30 file types to choose from, but useful formats for data are MATLAB and netCDF formats. The URL representations for those file types are:\n\n.nc - netCDF files\n\n.mat - Matlab files\n\nWe will select a netCDF file.\n\nIn the browser, locate the .png in the URL and replace it with .nc\n\nHit return in the browser and the netCDF file will download onto your computer\nView the netCDF file you just downloaded in Panoply\n\nA full description of file types can be found at this link:\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html\n\n\n\nNow that you know how the ERDDAP URL is constructed, it easy to imagine how to write a script within an analysis tool like R, MATLAB or Python to build a URL, download data, and use the data to accomplish a task. The next example, we will build a simple script in R that downloads the data from the PNG image we produced above, show some information about the file (metadata), and generate a simple plot.\nReview the parts of the ERDDAP URL\nUsing this URL as an example, the component parts of the URL are reviewed below.\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/jplUKMO_OSTIAv20.nc?analysed_sst[(2015-07-13T12:00:00Z):1:(2015-07-14T12:00:00Z)][(46.5):(50.0)][(-128.975):(-121.975)]\n\nBase URL -&gt; https://coastwatch.pfeg.noaa.gov/erddap/griddap/\ndataset ID: jplUKMO_OSTIAv20\nFile type: .nc\nVariable of interest -&gt; analysed_sst\nTime range -&gt; [(2015-07-13T12:00:00Z):1:(2015-07-14T12:00:00Z)] The “1” between times is the stride\nLatitude range -&gt; [(45.025):1:(52.025)] The “1” between times is the stride\nLongitude range -&gt; [(-128.975):1:(-121.975)] The “1” between times is the stride\n\nCreate a function in R to build the URL\nThe code block below contains a simple function to build an ERDDAP URL.\n# A function that generates the URL\nmyURL &lt;- function(burl, data_id, ftype, data_var, dates, lats, lons) {\n  url1 = paste(burl, \"griddap/\", data_id, ftype, \"?\", data_var, sep=\"\")\n  urltime = paste(\"[(\", dates[1], \"):1:(\", dates[2], \")]\", sep=\"\")\n  urllat = paste(\"[(\", lats[1], \"):1:(\", lats[2], \")]\", sep=\"\")\n  urllon = paste(\"[(\", lons[1], \"):1:(\",  lons[2], \")]\", sep=\"\")\n  \n   erddapURL &lt;- paste(url1, urltime, urllat, urllon, sep=\"\")\n}\nUse the function in R to build the URL\nUse the function to generate a URL and download the data. The input information for the URL is hard coded below. It is likely that in a script you would write there would be a process to generate the input information.\nNOTE: If you get an error similar to “Not Found: Currently unknown datasetID=jplUKMO_OSTIAv20.nc”, it means that the dataset is temporarily not available. Try the following to get the exercise to work:\n* Switch the dataset ID from ID &lt;- “jplUKMO_OSTIAv20” to ID &lt;- “nesdisGeoPolarSSTN5SQ” * Below, put a # in front of ID &lt;- “jplUKMO_OSTIAv20” i.e. # ID &lt;- “jplUKMO_OSTIAv20” * Below, remove the # in front of # ID &lt;- “nesdisGeoPolarSSTN5SQ”, i.e. ID &lt;- “nesdisGeoPolarSSTN5SQ”\n# The location of the ERDDAP server\nbaseurl &lt;- \"https://coastwatch.pfeg.noaa.gov/erddap/\"\n# The id of the dataset\nID &lt;- \"jplUKMO_OSTIAv20\"\n# ID &lt;- \"nesdisGeoPolarSSTN5SQ\"\n# The name of the variable \nmydata_var &lt;- \"analysed_sst\"\n# A list containing the beginning and end dates\nmydates &lt;- c(\"2015-07-13T12:00:00Z\", \"2015-07-14T12:00:00Z\")\n# A list containing the beginning and end latitudes\nmylats &lt;- c(45, 52)\n# A list containing the beginning and end longitudes\nmylons &lt;- c(-128, -121)\n# The file type\nfile_type &lt;- \".nc\"\n\n# Generate the URL\nerddap_url &lt;- myURL(baseurl, ID, file_type, mydata_var, mydates, mylats, mylons)\nerddap_url\n## [1] \"https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplUKMO_OSTIAv20.nc?analysed_sst[(2015-07-13T12:00:00Z):1:(2015-07-14T12:00:00Z)][(45):1:(52)][(-128):1:(-121)]\"\n# Download the data as a netCDF file\n\njunk &lt;- GET(erddap_url, write_disk(\"myDataFile.nc\", overwrite=TRUE))  \n\n# The following code will also work for Mac, but not Windows:  \n# download.file(url=erddap_url, destfile=\"myDataFile.nc\", quiet=TRUE)\nBring the data into R\nOpen the downloaded data file, load the SST data, and display some information about the SST variable.\n# open the netCDF file\nlibrary(ncdf4)\nnc &lt;- ncdf4::nc_open(\"myDataFile.nc\")\n# attributes(nc$var)$names\n# load the SST data \nsst &lt;- ncvar_get(nc, mydata_var)\n# Get the shape of the array\ndim(sst)\n## [1] 142 141   2\n# print out some metadata about the varialbe\nncatt_get(nc, mydata_var)\n## $`_FillValue`\n## [1] -327.68\n## \n## $colorBarMaximum\n## [1] 32\n## \n## $colorBarMinimum\n## [1] 0\n## \n## $comment\n## [1] \"OSTIA foundation SST\"\n## \n## $ioos_category\n## [1] \"Temperature\"\n## \n## $long_name\n## [1] \"analysed sea surface temperature\"\n## \n## $references\n## [1] \"C.J. Donlon, M. Martin, J.D. Stark, J. Roberts-Jones, E. Fiedler, W. Wimmer. The operational sea surface temperature and sea ice analysis (OSTIA) system. Remote Sensing Environ., 116 (2012), pp. 140u2013158 https://dx.doi.org/10.1016/j.rse.2010.10.017\"\n## \n## $source\n## [1] \"AVHRR18_G-NAVO-L2P-V1.0, AVHRR19_G-NAVO-L2P-V1.0, AVHRR_SST_METOP_B-OSISAF-L2P-V1.0, VIIRS_NPP-OSPO-L2P-V2.3, AMSR2-REMSS-L2P-V07.2, GOES13-OSISAF-L3C-V1.0, SEVIRI_SST-OSISAF-L3C-V1.0, OSISAF_ICE, NCEP_ICE\"\n## \n## $standard_name\n## [1] \"sea_surface_foundation_temperature\"\n## \n## $units\n## [1] \"degree_C\"\n## \n## $valid_max\n## [1] 44.99999\n## \n## $valid_min\n## [1] -3.000006\nPlot a simple visualization of the SST data.\n# Get the data for the first time step\nsst1 &lt;- (sst[,,1])\n# Visualize teh data\n#image(sst1, col=matlab.like2(255)) blue2green2red\nimage(sst1, col = rainbow(225))"
   },
   {
-    "objectID": "trainings/past/pgrsc24.html#course-description",
-    "href": "trainings/past/pgrsc24.html#course-description",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
+    "objectID": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#deconstructing-the-url",
+    "href": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#deconstructing-the-url",
+    "title": "Automating ERDDAP requests",
     "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using information tools from PacIOOS for applications in the Pacific Islands region. This training will be held during the 2024 Pacific Islands GIS and Remote Sensing Users Conference in Suva, Fiji.\nClick here to Register.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
+    "text": "The URL is composed of several parts that define the data request. Let’s try breaking the URL down into its component parts.\nCopy the following URL paste it into a browser to see what the data looks like. https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplUKMO_OSTIAv20.largePng?analysed_sst[(2015-07-17T12:00:00Z):(2015-07-17T12:00:00Z)][(45.025):(52.025)][(-128.975):(-121.975)]&.draw=surface&.trim=2&.vars=longitude|latitude|analysed_sst&.colorBar=KT_thermal|||12|20|&.bgColor=0xffccccff\nNOTE: If you get an error similar to “code=404, Not Found: Currently unknown datasetID=jplUKMO_OSTIAv20.nc”, it means that the dataset is temporarily not available. Try using the following URL, which switches to the “nesdisGeoPolarSSTN5SQ” dataset, instead of the one above:\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/nesdisGeoPolarSSTN5SQ.largePng?analysed_sst[(2015-07-17T12:00:00Z):(2015-07-17T12:00:00Z)][(45.025):(52.025)][(-128.975):(-121.975)]&.draw=surface&.trim=2&.vars=longitude|latitude|analysed_sst&.colorBar=KT_thermal|||12|20|&.bgColor=0xffccccff\nOpen simple word processor (not Word) and paste in the URL\nTry breaking the URL down into its component parts as described below.\n\nBase URL\n\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/\n\n\ndataset ID\n\njplUKMO_OSTIAv20 (or nesdisGeoPolarSSTN5SQ if you changed the URL above)\n\nFile type\n\n.largePng\n\nEverything after ? is the data request -&gt; ?\nVariable of interest\n\nanalysed_sst\n\nTime\n\n[(2015-07-17T12:00:00Z):(2015-07-17T12:00:00Z)]\n\nLatitude range\n\n[(45.025):(52.025)]\n\nLongitude range\n\n[(-128.975):(-121.975)]\n\nEverything beginning with &.draw adjusts the look of the image\n\n&.draw=surface&.trim=2&.vars=longitude|latitude|analysed_sst&.colorBar=KT_thermal|||12|20|&.bgColor=0xffccccff"
   },
   {
-    "objectID": "trainings/past/pgrsc24.html#instructors",
-    "href": "trainings/past/pgrsc24.html#instructors",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager\n\n\nLauren Kaiser\nPacIOOS, data management specialist\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/pgrsc24.html#objectives",
-    "href": "trainings/past/pgrsc24.html#objectives",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstrate how to access data on ERDDAP servers\nIntroduce CoastWatch satellite data and training resources\nExplore additional data and information tools available at PacIOOS\nProvide hands-on time to access data and run tutorials",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/pgrsc24.html#schedule",
-    "href": "trainings/past/pgrsc24.html#schedule",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\nTime (Fiji Standard Time)\nTopic\nPresenter\n\n\n\n\n1:00 - 1:10\nWelcome & Introductions\nDaisy Shi & Lauren Kaiser\n\n\n1:10 - 1:20\nInteractive Questions\n\n\n\n1:20 - 1:35\nIntro to CoastWatch, Satellite Datasets & Data Portal\nDaisy Shi\n\n\n1:35 - 1:50\nIntro to OceanWatch, Data Accessibility & Usability\nDaisy Shi\n\n\n1:50 - 2:20\nIntro to PacIOOS, Website Walkthrough & Data Search\nLauren Kaiser\n\n\n2:20 - 2:30\nInteractive Questions\n\n\n\n2:30 - 2:45\nBreak\n\n\n\n2:45 - 2:55\nOverview of CoastWatch Tutorials\nDaisy Shi\n\n\n2:55 - 3:15\nERDDAP Demos\nDaisy Shi\n\n\n3:15 - 3:45\nArcGIS & QGIS Demos\nLauren Kaiser\n\n\n3:45 - 4:00\nBreak\n\n\n\n4:00 - 5:50\nHands-On time\nAll\n\n\n5:50 - 6:00\nInteractive Questions & Feedback",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/pgrsc24.html#resources",
-    "href": "trainings/past/pgrsc24.html#resources",
-    "title": "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nGeostationary satellites covering Western Pacific\nPacIOOS\nPacIOOS Voyager",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 PGRSC Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html",
-    "href": "trainings/past/icft25.html",
-    "title": "Satellite and Animal Telemetry Data Training",
+    "objectID": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#adjust-the-area-in-the-url",
+    "href": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#adjust-the-area-in-the-url",
+    "title": "Automating ERDDAP requests",
     "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
+    "text": "NOTE: You could do the following on the ERDDAP “Data Access Form” page and have ERDDAP generate the modified URL, but we will do it by hand in the browser.\nChange the latitude range to remove Oregon and most of Canada from the map. In the browser, look through the URL and find the part that defines the latitude. Change the lower latitude value from 45.025 to 46.5 and the higher latitude value from 52.025 to 50.0.\n\nChange this: [(45.025):(52.025)]\n\nTo this: [(46.5):(50.0)]\nHit return in the browser to see the new edited map.\n\n\n\n\nWA coast, July 15, 2015"
   },
   {
-    "objectID": "trainings/past/icft25.html#course-description",
-    "href": "trainings/past/icft25.html#course-description",
-    "title": "Satellite and Animal Telemetry Data Training",
+    "objectID": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#adjust-the-time-in-the-url",
+    "href": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#adjust-the-time-in-the-url",
+    "title": "Automating ERDDAP requests",
     "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual ICFT (International Conference on Fish Telemetry) meeting in Traverse City, Michigan, but has been rescheduled to be an online course, open to all.\nLink to registration page",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
+    "text": "The time is adjusted the similarly to the latitude.\nIn the browser, look through the URL and find the part that defines the time. Change the both values to be one (1) month earlier.\n\nChange this: [(2015-07-17T12:00:00Z):(2015-07-17T12:00:00Z)]\nTo this: [(2015-06-17T12:00:00Z):(2015-06-17T12:00:00Z)]\nHit return in the browser to see the new edited map.\n\n\n\n\nWA coast, June 15, 2015\n\n\nGetting the most recent data\nERDDAP allows you to call the most recent image without knowing the date of the most recent data.\nIn the browser, look through the URL and find the part that defines the time. Change the both values \"last\".\n\nChange this: [(2015-06-17T12:00:00Z):(2015-06-17T12:00:00Z)]\n\nTo this: [(last):(last)]\nHit return in the browser to see the new edited map.\n\nThe image that appears is most recent data. You can even due math while using \"last\". For example, to get the image one week before the most recent image.\n\nChange this: [(last):(last)]\n\nTo this: [(last-7):(last-7)]\nHit return in the browser to see the new edited map.\n\nYou may have to adjust the color bar minimum and maximum a little. If so, find the part of the URL that defines the color bar\n\ncolorBar=KT_thermal|||12|20|\n\nThe minimum is set to 12 and maximum is set to 20. Play around with the numbers until your image looks good."
   },
   {
-    "objectID": "trainings/past/icft25.html#instructors",
-    "href": "trainings/past/icft25.html#instructors",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data manager\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#objectives",
-    "href": "trainings/past/icft25.html#objectives",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#schedule",
-    "href": "trainings/past/icft25.html#schedule",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Schedule",
-    "text": "Schedule\nThursday, August 14, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 11:30\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:15\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:15 - 12:45\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:45 - 1:00\nDay 1 wrap-up\n\n\n\n\nFriday, August 15, 2025\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:30\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n10:30 - 11:00\nDemo of ATN data portal\nMegan McKinzie\n\n\n11:00 - 11:30\nAccessing public ATN datasets\nMegan McKinzie\n\n\n11:30 - 11:45\nBreak\n\n\n\n11:45 - 12:00\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n12:00 - 12:45\nWorkshop, part 2: Hand’s on time\n\n\n\n12:45 - 13:00\nWrap up and final discussion\nAll",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/past/icft25.html#resources",
-    "href": "trainings/past/icft25.html#resources",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Satellite and Animal Telemetry"
-    ]
-  },
-  {
-    "objectID": "trainings/index.html",
-    "href": "trainings/index.html",
-    "title": "CoastWatch Workshops",
+    "objectID": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#changing-the-file-type-in-the-url",
+    "href": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#changing-the-file-type-in-the-url",
+    "title": "Automating ERDDAP requests",
     "section": "",
-    "text": "CoastWatch regularly organizes and offers in-person and online satellite training classes or workshops featuring lectures, tutorials, & tool demonstrations.\nDuring in-person and online satellite course, participants learn about environmental satellite data and how to easily obtain it. Participants also gain hands on experience working with the data of interest to them. A major goal of the course is to provide scientists who are not regular users of satellite data with the knowledge and tools they need to incorporate satellite data into their research and management projects.\nFor questions or more information about the upcoming satellite training classes, please contact coastwatch.info@noaa.gov.",
-    "crumbs": [
-      "Training Classes"
-    ]
+    "text": "So far we have been downloading PGN files in our URL requests to visualize the changes brought about by altering the URL. In the URL the PGN format is represented in the URL by “.png”\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/jplUKMO_OSTIAv20__.png__?analysed_sst[(last):(last)][(46.5):(50.0)][(-128.975):(-121.975)]&.draw=surface&.trim=2&.vars=longitude|latitude|analysed_sst&.colorBar=KT_thermal|||12|20|&.bgColor=0xffccccff\nTo download the data, we need to change the file type section of the URL request. There are over 30 file types to choose from, but useful formats for data are MATLAB and netCDF formats. The URL representations for those file types are:\n\n.nc - netCDF files\n\n.mat - Matlab files\n\nWe will select a netCDF file.\n\nIn the browser, locate the .png in the URL and replace it with .nc\n\nHit return in the browser and the netCDF file will download onto your computer\nView the netCDF file you just downloaded in Panoply\n\nA full description of file types can be found at this link:\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "CoastWatch Training Website",
+    "objectID": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#pull-data-into-a-scripting-language",
+    "href": "tutorials/ERDDAP-Basics/understanding-erddap-url/understanding-erddap-url.html#pull-data-into-a-scripting-language",
+    "title": "Automating ERDDAP requests",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "officehours.html",
-    "href": "officehours.html",
-    "title": "CoastWatch Office Hours",
-    "section": "",
-    "text": "Hosted by the West Coast Node and PolarWatch\nevery other Thursday at 11 am PST\nUpcoming dates: March 5, 12\nEveryone is welcome to come to the CoastWatch Office Hour where people can:\n\nAsk questions about satellite data\nRequest help with accessing satellite data products\nGet troubleshooting assistance with code examples for discovering, accessing and working with satellite data\n\nCoastWatch Lectures\nCoastWatch Tutorials",
-    "crumbs": [
-      "Office Hours"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html",
-    "href": "trainings/past/afs24.html",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has been rescheduled to be an online course, open to all.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#course-description",
-    "href": "trainings/past/afs24.html#course-description",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "",
-    "text": "Training on accessing Oceanographic Satellite Data from NOAA CoastWatch and using the Animal Telemetry Network Portal. This training was originally going to be held before the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has been rescheduled to be an online course, open to all.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#instructors",
-    "href": "trainings/past/afs24.html#instructors",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nMegan McKinzie\nATN Data Coordinator\n\n\nDaisy Shi\nCoastWatch/Pacific OceanWatch, node manager",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#objectives",
-    "href": "trainings/past/afs24.html#objectives",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of products available from satellite data\nDemonstate how to access data on ERDDAP servers\nExplore the data available on the Animal Telemetry Network portal\nIntroduce CoastWatch satellite data training resources\nProvide hands-on time to access data and try tutorials",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#schedule",
-    "href": "trainings/past/afs24.html#schedule",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n10:00 - 10:15\nTraining Overview - CoastWatch, ATN and the workshop component\nCara Wilson\n\n\n10:15 - 10:30\nGroup Introductions\nCara Wilson\n\n\n10:30 - 11:15\nCoastwatch satellite datasets and data portals\nCara Wilson\n\n\n11:15 - 11:30\nBreak\n\n\n\n11:30 - 12:00\nUsing the ERDDAP data server\nCara Wilson\n\n\n12:00 - 12:30\nAccessing ERDDAP using scripts (R, python)\nCara Wilson\n\n\n12:30 - 1:30\nLunch break\n\n\n\n1:30 - 2:00\nIntro to ATN and the DAC\nMegan McKinzie\n\n\n2:00 - 2:30\nDemo of ATN data portal\nMegan McKinzie\n\n\n2:30 - 3:00\nAccessing public ATN datasets\nMegan McKinzie\n\n\n3:00 - 3:15\nBreak\n\n\n\n3:15 - 3:30\nWorkshop, part 1: Linking CoastWatch and ATN data using scripts\nDaisy Shi\n\n\n3:30 - 4:45\nWorkshop, part 2: Hand’s on time\n\n\n\n4:45 - 5:00\nWrap up and final discussion\nAll",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/afs24.html#resources",
-    "href": "trainings/past/afs24.html#resources",
-    "title": "Satellite and Animal Telemetry Data Training",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nAnimal telemetry Network",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 AFS Workshop"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html",
-    "href": "trainings/past/longislandsound25.html",
-    "title": "2025 Long Island Sound Class",
-    "section": "",
-    "text": "Virtual - Times vary daily, see schedule below (times are Eastern).\nNOAA CoastWatch is hosting this free, virtual training class:  Viewing and Analyzing Ocean/Coastal Events and Water Quality Using Satellites\nJoin Class Via Zoom Here",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html#course-description",
-    "href": "trainings/past/longislandsound25.html#course-description",
-    "title": "2025 Long Island Sound Class",
-    "section": "Course Description",
-    "text": "Course Description\nMany satellite products are available for water quality applications and other uses from NOAA and other data providers. These include: chlorophyll, turbidity, sea surface temperature, organic matter, and more. In this course, learn how to use these satellite products for your region of interest using freely available tools. Address your needs and questions by creating maps and images, plotting a time series of varying conditions, or creating a virtual buoy for your study location. And other applications too!\nThis class is being offered in two Tiers as part of a larger Long Island Sound Project funded by New York/Connecticut Sea Grant.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html#objectives",
-    "href": "trainings/past/longislandsound25.html#objectives",
-    "title": "2025 Long Island Sound Class",
-    "section": "Objectives",
-    "text": "Objectives\n\nTier I: Creating Images\nLearn to use tools to create images and maps of ocean or coastal features in your area of interest. Tools taught: CoastWatch Data Portal, ArcGIS, ERDDAP visualization server, and more.\n\n\nTier II: Analyzing Data for Your Study or Region\nWork more analytically with oceanographic satellite data. Learn R and/or Python techniques to access data on ERDDAP data servers for data extraction, map creation, time series analysis, matching data to your study site locations or ship tracks, creating a virtual buoy using satellite data in your location of choice, and other application skills.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html#schedule",
-    "href": "trainings/past/longislandsound25.html#schedule",
-    "title": "2025 Long Island Sound Class",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\nDay\nTime (ET)\nTopic\nPresenter\n\n\n\n\nMonday - March 31\n\nTier I and Tier II\n\n\n\n\n9:00 - 9:15\nPresentation 1: Overview – SeaGrant-funded Satellite Project\nJonathan Sherman\n\n\n\n9:15 - 9:45\nPresentation 2: Data Portal\nMichael Soracco\n\n\n\n9:45 - 10:15\nPresentation 3: ArcGIS\nMichael Soracco\n\n\n\n10:15 - 10:30\nBreak\n\n\n\n\n10:30 - 11:15\nPresentation 4: CoastWatch Utilities - CDAT  Files\nRon Vogel\n\n\n\n11:15 - 11:30\nQ & A\n\n\n\n\n11:30 - 12:15\nParticipant Exercise 1: Choose a tool and make a map  ArcGIS files, CDAT files\n\n\n\n\n12:15 - 1:15\nLunch break\n\n\n\n\n1:15 - 1:45\nPresentation 5: Choosing a Dataset\nJonathan Sherman\n\n\n\n1:45 - 2:45\nPresentation 6: ERDDAP\nRon Vogel\n\n\n\n2:45 - 3:00\nBreak\n\n\n\n\n3:00 - 3:30\nQ & A and Resources for Participants\n\n\n\n\n3:30 - 4:30\nParticipant Exercise 2: Choose a dataset from ERDDAP, download, make a map and a time series  Sample data list\n\n\n\nTuesday - April 1\n\nTier II (April 1–4)\n\n\n\n\n9:00 - 9:30\nPresentation 7: Satellite 101\nShelly Tomlinson\n\n\n\n9:30 - 10:30\nPresentation 8: CoastWatch Training Code (R and Python) – Capabilities and Tutorials  Tutorials GitHub page\nJonathan Sherman\n\n\n\n10:30 - 10:45\nBreak\n\n\n\n\n10:45 - 11:30\nPresentation 9: CoastWatch Utilities - Command Line  Files\nRon Vogel\n\n\n\n11:30 - 12:00\nOffice Hours Logistics, Mini-project & Slide Info, Q & A\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nOffice Hours: One-on-One\n\n\n\nWednesday - April 2\n\nParticipants work on their mini-project on their own time\n\n\n\nThursday - April 3\n9:00 - 9:15\nGauge Progress Poll\nBetty Staugler\n\n\n\n9:15 - 9:30\nPresentation 10: HAB Forecasts\nShelly Tomlinson\n\n\n\n9:30 - 9:45\nPresentation 11: COVID Impacts\nJonathan Sherman\n\n\n\n9:45 - 10:00\nPresentation 12: Participant Slide Examples from Past Classes\nRon Vogel\n\n\n\n10:00 - 12:00\nOffice Hours: Group Discussion or One-on-One\n\n\n\n\n12:00 - 1:00\nLunch\n\n\n\n\n1:00 - 4:00\nParticipants work on their mini-project on their own time\n\n\n\nFriday - April 4\n1:00 - 3:00\nFinal Mini-project Presentations (1 slide each)\nParticipants",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/longislandsound25.html#resources",
-    "href": "trainings/past/longislandsound25.html#resources",
-    "title": "2025 Long Island Sound Class",
-    "section": "Resources",
-    "text": "Resources\n\nCoastWatch main website\nCoastWatch East Coast Regional Node website\nCoastWatch Data Access methods\nCoastwatch Coding Tutorials: R and Python (on GitHub)\nCoastwatch Lecture series\nCoastwatch Data Portal video tutorials\nCoastwatch ArcGIS lecture videos and tutorials\nCoastWatch Utilities\n\nCoastWatch Utilities Tutorials - CDAT and Command-Line\nCDAT demo videos on YouTube\n\nCoastWatch Help Desk\n\nEmail: coastwatch.info@noaa.gov\nPhone: +1-301-683-3335\nUser Forums",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2025 Long Island Sound"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html",
-    "href": "trainings/past/seaice24.html",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "",
-    "text": "PolarWatch node of the CoastWatch is hosting a free, virtual training class on October 21, 2024 (9am-4pm Pacific Time).",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html#course-description",
-    "href": "trainings/past/seaice24.html#course-description",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Course Description",
-    "text": "Course Description\nMany satellite sea ice products are available for download from NOAA and many other data providers: e.g. sea ice concentration, sea ice thickness, sea ice age, sea ice temperature, and sea ice extent. It can often be challenging to know the differences between the products and how each can be applied to a user’s specific application. For example, the spatial resolutions of the products can vary widely, largely dependent on the type of satellite measurement the product is derived from (passive microwave, visible radiometry or synthetic aperture radar). Additionally, when working with data in the high-latitudes issues of data projection invariably arise and can complicate accessing and working with data. To address these issues, NOAA’s PolarWatch node has developed a 1-day (6 hour) online course with the following training objectives.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html#objectives",
-    "href": "trainings/past/seaice24.html#objectives",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of sea-ice products available from satellite data\nGive an overview of working with different projections\nExplore the data available on the PolarWatch portal\nProvide hands-on time to access data and try tutorials\nIntroduce CoastWatch and other sea ice satellite data training resources",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html#schedule",
-    "href": "trainings/past/seaice24.html#schedule",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Schedule",
-    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n9:00 - 9:30\nPresentation 1: Introduction to NOAA CoastWatch\nCara Wilson\n\n\n9:30 - 10:00\nPresentation 2: Overview of Sea Ice Remote Sensing\nLudovic Brucker\n\n\n10:00 - 10:30\nPresentation 3: JPSS Sea Ice Microlesson\nKevin Fuell\n\n\n10:30 - 10:45\nBreak\n\n\n\n10:45 - 11:15\nPresentation 4: Sea Ice from SAR\nChris Jackson\n\n\n11:15 - 11:30\nPresentation 5: Projections - Why they Matter\nMichael Soracco\n\n\n11:30 - 11:45\nPresentation 6: Ice in the Great Lakes\nAndrea VanderWoude\n\n\n11:45 - 12:45\nLunch break\n\n\n\n12:45 - 13:00\nPresentation 7: Projections in Action (Watch Video)\nPeter Hollemans\n\n\n13:00 - 13:30\nPresentation 8: ERDDAP Demo\nCara Wilson\n\n\n13:30 - 13:45\nPresentation 9: PolarWatch Portal Demo\nSunny Hospital\n\n\n13:45 - 14:00\nPresentation 10: CoastWatch Viewer Demo\nMichael Soracco\n\n\n14:00 - 14:15\nBreak\n\n\n\n14:15 - 14:30\nPresentation 11: Overview of Tutorials\nCara Wilson, Matthew Smith\n\n\n14:30 - 16:00\nHand’s on time, with instuctor’s guidance available",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/past/seaice24.html#resources",
-    "href": "trainings/past/seaice24.html#resources",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series\nJPSS Sea Ice Microlesson",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html",
-    "href": "trainings/upcoming/sat201_26.html",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "",
-    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#course-description",
-    "href": "trainings/upcoming/sat201_26.html#course-description",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "",
-    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#schedule-attendance",
-    "href": "trainings/upcoming/sat201_26.html#schedule-attendance",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Schedule & Attendance",
-    "text": "Schedule & Attendance\nFrequency: Sessions are held every Friday for one month.\nDuration: Approximately 2.5 hours per session.\nFlexibility: Attendance for all sessions is not required; feel free to join the topics most relevant to you.",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#curriculum",
-    "href": "trainings/upcoming/sat201_26.html#curriculum",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "2026 Curriculum",
-    "text": "2026 Curriculum\nThe inaugural 2026 course will cover the following subjects: * Alternative Data Access: Methods for accessing data not hosted on ERDDAP servers. * CoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite. * Beyond Chlorophyll: Exploring ocean color products other than chlorophyll. * SAR Data: An introduction to Synthetic Aperture Radar.",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#schedule",
-    "href": "trainings/upcoming/sat201_26.html#schedule",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Schedule",
-    "text": "Schedule\nFriday, July 10, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nAccessing data not on ERDDAP servers\nDale Robinson\n\n\n11:45 - 12:30\na demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 17, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to using Coastwatch Utilities software\nPeter Hollemans\n\n\n11:45 - 12:30\na demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 24, 2026 | Time (PST) | Topic | Presenter | |:————-|:—————————————————————————–|:—————————-| | 11:00 - 11:45 | Beyond Chlorophyll | Ryan Vandermeulan | | 11:45 - 12:30 | Beyond Chlorophyll Case Study | | | 12:30 - 12:45 | Break | |\n| 12:45 - 1:30 | Question & Answer and hand’s on session | |\nFriday, July 31, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to SAR Data\n\n\n\n11:45 - 12:30\nSAR Case Study\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#instructors",
-    "href": "trainings/upcoming/sat201_26.html#instructors",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, node manager\n\n\nPeter Hollemans\nCoastWatch/Pacific OceanWatch, node manager",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#resources",
-    "href": "trainings/upcoming/sat201_26.html#resources",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials (on GitHub)\nCoastwatch Lecture series",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
+    "text": "Now that you know how the ERDDAP URL is constructed, it easy to imagine how to write a script within an analysis tool like R, MATLAB or Python to build a URL, download data, and use the data to accomplish a task. The next example, we will build a simple script in R that downloads the data from the PNG image we produced above, show some information about the file (metadata), and generate a simple plot.\nReview the parts of the ERDDAP URL\nUsing this URL as an example, the component parts of the URL are reviewed below.\nhttps://coastwatch.pfeg.noaa.gov/erddap/griddap/jplUKMO_OSTIAv20.nc?analysed_sst[(2015-07-13T12:00:00Z):1:(2015-07-14T12:00:00Z)][(46.5):(50.0)][(-128.975):(-121.975)]\n\nBase URL -&gt; https://coastwatch.pfeg.noaa.gov/erddap/griddap/\ndataset ID: jplUKMO_OSTIAv20\nFile type: .nc\nVariable of interest -&gt; analysed_sst\nTime range -&gt; [(2015-07-13T12:00:00Z):1:(2015-07-14T12:00:00Z)] The “1” between times is the stride\nLatitude range -&gt; [(45.025):1:(52.025)] The “1” between times is the stride\nLongitude range -&gt; [(-128.975):1:(-121.975)] The “1” between times is the stride\n\nCreate a function in R to build the URL\nThe code block below contains a simple function to build an ERDDAP URL.\n# A function that generates the URL\nmyURL &lt;- function(burl, data_id, ftype, data_var, dates, lats, lons) {\n  url1 = paste(burl, \"griddap/\", data_id, ftype, \"?\", data_var, sep=\"\")\n  urltime = paste(\"[(\", dates[1], \"):1:(\", dates[2], \")]\", sep=\"\")\n  urllat = paste(\"[(\", lats[1], \"):1:(\", lats[2], \")]\", sep=\"\")\n  urllon = paste(\"[(\", lons[1], \"):1:(\",  lons[2], \")]\", sep=\"\")\n  \n   erddapURL &lt;- paste(url1, urltime, urllat, urllon, sep=\"\")\n}\nUse the function in R to build the URL\nUse the function to generate a URL and download the data. The input information for the URL is hard coded below. It is likely that in a script you would write there would be a process to generate the input information.\nNOTE: If you get an error similar to “Not Found: Currently unknown datasetID=jplUKMO_OSTIAv20.nc”, it means that the dataset is temporarily not available. Try the following to get the exercise to work:\n* Switch the dataset ID from ID &lt;- “jplUKMO_OSTIAv20” to ID &lt;- “nesdisGeoPolarSSTN5SQ” * Below, put a # in front of ID &lt;- “jplUKMO_OSTIAv20” i.e. # ID &lt;- “jplUKMO_OSTIAv20” * Below, remove the # in front of # ID &lt;- “nesdisGeoPolarSSTN5SQ”, i.e. ID &lt;- “nesdisGeoPolarSSTN5SQ”\n# The location of the ERDDAP server\nbaseurl &lt;- \"https://coastwatch.pfeg.noaa.gov/erddap/\"\n# The id of the dataset\nID &lt;- \"jplUKMO_OSTIAv20\"\n# ID &lt;- \"nesdisGeoPolarSSTN5SQ\"\n# The name of the variable \nmydata_var &lt;- \"analysed_sst\"\n# A list containing the beginning and end dates\nmydates &lt;- c(\"2015-07-13T12:00:00Z\", \"2015-07-14T12:00:00Z\")\n# A list containing the beginning and end latitudes\nmylats &lt;- c(45, 52)\n# A list containing the beginning and end longitudes\nmylons &lt;- c(-128, -121)\n# The file type\nfile_type &lt;- \".nc\"\n\n# Generate the URL\nerddap_url &lt;- myURL(baseurl, ID, file_type, mydata_var, mydates, mylats, mylons)\nerddap_url\n## [1] \"https://coastwatch.pfeg.noaa.gov/erddap/griddap/jplUKMO_OSTIAv20.nc?analysed_sst[(2015-07-13T12:00:00Z):1:(2015-07-14T12:00:00Z)][(45):1:(52)][(-128):1:(-121)]\"\n# Download the data as a netCDF file\n\njunk &lt;- GET(erddap_url, write_disk(\"myDataFile.nc\", overwrite=TRUE))  \n\n# The following code will also work for Mac, but not Windows:  \n# download.file(url=erddap_url, destfile=\"myDataFile.nc\", quiet=TRUE)\nBring the data into R\nOpen the downloaded data file, load the SST data, and display some information about the SST variable.\n# open the netCDF file\nlibrary(ncdf4)\nnc &lt;- ncdf4::nc_open(\"myDataFile.nc\")\n# attributes(nc$var)$names\n# load the SST data \nsst &lt;- ncvar_get(nc, mydata_var)\n# Get the shape of the array\ndim(sst)\n## [1] 142 141   2\n# print out some metadata about the varialbe\nncatt_get(nc, mydata_var)\n## $`_FillValue`\n## [1] -327.68\n## \n## $colorBarMaximum\n## [1] 32\n## \n## $colorBarMinimum\n## [1] 0\n## \n## $comment\n## [1] \"OSTIA foundation SST\"\n## \n## $ioos_category\n## [1] \"Temperature\"\n## \n## $long_name\n## [1] \"analysed sea surface temperature\"\n## \n## $references\n## [1] \"C.J. Donlon, M. Martin, J.D. Stark, J. Roberts-Jones, E. Fiedler, W. Wimmer. The operational sea surface temperature and sea ice analysis (OSTIA) system. Remote Sensing Environ., 116 (2012), pp. 140u2013158 https://dx.doi.org/10.1016/j.rse.2010.10.017\"\n## \n## $source\n## [1] \"AVHRR18_G-NAVO-L2P-V1.0, AVHRR19_G-NAVO-L2P-V1.0, AVHRR_SST_METOP_B-OSISAF-L2P-V1.0, VIIRS_NPP-OSPO-L2P-V2.3, AMSR2-REMSS-L2P-V07.2, GOES13-OSISAF-L3C-V1.0, SEVIRI_SST-OSISAF-L3C-V1.0, OSISAF_ICE, NCEP_ICE\"\n## \n## $standard_name\n## [1] \"sea_surface_foundation_temperature\"\n## \n## $units\n## [1] \"degree_C\"\n## \n## $valid_max\n## [1] 44.99999\n## \n## $valid_min\n## [1] -3.000006\nPlot a simple visualization of the SST data.\n# Get the data for the first time step\nsst1 &lt;- (sst[,,1])\n# Visualize teh data\n#image(sst1, col=matlab.like2(255)) blue2green2red\nimage(sst1, col = rainbow(225))"
   },
   {
     "objectID": "tutorials/ERDDAP-Basics/visualize-and-download-data/visualize-and-download-data.html",

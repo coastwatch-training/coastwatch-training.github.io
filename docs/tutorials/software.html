@@ -273,8 +273,8 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists software-based tutorials.<br>
 Click the <strong>eye</strong> icon to preview outputs, or <strong>download</strong> to open the source file on GitHub.</p>
-<div id="1f476d5e" class="cell" data-message="false" data-execution_count="1">
-<div class="cell-output cell-output-display" data-execution_count="3">
+<div id="508a0a4c" class="cell" data-message="false" data-execution_count="1">
+<div class="cell-output cell-output-display" data-execution_count="1">
 <script>
 function cgOpenModal(id){
   document.getElementById("cg-backdrop").style.display="block";
@@ -301,7 +301,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th">Title</th>
-<th data-quarto-table-cell-role="th">More Info</th>
+<th data-quarto-table-cell-role="th">Info</th>
 <th data-quarto-table-cell-role="th">Preview</th>
 <th data-quarto-table-cell-role="th">Download ↓</th>
 </tr>
@@ -338,6 +338,24 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/ERDDAP-Basics/visualize-and-download-data.md" class="cg-icon" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+</tr>
+<tr class="cg-row odd">
+<td>ERDDAP Basics - Understanding the ERDDAP URL</td>
+<td><a href="softwarebackground.html#erddap" class="cg-icon" aria-label="Background info">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path>
+</svg>
+</a></td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-2')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/ERDDAP-Basics/using-the-erddap-data-catalog/using-the-erddap-data-catalog.Rmd" class="cg-icon" target="_blank" rel="noopener">
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
@@ -387,7 +405,33 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <div class="cg-caption">Sea surface temperature map for the Washington coast on July 15, 2015, generated using ERDDAP’s Make A Graph tool.</div>
           </div>
         <div class="cg-nav"><button class="cg-arrow" onclick="cgPrev('sw-carousel-1')">◀</button><span class="cg-count">1 / 2</span><button class="cg-arrow" onclick="cgNext('sw-carousel-1')">▶</button></div></div>
-        <div class="cg-one-actions"><a class="cg-btn" href="ERDDAP-Basics/visualize-and-download-data.qmd">View tutorial</a></div>
+        <div class="cg-one-actions"><a class="cg-btn" href="../tutorials/ERDDAP-Basics/visualize-and-download-data/visualize-and-download-data.html">View tutorial</a></div>
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-2" class="cg-modal">
+      <h3 class="anchored">ERDDAP Basics - Understanding the ERDDAP URL</h3>
+      <p>This tutorial explains how ERDDAP data requests are fully defined within a URL and how those URLs can be edited to control dataset selection, spatial and temporal subsetting, output formats, and visualization settings. You will learn how to modify URL components by hand to retrieve different maps, images, and data files, including accessing the most recent available data. The tutorial concludes by showing how ERDDAP URLs can be generated and used within scripts to automate data downloads and integrate ERDDAP directly into analysis workflows.</p>
+
+      <div class="cg-one cg-one-vertical">
+        <div id="sw-carousel-2" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="ERDDAP-Basics/using-the-erddap-data-catalog/images/erddap-url1.png" loading="lazy" data-caption="Sea surface temperature map for the Washington coast generated by directly editing an ERDDAP request URL. The spatial extent and date were modified in the URL to retrieve SST for July 15, 2015, and the output was returned as a PNG image using the KT_thermal color palette.">
+            </div>
+            <div class="cg-caption">Sea surface temperature map for the Washington coast generated by directly editing an ERDDAP request URL. The spatial extent and date were modified in the URL to retrieve SST for July 15, 2015, and the output was returned as a PNG image using the KT_thermal color palette.</div>
+          </div>
+        
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="ERDDAP-Basics/using-the-erddap-data-catalog/images/erddap-url2.png" loading="lazy" data-caption="Sea surface temperature map generated after updating the time component of the ERDDAP URL to request data from one month earlier (June 15, 2015).">
+            </div>
+            <div class="cg-caption">Sea surface temperature map generated after updating the time component of the ERDDAP URL to request data from one month earlier (June 15, 2015).</div>
+          </div>
+        <div class="cg-nav"><button class="cg-arrow" onclick="cgPrev('sw-carousel-2')">◀</button><span class="cg-count">1 / 2</span><button class="cg-arrow" onclick="cgNext('sw-carousel-2')">▶</button></div></div>
+        <div class="cg-one-actions"><a class="cg-btn" href="../tutorials/ERDDAP-Basics/using-the-erddap-data-catalog/using-the-erddap-data-catalog.html">View tutorial</a></div>
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
