@@ -718,7 +718,7 @@
     "href": "tutorials/software.html",
     "title": "Software Code Gallery",
     "section": "",
-    "text": "This page lists software-based tutorials.\nClick the eye icon to preview outputs, or download to open the source file on GitHub.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nPreview\nDownload ↓\n\n\n\n\nERDDAP Basics - Using the ERDDAP data catalog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n      ERDDAP Basics - Using the ERDDAP data catalog\n      Description here\n\n      \n        \n          \n            \n              \n            \n            Global SST & Sea Ice Analysis (OSTIA) dataset from the UK Met Office on an ERDDAP server.\n          \n        \n        View tutorial\n      \n\n      Close\n    \n\n\n\n\n✕",
+    "text": "This page lists software-based tutorials.\nClick the eye icon to preview outputs, or download to open the source file on GitHub.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nTitle\nInfo\nPreview\nDownload ↓\n\n\n\n\nERDDAP Basics - Using the ERDDAP data catalog\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    \n      ERDDAP Basics - Using the ERDDAP data catalog\n      Description here\n\n      \n        \n          \n            \n              \n            \n            Global SST & Sea Ice Analysis (OSTIA) dataset from the UK Met Office on an ERDDAP server.\n          \n        \n        View tutorial\n      \n\n      Close\n    \n\n\n\n\n✕",
     "crumbs": [
       "Training Tutorials",
       "Software Tutorials",
@@ -2495,8 +2495,8 @@
     ]
   },
   {
-    "objectID": "tutorials/softwarebackground.html#erddap-basics-what-is-erddap",
-    "href": "tutorials/softwarebackground.html#erddap-basics-what-is-erddap",
+    "objectID": "tutorials/softwarebackground.html#erddap",
+    "href": "tutorials/softwarebackground.html#erddap",
     "title": "Software Information",
     "section": "ERDDAP basics: What is ERDDAP?",
     "text": "ERDDAP basics: What is ERDDAP?\nFor many users, obtaining the ocean satellite data they need requires downloading data from several data providers, each with its own file formats, download protocols, subset abilities, and preview abilities.\nA short list of ocean satellite data providers:\n\nJet Propulsion Laboratory (PO.DAAC)\nNASA Ocean Biology (OB.DAAC)\nNASA Goddard Space Flight Center\nNOAA Center for Satellite Applications and Research\nNOAA CoastWatch Central Operations\nNOAA Office of Satellite and Product Operations\nNOAA National Centers for Environmental Information (NCEI)\nNOAA Comprehensive Large Array-data Stewardship System (CLASS)\nEuropean Space Agency (ESA)\nJapan Aerospace Exploration Agency (JAXA)\n\n\nThe goal behind ERDDAP is to make it easier for you to get scientific data. To accomplish that goal, ERDDAP acts as a middleman, selectively channeling datasets from remote and local data sources to a single data portal. With ERDDAP as the single-source portal, you have access to a simple, consistent way to download subsets of gridded and tabular scientific datasets in common file formats, with options and make graphs and maps.\nFeatures of ERDDAP:\n\nData in the common file format of your choice. ERDDAP offers all data as .html table, ESRI .asc and .csv, Google Earth .kml, OPeNDAP binary, .mat, .nc, ODV .txt, .csv, .tsv, .json, and .xhtml\nERDDAP can also return a .png or .pdf image with a customized graph or map\nStandardized dates/times (“seconds since 1970-01-01T00:00:00Z” in UTC)\nA graphical interface for humans with browsers\nRESTful web services for machine-to-machine data exchange and downloading data directly into your software applications (e.g.Matlab, R, Python…) and even into web pages.\n\n\nTutorials on how to use ERDDAP servers\nOn the Software Code Gallery page, you’ll find individual lessons such as:\n\nUsing the ERDDAP Data Catalog\nVisualizing data\nUnderstanding the ERDDAP URL\nCreating a Hovmöller plot\nWorking with wind vectors\nUsing tabular data\nAdditional resources\n\n\n\nCoastWatch ERDDAP servers\nCoastWatch\n\nCoastWatch West Coast Node: https://coastwatch.pfeg.noaa.gov/erddap/\nCoastWatch Central Pacific Node: https://oceanwatch.pifsc.noaa.gov/erddap/\nCoastWatch Gulf of Mexico Node: https://cwcgom.aoml.noaa.gov/erddap/\nCoastWatch Great Lakes Node: https://coastwatch.glerl.noaa.gov/erddap/\nCoastWatch Central: https://coastwatch.noaa.gov/erddap/\n\nOther organizations\n\nSouthern California Coastal Ocean Observing System (SCCOOS): http://sccoos.org/erddap/\nRutgers: http://tds.marine.rutgers.edu/erddap/\nNOAA GEO-IDE UAF: https://upwell.pfeg.noaa.gov/erddap/\nNCEI: https://www.ncei.noaa.gov/erddap/\nIFREMER: http://www.ifremer.fr/erddap/\nMarine Institute Ireland: https://erddap.marine.ie/erddap/\n\nA more complete list is available here:\nhttps://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations",
@@ -2507,8 +2507,8 @@
     ]
   },
   {
-    "objectID": "tutorials/softwarebackground.html#netcdf-files",
-    "href": "tutorials/softwarebackground.html#netcdf-files",
+    "objectID": "tutorials/softwarebackground.html#netcdf",
+    "href": "tutorials/softwarebackground.html#netcdf",
     "title": "Software Information",
     "section": "NetCDF files",
     "text": "NetCDF files\nNetCDF (Network Common Data Form) is a file format for storing multidimensional scientific data (variables), including common satellite observations (e.g., sea surface temperature, salinity, chlorophyll, winds). Many organizations and scientific groups in different countries have adopted netCDF as a standard way to represent some forms of scientific data.\nThe NetCDF format has many advantages, the most important of which is that it is self-describing, meaning that software packages can directly read the data and determine its structure, the variable names and essential metadata such as the units. This self-describing aspect of the netCDF file format means that the information needed to ensure accurate work (reduce the incidence of errors) is available within the data itself (no need for additional files). Secondly, it means that different analysis software, like Matlab, R, Python or ArcGIS (among many others), have utilities to read and work with NetCDF files. Thirdly, plotting software (e.g. Ferret, Panoply, ncview) can directly read the netCDF files for visualization.",
@@ -2519,8 +2519,8 @@
     ]
   },
   {
-    "objectID": "tutorials/softwarebackground.html#nasa-panoply",
-    "href": "tutorials/softwarebackground.html#nasa-panoply",
+    "objectID": "tutorials/softwarebackground.html#panoply",
+    "href": "tutorials/softwarebackground.html#panoply",
     "title": "Software Information",
     "section": "NASA Panoply",
     "text": "NASA Panoply\nNASA developed the Panoply viewer that allows users to view and visualize data held in NetCDF files. Some features the software includes are:\n\nVisualize data from netCDF and HDF files\nView the metadata\nView the data\nDisplay the data in many different map projections\nDownload visualization as images\nCreate animations\nFreeware\n\n\nPanoply is available for download at: https://www.giss.nasa.gov/tools/panoply/ and can be run on Windows, Mac and Linux computers.\nA set of “how to” instructions can be found to the following URL https://www.giss.nasa.gov/tools/panoply/help/ Below are a few examples to try out to get you used to visualizing data with the Panoply Viewer.\n💡 Panoply Version Note: The examples provided in CoastWatch materials are based on Panoply Version 5.3.3 (interfaces may differ slightly across versions).",
@@ -2531,8 +2531,8 @@
     ]
   },
   {
-    "objectID": "tutorials/softwarebackground.html#coastwatch-utilities",
-    "href": "tutorials/softwarebackground.html#coastwatch-utilities",
+    "objectID": "tutorials/softwarebackground.html#cwutils",
+    "href": "tutorials/softwarebackground.html#cwutils",
     "title": "Software Information",
     "section": "CoastWatch Utilities",
     "text": "CoastWatch Utilities\nThe CoastWatch Utilities (CWUtils) are software tools designed to help users work with NOAA/NESDIS CoastWatch satellite data—especially because these scientific data files aren’t meant to be opened in standard image viewers.\n\nWhat CoastWatch Utilities includes\nCWUtils provides both: - Graphical tools for interactive exploration - Command-line tools for scripting and repeatable processing workflows\nThe tools commonly support workflows like: - Information and statistics (inspect file contents, compute summary stats) - Data processing (format conversions, compositing, variable math, sampling) - Graphics and visualization (interactive visualization + batch rendering) - Registration and navigation (resampling between projections; navigation correction)\n\n\nGetting CoastWatch Utilities\nCWUtils is available for Windows, macOS, and Linux. The User’s Guide notes (minimum recommendations): ~400 MB disk (1 GB recommended total workspace) and 4 GB RAM.\nTo download, the guide directs users to the CoastWatch site and to look for CoastWatch Utilities under Data Tools (or search “utilities”).\n\n\nCoastWatch Utilities Online Course\nThe CoastWatch Utilities Online Course is about using the CoastWatch Utilities software package to help with processing satellite imagery and derived data products. The course covers working with data files (i) visually using a graphical user interface, and (ii) by typing commands at the Unix or Windows command prompts. No programming experience is needed, though it can be helpful when automating data processing.",

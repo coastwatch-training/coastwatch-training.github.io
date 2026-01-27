@@ -24,9 +24,9 @@ BACKGROUND_PAGE = "softwarebackground.html"
 # -----------------------------
 # Site path config (PREVIEWS)
 # Gallery page location: softwaretutorials/
-# Tutorials location:     softwaretutorials/software-background/<slug>/
+# Tutorials location:     tutorials/<slug>/
 # -----------------------------
-TUTORIALS_BASE = "software-background"
+TUTORIALS_BASE = ""
 
 # -----------------------------
 # Load CSV
@@ -195,10 +195,10 @@ table = f"""
 <div class="cg-table-wrap">
 <table class="code-gallery-table">
   <colgroup>
-    <col style="width: 70%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
+    <col style="width: 60%;">
+    <col style="width: 13%;">
+    <col style="width: 13%;">
+    <col style="width: 13%;">
   </colgroup>
   <thead>
     <tr>
