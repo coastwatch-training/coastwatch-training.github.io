@@ -195,15 +195,15 @@ table = f"""
 <div class="cg-table-wrap">
 <table class="code-gallery-table">
   <colgroup>
-    <col style="width: 60%;">
-    <col style="width: 13%;">
-    <col style="width: 13%;">
-    <col style="width: 13%;">
+    <col style="width: 50%;">
+    <col style="width: 16%;">
+    <col style="width: 16%;">
+    <col style="width: 16%;">
   </colgroup>
   <thead>
     <tr>
       <th>Title</th>
-      <th>Info</th>
+      <th>More Info</th>
       <th>Preview</th>
       <th>Download ↓</th>
     </tr>
