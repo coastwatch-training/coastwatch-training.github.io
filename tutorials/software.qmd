@@ -11,6 +11,7 @@ Click the **eye** icon to preview outputs, or **download** to open the source fi
 #| warning: false
 #| message: false
 
+import os
 import pandas as pd
 from IPython.display import HTML
 from urllib.parse import quote
@@ -150,6 +151,23 @@ def info_icon(info_id):
     return f'<a href="{url}" class="cg-icon" aria-label="Background info">{INFO_SVG}</a>'
 
 
+def resources_icon(slug):
+    """
+    Show a Resources link if tutorials/<slug>/resources/ exists.
+    """
+    if not slug:
+        return "—"
+
+    resources_path = f"{TUTORIALS_BASE}/{slug}/resources"
+
+    if os.path.isdir(resources_path):
+        return (
+            f"<a href='{resources_path}/' class='cg-icon' "
+            f"target='_blank' rel='noopener'>📎</a>"
+        )
+
+    return "—"
+
 # -----------------------------
 # Build table + modals
 # -----------------------------
@@ -168,6 +186,7 @@ for i, r in df.iterrows():
         <td>{title}</td>
         <td>{info_icon(info_id)}</td>
         <td>{modal_eye(mid)}</td>
+        <td>{resources_icon(slug)}</td>
         <td>{download_icon(r.get("sw_download",""))}</td>
     </tr>
     """)
@@ -195,8 +214,9 @@ table = f"""
 <div class="cg-table-wrap">
 <table class="code-gallery-table">
   <colgroup>
-    <col style="width: 50%;">
-    <col style="width: 16%;">
+    <col style="width: 44%;">
+    <col style="width: 12%;">
+    <col style="width: 12%;">
     <col style="width: 16%;">
     <col style="width: 16%;">
   </colgroup>
@@ -205,6 +225,7 @@ table = f"""
       <th>Title</th>
       <th>Info</th>
       <th>Preview</th>
+      <th>Resource</th>
       <th>Download ↓</th>
     </tr>
   </thead>
