@@ -72,9 +72,9 @@ table = f"""
 <div class="cg-table-wrap">
 <table class="code-gallery-table">
   <colgroup>
-    <col style="width: 70%;">
-    <col style="width: 15%;">
-    <col style="width: 15%;">
+    <col style="width: 50%;">
+    <col style="width: 25%;">
+    <col style="width: 25%;">
   </colgroup>
   <thead>
     <tr>

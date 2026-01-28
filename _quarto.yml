@@ -65,7 +65,7 @@ website:
                 text: "Software Code Gallery"
 
 
-      - section: "Course Lectures"
+      - text: "Course Lectures"
         href: lectures/index.qmd
 
       - text: "Office Hours"
