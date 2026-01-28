@@ -253,8 +253,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#tutorials-on-how-to-use-erddap-servers" id="toc-tutorials-on-how-to-use-erddap-servers" class="nav-link" data-scroll-target="#tutorials-on-how-to-use-erddap-servers">Tutorials on how to use ERDDAP servers</a></li>
   <li><a href="#coastwatch-erddap-servers" id="toc-coastwatch-erddap-servers" class="nav-link" data-scroll-target="#coastwatch-erddap-servers">CoastWatch ERDDAP servers</a></li>
   </ul></li>
-  <li><a href="#netcdf" id="toc-netcdf" class="nav-link" data-scroll-target="#netcdf">NetCDF files</a></li>
-  <li><a href="#panoply" id="toc-panoply" class="nav-link" data-scroll-target="#panoply">NASA Panoply</a></li>
+  <li><a href="#netcdfpanoply" id="toc-netcdfpanoply" class="nav-link" data-scroll-target="#netcdfpanoply">NetCDF and Panoply</a>
+  <ul class="collapse">
+  <li><a href="#netcdf" id="toc-netcdf" class="nav-link" data-scroll-target="#netcdf">NetCDF</a></li>
+  <li><a href="#nasa-panoply" id="toc-nasa-panoply" class="nav-link" data-scroll-target="#nasa-panoply">NASA Panoply</a></li>
+  </ul></li>
   <li><a href="#cwutils" id="toc-cwutils" class="nav-link" data-scroll-target="#cwutils">CoastWatch Utilities</a>
   <ul class="collapse">
   <li><a href="#what-coastwatch-utilities-includes" id="toc-what-coastwatch-utilities-includes" class="nav-link" data-scroll-target="#what-coastwatch-utilities-includes">What CoastWatch Utilities includes</a></li>
@@ -350,14 +353,16 @@ ul.task-list li input[type="checkbox"] {
 https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations</p>
 </section>
 </section>
-<section id="netcdf" class="level2">
-<h2 class="anchored" data-anchor-id="netcdf">NetCDF files</h2>
+<section id="netcdfpanoply" class="level2">
+<h2 class="anchored" data-anchor-id="netcdfpanoply">NetCDF and Panoply</h2>
+<section id="netcdf" class="level3">
+<h3 class="anchored" data-anchor-id="netcdf">NetCDF</h3>
 <p><strong>NetCDF (Network Common Data Form)</strong> is a file format for storing multidimensional scientific data (variables), including common satellite observations (e.g., sea surface temperature, salinity, chlorophyll, winds). Many organizations and scientific groups in different countries have adopted netCDF as a standard way to represent some forms of scientific data.</p>
 <p>The NetCDF format has many advantages, the most important of which is that it is self-describing, meaning that software packages can directly read the data and determine its structure, the variable names and essential metadata such as the units. This self-describing aspect of the netCDF file format means that the information needed to ensure accurate work (reduce the incidence of errors) is available within the data itself (no need for additional files). Secondly, it means that different analysis software, like Matlab, R, Python or ArcGIS (among many others), have utilities to read and work with NetCDF files. Thirdly, plotting software (e.g.&nbsp;Ferret, Panoply, ncview) can directly read the netCDF files for visualization.</p>
 <p><img src="images/netcdf1.png" class="img-fluid" style="width:40.0%"> <img src="images/netcdf2.png" class="img-fluid" style="width:40.0%"></p>
 </section>
-<section id="panoply" class="level2">
-<h2 class="anchored" data-anchor-id="panoply">NASA Panoply</h2>
+<section id="nasa-panoply" class="level3">
+<h3 class="anchored" data-anchor-id="nasa-panoply">NASA Panoply</h3>
 <p>NASA developed the Panoply viewer that allows users to view and visualize data held in NetCDF files. Some features the software includes are:</p>
 <ul>
 <li>Visualize data from netCDF and HDF files</li>
@@ -372,6 +377,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations</p>
 <p>Panoply is available for download at: https://www.giss.nasa.gov/tools/panoply/ and can be run on Windows, Mac and Linux computers.</p>
 <p>A set of “how to” instructions can be found to the following URL https://www.giss.nasa.gov/tools/panoply/help/ Below are a few examples to try out to get you used to visualizing data with the Panoply Viewer.</p>
 <p>💡 <strong>Panoply Version Note:</strong> The examples provided in CoastWatch materials are based on Panoply <strong>Version 5.3.3</strong> (interfaces may differ slightly across versions).</p>
+</section>
 </section>
 <section id="cwutils" class="level2">
 <h2 class="anchored" data-anchor-id="cwutils">CoastWatch Utilities</h2>

@@ -71,8 +71,9 @@ A more complete list is available here:
 https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations
 
 
-## NetCDF files {#netcdf}
+## NetCDF and Panoply {#netcdfpanoply}
 
+### NetCDF
 **NetCDF (Network Common Data Form)** is a file format for storing multidimensional scientific data (variables), including common satellite observations (e.g., sea surface temperature, salinity, chlorophyll, winds). Many organizations and scientific groups in different countries have adopted netCDF as a standard way to represent some forms of scientific data.
 
 The NetCDF format has many advantages, the most important of which is that it is self-describing, meaning that software packages can directly read the data and determine its structure, the variable names and essential metadata such as the units. This self-describing aspect of the netCDF file format means that the information needed to ensure accurate work (reduce the incidence of errors) is available within the data itself (no need for additional files). Secondly, it means that different analysis software, like Matlab, R, Python or ArcGIS (among many others), have utilities to read and work with NetCDF files. Thirdly, plotting software (e.g. Ferret, Panoply, ncview) can directly read the netCDF files for visualization.
@@ -80,7 +81,7 @@ The NetCDF format has many advantages, the most important of which is that it is
 ![](images/netcdf1.png){width=40%} ![](images/netcdf2.png){width=40%}
 
 
-## NASA Panoply {#panoply}
+### NASA Panoply
 
 NASA developed the Panoply viewer that allows users to view and visualize data held in NetCDF files. Some features the software includes are:
 
