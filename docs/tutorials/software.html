@@ -273,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists software-based tutorials.<br>
 Click the <strong>eye</strong> icon to preview outputs, or <strong>download</strong> to open the source file on GitHub.</p>
-<div id="ad7cc708" class="cell" data-message="false" data-execution_count="1">
+<div id="2a0ef7d3" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <script>
 function cgOpenModal(id){
@@ -471,6 +471,25 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 <td><a href="https://github.com/madrichardson/coastwatch-training.github.io/blob/main/tutorials/troubleshooting-rerddapXtracto/troubleshooting-rerddapXtracto.md" class="cg-icon" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+</tr>
+<tr class="cg-row even">
+<td>NetCDF and Panoply Tutorial</td>
+<td><a href="softwarebackground.html#netcdfpanoply" class="cg-icon" aria-label="Background info">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path>
+</svg>
+</a></td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-9')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td>—</td>
+<td><a href="https://github.com/madrichardson/coastwatch-training.github.io/blob/main/tutorials/netcdf-panoply/netcdf-panoply-tutorial.md" class="cg-icon" target="_blank" rel="noopener">
 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
@@ -675,6 +694,32 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
         </div>
         <div class="cg-one-actions"><a class="cg-btn" href="../tutorials/troubleshooting-rerddapXtracto/troubleshooting-rerddapXtracto.html">View tutorial</a></div>
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-9" class="cg-modal">
+      <h3 class="anchored">NetCDF and Panoply Tutorial</h3>
+      <p>This tutorial introduces the NetCDF data format and demonstrates how to explore, visualize, and interpret multidimensional satellite datasets using NASA’s Panoply viewer. It explains the structure and metadata of NetCDF files and walks through hands-on examples for mapping chlorophyll, sea surface temperature, and wind speed, including adjusting color scales, projections, and time steps. The tutorial is designed to help users become comfortable opening NetCDF files, understanding their contents, and creating publication-ready visualizations without writing code.</p>
+
+      <div class="cg-one cg-one-vertical">
+        <div id="sw-carousel-9" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="netcdf-panoply/images/chlor_a.png" loading="lazy" data-caption="Global map of chlorophyll-a concentration using the default algorithm, shown with a linear color scale and latitude–longitude gridlines.">
+            </div>
+            <div class="cg-caption">Global map of chlorophyll-a concentration using the default algorithm, shown with a linear color scale and latitude–longitude gridlines.</div>
+          </div>
+        
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="netcdf-panoply/images/viirs_global_map.png" loading="lazy" data-caption="Global map of VIIRS SNPP chlorophyll-a concentration for March 2021, visualized in NASA Panoply using a Mollweide projection.">
+            </div>
+            <div class="cg-caption">Global map of VIIRS SNPP chlorophyll-a concentration for March 2021, visualized in NASA Panoply using a Mollweide projection.</div>
+          </div>
+        <div class="cg-nav"><button class="cg-arrow" onclick="cgPrev('sw-carousel-9')">◀</button><span class="cg-count">1 / 2</span><button class="cg-arrow" onclick="cgNext('sw-carousel-9')">▶</button></div></div>
+        <div class="cg-one-actions"><a class="cg-btn" href="../tutorials/netcdf-panoply/netcdf-panoply-tutorial.html">View tutorial</a></div>
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
