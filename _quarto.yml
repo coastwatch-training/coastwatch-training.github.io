@@ -52,7 +52,6 @@ website:
               - href: trainings/past/afs24.qmd
                 text: 2024 AFS Workshop
                 
-
       - section: "Training Tutorials"
         href: tutorials/index.qmd
         contents:
@@ -64,6 +63,10 @@ website:
                 text: Software Information
               - href: tutorials/software.qmd
                 text: "Software Code Gallery"
+
+
+      - section: "Course Lectures"
+        href: lectures/index.qmd
 
       - text: "Office Hours"
         href: officehours.qmd

@@ -5,7 +5,7 @@ title: "Training Tutorials"
 The CoastWatch tutorial collection is organized to support users working with satellite data at different stages of their workflow. Tutorials are grouped into two broad categories: **software-focused tutorials** and **coding-based tutorials**.
 
 
-## Software tutorials
+## Software Tutorials
 
 Software tutorials provide guidance on installing, configuring, and using commonly supported tools for working with CoastWatch satellite data. These tutorials focus on foundational software and utilities that are often used to access, explore, or manage data prior to analysis.
 
@@ -16,10 +16,13 @@ Topics include:
 - Working with NetCDF files  
 - Using data visualization tools such as Panoply  
 
+[View Software Information](softwarebackground.qmd)
+
+[View Software Code Gallery](software.qmd)
 
 ---
 
-## Coding tutorials (Code Gallery)
+## Coding Tutorials
 
 Coding tutorials demonstrate how to access, subset, analyze, and visualize CoastWatch satellite data using common programming languages. These tutorials are organized by **exercise or topic**, and many are available in multiple **software languages** such as Python, R, and MATLAB.
 

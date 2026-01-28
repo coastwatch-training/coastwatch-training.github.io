@@ -1,0 +1,94 @@
+---
+title: "Satellite Course Lectures"
+---
+
+These lectures are short (about 20 minutes when narrated) and are used throughout CoastWatch courses.  
+Click the **eye** icon to open the lecture, or **download** to save the file.
+
+```{python}
+#| echo: false
+#| warning: false
+#| message: false
+
+import pandas as pd
+from IPython.display import HTML
+from urllib.parse import quote
+
+df = pd.read_csv("lectures.csv", encoding="utf-8-sig").fillna("")
+
+EYE_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
+    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    'stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path>'
+    '<circle cx="12" cy="12" r="3"></circle>'
+    '</svg>'
+)
+
+DOWNLOAD_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
+    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    'stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>'
+    '<path d="M7 10l5 5 5-5"></path>'
+    '<path d="M12 15V3"></path>'
+    '</svg>'
+)
+
+def preview_icon(url: str) -> str:
+    url = str(url).strip()
+    if not url:
+        return "—"
+    return (
+        f'<a href="{url}" class="cg-icon" target="_blank" rel="noopener" '
+        f'aria-label="Preview lecture">{EYE_SVG}</a>'
+    )
+
+def download_icon(url: str) -> str:
+    url = str(url).strip()
+    if not url:
+        return "—"
+    # if you ever store repo-relative paths instead of full URLs, you can adapt here.
+    return (
+        f'<a href="{url}" class="cg-icon" target="_blank" rel="noopener" '
+        f'aria-label="Download lecture">{DOWNLOAD_SVG}</a>'
+    )
+
+rows = []
+for _, r in df.iterrows():
+    title = str(r.get("title", "")).strip()
+    purl  = str(r.get("preview_url", "")).strip()
+    durl  = str(r.get("download_url", "")).strip()
+
+    rows.append(f"""
+      <tr class="cg-row">
+        <td>{title}</td>
+        <td>{preview_icon(purl)}</td>
+        <td>{download_icon(durl)}</td>
+      </tr>
+    """)
+
+table = f"""
+<div class="cg-table-wrap">
+<table class="code-gallery-table">
+  <colgroup>
+    <col style="width: 70%;">
+    <col style="width: 15%;">
+    <col style="width: 15%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Preview</th>
+      <th>Download ↓</th>
+    </tr>
+  </thead>
+  <tbody>
+    {''.join(rows)}
+  </tbody>
+</table>
+</div>
+"""
+
+HTML(table)
+```
