@@ -15,23 +15,15 @@ import os
 import pandas as pd
 from IPython.display import HTML
 from urllib.parse import quote
+from pathlib import Path
 
-# -----------------------------
-# GitHub repo config
-# -----------------------------
 REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
 BACKGROUND_PAGE = "softwarebackground.html"
+REPO_TREE_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/tree/main/"
 
-# -----------------------------
-# Site path config (PREVIEWS)
-# Gallery page location: softwaretutorials/
-# Tutorials location:     tutorials/<slug>/
-# -----------------------------
 TUTORIALS_BASE = "tutorials"
+TUTORIALS_ROOT = Path(TUTORIALS_BASE)
 
-# -----------------------------
-# Load CSV
-# -----------------------------
 df = pd.read_csv("softwarecodegallery.csv", encoding="utf-8-sig").fillna("")
 
 # -----------------------------
@@ -66,6 +58,18 @@ INFO_SVG = (
     '<path d="M12 8h.01"></path>'
     '</svg>'
 )
+
+
+RESOURCES_SVG = (
+    '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
+    'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
+    'stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>'
+    '<path d="M3.3 7l8.7 5 8.7-5"></path>'
+    '<path d="M12 22V12"></path>'
+    '</svg>'
+)
+
 
 # -----------------------------
 # Modal backdrop
@@ -151,22 +155,26 @@ def info_icon(info_id):
     return f'<a href="{url}" class="cg-icon" aria-label="Background info">{INFO_SVG}</a>'
 
 
-def resources_icon(slug):
-    """
-    Show a Resources link if tutorials/<slug>/resources/ exists.
-    """
+def resources_icon_for_row(row) -> str:
+    slug = str(row.get("slug", "")).strip()
     if not slug:
         return "—"
 
-    resources_path = f"{TUTORIALS_BASE}/{slug}/resources"
+    folder = TUTORIALS_ROOT / slug / "resources"
+    if not folder.is_dir():
+        return "—"
 
-    if os.path.isdir(resources_path):
-        return (
-            f"<a href='{resources_path}/' class='cg-icon' "
-            f"target='_blank' rel='noopener'>📎</a>"
-        )
+    has_files = any(p.is_file() for p in folder.rglob("*"))
+    if not has_files:
+        return "—"
 
-    return "—"
+    folder_path = f"tutorials/{slug}/resources"
+    url = f"{REPO_TREE_BASE}{quote(folder_path)}"
+
+    return (
+        f'<a href="{url}" class="cg-icon" aria-label="Open resources for {slug}" '
+        f'target="_blank" rel="noopener">{RESOURCES_SVG}</a>'
+    )
 
 # -----------------------------
 # Build table + modals
@@ -186,7 +194,7 @@ for i, r in df.iterrows():
         <td>{title}</td>
         <td>{info_icon(info_id)}</td>
         <td>{modal_eye(mid)}</td>
-        <td>{resources_icon(slug)}</td>
+        <td>{resources_icon_for_row(r)}</td>
         <td>{download_icon(r.get("sw_download",""))}</td>
     </tr>
     """)
@@ -225,7 +233,7 @@ table = f"""
       <th>Title</th>
       <th>Info</th>
       <th>Preview</th>
-      <th>Resource</th>
+      <th>Resources</th>
       <th>Download ↓</th>
     </tr>
   </thead>
