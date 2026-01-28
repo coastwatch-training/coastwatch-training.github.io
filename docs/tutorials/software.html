@@ -273,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This page lists software-based tutorials.<br>
 Click the <strong>eye</strong> icon to preview outputs, or <strong>download</strong> to open the source file on GitHub.</p>
-<div id="cb82f3aa" class="cell" data-message="false" data-execution_count="1">
+<div id="05d04b47" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <script>
 function cgOpenModal(id){
@@ -397,6 +397,24 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 </tr>
+<tr class="cg-row even">
+<td>ERDDAP Basics - Using tabular data</td>
+<td><a href="softwarebackground.html#erddap" class="cg-icon" aria-label="Background info">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path>
+</svg>
+</a></td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-5')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td><a href="https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/tutorials/ERDDAP-Basics/using-tabular-data/using-tabular-data.md" class="cg-icon" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+</tr>
 </tbody>
 </table>
 
@@ -507,12 +525,38 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         
           <div class="cg-slide cg-figure">
             <div class="cg-imgframe">
-              <img src="ERDDAP-Basics/wind-vectors/images/windvector5.png" loading="lazy" data-caption="Vector map of ASCAT-derived ocean surface winds on September 19, 2017, showing both wind speed and direction. The arrows illustrate the counterclockwise circulation associated with Hurricane Jose, with arrow length proportional to wind speed.">
+              <img src="ERDDAP-Basics/wind-vectors/images/windvectors5.png" loading="lazy" data-caption="Vector map of ASCAT-derived ocean surface winds on September 19, 2017, showing both wind speed and direction. The arrows illustrate the counterclockwise circulation associated with Hurricane Jose, with arrow length proportional to wind speed.">
             </div>
             <div class="cg-caption">Vector map of ASCAT-derived ocean surface winds on September 19, 2017, showing both wind speed and direction. The arrows illustrate the counterclockwise circulation associated with Hurricane Jose, with arrow length proportional to wind speed.</div>
           </div>
         <div class="cg-nav"><button class="cg-arrow" onclick="cgPrev('sw-carousel-4')">◀</button><span class="cg-count">1 / 2</span><button class="cg-arrow" onclick="cgNext('sw-carousel-4')">▶</button></div></div>
         <div class="cg-one-actions"><a class="cg-btn" href="../tutorials/ERDDAP-Basics/wind-vectors/wind-vectors.html">View tutorial</a></div>
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-5" class="cg-modal">
+      <h3 class="anchored">ERDDAP Basics - Using tabular data</h3>
+      <p>This tutorial introduces ERDDAP tabular datasets using Biogeochemical-Argo (BGC-Argo) float data hosted on the PolarWatch ERDDAP server. You will learn how to subset observations using constraints, filter data by quality flags and regions, and visualize float locations, trajectories, and depth profiles. The exercise highlights how ERDDAP supports interactive exploration of in-situ oceanographic data alongside gridded satellite products.</p>
+
+      <div class="cg-one cg-one-vertical">
+        <div id="sw-carousel-5" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="ERDDAP-Basics/using-tabular-data/images/tabledap7.png" loading="lazy" data-caption="Map of Biogeochemical-Argo float locations in the Antarctic region, colored by surface pCO₂ values from the near-real-time SOCCOM BGC-Argo dataset. The floats were subset using ERDDAP tabular constraints for time, region, variable availability, and quality-controlled pCO₂ measurements.">
+            </div>
+            <div class="cg-caption">Map of Biogeochemical-Argo float locations in the Antarctic region, colored by surface pCO₂ values from the near-real-time SOCCOM BGC-Argo dataset. The floats were subset using ERDDAP tabular constraints for time, region, variable availability, and quality-controlled pCO₂ measurements.</div>
+          </div>
+        
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="ERDDAP-Basics/using-tabular-data/images/tabledap10.png" loading="lazy" data-caption="Depth–time section of nitrate concentration for a single Biogeochemical-Argo float, visualized using ERDDAP’s tabular plotting tools. The section shows the vertical structure and temporal evolution of nitrate from the surface to depth, demonstrating how ERDDAP can be used to explore in-situ profile data over time.">
+            </div>
+            <div class="cg-caption">Depth–time section of nitrate concentration for a single Biogeochemical-Argo float, visualized using ERDDAP’s tabular plotting tools. The section shows the vertical structure and temporal evolution of nitrate from the surface to depth, demonstrating how ERDDAP can be used to explore in-situ profile data over time.</div>
+          </div>
+        <div class="cg-nav"><button class="cg-arrow" onclick="cgPrev('sw-carousel-5')">◀</button><span class="cg-count">1 / 2</span><button class="cg-arrow" onclick="cgNext('sw-carousel-5')">▶</button></div></div>
+        <div class="cg-one-actions"><a class="cg-btn" href="../tutorials/ERDDAP-Basics/using-tabular-data/using-tabular-data.html">View tutorial</a></div>
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
