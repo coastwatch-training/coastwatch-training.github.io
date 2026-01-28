@@ -24,9 +24,9 @@ from IPython.display import HTML
 from urllib.parse import quote
 from pathlib import Path
 
-REPO_RAW_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/raw/main/"
-REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
-REPO_TREE_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/tree/main/"
+REPO_RAW_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/raw/main"
+REPO_BLOB_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/blob/main/"
+REPO_TREE_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/tree/main/"
 
 BASE_DIR = Path("code_gallery.csv").resolve().parent
 TUTORIALS_ROOT = BASE_DIR

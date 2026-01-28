@@ -17,18 +17,16 @@ from IPython.display import HTML
 from urllib.parse import quote
 from pathlib import Path
 
-REPO_BLOB_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/blob/main/"
+REPO_BLOB_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/blob/main/"
 BACKGROUND_PAGE = "softwarebackground.html"
-REPO_TREE_BASE = "https://github.com/madrichardson/CoastWatch-Training-Tutorials/tree/main/"
+REPO_TREE_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/tree/main/"
 
 TUTORIALS_BASE = "tutorials"
-TUTORIALS_ROOT = Path(TUTORIALS_BASE)
+BASE_DIR = Path("softwarecodegallery.csv").resolve().parent
+TUTORIALS_ROOT = BASE_DIR
 
 df = pd.read_csv("softwarecodegallery.csv", encoding="utf-8-sig").fillna("")
 
-# -----------------------------
-# Icons
-# -----------------------------
 EYE_SVG = (
     '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
     'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
@@ -71,9 +69,6 @@ RESOURCES_SVG = (
 )
 
 
-# -----------------------------
-# Modal backdrop
-# -----------------------------
 JS_BACKDROP = """
 <script>
 function cgOpenModal(id){
@@ -90,9 +85,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <div id="cg-backdrop" class="cg-backdrop" onclick="cgCloseModal()"></div>
 """
 
-# -----------------------------
-# Helpers
-# -----------------------------
+
 def modal_eye(modal_id):
     return (
         f'<a href="javascript:void(0)" onclick="cgOpenModal(\'{modal_id}\')" '
@@ -176,9 +169,7 @@ def resources_icon_for_row(row) -> str:
         f'target="_blank" rel="noopener">{RESOURCES_SVG}</a>'
     )
 
-# -----------------------------
-# Build table + modals
-# -----------------------------
+
 table_rows = []
 modals = []
 
