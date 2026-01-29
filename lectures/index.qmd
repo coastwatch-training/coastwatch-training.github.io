@@ -57,6 +57,7 @@ VIDEO_SVG = (
     '</svg>'
 )
 
+
 TRANSCRIPT_SVG = (
     '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
     'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
@@ -89,25 +90,6 @@ def download_icon(url: str) -> str:
         f'aria-label="Download lecture">{DOWNLOAD_SVG}</a>'
     )
 
-rows = []
-for _, r in df.iterrows():
-    title = str(r.get("title", "")).strip()
-    purl  = str(r.get("preview_url", "")).strip()
-    durl  = str(r.get("download_url", "")).strip()
-    desc = str(r.get("description", "")).strip()
-
-    rows.append(f"""
-      <tr class="cg-row">
-        <td>
-          <strong>{title}</strong><br>
-          <span class="cg-desc">{desc}</span>
-        </td>
-        <td>{preview_icon(purl)}</td>
-        <td>{download_icon(durl)}</td>
-        <td>{video_icon(r.get("video_url", ""))}</td>
-        <td>{transcript_icon(r.get("transcript_url", ""))}</td>
-      </tr>
-    """)
 
 
 def video_icon(url: str) -> str:
@@ -128,6 +110,27 @@ def transcript_icon(url: str) -> str:
         f'<a href="{url}" class="cg-icon" target="_blank" rel="noopener" '
         f'aria-label="View video transcript">{TRANSCRIPT_SVG}</a>'
     )
+    
+
+rows = []
+for _, r in df.iterrows():
+    title = str(r.get("title", "")).strip()
+    purl  = str(r.get("preview_url", "")).strip()
+    durl  = str(r.get("download_url", "")).strip()
+    desc = str(r.get("description", "")).strip()
+
+    rows.append(f"""
+      <tr class="cg-row">
+        <td>
+          <strong>{title}</strong><br>
+          <span class="cg-desc">{desc}</span>
+        </td>
+        <td>{preview_icon(purl)}</td>
+        <td>{download_icon(durl)}</td>
+        <td>{video_icon(r.get("video_url", ""))}</td>
+        <td>{transcript_icon(r.get("transcript_url", ""))}</td>
+      </tr>
+    """)
 
 
 table = f"""
