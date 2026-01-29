@@ -1,0 +1,2590 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.31">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Calculating anomaly and trend with sea ice thickness time series – CoastWatch Training</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<link href="../../../images/coastwatch.png" rel="icon" type="image/png">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-973137e60ee60a7e9cda953a542133da.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-sidebar docked quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Calculating anomaly and trend with sea ice thickness time series</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="../../../index.html" class="sidebar-logo-link">
+      <img src="../../../images/coastwatch.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main">
+    <a href="https://coastwatch.noaa.gov/cwn" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-globe"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../trainings/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Training Classes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Upcoming Trainings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/upcoming/pgrsc26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 PGRSC Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/upcoming/sat201_26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 Satellite 201 Summer Series</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Past Trainings</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/icft25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2025 Satellite and Animal Telemetry</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/longislandsound25.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2025 Long Island Sound</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/pgrsc24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 PGRSC Workshop</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/seaice24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 Sea Ice Data Course</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../trainings/past/afs24.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2024 AFS Workshop</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../../tutorials/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Training Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../tutorials/codegallery.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Code Gallery</span></a>
+  </div>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software Tutorials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../tutorials/softwarebackground.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Information</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../tutorials/software.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Software Code Gallery</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../lectures/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course Lectures</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../officehours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Office Hours</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-exercise-demonstrates-the-following-techniques" id="toc-the-exercise-demonstrates-the-following-techniques" class="nav-link active" data-scroll-target="#the-exercise-demonstrates-the-following-techniques">The exercise demonstrates the following techniques:</a></li>
+  <li><a href="#datasets-used" id="toc-datasets-used" class="nav-link" data-scroll-target="#datasets-used">Datasets used:</a></li>
+  <li><a href="#import-python-packages" id="toc-import-python-packages" class="nav-link" data-scroll-target="#import-python-packages">Import Python packages</a></li>
+  <li><a href="#load-data-from-polarwatch-erddap-data-server" id="toc-load-data-from-polarwatch-erddap-data-server" class="nav-link" data-scroll-target="#load-data-from-polarwatch-erddap-data-server">Load data from PolarWatch ERDDAP data server</a></li>
+  <li><a href="#load-2021-data-and-compute-monthly-average" id="toc-load-2021-data-and-compute-monthly-average" class="nav-link" data-scroll-target="#load-2021-data-and-compute-monthly-average">Load 2021 data and compute monthly average</a></li>
+  <li><a href="#visualizing-2023-january-monthly-average-on-the-map" id="toc-visualizing-2023-january-monthly-average-on-the-map" class="nav-link" data-scroll-target="#visualizing-2023-january-monthly-average-on-the-map">Visualizing 2023 January Monthly Average on the Map</a></li>
+  <li><a href="#loading-monthly-average-from-2006-to-2020" id="toc-loading-monthly-average-from-2006-to-2020" class="nav-link" data-scroll-target="#loading-monthly-average-from-2006-to-2020">Loading Monthly Average from 2006 to 2020</a></li>
+  <li><a href="#compute-the-15-year-historical-mean" id="toc-compute-the-15-year-historical-mean" class="nav-link" data-scroll-target="#compute-the-15-year-historical-mean">Compute the 15 year historical mean</a></li>
+  <li><a href="#visualizing-monthly-historical-mean" id="toc-visualizing-monthly-historical-mean" class="nav-link" data-scroll-target="#visualizing-monthly-historical-mean">Visualizing monthly historical mean</a></li>
+  <li><a href="#computing-anomalies" id="toc-computing-anomalies" class="nav-link" data-scroll-target="#computing-anomalies">Computing Anomalies</a></li>
+  <li><a href="#computing-trends" id="toc-computing-trends" class="nav-link" data-scroll-target="#computing-trends">Computing Trends</a></li>
+  <li><a href="#visualizing-the-trends-slopes-for-each-grid" id="toc-visualizing-the-trends-slopes-for-each-grid" class="nav-link" data-scroll-target="#visualizing-the-trends-slopes-for-each-grid">Visualizing the Trends (Slopes) for Each Grid</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Calculating anomaly and trend with sea ice thickness time series</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In this exercise, we will use the sea ice thickness data in the Arctic region, available through the PolarWatch data server, to study changes in monthly average sea ice thickness values. We will compare the current state of sea ice thickness to the historical mean and also evaluate the long-term trend from the data.</p>
+<section id="the-exercise-demonstrates-the-following-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="the-exercise-demonstrates-the-following-techniques">The exercise demonstrates the following techniques:</h3>
+<ul>
+<li>Loading twice daily sea ice thickness data of the year 2023 from ERDDAP using <code>xarray</code> and compute monthly average</li>
+<li>Loading multi-year monthly average sea ice thickness data from netCDF file</li>
+<li>Calculating the historical sea ice thickness monthly means</li>
+<li>Calculating anomalies (departures from the historical means)</li>
+<li>Calculating the trend of monthly sea ice thickness means for the climatological reference period of 2006 to 2020 (15 years)</li>
+<li>Visualizing the data</li>
+</ul>
+</section>
+<section id="datasets-used" class="level3">
+<h3 class="anchored" data-anchor-id="datasets-used">Datasets used:</h3>
+<ul>
+<li><p><strong>Sea ice thickness for the Arctic from the NOAA Climate Data Record (CDR)</strong> of the Extended Polar Pathfinder cryosphere dataset from NCEI. Twice daily data are available from 1982 to present. https://polarwatch.noaa.gov/catalog/ice-thick-sq-nh-appx/preview/?dataset=daily&amp;var=cdr_sea_ice_thickness&amp;time_min=2024-08-28T14:00:00Z&amp;time_max=2024-08-28T14:00:00Z&amp;proj=epsg3413&amp;colorBar=KT_amp|||0|3|</p></li>
+<li><p>25-km sea ice thickess monthly average data from 2006 to 2020.</p></li>
+</ul>
+<p><em>In this exercise, monthly means were computed from the 25-km sea ice thickness dataset under the assumption of equal sampling and no missing data. Therefore, no weights were applied in this instance. In cases where data gaps or uneven sampling occur, applying appropriate weights is recommended for more accurate climatological calculations.</em></p>
+</section>
+<section id="import-python-packages" class="level3">
+<h3 class="anchored" data-anchor-id="import-python-packages">Import Python packages</h3>
+<div id="cell-3" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pymannkendall <span class="im">as</span> mk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="load-data-from-polarwatch-erddap-data-server" class="level3">
+<h3 class="anchored" data-anchor-id="load-data-from-polarwatch-erddap-data-server">Load data from PolarWatch ERDDAP data server</h3>
+<p>We will begin by obtaining the current sea ice thickness data from the PolarWatch ERDDAP data server. The data request is made using a URL that includes the ERDDAP address and a unique dataset ID.</p>
+<div id="cell-5" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the URL for the PolarWatch sea ice thickness dataset on the ERDDAP server</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>erddap_url <span class="op">=</span> <span class="st">"https://polarwatch.noaa.gov/erddap/griddap/ncei_polarAPPX20_nhem"</span>  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Use xarray function to load the dtaset from the EREDDAP URL</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(erddap_url)   </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the dataset metadata </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>ds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt; Size: 310GB
+Dimensions:                                    (time: 29729, rows: 361,
+                                                columns: 361)
+Coordinates:
+  * time                                       (time) datetime64[ns] 238kB 19...
+  * rows                                       (rows) float32 1kB -4.5e+06 .....
+  * columns                                    (columns) float32 1kB -4.525e+...
+Data variables: (12/20)
+    cdr_sea_ice_thickness                      (time, rows, columns) float32 15GB ...
+    cdr_surface_temperature                    (time, rows, columns) float32 15GB ...
+    cdr_surface_albedo                         (time, rows, columns) float32 15GB ...
+    cdr_surface_downwelling_shortwave_flux     (time, rows, columns) float32 15GB ...
+    cdr_surface_downwelling_longwave_flux      (time, rows, columns) float32 15GB ...
+    cdr_surface_upwelling_shortwave_flux       (time, rows, columns) float32 15GB ...
+    ...                                         ...
+    cloud_optical_depth                        (time, rows, columns) float32 15GB ...
+    cloud_top_pressure                         (time, rows, columns) float32 15GB ...
+    cloud_top_temperature                      (time, rows, columns) float32 15GB ...
+    cloud_type                                 (time, rows, columns) float32 15GB ...
+    surface_shortwave_cloud_radiative_forcing  (time, rows, columns) float32 15GB ...
+    surface_longwave_cloud_radiative_forcing   (time, rows, columns) float32 15GB ...
+Attributes: (12/44)
+    _NCProperties:              version=2,netcdf=4.8.1,hdf5=1.10.6
+    acknowledgement:            Please acknowledge NCEI, CoastWatch West Coas...
+    cdm_data_type:              Grid
+    cdr_program:                NOAA Climate Data Record Program for satellites
+    cdr_variable:               cdr_surface_temperature, cdr_surface_albedo, ...
+    comment:                    In order to be compliant with the EASE Grid s...
+    ...                         ...
+    spatial_resolution:         25 km
+    standard_name_vocabulary:   CF Standard Name Table (v26, 08 November 2013)
+    summary:                    summary
+    time_coverage_end:          2024-09-19T14:00:00Z
+    time_coverage_start:        1982-01-01T04:00:00Z
+    title:                      Sea Ice Thickness and Multi-variable Extended...</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input id="section-44722629-bcbe-4201-8eef-023588e1a34d" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-44722629-bcbe-4201-8eef-023588e1a34d" class="xr-section-summary" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span class="xr-has-index">time</span>: 29729</li><li><span class="xr-has-index">rows</span>: 361</li><li><span class="xr-has-index">columns</span>: 361</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input id="section-a3715299-1370-4021-87a6-e5a9c18b6b0a" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-a3715299-1370-4021-87a6-e5a9c18b6b0a" class="xr-section-summary">Coordinates: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">time</span></div><div class="xr-var-dims">(time)</div><div class="xr-var-dtype">datetime64[ns]</div><div class="xr-var-preview xr-preview">1982-01-01T04:00:00 ... 2024-09-...</div><input id="attrs-5d457d28-7f5d-4353-a0a6-096de9936daa" class="xr-var-attrs-in" type="checkbox"><label for="attrs-5d457d28-7f5d-4353-a0a6-096de9936daa" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-ee2dfae8-ed14-4429-bea1-eccf4c46ed87" class="xr-var-data-in" type="checkbox"><label for="data-ee2dfae8-ed14-4429-bea1-eccf4c46ed87" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>512</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[3.7870560e+08 1.7267544e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>Time</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class="xr-var-data"><pre>array(['1982-01-01T04:00:00.000000000', '1982-01-01T14:00:00.000000000',
+       '1982-01-02T04:00:00.000000000', ..., '2024-09-16T14:00:00.000000000',
+       '2024-09-19T04:00:00.000000000', '2024-09-19T14:00:00.000000000'],
+      dtype='datetime64[ns]')</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">rows</span></div><div class="xr-var-dims">(rows)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-4.5e+06 -4.475e+06 ... 4.525e+06</div><input id="attrs-76eb10f0-d526-4598-924c-6cc22c27d7f6" class="xr-var-attrs-in" type="checkbox"><label for="attrs-76eb10f0-d526-4598-924c-6cc22c27d7f6" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-26276838-d3d7-4a88-ba11-7d72305927cf" class="xr-var-data-in" type="checkbox"><label for="data-26276838-d3d7-4a88-ba11-7d72305927cf" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>361</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoY</dd><dt><span>actual_range :</span></dt><dd>[-4499620.  4524689.]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>comment :</span></dt><dd>columns values are the upper left of the grid cells</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Projection Grid Y Coordinates</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd></dl></div><div class="xr-var-data"><pre>array([-4499620.5, -4474553. , -4449485.5, ...,  4474553. ,  4499620.5,
+        4524688.5], dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">columns</span></div><div class="xr-var-dims">(columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-4.525e+06 -4.5e+06 ... 4.5e+06</div><input id="attrs-490523e4-9264-421b-a85b-a725d511e9c6" class="xr-var-attrs-in" type="checkbox"><label for="attrs-490523e4-9264-421b-a85b-a725d511e9c6" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-c6d5378a-4221-4f20-b119-1c68b8446b34" class="xr-var-data-in" type="checkbox"><label for="data-c6d5378a-4221-4f20-b119-1c68b8446b34" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>361</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoX</dd><dt><span>actual_range :</span></dt><dd>[-4524688.  4499621.]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>comment :</span></dt><dd>columns values are the upper left of the grid cells</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Projection Grid X Coordinates</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd></dl></div><div class="xr-var-data"><pre>array([-4524688.5, -4499620.5, -4474553. , ...,  4449485.5,  4474553. ,
+        4499620.5], dtype=float32)</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-08456a9f-faf2-4da7-b212-0a9fd7ebd2a1" class="xr-section-summary-in" type="checkbox"><label for="section-08456a9f-faf2-4da7-b212-0a9fd7ebd2a1" class="xr-section-summary">Data variables: <span>(20)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>cdr_sea_ice_thickness</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-6c836118-7fad-4333-b01b-4eeb357768cc" class="xr-var-attrs-in" type="checkbox"><label for="attrs-6c836118-7fad-4333-b01b-4eeb357768cc" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-27825fb6-fe50-491d-979f-e82754d3b7a8" class="xr-var-data-in" type="checkbox"><label for="data-27825fb6-fe50-491d-979f-e82754d3b7a8" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_ice</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Ice Distribution</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of sea ice thickness</dd><dt><span>standard_name :</span></dt><dd>sea_ice_thickness</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>valid_range :</span></dt><dd>[ 0. 10.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_surface_temperature</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-3e9ae0eb-5322-4ee9-95d0-bb819568ef11" class="xr-var-attrs-in" type="checkbox"><label for="attrs-3e9ae0eb-5322-4ee9-95d0-bb819568ef11" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-48399563-ebc9-4c70-88f8-8e91efb2c9c0" class="xr-var-data-in" type="checkbox"><label for="data-48399563-ebc9-4c70-88f8-8e91efb2c9c0" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_thermal</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Temperature</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of surface skin temperature</dd><dt><span>standard_name :</span></dt><dd>surface_temperature</dd><dt><span>units :</span></dt><dd>degree_K</dd><dt><span>valid_range :</span></dt><dd>[   0. 1000.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_surface_albedo</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-5dc3eb68-ca36-40bf-8ca9-348d1359655a" class="xr-var-attrs-in" type="checkbox"><label for="attrs-5dc3eb68-ca36-40bf-8ca9-348d1359655a" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-c4617a91-9084-411f-a4db-966566939aa1" class="xr-var-data-in" type="checkbox"><label for="data-c4617a91-9084-411f-a4db-966566939aa1" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_solar</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of surface broadband albedo</dd><dt><span>standard_name :</span></dt><dd>surface_albedo</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_range :</span></dt><dd>[0. 1.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_surface_downwelling_shortwave_flux</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-17de9adb-d265-4047-bf3f-215ea57b3005" class="xr-var-attrs-in" type="checkbox"><label for="attrs-17de9adb-d265-4047-bf3f-215ea57b3005" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-82ac9b7b-5083-4ed9-a82f-ee29af002aab" class="xr-var-data-in" type="checkbox"><label for="data-82ac9b7b-5083-4ed9-a82f-ee29af002aab" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_solar</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of surface downwelling shortwave radiative flux</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_shortwave_flux</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_surface_downwelling_longwave_flux</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-99f88ca5-9576-4b7b-9545-51f94c55ca12" class="xr-var-attrs-in" type="checkbox"><label for="attrs-99f88ca5-9576-4b7b-9545-51f94c55ca12" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-911db5d7-1261-47e8-84b0-b24a9c206192" class="xr-var-data-in" type="checkbox"><label for="data-911db5d7-1261-47e8-84b0-b24a9c206192" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_solar</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of surface downwelling longwave radiative flux</dd><dt><span>standard_name :</span></dt><dd>surface_downwelling_longwave_flux</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_surface_upwelling_shortwave_flux</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-3490b56e-2855-4265-951f-aff55c2f0289" class="xr-var-attrs-in" type="checkbox"><label for="attrs-3490b56e-2855-4265-951f-aff55c2f0289" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-2271c2d9-efc1-4d5e-96c8-63e055629553" class="xr-var-data-in" type="checkbox"><label for="data-2271c2d9-efc1-4d5e-96c8-63e055629553" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_solar</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of surface upwelling shortwave radiative flux</dd><dt><span>standard_name :</span></dt><dd>surface_upwelling_shortwave_flux</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_surface_upwelling_longwave_flux</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-d1a2e9be-e4e8-452c-b207-edb087fbca8a" class="xr-var-attrs-in" type="checkbox"><label for="attrs-d1a2e9be-e4e8-452c-b207-edb087fbca8a" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-518c2cd8-98f7-4d94-995a-f748c00f5d7d" class="xr-var-data-in" type="checkbox"><label for="data-518c2cd8-98f7-4d94-995a-f748c00f5d7d" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_solar</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of surface upwelling longwave radiative flux</dd><dt><span>standard_name :</span></dt><dd>surface_upwelling_longwave_flux</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_cloud_binary_mask</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-a3927110-79a5-4c17-b8cf-ebdeadf6286b" class="xr-var-attrs-in" type="checkbox"><label for="attrs-a3927110-79a5-4c17-b8cf-ebdeadf6286b" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-ead80dca-4e39-4a6b-b597-517b5178e840" class="xr-var-data-in" type="checkbox"><label for="data-ead80dca-4e39-4a6b-b597-517b5178e840" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarContinuous :</span></dt><dd>false</dd><dt><span>colorBarMaximum :</span></dt><dd>1.5</dd><dt><span>colorBarMinimum :</span></dt><dd>-0.5</dd><dt><span>colorBarNSections :</span></dt><dd>2</dd><dt><span>colorBarPalette :</span></dt><dd>BlackWhite</dd><dt><span>coverage_content_type :</span></dt><dd>referenceInformation</dd><dt><span>flag_meanings :</span></dt><dd>clear cloudy</dd><dt><span>flag_values :</span></dt><dd>[0 1]</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Identifier</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of cloud mask</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_range :</span></dt><dd>[0. 1.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_toa_net_downward_shortwave_flux</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-ee03ff6d-aba8-48de-b519-a4d91d4b105c" class="xr-var-attrs-in" type="checkbox"><label for="attrs-ee03ff6d-aba8-48de-b519-a4d91d4b105c" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-0a639398-4384-4b6c-b935-8960837b5202" class="xr-var-data-in" type="checkbox"><label for="data-0a639398-4384-4b6c-b935-8960837b5202" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_solar</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of TOA net downward shortwave radiative flux</dd><dt><span>standard_name :</span></dt><dd>toa_net_downward_shortwave_flux</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_toa_outgoing_shortwave_flux</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-31144b1f-e1d7-4cb4-bef2-8bce03ff3607" class="xr-var-attrs-in" type="checkbox"><label for="attrs-31144b1f-e1d7-4cb4-bef2-8bce03ff3607" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-372697cc-5f97-4e7a-99f5-af5bd12542d7" class="xr-var-data-in" type="checkbox"><label for="data-372697cc-5f97-4e7a-99f5-af5bd12542d7" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_solar</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of TOA outgoing shortwave radiative flux</dd><dt><span>standard_name :</span></dt><dd>toa_outgoing_shortwave_flux</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cdr_toa_outgoing_longwave_flux</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-d440a611-f5ec-4d32-8a93-db3989b7212b" class="xr-var-attrs-in" type="checkbox"><label for="attrs-d440a611-f5ec-4d32-8a93-db3989b7212b" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-7a873b9e-0c37-4f52-a254-0f57d5399720" class="xr-var-data-in" type="checkbox"><label for="data-7a873b9e-0c37-4f52-a254-0f57d5399720" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_solar</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of TOA outgoing longwave radiative flux</dd><dt><span>standard_name :</span></dt><dd>toa_outgoing_longwave_flux</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>surface_type</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-89cc5bdc-9064-4610-abd2-711ba2891aa3" class="xr-var-attrs-in" type="checkbox"><label for="attrs-89cc5bdc-9064-4610-abd2-711ba2891aa3" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-0655c231-1ea9-4f97-9d45-2d0ed771c543" class="xr-var-data-in" type="checkbox"><label for="data-0655c231-1ea9-4f97-9d45-2d0ed771c543" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarContinuous :</span></dt><dd>false</dd><dt><span>colorBarMaximum :</span></dt><dd>5.5</dd><dt><span>colorBarMinimum :</span></dt><dd>-0.5</dd><dt><span>colorBarNSections :</span></dt><dd>6</dd><dt><span>colorBarPalette :</span></dt><dd>KT_gray</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>flag_meanings :</span></dt><dd>not_land ice snow land</dd><dt><span>flag_values :</span></dt><dd>[  0   3   4 254]</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>surface type</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_range :</span></dt><dd>[  0 254]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cloud_particle_phase</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-f93879ec-a98f-4bf3-868d-627428857ca1" class="xr-var-attrs-in" type="checkbox"><label for="attrs-f93879ec-a98f-4bf3-868d-627428857ca1" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-f49e32c6-e6af-48f1-a96d-38e091b03c02" class="xr-var-data-in" type="checkbox"><label for="data-f49e32c6-e6af-48f1-a96d-38e091b03c02" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarContinuous :</span></dt><dd>false</dd><dt><span>colorBarMaximum :</span></dt><dd>1.5</dd><dt><span>colorBarMinimum :</span></dt><dd>-0.5</dd><dt><span>colorBarNSections :</span></dt><dd>2</dd><dt><span>colorBarPalette :</span></dt><dd>KT_haline</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>flag_meanings :</span></dt><dd>liquid solid</dd><dt><span>flag_values :</span></dt><dd>[0 1]</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>cloud particle phase</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_range :</span></dt><dd>[0 1]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cloud_particle_radius</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-b25c1cbb-e7bd-4736-ae01-10a3602eb24a" class="xr-var-attrs-in" type="checkbox"><label for="attrs-b25c1cbb-e7bd-4736-ae01-10a3602eb24a" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-d9fd7fd3-0ff4-412d-ad24-d40cf70c39b6" class="xr-var-data-in" type="checkbox"><label for="data-d9fd7fd3-0ff4-412d-ad24-d40cf70c39b6" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_haline</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>cloud particle radius</dd><dt><span>units :</span></dt><dd>microns</dd><dt><span>valid_range :</span></dt><dd>[  0. 300.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cloud_optical_depth</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-fad15605-49fc-4db8-98f2-3c340ff63560" class="xr-var-attrs-in" type="checkbox"><label for="attrs-fad15605-49fc-4db8-98f2-3c340ff63560" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-e4db4d84-fb54-4862-b361-97d4e9d18100" class="xr-var-data-in" type="checkbox"><label for="data-e4db4d84-fb54-4862-b361-97d4e9d18100" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_deep</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>cloud optical depth</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_range :</span></dt><dd>[  0. 300.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cloud_top_pressure</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-e32111df-ba07-4df0-838c-96b668bde453" class="xr-var-attrs-in" type="checkbox"><label for="attrs-e32111df-ba07-4df0-838c-96b668bde453" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-adbee672-0e62-4668-bc43-cca65525ab73" class="xr-var-data-in" type="checkbox"><label for="data-adbee672-0e62-4668-bc43-cca65525ab73" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_dense</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>cloud top pressure</dd><dt><span>units :</span></dt><dd>hPa</dd><dt><span>valid_range :</span></dt><dd>[   0. 1000.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cloud_top_temperature</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-0e1395f0-c7c4-49ba-aeec-b1a1bdfd0fba" class="xr-var-attrs-in" type="checkbox"><label for="attrs-0e1395f0-c7c4-49ba-aeec-b1a1bdfd0fba" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-4eb5823f-49c0-415a-8c8b-2e60b178d804" class="xr-var-data-in" type="checkbox"><label for="data-4eb5823f-49c0-415a-8c8b-2e60b178d804" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_thermal</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>cloud top temperature</dd><dt><span>units :</span></dt><dd>K</dd><dt><span>valid_range :</span></dt><dd>[   0. 1000.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>cloud_type</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-73b57ca5-e16e-4f26-9cc6-cd9960bcd35b" class="xr-var-attrs-in" type="checkbox"><label for="attrs-73b57ca5-e16e-4f26-9cc6-cd9960bcd35b" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-2f5c56ad-9d5c-4340-b389-0070a4e363e5" class="xr-var-data-in" type="checkbox"><label for="data-2f5c56ad-9d5c-4340-b389-0070a4e363e5" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>cloud type</dd><dt><span>meanings :</span></dt><dd>Cloud type value has two digits, i.e. XX, the ones place X (the first X from left), representing cloud type from CASPR algorithm, and the tenth place X representing cloud type from CLAVR algorithm. For CLAVR algorithm the tenth place X meanings: 0=clear or partly cloudy,1=fogs,2=liquid,3=mixed phase,4=glaciated,5=cirrus6=cirrus over lower,7=unused,8=unused,9=missing. For CASPR algorithm the ones place X meanings: 0=clear,1=cirrus,2=low stratus,3=warm,4=cold,5=water6=ice,7=Polar stratospheric cloud (PSC),8=unknown,9=missing.</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_range :</span></dt><dd>[ 0 99]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>surface_shortwave_cloud_radiative_forcing</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-e551c308-4280-46bf-8be3-f26ea618a672" class="xr-var-attrs-in" type="checkbox"><label for="attrs-e551c308-4280-46bf-8be3-f26ea618a672" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-dab3312c-df5a-4bea-ab82-a05e297a19ba" class="xr-var-data-in" type="checkbox"><label for="data-dab3312c-df5a-4bea-ab82-a05e297a19ba" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_dense</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>surface shortwave cloud radiative forcing</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span>surface_longwave_cloud_radiative_forcing</span></div><div class="xr-var-dims">(time, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-87c27f9a-b765-49c5-affd-48679ac84c5a" class="xr-var-attrs-in" type="checkbox"><label for="attrs-87c27f9a-b765-49c5-affd-48679ac84c5a" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-422db270-2d18-4458-99f8-7aa740791225" class="xr-var-data-in" type="checkbox"><label for="data-422db270-2d18-4458-99f8-7aa740791225" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_dense</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Meteorology</dd><dt><span>long_name :</span></dt><dd>surface longwave cloud radiative forcing</dd><dt><span>units :</span></dt><dd>W m-2</dd><dt><span>valid_range :</span></dt><dd>[   0. 1800.]</dd></dl></div><div class="xr-var-data"><pre>[3874313009 values with dtype=float32]</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-710863ba-14bc-4df1-9139-642ea5bfc989" class="xr-section-summary-in" type="checkbox"><label for="section-710863ba-14bc-4df1-9139-642ea5bfc989" class="xr-section-summary">Indexes: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>time</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-d2cf2544-c5cf-4634-9273-4060e69ded46" class="xr-index-data-in" type="checkbox"><label for="index-d2cf2544-c5cf-4634-9273-4060e69ded46" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(DatetimeIndex(['1982-01-01 04:00:00', '1982-01-01 14:00:00',
+               '1982-01-02 04:00:00', '1982-01-02 14:00:00',
+               '1982-01-03 04:00:00', '1982-01-03 14:00:00',
+               '1982-01-04 04:00:00', '1982-01-04 14:00:00',
+               '1982-01-05 04:00:00', '1982-01-05 14:00:00',
+               ...
+               '2024-09-13 04:00:00', '2024-09-13 14:00:00',
+               '2024-09-14 04:00:00', '2024-09-14 14:00:00',
+               '2024-09-15 04:00:00', '2024-09-15 14:00:00',
+               '2024-09-16 04:00:00', '2024-09-16 14:00:00',
+               '2024-09-19 04:00:00', '2024-09-19 14:00:00'],
+              dtype='datetime64[ns]', name='time', length=29729, freq=None))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>rows</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-50aa08f3-0693-4658-ace6-d55a13200026" class="xr-index-data-in" type="checkbox"><label for="index-50aa08f3-0693-4658-ace6-d55a13200026" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-4499620.5, -4474553.0, -4449485.5, -4424418.0, -4399350.5, -4374283.0,
+       -4349215.5, -4324148.0, -4299080.5, -4274013.0,
+       ...
+        4299080.5,  4324148.0,  4349215.5,  4374283.0,  4399350.5,  4424418.0,
+        4449485.5,  4474553.0,  4499620.5,  4524688.5],
+      dtype='float32', name='rows', length=361))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>columns</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-cc653acf-7176-4bef-9a13-253284f45dd1" class="xr-index-data-in" type="checkbox"><label for="index-cc653acf-7176-4bef-9a13-253284f45dd1" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-4524688.5, -4499620.5, -4474553.0, -4449485.5, -4424418.0, -4399350.5,
+       -4374283.0, -4349215.5, -4324148.0, -4299080.5,
+       ...
+        4274013.0,  4299080.5,  4324148.0,  4349215.5,  4374283.0,  4399350.5,
+        4424418.0,  4449485.5,  4474553.0,  4499620.5],
+      dtype='float32', name='columns', length=361))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-68390763-a7dc-4154-9535-a53d2f992bc1" class="xr-section-summary-in" type="checkbox"><label for="section-68390763-a7dc-4154-9535-a53d2f992bc1" class="xr-section-summary">Attributes: <span>(44)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"><dt><span>_NCProperties :</span></dt><dd>version=2,netcdf=4.8.1,hdf5=1.10.6</dd><dt><span>acknowledgement :</span></dt><dd>Please acknowledge NCEI, CoastWatch West Coast Node, and this dataset (doi:10.25921/AE96-0E57).</dd><dt><span>cdm_data_type :</span></dt><dd>Grid</dd><dt><span>cdr_program :</span></dt><dd>NOAA Climate Data Record Program for satellites</dd><dt><span>cdr_variable :</span></dt><dd>cdr_surface_temperature, cdr_surface_albedo, cdr_surface_downwelling_shortwave_flux, cdr_surface_downwelling_longwave_flux, cdr_surface_upwelling_shortwave_flux, cdr_surface_upwelling_longwave_flux, cdr_cloud_binary_mask, cdr_sea_ice_thickness, cdr_toa_net_downward_shortwave_flux, cdr_toa_outgoing_shortwave_flux, cdr_toa_outgoing_longwave_flux,surface_type, cloud_particle_phase, cloud_particle_radius, cloud_optical_depth, cloud_top_pressure, cloud_top_temperature, Cloud_type, surface_shortwave_cloud_radiative_forcing, surface_longwave_cloud_radiative_forcing</dd><dt><span>comment :</span></dt><dd>In order to be compliant with the EASE Grid specifications, the following modifications were made to the source files: 1) For each data variable plus the latitude and longitude variables, the two dimensional x-y grid was rotated clockwise by 90 degrees, resulting in geographical orientation where the Greenwich Meridian runs parallel to the y (rows)-axis from the North Pole at the grid center to the middle of the x (columns)-axis at the bottom edge of the grid and -90 degree E meridian runs parallel to the x (columns)-axis from the North Pole at the grid center to the middle of the y (rows)-axis at the left edge of the grid.: 2) two coordinate variables (columns and rows) were added that correspond to the columns and rows dimensions (units of m). In addition, the time variable was modified to put all of the files in the dataset on the same base time (seconds since 1970-01-01T00:00:00Z).</dd><dt><span>Conventions :</span></dt><dd>COARDS, CF-1.4, Unidata Dataset Discovery v1.0</dd><dt><span>creator_email :</span></dt><dd>erd.data@noaa.gov</dd><dt><span>creator_name :</span></dt><dd>NOAA/NMFS/SWFSC/ERD and NOAA/NESDIS/CoastWatch West Coast Node</dd><dt><span>creator_type :</span></dt><dd>institution</dd><dt><span>date_created :</span></dt><dd>2024-09-23</dd><dt><span>defaultGraphQuery :</span></dt><dd>cdr_sea_ice_thickness[(last)][(-4499620.5):(4524688.5)][(-4524688.5):(4499620.5)]&amp;.draw=surface</dd><dt><span>doi :</span></dt><dd>doi.org/10.25921/AE96-0E57</dd><dt><span>EPSG :</span></dt><dd>http://epsg.io/3408</dd><dt><span>history :</span></dt><dd>Data files were obtained from NCEI at https://www.ncei.noaa.gov/data/avhrr-polar-pathfinder-extended/access/. For each data variable plus the latitude and longitude variables, the two dimensional x-y grid was rotated clockwise by 90 degrees, resulting in geographical orientation where the Greenwich Meridian runs parallel to the y (rows)-axis from the North Pole at the grid center to the middle of the x (columns)-axis at the bottom edge of the grid and -90 degree E meridian runs parallel to the x (columns)-axis from the North Pole at the grid center to the middle of the y (rows)-axis at the left edge of the grid. To coordinate variables (columns and rows) were added that correspond to the columns and rows dimensions. The coordinate variables have units of meters. The timestamp was made consistent across all files by converting to seconds since 1970-01-01T00:00:00Z. Metadata were alter to be in compliance with CF and ACDD standards.
+2024-10-02T16:55:11Z https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc:C00941/html
+2024-10-02T16:55:11Z https://polarwatch.noaa.gov/erddap/griddap/ncei_polarAPPX20_nhem.das</dd><dt><span>id :</span></dt><dd>Polar-APP-X_v02r00_Nhem</dd><dt><span>infoUrl :</span></dt><dd>https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc:C00941/html</dd><dt><span>institution :</span></dt><dd>NOAA/NCEI</dd><dt><span>keywords :</span></dt><dd>Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Longwave Radiation, Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Radiative Flux, Earth Science &gt; Atmosphere &gt; Atmospheric Radiation &gt; Solar Radiation, Earth Science &gt; Atmosphere &gt; Clouds &gt; Cloud Microphysics &gt; Cloud Droplet Concentration(Size), Earth Science &gt; Atmosphere &gt; Clouds &gt; Cloud Microphysics &gt; Cloud Droplet Phase, Earth Science &gt; Atmosphere &gt; Clouds &gt; Cloud Microphysics &gt; Cloud Optical Depth(Thickness), Earth Science &gt; Atmosphere &gt; Clouds &gt; Cloud Properties &gt; Cloud Fraction, Earth Science &gt; Atmosphere &gt; Clouds &gt; Cloud Properties &gt; Cloud Top Pressure, Earth Science &gt; Atmosphere &gt; Clouds &gt; Cloud Properties &gt; Cloud Top Temperature, Earth Science &gt; Atmosphere &gt; Clouds &gt; Cloud Properties &gt; Cloud Type, Earth Science &gt; Atmosphere &gt; Clouds &gt; Cloud Radiative Transfer &gt; Cloud Radiative Forcing, Earth Science &gt; Climate Indicators &gt; Cryospheric Indicators &gt; Ice Depth(Thickness), Earth Science &gt; Cryosphere &gt; Sea Ice &gt; Ice Depth(Thickness), Earth Science &gt; Cryosphere &gt; Snow And Ice &gt; Albedo, Earth Science &gt; Cryosphere &gt; Snow And Ice &gt; Snow And Ice Temperature, Earth Science &gt; Land Surface &gt; Land Albedo, Earth Science &gt; Land Surface &gt; Land Temperature, Earth Science &gt; Oceans &gt; Sea Ice &gt; Ice Depth(Thickness), Earth Science &gt; Terrestrial Hydrosphere &gt; Snow And Ice &gt; Albedo, Earth Science &gt; Terrestrial Hydrosphere &gt; Snow And Ice &gt; Ice Depth(Thickness)</dd><dt><span>keywords_vocabulary :</span></dt><dd>NASA Global Change Master Directory (GCMD) Earth Science Keywords, Version 8</dd><dt><span>license :</span></dt><dd>The data may be used and redistributed for free but is not intended
+for legal use, since it may contain inaccuracies. Neither the data
+Contributor, ERD, NOAA, nor the United States Government, nor any
+of their employees or contractors, makes any warranty, express or
+implied, including warranties of merchantability and fitness for a
+particular purpose, or assumes any legal liability for the accuracy,
+completeness, or usefulness, of this information.</dd><dt><span>Metadata_Conventions :</span></dt><dd>COARDS, CF-1.6, Unidata Dataset Discovery v1.0</dd><dt><span>metadata_link :</span></dt><dd>https://doi.org/10.25921/AE96-0E57</dd><dt><span>naming_authority :</span></dt><dd>gov.noaa.ncei</dd><dt><span>NCO :</span></dt><dd>netCDF Operators version 5.0.6 (Homepage = http://nco.sf.net, Code = https://github.com/nco/nco)</dd><dt><span>platform :</span></dt><dd> NOAA polar orbiting satellite 19</dd><dt><span>product_version :</span></dt><dd>V2.0</dd><dt><span>PROJ4 :</span></dt><dd>+proj=laea +lat_0=90 +lon_0=0 +x_0=0 +y_0=0 +a=6371228 +b=6371228 +units=m +no_defs</dd><dt><span>proj_crs_code :</span></dt><dd>EPSG:3408</dd><dt><span>proj_crs_code_description :</span></dt><dd>The proj_crs_code attribute references a registered projection identifier (i.e. EPSG) when available. If the projection is not registered, non-standard then this attribute references a PolarWatch assigned internal identifier.</dd><dt><span>proj_units :</span></dt><dd>meters</dd><dt><span>publisher_email :</span></dt><dd>erd.data@noaa.gov</dd><dt><span>publisher_name :</span></dt><dd>NOAA/NMFS/SWFSC/ERD and NOAA/NESDIS/CoastWatch West Coast Node</dd><dt><span>publisher_type :</span></dt><dd>institution</dd><dt><span>references :</span></dt><dd>doi.org/10.25921/AE96-0E57</dd><dt><span>sensor :</span></dt><dd>Advanced Very High Resolution Radiometer (AVHRR)/3</dd><dt><span>source :</span></dt><dd>individual twice daily APP-x data</dd><dt><span>sourceUrl :</span></dt><dd>https://www.ncei.noaa.gov/metadata/geoportal/rest/metadata/item/gov.noaa.ncdc:C00941/html</dd><dt><span>spatial_resolution :</span></dt><dd>25 km</dd><dt><span>standard_name_vocabulary :</span></dt><dd>CF Standard Name Table (v26, 08 November 2013)</dd><dt><span>summary :</span></dt><dd>summary</dd><dt><span>time_coverage_end :</span></dt><dd>2024-09-19T14:00:00Z</dd><dt><span>time_coverage_start :</span></dt><dd>1982-01-01T04:00:00Z</dd><dt><span>title :</span></dt><dd>Sea Ice Thickness and Multi-variable Extended AVHRR Polar Pathfinder APP-X NCEI Climate Data Record V2, Arctic, 1982-Present, Twice Daily</dd></dl></div></li></ul></div></div>
+</div>
+</div>
+</section>
+<section id="load-2021-data-and-compute-monthly-average" class="level3">
+<h3 class="anchored" data-anchor-id="load-2021-data-and-compute-monthly-average">Load 2021 data and compute monthly average</h3>
+<p><strong>Note</strong>: Running this code snippet may take some time (about 10 minutes), depending on the available resources of your computer. If you encounter any issues running the code, you can load the final dataset, <code>ds_23_monthly.nc</code>, located in the <code>data/</code> folder to continue with the exercise.</p>
+<pre><code># Load data from year 2021
+ds21 = ds.sel(time=slice('2023-01-01', '2023-12-31'))
+
+# Compute montly average
+ds_monthly_mean21 = ds21.groupby("time.month").mean()
+
+# Close dataset to free up memory
+ds21.close()</code></pre>
+<div id="cell-8" class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data from year 2021</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ds23 <span class="op">=</span> ds[<span class="st">'cdr_sea_ice_thickness'</span>].sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">'2023-01-01'</span>, <span class="st">'2023-12-31'</span>))</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute montly average</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ds_monthly_mean23_2 <span class="op">=</span> ds23.groupby(<span class="st">"time.month"</span>).mean()</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Close dataset to free up memory</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>ds23.close()</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-9" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load already computed monthly mean for 2021</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ds_monthly_mean23 <span class="op">=</span> xr.open_dataset(<span class="st">'../data/sit_monthly_mean23.nc'</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ds_monthly_mean23</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt; Size: 6MB
+Dimensions:                (rows: 361, columns: 361, month: 12)
+Coordinates:
+  * rows                   (rows) float32 1kB -4.5e+06 -4.475e+06 ... 4.525e+06
+  * columns                (columns) float32 1kB -4.525e+06 -4.5e+06 ... 4.5e+06
+  * month                  (month) int64 96B 1 2 3 4 5 6 7 8 9 10 11 12
+Data variables:
+    cdr_sea_ice_thickness  (month, rows, columns) float32 6MB ...</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input id="section-35a1f8bc-7bbf-4c8e-8a14-c39cb50420ce" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-35a1f8bc-7bbf-4c8e-8a14-c39cb50420ce" class="xr-section-summary" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span class="xr-has-index">rows</span>: 361</li><li><span class="xr-has-index">columns</span>: 361</li><li><span class="xr-has-index">month</span>: 12</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input id="section-cb26e1b9-d714-44c8-8022-ed9bd6f4f69a" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-cb26e1b9-d714-44c8-8022-ed9bd6f4f69a" class="xr-section-summary">Coordinates: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">rows</span></div><div class="xr-var-dims">(rows)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-4.5e+06 -4.475e+06 ... 4.525e+06</div><input id="attrs-c4c2dcfc-6054-4e03-8adb-5709a10e3563" class="xr-var-attrs-in" type="checkbox"><label for="attrs-c4c2dcfc-6054-4e03-8adb-5709a10e3563" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-1eeb93ae-a23d-4937-9e71-1b2f706d7bde" class="xr-var-data-in" type="checkbox"><label for="data-1eeb93ae-a23d-4937-9e71-1b2f706d7bde" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>361</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoY</dd><dt><span>actual_range :</span></dt><dd>[-4499620.  4524689.]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>comment :</span></dt><dd>columns values are the upper left of the grid cells</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Projection Grid Y Coordinates</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd></dl></div><div class="xr-var-data"><pre>array([-4499620.5, -4474553. , -4449485.5, ...,  4474553. ,  4499620.5,
+        4524688.5], dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">columns</span></div><div class="xr-var-dims">(columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-4.525e+06 -4.5e+06 ... 4.5e+06</div><input id="attrs-39f1186b-5162-4e28-8a42-99ed3b4fae95" class="xr-var-attrs-in" type="checkbox"><label for="attrs-39f1186b-5162-4e28-8a42-99ed3b4fae95" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-bf8dcc16-91be-483c-a09a-38fc5445b4a8" class="xr-var-data-in" type="checkbox"><label for="data-bf8dcc16-91be-483c-a09a-38fc5445b4a8" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>361</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoX</dd><dt><span>actual_range :</span></dt><dd>[-4524688.  4499621.]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>comment :</span></dt><dd>columns values are the upper left of the grid cells</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Projection Grid X Coordinates</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd></dl></div><div class="xr-var-data"><pre>array([-4524688.5, -4499620.5, -4474553. , ...,  4449485.5,  4474553. ,
+        4499620.5], dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">month</span></div><div class="xr-var-dims">(month)</div><div class="xr-var-dtype">int64</div><div class="xr-var-preview xr-preview">1 2 3 4 5 6 7 8 9 10 11 12</div><input id="attrs-8a31f79b-7917-4126-8839-92e764203f05" class="xr-var-attrs-in" type="checkbox" disabled=""><label for="attrs-8a31f79b-7917-4126-8839-92e764203f05" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-0791a488-f340-4794-9801-d030a4696034" class="xr-var-data-in" type="checkbox"><label for="data-0791a488-f340-4794-9801-d030a4696034" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12])</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-8c15749e-1a3c-41ce-bcfe-731e5e2e2bbd" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-8c15749e-1a3c-41ce-bcfe-731e5e2e2bbd" class="xr-section-summary">Data variables: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>cdr_sea_ice_thickness</span></div><div class="xr-var-dims">(month, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-9ffaf11e-e8ce-4b51-8f81-fa7d97817e2c" class="xr-var-attrs-in" type="checkbox"><label for="attrs-9ffaf11e-e8ce-4b51-8f81-fa7d97817e2c" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-ca97fc73-ea7d-4d01-ba3c-cdecb27be4f1" class="xr-var-data-in" type="checkbox"><label for="data-ca97fc73-ea7d-4d01-ba3c-cdecb27be4f1" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_ice</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Ice Distribution</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of sea ice thickness</dd><dt><span>standard_name :</span></dt><dd>sea_ice_thickness</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>valid_range :</span></dt><dd>[ 0. 10.]</dd></dl></div><div class="xr-var-data"><pre>[1563852 values with dtype=float32]</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-5fbee4cf-c8fc-43f5-87e1-46c641beb496" class="xr-section-summary-in" type="checkbox"><label for="section-5fbee4cf-c8fc-43f5-87e1-46c641beb496" class="xr-section-summary">Indexes: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>rows</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-36230284-d418-491d-8825-93f3c817a98a" class="xr-index-data-in" type="checkbox"><label for="index-36230284-d418-491d-8825-93f3c817a98a" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-4499620.5, -4474553.0, -4449485.5, -4424418.0, -4399350.5, -4374283.0,
+       -4349215.5, -4324148.0, -4299080.5, -4274013.0,
+       ...
+        4299080.5,  4324148.0,  4349215.5,  4374283.0,  4399350.5,  4424418.0,
+        4449485.5,  4474553.0,  4499620.5,  4524688.5],
+      dtype='float32', name='rows', length=361))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>columns</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-aaf48276-af2f-40b1-b253-e22381bd5cff" class="xr-index-data-in" type="checkbox"><label for="index-aaf48276-af2f-40b1-b253-e22381bd5cff" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-4524688.5, -4499620.5, -4474553.0, -4449485.5, -4424418.0, -4399350.5,
+       -4374283.0, -4349215.5, -4324148.0, -4299080.5,
+       ...
+        4274013.0,  4299080.5,  4324148.0,  4349215.5,  4374283.0,  4399350.5,
+        4424418.0,  4449485.5,  4474553.0,  4499620.5],
+      dtype='float32', name='columns', length=361))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>month</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-4170f6c8-0ab3-4bca-a67b-9fdc228418c3" class="xr-index-data-in" type="checkbox"><label for="index-4170f6c8-0ab3-4bca-a67b-9fdc228418c3" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], dtype='int64', name='month'))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-a94108bf-6fbf-47d7-92a8-84cb29bad225" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-a94108bf-6fbf-47d7-92a8-84cb29bad225" class="xr-section-summary" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div>
+</div>
+</div>
+</section>
+<section id="visualizing-2023-january-monthly-average-on-the-map" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-2023-january-monthly-average-on-the-map">Visualizing 2023 January Monthly Average on the Map</h3>
+<div id="cell-11" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the January sea ice thickness mean (first time step: index[0])</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ds_monthly_mean23[<span class="st">'cdr_sea_ice_thickness'</span>][<span class="dv">0</span>].plot()</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"2023 Sea ice thickness January Average"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice-thickness-climatology_files/figure-html/cell-6-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="loading-monthly-average-from-2006-to-2020" class="level3">
+<h3 class="anchored" data-anchor-id="loading-monthly-average-from-2006-to-2020">Loading Monthly Average from 2006 to 2020</h3>
+<p>To do climate analysis such as computing climatology and trend analysis, we will use sea ice thickness monthly average from 2005 to 2020. The monthly averages are already computed and are available in netcdf file.</p>
+<div id="cell-13" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load monthly average data from 2006-2020</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ds_monthly <span class="op">=</span> xr.open_dataset(<span class="st">'../data/seaice-thickness-monthly2006_2020.nc'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ds_monthly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt; Size: 94MB
+Dimensions:                (year: 15, month: 12, rows: 361, columns: 361)
+Coordinates:
+  * rows                   (rows) float32 1kB -4.5e+06 -4.475e+06 ... 4.525e+06
+  * columns                (columns) float32 1kB -4.525e+06 -4.5e+06 ... 4.5e+06
+  * month                  (month) int64 96B 1 2 3 4 5 6 7 8 9 10 11 12
+  * year                   (year) int64 120B 2006 2007 2008 ... 2018 2019 2020
+Data variables:
+    cdr_sea_ice_thickness  (year, month, rows, columns) float32 94MB ...</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input id="section-621d6284-ae03-475a-b712-382898b07cf0" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-621d6284-ae03-475a-b712-382898b07cf0" class="xr-section-summary" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span class="xr-has-index">year</span>: 15</li><li><span class="xr-has-index">month</span>: 12</li><li><span class="xr-has-index">rows</span>: 361</li><li><span class="xr-has-index">columns</span>: 361</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input id="section-63e559d2-f0ae-4a93-8823-18077c82496c" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-63e559d2-f0ae-4a93-8823-18077c82496c" class="xr-section-summary">Coordinates: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">rows</span></div><div class="xr-var-dims">(rows)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-4.5e+06 -4.475e+06 ... 4.525e+06</div><input id="attrs-e39c1ed4-49e7-4869-9585-f97a8b04e452" class="xr-var-attrs-in" type="checkbox"><label for="attrs-e39c1ed4-49e7-4869-9585-f97a8b04e452" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-0eaae1cc-5a57-482e-b833-f9dceca9bcb2" class="xr-var-data-in" type="checkbox"><label for="data-0eaae1cc-5a57-482e-b833-f9dceca9bcb2" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>361</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoY</dd><dt><span>actual_range :</span></dt><dd>[-4499620.  4524689.]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>comment :</span></dt><dd>columns values are the upper left of the grid cells</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Projection Grid Y Coordinates</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd></dl></div><div class="xr-var-data"><pre>array([-4499620.5, -4474553. , -4449485.5, ...,  4474553. ,  4499620.5,
+        4524688.5], dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">columns</span></div><div class="xr-var-dims">(columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-4.525e+06 -4.5e+06 ... 4.5e+06</div><input id="attrs-83af3678-2fd9-41fb-b133-d59204b37691" class="xr-var-attrs-in" type="checkbox"><label for="attrs-83af3678-2fd9-41fb-b133-d59204b37691" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-a7a3bbe0-7474-4c35-b1a1-3d19fa2d6c7d" class="xr-var-data-in" type="checkbox"><label for="data-a7a3bbe0-7474-4c35-b1a1-3d19fa2d6c7d" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>361</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoX</dd><dt><span>actual_range :</span></dt><dd>[-4524688.  4499621.]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>comment :</span></dt><dd>columns values are the upper left of the grid cells</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Projection Grid X Coordinates</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd></dl></div><div class="xr-var-data"><pre>array([-4524688.5, -4499620.5, -4474553. , ...,  4449485.5,  4474553. ,
+        4499620.5], dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">month</span></div><div class="xr-var-dims">(month)</div><div class="xr-var-dtype">int64</div><div class="xr-var-preview xr-preview">1 2 3 4 5 6 7 8 9 10 11 12</div><input id="attrs-b5e9f989-02d3-4395-8783-610984268076" class="xr-var-attrs-in" type="checkbox" disabled=""><label for="attrs-b5e9f989-02d3-4395-8783-610984268076" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-b019e807-4218-4766-ab77-d36ecbab282e" class="xr-var-data-in" type="checkbox"><label for="data-b019e807-4218-4766-ab77-d36ecbab282e" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12])</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">year</span></div><div class="xr-var-dims">(year)</div><div class="xr-var-dtype">int64</div><div class="xr-var-preview xr-preview">2006 2007 2008 ... 2018 2019 2020</div><input id="attrs-a704d0b9-880b-49a5-a5c8-dde9a9698d9b" class="xr-var-attrs-in" type="checkbox" disabled=""><label for="attrs-a704d0b9-880b-49a5-a5c8-dde9a9698d9b" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-369644e6-655f-44ea-9ea1-d8c234730f6b" class="xr-var-data-in" type="checkbox"><label for="data-369644e6-655f-44ea-9ea1-d8c234730f6b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+       2018, 2019, 2020])</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-9ed2f21d-2ea5-45c9-b3ef-8d70931f7be9" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-9ed2f21d-2ea5-45c9-b3ef-8d70931f7be9" class="xr-section-summary">Data variables: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>cdr_sea_ice_thickness</span></div><div class="xr-var-dims">(year, month, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-6a5e1fd2-512c-4e51-ba86-d9d857b095b6" class="xr-var-attrs-in" type="checkbox"><label for="attrs-6a5e1fd2-512c-4e51-ba86-d9d857b095b6" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-60a0f616-a708-4a9e-a57f-0a4535501e65" class="xr-var-data-in" type="checkbox"><label for="data-60a0f616-a708-4a9e-a57f-0a4535501e65" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>[  1 361 361]</dd><dt><span>colorBarPalette :</span></dt><dd>KT_ice</dd><dt><span>coverage_content_type :</span></dt><dd>physicalMeasurement</dd><dt><span>grid_mapping :</span></dt><dd>crs</dd><dt><span>ioos_category :</span></dt><dd>Ice Distribution</dd><dt><span>long_name :</span></dt><dd>NOAA CDR of sea ice thickness</dd><dt><span>standard_name :</span></dt><dd>sea_ice_thickness</dd><dt><span>units :</span></dt><dd>m</dd><dt><span>valid_range :</span></dt><dd>[ 0. 10.]</dd></dl></div><div class="xr-var-data"><pre>[23457780 values with dtype=float32]</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-09fc5f1a-26e5-4228-9d24-95cb77295ce0" class="xr-section-summary-in" type="checkbox"><label for="section-09fc5f1a-26e5-4228-9d24-95cb77295ce0" class="xr-section-summary">Indexes: <span>(4)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>rows</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-808a61dc-de23-49d7-99f4-fadddbc6ce62" class="xr-index-data-in" type="checkbox"><label for="index-808a61dc-de23-49d7-99f4-fadddbc6ce62" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-4499620.5, -4474553.0, -4449485.5, -4424418.0, -4399350.5, -4374283.0,
+       -4349215.5, -4324148.0, -4299080.5, -4274013.0,
+       ...
+        4299080.5,  4324148.0,  4349215.5,  4374283.0,  4399350.5,  4424418.0,
+        4449485.5,  4474553.0,  4499620.5,  4524688.5],
+      dtype='float32', name='rows', length=361))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>columns</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-95c803c0-0008-4c6d-9207-c04960b564c5" class="xr-index-data-in" type="checkbox"><label for="index-95c803c0-0008-4c6d-9207-c04960b564c5" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-4524688.5, -4499620.5, -4474553.0, -4449485.5, -4424418.0, -4399350.5,
+       -4374283.0, -4349215.5, -4324148.0, -4299080.5,
+       ...
+        4274013.0,  4299080.5,  4324148.0,  4349215.5,  4374283.0,  4399350.5,
+        4424418.0,  4449485.5,  4474553.0,  4499620.5],
+      dtype='float32', name='columns', length=361))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>month</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-c3d63d45-846b-45d8-a08d-98760ed670c1" class="xr-index-data-in" type="checkbox"><label for="index-c3d63d45-846b-45d8-a08d-98760ed670c1" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], dtype='int64', name='month'))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>year</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-2ba7d1b6-08e3-42e0-b4db-0bd337c91a86" class="xr-index-data-in" type="checkbox"><label for="index-2ba7d1b6-08e3-42e0-b4db-0bd337c91a86" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017,
+       2018, 2019, 2020],
+      dtype='int64', name='year'))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-371572a0-b76f-42bc-88fd-af511d6fffa9" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-371572a0-b76f-42bc-88fd-af511d6fffa9" class="xr-section-summary" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div>
+</div>
+</div>
+</section>
+<section id="compute-the-15-year-historical-mean" class="level3">
+<h3 class="anchored" data-anchor-id="compute-the-15-year-historical-mean">Compute the 15 year historical mean</h3>
+<p>Using <code>ds_monthly</code> dataset, we will compute 15 year historical monthly means.</p>
+<div id="cell-15" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute monthly mean from annualized data</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>historical_mean <span class="op">=</span> ds_monthly.mean(dim<span class="op">=</span><span class="st">'year'</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ds_monthly.close()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>historical_mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewbox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewbox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt; Size: 6MB
+Dimensions:                (month: 12, rows: 361, columns: 361)
+Coordinates:
+  * rows                   (rows) float32 1kB -4.5e+06 -4.475e+06 ... 4.525e+06
+  * columns                (columns) float32 1kB -4.525e+06 -4.5e+06 ... 4.5e+06
+  * month                  (month) int64 96B 1 2 3 4 5 6 7 8 9 10 11 12
+Data variables:
+    cdr_sea_ice_thickness  (month, rows, columns) float32 6MB 0.0 0.0 ... 0.0</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input id="section-80b6ae87-e87a-450e-bd04-5abfcacd65cd" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-80b6ae87-e87a-450e-bd04-5abfcacd65cd" class="xr-section-summary" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span class="xr-has-index">month</span>: 12</li><li><span class="xr-has-index">rows</span>: 361</li><li><span class="xr-has-index">columns</span>: 361</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input id="section-4b5cfc31-e475-4532-a713-83bc52e6b27e" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-4b5cfc31-e475-4532-a713-83bc52e6b27e" class="xr-section-summary">Coordinates: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">rows</span></div><div class="xr-var-dims">(rows)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-4.5e+06 -4.475e+06 ... 4.525e+06</div><input id="attrs-123bd0da-fc9a-48e4-b277-9ef9eab85c01" class="xr-var-attrs-in" type="checkbox"><label for="attrs-123bd0da-fc9a-48e4-b277-9ef9eab85c01" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-40335240-37d4-4e38-afde-484b2eaea517" class="xr-var-data-in" type="checkbox"><label for="data-40335240-37d4-4e38-afde-484b2eaea517" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>361</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoY</dd><dt><span>actual_range :</span></dt><dd>[-4499620.  4524689.]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>comment :</span></dt><dd>columns values are the upper left of the grid cells</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Projection Grid Y Coordinates</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd></dl></div><div class="xr-var-data"><pre>array([-4499620.5, -4474553. , -4449485.5, ...,  4474553. ,  4499620.5,
+        4524688.5], dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">columns</span></div><div class="xr-var-dims">(columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-4.525e+06 -4.5e+06 ... 4.5e+06</div><input id="attrs-b3abf5fe-531a-423a-9f95-d066a039af87" class="xr-var-attrs-in" type="checkbox"><label for="attrs-b3abf5fe-531a-423a-9f95-d066a039af87" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-5092985b-0b33-4bfd-92f0-41fa690d4356" class="xr-var-data-in" type="checkbox"><label for="data-5092985b-0b33-4bfd-92f0-41fa690d4356" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>361</dd><dt><span>_CoordinateAxisType :</span></dt><dd>GeoX</dd><dt><span>actual_range :</span></dt><dd>[-4524688.  4499621.]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>comment :</span></dt><dd>columns values are the upper left of the grid cells</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>Projection Grid X Coordinates</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd></dl></div><div class="xr-var-data"><pre>array([-4524688.5, -4499620.5, -4474553. , ...,  4449485.5,  4474553. ,
+        4499620.5], dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">month</span></div><div class="xr-var-dims">(month)</div><div class="xr-var-dtype">int64</div><div class="xr-var-preview xr-preview">1 2 3 4 5 6 7 8 9 10 11 12</div><input id="attrs-8522a82d-1462-42e0-94fc-24834a1351d9" class="xr-var-attrs-in" type="checkbox" disabled=""><label for="attrs-8522a82d-1462-42e0-94fc-24834a1351d9" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-0ea5d9ec-988c-4951-a98d-ce1d49c7eb5e" class="xr-var-data-in" type="checkbox"><label for="data-0ea5d9ec-988c-4951-a98d-ce1d49c7eb5e" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12])</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-2b63ed73-1bbc-4be1-b717-5e5de3bee3ec" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-2b63ed73-1bbc-4be1-b717-5e5de3bee3ec" class="xr-section-summary">Data variables: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>cdr_sea_ice_thickness</span></div><div class="xr-var-dims">(month, rows, columns)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id="attrs-41aa02bd-77e6-4867-b7c5-28da96476162" class="xr-var-attrs-in" type="checkbox" disabled=""><label for="attrs-41aa02bd-77e6-4867-b7c5-28da96476162" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-6e6edbe0-cbaa-4069-bfe8-f9e33b4a29f9" class="xr-var-data-in" type="checkbox"><label for="data-6e6edbe0-cbaa-4069-bfe8-f9e33b4a29f9" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"></dl></div><div class="xr-var-data"><pre>array([[[ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        ...,
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.]],
+
+       [[ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        ...,
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.]],
+
+       [[ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        ...,
+...
+        ...,
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.]],
+
+       [[ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        ...,
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.]],
+
+       [[ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        [ 0.,  0.,  0., ..., nan, nan, nan],
+        ...,
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.]]], dtype=float32)</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-5d27c81e-96b8-4bf2-8772-0b115fb35d39" class="xr-section-summary-in" type="checkbox"><label for="section-5d27c81e-96b8-4bf2-8772-0b115fb35d39" class="xr-section-summary">Indexes: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>rows</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-8272093b-ad0b-487c-bb63-1418c4f683bb" class="xr-index-data-in" type="checkbox"><label for="index-8272093b-ad0b-487c-bb63-1418c4f683bb" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-4499620.5, -4474553.0, -4449485.5, -4424418.0, -4399350.5, -4374283.0,
+       -4349215.5, -4324148.0, -4299080.5, -4274013.0,
+       ...
+        4299080.5,  4324148.0,  4349215.5,  4374283.0,  4399350.5,  4424418.0,
+        4449485.5,  4474553.0,  4499620.5,  4524688.5],
+      dtype='float32', name='rows', length=361))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>columns</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-d1c8d97f-162a-46c3-b4fd-d37005686f6d" class="xr-index-data-in" type="checkbox"><label for="index-d1c8d97f-162a-46c3-b4fd-d37005686f6d" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-4524688.5, -4499620.5, -4474553.0, -4449485.5, -4424418.0, -4399350.5,
+       -4374283.0, -4349215.5, -4324148.0, -4299080.5,
+       ...
+        4274013.0,  4299080.5,  4324148.0,  4349215.5,  4374283.0,  4399350.5,
+        4424418.0,  4449485.5,  4474553.0,  4499620.5],
+      dtype='float32', name='columns', length=361))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>month</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-6d5b35a1-c7a3-426e-b586-4d62a0f64f0d" class="xr-index-data-in" type="checkbox"><label for="index-6d5b35a1-c7a3-426e-b586-4d62a0f64f0d" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], dtype='int64', name='month'))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-452d8660-9ad7-4664-b26c-0de14ce5b824" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-452d8660-9ad7-4664-b26c-0de14ce5b824" class="xr-section-summary" title="Expand/collapse section">Attributes: <span>(0)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"></dl></div></li></ul></div></div>
+</div>
+</div>
+</section>
+<section id="visualizing-monthly-historical-mean" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-monthly-historical-mean">Visualizing monthly historical mean</h3>
+<div id="cell-17" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first time step of the sea ice thickness</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>historical_mean[<span class="st">'cdr_sea_ice_thickness'</span>][<span class="dv">1</span>].plot()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Sea Ice Thickness Historical Month Mean (Feb)"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice-thickness-climatology_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="computing-anomalies" class="level3">
+<h3 class="anchored" data-anchor-id="computing-anomalies">Computing Anomalies</h3>
+<p>To assess recent changes in sea ice thickness, we can compare the current sea ice thickness for the year 2023 to the 15-year historical mean. An anaomaly is a commonly used metric that represents the difference (or departure) between the current value and the historical average.</p>
+<div id="cell-19" class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute anomaly of 2021 from the mean data</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>anom_mean <span class="op">=</span> ds_monthly_mean23[<span class="st">'cdr_sea_ice_thickness'</span>] <span class="op">-</span> historical_mean[<span class="st">'cdr_sea_ice_thickness'</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot Feb and Sep anomaly</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">5</span>))</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>anom_mean[<span class="dv">1</span>].plot(ax<span class="op">=</span>axs[<span class="dv">0</span>])</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>anom_mean[<span class="dv">8</span>].plot(ax<span class="op">=</span>axs[<span class="dv">1</span>])</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the title</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'2021 Monthly Sea ice thickness Anomalies from 2005-2020 means'</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust the layout</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plots</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice-thickness-climatology_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="computing-trends" class="level3">
+<h3 class="anchored" data-anchor-id="computing-trends">Computing Trends</h3>
+<p>https://www.geeksforgeeks.org/how-to-perform-a-mann-kendall-trend-test-in-python/</p>
+<p>A trend in climatology refers to long-term changes over an extended period. There are several methods to estimate the trends in the time series data. In this exercise, we will use Mann-Kendall regression with <code>mk_slope()</code> function to compute the slope. Mann-Kendall test is a non-parametric method that does not assume data normality, making it suitable for various data distributions.</p>
+<p>Note: The code may take some time to process (approximately 3 minutes).</p>
+<div id="cell-21" class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to apply the Mann-Kendall test and return the slope</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mk_slope(data):</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># remove NaN data points</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    clean_data <span class="op">=</span> data[<span class="op">~</span>np.isnan(data)]</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># if data points not enough, return Nan </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(clean_data) <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> np.nan     </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Apply MK analysis</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> mk.original_test(data)</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Return only slope</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> result.slope</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Using xarray.apply_ufunc(), we will apply mk_slope across the 'time' (monthly)  dimension for each grid</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function across the 'time' dimension for each pixel</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>slopes <span class="op">=</span> xr.apply_ufunc(</span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    mk_slope,                <span class="co"># The function to apply</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    ds_monthly,                    <span class="co"># The data </span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    input_core_dims<span class="op">=</span>[[<span class="st">'year'</span>]],  <span class="co"># The dimension over which to apply the function</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    vectorize<span class="op">=</span><span class="va">True</span>,          <span class="co"># Vectorize to apply across all grid</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>    dask<span class="op">=</span><span class="st">'parallelized'</span>,     <span class="co"># Enable parallel processing if using Dask</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>    output_dtypes<span class="op">=</span>[<span class="bu">float</span>]    <span class="co"># The output type (float for slope)</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="visualizing-the-trends-slopes-for-each-grid" class="level3">
+<h3 class="anchored" data-anchor-id="visualizing-the-trends-slopes-for-each-grid">Visualizing the Trends (Slopes) for Each Grid</h3>
+<p>The slopes are calculated for each month and grid over the 15-year-period (2005-2020).<br>
+For this visualization, we will display the results from the month of September across the grid.</p>
+<div id="cell-23" class="cell" data-execution_count="65">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>slopes[<span class="st">'cdr_sea_ice_thickness'</span>].sel(month<span class="op">=</span><span class="dv">9</span>).plot()</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Sea Ice Thickness Trend for September'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the plot</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="seaice-thickness-climatology_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© CC-By CoastWatch, 2026</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

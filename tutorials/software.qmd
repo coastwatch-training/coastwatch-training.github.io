@@ -1,10 +1,10 @@
-
 ---
 title: "Software Code Gallery"
 ---
 
-This page lists software-based tutorials.  
-Click the **eye** icon to preview outputs, or **download** to open the source file on GitHub.
+This gallery brings together hands-on, software-based tutorials for working with CoastWatch and ERDDAP data. Each tutorial focuses on a specific task—such as discovering datasets, building ERDDAP URLs, visualizing gridded and tabular data, or troubleshooting common workflows—using tools like Python, R, and related utilities.
+
+Click the **info** icon to learn more about the software and tools used in the tutorial, **eye** icon to preview outputs, **box** to view tutorial resources, or **download** to open the source file on GitHub.
 
 ```{python}
 #| echo: false

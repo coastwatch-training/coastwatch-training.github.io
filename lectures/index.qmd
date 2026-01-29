@@ -4,20 +4,7 @@ title: "Satellite Course Lectures"
 
 This page provides access to the lecture slide decks used in CoastWatch training courses. The lectures are designed to be short (about 20 minutes when narrated), and many have narrated versions available on YouTube. Use the table below to preview a lecture in your browser or download the slides for offline viewing.
 
-## Acknowledgements
-
-The CoastWatch training materials have been developed, reviewed, and edited with contributions from many dedicated individuals:
-
-- Melanie Abecassis — Code/content development, review
-- Dale Robinson — Code/content development, review
-- Shelly Tomlinson — Code/content development, review
-- Andrea Vander Woude — Code/content development, review
-- Victoria Wegman — Content review/editing
-- Cara Wilson — Code/content development, review
-
-We also extend our gratitude to additional external contributors whose acknowledgements are included within the training materials they helped to create.
-
-Click the **eye** icon to open the lecture, or **download** to save the file.
+Click the **eye** icon to open the lecture, **download** to go to the source file, **play button** to view the narrated lecture, and **clipboard** to read the transcript of the narrated lecture.
 
 ```{python}
 #| echo: false
@@ -110,7 +97,7 @@ def transcript_icon(url: str) -> str:
         f'<a href="{url}" class="cg-icon" target="_blank" rel="noopener" '
         f'aria-label="View video transcript">{TRANSCRIPT_SVG}</a>'
     )
-    
+
 
 rows = []
 for _, r in df.iterrows():
@@ -147,7 +134,8 @@ table = f"""
     <tr>
       <th>Lecture</th>
       <th>Preview</th>
-      <th>Download ↓</th>
+      <th>Download</th>
+      <th>Video</th>
       <th>Transcript</th>
     </tr>
   </thead>
@@ -160,3 +148,16 @@ table = f"""
 
 HTML(table)
 ```
+
+## Acknowledgements
+
+The CoastWatch training materials have been developed, reviewed, and edited with contributions from many dedicated individuals:
+
+- Melanie Abecassis — Code/content development, review
+- Dale Robinson — Code/content development, review
+- Shelly Tomlinson — Code/content development, review
+- Andrea Vander Woude — Code/content development, review
+- Victoria Wegman — Content review/editing
+- Cara Wilson — Code/content development, review
+
+We also extend our gratitude to additional external contributors whose acknowledgements are included within the training materials they helped to create.
