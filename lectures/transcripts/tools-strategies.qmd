@@ -1,0 +1,50 @@
+---
+title: "Tools and Strategy Transcript"
+format: html
+---
+
+Welcome to the online course on oceanographic satellite data products, produced by NOAA’s CoastWatch Program. In this module we will present strategies for discovering, accessing, and downloading ocean satellite data, and some tools you can use to accomplish these tasks. My name is Cara Wilson, I’m the node manager of the West Coast Node of NOAA’s CoastWatch Program.  The materials I will be presenting in this video were produced from a collaboration from many members of NOAA’s CoastWatch Program including Dale Robinson, Melanie Abecassis, Ron Vogel, Shelly Tomlinson, me and the late Dave Foley.  
+
+ 
+
+For many people,  discovering, accessing, and downloading ocean satellite data can be challenging. There are dozens of data providers online, each with its own:
+
+data products, file formats, download protocols, subsetting abilities, and previewing abilities.
+
+ 
+
+At CoastWatch we believe that getting data should not be difficult. People experienced with using satellite data typically have a strategy for  finding satellite data that works for their application. If you are new to satellite data, suggest the following strategy to get you started.  To start with, use online data viewers to explore datasets and to look for interesting ocean features. Next, develop a basic understanding of the data file formats used with satellite data and how they can benefit working with the data. Finding a good viewer for visualizing the data in the files will also help you work with the data. Find a good online site with an easy to use data server, for accessing and downloading data. In this course we will focus on using ERDDAP. Next, steal, I mean, borrow code from other people. There is no need to start from scratch. You can improve and customize existing code for your purposes. There are even code packages written in languages like  R, Python, and MATLAB specifically developed for working with satellite data. We go into this in further detail in the tutorials. Finally, there are software plugins available to help with bringing data into applications like ArcGIS.  We will be exploring all of these during this course. 
+
+
+
+
+To start a project or to look for interesting ocean features, a great place to start is to use an online data viewer. The viewers allow you to explore a variety of datasets and examine your area of interest.  Using data viewers is like looking through department store windows: they let you shop around before you buy. There are many good data viewers available. I’ve listed a few below, including the CoastWatch viewer. Try visiting one of these sites and explore a few datasets that are of interest to you.  
+
+ 
+
+If you will work a lot with satellite data, you will need to get familiar with the netCDF file format, as most satellite data is delivered in this format. Why NetCDF? The files are self-describing, meaning they contain all the information you need to use the data, including geographical and  temporal coverage, details about how the data were processed, how you are allowed to use the data, and who to acknowledge if you use the data. The files are portable.  They can be used by all computer platforms. The binary format is compact, so file sizes are smaller.
+
+If you are using netCDF, it is helpful to use a good netCDF viewer. A good one is NASA's Panoply. With Panoply you can map the data, reproject maps, save the maps as images, see data and metadata, and much more. Of course if you want to do any more complicated analysis of the data you will need to use software like R, python or ArcGIS. There is a tutorial assignment in your syllabus where you will find out more about netCDF and Panoply. 
+
+ 
+
+For the workshop, we will get most of our data from the ERDDAP data server
+
+developed at SWFSC by Bob Simons. ERDDAP gives you a consistent way to download data, the option to subset in time and space, and the choice to download the data in your preferred file format. ERDDAP has both a human interface and machine to machine capabilities. 
+
+ 
+
+Here is how it works. On the data catalog side, ERDDAP can host local files. But one of ERDDAP’s strengths is that it can serve data from other remote servers. Remember that list of data servers from many different data providers that I showed on the first slide? ERDDAP can point to those servers and pull data from them when you make an ERDDAP request. So, you don't have to learn how to get data from all of those other servers. You just have to know one way, the ERDDAP way. On the data distribution side. You can get data by hand with the ERDDAP web interface. You can pull data directly into software apps. You can get data with automatic scripts for machine to machine data exchange. You can use ERDDAP as a backend for web applications. Maybe you want to build a website about your project. You can pull data directly from ERDDAP to populate websites with data or images. This is made possible by Restful URL, where an entire data request is defined in a single URL. There is a tutorial assignment in your syllabus where you will find out more about ERDDAP. 
+
+ 
+
+Some talented people have developed software libraries to help you access data from ERDDAP. One that we use in the course is RerddapXtracto, a package for R developed by Roy Mendelssohn at SWFSC ERD. The package helps you accomplish some common tasks that fisheries and management people often need, like getting satellite data at stations along a cruise or animal track, and getting satellite data from a polygon shaped area over time. Coastwatch also provides sample code in R and Python to help get you started developing your own code. You will find a lesson and a tutorial on the RerddapXtracto package in your syllabus.  There are also tutorial assignments in your syllabus where you will find sample R and python code. 
+
+ 
+
+The ERD and CoastWatch West Coast Node also commissioned the development of the Environmental Data Connector. The Environmental Data Connector is a plug-in for ArcGIS that makes it easy to bring raster data into ArcGIS. It is particularly helpful to bring in spatial data with several time steps. You can also use it to extract data from station locations and from a specified area over time. There is a tutorial assignment in your syllabus where you will find out more about using the EDC. 
+
+ 
+
+Lastly there are multiple different CoastWatch nodes, all geared towards a particular geographical region.   The West Coast node has a lot of datasets with global coverage, but if your study area falls within the domain of one of the other nodes of CoastWatch you might want to check out those nodes for regional products.  This concludes this presentation.  Thank you for listening, I hope you have found it useful 
+

@@ -1,0 +1,79 @@
+---
+title: "Using Satellite Data in ArcGIS"
+format: html
+---
+
+This training is one part of several tutorials within the NOAA CoastWatch Satellite Training Course.  The GIS tutorials consist of 3  modules and although the screenshots and examples use ArcGIS,  the principles apply to any GIS software packages.  Finally,  we've come a long way as this is the 20th year since the first formal CoastWatch Satellite GIS training given in the 2000.  By the end of this training,  you should have an understanding of the various ways to view and work with satellite data in GIS.
+
+ 
+
+The objective of this tutorial is to present a description of the satellite imagery and products and considerations when using satellite data in a Geographic Information System or GIS. In terms of utilizing a satellite product,  we'll discuss Imagery and Data.
+
+ 
+
+One type of satellite product you may use in your GIS is satellite imagery.  Imagery is usually intended for visualization.  It may display one or more types of data or be generated from multiple inputs.  One of the most common examples is true color.  True color imagery may either be a photo or combination of visible bands (red, green, blue) where the environment is displayed in a similar way to how we see it with our eyes. Common imagery formats include PNG, JPEG, and GeoTIFF.  
+
+ 
+
+When data are shown in imagery,  the pixel values are usually color values used to display the geophysical parameter.   So, imagery is essentially a picture.  And generally, within the GIS,  the image cannot be queried or classified.  However, some spatially-enabled formats such as GeoTIFF may contain the scaling equations that data went through to create the image and using tools within the GIS,  can be treated like data.
+
+ 
+
+Satellite Data, on the other hand, is different from imagery in that it contains the geophysical values of the observed parameter.  In other words,  looking at sea surface temperature data we have access to the actual temperature of the water.  This is an important distinction,  as data can often look like imagery,  but the actual values can be used in calculations and spatial operations in the GIS.  Common formats for satellite data include HDF, NetCDF, and GeoTiff.
+
+ 
+
+What are some of the considerations for working with satellite data?  One consideration is Metadata – or data about the data.  Another is formats -- or how the data are stored.  Will my GIS recognize it? Another consideration is Resolution.  Resolution can be spatial or temporal.  i.e. a monthly composite, or spatial -- how much space does a single pixel cover.  Projection --  consists of a coordinate system and reference.  Projections are often selected based on the application of the data. And finally preparation.  In some cases, data must be worked with to get it to the desired state.  The GIS often does some of this for you,  but we'll discuss some of these cases shortly.
+
+ 
+
+Metadata. Working with GIS,  it's all about the metadata.  When combining different spatial layers,  it's critical they share the same reference system. Also, we need to know what has been done to the data so that in our application,  we fully understand any caveats or restrictions in working with the data.  Fortunately,  metadata has become more standardized.  Multiple standards have converged into ISO standards and for satellite data and geographic information,  there is guidance on what information to include making it much easier to understand the data we work with.  In the satellite data context,  metadata typically includes geographic and temporal coverage, resolution,  processing details,  projection information, and where to find out more information -- the Point-of-contact or website of where these data actually come from. 
+
+ 
+
+We've discussed formats.  With respect to GIS,  we typically have two types of data -- vector and raster.  Most of the satellite data with spatial coverage will be stored in a raster friendly format.  These formats, like NetCDF or HDF, are considered self-described as they contain metadata and file-level metadata on how to read the data contained within the format.  Each format may have a prescribed way to store the geospatial information.  Is there a latitude/longitude for each pixel? Or must some operation be performed to calculate each pixel's location?   Fortunately,  this is where the attributes or metadata assist in reading data, and arcGIS knows how to read the metadata on the fly to display the data correctly.
+
+
+
+
+Resolution.  Spatial resolution is the size of a pixel on the ground.  Sounds simple,  but it can be complex. A cell or pixel isn't always a square. And what if the data are stored in degrees?  The conversion of degrees to kilometers or meters varies by latitude,  so we often see resolution represented by a single value generalized for the entire dataset. Temporal resolution may vary as well.  You may find a daily or weekly product and other data you are working with is monthly or seasonal.  Satellite data from GOES - geostationary satellite has a new 2km dataset every 10 minutes. The main point here is that you should consider resolution in the context of the other data you are working with.  What are the extents?  Say you have marine mammal data aggregated monthly for the Gulf of Mexico over 3 years that you want to correlate to sea surface temperature.  What satellite data are appropriate?  In this scenario,  a 5km monthly sea surface temperature may be adequate.  Does that data exist?  Is it of appropriate quality?  Or will you need to assemble it yourself?
+
+ 
+
+It may matter to you how data are combined.  This is referred to as binning, and  it applies to both the spatial and temporal aspects of data. For example,  this shows how many granules go into generating a daily composite of chlorophyll-a from S-NPP VIIRS for a given CoastWatch Sector. 
+
+ 
+
+A granule is the data captured in 84 seconds of orbit or the smallest dataset unit acquired by the spacecraft sensor. Sixty to eighty granules contribute to generating a sector. Underlying the true color imagery and overlaying the granule outlines in green,  the shaded areas in white illustrate the potential overlap of data.
+
+ 
+
+Similarly in this image,  the white area shows where the most recent valid pixel is retained.  Note,  in addition to overlapping pixels,  products that are distributed in several spatial resolutions, for example, 750m or 4km for VIIRS data, have undergone some sort of resampling.  Since the binning of data may be out of your hands,  i.e.  it’s performed by the data provider, you just need to be aware.  But if your GIS activity requires very accurate time and space measurements,  then check the metadata or contact the data provider to verify the methodology in use or if there are alternatives that are best suited for your application. Projections.  If you have taken the satellite 101 tutorial,  you may recall satellite data has different processing levels.  Most of the products used in GIS are mapped or considered Level-3, or Level-4 in satellite-data-terms,  but some data providers only store Level-2 which is not mapped and in the view of the sensor/satellite. The purpose of your project should determine which projection is used for analysis. Many satellite data products are distributed in a projection that may or may not match the needs of your application and metadata may not always include how the data were handled or reprojected so you need to be careful when choosing data. All projections have distortion.  And one thing to note,  is that once data are projected,  distortion is 'baked' into the data product. Additional reprojection will add additional distortion,  so you need to be aware and consider this in terms of your application to understand if this particular dataset is acceptable or not for your project. It's not all doom and gloom,  as projects at a large scale (or a region or local area on earth) may be less distorted than smaller scales -- trying to represent all of Earth's surface in a 2D plane.   
+
+ 
+
+There is a vast array of projections available,  but in general, projections preserve one of the following map properties: Shape, Area, Direction, and Distance. Projections are chosen to preserve one of these criteria or sometimes a compromise projection is used to minimize the distortion across multiple map properties.  If your project includes azimuthal or direction,  then you would select a projection that preserves direction.  If you are measuring distances,  then a projection that preserves distance. For a regional area of interest (or large scale map), you can often minimize distortions through manipulation of the projection parameters. But often in working with satellite data your only choice will be to use what is available;  and often,  these data are in the Geographic projection, which unfortunately, doesn't preserve any of these map properties.
+
+ 
+
+The Geographic projection with an ellipsoid is a special case of lat-long or Plate Carree.  Its main use is to represent global data and it has a simple relationship between each pixel and corresponding latitude/longitude position. Shown on the map are green circles and ovals.  Prior to undergoing geographic projection,  these circles were of equal size. This illustrates the distortion that takes place when data is geographically projected. If you work at higher latitudes, you might want to consider other projections to minimize distortion.
+
+ 
+
+Here are other examples of global projections and their representative distortion.  ESRI has added the satellite projection of GOES-16/ABI to its list of supported projections.
+
+ 
+
+If your project requires shapes to be preserved,  a conformal projection such as Mercator or Lambert Conic should be used. If coverages across a map are to be compared, then a map that preserves areas such as Albers Equal Area or Sinusoidal.
+
+ 
+
+In this course, we are focusing on Level 3 and 4 data, which is only available in Geographic projection. This is acceptable in many cases but if you work with polar areas or need more accurate results, you might want to consider working with Level-2 data and projecting it using the most appropriate projection for your purpose. This would reduce distortion by projecting the data just once into your preferred destination mapping.
+
+ 
+
+In summary,  satellite data may be imagery or data. Data is required in order to utilize the satellite product in analysis. Most of the formats used for satellite products are GIS compatible,  but some considerations may be necessary regarding metadata, temporal/spatial binning, or projections.
+
+ 
+
+This concludes the Using Satellite Data in GIS Data tutorial.  The second part of this tutorial is about Tools that enable you to get data into GIS.  Visit the CoastWatch website for more information.

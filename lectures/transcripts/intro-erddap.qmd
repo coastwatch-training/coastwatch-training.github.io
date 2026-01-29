@@ -1,0 +1,97 @@
+---
+title: "Introduction to ERDDAP Transcript"
+format: html
+---
+
+Welcome to Introduction to ERDDAP, part of an online course on oceanographic satellite data products, produced by NOAA’s CoastWatch Program. My name is Cara Wilson, and I’m the node manager of the West Coast Node of NOAA’s CoastWatch Program. 
+
+ 
+
+Accessing satellite data, or any environmental data for that matter, can be challenging.  There are lots of different places to get data, and they all have different ways of organizing their data. Some let you subset the data or preview it first through visualization, but not all do.  Different servers can have different download protocols and different file formats. If you have to get multiple datasets from different places  it can be overwhelming, even to experienced data users.   In this presentation I will give a brief introduction to ERDDAP, a data server that tries to mitigate these issues. 
+
+ 
+
+ERDDAP was developed at the NOAA Southwest Fisheries Science Center by Bob Simons.  It provides a simple, consistent way to subset and download data.  The data can also be visualized in customizable graphs.  Data can be downloaded in over 30 formats, as both graphs and data.  ERDDAP is a restful service, meaning that the data requests are completely defined by a URL, which allows for easy access from computer programs like R or Matlab, as well as allowing machine-to-machine access.  Over 85 ERDDAPs exist worldwide. In this presentation I will show examples using the ERDDAP maintained jointly by the NOAA SWFSC Environmental Research Division and the West Coast Node of NOAA’s CoastWatch program. 
+
+ 
+
+The NOAA ERD  ERDDAP has over a thousand oceanographic satellite datasets on it, most of them having global coverage. Most products are available in daily, weekly or monthly composites.
+
+ 
+
+There is more than just satellite data on the ERD ERDDAP.  There are also in situ measurements from a number of different platforms and projects, underway data from NOAA and UNOLS research vessels and a variety of model data.  
+
+ 
+
+The main ERDDAP interface can be a little overwhelming at first. Datasets are listed alphabetically by their dataset title, seen here in the middle of the table.  Different columns of the table provide different information about the datasets, such as their metadata, source institution and the local dataset id.  If you want to download data from this interface you would click the data link to the left of the dataset title, which brings up a form that easily lets you subset the data temporally and spatially.  To create a graph of the data click on the graph column to the left of the dataset title, which brings up an online form that lets you customize a graph of the data.  We’ll see what these two forms look like on the next slides. 
+
+ 
+
+This is the ERDDAP graphing interface for gridded data. Data can be shown as maps, timeseries, and hovmollers, which is a hybrid map with either latitude or longitude on one axis and time on the other, to show both temporal and spatial variability.  I’ll show an example of one of these later in the presentation. The date and spatial boundaries of the map can all be changed by either manually entering values, or moving the slider bar under the dimensions listed. The map domain can also be changed by using the zoom in or zoom out buttons above the map on the right.  The ranges of the color are adjustable, as is the color palette, there are over 40 different palettes to choose from.   
+
+ 
+
+This is the ERDDAP Data Access Form for gridded data. You can select the temporal and spatial bounds by either directly entering values or by moving the sliders under the variable. If you access this form from the Make a graph page your spatial constraints will be copied across. By default the stride is set to 1, if you change this value, you will reduce the number of values you will obtain in that dimension.  If there are multiple variables in a dataset, like there are for this one, you can choose which ones you want to download by checking the variables you want.  Clicking on the dropdown list under file type gives you the list, partially shown here, of over 40 different file types. These graphical interfaces provide a user-friendly way to create a customized graph, or download data, but since all data requests are given as a URL, once can make changes by directly changing the URL.  To do that it helps to understand the grammar of the ERDDAP URL data request. 
+
+ 
+
+Here the text wrapped around the slide is an actual URL. I’ve marked different parts of it in different colors to help identify the different components. The red text marks the dataset id, the green text the file type, the purple text the variable name, the black text the time range and the blue text the latitude and longitude ranges.  So by simply reading this URL I can tell that it will produce a png image of SST for September 2019 in the North Pacific, which is shown on the next slide. 
+
+ 
+
+This is the map produced by the URL shown on the previous slide. Let’s modify the graph by making some changes to the URL.  Let’s first change the variable name from ‘sea surface temperature’ to ‘sea surface temperature anomaly’. 
+
+ 
+
+Now we see a map of the SST anomaly for this same time period.  The red values show the extent of the marine heat wave that has developed in the Pacific the last few years. Note that in this example changing the variable name produces an anomaly because this dataset has a variable within it with the SST anomaly in it.  Most datasets do not have an anomaly variable in them, so this specific modification will only work for this dataset. How long has this marine heat wave been around?  How can we see that graphically?
+
+ 
+
+We can determine how long this heat wave has been around by making a hovmoller graph, which is a hybrid map, with time on one axis.  We will take a cross-section along 30N and plot it over time.  We can do this on the “make a Graph” page by changing the Y axis from latitude to time. 
+
+ 
+
+Here we are looking at SST along 30N from 1985 at the bottom of the plot to the end of 2019.  We can see that while most of the last 20 years there have been warmer than usual temperatures in the Central Pacific, only since 2015 has this phenomena spread to the coast, as seen by the positive anomalies east of 120W in the upper right hand side of the plot.  
+
+You can also make just a simple time series of the data at one of the points. Select ‘linesAndMarkers’ under Graph Type on the Make a Graph page, pick the latitude and longitude that you want, and select the time range that you want. Here I am showing the complete dataset from 1985 onward of the SST anomaly in the Bering Sea at 60°N, 170°E.   
+
+ 
+
+Next, let’s take a look at Hurricane Katrina using QuikSCAT ocean winds data. The URL shown on this slide produces the map of  wind speed on Aug. 27, 2005 in the Gulf of Mexico.  But what if we also want to see the wind directions?  ERDDAP can also plot vector data, although it can not do overlays, so we will have to make another plot.  
+
+ 
+
+From the “Make a Graph” page we simply select vectors as the graph type. Note that the vector graph option is only available for those datasets that contain vector data. And now we can see the wind vectors associated with Hurricane Katrina in the Gulf of Mexico.  
+
+ 
+
+ERDDAP also serves tabular data like in-situ data.  Here we are looking at a map of all of the BGC-Argo data since the beginning of 2017 in the Southern Ocean around South America. These are profiling floats that are equipped with sensors that can make biological or chemical measurements like oxygen, nitrate, pH, etc.  This data is served on the PolarWatch ERDDAP.  Here the float locations are colored by time, but they could also be colored by float number, or any of the variables in the dataset. The Make a Graph interface works a little differently for tabular datasets, and one can constrain the data shown by any of the variables in the dataset.  Next we will look at some different graphs made from one of these floats. 
+
+ 
+
+By changing the constraint selections one can easily make maps and different types of graphs for tabular data. On the left is the float track for one of the SOCCOM Bio-Argo floats, color-coded by time. In the middle is a Temperature-Salinity diagram, color-coded by density, for that same float data, and on the right is a section plot showing oxygen in the surface 300 m for the 5-year duration of the float.  For the oxygen section a color palette has been chosen that is perceptually uniform.  
+
+ 
+
+So far I have been focusing on different ways of visualizing data on ERDDAP.  What if we want the data associated with one of these figures?  Lets revisit that URL I showed at the beginning of the talk when I introduced the different components of the ERDDAP data request.   This URL has the File type, the text in green,  given as a large PNG file, so it will create an image on your browser.  But if you changed that bit of the url to .mat it would produce a matlab file of that same data, which would be automatically downloaded to your computer.  There are many different file formats to choose from, including netCDF, .json, kml, csv etc.  Now since we were just looking at one time increment in this map, this url will only download one time period.  Most likely you will want to download a range of times, and that can be done by setting the time range to actually represent a range of values, rather than having it be only one time period as shown here. Talking about the time range reminds me of another cool feature of ERDDAP I need to tell you about, and that is the ‘last’ function that can be used in the time range.  
+
+
+
+
+If you replace a specific date in the url with the word last, you will get the most recent image.  That’s what we are showing on the left.  That url, in December of 2020, produced a map of the data from Nov 2020. If I access that same url in January of 2021 it should show me data from December of 2020. This is a very convenient way to embed images in a website to always show the most recent data for a region of interest.  You can also do simple math with the last function. The url on the right is requesting “last-24”, so is getting the data from 24 time increments before the most recent data.  Since this is a data product with monthly timesteps, that is getting data 2 years before the most recent data.  For a daily dataset last-24 will return data 24 days before the most recent data.  
+
+ 
+
+Now you might be thinking this is all very well and good, but there is no way you will ever be able to figure out how to put one of these long cumbersome URLs together. You don’t have to.  I have been showing the URLs associated with graphs to demonstrate how the URLs work. But remember you can download data directly from the Data Access Form for a dataset. You get there by clicking the data link to the left of a dataset title on the main ERDDAP data listing, or by  changing the filetype in the url to .html. The screenshot shown here is the Data Access Form for the sea surface temperature  product we were just looking at. If you just want the url of what this download request would be, to use in some other software, you can generate it by clicking on the “Just generate the URL” button. The “just generate the URL” feature is also available on the Make a Graph page. 
+
+ 
+
+I’ve provided a very quick introduction to ERDDAP capabilities. We also have an online tutorial which demonstrates the main features of ERDDAP. It is available at the link shown here, coastwatch.pfeg.noaa.gov/projects/ERDDAP  
+
+ 
+
+The previous slides showed examples of using ERDDAP's web pages to download data or make a customized graph. Since ERDDAP has an underlying RESTful service, one can make requests for data from programs like curl and wget, or by writing scripts which automate the process of making 100's, 1000's, or 1000000's of requests. We have an online tutorial that demonstrates ways to extract data from ERDDAP using R software. It is available at coastwatch.pfeg.noaa.gov/projects/r
+
+ 
+
+This concludes the Introduction to ERDDAP.  This is one of several presentations put together as part of the CoastWatch Ocean Satellite Course. 

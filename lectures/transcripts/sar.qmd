@@ -1,0 +1,110 @@
+---
+title: "Synthetic Aperture Radar (SAR) Transcript"
+format: html
+---
+
+Slide 1
+
+Welcome to the NOAA CoastWatch module on Synthetic Aperture Radar (or SAR). I’m Chris Jackson and I’m part of the NOAA’s Center for Applications and Research.  This module will go over the basics of what a synthetic aperture radar is and how it operates.  
+
+Slide 2
+
+So let's start the course by looking at a Synthetic Aperture Radar image.  At first glance it looks very similar to a black and white photograph but instead of recording reflected light, the variation in shading represents variations in the back scattered radar signal.  The slide shows a SAR image acquired over Hawaii on 29 May 2022.  The islands are clearly visible in light gray. The bright area over the ocean indicates an area of higher winds and the dark areas are the result of the wind being blocked by the island’s topography.  The imprints of some storm cells are also visible adjacent to the northeast of the Big Island.  This image was collected from the Sentinel-1 C-band SAR in VV vertical / vertical polarization. Later in this module I will explain what is meant by C-band and vertical polarization.    
+
+
+Slide 3
+
+This class consists of three modules. In this one we will give an overview of how a synthetic aperture radar operates.  In the module 2 we'll talk about some SAR data products and where you can get them then in module 3 we will go over imagery examples, pointing out some interesting features that have been observed in various SAR images 
+
+Slide 4
+
+In this overview of  Synthetic Aperture Radar we will talk about what a SAR measures,  why you might want to use it,  and how it differs from a regular radar.  We will go over the basic characteristics of frequency and polarization and provide an overview of the type of imagery they collect and where you can get access to it.  
+
+Slide 5
+
+SAR is useful for observing a variety of phenomena. Oceanic phenomena include ocean surface waves, surfactants like oil from an oil spill,  sea ice and internal waves.  Atmospheric phenomena are detectable by SAR when they interact with the ocean surface.  These include convection cells, rain cells and atmospheric gravity waves.  Ships and ship wakes are readily visible.  Land applications include identifying flooding and inundation or determination of land use.  There are many additional applications.  
+
+Slide 6
+
+As a remote sensing instrument SAR has several advantages compared to optical sensors: it provides data independent of lighting and cloud conditions, and it can cover a swath width of up to 450 km with relatively fine resolution.  And as we noted on the previous slide, it's useful for observing a wide variety of phenomena.  But SAR also has disadvantages:  it requires some expertise in order to be able to properly interpret the imagery features, and some specialized software in order to read and calibrate the imagery. In addition,  since the SAR is not “always on”, daily coverage is more limited compared to optical sensors like VIIRS which collect continuously.  But the traditional barriers of cost and data access have largely been overcome with the Sentinel-1 system launched by the European Space Agency in 2014. 
+
+Slide 7
+
+Radar is actually an acronym that stands for RAdio Detection And Ranging. Radar sensors transmit pulses and then listen for the backscattered echo, determining the distance (or range) from the time between the two.  Since the radar provides its own illumination it can collect data independent of lighting conditions.  The radar pulses at microwave frequencies allow for penetration through cloud cover.
+
+Slide 8
+
+A radar system is composed of a transmitter,a receiver and an antenna which allows the pulse to be sent out and then listens for the return echo.  A radar’s aperture is the physical area of the antenna.  Electronics on the system are responsible for creating a well characterized pulse and receiving and recording the echo of the backscattered signal 
+
+Slide 9
+
+A radar system records the portion of the energy reflected back to the antenna.  For smooth surfaces, the transmitted signal is mostly reflected away from the antenna.  You can visualize this by thinking about  shining a flashlight towards a mirror at an angle.  Almost all the light will be reflected in the direction the beam is pointed rather than back to the flashlight.  Rough surfaces allow a portion of the radar energy to be reflected back to the antenna. The measure of radar Backscatter is called the normalized radar cross section; 
+
+Slide 10
+Here's a SAR image that was acquired over the Gulf of Mexico on 10th September 2021. It shows how different surfaces reflect different amounts of radar energy.  The land in the image is bright because it's very rough and more energy is backscattered. The ocean surface has different shades of gray indicating the variation in radar return signal.  Oil spills and biogenics slicks are very smooth and so they appear very dark.  The image shows the boundary of an atmospheric front.  Behind the boundary to the north, high winds roughen the ocean surface and return more backscattered energy, but less than the land.  Ahead of the front, lower winds over the ocean result in a slightly darker shade of gray.  If you also look closely you can see very bright returns from the oil platforms that are on the surface of the Gulf.
+
+Slide 11
+As the previous slide shows, the  ocean surface appears in different shades of gray indicating the various amounts of radar backscatter.  SAR responds to roughness, more roughness produces more backscatter and thus a brighter return.  So where does the roughness on the ocean surface come from?  The answer is the wind.  The wind moves over the ocean surface interacting with the water and generating small capillary waves.  When the capillary waves reach the wavelength of the synthetic aperture radar (approximately  5 cm for C-Band) backscatter from the ocean takes place. This capillary wavefield is modulated by the various oceanographic and atmospheric phenomena allowing their signatures to appear on the SAR image 
+
+
+Slide 12
+The diagram shows a side looking radar on a satellite (all current SAR systems are side looking).  The direction in which the satellite travels is called the azimuth or along track direction.  The direction the antenna is pointing, perpendicular to the azimuth direction, is the transmission, or range direction. Spatial resolution in the range direction depends on the characteristics of the radar pulse, in particular the pulse bandwidth (the frequency range spanned by the radar pulse).  The larger the bandwidth the finer the resolution.  In the azimuth direction, resolution depends on the size of the antenna beam which is given by the wavelength divided by the physical length of the antenna.   The larger the antenna length, the finer the resolution.  . 
+
+The diagram shows a side-looking radar on a satellite.  In the direction parallel to the flight path, which is called the azimuth direction, spatial resolution depends on the radar wavelength divided by the physical length of the antenna.  In the direction perpendicular to the spacecraft flight, which is called the range direction, spatial resolution depends on the pulse bandwidth, in other words, the number of frequencies the radar pulse spans. The larger the bandwidth the finer the resolution. In real aperture radar systems the resolution in the range direction is on the order of meters, while the resolution in the azimuth direction is on the order of kilometers. 
+
+
+Slide 13
+In order to achieve Azimuth resolutions comparable to range resolution, the spacecraft would need an antenna several kilometers long.  Since this is physically unfeasible, signal processing is used to combine the many radar returns from the time an object is within the radar beam to improve the azimuth resolution.  By taking advantage of an object's Doppler shift, a larger antenna can be SYNTHESIZED, and an azimuth resolution comparable to the range resolution can be achieved.  This explains why it is called SYNTHETIC aperture radar. 
+
+
+Slide 14
+This slide shows the concept of a synthetic aperture length.  The spacecraft is moving from right to left.  At time t1, the location labeled “point target” crosses the leading edge of the antenna beam.  At time t2 the antenna is directly perpendicular to the target, and at time t3, the target crosses out of the beam.  The distance traveled by the antenna in the time between t1 and t3 is the synthetic aperture length.  For a SAR system with a beam width of a ¼ degree, this distance is approximately 3.5 km with the spacecraft in a polar orbit around 700 km altitude.       
+
+Slide 15
+To review, The SAR actively transmits a well characterized pulse.  The radar returns over the time an object remains within the antenna’s coverage are coherently combined to improve the along-track or azimuth direction resolution.  The distance traveled by the antenna in this time is the synthetic aperture length. 
+
+
+Slide 16
+Synthetic aperture radars can operate at a variety of frequencies.  Radar frequency bands  are designated by letters, and are shown here from lowest to highest frequency. The Sentinel-1 and Radarsat Constellation Mission  systems operate at C-band, approximately 5 gigahertz in frequency,  and with a wavelength of approximately 6 cm.
+
+Slide 17 
+The choice of radar wavelength or frequency depends on both the application of interest  as well as engineering considerations like antenna size and power requirements.  To date, all the satellite based SAR systems have operated between L-band and X-Band.  Lower frequency, longer wavelength radars are more applicable for land applications because of the many objects that appear “rough” at > 30 cm wavelength.   X-Band systems require a smaller antenna for the smaller wavelengths and can produce high resolution on the order of  1 meter in the range direction, but have a more limited image footprint.  C-band turns out to be a good compromise frequency requiring a medium sized antenna of approximately 12 m in length while also producing wider area coverage.
+
+Slide 18   
+This slide graphically shows the effect of wavelength on scattering.  High frequency X-Band signals scatter from small objects while lower frequency L-band waves scatter from larger objects.  The top row shows X-Band scattering from the tree leaves and L-band scattering from the tree trunks.  In the bottom row X-band can be seen scattering from the top of the snow pack while the L-band penetrates the snow  reflecting from the surface underneath, either land or sea ice. 
+
+Slide 19
+A basic characteristic of the SAR radar signal is polarization.   Polarization refers to the orientation of the electric field in the electromagnetic wave.  A SAR will transmit either a horizontally or vertically polarized wave. The system can then listen for backscatter in either the same polarization as it transmitted, called co-polarization or it can receive in the opposite polarization called cross polarization.  Co-polarization signals are either VV (vertical vertical) or HH (horizontal horizontal)  Cross polarization signals are VH (vertical transmit / horizontal receive or HV (horizontal transmit / vertical receive).  The amount of back scatter received in a particular polarization tells you something about the characteristics of the object being observed.
+
+
+Slide 20
+This slide shows a Radarsat-2 image collected in January 2020 over sea ice just off the north coast of Canada.  The radar transmitted both horizontal and vertical signals and recorded both horizontal and vertical returns.  
+
+Slide 21
+You can see the effect of polarization on scattering in the lower right quadrant of the image where the scattering from one portion of the sea ice is strong in the HH polarization but much weaker in the VV polarization.  This tells us that the sea ice in that area is different in some way to the sea ice in other parts of the image. 
+
+Slide 22
+Polarization and scattering are intimately connected.  The amount of energy back-scattered from an object is influenced by the polarization of the incident wave.  We saw this on the previous two slides where sea ice in certain areas returned a greater amount of the HH polarized wave compared to VV.  This slides provides some general rules with regard to polarization and backscatter.  SAR collections using multiple polarizations allow the user to determine additional information about the object being observed. 
+
+Slide 23
+
+We have talked about the concepts of synthetic aperture and backscatter as well as the basic radar operating parameters like frequency and polarization.  This slide shows how a satellite SAR, in this case Sentinel-1, takes its observations.  Sentinel-1 has three imaging modes: Stripmap, Interferometric Wide and Extended Wide. Stripmap mode has an 80 km swath that can be placed at different positions.  IW and EW modes each combine multiple beam positions to produce swath widths of 240 and 400 km, respectively .  Early SAR systems had only a single collection mode, but since Radarsat-1 launched in 1995, SAR systems have been designed to collect imagery using a variety of beam modes, which provide flexibility in terms of coverage area and resolution.
+For example, the Radarsat Constellation Mission has 11 different modes allowing the system to support operations from the monitoring of broad geographic areas to high resolution collections over very focused areas to support disaster response.         
+
+Slide 24  
+Unlike most optical sensors, for example VIIRS, MODIS or Landsat, the SAR does not operate 100 percent of the time.  Engineering constraints allow the system to collect data only over about 30 percent of every orbit.  The SAR collections are all scheduled in advance and the collection pattern will change from day to day.  Sentinel-1 for example is in a 12 day repeat orbit, which means its data collection pattern is basically the same every 12th day.   This was a big change to the way SAR collections were done in the past.  This slide shows the difference in the collections between Sentinel-1 and the VIIRS system on 29 March 2021.  It highlights the difference in total collection area.  Note that compared to VIIRS, the SAR has a smaller swath width but much higher spatial resolution.   
+
+
+Slide 25
+You can get Sentinel-1 data from the Coastwatch Website.  Go to the L1/L2 Spatial Search Tab and then click the radio button for S1A or S1B NRCS.  The imagery are available in NetCDF format and preview PNG images can also be found..
+
+
+Slide 26
+Imagery from a variety of SAR systems are available at the Alaska Satellite Facility through their Vertex search page. The user can filter the results on geographic region, on time, and on data format and collection characteristics (e.g beam mode).
+
+Slide 27
+Sentinel-1 SAR imagery is also available directly from the Copernicus Open access Scientific Data Hub.   The user selects the Sentinel satellite of interest and the data processing level, and can then search over a specific region and or time period.
+
+Slide 28
+A useful tool to get started working with SAR data in its native format  is the SNAP toolbox available from ESA.  The software allows the user to work with nearly all the data from the Scientific Data Hub and the Alaska Satellite Facility, performing operations like calibration or image subsetting.   
+

@@ -1,0 +1,130 @@
+---
+title: "Sea Surface Temperature Transcript"
+format: html
+---
+
+Welcome to the Sea Surface Temperature, or SST lecture, part four of an online course on oceanographic satellite data products that is produced by NOAA’s CoastWatch Program.  My name is Cara Wilson, I’m the node manager of the West Coast Node of NOAA’s CoastWatch Program.  The materials I will present in this video were produced from a collaboration from many members of NOAA’s CoastWatch Program including Dale Robinson, Melanie Abecassis, Ron Vogel, Shelly Tomlinson, me, and the late Dave Foley. 
+
+ 
+
+Measurements of SST provide fundamental information on the global climate system, including making accurate weather forecasts, studying marine ecosystems, and identifying the onset of El Niño and La Niña cycles.
+
+ 
+
+In this presentation, I will go over the definition of SST. I will discuss how SST is measured from space, including the use of both infrared and microwave measurements. Finally,  I will describe several of the level 4 SST products.
+
+ 
+
+SST is a difficult parameter to define because the upper few meters of the ocean  has a complex and variable temperature structure. This complexity and variability is due to changing solar heating, ocean currents, wind-driven surface mixing, and the air-sea fluxes of heat, moisture, and momentum. Let’s take a better look at what I mean by this.
+
+ 
+
+So what is SST? Well we know SST means sea surface temperature, so perhaps the better question is what Surface is being referred to when we say SST?  And the answer depends on the measurement. Infrared instruments measure to a depth of about 20 micrometers, called SSTskin, the symbols shown in red here, while microwave radiometers measure to a depth of a few millimeters, called SSTsubskin, the symbols in yellow. But there is more complication going on here as well. This plot is showing two schematic SST profiles for the same location, one during the day, where temperature varies in the top few meters of the ocean, and one at night where wind has mixed the surface resulting in  a homogeneous layer where the temperature is all the same, and can be considerably lower than daytime values.  If you were out here making measurements with a CTD from a ship your surface measurement would probably be at about  1 meter, roughly the green symbols on this plot , and would measure a different value that satellite measurements would.  The foundational temperature, shown here in blue, is the temperature that is unaffected by diurnal changes. These changes can be considerable, as we will see on the next slide. 
+
+ 
+
+This graph shows the diurnal variation in near surface temperatures with depth. The closer to the surface, the more variability is observed. At around 1-10m depth, the water temperature is no longer affected by the diurnal cycle. The temperature at that depth is called the foundation SST and can be estimated analytically from satellite measurements.
+
+ 
+
+As I’ve previously mentioned SST can be measured in both the infrared and the microwave. Infrared measurements have a higher spatial resolution, on the order of 1-5 km, but can not make measurements through clouds.Microwave measurements have a lower spatial resolution, around 25 km. They are generally not affected by cloud cover, but measurements are not possible close to the coast.
+
+ 
+
+This table summarizes the main types of SST sensors, infrared vs microwave, polar-orbiting or geostationary, along with their typical resolutions, resampling interval , accuracy, and cloud effect.
+
+ 
+
+Let’s talk about infrared measurements in more detail. SST has been measured using infrared sensors since 1978, it’s the longest running time-series of ocean satellite measurements.
+
+ 
+
+Remember that in the infrared, satellite sensors can “see” through the atmosphere only at specific wavelengths, or windows, which are represented by the yellow bands on this figure.
+
+ 
+
+However, as we saw in the 101 presentation, according to Plank’s law, there is a relationship between the temperature of the Earth, and its emitted radiation. For the range of temperatures on the Earth’s surface, the peak of the Planck function is around 10-12µm, which corresponds to one of the atmospheric windows in the infrared. The apparent temperature of the Earth’s surface is called its brightness temperature.
+
+ 
+
+However, as we saw in the 101 presentation, the emission from the Earth’s surface is affected by the atmosphere – it can be scattered or absorbed by atmospheric gasses and aerosols. Those phenomena end up attenuating the original signal as it makes its ways to the satellite sensors.
+
+ 
+
+As a consequence, the resulting Earth’s emission spectrum at an average temperature of 21ºC doesn’t quite match that of a blackbody of the same temperature, shown here by the red line. Instead, the energy emitted, which is highlighted here in light blue, is lower overall than it would be if there were no interactions with the atmosphere, and especially so at certain wavelengths.
+
+ 
+
+This is especially true when there are clouds in the field of view of the sensor. Infrared radiation is completely attenuated by clouds. So a critical step to measure SST from space is cloud detection. What we are seeing here is a map of the average degree of cloudiness for the month of January.  Values are greater than 50% over the entire ocean, so clearly dealing with clouds is an important part of ocean remote sensing! 
+
+ 
+
+Even in the absence of clouds, some of the EMR is absorbed by the atmosphere. It is then reemitted  at a temperature characteristic of that height in the atmosphere, which is cooler than the surface value we want to measure. So the Earth appears cooler than it would if the temperature was measured at sea level. This is called the temperature deficit and needs to be corrected.
+
+ 
+
+Most of the temperature deficit in the infrared is due to absorption by water vapor in the atmosphere. Other gasses are well mixed and cause a homogenous temperature deficit that is easier to correct. As can be seen in this image, water vapor concentration is very variable in time and space, and requires specific corrections.
+
+ 
+
+To sum up, SST can be measured from space in the infrared, and to obtain accurate measurements, several steps are needed to process the raw data received from satellites. Those steps are: sensor calibration, cloud detection, atmospheric correction and SST-specific algorithms.
+
+ 
+
+Satellites have been measuring SST in the infrared  since 1978. We now have multiple concurrent measurements, from geostationary and polar-orbiting platforms. This allows scientists to blend observations from multiple satellites to create SST products that are more accurate and gap-free.
+
+ 
+
+Satellite measurements of SST using microwaves sensors have been in the tropics since 1999, and globally since 2002.
+
+ 
+
+Remember that in the microwave wavelengths, there is almost no atmospheric absorption of EMR. However, the intensity of the Earth’s surface emissions in the microwave is much lower than in the infrared.
+
+ 
+
+As a result of that low intensity, microwave instruments need to carry large antennas in order to capture enough signal from the surface. And in the microwave, the instruments are more limited by diffraction which spreads the EMR over a broader area and blurs the image. So the spatial resolution of microwave instruments is around 25-50 km.
+
+ 
+
+Because the emissivity of land and ice in the microwaves is much higher than the emissivity of the ocean, measurements close to the coast are contaminated by the land signal. As a consequence SST from microwave instruments is not available within about 25 km of the coasts. However, a huge advantage of microwave measurements is that they are not affected by cloud cover, which makes those observations a very important complement of infrared measurements, especially in regions with persistent cloud cover.
+
+ 
+
+Microwave SST measurements are currently only available on polar-orbiting satellites and we now have several concurrent observations.
+
+ 
+
+Remember from the 101 presentation that there are several levels of data. In this course, we are focusing only on level 3 and 4 products. These are products containing geophysical variables or derived variables that are mapped onto uniform space-time grid scales. 
+
+ 
+
+But with so many SST products available, which should you choose for your project? As with anything in life, you can’t have it all. Each product has its advantages and its drawbacks. You can find products that have the highest resolution and are based entirely on reliable satellite observations, but they can have data gaps due to cloud cover and incomplete spatial coverage between satellite swaths. You can find products that are based entirely on reliable satellite data that are almost gap-free, but they will usually be weekly or monthly composites and have a lower spatial resolution. Alternatively, you can find high-resolution level 4  products that are gap-free because they combine observations from multiple satellites and include an interpellation processing step to fill in the data gaps. Typically, such products don’t tell you which pixels are derived from observations and which from interpellation. 
+
+ 
+
+Here is a list of the most popular Level 4 SST products currently available, with some of their characteristics. I will go over the last two in a bit more detail.
+
+ 
+
+The daily NOAA GeoPolar blended SST is available from 2002 to the present, has a spatial resolution of 5km, and is interpellated to be gap-free. It’s available as night-time only, daytime only, or a daytime and night-time average, which allows users to look at diurnal variation if needed. The product is also available in near real-time and science quality versions. The daily MUR SST from NASA is a 1km product, available from 2002 to the present, and is gap-free. 
+
+ 
+
+This figure shows a few examples of level 3 and level 4 SST over the same area on the same day to get you thinking about the pros and cons of various products based on your needs. You can think of the level 3 SST as the “truth”  where there is data.These are the top 3 images.  They are  pretty accurate, high-resolution observations, but quite a bit of data is missing. The 3 bottom images are level 4 products that attempt to fill in these gaps. The MUR product, shown on the left,  is very high-resolution, and where there is data, does a really good job at reproducing the observations, but where there is no data the image can become very blurred. The OSTIA product on the right is the same resolution as the geopolar blended product in the middle, but the OSTIA product  appears more blurred. The GeoPolar and OSTIA products do not capture many of the fine features present in the top images. This is partially due to the lower resolution of the of these two L4 products, which are 5 km, and partially due to the interpellation process. Although it’s the same resolution as the GeoPolar Blended product, more of the features of the SST field appear to be lost with the OSTIA product. The results shown in this example are unique to the time and place of the image we selected. Therefore, when selecting a dataset for your application it’s good practice to select a few products and compare them for several time steps and regions. 
+
+ 
+
+In this example for the Monterey Bay region, you can see that sometimes, higher resolution products like MUR can actually have a harder time at reproducing the overall patterns in SST, compared to the GeoPolar Blended or OSTIA. So be sure to look at different products for your region. 
+
+ 
+
+Finally, when choosing a product, you can also compare the quality of different products using the NOAA SST Quality Monitor. You can compare them against each other or against in-situ observations from buoys and ships.
+
+ 
+
+So lets review some of the important aspects of satellite SST measurements.  SST measurements are made in different part of the EMR spectra, in both the infrared and also in the microwave.  Infrared measurements, which are more common, have a higher spatial resolution, but are blocked by clouds.  Microwave measurements get fuller coverage since they can see through clouds, but have reduced spatial resolution and can not be made close to land.  IR SST measurements are also made from geosynchronous satellites, which can make measurements sub-hourly, and can thus mitigate the cloud issue. There are a number of products that blend these different SST data together. It’s important to compare how these different datasets perform in your region of interest to determine which one is best suited for your project.    
+
+ 
+
+This concludes this presentation on sea surface temperature.  This is one of several presentations put together as part of the CoastWatch Ocean Satellite Course. We have additional presentations that cover how measurements are made for ocean color, and for measurements made in the microwave, i.e. altimetry, salinity and wind.  

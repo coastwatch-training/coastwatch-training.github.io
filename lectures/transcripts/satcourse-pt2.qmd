@@ -1,0 +1,80 @@
+---
+title: "Satellite 101 Part 2 Transcript"
+format: html
+---
+
+Welcome to Part 2 of Satellite 101, part of an online course on oceanographic satellite data products, produced by NOAA's CoastWatch Program. My name is Cara Wilson, I'm the node manager of the West Coast Node of NOAA's CoastWatch Program. The materials that I will be presenting in this video were produced from a collaboration from many members of NOAA's CoastWatch Program including Dale Robinson, Melanie Abecassis, Ron Vogel, Shelly Tomlinson, me and the late Dave Foley.
+
+ 
+
+In Part 1 I gave an overview of available oceanographic satellite products and presented the different types of orbits, resolutions and spatial coverages and other general information. In this presentation we will get into some of the nitty gritty details about how satellite measurements are made. I will discuss how light propagates through the atmosphere and water column, and back out to the satellite sensor. I will introduce the different types of sensors and get into some of the details of how measurements are made. We also have additional presentations that go into greater detail about how certain measurements and products are made.
+
+ 
+
+As satellites fly over a region of the ocean, its sensors record light, or electromagnetic radiation, within its field of view. The radiation measured by the satellite has either been emitted by the ocean, or has been emitted by the sun and reflected by the ocean. In both cases the radiation passes through the atmosphere before being received by the satellite sensor. There are multiple processes that can affect the signal as it passes through the atmosphere. 
+
+ 
+
+The atmosphere between the satellite and the ocean surface has big impacts on the signal that we want to measure. It can scatter or absorb the energy so that it is not detected by the sensor. Scattering of the energy can also result in detection of energy that is not coming from the ocean, and needs to be accounted for. Accounting for the absorption and scattering of energy in the atmosphere is part of the atmospheric correction process that is undertaken as part of creating usable products. A lot of corrections are necessary in order to obtain accurate estimates of the ocean phenomenon that we are measuring. 
+
+ 
+
+Let's talk about electromagnetic radiation, or EMR, in more detail. As energy is emitted from the sun and the surface of the Earth, photons travel at different wavelengths. The EMR spectrum is divided into bands by wavelength ranges. Wavelength bands useful for remote sensing are in the visible, infrared (IR), and microwave wavelengths, which is the area indicated by the shaded box on this slide. 
+
+ 
+
+Planets and stars emit radiation, called black body radiation. There is a close relationship between the spectrum of the light they emit and their temperature. The lower their temperature, the weaker the intensity of the light they emit, and the higher their peak wavelength, as can be seen here in the graphs of emission intensity versus wavelength for a number of different temperatures. 
+
+ 
+
+If we compare the sun's emission vs the earth's emission, we can see that because the sun is much warmer than the earth, the intensity of its light is much higher, and its spectrum peaks in the visible, whereas the Earth's emission peak is at longer wavelengths in the thermal infrared, with a much weaker intensity. The light that is received by the satellite sensors is a combination of the two and their interaction with the atmosphere. 
+
+ 
+
+Earth is not a perfect black body, meaning that other properties aside from temperature impact how effectively radiation is emitted from the earth. Emissivity is a measure of how effectively an object emits thermal energy. And we can take advantage of the changes in emissivity to measure different properties in the ocean. For example, while water and sea ice have a similar emissivity in the infrared, their values in the microwave portion of the spectrum are very different, allowing for differentiating sea ice from water. 
+
+ 
+
+The influence of the atmosphere depends on the wavelength of electromagnetic radiation. The atmosphere is opaque to radiation at many wavelengths, due to the absorption by atmospheric gasses, these are the areas shown in black on these graphs. There are only certain wavelengths through which radiation may be fully or partly transmitted. Remote sensing focuses on those transmission ranges, the so-called atmospheric windows, which are the non-black regions. 
+
+ 
+
+Transmittance is the opposite of absorption. Where there is a little absorption, there is high transmittance. Satellites can see the earth, through the atmosphere in the regions of high transmittance, the white areas on this figure. X-Ray and shorter Ultraviolet wavelengths are almost totally attenuated, therefore these EMR bands are less relevant for remote sensing. In the visible wavelengths, where the sun emits at the highest intensity, the atmospheric transmittance is high. At higher wavelengths, transmittance is reduced to narrow bands. This includes the optical windows in the thermal infrared, where the Earth's surface emits radiation. In the microwave, the atmosphere is nearly transparent, but radiation from the sun and earth is weak, so we need large antennas to collect enough radiation. 
+
+ 
+
+As I mentioned earlier, sensors measure electromagnetic radiation that is either reflected or re-emitted from the ocean. Light from the sun passes through the atmosphere and if it reaches the ocean surface it may reflect off of the surface or pass through it. Photons entering the water will either be scattered or absorbed. If absorbed, phytoplankton, non-algal particles, colored dissolved organic matter, called CDOM, or water itself will absorb the light. If scattered, it will do so in either the forward or backward direction. If in the backward direction, some of it will be re-emitted from the sea surface and will be detected by a sensor. We are interested in the remote sensing reflectance, at specific wavelengths, and from these we derive the concentration of chlorophyll and other products. More details are given about this in our presentation on ocean color. 
+
+ 
+
+Ideally, we want to measure all of the signal within the sensor s footprint or field of view. In reality, not all of the signal makes it to the sensor. In addition, stray emissions from outside the footprint add noise to the signal reaching the sensor. In the diagram, the rays in green show the fates of the signals coming off the ocean that we want to measure. Some of the rays make it to the sensor. Others are either absorbed by the atmosphere or scattered out of the sensor's field of view. The red rays represent the stray radiation reaching the sensor from outside its footprint on the sea. Atmospheric corrections are needed to account for the missing signals, and remove the extraneous ones. 
+
+ 
+
+Some of the atmospheric components that scatter or absorb the ocean signal are well-mixed, like oxygen and nitrogen, but others are not. The distributions of water vapor, ozone and aerosols are very heterogeneous, and these components must be measured in order to correct for their impact on the satellite signal. 
+
+ 
+
+So to sum up, a lot of different processes that affect EMR need to be accounted for and corrected for, in order to get accurate measurements. This course focuses on the application of the finished products, but recognizes that it's important to understand a bit of the sausage making that has gone into the generation of these products. 
+
+ 
+
+Depending on the application they were designed for, sensors measure different parts of the electromagnetic spectrum. There are sensors that operate in the visible, the infrared, and microwave sensors, including radar instruments. Sensors target specific wavelengths depending on their application. Some products can only be measured in one part of the spectrum, for example ocean color can only be measured in the visible, whereas sea-surface temperature measurements can be made in both the infrared and the microwave portions of the spectrum. 
+
+ 
+
+This slide maps out examples of the sensors and applications that are each part of the spectrum. In the yellow box are sensors that operate in the visible, which include SeaWIFS, MODIS, and VIIRS, the primary sensors for measuring ocean color. From ocean color measurement we can derive chlorophyll concentrations, turbidity and a whole suite of other products. Measurements of sea ice are made in both the near-IR and in the microwave. Other measurements made in the microwave include sea surface height, currents, wind, salinity and temperature. 
+
+ 
+
+There are two basic technologies used for satellite sensors. Passive sensors detect radiation from two natural sources, the sun and the earth. Active sensors measure signals that are reflected back from a pulse of energy sent down by the sensor. Most of the sensors used for oceanographic remote sensing are passive. Examples of active sensors are altimeters, scatterometers, lidars, and radars. This is an animation illustrating those two concepts.
+
+ 
+
+It takes time to do all the processing necessary for atmospheric correction as well as performing quality-control. Science quality data has undergone rigorous processing and, depending on the product, can have latencies between a few weeks to a few months. For analyzing trends over time it's best to use science-quality data. However, some applications need data as soon as possible. To accommodate this need, some products are also offered as near-real time products, with a latency of hours to days after collection. Near-real time products have undergone a less rigorous processing and so should be used with caution. 
+
+ 
+
+This concludes part 2 of the Satellite 101 presentations. We have additional presentations that go into greater details about how measurements are made for ocean color, sea-surface temperature and altimetry, winds and salinity.
+
+

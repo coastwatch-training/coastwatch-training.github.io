@@ -1,0 +1,100 @@
+---
+title: "Ocean Color Transcript"
+format: html
+---
+
+Welcome to the Ocean Color portion of our online course on oceanographic satellite data products, which has been produced by NOAA’s CoastWatch Program. My name is Shelly Tomlinson and I’m the node manager of the East Coast Node of NOAA’s CoastWatch Program. The materials I will present in this video were produced from a collaboration from many members of NOAA’s CoastWatch Program including Dale Robinson, Melanie Abecassis, Ron Vogel, Cara Wilson, myself, and the late Dave Foley.
+
+ 
+
+Ocean color estimates through remote sensing have revolutionized our understanding of the living ocean on small to global scales, and provide important information for daily monitoring and long-term trend analyses. Ocean color refers to the “color” of the ocean as determined by the interactions of incident light with substances or particles present in the water. These measurements reveal many ecologically important parameters related to chlorophyll concentration, phytoplankton bloom monitoring, primary productivity, sediment transport, the dispersion of pollutants, responses of oceanic biota to long-term climate changes, and water clarity and quality, to name a few. 
+
+ 
+
+The way an ocean color sensor works is by measuring the electromagnetic energy that passes through the atmosphere, is transmitted through the surface of the ocean and then reflected back to the satellite. The electromagnetic spectrum usually used for ocean color algorithms include the visible wavelengths from 400 nm to 700 nm (blue to red), some infrared wavelengths and higher wavelengths for atmospheric corrections. As the atmosphere causes the most scattering and absorption of the light from the sun (Downwelling Irradiance, Ed), you will often hear that an “Atmospheric correction” must be applied to the measurements we use for algorithm development. This is to remove the effects of the atmosphere. As the light is transmitted through the water column, there are both absorbing materials (which can be the water itself plus pigments from phytoplankton, dissolved organic material and other particles containing absorbing compounds such as detritus. In addition, particles can scatter the light, preventing it from returning to the satellite. This can be sediment,  organic matter, as well as detritus and phytoplankton. So what the satellite measures, the Water Leaving Radiance (Lw) at each wavelength of light, is actually measuring a combination of what was returned from the water column as a result of the scattering and absorption properties. You often see what is referred to as Remote Sensing Reflectance, Rrs, which is water-leaving radiance, Lw(λ), corrected for bidirectional effects of the air-sea interface and sub-surface light field, and normalized by downwelling solar irradiance, Ed(λ), just above the sea surface. 
+
+ 
+
+So, what affects the variations in color within the ocean? First of all, I should mention that what the satellite is seeing is what is called the first optical depth, which we tend to associate with about a secchi depth. So it cannot see all the way to the bottom in turbid or deeper waters. The color you see is related to these absorption and scattering properties. So for instance, far offshore the water appears very blue. This is because the water has less absorption in the blue wavelengths (400) as there is less dissolved organic matter from land, and less phytoplankton and chla, which absorbs blue and red light. There are also less scattering particles , such as sediment, in the red wavelengths (600-700 nm) which would cause red reflectance back to the satellite. So as you move closer to the coast, the increase in absorbing and scattering particles causes the blue Rrs to go down, as the red Rrs increases. The relative combination of these various scattering and absorbing materials is what affects the color of the ocean in different regions.
+
+ 
+
+So, when looking at just the effects of chlorophyll a (chla), which can provide an estimate of the amount of phytoplankton in the water, you may often hear of blue-green ratios. Common ocean color algorithms look at the changes in the blue to green peaks in the reflectance spectra to determine the concentration of chla in the water. So from this figure, you can see that as the chla increases in concentration, the reflectance is decreasing. This is the result of an increase in absorption by chla.  You can think of reflectance as the inverse of absorption, so when there is more absorption occurring at a specific wavelength, there is less reflectance back to the satellite of that wavelength of light. One thing also to note is that there is a peak occurring around 680 nm which becomes more predominant as chla increases. This is related to a peak in chlorophyll a fluorescence.
+
+ 
+
+As I mentioned earlier, the atmosphere is responsible for about 90% of the signal measured by the sensor. So if only 10% of the signal returning back to the satellite is coming from the water, it is very important to provide an accurate atmospheric correction. This becomes even more important in coastal or estuarine areas, as the signal gets more complicated by the increased scattering and absorption closer to land. 
+
+ 
+
+We often refer to clear open ocean water as Case 1 or optically deep water, whereas Case 2 waters, or optically shallow,  tend to be more complex due to influences from land. Ocean color algorithms in Case 1 waters are more straightforward as the absorption is primarily due to phytoplankton and their derivative products. In case 2 waters, there is much more absorption at all wavelengths due to absorbing compounds (dissolved and particulate matter such as Colored Dissolved Organic Matter (CDOM), phytoplankton, detritus, etc). There is also more scattering as a result of sediment from land and  these other particles.
+
+ 
+
+So, given all of these absorbing and scattering characteristics, satellite bands are selected to try to capture these changes in the optical signature. For example, Colored Dissolved Organic Matter (CDOM), often called gelbstoff absorbs in the blue wavelengths, as does chl a. Chlorophyll a also absorbs in the red wavelengths, which is why plants and phytoplankton often appear green. Pure water absorbs more in the red wavelengths. For those of you who are divers, this is why the deeper you dive the fish and coral will look more blue and start to lose the red colors first. There are also various accessory pigments in phytoplankton with different absorption peaks. There are efforts to use these differences to separate out various phytoplankton types.
+
+ 
+
+So, for example, this is showing the various reflectance peaks due to the effects of CDOM absorption, chlorophyll absorption and fluorescence. The atmospheric correction is calculated using the infrared bands. The colored boxes represent the individual bands for each satellite sensor, and also show the width of each band. For detecting certain characteristics, it is important to have narrower bands for certain features,  as the light returning back to the satellite is averaged within those wavelengths.
+
+
+
+
+Sunglint can be a problem when using ocean color imagery during certain times of the year.. The angle of the sun can cause a mirror reflection off the sea surface that causes the reflectance to increase at all of the wavelengths. This usually makes the imagery unusable when this happens. However, sunglint can be used to identify oil, due to its reflective nature.
+
+ 
+
+There are a suite of ocean color products available from NOAA’s CoastWatch Program. Some are available globally from the various satellite sensors, whereas others are more regional in nature. Normalized water-leaving radiance is available for all of the visible wavelengths. Various chlorophyll a products are available, with regional algorithms in some locations. Kd490, KdPAR and turbidity can aid in assessing water clarity. NOAA ocean color processing includes a QA score which assigns a 0 to 1 score to each pixel, where higher values indicate a likely reliability of the measurement.  Through the CoastWatch regional nodes various products are available such as Harmful Algal Bloom products, total suspended sediment, phytoplankton composition and primary productivity, to name a few.
+
+ 
+
+Briefly, Kd490 (the vertical attenuation coefficient for downward irradiance at 490-nm) describes the rate of change of Ed490 (downward irradiance at 490-nm) with depth. In other words, it is a measure of the loss of blue light which is related to the absorbing particles in the water column. It is inversely proportional to the clarity of the water (the higher Kd490 is, the lower the clarity of the water). 
+
+ 
+
+There is also a product called KdPAR  (PAR stands for Photosynthetically Active Radiation) which measures the attenuation of light available for photosynthesis. PAR covers the light in the visible (400-700 nm) portion of the spectrum. KdPAR can be estimated from satellites using Kd490 and some general assumptions. PAR is an important parameter in marine primary productivity models. As with Kd490, the higher the KdPAR value, the less visible light which is available for photosynthesis.
+
+ 
+
+Primary productivity is a measure of the rate of carbon fixation by the phytoplankton during photosynthesis. Primary production can be estimated from satellite using chlorophyll a, PAR, Sea Surface Temperature and daylength, and is an important parameter as input to ocean biogeochemistry and fisheries models.
+
+ 
+
+The measurement of phytoplankton size classes and functional groups from remote sensing imagery is an emerging field that is limited by the spectral resolution of the current ocean color sensors.  New sensors look to increase the spectral resolution, thereby expanding our capability to better distinguish phytoplankton groups in the sea. We also have models that incorporate several remote sensing products to estimate total primary production, but we need to derive how much of the production is from each size class.
+
+ 
+
+In the Chesapeake Bay, Total Suspended Matter (TSM) is available at 250 m spatial resolution, using a regional algorithm developed by Ondrusek et al, 2012. The algorithm is applied to the MODIS high resolution bands at 250 m resolution, on a daily basis. These products provide a spatial overview of turbidity patterns, and due to the high spatial resolution, can provide information on turbidity plumes in the tributaries. 
+
+ 
+
+Other regional products include a suite of experimental bloom products for the Chesapeake Bay. Efforts are underway to validate these products with field collected data from the Chesapeake Bay program. While a prototype website has been developed at CoastWatch to deliver these products for the Bay, we plan to extend delivery of these OLCI products for other coastal regions. Several algorithms are being applied for Chlorophyll a, using a ratio of NIR to Red bands, which is less influenced by sediment and CDOM in coastal areas. An additional Red Band Difference algorithm (RBD) provides a fluorescence product which is useful for detecting high biomass blooms. We are also providing a low-non-fluorescing product as it tends to highlight dinoflagellate blooms of several harmful species. There are several theories as to why this happens, either due to a switch to mixotrophy, when the cells aren’t releasing energy from photosynthesis through fluorescence, or due to low irradiance during winter or high turbidity conditions. A maximum chlorophyll index is also being applied to higher resolution Sentinel 2 imagery, to help resolve harmful cyanobacteria blooms in smaller lakes.
+
+
+
+
+This figure demonstrates the current set of ocean color satellites provided by the CoastWatch program. Historical data going back to 1997 from SeaWiFS are available for short-term climate studies. MODIS-Aqua was then launched in 2002, and has been supporting ocean studies ever since. Unfortunately, this sensor is past its design life and has begun to deteriorate. The VIIRS-NPP and NOAA-20 satellites are NOAA’s operational ocean color satellites and support global ocean color monitoring. While the European MERIS sensor, which supported higher resolution ocean color with a set of bands conducive to work in coastal regions, stopped working in 2012, the Sentinel 3 series started in 2016, with follow-on launches every 2 years, to provide 300 m data on a global scale. 
+
+ 
+
+Efforts are underway to merge chlorophyll a products to develop a time-series for climate applications in order to assess long-term trends in ocean  ecosystems. The European Space Agencies Climate Change Initiative have developed a long-term time-series of satellite chlorophyll spanning the SeaWiFS, MODIS, MERIS and VIIRS launch periods. This dataset is available from 1997 in weekly and monthly merged products on the West Coast and Central Pacific Node data servers. 
+
+ 
+
+Developing a long-term ocean color time-series isn’t easy, as there are gaps in the datasets, and often one satellite may overestimate chlorophyll while others are lower. Therefore, it is necessary to adjust the various ocean color satellite datasets to provide a consistent dataset over time, and to avoid anomalous jumps in the data due to the sensor’s retrieval rather than real climatological changes.
+
+ 
+
+The ESA CCI dataset attempts to adjust these ocean color time series to provide a more accurate assessment of ocean color trends over time.
+
+ 
+
+Most ocean color sensors used to monitor conditions in the U.S. are provided by polar-orbiting sensors. This limits the temporal resolution of the imagery, as these produce a single image per day. Also, ocean color sensors cannot see through clouds, so while daily imagery is available, they may be obscured during cloudy conditions, as well as when glint occurs. Therefore, there is a need for higher temporal resolution from geostationary sensors. The GOCI sensor has been providing OLCI-like spectral bands over Korea since 2010, at 250 m resolution. In the US, a research geostationary satellite, the Geosynchronous Littoral Imaging and Monitoring Radiometer (GLIMR) is expected to launch in 2027. This will provide high temporal resolution over the Gulf of Mexico, parts of the East Coast and South America, at almost hyperspectral spectral resolution. 
+
+ 
+
+The Plankton, Aerosol, Cloud, ocean Ecosystem (PACE) program is expected to launch a hyperspectral polar orbiting sensor in 2022. There are high expectations for this satellite sensor, as it will provide more information related to phytoplankton pigments to further tease out optical signatures, important to separating phytoplankton functional groups, address coastal biology and physiology, assess particle sizes and to improve absorbing aerosols near land and atmospheric correction properties.
+
+ 
+
+So, in summary, when we discuss ocean color imagery, we are generally talking about the visible portion of the electromagnetic spectrum. One caveat is that ocean color imagery cannot see through clouds, and is unavailable at night. Given that 90% of the signature pertains to atmospheric effects, having a robust atmospheric correction is extremely important. There are a suite of ocean color products looking at pigments, phytoplankton blooms and productivity, water clarity and quality. Many of these are regionally based, especially in coastal areas, while there are other products which are available on a global scale. Care must be taken when using data in Case-2, coastal regions, which is why regional algorithms are necessary. The most recent U.S. ocean color sensor, VIIRS, was first launched in 2011, with a subsequent launch aboard NOAA-20 in 2017. While several polar orbiting ocean color sensors have been launched starting with SeaWiFS in 1997, with MODIS and VIIRS following afterwards, long-term time-series are available by leveraging imagery from both US and other global satellite launches, such as the European satellites MERIS and OLCI, to begin to look at climatic changes in the ecosystem. In addition, each satellite has advantages and disadvantages based on their spatial, temporal, and spectral resolution, therefore, it is important to understand the limitations of the products before selecting imagery to address your particular oceanographic question.

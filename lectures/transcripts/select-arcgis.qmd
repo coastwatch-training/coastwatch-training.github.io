@@ -1,0 +1,114 @@
+---
+title: "Selecting and Using Data in ArcGIS Transcripts"
+format: html
+---
+
+This training is one part of several tutorials within the NOAA CoastWatch Satellite Training Course.  The GIS tutorials consist of 3  modules and although the screenshots and examples use ArcGIS,  the principles apply to any GIS software packages.
+
+ 
+
+ In this module,  we will cover tools or methods in bringing satellite data into the GIS.
+
+ 
+
+In the Data module,  we saw there are essentially two types of satellite products –  imagery and data.  In most cases for analysis, we're wanting to bring in the data and there are multiple ways of doing this by leveraging hooks built-into the GIS,  added extensions, or external data preparation software such as the CoastWatch Utilities. 
+
+ 
+
+Since data will usually become a raster layer within the GIS,  the Spatial Analyst extension is quite useful in interacting with the raster layer. In addition, the NOAA Environmental Data Connector is tailored for extracting multidimensional data from online services such as THREDDS/ERDDAP. The CoastWatch software provides functionality to reformat satellite data from the scientific data formats HDF or NetCDF to GeoTIFF,  export data to CSV,  and additional features including mapping, masking, and compositing data.
+
+ 
+
+Let's first look at some of the built-in features of getting satellite data into ArcGIS.  In most cases we're discussing NetCDF files or service-provided data -- where NetCDF is usually the underlying source format.  These methods also work with HDF files. ArcMap allows you to add data using services such as WMS & WCS .  Drag-n-drop.  The Multidimension Toolbox supports the import by file or service (OpenDAP), and in some versions of ArcGIS you can use Python or Jupyter notebooks to work with data.  
+
+ 
+
+Looking more in depth,  to access the WMS or WCS service  you use the Add Data icon.  A web mapping service (WMS) returns a map or image whereas the web coverage service (WCS) returns data values. These services work OK for a single image and time step, but can be network intensive as each Pan/Zoom/Identify (or PZI) event in the GIS requires a refresh. Both of these services require a GetCapabilities URL from which to dynamically self-configure.  And although the THREDDS and ERDDAP servers in NOAA have those services, it's not always easy to find the URL associated with specific datasets. Additionally WMS and WCS do not handle time series. 
+
+ 
+
+And even when it looks like it's going well,  you may encounter errors.
+
+ 
+
+Probably the easiest way of adding a datafile to the GIS is simply dragging a downloaded file and dropping it into the map view.  If the file contains metadata and the variable or parameter (i.e.  Turbidity)  of interest is the first listed,  you will then just need to add symbology and enable time -- if warranted.  
+
+ 
+
+If the file contains more than one variable,  you will most likely need to use another way like the multidimension toolbox. 
+
+ 
+
+One of the tools within the multidimension Toolbox is the 'make OpenDAP Raster Layer.'  This is essentially the ArcMap version of a THREDDS OpenDAP page or ERDDAP GRIDDAP page. You merely enter the base url of the OpenDAP service for your desired data -- again, not always easily found-- enter the variable and any subset information and it'll import the data. I've had mixed results with this tool,  but when it works it does a good job.  You will need to add some symbology and enable time to maximize its usefulness and enable time.  .  Because this  requests data from external OpenDAP service,  it's similar to WMS or WCS in that there are some server-side limitations that may cause the tool to fail or to be too slow to be practical.  We'll talk more about OpenDAP later.
+
+ 
+
+Make NetCDF Raster Layer is the most reliable method of ingesting NetCDF data.  You will first need to download the data from whichever source you identified, which can be, THREDDS or ERDDAP, and save it to your computer in the netcdf format. Once the data are imported using the Make NetCDF Raster Layer tool,  you will need to add some additional configuration to fully utilize the data.
+
+ 
+
+After importing and once the Raster Layer has been added to the map view,  you'll need to use Layer Properties  (just a right-mouse click) on the layer to open the dialog. First, adjust the symbology.  This is the assignment of a color ramp to data values.
+
+ 
+
+Next,  use the NetCDF tab to  ensure the X and Y point to the correct variables and that if applicable,  time is included as a dimension.
+
+ 
+
+Finally,  if applicable,  enable time under the time tab.  You will probably need to adjust the time stop interval and go ahead and click the Calculate button to verify the time extent. Click Apply or Ok and return to the map view.
+
+ 
+
+To make use of the temporal range of the data,  enable the Time Slider by clicking the icon.  The slider can be used to view a particular time step or generate an animation of the data over time.
+
+ 
+
+To retain the data,  you need to store it in a geospatial database.  Right-mouse-click on the layer, select Data and ExportData to open the dialog. Set the geodatabase for your project or leave as the default and export the data.  It may pass back to your map view.
+
+ 
+
+So, in summary above the line,  we see the two most reliable methods to get data into ArcMap are Drag-n-Drop and Multidimensional Toolbox. Let's look next at the Environmental Data Connector. 
+
+ 
+
+The EDC bridges the online service and file import by providing a GUI to connect to the service.  What this means is that you only need to give it a high-level THREDDS/ERDDAP URL and then find the dataset -- in a user-friendly way --  to import into your GIS. The tool can be downloaded from the CoastWatch West Coast Node and the URL is included again at the end of this presentation. A user guide is also available.
+
+ 
+
+But first, you need to install the add-on.  The Installation will create a standalone directory for programs and interim output data.  On managed systems, it's best to install as an admin for a single-user.  If that is not permitted,  then the output directory permissions will need to be set or linked for user access. Once installed properly,  it will have added a Menu item to ArcMap,  though it can be run as a standalone to fetch data. If all works well,  the tool will fetch data, import as raster,  add default symbology, add data to the geospatial database,  and load a custom time slider that shows the temporal overlap if multiple data time series are loaded.
+
+ 
+
+The tool is activated by clicking the EDC menu item.  The EDC dialog opens and when a URL is connected,  the data listing will appear on the left.  Once a dataset is selected,  the URLS are available or you can continue with the tool by clicking the GRIDDAP button.
+
+ 
+
+The GRIDDAP button will add a tab to the window allowing specific subsetting information to be entered.  Subset criteria can be entered either by typing the desired extents or using the map interface. Illustrated here,  is the extent of the data (red) with the desired subset area highlighted as light red. Additional settings or variable,  output and time were set prior to clicking 'Process'.
+
+ 
+
+Once process is clicked,  the tool will obtain or fetch the data and add it to the map view.  All of the Layer Property tasks have been completed by the tool including enabling time. Zooming in, and adding a land shapefile,  we see the subset is where we expect it to be from our initial map selection.
+
+ 
+
+Using the tabs in the EDC window and the map selector,  you can load multiple datasets and even grab data in custom polygon shapes or load a track.  The user guide defines the fields and CSV format for track data. The time slider adjusts and shows the temporal coverage of multiple time-enabled data.  This could be useful for making a time series or ensuring the data overlap of multiple layers is correct. 
+
+ 
+
+And for completeness, you can get data 'manually' from services such as OpenDAP, THREDDS, and ERDDAP.  Most have a user interface,  though not as friendly as the ArcGIS and EDC menus.  
+
+ 
+
+OpenDap is useful to subset the dimensions of aggregated data, retrieve dataset attributes, or structure.
+
+ 
+
+THREDDS Data Servers integrate multiple services such as WMS, WCS, OpenDAP, NetCDF Subset, and metadata.  ERDDAP integrates services  but in a much easier way.  ERDDAP also has an array of supported output formats and is a RESTful service, meaning the requests of the service are made and preserved in a hyperlink. Ok,  now that we know how to get the data into our GIS,  there are a few things to keep track of.
+
+ 
+
+When comparing data,  you need to ensure the units are similar.  Often,  satellite SST may be in Kelvin and in situ measurements in Celsius.  Easy enough to convert,  but something to pay attention to. Same thing with time.  Most data are with respect to UTC,  but use the metadata to make sure. Our GISs in map view usually default to -180 to 180.  Data may split over the dateline with Western longitudes at the left edge of the map and Eastern Longitudes on the right.  Also,  some data providers may provide data in 0 to 360.  The GIS can perform operations on the data,  but if it is desired to display  across the dateline,  some modification to input data is required.  Usually,  putting the data in 0 to 360 or extending Western longitudes (i.e.  beyond -180) will work. Finally,  as discussed in the Data module,  ensure your data are using the same projections and units.  ArcMap will usually take on the projection of the first dataset loaded and transform/reproject other data to match it, which may not be appropriate. Similarly,  make sure the ellipsoid and datums are defined and match for your data. 
+
+ 
+
+This concludes the Using Satellite Data in GIS Tools module.  The Environmental Data Connector can be obtained from  the CoastWatch West Coast Node link listed here.  Refer to the user guide to see all the capabilities as they were not all covered in this tutorial.  An online 'adding data to GIS' tutorial is also available at our West Coast Node.  The next module in this ArcGIS series is the ArcGIS exercise. Thank you for your interest in NOAA CoastWatch!

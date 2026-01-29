@@ -1,0 +1,133 @@
+---
+title: "Satellite Sea Surface Height, Altimetry, Winds, and Salinity"
+format: html
+---
+
+Welcome to the online course on oceanographic satellite data products, produced by NOAA’s CoastWatch Program. In this module we will discuss the measurement of sea surface salinity, surface winds, and sea surface height using satellite remote sensing techniques. The information presented here builds on the concepts discussed in the Satellite 101 Part 1 and Part 2 modules of the online course. You might want to review those modules first before viewing this module. My name is Cara Wilson, I’m the node manager of the West Coast Node of NOAA’s CoastWatch Program. The materials I will be presenting in this video were produced from a collaboration from many members of NOAA’s CoastWatch Program including Dale Robinson, Melanie Abecassis, Ron Vogel, Shelly Tomlinson, me and the late Dave Foley. 
+
+ 
+
+Salinity, winds, and sea surface height are all measured with instruments that use the microwave portion of the electromagnetic spectrum. So first I will review the characteristics of measuring microwaves from satellites. I will also cover the two basic types of satellite microwave sensors: Passive and Active sensors. Finally, I will cover how sea surface salinity, surface wind, and sea surface height measurements are made and the products derived from the measurement.
+
+ 
+
+On the left, the EMR spectrum is pictured showing the range of wavelengths from ultraviolet to the microwave. Microwaves are at longer wavelengths than the rest of this spectrum. However, microwaves are typically measured in frequency rather than wavelength. The microwave range is approximately 300 GHz to 0.3 GHz. Sometimes parts of this range are referred to as lettered bands, such as the K-band and the X-band. 
+
+ 
+
+As discussed in Satellites 101 Part 2 module of this course, satellites primarily use the visible, infrared, and microwave wavelengths to view the Earth. This is because other wavelengths are strongly absorbed by the Earth’s atmosphere. On the plot, I have overlain the opacity of the atmosphere on the EMR spectrum; you can see the “atmospheric windows” in the visible, infrared, and microwave bands where EMR can pass through the atmosphere. Notice that most of the microwave range falls within a very transparent atmospheric window. 
+
+ 
+
+Another advantage of using microwaves for remote sensing, is that they can see through clouds. If I overlay the attenuation of EMR by clouds, the visible and infrared frequencies are blocked. However, the microwave range frequencies are unaffected, making the microwave range useful for remote sensing in almost any weather condition, except during heavy rain. 
+
+ 
+
+Passive sensors, shown on the left,  detect microwaves from radiation that is naturally emitted by the Earth. Active sensors, shown on the right,  generate microwave pulses that are sent to the sea. The pulses interact with the sea surface and part of the pulse energy is reflected back into the atmosphere. The sensors measure the reflected signal that returns to the satellite. First, let’s take a closer look at how passive sensors work and what they measure.
+
+ 
+
+Passive microwave radiometers measure the blackbody radiation emitted by the ocean. This radiation is emitted at intensities and frequencies defined by temperature. At the temperatures found on the Earth, most of the emissions are in the infrared range, as shown in the figure on the left. The inset plot on the right shows a close up of the microwave part of the emission. There are two important features to note about the microwave plot. First, the intensity of the emissions is very low compared to the intensity in the infrared. Second, the intensity of the emissions decreases as frequency decreases.
+
+ 
+
+However, blackbody objects are theoretical, and do not exist in nature. For the real objects that do exist, the efficiency at which blackbody radiation is released is less than for a blackbody at the same temperature. Emissivity is a measure of how efficient an object is at emitting radiation compared to a blackbody, where a value of 1 is 100% as efficient as a blackbody. All materials have unique emissivity spectra, where values are less than one and emissivity varies with frequency. For example, at a frequency of 37 GHz, sea water has an emissivity of ~0.45 and land has an emissivity of ~0.95. So, it is easy to distinguish between these 2 surfaces based on the strength of the microwave signal at 37 GHz. On the left is an image of the Earth taken at 37 GHz where the division between land and sea is easy to determine. Similarly, physical properties like salinity and surface roughness change the emissivity. For example, the strength of the microwave signal where salinity is 30 parts per thousand will be different than where the salinity is 36 parts per thousand. This difference in signal can be used to determine surface salinity values.
+
+ 
+
+The plot shows at which frequencies we will see a maximum change in the microwave signal due to change in a physical property. The maximum change for salinity is near 1.4 GHz
+
+Wind speed shows maximum change at frequencies greater than 10 Ghz. SST shows a peak near 7GHz. The maxima for liquid water and water vapor are also shown. Based on these characteristics, the frequencies used to measure the parameters are chosen. Some typical frequencies used for each parameter are presented on the right. In reality, the signal measured at each frequency will have contributions from many parameters. Those contaminating contributions are corrected for by collecting measurements at many frequencies and subtracting the unwanted signal during the signal processing. 
+
+ 
+
+As we saw in the SST lesson, a drawback of passive microwave sensors is their low spatial resolution. Spatial resolution in the infrared can be in the sub-kilometer range. However, the intensity of ocean blackbody emissions in the microwave is a small fraction of that measured in the infrared. Therefore, to collect enough energy to make a measurement, microwave sensors must have larger antennas and collect energy from a larger footprint on the sea surface. There are technical limits to antenna size that make antennas bigger than about 1m impractical. Consequently, microwave sensors have a larger footprint, which translates to lower spatial resolution. The graph on the lower left shows the decreasing black body emission intensity in the microwave range with decreasing frequency. Above are the footprint sizes required in the frequency bands on the WindSat radiometer. In general, the spatial resolution of passive microwave sensors ranges from 25 to 100 km.
+
+ 
+
+ A second drawback to passive microwave sensors is that measurements cannot be made close to the coast. Land has a much higher emissivity than sea water, so it emits a strong microwave signal. When the sensor’s footprint includes land and sea, like in the top left image, the signal is contaminated with radiation from the land. Even when the footprint is 100% over the sea but near land, radiation from land can be scattered into the sensor’s field of view. The image to the right shows 6 GHz data from the coast of Japan. The halo around the island represents the bad data values that are a blend of the land and sea microwave signal. In general, for passive microwave satellite products, measurements within about 50 km of land are masked out to remove the bad data. 
+
+ 
+
+Sea Surface Salinity is measured with passive sensors. The salinity sensors measure the blackbody radiation emitted by the sea at 1.4 GHZ, which decreases with increasing salinity, as seen on the plot to the right. This relationship between emission and salinity is used to determine salinity with satellite passive sensors.
+
+ 
+
+Salinity is a relatively new satellite measurement. Three missions have flown since 2010, and currently two sensors are still collecting data. Because data are collected at 1.4 GHz, where the signal from the Earth is weaker, the spatial resolution is relatively low: ranging from 25 km to 100 km, depending on the satellite mission. Complete global coverage takes 3-8 days. The accuracy of the measurement is 0.15 - 0.25 units on the practical salinity scale. It is important to remember that satellites can measure the salinity only in the top few centimeters of the sea. 
+
+ 
+
+Uses of salinity measurements include studies of global circulation patterns, defining animal habitats, and tracking surface salinity events. The salinity map on this slide, made from the SMOS data, shows the distribution of a lower salinity water plume resulting from strong fresh water outflow from the Amazon River. 
+
+ 
+
+Wind speed can be measured with radiometers, which are passive sensors. The radiometers measure surface roughness that is produced by wind blowing across the sea surface. As shown on the left, surface roughness increases as winds increase. The microwave signal intensity from the sea increases as surface roughness increases, as shown by the plot on the right. Measurements of surface roughness with radiometers are used as a proxy for wind speed. 
+
+
+
+
+To get both wind speed and wind direction we need to make measurements with scatterometers, which are active sensors. Wind speed and direction are measured with Scatterometers, which are active sensors. Scatterometers send pulses of microwave radiation to the sea surface. If the water is flat, the pulse is reflected like a mirror, which is called specular reflection, and most of the reflected signal doesn't return to the sensor. With more wind, ripples on the sea surface increase. The ripples increase the amount of the pulse that is backscattered as a signal to the sensor. You may have experienced something similar with visible light at a placid lake. When the wind is still, the light hitting the lake is reflected like a mirror to your eye, and you can clearly see the landscape in the foreground. As the wind increases, ripples on the lake surface scatter light in many directions away from your eye, making the reflected landscape in the foreground harder to see. 
+
+ 
+
+In addition, for any single wind speed, the amount of the signal that is returned to the sensor via scattering is sensitive to the wind direction relative to the direction of the pulse sent by the instrument. The maximum return occurs when the pulse is in the upwind direction. The return is reduced when the pulse is in the downwind direction, and minimal returns occur when the pulse is at 90 degrees to wind direction or at crosswinds.
+
+ 
+
+To obtain both wind speed and direction, scatterometers are built to put out pulses in many directions. The instruments measure the scattered signal from each pulse direction. On the figure on the right, the line represents the function of relative backscatter at different angles to the wind. The blue circles are the measured backscatter from the scatterometer pulses. These multiple measurements are used to calculate the wind speed and direction that best fits the function. 
+
+ 
+
+Passive measurements of wind speed with radiometers date back to 1987. At present, there are multiple sensors that are orbiting the Earth. With so many instruments flying at the same time, complete global coverage can be obtained as quickly as every 6 hours. Active measurements of wind speed began in 1999, with QuickScat, and continue with ASCAT sensors on METOP satellites. Depending on the mission, these instruments can give complete global coverage in 1 to 3 days.
+
+ 
+
+Here is an example of tracking events with wind data. On the left is a true-color image of Hurricane Jose from 2017. On the right are maps from ASCAT wind data. The reddish map shows just wind speed, with black as the fastest speed. Strong winds are visible toward the center, with the eye of the storm in the middle. On the right, wind direction and speed are shown with vector arrows. You can see the counterclockwise movement of the storm. 
+
+ 
+
+Once you know wind speed and direction you can calculate other derived products. One of those products is Ekman upwelling. As illustrated on the left, when winds blow parallel to the coast on the western sides of continents, the forces from the wind and those due to the earth's rotation push surface water offshore. The displaced water is replaced with cold, nutrient rich water from depth, which helps to drive increased productivity. On the right, the satellite wind vector product shows wind blowing parallel to the shore along Oregon and California. The map of the Ekman Upwelling satellite product shows regions of upwelling in yellow and red. You can see a strong upwelling signal along the coast, quite often just south of a cape.
+
+ 
+
+The ocean is not flat, it's bumpy. These differences are measured as sea surface height. The globe on the left shows areas of low SSH in blue, high in red, and exaggerated relief shows the bumpiness. The figure on the right shows a transect of sea surface height across the Central Pacific where the height difference is 32 cm. World-wide the difference in sea surface height can be up to 200 meters. Most of this difference is constant, though, and is due to the Earth's gravity and ocean circulation. For most oceanographic purposes we are interested in the anomalies which illustrate phenomena such as El Nino events. 
+
+ 
+
+Sea surface height is measured with altimeters, which are active microwave sensors. Altimetry works much like police radar. The sensor sends a pulse that bounces off the surface and returns to the sensor. The time the pulse takes to return to the altimeter and the speed of light are used to calculate range, which is the distance from the altimeter to the sea surface. Because of atmospheric conditions, the speed of light varies through the atmosphere. A microwave radiometer aboard the satellite is used to correct for changes in the speed of light. 
+
+ 
+
+The exact position of the altimeter is measured in 4 dimensions, by GPS satellites and ground stations. Altitude is measured relative to a known reference, the reference ellipsoid. Latitude, longitude, and time are also recorded.
+
+ 
+
+Putting it all together we get: Range from altimeter. Satellite altitude from GPS and ground stations. Subtract range from the altitude to get sea surface height. And locate the sea surface height measurement in space and time. The map on the right shows sea surface height for the Gulf of Mexico. Blue are lower values and red are higher values.
+
+ 
+
+Several useful products can be derived from sea surface height. One example is sea level anomaly, which is a measure of how different a sea surface height value is from a typical value. To determine sea level anomaly, a long-term mean of SSH measurement is created to get a climatology of typical sea surface height values. At present that climatology is from 1993-2012 (19 years). The climatological values of sea surface height are then subtracted from the measured values. When SSH is greater than normal, the anomaly is positive. When SSH is less than normal, the anomaly is negative.
+
+ 
+
+SLA helps detect ocean phenomena from subtle changes in SSH. An event like El Nino can cause changes in SSH that measure in the tens of centimeters. Total SSH has a range of plus or minus 100 meters, so the El Nino signal may be hard to detect from SSH measurement. The map at the top shows the SSH during the 1997-1998 El Niño. It would take a trained eye to detect the El Niño signature from SSH. The map at the bottom shows the SLA. The unusually high SSH signature near the Peruvian coast can be easily detected in the SLA map. 
+
+ 
+
+Geostrophic currents are important products that are derived from SSH information. These are currents that are driven by a gradient of high to low sea level. Geostrophic currents can be used to identify features like large scale circulation and larger eddies. On the left is a map of geostrophic currents generated by the CoastWatch Gulf of Mexico Node, which shows eddies formed in the Gulf of Mexico.
+
+ 
+
+Operational altimetry missions date back to the early 1990’s. The missions have overlapped over that time period, which has a couple of benefits. First, the mission data can be blended together to create a long time series. Second, blending data from the large number of sensors flying at the same time gives better spatial coverage than a single sensor.
+
+ 
+
+The image on the left tracks the rise in mean sea level, from 1993 -2018. The data for this 25-year time series are a compilation of four altimetry sensors. The image on the right shows the coverage for all altimeters flying on a single day in 2018. By blending these data into a single product, far better spatial coverage is achieved than with any single sensor.
+
+ 
+
+To summarize, all of the parameters I discussed, salinity, winds and sea-surface height, are all measurements made in the microwave port of the EMR spectrum. Because they are microwave measurements they can be made day or night and in nearly all-weather conditions. However the spatial resolution is lower than for measurements made in the visible and the IR, and passive measurements can not be made close to land. 
+
+ 
+
+This concludes this presentation on sea surface salinity, surface winds, and sea surface height. This is one of several presentations put together as part of the CoastWatch Ocean Satellite Course. We have additional presentations that cover how measurements are made for ocean color and sea-surface temperature.

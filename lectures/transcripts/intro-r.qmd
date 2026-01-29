@@ -1,0 +1,50 @@
+---
+title: "Intro to Using R with Satellite Data Transcript"
+format: html
+---
+
+In this video I will demonstrate how to access datasets on ERDDAP from within the R software. If you aren't familiar with ERDDAP, you should first view the ERDDAP video before viewing this one. 
+
+ 
+
+Let's start off by briefly discussing what R is. R is a free software package frequently used by many marine scientists to do statistical computing and graphics. There is a huge R user community worldwide. This community has led to the establishment of a repository of R packages that do many specialized functions. If there is some way you want to access or analyze data, chances are there is an R package that will make that task easier for you. 
+
+ 
+
+Today I am going to talk in detail about one of those packages: the rerddapXtracto package. This package was written by Roy Mendelssohn of NOAA's Southwest  
+
+Fisheries Science Center to help with some of  the most common tasks that participants within the NOAA satellite core typically want to do. Like many R packages, it utilizes other R packages. In this case, the rerddap and plotdap packages, which were written to more easily access plot data served by ERDDAP. All three of these packages are available on the cran and can be easily downloaded using the default setup in R to install packages. Within the rerddapXtracto package,  there are several different functions. Rxtracto is the primary function  that it was designed to do. What this function does is match up satellite  data to a set of user-supplied xyt data. i.e. coordinates of latitude and longitude and time.  This is a task commonly done by biologists with  
+
+data from tagged animals that they want  to acquire quiescent satellite data from. Rxtractogon extracts satellite data from within  user-supplied polygons. This is useful if you want all the data from an unusually shaped area like a  marine sanctuary or a fishery management area. rxtracto_3D extracts a 3-dimensional cube  meaning latitude, longitude, and time within the boundaries of a user-supplied box. plotTrack will plot the results of rxtracto and plotBox will plot the results of rxtracto_3D. In this presentation, I will show you examples of using all of these functions based on  the notebooks that we have available online. 
+
+ 
+
+Our online notebook contains several chapters  as outlined here. Chapter 2 used the rxtractogon function to plot chlorophyll data within  the boundaries of Monterey Bay Sanctuary. Chapter 3 uses the rxtracto function to plot  satellite data corresponding to a tagged marlin fish in the Pacific. Chapter 4 makes a time series  of chlorophyll data by downloading several overlapping datasets. The data averaged  spatially to make a time series and also averaged temporally to make maps. Chapter 5 shows  how to use the tabledap function in rerddap to download tabular in-situ SST data and uses the  rxtracto function to get corresponding satellite data to compare against the in-situ data. Chapter 6 uses the rxtracto_3D function  to import SST data and use a temperature threshold to look at the turtle habitat. Next I will give a brief overview  of each of these chapters.
+
+ 
+
+Chapter 2 of the online tutorial uses  the rxtractogon function to read in the chlorophyll data within the boundaries of the  Monterey Bay Sanctuary and generates a map of this data as shown here on the slide. To provide  this example, the boundaries of the Monterey Bay Sanctuary are embedded within the function.  To modify this to work in a different region, the user needs to have the x and y coordinates  of the polygon they are interested in. 
+
+ 
+
+Chapter 3 of the online tutorial uses the  rxtracto function to extract the chlorophyll data synoptic with the tracks of a tagged  marlin in the Pacific. It then plots this data, color-coded by the chlorophyll  variable, as shown on the plot here. Chapter 3 of the tutorial also  shows the rxtracto function to extract the chlorophyll data that is synoptic  with some virtual survey stations in the Pacific, showing that rxtracto is capable of  dealing with data that span the dateline. 
+
+ 
+
+Chapter 4 uses the rxtracto_3D function to  download data from 4 different chlorophyll  data sets to spatially average the  data into one continuous time series. It also shows how to temporally average the  data into average maps for each data set. 
+
+ 
+
+Chapter 5 shows how to use the tabledap function in  rerddap to download in-situ buoy data and then uses the rxtracto_3D function to get corresponding  satellite SST data to compare with that data. The graph shown here shows the matchup of VIIRS SST data against buoy data  along the California coast. This chapter also shows how to  compare the data graphically. This map of satellite SST is overlapping  with buoy data from the same time period. Both datasets are color-coded  using the same color palette. 
+
+ 
+
+Chapter 6 uses rxtracto_3D to import  SST data from ERDDAP and uses a specific temperature threshold to identify  a potential turtle habitat. The red band, the red area shown on the map here is a certain  area that is defined by a temperature threshold. 
+
+ 
+
+Chapter 8 shows how to map projected datasets that are served on PolarWatch ERDDAP. This also demonstrates how to access an  ERDDAP other than the default ERDDAP. 
+
+ 
+
+This was a quick overview of what  is covered in our online R tutorial. The tutorial gives all the code you  need to make the graph shown here. We also have other online tutorials.  We have an overview of ERDDAP, and we have one covering different ways  to import satellite data into ArcGIS.

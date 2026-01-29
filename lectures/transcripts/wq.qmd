@@ -1,0 +1,162 @@
+---
+title: "Water Quality Transcripts"
+format: html
+---
+
+[Slide 1]
+
+Welcome to the online course on oceanographic satellite data products, produced by NOAA’s CoastWatch Program. In this module we will discuss how satellite data can be used for water quality applications. The information presented here builds on the concepts discussed in several of the course’s earlier modules, including Satellite 101, Sea Surface Temperature, Ocean Color, and the one covering Wind, Salinity, and Sea Surface Height. You might want to review those modules first before viewing this module. My name is Cara Wilson, I’m the node manager of the West Coast Node of NOAA’s CoastWatch Program. The materials I will be presenting here were produced from a collaboration from many members of NOAA’s CoastWatch Program including Dale Robinson, Melanie Abecassis, Ron Vogel, Shelly Tomlinson, Andrea VanderWoude, Betty Staugler, V Wegman and myself. 
+
+ 
+
+[Slide 2]
+
+There are a lot of satellite derived parameters that can be used for water quality monitoring as indicated by the list here. However, there is also a great deal of variation in the maturity and availability of these parameters. Some products, like sea-surface temperature and chlorophyll are quite mature, routinely used and relatively easy to find. As we go down this list the products become less mature and products like bottom substrate and surface oil slicks, are data that are produced regionally and/or sporadically. In this presentation we will go over all of these parameters in further detail and let you know where these different data products are available from. This course focuses on the use of “off the shelf products”, so the intent is to help you find existing data. Our intent is not to walk you through the algorithms to create these products yourself.  
+
+ 
+
+[Slide 3]
+
+One of the difficulties new users of satellite data often face is understanding the terminology used in the satellite community, which might not always coincide with terminology used for in situ observations. On the left we have a list of common observations made in situ, and on the right the corresponding satellite name. Some are fairly straight forward. In the field you measure water temperature, and satellites measure sea surface temperature, or lake surface temperature. The inclusion of “surface” in the satellite product terminology is important, as it demonstrates a weakness of satellite data compared to in situ data in that it just makes surface measurements, and doesn’t give any depth information. For field observations one often talks about turbidity or water clarity, but in the satellite community we call this the “diffuse attenuation of light at 490 nanometers” or Kd490 for short. That’s an obvious translation, right? This water quality module was designed to try to help bridge the communication gap between what water quality managers want and what satellite data can provide.  
+
+ 
+
+[Slide 4]
+
+One of the other big differences between satellite data and in situ data is their measurement scales. Satellite data can provide much better spatial and temporal coverage than one can achieve with in situ measurements. This slide is actually somewhat misleading because the two panels on the left, showing the spatial coverage of satellite data, also show the chlorophyll pattern with depth which of course one can not obtain with satellite data, but which one does obtain with in situ sampling, which is represented on the right-hand panel. 
+
+ 
+
+[Slide 5]
+
+There are other parameters that can be inferred using satellite information but that can’t be directly measured by satellites. These include algal toxins for which a number of algorithms are being developed, but the relationships between watercolor and algal toxicity is so variable that this is very challenging. Because nutrients influence algal growth where they are a limiting factor, it’s possible to statistically estimate nutrients from water color, even though nutrients can’t be measured directly by satellite. Similarly, because of their relationships with other parameters, it’s sometimes possible to get indirect information about dissolved oxygen or pollutants.
+
+ 
+
+[Slide 6]
+
+We showed this slide in the ocean color presentation, but let’s revisit it again to review what ocean color satellites can measure. Different water constituents have different absorption and scattering peaks, and satellite bands are selected to capture these changes in the optical signature. For example, Colored Dissolved Organic Matter, or CDOM, absorbs in the blue wavelengths, as does chl a. Chlorophyll also absorbs in the red wavelengths, which is why plants and phytoplankton often appear green. Pure water absorbs more in the red wavelengths. For those of you who are divers, this is why the deeper you dive, the more fish and coral will appear blue and start to lose the red colors first. There are also various accessory pigments in phytoplankton with different absorption peaks. There are efforts to use these differences to separate out various phytoplankton types. In addition, scattering due to the particles in the water (phytoplankton, sediment, detritus) occurs in the red wavelengths, therefore affecting turbidity.
+
+ 
+
+[Slide 7]
+
+There is a whole suite of different products that are generated from ocean color satellites. Chlorophyll, which is shown around Hawaii, on the left hand image, is the most widely used. But there are other products like Kd490, shown here off of Washington State, KdPAR, and products that estimate sediment and phytoplankton composition. In this presentation we will go over all of these products in greater detail. Some are available globally, whereas others are regional. These products are all available through the CoastWatch regional nodes.
+
+ 
+
+[Slide 8]
+
+Temperature is an important and widely-used parameter when looking at water quality. Satellites have been measuring Sea Surface Temperature routinely since the 1980s. SST can be measured in the infrared and in the microwave, and from polar orbiting and geostationary satellites. When combined into blended products, these different types of measurements are complementary and provide near complete global coverage on a daily basis. Many SST products are available from CoastWatch, from single-sensor high-resolution products to gap-free blended products with a coarser spatial resolution. Satellite data is also used to get lake temperatures, as shown here in the image of temperatures for the Great Lakes.   More information on SST can be found in the “Fundamentals of SST” presentation.
+
+
+
+
+
+[Slide 9]
+
+Chlorophyll is the most mature product measured by ocean color sensors. Since all phytoplankton contain chlorophyll, satellite-derived chlorophyll can provide an estimate of phytoplankton abundance. The global satellite chlorophyll products work well in clear open ocean waters, where changes in optical properties result mainly from changes in phytoplankton and CDOM concentrations. These waters are called Case 1. In other waters, including coastal and inland waters, optical properties are also determined by suspended sediments and terrestrial runoff. In these optically complex waters, called Case 2 waters, the global satellite chlorophyll product can be much less accurate and often overestimate chlorophyll concentration. The image shows chlorophyll concentrations off the US East Coast using the global product. Note the very high chlorophyll concentrations in the waters close to the coast. Because these are Case 2 waters, the satellite measurements may be overestimates. Some chlorophyll products have been produced that take into account to the complex optical properties of Case 2 waters, especially for US and European regions, but they are regional in spatial coverage. More information on chlorophyll can be found in the “Fundamentals of Ocean Color” presentation.
+
+ 
+
+[Slide 10]
+
+Algal blooms are rapid increases in phytoplankton concentration in fresh, coastal and marine waters. Measuring algal abundance using satellite data depends on the type of algal bloom and the region of interest. Regional algorithms must be tuned to their unique optical and biological properties. Some algorithms look at specific optical characteristics of the algal type, whereas other methods use large increases in chlorophyll concentration as an indicator of new blooms. In coastal areas, algorithms that look at the changes in the chlorophyll absorption in the red and near infrared wavelengths are used as they are less impacted by CDOM. Regional monitoring and forecast systems for algal blooms have successfully used products that look at relative abundance rather than absolute cell count estimates. In particular, some models and monitoring systems use satellite imagery to monitor for new blooms or conditions that might produce Harmful Algal Blooms, or HABs. These are high biomass algal blooms which contain toxins and are a concern for public, marine and ecosystem health. For example, the Cyanobacteria Index image of Lake Erie, shown in the upper right, shows a toxic cyanobacteria bloom in September 2021. Higher algal biomass can be seen in the western portion of the lake. The Relative Fluorescence product in the lower right shows a toxic Karenia brevis bloom off the coast of Florida. Reds and yellows indicate higher concentrations of algae, where chlorophyll is greater. The NOAA and the CoastWatch program distribute several regional experimental products for lakes and coastal waters that can be accessed via the links in the yellow box. 
+
+ 
+
+[Slide 11]
+
+The measurement of phytoplankton community composition from remote sensing imagery is an emerging field that is limited by the spectral resolution of the current ocean color sensors.  New sensors look to increase the spectral resolution, to expand our capability to better distinguish phytoplankton groups in the ocean.  Phytoplankton Community Composition includes phytoplankton taxonomic class, phytoplankton size class, and also particle size distribution. Different types of experimental algorithms are being developed. You might be wondering how PCC relates to PFTs, or Phytoplankton Functional Types.  There are in fact the same thing, but the community has decided that Phytoplankton Community Composition is a more accurate term.  
+
+ 
+
+[Slide 12]
+
+I’ve already mentioned CDOM a few times in this presentation. CDOM stands for Color dissolved organic material, and is a  fraction of the dissolved organic pool.  Older terms for cdom are gilvin, and gelbstoff, which is German for “yellow substance”.  As the name implies, CDOM influences the color of the water and absorbs primarily in the blue and UV wavelengths. The highest concentrations of CDOM are usually nearshore because of the breakdown of plants and organic matter. CDOM plays a large role in aquatic photochemistry and can be used as a tracer for water masses. 
+
+ 
+
+[Slide 13]
+
+Let's talk next about turbidity and light attenuation.  These are related, but they are different optically. Turbidity is the amount of scattering by the particles in the water. Many types of in situ measurements are used in the field to measure turbidity such as nephelometers, turbidimeters and similar instruments. In remote sensing, we usually use the reflectance in the red to near IR portion of the electromagnetic spectrum as an indicator of relative turbidity.  Relative change in turbidity is a better indicator of water visibility than light attenuation. Light attenuation, Kd, on the other hand, indicates the loss of light as you move deeper in the water column and is related to both the absorption and scattering properties of the surface water. Kd at 490 nm is generally used to quantify light attenuation, as it captures the maximum chl absorption due to algal pigments.  Notice that Kd has units of inverse meters. In waters dominated by sediment, Kd is approximately 1 over secchi depth. 
+
+ 
+
+[Slide 14]
+
+So, in more relative terms, water clarity is a catch-all term describing how clear the water is, and can be influenced by the turbidity of the water due to the scattering properties of the particles. Water clarity is influenced more by turbidity than light attenuation. In this example, as more sediment is added to a body of water, turbidity increases as it is related to the amount of scattering particles. This corresponds to a decrease in clarity. 
+
+ 
+
+[Slide 15]
+
+Sediment, like mud, silt, sand and organic particulates, can be generated from rain runoff from land, or from wind events over nearshore water, and is highly visible in true color images, as shown here on the left, and also in satellite imagery at red wavelengths. The remote sensing reflectance, or Rrs, in the red portion of the electromagnetic spectrum, at approximately 670 nm, is often used as a relative indication of the amount of sediment in the water. The image on the right shows the remote sensing reflectance at 671 nm for the same time period as the image on the left, although the maps are not at the same scales. The Rrs at 670 is referred to as an index because it is a relative measure. It is not an absolute measure of sediment, so it is only used to distinguish areas of high or low sediment.
+
+ 
+
+[Slide 16]
+
+Unlike the sediment index, this product provides an absolute measure of particles in the surface water. Particles are typically defined as any particulates greater than a 0.45 um mesh filter. Total Suspended Matter includes both inorganic and organic particles. Other names for this product are Total Suspended Solids and Suspended Particulate Matter. The Great Lakes node has a total suspended mineral product, similar to total suspended solids, with an example of Lake Superior shown here. The top image shows TSM while the bottom image is a true color image. High areas of sediment appear yellow and red in the top panel, and brown in the true color image. The sediment products are often used to track sediment plumes in coastal and nearshore water after storms, or to understand how losses in water clarity affect organisms.
+
+ 
+
+[Slide 17]
+
+Kd490 is the vertical light attenuation coefficient for downward irradiance at 490 nm. It describes how rapidly sunlight is lost with depth in the water, specifically measuring  the loss of blue-green light which is related to the absorbing particles in the water column. It is inversely proportional to the clarity of the water. The higher Kd490 is, the lower the clarity of the water. 
+
+ 
+
+[Slide 18]
+
+PAR stands for Photosynthetically Active Radiation and refers to all  the wavelengths necessary for photosynthesis. So it includes all the light in the visible portion of the spectrum, between 400-700 nm, as shown in the figure. KdPAR is a measure of the attenuation of all of the PAR wavelengths, and can be estimated from satellites using Kd490 and some general assumptions. As with Kd490, with higher Kd PAR values, there is less visible light which is available for photosynthesis.
+
+ 
+
+[Slide 19]
+
+Euphotic Zone Depth describes the depth where only 1% of the surface PAR remains. It is determined by water constituents  such as dissolved organic matter, suspended particulate matter, phytoplankton, and even water molecules, all of which attenuate solar radiation with increasing depth. Primary production is at its maximum within the euphotic zone because there is ample photosynthetically active radiation available there. 
+
+ 
+
+[Slide 20]
+
+Satellite water quality products are also an important resource for inland lakes. Some examples include data available through the Great Lakes CoastWatch node that include ocean color products that are regionally tuned, as well as primary productivity and water clarity estimates. A cyanobacteria index is used to initiate NOAA’s Lake Erie HAB forecast system.  CyAN, which covers the extent of the United States, maps cyanobacteria harmful algal blooms for many small and large inland lakes. Both of these products are available on the CoastWatch and NASA website, respectively. 
+
+ 
+
+[Slide 21]
+
+Detecting floating vegetation and submerged aquatic vegetation, referred to as SAV,  requires the use of high resolution data such as Landsat. There are monitoring efforts for submerged aquatic vegetation in coastal areas of the U.S,  floating macroalgae such as cladophora in the Great Lakes and Sargassum in tropical areas. Shown here are estimates of Sargassum in the Gulf of Mexico area and submerged aquatic vegetation in the Great Lakes. The existing products are focused on specific regions and are not available globally. 
+
+ 
+
+[Slide 22]
+
+There are a number of different satellite products that can be used to detect oil spills. Synthetic Aperture Radar, or SAR, is very useful for detecting oil spills, the image on the left shows a SAR image of the Deepwater Horizon oil spill in the Gulf of Mexico in 2010. SAR data is very high spatial resolution, but it is also not routinely collected over the open ocean, and this data is more difficult to get ahold of than more routine products like sst or ocean color data.   The image on the right shows a visible image of the Deepwater Horizon spill, taking advantage of the sunglint issue that some sensors have.  In this case the sun glint phenomena makes the oil spill quite visible.  There are no “off the shelf” products for oil spill monitoring.  Images such as the ones shown here are generally custom produced by satellite data providers in response to an event.   If you want more information there was a good review paper on the subject published in 2017 by Fingas and Brown. 
+
+ 
+
+[Slide 23]
+
+Before wrapping up, let's talk a little bit about satellite data accuracy.  Satellite data products are validated against in situ data during algorithm development.   For a lot of products this process is hampered by the small size of available in situ data.  The observations must be temporally and spatially representative of the satellite measurements.  Generally validation uses in situ samples that are taken within 3 hours of the satellite measurement, and within a 3 by 3 pixel box centered on the in situ sampling location.  The validation results are typically available from the scientific literature and from the ATBD, the Algorithm Theoretical Basis Document produced by the satellite data provider.  We recognize that it would be useful to have this information included with the data, particularly for products where this information varies pixel by pixel.  There are discussions underway to generate some products like that, but currently none are available.
+
+ 
+
+[Slide 24]
+
+It's important to remember that when we talk about satellite data accuracy, we are referring to the degree of accuracy.  The degree of accuracy of a satellite product is one of the many considerations that need to be made in selecting a dataset.  Maybe you are thinking - well that doesn’t make sense - why would anyone choose to use data with lower accuracy if there was a product available with higher accuracy?  As always it comes down to what is the application?  Near real time products will not have as high an accuracy as delayed science-quality products, but if you need to know the spatial extent of a current coastal bloom as soon as possible, the lower accuracy products may work fine, as illustrated in the images here, which clearly show the rapid development of a coastal bloom between July 1 and 6 of 2014, even though the absolute values of the chlorophyll might have a low degree of accuracy.  
+
+ 
+
+[Slide 25]
+
+There are a number of other resources about water quality monitoring that you might find useful.  The EPA has a number of training modules and webcasts available on a range of watershed management topics.  NASA’s ARSET program has a three-part online training on water quality.  The IOCCG  published a report on using ocean color data for water quality monitoring, and in fact that report served as the outline for this presentation.  The AquaWatch program was established to improve the coordination, delivery and utilization of water quality information. 
+
+
+
+
+
+[Slide 26]
+
+This concludes this presentation on water quality monitoring .  We hope that you found it useful.  This is one of several presentations put together as part of the CoastWatch Ocean Satellite Course. We’ve listed here all of the available presentations.  Thanks for listening.   
