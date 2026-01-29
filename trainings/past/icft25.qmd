@@ -51,12 +51,12 @@ Friday, August 15, 2025
 | 10:30 - 11:00   | Demo of ATN data portal                                                            | [Megan McKinzie](mailto:mmckinzie@mbari.org)    |
 | 11:00 - 11:30   | [Accessing public ATN datasets](../presentations/icft25/McKinzie_Accessing%20Public%20ATN%20Data_15Aug25.pdf)                                                      | [Megan McKinzie](mailto:mmckinzie@mbari.org)    |
 | 11:30 - 11:45   | Break                                                                              |                   |
-| 11:45 - 12:00   | Workshop, part 1: Linking CoastWatch and ATN data using [scripts](https://github.com/coastwatch-training/CoastWatch-Tutorials/tree/main/matchup-satellite-data-to-ATN-animal-tracks)                    | [Daisy Shi](mailto:hui.shi@noaa.gov)       |
+| 11:45 - 12:00   | Workshop, part 1: Linking CoastWatch and ATN data using [scripts](../../tutorials/matchup-satellite-data-to-ATN-animal-tracks/)                    | [Daisy Shi](mailto:hui.shi@noaa.gov)       |
 | 12:00 - 12:45   | Workshop, part 2: Hand’s on time                                                   |                   |
 | 12:45 - 13:00   | Wrap up and final discussion                                                       | All               |
 
 
 ## Resources
-- [Coastwatch Tutorials (on GitHub)](https://github.com/coastwatch-training/CoastWatch-Tutorials/blob/main/README.md)
-- [Coastwatch Lecture series](https://umd.instructure.com/courses/1336575/pages/all-lectures)
+- [Coastwatch Tutorials (on GitHub)](../../tutorials/index.qmd)
+- [Coastwatch Lecture series](../../lectures/index.qmd)
 - [Animal telemetry Network](https://portal.atn.ioos.us/)

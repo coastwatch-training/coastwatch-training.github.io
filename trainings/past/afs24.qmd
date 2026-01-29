@@ -42,7 +42,7 @@ the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has
 | 2:00 - 2:30   | Demo of ATN data portal                                                            | [Megan McKinzie](mailto:mmckinzie@mbari.org)    |
 | 2:30 - 3:00   | [Accessing public ATN datasets](../presentations/afs24/McKinzie_Accessing%20Public%20ATN%20Data_25Oct24.pptx.pdf)                                                      | [Megan McKinzie](mailto:mmckinzie@mbari.org)    |
 | 3:00 - 3:15   | Break                                                                              |                   |
-| 3:15 - 3:30   | Workshop, part 1: Linking CoastWatch and ATN data using [scripts](https://github.com/madrichardson/coastwatch-training.github.io/tree/main/tutorials/matchup-satellite-data-to-ATN-animal-tracks)                    | [Daisy Shi](mailto:hui.shi@noaa.gov)       |
+| 3:15 - 3:30   | Workshop, part 1: Linking CoastWatch and ATN data using [scripts](../../tutorials/matchup-satellite-data-to-ATN-animal-tracks/)                    | [Daisy Shi](mailto:hui.shi@noaa.gov)       |
 | 3:30 - 4:45   | Workshop, part 2: Hand’s on time                                                   |                   |
 | 4:45 - 5:00   | Wrap up and final discussion                                                       | All               |
 
