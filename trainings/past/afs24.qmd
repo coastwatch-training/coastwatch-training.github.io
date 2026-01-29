@@ -20,6 +20,7 @@ the annual AFS (American Fisheries Society) meeting in Honolulu, Hawaii, but has
  | [Daisy Shi](mailto:hui.shi@noaa.gov)         | CoastWatch/Pacific OceanWatch, node manager |
     
 ## Objectives
+
 * Describe the basic types of products available from satellite data
 * Demonstate how to access data on ERDDAP servers 
 * Explore the data available on the Animal Telemetry Network portal
