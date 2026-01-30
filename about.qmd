@@ -1,5 +1,46 @@
 ---
-title: "About"
+title: "About the CoastWatch Satellite Training Course"
 ---
 
-About this site
+The NOAA CoastWatch Satellite Training Course is a long-running professional training program designed to help scientists, managers, and decision-makers effectively use satellite-derived oceanographic and environmental data in their work. Since its earliest beginnings more than two decades ago, the course has evolved alongside satellite technology, software tools, and the needs of NOAA and its partners, while maintaining a consistent focus on applied, “fit-for-purpose” training.
+
+## Course History and Evolution 
+CoastWatch training efforts began in the late 1990s with workshops focused on integrating satellite imagery into desktop GIS tools. These early courses demonstrated strong demand for satellite data training, but also highlighted limitations in length, cost, and accessibility.
+
+In 2006, the first formal CoastWatch Satellite Course was held at Oregon State University, organized by the West Coast Node. This marked the beginning of a dedicated training program designed specifically for NOAA personnel. The course emphasized short intensive instruction and exposure to multiple satellite products (beyond ocean color), with hands-on support provided in whatever software languages participants used and project time centered on each particpant's own applications and interests.
+
+A major milestone occurred in 2013 with support from the JPSS Proving Ground and Risk Reduction program. That year introduced the collection of participant slides, documenting how attendees use satellite data in their own work. These slides became a lasting record of course impact and remain a core component of the program today.
+
+![A timeline highlighting major milestones in the CoastWatch Satellite Training Program, from early GIS-focused workshops in the late 1990s through the establishment of the formal satellite course in 2006, expansion across CoastWatch nodes beginning in 2018, the transition to online training during COVID-19, and the development of specialty courses and advanced modules in recent years.](images/timeline-coastwatch.png)
+
+## Expansion Across Nodes and the "Roadshow" Period
+Beginning in 2018, additional CoastWatch nodes began hosting their own courses, expanding participation across a wider range of the US and supporting more region-specific training needs and topics. In 2019 and early 2020, the program adopted a “roadshow” model, bringing in-person trainings to locations across the U.S. and U.S. territories, including Alaska, Texas, and Puerto Rico.
+
+This period culminated in a publication describing lessons learned from the CoastWatch Satellite Course and its role in supporting operational use of satellite data. 
+
+![Map showing locations of in-person CoastWatch Satellite Training courses during the “roadshow” period, illustrating the program’s expansion to region-specific trainings across the United States and U.S. territories, including Alaska, Texas, and Puerto Rico.](images/course-roadshow.png)
+
+## Transition to Online Training and Increased Participation
+
+The COVID-19 pandemic in 2020 prompted a rapid shift to online delivery. While initially disruptive, this transition significantly expanded participation by reducing travel and time barriers. Shorter virtual courses and conference workshops enabled CoastWatch to reach a broader and more diverse audience.
+
+As of 2025, the CoastWatch Satellite Training Course has:
+
+- Hosted over 40 courses
+- Trained more than 1,000 participants
+- Collected over 250 participant slides
+- Engaged users across NOAA, academia, industry, NGOs, and international partners 
+
+![Annual participation in CoastWatch Satellite Training courses, distinguishing between full-length courses and shorter workshops. The figure highlights a substantial increase in participation beginning in 2020, driven by the shift to online delivery and the introduction of shorter, more accessible training formats.](images/course-participation.png)
+
+## Training Materials, Courses, and Ongoing Support
+This website serves as a central hub for CoastWatch Satellite Training materials, bringing together resources that were previously distributed across multiple platforms. Users can explore a wide range of training content developed over the course of the program, including:
+
+- [Lecture materials](lectures/index.qmd) covering satellite fundamentals, data products, and applied use cases
+- [Software-based tutorials](tutorials/index.qmd) for accessing, visualizing, and analyzing satellite data using tools such as Python, R, MATLAB, GIS, and web-based utilities
+
+Together, these materials reflect the evolution of the course and support both self-paced learning and structured training activities.
+
+In addition to archived content, the site provides information on [past trainings and upcoming courses](trainings/index.qmd), including full-length courses, shorter workshops, and region-specific offerings. These listings are intended to help users understand the scope of previous trainings and identify opportunities to participate in future events.
+
+To support continued learning beyond formal courses, the CoastWatch training team also offers regular [office hours](officehours.qmd), providing an open forum for users to ask questions, troubleshoot workflows, and get guidance on applying satellite data to their own projects. Office hours are open to anyone and are designed to complement the training materials hosted on this site.

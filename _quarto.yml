@@ -8,7 +8,6 @@ project:
 
 website:
   title: "CoastWatch Training"
-  repo-actions: [issue] #[edit, source, issue]
   favicon: images/coastwatch.png
 
   page-footer: 
@@ -67,6 +66,9 @@ website:
 
       - text: "Course Lectures"
         href: lectures/index.qmd
+
+      - text: "About"
+        href: about.qmd
 
       - text: "Office Hours"
         href: officehours.qmd
