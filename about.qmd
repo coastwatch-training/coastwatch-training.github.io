@@ -33,6 +33,8 @@ As of 2025, the CoastWatch Satellite Training Course has:
 
 ![Annual participation in CoastWatch Satellite Training courses, distinguishing between full-length courses and shorter workshops. The figure highlights a substantial increase in participation beginning in 2020, driven by the shift to online delivery and the introduction of shorter, more accessible training formats.](images/course-participation.png)
 
+![Distribution of participant affiliations across CoastWatch Satellite Training courses, illustrating engagement from NOAA line offices, other government agencies, academia, industry, NGOs, and international organizations.](images/participant-affiliation.png)
+
 ## Training Materials, Courses, and Ongoing Support
 This website serves as a central hub for CoastWatch Satellite Training materials, bringing together resources that were previously distributed across multiple platforms. Users can explore a wide range of training content developed over the course of the program, including:
 
