@@ -18,7 +18,7 @@ Beginning in 2018, additional CoastWatch nodes began hosting their own courses, 
 
 This period culminated in a publication describing lessons learned from the CoastWatch Satellite Course and its role in supporting operational use of satellite data. 
 
-![Map showing locations of in-person CoastWatch Satellite Training courses during the “roadshow” period, illustrating the program’s expansion to region-specific trainings across the United States and U.S. territories, including Alaska, Texas, and Puerto Rico.](images/course-roadshow.png)
+![Map showing locations of in-person CoastWatch Satellite Training courses during the “roadshow” period, illustrating the program’s expansion to region-specific trainings across the United States and U.S. territories, including Alaska, Texas, and Puerto Rico.](images/course-roadshow.png){width=85%}
 
 ## Transition to Online Training and Increased Participation
 
@@ -31,9 +31,9 @@ As of 2025, the CoastWatch Satellite Training Course has:
 - Collected over 250 participant slides
 - Engaged users across NOAA, academia, industry, NGOs, and international partners 
 
-![Annual participation in CoastWatch Satellite Training courses, distinguishing between full-length courses and shorter workshops. The figure highlights a substantial increase in participation beginning in 2020, driven by the shift to online delivery and the introduction of shorter, more accessible training formats.](images/course-participation.png)
+![Annual participation in CoastWatch Satellite Training courses, distinguishing between full-length courses and shorter workshops. The figure highlights a substantial increase in participation beginning in 2020, driven by the shift to online delivery and the introduction of shorter, more accessible training formats.](images/course-participation.png){width=60%}
 
-![Distribution of participant affiliations across CoastWatch Satellite Training courses, illustrating engagement from NOAA line offices, other government agencies, academia, industry, NGOs, and international organizations.](images/participant-affiliation.png)
+![Distribution of participant affiliations across CoastWatch Satellite Training courses, illustrating engagement from NOAA line offices, other government agencies, academia, industry, NGOs, and international organizations.](images/participant-affiliation.png){width=85%}
 
 ## Training Materials, Courses, and Ongoing Support
 This website serves as a central hub for CoastWatch Satellite Training materials, bringing together resources that were previously distributed across multiple platforms. Users can explore a wide range of training content developed over the course of the program, including:

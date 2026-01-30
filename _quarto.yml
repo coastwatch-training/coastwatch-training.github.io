@@ -67,8 +67,11 @@ website:
       - text: "Course Lectures"
         href: lectures/index.qmd
 
-      - text: "About"
+      - text: "About Us"
         href: about.qmd
+
+      - text: "Help"
+        href: help.qmd
 
       - text: "Office Hours"
         href: officehours.qmd

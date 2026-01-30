@@ -554,3 +554,28 @@
   display: flex;
   justify-content: flex-start;
 }
+
+/* ==========================================================================
+   FAQ styling
+   ========================================================================== */
+
+.faq-section {
+  background-color: #f5f6f7;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  border-radius: 6px;
+}
+
+.faq details summary {
+  font-weight: 600;
+  color: #005cb9;
+  cursor: pointer;
+}
+
+.faq details summary:hover {
+  color: #003f88;
+}
+
+.faq details {
+  margin-bottom: 0.75rem;
+}
