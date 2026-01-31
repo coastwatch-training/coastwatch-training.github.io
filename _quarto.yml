@@ -29,6 +29,9 @@ website:
       - text: "Welcome"
         href: index.qmd
 
+      - text: "News & Announcements"
+        href: news-announcements.qmd
+
       - section: "Training Classes"
         href: trainings/index.qmd
         contents:
@@ -50,7 +53,7 @@ website:
                 text: 2024 Sea Ice Data Course
               - href: trainings/past/afs24.qmd
                 text: 2024 AFS Workshop
-                
+
       - section: "Training Tutorials"
         href: tutorials/index.qmd
         contents:
@@ -63,18 +66,17 @@ website:
               - href: tutorials/software.qmd
                 text: "Software Code Gallery"
 
-
       - text: "Course Lectures"
         href: lectures/index.qmd
+
+      - text: "Office Hours"
+        href: officehours.qmd
 
       - text: "About Us"
         href: about.qmd
 
       - text: "Help"
         href: help.qmd
-
-      - text: "Office Hours"
-        href: officehours.qmd
   page-navigation: true
 
 

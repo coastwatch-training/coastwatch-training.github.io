@@ -1,0 +1,27 @@
+---
+title: "News & Announcements"
+format: html
+---
+
+This page highlights recent updates, announcements, and changes related to CoastWatch training materials, tutorials, and data resources.
+
+## Latest Updates
+
+:::{.news-card}
+## Upcoming Training: NOAA CoastWatch/PacIOOS Satellite and Ocean Data Training Course
+**February 10-13, 2026, Virtual, 9 AM-3 PM (Fiji Standard Time)**
+
+This 4-day satellite and ocean data training course will be held virtually during February 10-13 (FJT), 2026. It is co-hosted by CoastWatch/OceanWatch Central Pacific and the Pacific Islands Ocean Observing System (PacIOOS).
+
+Find more information on the upcoming course [here](trainings/upcoming/pgrsc26.qmd).
+
+:::
+
+:::{.news-card}
+## Upcoming Trainings: Satellite 201 Summer Lecture Series
+**July 10, 17, 24 and 31, 2026, Virtual 11am - 1pm (Pacific Time)**
+
+This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. 
+
+Find more information on the upcoming course [here](trainings/upcoming/sat201_26.qmd).
+:::

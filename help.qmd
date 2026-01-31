@@ -90,24 +90,27 @@ To be notified about future courses, contact [Cara Wilson](cara.wilson@noaa.gov)
 :::{.resource-card}
 ### Training Lectures
 Introductory lectures and course materials covering using satellite data.
+
 [View lectures](lectures/index.qmd)
 :::
 
 :::{.resource-card}
 ### Training Tutorials
 The training tutorials provide step-by-step guidance for accessing, exploring, and analyzing satellite data, from software setup and data access to coding workflows in Python, R, and MATLAB.
+
 [View training tutorials](trainings/index.qmd)
 :::
 
 :::{.resource-card}
-### Data Server
+### Data Servers
 Browse available oceanographic satellite products and datasets on ERDDAP.
-[NOAA CoastWatch West Coast Node](https://coastwatch.pfeg.noaa.gov/erddap/index.html)
-[NOAA CoastWatch East Coast Node](https://coastwatch.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000)
-[NOAA CoastWatch Great Lakes Node](https://apps.glerl.noaa.gov/erddap/index.html)
-[NOAA CoastWatch Caribbean and Gulf of America Node](https://cwcgom.aoml.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000)
-[NOAA CoastWatch Central Pacific Node]()
-[NOAA CoastWatch PolarWatch Node](https://polarwatch.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000)
+
+- [NOAA CoastWatch West Coast Node](https://coastwatch.pfeg.noaa.gov/erddap/index.html)
+- [NOAA CoastWatch East Coast Node](https://coastwatch.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000)
+- [NOAA CoastWatch Great Lakes Node](https://apps.glerl.noaa.gov/erddap/index.html)
+- [NOAA CoastWatch Caribbean and Gulf of America Node](https://cwcgom.aoml.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000)
+- [NOAA CoastWatch Central Pacific Node]()
+- [NOAA CoastWatch PolarWatch Node](https://polarwatch.noaa.gov/erddap/info/index.html?page=1&itemsPerPage=1000)
 :::
 
 :::

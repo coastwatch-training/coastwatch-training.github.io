@@ -46,3 +46,38 @@ Together, these materials reflect the evolution of the course and support both s
 In addition to archived content, the site provides information on [past trainings and upcoming courses](trainings/index.qmd), including full-length courses, shorter workshops, and region-specific offerings. These listings are intended to help users understand the scope of previous trainings and identify opportunities to participate in future events.
 
 To support continued learning beyond formal courses, the CoastWatch training team also offers regular [office hours](officehours.qmd), providing an open forum for users to ask questions, troubleshoot workflows, and get guidance on applying satellite data to their own projects. Office hours are open to anyone and are designed to complement the training materials hosted on this site.
+
+
+## People 
+
+**West Coast Node**
+
+- [Cara Wilson](cara.wilson@noaa.gov)
+- [Dale Robinson](dale.robinson@noaa.gov)
+
+**PolarWatch**
+
+- [Sunny Hospital](sun.bak-hospital@noaa.gov)
+
+**East Coast Node**
+
+- [Michelle Tomlinson](michelle.tomlinson@noaa.gov )
+- [Ron Vogel](ronald.vogel@noaa.gov)
+
+**Great Lakes Node**
+
+- [James Kessler](james.kessler@noaa.gov)
+- [Songzhi Liu](songzhi.liu@noaa.gov)
+
+**Caribbean and Gulf of America Node**
+
+- [Joaquin A. Trinanes](joaquin.trinanes@noaa.gov)
+- [Gregory Foltz](gregory.foltz@noaa.gov)
+
+**OceanWatch Central Pacific**
+
+- [Daisy Shi](hui.shi@noaa.gov)
+- [Ryan Rykaczewski](ryan.rykaczewski@noaa.gov)
+
+### In Memoriam
+We gratefully acknowledge the contributions of Dave Foley, who played an important role the the development and delivery of the CoastWatch Satellite Training Courses. His efforts helped support scientists and resource managers in applying satellite data to real-world problems, and that impact continues through this site. 

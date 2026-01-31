@@ -1993,6 +1993,36 @@
     ]
   },
   {
+    "objectID": "help.html",
+    "href": "help.html",
+    "title": "Help",
+    "section": "",
+    "text": "Are you interested in using oceanographic satellite data in your work but not sure where to start?\nNOAA CoastWatch Satellite Training Courses provide access to environmental satellite data, along with tutorials and example workflows designed to help scientists and resource managers work with these datasests more easily. This website brings together training materials, coding examples, and practical guidance developed through CoastWatch courses to support users with varying levels of experience.\nWhether you are new to satellite data or looking for reproducible ways to integrate it into your research or management projects, these resources are intended to help you explore, access, and analyze oceanographic satellite products with confidence.",
+    "crumbs": [
+      "Help"
+    ]
+  },
+  {
+    "objectID": "help.html#frequently-asked-questions",
+    "href": "help.html#frequently-asked-questions",
+    "title": "Help",
+    "section": "Frequently Asked Questions",
+    "text": "Frequently Asked Questions\n\n\n\n\nHow is the course structured?\n\nThe course combines instructional materials with virtual workshops. Instructional materials introduce participants to common types of environmental satellite data including:\n\nOcean color\nSea surface temperature\nSea surface height\nSalinity\nOcean surface winds\n\nWorkshops focus on practical application where participants recieve individual and group support to:\n\nLocate online satellite data\nSelect data with the spatial and temporal coverage that fits their needs\nDownload and work with the data in their preferred software\n\nMost examples focus on R, Python, and ArcGIS, but participants using other software are also welcome.\nParticipants are encouraged to come with a specific project or question to work on during the workshops.\nFor example:\n\nMerging tagged animal tracks with satellite data\nExploring environmental conditions in a study region\nPreparing satellite data for analysis or visualization\n\nParticipants tend to get the most out of workshops when they arrive with clear goals, data, or questions in mind.\n\n\n\nWho should take the course?\n\nThe courses are primarily designed for National Marine Fisheries Service and National Ocean Service scientists, but non-NOAA participants are welcome when space is available.\nTo date, over a thousand participants have taken these courses, including scientists and staff from:\n\nAll six Fisheries Science Centers\nMultiple National Marine Sanctuaries\nOther federal agencies, such as:\n\nU.S. Coast Guard\nU.S. Geological Survey\nU.S. Fish and Wildlife Service\n\n\n\n\n\nHow much does the course cost?\n\nThere is no fee to participate in the course. Participants are asked to submit a single PowerPoint slide describing the project they worked on during the course. These slides help document course outcomes and shared applications of satellite data.\n\n\n\nWhen and where is the next course?\n\nThe dates and locations of upcoming courses can be found here.\nTo be notified about future courses, contact Cara Wilson.",
+    "crumbs": [
+      "Help"
+    ]
+  },
+  {
+    "objectID": "help.html#resources",
+    "href": "help.html#resources",
+    "title": "Help",
+    "section": "Resources",
+    "text": "Resources\n\n\nTraining Lectures\nIntroductory lectures and course materials covering using satellite data.\nView lectures\n\n\nTraining Tutorials\nThe training tutorials provide step-by-step guidance for accessing, exploring, and analyzing satellite data, from software setup and data access to coding workflows in Python, R, and MATLAB.\nView training tutorials\n\n\nData Servers\nBrowse available oceanographic satellite products and datasets on ERDDAP.\n\nNOAA CoastWatch West Coast Node\nNOAA CoastWatch East Coast Node\nNOAA CoastWatch Great Lakes Node\nNOAA CoastWatch Caribbean and Gulf of America Node\nNOAA CoastWatch Central Pacific Node\nNOAA CoastWatch PolarWatch Node",
+    "crumbs": [
+      "Help"
+    ]
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About the CoastWatch Satellite Training Course",
@@ -3532,43 +3562,53 @@
     "text": "Updated September 2024\n\n\nBackground\nRemote sensing data in polar regions commonly use a polar stereographic projection, where the georeferencing is in x and y coordinates instead of the more widely used latitudes and longitudes. Working with data from different projections can be challenging.\n\n\nObjectives\nIn this tutorial, we will demonstrate how to download remote sensing data in polar stereographic projection from PolarWatch and subset it within the boundaries of Lake Iliamna in Alaska, where the lake shape data is presented in a different projection.\nAs this tutorial focuses on satellite data transformation, a basic understanding of satellite data, map projections, and the ERDDAP data server is recommended. For additional learning, you can explore satellite data tutorials and video lectures available through introductory video lectures and tutorials hosted on the CoastWatch Learning Portal and GitHub repository.\n\nThe tutorial demonstrates the following techniques\n\nDownload sea ice satellite data from the PolarWatch ERDDAP data server\nImport geographical features of Lake Iliamna from a shapefile\nTransform data from one projection to another\nSubset the satellite data for Lake Iliamna\nVisualize data in different projection\n\n\n\n\nData Used\nWorld Lake shape data\nThe world lake shapefile can be downloaded from ArcGIS Hub at https://hub.arcgis.com, and is also available in the resource/ directory of this tutorial folder. The file includes geographical features of all world lakes. For this exercise, only the features of Lake Illemna will be used.\nIMS Snow and Ice Analysis, Arctic, 4km, 2004 - Present, Daily (PolarWatch Preview)\nThe IMS dataset includes daily snow and ice coverage data for the Arctic with a 4-km resolution, available starting from 2004. The values in the dataset are categorical, representing five categories: 0 for areas outside the coverage zone, 1 for open water, 2 for land without snow, 3 for sea ice or lake ice, and 4 for snow-covered land. Data with a 1-km resolution are also available. Please contact us for more information.\n\nLoad python packages\nFor this exercise, the following packages are required. The complete list of required packages for all CoastWatch tutorials is provided in the environment.yml located in the Python-setup/ folder.\n\n# Load packages\nimport xarray as xr\nimport geopandas as gpd\nimport pandas as pd\nimport rioxarray\nfrom shapely.geometry import mapping\n\n\n\nLoad Lake Illemna data\n\n# Load lake shape file into geopanda data frame\nshapefile_path = '../resources/Iliamna/Iliamna.shp'\nlakes_shp = gpd.read_file(shapefile_path)\n\n\n# Check column names\nprint(\"Lake Data Columns:\")\nprint(lakes_shp.columns)\nlakes_shp[\"Lake_name\"].unique()\n\nLake Data Columns:\nIndex(['Hylak_id', 'Lake_name', 'Country', 'Continent', 'Poly_src',\n       'Lake_type', 'Grand_id', 'Lake_area', 'Shore_len', 'Shore_dev',\n       'Vol_total', 'Vol_res', 'Vol_src', 'Depth_avg', 'Dis_avg', 'Res_time',\n       'Elevation', 'Slope_100', 'Wshd_area', 'Pour_long', 'Pour_lat',\n       'geometry'],\n      dtype='object')\n\n\narray([None, 'Iliamna'], dtype=object)\n\n\n\n# Look up Iliamna lake\nprint(\"Row(s) that contain lake name: Iliamna\")\nlakes_shp[lakes_shp['Lake_name'].str.contains('iliamna', case=False, na=False)]\n\nRow(s) that contain lake name: Iliamna\n\n\n\n\n\n\n\n\n\nHylak_id\nLake_name\nCountry\nContinent\nPoly_src\nLake_type\nGrand_id\nLake_area\nShore_len\nShore_dev\n...\nVol_src\nDepth_avg\nDis_avg\nRes_time\nElevation\nSlope_100\nWshd_area\nPour_long\nPour_lat\ngeometry\n\n\n\n\n287\n31\nIliamna\nUnited States of America\nNorth America\nNHD\n1\n0\n2634.62\n1006.79\n5.53\n...\n1\n43.8\n354.811\n3761.5\n13\n-1.0\n16869.4\n-155.884538\n59.331889\nPOLYGON ((-17336380.000 8247763.000, -17336837...\n\n\n\n\n1 rows × 22 columns\n\n\n\n\n# Extract Iliamna shape\niliamna_shp = lakes_shp[lakes_shp['Hylak_id'] == 31]\n\n# Examine coordinate referernce system (crs)\niliamna_shp.crs\n\n&lt;Projected CRS: EPSG:3857&gt;\nName: WGS 84 / Pseudo-Mercator\nAxis Info [cartesian]:\n- X[east]: Easting (metre)\n- Y[north]: Northing (metre)\nArea of Use:\n- name: World between 85.06°S and 85.06°N.\n- bounds: (-180.0, -85.06, 180.0, 85.06)\nCoordinate Operation:\n- name: Popular Visualisation Pseudo-Mercator\n- method: Popular Visualisation Pseudo Mercator\nDatum: World Geodetic System 1984 ensemble\n- Ellipsoid: WGS 84\n- Prime Meridian: Greenwich\n\n\n\n# Visualize the lake \niliamna_shp.plot()\n\n\n\n\n\n\n\n\n\n\nLoad IMS data from PolarWatch ERDDAP\n\n# Load IMS data from ERDDAP\nerddap_url = \"https://polarwatch.noaa.gov/erddap/griddap/usnic_ims_4km\"\nds = xr.open_dataset(erddap_url)\n\n# Select one day data\nds_date = '2024-07-30'\nds = ds.sel(time=ds_date)\n\n# Visualize the IMS data\nds[\"IMS_Surface_Values\"].plot()\n\n\n\n\n\n\n\n\n\n# Check the IMS data projection\nds.attrs['grid_mapping_proj4']\n\n'+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs'\n\n\n\n\n\nTransform the lake data crs to match the satellite data crs\nThe helper functions are provided for the projection transformation process\n\n# from PolarWatch helper functions\n\ndef set_geo_specs(dat: xr.DataArray, xdim: str, ydim: str, crs: str) -&gt; xr.DataArray:\n    \"\"\"Update the spatial dimensions and coordinate reference system (CRS) of an xarray DataArray.\n\n    Args:\n        dat (xr.DataArray): The data array to modify.\n        xdim (str): Name of the dimension representing the x-coordinate.\n        ydim (str): Name of the dimension representing the y-coordinate.\n        crs (str): String representation of the coordinate reference system to assign.\n\n    Returns:\n        xr.DataArray: The updated data array with specified spatial dimensions and CRS.\n    \"\"\"\n    dat = dat.rio.set_spatial_dims(x_dim=xdim, y_dim=ydim)\n    try:\n        dat = dat.rio.write_crs(crs)\n        print('CRS setup successful')\n    except Exception as e:\n        print(f'Error during crs setup: {e}')\n\n    return dat\n\n\ndef clip_data_to_shapefile(data_array: xr.DataArray, shapefile_geom, crs: str)-&gt; xr.DataArray:\n    \"\"\"Clip data array to the specified shapefile geometry with CRS.\n    \n    Args:\n        data_array (xr.DataArray): The data array to modify.\n        shapefile_geom : Shapefile geometry.\n        crs (str): CRS of the data.\n\n    Returns:\n        xr.DataArray: The updated data array with specified spatial dimensions and CRS.  \n    \n    \"\"\"\n    try:\n        clipped_data = data_array.rio.clip(shapefile_geom.apply(mapping), crs)\n        print(\"Clipping successful\")\n        return clipped_data\n    except Exception as e:\n        print(f\"Error during clipping: {e}\")\n        raise\n\ndef transform_shapes(shp: gpd.GeoDataFrame, crs:str)-&gt; gpd.GeoDataFrame:\n    \"\"\"\n    Transforms the projection of a GeoDataFrame to a specified coordinate reference system (CRS).\n    \n    This function takes a GeoDataFrame and transforms its projection to the specified CRS, typically used\n    for reprojecting geometries to match satellite data or other spatial datasets that require a specific CRS.\n    For example, transforming the shape to a Polar Stereographic Projection.\n    \n    Parameters:\n    shp : gpd.GeoDataFrame\n        The input GeoDataFrame containing geometries (e.g., shapes, boundaries) that need to be transformed.\n    crs : str\n        The target coordinate reference system (CRS) in string format (e.g., \"EPSG:3413\" for the Polar Stereographic Projection).\n    \n    Returns:\n    gpd.GeoDataFrame\n        A GeoDataFrame with geometries transformed to the specified CRS.\n\n    \"\"\"\n    try:\n        shp_proj_transformed = shp.to_crs(crs)\n        print(f\"Projection transformed to {crs}\")\n        return shp_proj_transformed\n    except Exception as e:\n        print(f\"Error transforming CRS: {e}\")\n        raise\n\n\n# Set crs_project as the data crs (based on xarray.Dataset.attrs)\ncrs_project = \"+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs\"\n\n# Set data crs\nds = set_geo_specs(ds, xdim=\"x\", ydim=\"y\", crs=crs_project)\n\n# Transform the shape into the data crs\niliamna_transformed = transform_shapes(iliamna_shp, crs_project)\n\nCRS setup successful\nProjection transformed to +proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs\n\n\n\n# Examine lake shape crs\niliamna_transformed.crs\n\n&lt;Projected CRS: +proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 + ...&gt;\nName: unknown\nAxis Info [cartesian]:\n- E[south]: Easting (metre)\n- N[south]: Northing (metre)\nArea of Use:\n- undefined\nCoordinate Operation:\n- name: unknown\n- method: Polar Stereographic (variant B)\nDatum: unknown\n- Ellipsoid: unknown\n- Prime Meridian: Greenwich\n\n\n\n# Visualized transformed iliamna shape\niliamna_transformed.plot()\n\n\n\n\n\n\n\n\n\nSubset the satellite data using the Lake shape\n\n# Clip data to the shape\nds_clipped = clip_data_to_shapefile(ds, iliamna_transformed.geometry, iliamna_transformed.crs)\n\nClipping successful\n\n\n\n# Visualized clipped data\nds_clipped[\"IMS_Surface_Values\"].plot()\n\n\n\n\n\n\n\n\n\n\n\nResources\n\nCoastWatch Learning Portal - Lectures, Videos, Other learning resources\nCoastWatch Tutorials on Github - Tutorial notebooks and code samples\nPolarWatch ERDDAP - Complete list of data available on PolarWatch ERDDAP Server\nPolarWatch Catalog - Preview data on polar map"
   },
   {
-    "objectID": "help.html",
-    "href": "help.html",
-    "title": "Help",
+    "objectID": "about.html#people",
+    "href": "about.html#people",
+    "title": "About the CoastWatch Satellite Training Course",
+    "section": "People",
+    "text": "People\nWest Coast Node\n\nCara Wilson\nDale Robinson\n\nPolarWatch\n\nSunny Hospital\n\nEast Coast Node\n\nMichelle Tomlinson\nRon Vogel\n\nGreat Lakes Node\n\nJames Kessler\nSongzhi Liu\n\nCaribbean and Gulf of America Node\n\nJoaquin A. Trinanes\nGregory Foltz\n\nOceanWatch Central Pacific\n\nDaisy Shi\nRyan Rykaczewski\n\n\nIn Memoriam\nWe gratefully acknowledge the contributions of Dave Foley, who played an important role the the development and delivery of the CoastWatch Satellite Training Courses. His efforts helped support scientists and resource managers in applying satellite data to real-world problems, and that impact continues through this site.",
+    "crumbs": [
+      "About Us"
+    ]
+  },
+  {
+    "objectID": "news-announcements.html",
+    "href": "news-announcements.html",
+    "title": "News & Announcements",
     "section": "",
-    "text": "Are you interested in using oceanographic satellite data in your work but not sure where to start?\nNOAA CoastWatch Satellite Training Courses provide access to environmental satellite data, along with tutorials and example workflows designed to help scientists and resource managers work with these datasests more easily. This website brings together training materials, coding examples, and practical guidance developed through CoastWatch courses to support users with varying levels of experience.\nWhether you are new to satellite data or looking for reproducible ways to integrate it into your research or management projects, these resources are intended to help you explore, access, and analyze oceanographic satellite products with confidence.",
+    "text": "This page highlights recent updates, announcements, and changes related to CoastWatch training materials, tutorials, and data resources.",
     "crumbs": [
-      "Help"
+      "News & Announcements"
     ]
   },
   {
-    "objectID": "help.html#frequently-asked-questions",
-    "href": "help.html#frequently-asked-questions",
-    "title": "Help",
-    "section": "Frequently Asked Questions",
-    "text": "Frequently Asked Questions\n\n\n\n\nHow is the course structured?\n\nThe course combines instructional materials with virtual workshops. Instructional materials introduce participants to common types of environmental satellite data including:\n\nOcean color\nSea surface temperature\nSea surface height\nSalinity\nOcean surface winds\n\nWorkshops focus on practical application where participants recieve individual and group support to:\n\nLocate online satellite data\nSelect data with the spatial and temporal coverage that fits their needs\nDownload and work with the data in their preferred software\n\nMost examples focus on R, Python, and ArcGIS, but participants using other software are also welcome.\nParticipants are encouraged to come with a specific project or question to work on during the workshops.\nFor example:\n\nMerging tagged animal tracks with satellite data\nExploring environmental conditions in a study region\nPreparing satellite data for analysis or visualization\n\nParticipants tend to get the most out of workshops when they arrive with clear goals, data, or questions in mind.\n\n\n\nWho should take the course?\n\nThe courses are primarily designed for National Marine Fisheries Service and National Ocean Service scientists, but non-NOAA participants are welcome when space is available.\nTo date, over a thousand participants have taken these courses, including scientists and staff from:\n\nAll six Fisheries Science Centers\nMultiple National Marine Sanctuaries\nOther federal agencies, such as:\n\nU.S. Coast Guard\nU.S. Geological Survey\nU.S. Fish and Wildlife Service\n\n\n\n\n\nHow much does the course cost?\n\nThere is no fee to participate in the course. Participants are asked to submit a single PowerPoint slide describing the project they worked on during the course. These slides help document course outcomes and shared applications of satellite data.\n\n\n\nWhen and where is the next course?\n\nThe dates and locations of upcoming courses can be found here\nTo be notified about future courses, contact Cara Wilson.",
+    "objectID": "news-announcements.html#latest-updates",
+    "href": "news-announcements.html#latest-updates",
+    "title": "News & Announcements",
+    "section": "Latest Updates",
+    "text": "Latest Updates",
     "crumbs": [
-      "Help"
+      "News & Announcements"
     ]
   },
   {
-    "objectID": "help.html#are-you-interested-in-using-oceanographic-satellite-data-in-your-work-but-not-sure-where-to-start",
-    "href": "help.html#are-you-interested-in-using-oceanographic-satellite-data-in-your-work-but-not-sure-where-to-start",
-    "title": "Help",
-    "section": "",
-    "text": "NOAA CoastWatch Satellite Training Courses provide access to environmental satellite data, along with tutorials and example workflows designed to help scientists and resource managers work with these datasests more easily. This website brings together training materials, coding examples, and practical guidance developed through CoastWatch courses to support users with varying levels of experience.\nWhether you are new to satellite data or looking for reproducible ways to integrate it into your research or management projects, these resources are intended to help you explore, access, and analyze oceanographic satellite products with confidence.",
+    "objectID": "news-announcements.html#upcoming-training-noaa-coastwatchpacioos-satellite-and-ocean-data-training-course",
+    "href": "news-announcements.html#upcoming-training-noaa-coastwatchpacioos-satellite-and-ocean-data-training-course",
+    "title": "News & Announcements",
+    "section": "Upcoming Training: NOAA CoastWatch/PacIOOS Satellite and Ocean Data Training Course",
+    "text": "Upcoming Training: NOAA CoastWatch/PacIOOS Satellite and Ocean Data Training Course\nFebruary 10-13, 2026, Virtual, 9 AM-3 PM (Fiji Standard Time)\nThis 4-day satellite and ocean data training course will be held virtually during February 10-13 (FJT), 2026. It is co-hosted by CoastWatch/OceanWatch Central Pacific and the Pacific Islands Ocean Observing System (PacIOOS).\nFind more information on the upcoming course here.",
     "crumbs": [
-      "Help"
+      "News & Announcements"
     ]
   },
   {
-    "objectID": "help.html#resources",
-    "href": "help.html#resources",
-    "title": "Help",
-    "section": "Resources",
-    "text": "Resources",
+    "objectID": "news-announcements.html#upcoming-trainings-satellite-201-summer-lecture-series",
+    "href": "news-announcements.html#upcoming-trainings-satellite-201-summer-lecture-series",
+    "title": "News & Announcements",
+    "section": "Upcoming Trainings: Satellite 201 Summer Lecture Series",
+    "text": "Upcoming Trainings: Satellite 201 Summer Lecture Series\nJuly 10, 17, 24 and 31, 2026, Virtual 11am - 1pm (Pacific Time)\nThis lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course.\nFind more information on the upcoming course here.",
     "crumbs": [
-      "Help"
+      "News & Announcements"
     ]
   }
 ]
