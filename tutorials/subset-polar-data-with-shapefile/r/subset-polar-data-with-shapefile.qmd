@@ -96,15 +96,26 @@ ggplot(data = ims, aes(x = x, y = y, fill=IMS_Surface_Values)) +
 
 ``` r
 
-# convert ims to raster S3 obj
-ims_ras <- terra::rast(ims)
+# ensure numeric (rerddap often returns list columns)
+ims$x <- as.numeric(unlist(ims$x))
+ims$y <- as.numeric(unlist(ims$y))
+ims[[var_name]] <- as.numeric(unlist(ims[[var_name]]))
 
+# create raster from xyz explicitly
+ims_ras <- terra::rast(ims[, c("x", "y", var_name)], type = "xyz")
+
+# IMS 4km grid is Polar Stereographic (proj4 from NSIDC IMS user guide)
+ims_proj4 <- "+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs"
+terra::crs(ims_ras) <- ims_proj4
+
+
+# get CRS as an sf object for st_transform
+data_crs <- sf::st_crs("EPSG:3857")
 # plot the raster data
 plot(ims_ras)
 
-# get CRS of the ims data
-data_crs <- crs(ims_ras)
 ```
+
 ![](images/sub-polar-2.png)
 
 # Load the lake shapefile
@@ -135,9 +146,9 @@ ggplot(data = lake_shp) +
 
 ``` r
 
-shapes_polar <- st_transform(lake_shp, data_crs)
+shapes_polar <- sf::st_transform(lake_shp, sf::st_crs(ims_proj4))
 lake_ras <- terra::vect(shapes_polar)
-plot(lake_ras)
+plot(lake_ras, border = "red")
 ```
 
 ![](images/sub-polar-4.png)
