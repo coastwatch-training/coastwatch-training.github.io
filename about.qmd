@@ -47,37 +47,22 @@ In addition to archived content, the site provides information on [past training
 
 To support continued learning beyond formal courses, the CoastWatch training team also offers regular [office hours](officehours.qmd), providing an open forum for users to ask questions, troubleshoot workflows, and get guidance on applying satellite data to their own projects. Office hours are open to anyone and are designed to complement the training materials hosted on this site.
 
+## People
 
-## People 
-
-**West Coast Node**
-
-- [Cara Wilson](cara.wilson@noaa.gov)
-- [Dale Robinson](dale.robinson@noaa.gov)
-
-**PolarWatch**
-
-- [Sunny Hospital](sun.bak-hospital@noaa.gov)
-
-**East Coast Node**
-
-- [Michelle Tomlinson](michelle.tomlinson@noaa.gov )
-- [Ron Vogel](ronald.vogel@noaa.gov)
-
-**Great Lakes Node**
-
-- [James Kessler](james.kessler@noaa.gov)
-- [Songzhi Liu](songzhi.liu@noaa.gov)
-
-**Caribbean and Gulf of America Node**
-
-- [Joaquin A. Trinanes](joaquin.trinanes@noaa.gov)
-- [Gregory Foltz](gregory.foltz@noaa.gov)
-
-**OceanWatch Central Pacific**
-
-- [Daisy Shi](hui.shi@noaa.gov)
-- [Ryan Rykaczewski](ryan.rykaczewski@noaa.gov)
+ | Name              | Affiliation                     | 
+ |:-----------------|:-----------------------------------------------------------------------------|
+ | [Cara Wilson](mailto:cara.wilson@noaa.gov)       | CoastWatch/West Coast Node/PolarWatch, Node Manager|
+ | [Dale Robinson](mailto:dale.robinson@noaa.gov)       | CoastWatch/West Coast Node/PolarWatch, Development Lead |
+ | [Sunny Hospital](mailto:sun.bak-hospital@noaa.gov)       | CoastWatch/PolarWatch, Development Lead |
+ | [Michelle Tomlinson](mailto:michelle.tomlinson@noaa.gov)        | CoastWatch/East Coast Node, Node Manager |
+ | [Ron Vogel](mailto:ronald.vogel@noaa.gov)        | CoastWatch/East Coast Node, Development Lead |
+ | [James Kessler](mailto:james.kessler@noaa.gov)        | CoastWatch/Great Lakes Node, Node Manager |
+ | [Songzhi Liu](mailto:songzhi.liu@noaa.gov)        | CoastWatch/Great Lakes Node, Development Lead |
+ | [Gregory Foltz](mailto:gregory.foltz@noaa.gov)        | CoastWatch/Caribbean and Gulf of America Node, Node Manager |
+ | [Joaquin A. Trinanes](mailto:joaquin.trinanes@noaa.gov)        | CoastWatch/Caribbean and Gulf of America Node, Development Lead |
+ | [Ryan Rykaczewski](ryan.rykaczewski@noaa.gov)         | CoastWatch/Pacific OceanWatch, Node Manager |
+ | [Daisy Shi](mailto:hui.shi@noaa.gov)         | CoastWatch/Pacific OceanWatch, Development Lead |
+ 
 
 ### In Memoriam
 We gratefully acknowledge the contributions of Dave Foley, who played an important role the the development and delivery of the CoastWatch Satellite Training Courses. His efforts helped support scientists and resource managers in applying satellite data to real-world problems, and that impact continues through this site. 

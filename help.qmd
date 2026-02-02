@@ -88,6 +88,15 @@ To be notified about future courses, contact [Cara Wilson](cara.wilson@noaa.gov)
 
 
 :::{.resource-card}
+### CoastWatch Help Desk
+The CoastWatch Help Desk provides user support regarding the use of our data products and services. Please do not hesitate to contact us using the methods below:
+
+- Email: coastwatch.info@noaa.gov
+- Phone: +1 (301) 683-3335
+- [User Forums](https://vlab.noaa.gov/web/coastwatch) (inquiry threads)
+:::
+
+:::{.resource-card}
 ### Training Lectures
 Introductory lectures and course materials covering using satellite data.
 

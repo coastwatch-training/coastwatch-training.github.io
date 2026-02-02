@@ -52,20 +52,20 @@ On the [Software Code Gallery](software.qmd) page, you’ll find individual less
 
 **CoastWatch**
 
-- CoastWatch West Coast Node: https://coastwatch.pfeg.noaa.gov/erddap/
-- CoastWatch Central Pacific Node: https://oceanwatch.pifsc.noaa.gov/erddap/
-- CoastWatch Gulf of Mexico Node: https://cwcgom.aoml.noaa.gov/erddap/
-- CoastWatch Great Lakes Node: https://coastwatch.glerl.noaa.gov/erddap/
-- CoastWatch Central: https://coastwatch.noaa.gov/erddap/
+- [CoastWatch West Coast Node](https://coastwatch.pfeg.noaa.gov/erddap/)
+- [CoastWatch Central Pacific Node](https://oceanwatch.pifsc.noaa.gov/erddap/)
+- [CoastWatch Gulf of Mexico Node](https://cwcgom.aoml.noaa.gov/erddap/)
+- [CoastWatch Great Lakes Node](https://coastwatch.glerl.noaa.gov/erddap/)
+- [CoastWatch Central](https://coastwatch.noaa.gov/erddap/)
 
 **Other organizations**
 
-- Southern California Coastal Ocean Observing System (SCCOOS): http://sccoos.org/erddap/
-- Rutgers: http://tds.marine.rutgers.edu/erddap/
-- NOAA GEO-IDE UAF: https://upwell.pfeg.noaa.gov/erddap/
-- NCEI: https://www.ncei.noaa.gov/erddap/
-- IFREMER: http://www.ifremer.fr/erddap/
-- Marine Institute Ireland: https://erddap.marine.ie/erddap/
+- [Southern California Coastal Ocean Observing System (SCCOOS)](http://sccoos.org/erddap/)
+- [Rutgers](http://tds.marine.rutgers.edu/erddap/)
+- [NOAA GEO-IDE UAF](https://upwell.pfeg.noaa.gov/erddap/)
+- [NCEI](https://www.ncei.noaa.gov/erddap/)
+- [IFREMER](http://www.ifremer.fr/erddap/)
+- [Marine Institute Ireland](https://erddap.marine.ie/erddap/)
 
 A more complete list is available here:  
 https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations
