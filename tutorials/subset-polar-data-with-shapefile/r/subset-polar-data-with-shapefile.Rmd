@@ -150,7 +150,7 @@ ggplot(data = lake_shp) +
 
 shapes_polar <- sf::st_transform(lake_shp, sf::st_crs(ims_proj4))
 lake_ras <- terra::vect(shapes_polar)
-plot(lake_ras, add = TRUE, border = "red")
+plot(lake_ras, border = "red")
 ```
 
 ## Crop the IMS data

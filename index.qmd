@@ -2,6 +2,24 @@
 title: "CoastWatch Training Website"
 ---
 
-This is a Quarto website.
+This site provides information on CoastWatch Satellite Training courses such as upcoming or past trainings, training tutorials, course lectures, and more to support scientists working with oceanographic satellite data.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+### What you'll find here
+
+- Step-by-step coding and software tutorials for accessing and analyzing satellite data 
+- Training materials developed through NOAA CoastWatch courses, including information on upcoming and past trainings
+- Resources and support options, including scheduled office hours, to help you integrate satellite data into research and management workflows
+
+### Not sure where to start?
+
+- **Interested in participanting in a training course?**
+
+  Visit the [Training Classes](trainings/index.qmd) page to see upcoming trainings or past trainings to get an idea of what to expect.
+
+- **Looking for hands-on examples?**
+
+  Check out the [Training Tutorials](tutorials/index.qmd) to explore workflows in Python, R, and MATLAB, as well as software tutorials exploring NASA's Panoply and CoastWatch Utilities.
+
+- **Need help or have questions?**
+
+  The [Help](help.qmd) page points you to FAQs, resources, and support options.

@@ -90,7 +90,7 @@ ggplot(data = ims, aes(x = x, y = y, fill=IMS_Surface_Values)) +
          ggtitle("IMS Data")
 
 ```
-![](images/polarshp1_r.png)
+![](images/sub-polar-1.png)
 
 ## Convert IMS data to raster S4 object
 
@@ -105,7 +105,7 @@ plot(ims_ras)
 # get CRS of the ims data
 data_crs <- crs(ims_ras)
 ```
-![](images/polarshp2_r.png)
+![](images/sub-polar-2.png)
 
 # Load the lake shapefile
 
@@ -129,7 +129,7 @@ ggplot(data = lake_shp) +
        caption = "Source: shapefile")
 
 ```
-![](images/polarshp3_r.png)
+![](images/sub-polar-3.png)
 
 ## Convert the lake shape to raster S4 object
 
@@ -139,6 +139,8 @@ shapes_polar <- st_transform(lake_shp, data_crs)
 lake_ras <- terra::vect(shapes_polar)
 plot(lake_ras)
 ```
+
+![](images/sub-polar-4.png)
 
 ## Crop the IMS data
 
@@ -152,3 +154,5 @@ masked_lake <- mask(cropped_lake, lake_ras)
 plot(masked_lake)
 
 ```
+
+![](images/sub-polar-5.png)

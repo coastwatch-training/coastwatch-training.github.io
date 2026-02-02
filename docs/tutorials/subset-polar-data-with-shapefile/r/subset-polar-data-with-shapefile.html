@@ -150,6 +150,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Welcome</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../../news-announcements.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">News &amp; Announcements</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../../trainings/index.html" class="sidebar-item-text sidebar-link">
@@ -273,6 +279,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../../officehours.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Office Hours</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../../about.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">About Us</span></a>
   </div>
@@ -281,12 +293,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../../../help.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Help</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../../officehours.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Office Hours</span></a>
   </div>
 </li>
     </ul>
@@ -402,7 +408,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>         <span class="fu">scale_x_continuous</span>() <span class="sc">+</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>         <span class="fu">scale_fill_gradientn</span>(<span class="at">colours=</span><span class="fu">rev</span>(<span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">3</span>, <span class="at">name =</span> <span class="st">"Blues"</span>)),<span class="at">na.value=</span><span class="st">"tan"</span>) <span class="sc">+</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ggtitle</span>(<span class="st">"IMS Data"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="images/polarshp1_r.png" class="img-fluid"></p>
+<p><img src="images/sub-polar-1.png" class="img-fluid"></p>
 <section id="convert-ims-data-to-raster-s4-object" class="level2">
 <h2 class="anchored" data-anchor-id="convert-ims-data-to-raster-s4-object">Convert IMS data to raster S4 object</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
@@ -414,7 +420,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># get CRS of the ims data</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>data_crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(ims_ras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="images/polarshp2_r.png" class="img-fluid"></p>
+<p><img src="images/sub-polar-2.png" class="img-fluid"></p>
 </section>
 </section>
 <section id="load-the-lake-shapefile" class="level1">
@@ -436,13 +442,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Lake Iliamna"</span>, </span>
 <span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Source: shapefile"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="images/polarshp3_r.png" class="img-fluid"></p>
+<p><img src="images/sub-polar-3.png" class="img-fluid"></p>
 <section id="convert-the-lake-shape-to-raster-s4-object" class="level2">
 <h2 class="anchored" data-anchor-id="convert-the-lake-shape-to-raster-s4-object">Convert the lake shape to raster S4 object</h2>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>shapes_polar <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(lake_shp, data_crs)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>lake_ras <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">vect</span>(shapes_polar)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lake_ras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/sub-polar-4.png" class="img-fluid"></p>
 </section>
 <section id="crop-the-ims-data" class="level2">
 <h2 class="anchored" data-anchor-id="crop-the-ims-data">Crop the IMS data</h2>
@@ -453,6 +460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># mask data with the lake shape</span></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>masked_lake <span class="ot">&lt;-</span> <span class="fu">mask</span>(cropped_lake, lake_ras)</span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(masked_lake)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/sub-polar-5.png" class="img-fluid"></p>
 
 
 </section>
