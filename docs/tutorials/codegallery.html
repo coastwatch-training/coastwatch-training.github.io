@@ -300,7 +300,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Each tutorial presents a complete example workflow, including data access (for example through ERDDAP), basic data processing and quality control steps, and the generation of common outputs such as maps, time series, or summary statistics.</p>
 <p>The Code Gallery is designed to support exploration, comparison, and reuse of coding workflows. Users are encouraged to adapt the example code to their own research, educational, or operational needs.</p>
 <p>Click the <strong>eye</strong> icon to view the tutorial, <strong>box</strong> icon to view the required resources, or <strong>download</strong> to get directed to the source file.</p>
-<div id="5f6a5d8b" class="cell" data-message="false" data-execution_count="1">
+<div id="02798a55" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <script>
 function cgOpenModal(id){
@@ -1845,7 +1845,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
     
     <div id="cg-modal-20" class="cg-modal">
       <h3 class="anchored">Matching satellite chlorophyll to animal telemetry tracks</h3>
-      <p>This tutorial demonstrates how satellite data can be matched to moving tracks defined by longitude, latitude, and time, such as those from ships, gliders, or animal telemetry. Using a subsampled loggerhead turtle track and the ESA Ocean Colour Climate Change Initiative (OC-CCI) monthly chlorophyll-a dataset (v6.0), the workflow loads track data from a file, visualizes the track and its start/end locations, extracts satellite chlorophyll values at each track point via ERDDAP, saves the matchup results to a CSV file, and maps the satellite-derived chlorophyll patterns along the track.</p>
+      <p>This tutorial demonstrates how to match satellite chlorophyll data to animal, ship, or glider tracks using longitude, latitude, and time coordinates. Examples include a loggerhead turtle track using nearest-pixel matchups and a dusky shark telemetry dataset that applies spatial averaging within a local window to better represent environmental conditions along movement tracks.</p>
 
       <div class="cg-grid">
         
