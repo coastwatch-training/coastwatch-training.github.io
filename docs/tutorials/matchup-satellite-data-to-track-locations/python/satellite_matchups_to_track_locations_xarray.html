@@ -336,6 +336,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#map-the-chlorophyll-data" id="toc-map-the-chlorophyll-data" class="nav-link" data-scroll-target="#map-the-chlorophyll-data">Map the chlorophyll data</a></li>
   </ul></li>
   <li><a href="#on-your-own" id="toc-on-your-own" class="nav-link" data-scroll-target="#on-your-own">On your own!</a></li>
+  <li><a href="#match-satellite-chlorophyll-to-dusky-shark-telemetry" id="toc-match-satellite-chlorophyll-to-dusky-shark-telemetry" class="nav-link" data-scroll-target="#match-satellite-chlorophyll-to-dusky-shark-telemetry">Match satellite chlorophyll to Dusky shark telemetry</a>
+  <ul class="collapse">
+  <li><a href="#load-dusky-shark-telemetry-data" id="toc-load-dusky-shark-telemetry-data" class="nav-link" data-scroll-target="#load-dusky-shark-telemetry-data">Load Dusky shark telemetry data</a></li>
+  <li><a href="#convert-telemetry-columns-to-coordinate-arrays" id="toc-convert-telemetry-columns-to-coordinate-arrays" class="nav-link" data-scroll-target="#convert-telemetry-columns-to-coordinate-arrays">Convert telemetry columns to coordinate arrays</a></li>
+  <li><a href="#open-a-satellite-dataset-using-xarray-opendap" id="toc-open-a-satellite-dataset-using-xarray-opendap" class="nav-link" data-scroll-target="#open-a-satellite-dataset-using-xarray-opendap">Open a satellite dataset using Xarray (OPeNDAP)</a></li>
+  <li><a href="#match-each-shark-detection-to-a-local-satellite-window-0.2" id="toc-match-each-shark-detection-to-a-local-satellite-window-0.2" class="nav-link" data-scroll-target="#match-each-shark-detection-to-a-local-satellite-window-0.2">Match each shark detection to a local satellite window (±0.2°)</a></li>
+  <li><a href="#run-the-matchup-for-all-shark-detections" id="toc-run-the-matchup-for-all-shark-detections" class="nav-link" data-scroll-target="#run-the-matchup-for-all-shark-detections">Run the matchup for all shark detections</a></li>
+  <li><a href="#assemble-a-consolidated-telemetrysatellite-dataset" id="toc-assemble-a-consolidated-telemetrysatellite-dataset" class="nav-link" data-scroll-target="#assemble-a-consolidated-telemetrysatellite-dataset">Assemble a consolidated telemetry–satellite dataset</a></li>
+  <li><a href="#map-of-all-sharks-colored-by-chlorophyll" id="toc-map-of-all-sharks-colored-by-chlorophyll" class="nav-link" data-scroll-target="#map-of-all-sharks-colored-by-chlorophyll">Map of all sharks colored by chlorophyll</a></li>
+  <li><a href="#subset-all-tags-for-a-single-shark" id="toc-subset-all-tags-for-a-single-shark" class="nav-link" data-scroll-target="#subset-all-tags-for-a-single-shark">Subset all tags for a single shark</a></li>
+  <li><a href="#plot-the-movement-track-for-a-single-shark" id="toc-plot-the-movement-track-for-a-single-shark" class="nav-link" data-scroll-target="#plot-the-movement-track-for-a-single-shark">Plot the movement track for a single shark</a></li>
+  <li><a href="#compare-chlorophyll-conditions-by-year-using-a-boxplot" id="toc-compare-chlorophyll-conditions-by-year-using-a-boxplot" class="nav-link" data-scroll-target="#compare-chlorophyll-conditions-by-year-using-a-boxplot">Compare chlorophyll conditions by year using a boxplot</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -374,6 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Loading data from a tab- or comma-separated file</li>
 <li>Plotting the latitude/longitude points onto a map</li>
 <li>Extracting satellite data along a track</li>
+<li>Summarizing satellite values using either a single nearest pixel or a small spatial window</li>
 <li>Saving results as a CSV file</li>
 <li>Plotting the satellite data onto a map</li>
 </ul>
@@ -383,6 +397,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Chlorophyll a concentration from the European Space Agency’s Ocean Colour Climate Change Initiative Monthly dataset v6.0</li>
 <li>A loggerhead turtle telemetry track that has been subsample to reduce the data requests needed for this tutorial from over 1200 to 25. The turtle was raised in captivity in Japan, then tagged and released on 05/04/2005 in the Central Pacific. Its tag transmitted for over 3 years and went all the way to the Southern tip of Baja California. The track data can be downloaded from <code>data</code> folder in this project folder.</li>
+<li>Dusky shark telemetry detections, consisting of longitude, latitude, date, and transmitter ID information from acoustic tags deployed along the U.S. East Coast. This example demonstrates matching satellite chlorophyll using a small spatial window (±0.2°) to better represent local environmental conditions experienced by the animal.</li>
+<li>Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (8 Day Composite)</li>
 </ul>
 </section>
 <section id="python-packages-used" class="level3">
@@ -400,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="import-the-required-python-modules" class="level2">
 <h2 class="anchored" data-anchor-id="import-the-required-python-modules">Import the required Python modules</h2>
-<div id="cell-3" class="cell" data-execution_count="2">
+<div id="cell-3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -409,9 +425,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cartopy.mpl.ticker <span class="im">import</span> LongitudeFormatter, LatitudeFormatter</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cartopy.mpl.gridliner <span class="im">import</span> LONGITUDE_FORMATTER, LATITUDE_FORMATTER</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="load-the-track-data-into-a-pandas-data-frame" class="level2">
@@ -1257,6 +1274,538 @@ longitude range 175.86 248.57</code></pre>
 <section id="optional" class="level5">
 <h5 class="anchored" data-anchor-id="optional">Optional</h5>
 <p>Repeat the steps above with a daily version of the OC-CCI dataset to see how cloud cover can reduce the data you retrieve. https://oceanwatch.pifsc.noaa.gov/erddap/griddap/CRW_sst_v1_0.html</p>
+</section>
+</section>
+<section id="match-satellite-chlorophyll-to-dusky-shark-telemetry" class="level1">
+<h1>Match satellite chlorophyll to Dusky shark telemetry</h1>
+<p>The turtle example above selects a single nearest satellite pixel at each track point. In many real-world applications, it can be useful to match a small neighborhood of pixels around each location and summarize the satellite values (e.g.&nbsp;mean chlorophyll with ±0.2°). This helps reduce noise from single-pixel values and can better represent local conditions.</p>
+<p>In this example, we:</p>
+<ul>
+<li>Load dusky shark tag detections (lon, lat, date)</li>
+<li>Open a gridded chlorophyll dataset using Xarray (OPenDAP)</li>
+<li>For each detection:
+<ul>
+<li>select the nearest satellite time</li>
+<li>extract ±0.2° window in lon/lat</li>
+<li>compute mean, standard deviation, and valid pixel count</li>
+</ul></li>
+</ul>
+<p><strong>Data note:</strong> These dusky shark data were collected and provided by Dr.&nbsp;Chuck Bangley (Smithsonian Environmental Research Center). For details, see:</p>
+<pre><code>Bangley, C.W., et al. (2020) Identifying Important Juvenile Dusky Shark Habitat in the Northwest Atlantic Ocean Using Acoustic Telemetry and Spatial Modeling. Marine and Coastal Fisheries, 12:348–363. DOI: 10.1002/mcf2.10120</code></pre>
+<section id="load-dusky-shark-telemetry-data" class="level2">
+<h2 class="anchored" data-anchor-id="load-dusky-shark-telemetry-data">Load Dusky shark telemetry data</h2>
+<p>Load the dusky shark acoustic telemetry detections, which include longitude, latitude, detection date, and transmitter ID. Each row represents a single shark detection that will be matched to satellite data.</p>
+<div id="cell-32" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shark tag data (lon, lat, date, transmitter ID)</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tags <span class="op">=</span> pd.read_csv(</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"/Users/madisonrichardson/CoastWatch/Ron_R_stuff/DuskyDaily_NOAAclass_sortedTransmitterDate.csv"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tags.head(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Transmitter       Date  Latitude  Longitude  Unnamed: 4  \
+0  A69-1601-46065  9/15/2017  38.22503  -75.03418         NaN   
+1  A69-1601-46065  9/27/2017  38.30890  -75.01166         NaN   
+2  A69-1601-46065  10/2/2017  38.30890  -75.01166         NaN   
+
+  Unique Transmitters  
+0      A69-9006-16095  
+1      A69-9001-16950  
+2      A69-9006-16094  </code></pre>
+</div>
+</div>
+</section>
+<section id="convert-telemetry-columns-to-coordinate-arrays" class="level2">
+<h2 class="anchored" data-anchor-id="convert-telemetry-columns-to-coordinate-arrays">Convert telemetry columns to coordinate arrays</h2>
+<p>Longitude, latitude, and detection dates are extracted and converted into NumPy arrays and datetime objects. This format is required for iterating over detections and selecting satellite data by time.</p>
+<div id="cell-34" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert columns to arrays (same pattern used earlier in this tutorial)</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>xcoord <span class="op">=</span> tags[<span class="st">"Longitude"</span>].to_numpy()</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>ycoord <span class="op">=</span> tags[<span class="st">"Latitude"</span>].to_numpy()</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>tcoord <span class="op">=</span> pd.to_datetime(tags[<span class="st">"Date"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%m/</span><span class="sc">%d</span><span class="st">/%Y"</span>).to_numpy()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="open-a-satellite-dataset-using-xarray-opendap" class="level2">
+<h2 class="anchored" data-anchor-id="open-a-satellite-dataset-using-xarray-opendap">Open a satellite dataset using Xarray (OPeNDAP)</h2>
+<p>For this example, we use a CoastWatch MODIS 8-day chlorophyll dataset</p>
+<div id="cell-36" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>erddap_url2 <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.pfeg.noaa.gov/'</span>,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'erddap'</span>,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'griddap'</span>,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'erdMH1chla8day'</span>])</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>ds_shark <span class="op">=</span> xr.open_dataset(erddap_url2)</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>ds_shark</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Temporal and spatial ranges of the satellite dataset"</span>)</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"time range"</span>, ds_shark.attrs[<span class="st">"time_coverage_start"</span>], ds_shark.attrs[<span class="st">"time_coverage_end"</span>])</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"latitude range"</span>, ds_shark.attrs[<span class="st">"geospatial_lat_min"</span>], ds_shark.attrs[<span class="st">"geospatial_lat_max"</span>])</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"longitude range"</span>, ds_shark.attrs[<span class="st">"geospatial_lon_min"</span>], ds_shark.attrs[<span class="st">"geospatial_lon_max"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Temporal and spatial ranges of the satellite dataset
+time range 2003-01-05T00:00:00Z 2022-06-14T00:00:00Z
+latitude range -89.97917 89.97916
+longitude range -179.9792 179.9792</code></pre>
+</div>
+</div>
+</section>
+<section id="match-each-shark-detection-to-a-local-satellite-window-0.2" class="level2">
+<h2 class="anchored" data-anchor-id="match-each-shark-detection-to-a-local-satellite-window-0.2">Match each shark detection to a local satellite window (±0.2°)</h2>
+<p>This function matches a single shark detection to satellite chlorophyll by selecting the nearest satellite time and extracting a ±0.2° spatial window. It summarizes local conditions by computing the mean, standard deviation, and number of valid pixels.</p>
+<div id="cell-38" class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match_one_point(ds, lon, lat, req_time, half_window<span class="op">=</span><span class="fl">0.2</span>):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Match a single telemetry detection to satellite chlorophyll using</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="co">    spatial averaging within a local window.</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">    For a given longitude, latitude, and detection time, this function:</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="co">    selects the nearest satellite time, extracts chlorophyll pixels within</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">    a ±half_window degree box around the detection, and summarizes local</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="co">    conditions using the mean, standard deviation, and number of valid pixels.</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="co">    ds : xarray.Dataset</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co">        ERDDAP gridded satellite dataset opened via Xarray/OPeNDAP.</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co">    lon : float</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="co">        Longitude of the telemetry detection (decimal degrees).</span></span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="co">    lat : float</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co">        Latitude of the telemetry detection (decimal degrees).</span></span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="co">    req_time : datetime-like</span></span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co">        Telemetry detection time; the nearest satellite time is used.</span></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="co">    half_window : float, optional</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="co">        Half-width of the spatial averaging window in degrees (default 0.2).</span></span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co">    dict</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="co">        Dictionary containing mean chlorophyll, standard deviation, number</span></span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a><span class="co">        of valid pixels, the matched satellite time, spatial window bounds,</span></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="co">        and the original detection time.</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Nearest satellite time</span></span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>    ds_time <span class="op">=</span> ds.sel(time<span class="op">=</span>req_time, method<span class="op">=</span><span class="st">"nearest"</span>)</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>    sat_time <span class="op">=</span> pd.to_datetime(ds_time.time.values)</span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Spatial bounds</span></span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>    lon_min <span class="op">=</span> lon <span class="op">-</span> half_window</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>    lon_max <span class="op">=</span> lon <span class="op">+</span> half_window</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>    lat_min <span class="op">=</span> lat <span class="op">-</span> half_window</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>    lat_max <span class="op">=</span> lat <span class="op">+</span> half_window</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Latitude often runs descending in ERDDAP products</span></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a>    chl <span class="op">=</span> ds_time[<span class="st">"chlorophyll"</span>].sel(</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>        longitude<span class="op">=</span><span class="bu">slice</span>(lon_min, lon_max),</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a>        latitude<span class="op">=</span><span class="bu">slice</span>(lat_max, lat_min)</span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>        <span class="st">"mean_chlorophyll"</span>: <span class="bu">float</span>(chl.mean(skipna<span class="op">=</span><span class="va">True</span>)),</span>
+<span id="cb25-49"><a href="#cb25-49" aria-hidden="true" tabindex="-1"></a>        <span class="st">"stdev_chlorophyll"</span>: <span class="bu">float</span>(chl.std(skipna<span class="op">=</span><span class="va">True</span>)),</span>
+<span id="cb25-50"><a href="#cb25-50" aria-hidden="true" tabindex="-1"></a>        <span class="st">"n"</span>: <span class="bu">int</span>(chl.count()),</span>
+<span id="cb25-51"><a href="#cb25-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"satellite_date"</span>: sat_time,</span>
+<span id="cb25-52"><a href="#cb25-52" aria-hidden="true" tabindex="-1"></a>        <span class="st">"requested_lon_min"</span>: lon_min,</span>
+<span id="cb25-53"><a href="#cb25-53" aria-hidden="true" tabindex="-1"></a>        <span class="st">"requested_lon_max"</span>: lon_max,</span>
+<span id="cb25-54"><a href="#cb25-54" aria-hidden="true" tabindex="-1"></a>        <span class="st">"requested_lat_min"</span>: lat_min,</span>
+<span id="cb25-55"><a href="#cb25-55" aria-hidden="true" tabindex="-1"></a>        <span class="st">"requested_lat_max"</span>: lat_max,</span>
+<span id="cb25-56"><a href="#cb25-56" aria-hidden="true" tabindex="-1"></a>        <span class="st">"requested_date"</span>: pd.to_datetime(req_time),</span>
+<span id="cb25-57"><a href="#cb25-57" aria-hidden="true" tabindex="-1"></a>    }</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="run-the-matchup-for-all-shark-detections" class="level2">
+<h2 class="anchored" data-anchor-id="run-the-matchup-for-all-shark-detections">Run the matchup for all shark detections</h2>
+<div id="cell-40" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the matchup for every point:</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>half_window <span class="op">=</span> <span class="fl">0.2</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> [</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    match_one_point(ds_shark, lon, lat, t, half_window<span class="op">=</span>half_window)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> lon, lat, t <span class="kw">in</span> <span class="bu">zip</span>(xcoord, ycoord, tcoord)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>shark_matchups <span class="op">=</span> pd.DataFrame.from_records(rows)</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>shark_matchups.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">mean_chlorophyll</th>
+<th data-quarto-table-cell-role="th">stdev_chlorophyll</th>
+<th data-quarto-table-cell-role="th">n</th>
+<th data-quarto-table-cell-role="th">satellite_date</th>
+<th data-quarto-table-cell-role="th">requested_lon_min</th>
+<th data-quarto-table-cell-role="th">requested_lon_max</th>
+<th data-quarto-table-cell-role="th">requested_lat_min</th>
+<th data-quarto-table-cell-role="th">requested_lat_max</th>
+<th data-quarto-table-cell-role="th">requested_date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>3.600632</td>
+<td>1.796631</td>
+<td>62</td>
+<td>2017-09-18</td>
+<td>-75.234180</td>
+<td>-74.834180</td>
+<td>38.025030</td>
+<td>38.425030</td>
+<td>2017-09-15</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>3.486308</td>
+<td>1.330631</td>
+<td>62</td>
+<td>2017-09-26</td>
+<td>-75.211660</td>
+<td>-74.811660</td>
+<td>38.108900</td>
+<td>38.508900</td>
+<td>2017-09-27</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>5.782278</td>
+<td>3.086404</td>
+<td>67</td>
+<td>2017-10-04</td>
+<td>-75.211660</td>
+<td>-74.811660</td>
+<td>38.108900</td>
+<td>38.508900</td>
+<td>2017-10-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>1.374190</td>
+<td>0.879763</td>
+<td>16</td>
+<td>2017-10-12</td>
+<td>-74.976897</td>
+<td>-74.576897</td>
+<td>38.474039</td>
+<td>38.874039</td>
+<td>2017-10-08</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>0.864735</td>
+<td>0.149003</td>
+<td>24</td>
+<td>2017-10-12</td>
+<td>-74.860156</td>
+<td>-74.460156</td>
+<td>38.324397</td>
+<td>38.724397</td>
+<td>2017-10-09</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="assemble-a-consolidated-telemetrysatellite-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="assemble-a-consolidated-telemetrysatellite-dataset">Assemble a consolidated telemetry–satellite dataset</h2>
+<p>Telemetry coordinates, transmitter IDs, and matched chlorophyll values are combined into a single DataFrame. This unified table is used for all subsequent mapping and analysis steps.</p>
+<div id="cell-42" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>alltags <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lon"</span>: xcoord,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lat"</span>: ycoord,</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"chlorophyll"</span>: shark_matchups[<span class="st">"mean_chlorophyll"</span>].to_numpy(),</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"transmitter"</span>: tags[<span class="st">"Transmitter"</span>].to_numpy(),</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"date"</span>: shark_matchups[<span class="st">"requested_date"</span>].to_numpy(),</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(alltags.shape)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>alltags.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(417, 5)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">lon</th>
+<th data-quarto-table-cell-role="th">lat</th>
+<th data-quarto-table-cell-role="th">chlorophyll</th>
+<th data-quarto-table-cell-role="th">transmitter</th>
+<th data-quarto-table-cell-role="th">date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-75.034180</td>
+<td>38.225030</td>
+<td>3.600632</td>
+<td>A69-1601-46065</td>
+<td>2017-09-15</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-75.011660</td>
+<td>38.308900</td>
+<td>3.486308</td>
+<td>A69-1601-46065</td>
+<td>2017-09-27</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-75.011660</td>
+<td>38.308900</td>
+<td>5.782278</td>
+<td>A69-1601-46065</td>
+<td>2017-10-02</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-74.776897</td>
+<td>38.674039</td>
+<td>1.374190</td>
+<td>A69-1601-46065</td>
+<td>2017-10-08</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-74.660156</td>
+<td>38.524397</td>
+<td>0.864735</td>
+<td>A69-1601-46065</td>
+<td>2017-10-09</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="map-of-all-sharks-colored-by-chlorophyll" class="level2">
+<h2 class="anchored" data-anchor-id="map-of-all-sharks-colored-by-chlorophyll">Map of all sharks colored by chlorophyll</h2>
+<p>Plot the locations of all tagged dusky sharks and color each detection by the mean satellite-derived chlorophyll-a concentration matched to that location and date.</p>
+<p>Each point represents a single shark detection, and the color scale highlights spatial differences in chlorophyll conditions encountered by sharks across the study area. A simple land mask and coastline provide geographic context, while latitude and longitude gridlines help orient the map.</p>
+<p>This visualization provides a spatial overview of shark movements in relation to surface ocean productivity.</p>
+<div id="cell-44" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND, facecolor<span class="op">=</span><span class="st">"lightgray"</span>)</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.COASTLINE)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter(</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    alltags[<span class="st">"lon"</span>],</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    alltags[<span class="st">"lat"</span>],</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>alltags[<span class="st">"chlorophyll"</span>],</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"YlGn"</span>,</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree()</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>plt.colorbar(sc, label<span class="op">=</span><span class="st">"Chl-a (mg m$^{-3}$)"</span>)</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>gl <span class="op">=</span> ax.gridlines(</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    draw_labels<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="fl">0.5</span>,</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"gray"</span>,</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>    linestyle<span class="op">=</span><span class="st">"--"</span></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>gl.top_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>gl.right_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a>gl.xformatter <span class="op">=</span> LONGITUDE_FORMATTER</span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>gl.yformatter <span class="op">=</span> LATITUDE_FORMATTER</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Mean chlorophyll at dusky shark locations"</span>)</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="satellite_matchups_to_track_locations_xarray_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="subset-all-tags-for-a-single-shark" class="level2">
+<h2 class="anchored" data-anchor-id="subset-all-tags-for-a-single-shark">Subset all tags for a single shark</h2>
+<p>This step selects all detections associated with one transmitter ID. Focusing on a single shark allows individual movement patterns and environmental conditions to be examined.</p>
+<div id="cell-46" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>shark1 <span class="op">=</span> alltags[<span class="st">"transmitter"</span>].iloc[<span class="dv">0</span>]</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Selected shark transmitter:"</span>, shark1)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>single_shark <span class="op">=</span> alltags.loc[alltags[<span class="st">"transmitter"</span>] <span class="op">==</span> shark1, [<span class="st">"lon"</span>, <span class="st">"lat"</span>, <span class="st">"chlorophyll"</span>]].copy()</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>single_shark.columns <span class="op">=</span> [<span class="st">"x_shark"</span>, <span class="st">"y_shark"</span>, <span class="st">"dataval_shark"</span>]</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>single_shark.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Selected shark transmitter: A69-1601-46065</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">x_shark</th>
+<th data-quarto-table-cell-role="th">y_shark</th>
+<th data-quarto-table-cell-role="th">dataval_shark</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>-75.034180</td>
+<td>38.225030</td>
+<td>3.600632</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>-75.011660</td>
+<td>38.308900</td>
+<td>3.486308</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>-75.011660</td>
+<td>38.308900</td>
+<td>5.782278</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>-74.776897</td>
+<td>38.674039</td>
+<td>1.374190</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>-74.660156</td>
+<td>38.524397</td>
+<td>0.864735</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-movement-track-for-a-single-shark" class="level2">
+<h2 class="anchored" data-anchor-id="plot-the-movement-track-for-a-single-shark">Plot the movement track for a single shark</h2>
+<p>Successive detections for one shark are connected with track lines and colored by chlorophyll concentration. This combined view highlights both movement pathways and changing environmental conditions along the track.</p>
+<div id="cell-48" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> single_shark[<span class="st">"x_shark"</span>].to_numpy()</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> single_shark[<span class="st">"y_shark"</span>].to_numpy()</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>chl <span class="op">=</span> single_shark[<span class="st">"dataval_shark"</span>].to_numpy()</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>pad <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>maplonmin <span class="op">=</span> x.<span class="bu">min</span>() <span class="op">-</span> pad</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>maplonmax <span class="op">=</span> x.<span class="bu">max</span>() <span class="op">+</span> pad</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>maplatmin <span class="op">=</span> y.<span class="bu">min</span>() <span class="op">-</span> pad</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>maplatmax <span class="op">=</span> y.<span class="bu">max</span>() <span class="op">+</span> pad</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">8</span>))</span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND, facecolor<span class="op">=</span><span class="st">"lightgrey"</span>)</span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.COASTLINE)</span>
+<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>ax.set_extent([maplonmin, maplonmax, maplatmin, maplatmax], crs<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Track polyline</span></span>
+<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>ax.plot(</span>
+<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>    x, y,</span>
+<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"black"</span>,</span>
+<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>    linewidth<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree()</span>
+<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter points</span></span>
+<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>sc <span class="op">=</span> ax.scatter(</span>
+<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>    x, y,</span>
+<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a>    c<span class="op">=</span>chl,</span>
+<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>    cmap<span class="op">=</span><span class="st">"YlGn"</span>,</span>
+<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">25</span>,</span>
+<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree(),</span>
+<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>    zorder<span class="op">=</span><span class="dv">3</span></span>
+<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>gl <span class="op">=</span> ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, linewidth<span class="op">=</span><span class="fl">0.5</span>, color<span class="op">=</span><span class="st">"gray"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a>gl.top_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>gl.right_labels <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>gl.xformatter <span class="op">=</span> LONGITUDE_FORMATTER</span>
+<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>gl.yformatter <span class="op">=</span> LATITUDE_FORMATTER</span>
+<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>gl.xlabel_style <span class="op">=</span> {<span class="st">"size"</span>: <span class="dv">9</span>}</span>
+<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>gl.ylabel_style <span class="op">=</span> {<span class="st">"size"</span>: <span class="dv">9</span>}</span>
+<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(sc, ax<span class="op">=</span>ax)</span>
+<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a>cbar.set_label(<span class="st">"Chl-a (mg m$^{-3}$)"</span>)</span>
+<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Mean chl-a values for dusky shark #1 (with tracks)"</span>)</span>
+<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>plt.close(fig)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="satellite_matchups_to_track_locations_xarray_files/figure-html/cell-22-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="compare-chlorophyll-conditions-by-year-using-a-boxplot" class="level2">
+<h2 class="anchored" data-anchor-id="compare-chlorophyll-conditions-by-year-using-a-boxplot">Compare chlorophyll conditions by year using a boxplot</h2>
+<p>Matched chlorophyll values for a single shark are grouped by calendar year and displayed as a boxplot. The boxplot summarizes interannual differences and variability in environmental conditions experienced by the shark.</p>
+<div id="cell-50" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> alltags.loc[alltags[<span class="st">"transmitter"</span>] <span class="op">==</span> shark1, [<span class="st">"date"</span>, <span class="st">"chlorophyll"</span>]].dropna()</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>df1[<span class="st">"year"</span>] <span class="op">=</span> pd.to_datetime(df1[<span class="st">"date"</span>]).dt.year</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>vals_2017 <span class="op">=</span> df1.loc[df1[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2017</span>, <span class="st">"chlorophyll"</span>].to_numpy()</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>vals_2018 <span class="op">=</span> df1.loc[df1[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2018</span>, <span class="st">"chlorophyll"</span>].to_numpy()</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">6</span>))</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>ax.boxplot(</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    [vals_2017, vals_2018],</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>    positions<span class="op">=</span>[<span class="dv">1</span>, <span class="dv">2</span>],</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    patch_artist<span class="op">=</span><span class="va">True</span>,                      <span class="co"># allow filled boxes</span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>    boxprops<span class="op">=</span><span class="bu">dict</span>(facecolor<span class="op">=</span><span class="st">"green"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>),</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    medianprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>),</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>    whiskerprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>),</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    capprops<span class="op">=</span><span class="bu">dict</span>(color<span class="op">=</span><span class="st">"black"</span>)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">"Chlorophyll conditions for a single dusky shark"</span>)</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Year"</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Chl-a (mg m$^{-3}$)"</span>)</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>ax.set_xticks([<span class="dv">1</span>, <span class="dv">2</span>])</span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>ax.set_xticklabels([<span class="st">"2017"</span>, <span class="st">"2018"</span>])</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="satellite_matchups_to_track_locations_xarray_files/figure-html/cell-23-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
