@@ -1,6 +1,6 @@
 # Matchup Satellite data to track locations
 
-history \| Modified March 2024
+history \| Modified Feb 2026
 
 ## Objective
 
@@ -16,25 +16,28 @@ track.
 - Using rerddapXtraco function to extract satellite data from an ERDDAP
   data server along a track
 - Plotting the satellite data onto a map
+- Subsetting and analyzing data for individual animals
+- Comparing satellite-derived environmental conditions across time
 
 ## Datasets used
 
-**Chlorophyll a concentration, the European Space Agency’s Ocean Colour
-Climate Change Initiative (OC-CCI) Monthly dataset v6.0**
+**Chlorophyll a concentration, the European Space Agency's Ocean Colour Climate Change Initiative (OC-CCI) Monthly dataset v6.0**
 
-We’ll use the European Space Agency’s OC-CCI product
-(<https://climate.esa.int/en/projects/ocean-colour/>) to obtain
-chlorophyll data. This is a merged product combining data from many
-ocean color sensors to create a long time series (1997-present).
+We'll use the European Space Agency's OC-CCI product (<https://climate.esa.int/en/projects/ocean-colour/>) to obtain chlorophyll data.
+This is a merged product combining data from many ocean color sensors to create a long time series (1997-present).
 
 **Loggerhead turtle telemetry track data**
 
-The turtle was raised in captivity in Japan, then tagged and released on
-05/04/2005 in the Central Pacific. Its tag transmitted for over 3 years
-and went all the way to the Southern tip of Baja California. This
-dataset has been subsampled to reduce the data requests needed for this
-tutorial from over 1200 to 25. The track data are stored in the data
-folder in this project folder.
+The turtle was raised in captivity in Japan, then tagged and released on 05/04/2005 in the Central Pacific.
+Its tag transmitted for over 3 years and went all the way to the Southern tip of Baja California.
+This dataset has been subsampled to reduce the data requests needed for this tutorial from over 1200 to 25.
+The track data are stored in the data folder in this project folder.
+
+**Dusky shark satellite tag data**
+
+An extended example uses satellite tag data from dusky sharks provided by Chuck Bangley (Smithsonian Environmental Research Center). This dataset includes daily positions from multiple tagged individuals and demonstrates how the same ERDDAP extraction workflow can be applied to a different species and telemetry format. The shark example highlights additional steps such as data validation, subsetting individual animals, and comparing satellite-derived chlorophyll values across years.
+
+**Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (8 Day Composite)**
 
 ## Install required packages and load libraries
 
@@ -563,3 +566,224 @@ the spatial and temporal range of the track dataset.
 Repeat the steps above with a daily version of the OC-CCI dataset to see
 how cloud cover can reduce the data you retrieve.
 <https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorDaily_Lon0360.html>
+
+
+# Match satellite chlorophyll to Dusky shark telemetry
+
+In this example, we extend the techniques demonstrated above to a different type of animal telemetry dataset: satellite-tagged Dusky sharks. While the workflow is conceptually the same, this example highlights several additional considerations that commonly arise when working with real telemetry data.
+
+**Data note:** These dusky shark data were collected and provided by Dr. Chuck Bangley (Smithsonian Environmental Research Center). For details, see:
+
+    Bangley, C.W., et al. (2020) Identifying Important Juvenile Dusky Shark Habitat in the Northwest Atlantic Ocean Using Acoustic Telemetry and Spatial Modeling. Marine and Coastal Fisheries, 12:348–363. DOI: 10.1002/mcf2.10120
+
+### Import and validate shark tag data
+We load the Dusky shark tag data from a CSV file and perform a few basic checks to ensure the data are ready for analysis.
+
+``` r
+# Dusky shark tag data from Chuck Bangley (SERC)
+infile <- file.path("DuskyDaily_NOAAclass_sortedTransmitterDate.csv")
+
+if (!file.exists(infile)) {
+  stop("Tag CSV not found: ", infile,
+       "\nTip: put the CSV in your working directory or update `infile`.")
+}
+
+tagdata <- read.csv(infile, head = TRUE, sep = ",", stringsAsFactors = FALSE)
+
+# Quick look
+str(tagdata)
+
+# Minimal column checks (same expected columns your script uses)
+needed_cols <- c("Longitude", "Latitude", "Date", "Transmitter")
+missing_cols <- setdiff(needed_cols, names(tagdata))
+if (length(missing_cols) > 0) {
+  stop("Missing required columns in tag CSV: ", paste(missing_cols, collapse = ", "))
+}
+```
+
+### Extract coordinates and format dates for ERDDAP
+Extract the lat and lon values from the shark tag data and prepare the time information for use with ERDDAP. The `rxtracto` function requires coordinates to be supplied as a separate lon, lat, and time vectors.
+
+``` r
+xcoord <- tagdata$Longitude
+ycoord <- tagdata$Latitude
+
+# Convert m/d/YYYY -> YYYY-mm-dd (rxtracto expects character dates like this)
+tcoord_chr <- as.character(as.Date(tagdata$Date, "%m/%d/%Y"))
+
+# Optional: catch date parse failures (NA)
+if (any(is.na(tcoord_chr))) {
+  stop("Some dates could not be parsed with format '%m/%d/%Y'.\n",
+       "Check the Date column (example: 12/31/2018).")
+}
+
+```
+
+### Retrieve and examine ERDDAP dataset metadata
+Using the `rerrdap::info()` function, we query ERDDAP server for metadata describing the selected dataset.
+
+``` r
+url <- "https://coastwatch.pfeg.noaa.gov/erddap/"
+dataset <- "erdMH1chla8day"
+
+# Alternates (using WCN ERDDAP server):
+# dataset <- "nesdisVHNSQchlaWeekly"          # Suomi-NPP VIIRS weekly chlorophyll, global 4km
+# dataset <- "pmlEsaCCI50OceanColorMonthly"   # OC-CCI Chlorophyll, Monthly
+
+# If you encounter an error reading the nc file, clear the rerddap cache:
+# rerddap::cache_delete_all(force = TRUE)
+
+dataInfo <- rerddap::info(dataset, url = url)
+dataInfo
+
+```
+
+### Extract satellite data along the track using `rxtracto`
+Extract satellite-derived chlorophyll values at each shark tag location using the `rxtracto` function from the rerddapXtracto package. Satellite data are rarely available at an exact point in space, so `rxtracto` averages all satellite grid cells within a user-defined search radius around each track location. Here, we use a search window on 0.2° in both lon and lat. This spatial averaging helps account for differences in satellite resolution and small uncertainties in tag position.
+
+``` r
+parameter <- "chlorophyll"  # Chlorophyll, Aqua MODIS
+# Alternate:
+# parameter <- "chlor_a"     # Chlorophyll, Suomi-NPP VIIRS
+
+# Some satellite datasets have an altitude dimension.
+# If the dataInfo shows an altitude dimension, then zcoord must be included.
+zcoord <- rep(0., length(xcoord))
+
+# Search radius in degrees: satellite cells within +/- xlen/ylen are averaged
+xlen <- 0.2
+ylen <- 0.2
+
+weekly_chl <- rxtracto(
+  dataInfo,
+  parameter = parameter,
+  xcoord = xcoord, ycoord = ycoord,
+  tcoord = tcoord_chr,
+  xlen = xlen, ylen = ylen
+)
+
+# Save extracted values
+write.csv(weekly_chl, "weekly_chl_rxtracto.csv", row.names = FALSE)
+
+```
+
+### Visualize chlorophyll along the track
+We use `plotTrack` to create a quick-look map of chlorophyll values along the sharks' track.
+
+``` r
+# PlotTrack may not show the image in some environments.
+# If so, uncomment these lines to save a PNG:
+# png(file="chl_data_vals_at_shark_tag_locations.png")
+plotTrack(weekly_chl, xcoord, ycoord, tcoord_chr, plotColor = "algae")
+# dev.off()
+
+```
+
+![](images/dusky_shark_1.png)
+
+### Combine track coordinates with extracted chlorophyll values
+We create a tidy data frame that combines the shark tag locations with the corresponding satellie-derived chlorophyll values extracted using `rxtracto`.
+
+``` r
+alltags <- data.frame(
+  x = xcoord,
+  y = ycoord,
+  dataval = weekly_chl$`mean chlorophyll`
+)
+
+# Alternate: Chlorophyll, Suomi-NPP VIIRS
+# alltags <- data.frame(x = xcoord, y = ycoord, dataval = weekly_chl$`mean chlor_a`)
+
+mapWorld <- map_data("world")
+
+```
+
+### Select a single shark and plot
+We subset the full dataset to focus on a single shark, identified by its transmitter ID. We use `ggplot` to create a map showing the selected shark's track locations colored by the satellite-derived chlorophyll concentration. 
+
+``` r
+transm <- tagdata$Transmitter
+shark1 <- transm[1]          # selects the first value from transm
+shark1                       # displays the transmitter number
+shark1_index <- which(transm == shark1)
+
+single_shark <- data.frame(
+  x_shark = alltags$x[shark1_index],
+  y_shark = alltags$y[shark1_index],
+  dataval_shark = alltags$dataval[shark1_index]
+)
+
+# Zoom bounds for this shark 
+maplonmax <- max(single_shark$x_shark)
+maplonmin <- min(single_shark$x_shark)
+maplatmax <- max(single_shark$y_shark)
+maplatmin <- min(single_shark$y_shark)
+
+mapplot_shark1 <- ggplot(single_shark) +
+  geom_point(aes(x_shark, y_shark, color = dataval_shark), size = 2.) +
+  geom_polygon(data = mapWorld, aes(x = long, y = lat, group = group), fill = "grey80") +
+  coord_cartesian(xlim = c(maplonmin, maplonmax), ylim = c(maplatmin, maplatmax)) +
+  scale_color_gradientn(colours = brewer.pal(n = 8, name = "YlGn"),
+                        name = expression("Chlorophyll (mg m"^{-3}*")")) +
+  labs(x = "", y = "") +
+  ggtitle("Mean chl-a values for dusky shark #1 ")
+
+mapplot_shark1
+
+```
+
+![](images/dusky_shark_2.png)
+
+### Add track segments to connect consecutive shark locations
+Draw line segments to connect consecutive shark tag locations, creating a continuous movement track. Because a track with N location points contains N-1 movement segments, we construct a separate start and end coordinate vectors for each segment.
+``` r
+# Start/end points for N-1 line segments (same as your approach)
+start_lon <- single_shark$x_shark[1:(length(single_shark$x_shark) - 1)]
+start_lat <- single_shark$y_shark[1:(length(single_shark$y_shark) - 1)]
+end_lon   <- single_shark$x_shark[2:length(single_shark$x_shark)]
+end_lat   <- single_shark$y_shark[2:length(single_shark$y_shark)]
+
+str(start_lon)
+
+nseg <- length(start_lon)
+
+mapplot_shark1_tracks <- mapplot_shark1 +
+  geom_segment(
+    data = as.data.frame(single_shark$dataval_shark[1:nseg]),
+    aes(x = start_lon, y = start_lat, xend = end_lon, yend = end_lat)
+  )
+
+mapplot_shark1_tracks
+
+```
+
+![](images/dusky_shark_3.png)
+
+### Compare chlorophyll values across years for a single shark
+We add date information to the single-shark dataset and use it to examine how satellite-derived chlorophyll values vary across different years of the shark's track. The data are subset by year allowing, us to separate observations from 2017 and 2018 for comparison. We then visualize these year-specific chlorophyll distributions using a boxplot.
+
+``` r
+date_shark <- tcoord_chr[shark1_index]
+single_shark$date_shark <- date_shark
+
+shark1_2017 <- subset(single_shark, format(as.Date(date_shark), "%Y") == 2017)
+shark1_2018 <- subset(single_shark, format(as.Date(date_shark), "%Y") == 2018)
+
+print(shark1_2017)
+print(shark1_2018)
+
+boxplot(
+  shark1_2017$dataval_shark, shark1_2018$dataval_shark,
+  main = "Shark1 chlorophyll",
+  names = c("2017", "2018"),
+  col = c("green"),
+  xlab = "Year",
+  ylab = "Chl, mg/cm^3",
+  at = c(1, 3)  # draws boxplots at positions 1,3 with a space in the middle
+)
+
+```
+
+![](images/dusky_shark_4.png)
+
+
