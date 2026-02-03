@@ -412,14 +412,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="convert-ims-data-to-raster-s4-object" class="level2">
 <h2 class="anchored" data-anchor-id="convert-ims-data-to-raster-s4-object">Convert IMS data to raster S4 object</h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># convert ims to raster S3 obj</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ims_ras <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(ims)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the raster data</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ims_ras)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># get CRS of the ims data</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>data_crs <span class="ot">&lt;-</span> <span class="fu">crs</span>(ims_ras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ensure numeric (rerddap often returns list columns)</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ims<span class="sc">$</span>x <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(ims<span class="sc">$</span>x))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>ims<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(ims<span class="sc">$</span>y))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>ims[[var_name]] <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">unlist</span>(ims[[var_name]]))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># create raster from xyz explicitly</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ims_ras <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">rast</span>(ims[, <span class="fu">c</span>(<span class="st">"x"</span>, <span class="st">"y"</span>, var_name)], <span class="at">type =</span> <span class="st">"xyz"</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># IMS 4km grid is Polar Stereographic (proj4 from NSIDC IMS user guide)</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>ims_proj4 <span class="ot">&lt;-</span> <span class="st">"+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs"</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>terra<span class="sc">::</span><span class="fu">crs</span>(ims_ras) <span class="ot">&lt;-</span> ims_proj4</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co"># get CRS as an sf object for st_transform</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>data_crs <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_crs</span>(<span class="st">"EPSG:3857"</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># plot the raster data</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ims_ras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="images/sub-polar-2.png" class="img-fluid"></p>
 </section>
 </section>
@@ -446,9 +455,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="convert-the-lake-shape-to-raster-s4-object" class="level2">
 <h2 class="anchored" data-anchor-id="convert-the-lake-shape-to-raster-s4-object">Convert the lake shape to raster S4 object</h2>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>shapes_polar <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(lake_shp, data_crs)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>shapes_polar <span class="ot">&lt;-</span> sf<span class="sc">::</span><span class="fu">st_transform</span>(lake_shp, sf<span class="sc">::</span><span class="fu">st_crs</span>(ims_proj4))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>lake_ras <span class="ot">&lt;-</span> terra<span class="sc">::</span><span class="fu">vect</span>(shapes_polar)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lake_ras)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lake_ras, <span class="at">border =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><img src="images/sub-polar-4.png" class="img-fluid"></p>
 </section>
 <section id="crop-the-ims-data" class="level2">

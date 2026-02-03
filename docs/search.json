@@ -3119,14 +3119,14 @@
     "href": "tutorials/subset-polar-data-with-shapefile/r/subset-polar-data-with-shapefile.html#convert-ims-data-to-raster-s4-object",
     "title": "Subset and extract ims data",
     "section": "Convert IMS data to raster S4 object",
-    "text": "Convert IMS data to raster S4 object\n\n# convert ims to raster S3 obj\nims_ras &lt;- terra::rast(ims)\n\n# plot the raster data\nplot(ims_ras)\n\n# get CRS of the ims data\ndata_crs &lt;- crs(ims_ras)"
+    "text": "Convert IMS data to raster S4 object\n\n# ensure numeric (rerddap often returns list columns)\nims$x &lt;- as.numeric(unlist(ims$x))\nims$y &lt;- as.numeric(unlist(ims$y))\nims[[var_name]] &lt;- as.numeric(unlist(ims[[var_name]]))\n\n# create raster from xyz explicitly\nims_ras &lt;- terra::rast(ims[, c(\"x\", \"y\", var_name)], type = \"xyz\")\n\n# IMS 4km grid is Polar Stereographic (proj4 from NSIDC IMS user guide)\nims_proj4 &lt;- \"+proj=stere +lat_0=90 +lat_ts=60 +lon_0=-80 +k=1 +x_0=0 +y_0=0 +a=6378137 +b=6356257 +units=m +no_defs\"\nterra::crs(ims_ras) &lt;- ims_proj4\n\n\n# get CRS as an sf object for st_transform\ndata_crs &lt;- sf::st_crs(\"EPSG:3857\")\n# plot the raster data\nplot(ims_ras)"
   },
   {
     "objectID": "tutorials/subset-polar-data-with-shapefile/r/subset-polar-data-with-shapefile.html#convert-the-lake-shape-to-raster-s4-object",
     "href": "tutorials/subset-polar-data-with-shapefile/r/subset-polar-data-with-shapefile.html#convert-the-lake-shape-to-raster-s4-object",
     "title": "Subset and extract ims data",
     "section": "Convert the lake shape to raster S4 object",
-    "text": "Convert the lake shape to raster S4 object\n\nshapes_polar &lt;- st_transform(lake_shp, data_crs)\nlake_ras &lt;- terra::vect(shapes_polar)\nplot(lake_ras)"
+    "text": "Convert the lake shape to raster S4 object\n\nshapes_polar &lt;- sf::st_transform(lake_shp, sf::st_crs(ims_proj4))\nlake_ras &lt;- terra::vect(shapes_polar)\nplot(lake_ras, border = \"red\")"
   },
   {
     "objectID": "tutorials/subset-polar-data-with-shapefile/r/subset-polar-data-with-shapefile.html#crop-the-ims-data",
