@@ -23,6 +23,9 @@ website:
     tools:
       - icon: globe
         href: https://coastwatch.noaa.gov/cwn
+      - icon: github
+        href: https://github.com/coastwatch-training/coastwatch-training.github.io
+        aria-label: GitHub repository
     style: "docked"
     search: true
     contents:

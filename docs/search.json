@@ -2855,7 +2855,7 @@
     "href": "tutorials/index.html#software-tutorials",
     "title": "Training Tutorials",
     "section": "Software Tutorials",
-    "text": "Software Tutorials\nSoftware tutorials provide guidance on installing, configuring, and using commonly supported tools for working with CoastWatch satellite data. These tutorials focus on foundational software and utilities that are often used to access, explore, or manage data prior to analysis.\nTopics include:\n\nERDDAP access and configuration\n\nCoastWatch utilities\n\nWorking with NetCDF files\n\nUsing data visualization tools such as Panoply\n\nView Software Information\nView Software Code Gallery",
+    "text": "Software Tutorials\nSoftware tutorials provide guidance on installing, configuring, and using commonly supported tools for working with CoastWatch satellite data. These tutorials focus on foundational software and utilities that are often used to access, explore, or manage data prior to analysis.\nTopics include:\n\nERDDAP access and configuration\n\nCoastWatch utilities\n\nWorking with NetCDF files\n\nUsing data visualization tools such as Panoply\n\nView Software Information:\n\nERDDAP\nNetCDF and Panoply\nCoastWatch Utilities\n\nView Software Code Gallery",
     "crumbs": [
       "Training Tutorials"
     ]
