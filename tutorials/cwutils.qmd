@@ -1,9 +1,9 @@
 ---
-title: "CoastWatch Utilities"
 format: html
 ---
+# CoastWatch Utilities {#cwutils}
 
-The **CoastWatch Utilities {#cwutils}** (CWUtils) are software tools designed to help users work with NOAA/NESDIS CoastWatch satellite data—especially because these scientific data files aren’t meant to be opened in standard image viewers.
+The **CoastWatch Utilities** (CWUtils) are software tools designed to help users work with NOAA/NESDIS CoastWatch satellite data—especially because these scientific data files aren’t meant to be opened in standard image viewers.
 
 ### What CoastWatch Utilities includes
 

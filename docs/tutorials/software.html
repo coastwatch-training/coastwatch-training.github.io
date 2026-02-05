@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../lectures/index.html" rel="next">
-<link href="../tutorials/softwarebackground.html" rel="prev">
+<link href="../tutorials/cwutils.html" rel="prev">
 <link href="../images/coastwatch.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -86,7 +86,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/software.html">Software Code Gallery</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item">Software Tutorials</li><li class="breadcrumb-item"><a href="../tutorials/software.html">Software Code Gallery</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -225,12 +225,35 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Software Information</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/softwarebackground.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Software Information</span></a>
+  <a href="../tutorials/erddap.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">ERDDAP</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/netcdf-panoply.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NetCDF and Panoply</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/cwutils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CoastWatch Utilities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../tutorials/software.html" class="sidebar-item-text sidebar-link active">
@@ -276,7 +299,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/software.html">Software Code Gallery</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item">Software Tutorials</li><li class="breadcrumb-item"><a href="../tutorials/software.html">Software Code Gallery</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Software Code Gallery</h1>
 </div>
@@ -297,7 +320,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>This gallery brings together hands-on, software-based tutorials for working with CoastWatch and ERDDAP data. Each tutorial focuses on a specific task—such as discovering datasets, building ERDDAP URLs, visualizing gridded and tabular data, or troubleshooting common workflows—using tools like Python, R, and related utilities.</p>
 <p>Click the <strong>info</strong> icon to learn more about the software and tools used in the tutorial, <strong>eye</strong> icon to preview outputs, <strong>box</strong> to view tutorial resources, or <strong>download</strong> to open the source file on GitHub.</p>
-<div id="b5d9ea46" class="cell" data-message="false" data-execution_count="1">
+<div id="323d39a9" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <script>
 function cgOpenModal(id){
@@ -1250,8 +1273,8 @@ function cgNext(id) {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../tutorials/softwarebackground.html" class="pagination-link" aria-label="Software Information">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Software Information</span>
+      <a href="../tutorials/cwutils.html" class="pagination-link" aria-label="CoastWatch Utilities">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">CoastWatch Utilities</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

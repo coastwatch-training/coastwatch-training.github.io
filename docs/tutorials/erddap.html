@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Software Information – CoastWatch Training</title>
+<title>ERDDAP – CoastWatch Training</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,7 +29,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../tutorials/software.html" rel="next">
+<link href="../tutorials/netcdf-panoply.html" rel="next">
 <link href="../tutorials/codegallery.html" rel="prev">
 <link href="../images/coastwatch.png" rel="icon" type="image/png">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -83,7 +83,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Information</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item">Software Tutorials</li><li class="breadcrumb-item"><a href="../tutorials/erddap.html">Software Information</a></li><li class="breadcrumb-item"><a href="../tutorials/erddap.html">ERDDAP</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -222,12 +222,35 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Software Information</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth3 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../tutorials/softwarebackground.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Software Information</span></a>
+  <a href="../tutorials/erddap.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">ERDDAP</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/netcdf-panoply.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">NetCDF and Panoply</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../tutorials/cwutils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CoastWatch Utilities</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../tutorials/software.html" class="sidebar-item-text sidebar-link">
@@ -277,26 +300,15 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#tutorials-on-how-to-use-erddap-servers" id="toc-tutorials-on-how-to-use-erddap-servers" class="nav-link" data-scroll-target="#tutorials-on-how-to-use-erddap-servers">Tutorials on how to use ERDDAP servers</a></li>
   <li><a href="#coastwatch-erddap-servers" id="toc-coastwatch-erddap-servers" class="nav-link" data-scroll-target="#coastwatch-erddap-servers">CoastWatch ERDDAP servers</a></li>
   </ul></li>
-  <li><a href="#netcdfpanoply" id="toc-netcdfpanoply" class="nav-link" data-scroll-target="#netcdfpanoply">NetCDF and Panoply</a>
-  <ul class="collapse">
-  <li><a href="#netcdf" id="toc-netcdf" class="nav-link" data-scroll-target="#netcdf">NetCDF</a></li>
-  <li><a href="#nasa-panoply" id="toc-nasa-panoply" class="nav-link" data-scroll-target="#nasa-panoply">NASA Panoply</a></li>
-  </ul></li>
-  <li><a href="#cwutils" id="toc-cwutils" class="nav-link" data-scroll-target="#cwutils">CoastWatch Utilities</a>
-  <ul class="collapse">
-  <li><a href="#what-coastwatch-utilities-includes" id="toc-what-coastwatch-utilities-includes" class="nav-link" data-scroll-target="#what-coastwatch-utilities-includes">What CoastWatch Utilities includes</a></li>
-  <li><a href="#getting-coastwatch-utilities" id="toc-getting-coastwatch-utilities" class="nav-link" data-scroll-target="#getting-coastwatch-utilities">Getting CoastWatch Utilities</a></li>
-  <li><a href="#coastwatch-utilities-online-course" id="toc-coastwatch-utilities-online-course" class="nav-link" data-scroll-target="#coastwatch-utilities-online-course">CoastWatch Utilities Online Course</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Tutorials</a></li><li class="breadcrumb-item"><a href="../tutorials/softwarebackground.html">Software Information</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../tutorials/index.html">Training Tutorials</a></li><li class="breadcrumb-item">Software Tutorials</li><li class="breadcrumb-item"><a href="../tutorials/erddap.html">Software Information</a></li><li class="breadcrumb-item"><a href="../tutorials/erddap.html">ERDDAP</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Software Information</h1>
+<h1 class="title">ERDDAP</h1>
 </div>
 
 
@@ -313,8 +325,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This page provides background information on common tools and formats used throughout the CoastWatch training materials, including <strong>ERDDAP</strong>, <strong>NetCDF</strong>, <strong>NASA Panoply</strong>, and the <strong>CoastWatch Utilities (CWUtils)</strong>.</p>
-<p>If you’re looking for hands-on, step-by-step lessons, go to the <strong><a href="../tutorials/software.html">Software Code Gallery</a></strong> page.</p>
 <section id="erddap" class="level2">
 <h2 class="anchored" data-anchor-id="erddap">ERDDAP basics: What is ERDDAP?</h2>
 <p>For many users, obtaining the ocean satellite data they need requires downloading data from several data providers, each with its own file formats, download protocols, subset abilities, and preview abilities.</p>
@@ -375,50 +385,6 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>A more complete list is available here:<br>
 https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations</p>
-</section>
-</section>
-<section id="netcdfpanoply" class="level2">
-<h2 class="anchored" data-anchor-id="netcdfpanoply">NetCDF and Panoply</h2>
-<section id="netcdf" class="level3">
-<h3 class="anchored" data-anchor-id="netcdf">NetCDF</h3>
-<p><strong>NetCDF (Network Common Data Form)</strong> is a file format for storing multidimensional scientific data (variables), including common satellite observations (e.g., sea surface temperature, salinity, chlorophyll, winds). Many organizations and scientific groups in different countries have adopted netCDF as a standard way to represent some forms of scientific data.</p>
-<p>The NetCDF format has many advantages, the most important of which is that it is self-describing, meaning that software packages can directly read the data and determine its structure, the variable names and essential metadata such as the units. This self-describing aspect of the netCDF file format means that the information needed to ensure accurate work (reduce the incidence of errors) is available within the data itself (no need for additional files). Secondly, it means that different analysis software, like Matlab, R, Python or ArcGIS (among many others), have utilities to read and work with NetCDF files. Thirdly, plotting software (e.g.&nbsp;Ferret, Panoply, ncview) can directly read the netCDF files for visualization.</p>
-<p><img src="images/netcdf1.png" class="img-fluid" style="width:40.0%"> <img src="images/netcdf2.png" class="img-fluid" style="width:40.0%"></p>
-</section>
-<section id="nasa-panoply" class="level3">
-<h3 class="anchored" data-anchor-id="nasa-panoply">NASA Panoply</h3>
-<p>NASA developed the Panoply viewer that allows users to view and visualize data held in NetCDF files. Some features the software includes are:</p>
-<ul>
-<li>Visualize data from netCDF and HDF files</li>
-<li>View the metadata</li>
-<li>View the data</li>
-<li>Display the data in many different map projections</li>
-<li>Download visualization as images</li>
-<li>Create animations</li>
-<li>Freeware</li>
-</ul>
-<p><img src="images/panoply1.png" class="img-fluid" style="width:60.0%"></p>
-<p>Panoply is available for download at: https://www.giss.nasa.gov/tools/panoply/ and can be run on Windows, Mac and Linux computers.</p>
-<p>A set of “how to” instructions can be found to the following URL https://www.giss.nasa.gov/tools/panoply/help/ Below are a few examples to try out to get you used to visualizing data with the Panoply Viewer.</p>
-<p>💡 <strong>Panoply Version Note:</strong> The examples provided in CoastWatch materials are based on Panoply <strong>Version 5.3.3</strong> (interfaces may differ slightly across versions).</p>
-</section>
-</section>
-<section id="cwutils" class="level2">
-<h2 class="anchored" data-anchor-id="cwutils">CoastWatch Utilities</h2>
-<p>The <strong>CoastWatch Utilities</strong> (CWUtils) are software tools designed to help users work with NOAA/NESDIS CoastWatch satellite data—especially because these scientific data files aren’t meant to be opened in standard image viewers.</p>
-<section id="what-coastwatch-utilities-includes" class="level3">
-<h3 class="anchored" data-anchor-id="what-coastwatch-utilities-includes">What CoastWatch Utilities includes</h3>
-<p>CWUtils provides both: - Graphical tools for interactive exploration - Command-line tools for scripting and repeatable processing workflows</p>
-<p>The tools commonly support workflows like: - Information and statistics (inspect file contents, compute summary stats) - Data processing (format conversions, compositing, variable math, sampling) - Graphics and visualization (interactive visualization + batch rendering) - Registration and navigation (resampling between projections; navigation correction)</p>
-</section>
-<section id="getting-coastwatch-utilities" class="level3">
-<h3 class="anchored" data-anchor-id="getting-coastwatch-utilities">Getting CoastWatch Utilities</h3>
-<p>CWUtils is available for <strong>Windows, macOS, and Linux</strong>. The <a href="https://github.com/coastwatch-training/CoastWatch-Utilities/blob/main/downloads/cwutils_ug_4_0_0.pdf">User’s Guide notes</a> (minimum recommendations): <strong>~400 MB disk</strong> (1 GB recommended total workspace) and <strong>4 GB RAM</strong>.</p>
-<p>To download, the guide directs users to the CoastWatch site and to look for <strong>CoastWatch Utilities</strong> under Data Tools (or search “utilities”).</p>
-</section>
-<section id="coastwatch-utilities-online-course" class="level3">
-<h3 class="anchored" data-anchor-id="coastwatch-utilities-online-course">CoastWatch Utilities Online Course</h3>
-<p>The <a href="http://coastwatch-training.github.io/CoastWatch-Utilities/">CoastWatch Utilities Online Course</a> is about using the CoastWatch Utilities software package to help with processing satellite imagery and derived data products. The course covers working with data files (i) visually using a graphical user interface, and (ii) by typing commands at the Unix or Windows command prompts. No programming experience is needed, though it can be helpful when automating data processing.</p>
 
 
 </section>
@@ -831,8 +797,8 @@ https://coastwatch.pfeg.noaa.gov/erddap/download/setup.html#organizations</p>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../tutorials/software.html" class="pagination-link" aria-label="Software Code Gallery">
-        <span class="nav-page-text">Software Code Gallery</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../tutorials/netcdf-panoply.html" class="pagination-link" aria-label="NetCDF and Panoply">
+        <span class="nav-page-text">NetCDF and Panoply</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

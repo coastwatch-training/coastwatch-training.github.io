@@ -18,7 +18,6 @@ from urllib.parse import quote
 from pathlib import Path
 
 REPO_BLOB_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/blob/main/"
-BACKGROUND_PAGE = "softwarebackground.html"
 REPO_TREE_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/tree/main/"
 
 TUTORIALS_BASE = "tutorials"
@@ -141,11 +140,32 @@ def render_carousel(img_cell, carousel_id, slug):
     return f"<div id='{carousel_id}' class='cg-carousel' data-idx='0'>{''.join(slides)}{nav}</div>"
 
 
-def info_icon(info_id):
-    if not info_id:
+
+def to_html_page(path: str) -> str:
+    p = str(path).strip()
+    if not p:
+        return ""
+    return p[:-4] + ".html" if p.lower().endswith(".qmd") else p
+
+
+def info_icon_for_row(row) -> str:
+    page = str(row.get("info_page", "")).strip()
+    anchor = str(row.get("info_anchor", "")).strip()
+
+    if not page:
         return "—"
-    url = f"{BACKGROUND_PAGE}#{quote(str(info_id).strip())}"
-    return f'<a href="{url}" class="cg-icon" aria-label="Background info">{INFO_SVG}</a>'
+
+    page = to_html_page(page)
+
+    if anchor and not anchor.startswith("#"):
+        anchor = "#" + anchor
+
+    url = f"{page}{anchor}"
+
+    return (
+        f'<a href="{url}" class="cg-icon" aria-label="Background info">'
+        f"{INFO_SVG}</a>"
+    )
 
 
 def resources_icon_for_row(row) -> str:
@@ -178,12 +198,11 @@ for i, r in df.iterrows():
     title = str(r.get("title",""))
     desc  = str(r.get("description",""))
     slug   = str(r.get("slug","")).strip()
-    info_id = str(r.get("info", "")).strip()
 
     table_rows.append(f"""
     <tr class="cg-row">
         <td>{title}</td>
-        <td>{info_icon(info_id)}</td>
+        <td>{info_icon_for_row(r)}</td>
         <td>{modal_eye(mid)}</td>
         <td>{resources_icon_for_row(r)}</td>
         <td>{download_icon(r.get("sw_download",""))}</td>
