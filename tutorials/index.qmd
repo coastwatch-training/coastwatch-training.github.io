@@ -16,7 +16,11 @@ Topics include:
 - Working with NetCDF files  
 - Using data visualization tools such as Panoply  
 
-[View Software Information](softwarebackground.qmd)
+View Software Information:
+
+- [ERDDAP](erddap.qmd)
+- [NetCDF and Panoply](netcdf-panoply.qmd)
+- [CoastWatch Utilities](cwutils.qmd)
 
 [View Software Code Gallery](software.qmd)
 
