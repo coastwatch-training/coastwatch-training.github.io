@@ -86,12 +86,48 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 
 
 def modal_eye(modal_id):
+    """
+    Generate an HTML link element that opens a preview modal when clicked.
+
+    This function returns an anchor (`<a>`) element styled as an icon. When
+    clicked, it calls the JavaScript `cgOpenModal()` function with the provided
+    modal ID, allowing users to preview tutorial outputs in a modal window.
+
+    Parameters
+    ----------
+    modal_id : str
+        The unique HTML ID of the modal element to open.
+
+    Returns
+    -------
+    str
+        An HTML string representing a clickable preview (eye) icon.
+    """
     return (
         f'<a href="javascript:void(0)" onclick="cgOpenModal(\'{modal_id}\')" '
         f'class="cg-icon">{EYE_SVG}</a>'
     )
 
+
 def download_icon(path):
+    """
+    Generate an HTML link element for downloading or viewing a file on GitHub.
+
+    If a valid file path is provided, this function constructs a GitHub URL
+    pointing to the file in the repository and returns a clickable download
+    icon. If no path is provided, a placeholder dash is returned.
+
+    Parameters
+    ----------
+    path : str
+        Relative path to the file within the GitHub repository.
+
+    Returns
+    -------
+    str
+        An HTML string containing a download icon link, or a dash ("—") if no
+        path is provided.
+    """
     if not path:
         return "—"
     url = f"{REPO_BLOB_BASE}{quote(path)}"
@@ -100,7 +136,32 @@ def download_icon(path):
         f'{DOWNLOAD_SVG}</a>'
     )
 
+
 def render_carousel(img_cell, carousel_id, slug):
+    """
+    Render an HTML image carousel for previewing tutorial output images.
+
+    This function parses a pipe-delimited image specification string and
+    generates a carousel containing one or more images, each optionally paired
+    with a caption. Navigation controls are added automatically when multiple
+    images are present.
+
+    Parameters
+    ----------
+    img_cell : str
+        A pipe-delimited string of image filenames, optionally including
+        captions using the format "filename::caption".
+    carousel_id : str
+        A unique HTML ID assigned to the carousel container.
+    slug : str
+        The tutorial slug used to construct relative image paths.
+
+    Returns
+    -------
+    str
+        An HTML string containing the rendered carousel, or a placeholder
+        message if no images are available.
+    """
     if not img_cell:
         return "<div class='text-muted'>No preview image</div>"
 
@@ -140,8 +201,23 @@ def render_carousel(img_cell, carousel_id, slug):
     return f"<div id='{carousel_id}' class='cg-carousel' data-idx='0'>{''.join(slides)}{nav}</div>"
 
 
-
 def to_html_page(path: str) -> str:
+    """
+    Convert a Quarto source file path to its rendered HTML equivalent.
+
+    This helper function replaces a `.qmd` extension with `.html`, ensuring
+    links point to the rendered output rather than the source file.
+
+    Parameters
+    ----------
+    path : str
+        Path to a Quarto source file or HTML file.
+
+    Returns
+    -------
+    str
+        Path with a `.html` extension, or an empty string if no path is provided.
+    """
     p = str(path).strip()
     if not p:
         return ""
@@ -149,6 +225,25 @@ def to_html_page(path: str) -> str:
 
 
 def info_icon_for_row(row) -> str:
+    """
+    Generate an HTML link element pointing to a software information page.
+
+    This function reads the target page and optional section anchor from a
+    metadata row and returns a clickable information icon that links to the
+    appropriate rendered HTML page.
+
+    Parameters
+    ----------
+    row : pandas.Series or dict-like
+        A row containing at least the keys 'info_page' and optionally
+        'info_anchor'.
+
+    Returns
+    -------
+    str
+        An HTML string containing an information icon link, or a dash ("—")
+        if no information page is defined.
+    """
     page = str(row.get("info_page", "")).strip()
     anchor = str(row.get("info_anchor", "")).strip()
 
@@ -169,6 +264,24 @@ def info_icon_for_row(row) -> str:
 
 
 def resources_icon_for_row(row) -> str:
+    """
+    Generate an HTML link element pointing to a tutorial's resources folder.
+
+    This function checks whether a resources directory exists for a given
+    tutorial slug and whether it contains any files. If so, it returns a
+    clickable resources icon linking to the folder on GitHub.
+
+    Parameters
+    ----------
+    row : pandas.Series or dict-like
+        A row containing a 'slug' field that identifies the tutorial directory.
+
+    Returns
+    -------
+    str
+        An HTML string containing a resources icon link, or a dash ("—") if
+        no resources are available.
+    """
     slug = str(row.get("slug", "")).strip()
     if not slug:
         return "—"

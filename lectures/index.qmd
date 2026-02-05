@@ -59,6 +59,25 @@ TRANSCRIPT_SVG = (
 
 
 def preview_icon(url: str) -> str:
+    """
+    Generate an HTML link element for previewing a lecture or tutorial.
+
+    This function returns a clickable icon that links to a preview page or
+    rendered output. If no valid URL is provided, a placeholder dash is
+    returned instead.
+
+    Parameters
+    ----------
+    url : str
+        The URL pointing to a previewable lecture, tutorial, or rendered
+        output page.
+
+    Returns
+    -------
+    str
+        An HTML string containing a preview (eye) icon link, or a dash ("—")
+        if no URL is provided.
+    """
     url = str(url).strip()
     if not url:
         return "—"
@@ -67,7 +86,26 @@ def preview_icon(url: str) -> str:
         f'aria-label="Preview lecture">{EYE_SVG}</a>'
     )
 
+
 def download_icon(url: str) -> str:
+    """
+    Generate an HTML link element for downloading lecture or tutorial files.
+
+    This function creates a clickable download icon that links directly to a
+    file or resource URL. If no valid URL is supplied, a placeholder dash is
+    returned.
+
+    Parameters
+    ----------
+    url : str
+        The URL pointing to a downloadable lecture or tutorial file.
+
+    Returns
+    -------
+    str
+        An HTML string containing a download icon link, or a dash ("—") if
+        no URL is provided.
+    """
     url = str(url).strip()
     if not url:
         return "—"
@@ -78,8 +116,25 @@ def download_icon(url: str) -> str:
     )
 
 
-
 def video_icon(url: str) -> str:
+    """
+    Generate an HTML link element for watching a lecture video.
+
+    This function returns a clickable video icon that links to an external
+    video platform (e.g., YouTube or Vimeo). If no valid URL is provided,
+    a placeholder dash is returned.
+
+    Parameters
+    ----------
+    url : str
+        The URL pointing to a hosted lecture or training video.
+
+    Returns
+    -------
+    str
+        An HTML string containing a video icon link, or a dash ("—") if no
+        URL is provided.
+    """
     url = str(url).strip()
     if not url:
         return "—"
@@ -90,6 +145,24 @@ def video_icon(url: str) -> str:
 
 
 def transcript_icon(url: str) -> str:
+    """
+    Generate an HTML link element for viewing a lecture video transcript.
+
+    This function returns a clickable transcript icon that links to a text
+    transcript of a lecture or training video. If no valid URL is provided,
+    a placeholder dash is returned.
+
+    Parameters
+    ----------
+    url : str
+        The URL pointing to a lecture or video transcript resource.
+
+    Returns
+    -------
+    str
+        An HTML string containing a transcript icon link, or a dash ("—")
+        if no URL is provided.
+    """
     url = str(url).strip()
     if not url:
         return "—"

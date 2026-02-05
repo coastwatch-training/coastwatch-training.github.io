@@ -182,6 +182,38 @@ def resources_icon_for_row(row) -> str:
     if not folder.is_dir():
         return "—"
 
+
+def resources_icon_for_row(row) -> str:
+    """
+    Generate an HTML link element pointing to a tutorial’s resources directory.
+
+    This function checks whether a resources folder exists locally for the
+    tutorial identified by its slug and verifies that the folder contains
+    at least one file. If resources are available, it returns a clickable
+    icon linking to the corresponding resources directory on GitHub.
+    If no resources are found, a placeholder dash is returned.
+
+    Parameters
+    ----------
+    row : pandas.Series or dict-like
+        A row containing a ``slug`` field that identifies the tutorial
+        directory within the ``tutorials/`` folder.
+
+    Returns
+    -------
+    str
+        An HTML string containing a resources icon link if resources exist,
+        or a dash ("—") if no resources directory or files are found.
+    """
+    slug = str(row.get("slug", "")).strip()
+    if not slug:
+        return "—"
+
+    # local check (keep as-is if it's working)
+    folder = TUTORIALS_ROOT / slug / "resources"
+    if not folder.is_dir():
+        return "—"
+
     has_files = any(p.is_file() for p in folder.rglob("*"))
     if not has_files:
         return "—"
@@ -252,9 +284,35 @@ def render_lang_block(label, carousel_html, view_url, single=False):
         """
 
 
-
-
 def render_carousel(img_cell, carousel_id, slug):
+    """
+    Render an HTML image carousel for previewing tutorial outputs.
+
+    This function parses a pipe-delimited image specification string and
+    constructs an HTML carousel containing one or more preview images.
+    Each image may optionally include a caption using the format
+    ``filename::caption``. When multiple images are provided, navigation
+    controls are added to allow users to cycle through the carousel.
+
+    Parameters
+    ----------
+    img_cell : str
+        A pipe-delimited string specifying image filenames and optional
+        captions. Each entry may use the format ``filename::caption``.
+    carousel_id : str
+        A unique HTML ID assigned to the carousel container, used by
+        JavaScript navigation functions.
+    slug : str
+        The tutorial slug used to construct relative paths to the image
+        files (``{slug}/images/{filename}``).
+
+    Returns
+    -------
+    str
+        An HTML string containing the rendered image carousel. If no valid
+        images are provided, a placeholder message indicating that no
+        preview image is available is returned.
+    """
     if not img_cell:
         return "<div class='text-muted'>No preview image</div>"
 
