@@ -61,8 +61,13 @@ website:
             text: "Code Gallery"
           - section: "Software Tutorials"
             contents:
-              - href: tutorials/softwarebackground.qmd
-                text: Software Information
+              - href: tutorials/erddap.qmd
+                text: ERDDAP
+              - href: tutorials/netcdf-panoply.qmd
+                text: NetCDF and Panoply
+              - href: tutorials/cwutils.qmd
+                text: CoastWatch Utilities
+
               - href: tutorials/software.qmd
                 text: "Software Code Gallery"
 

@@ -1,0 +1,29 @@
+---
+title: "CoastWatch Utilities"
+format: html
+---
+
+The **CoastWatch Utilities {#cwutils}** (CWUtils) are software tools designed to help users work with NOAA/NESDIS CoastWatch satellite data—especially because these scientific data files aren’t meant to be opened in standard image viewers.
+
+### What CoastWatch Utilities includes
+
+CWUtils provides both:
+- Graphical tools for interactive exploration
+- Command-line tools for scripting and repeatable processing workflows
+
+The tools commonly support workflows like:
+- Information and statistics (inspect file contents, compute summary stats)
+- Data processing (format conversions, compositing, variable math, sampling)
+- Graphics and visualization (interactive visualization + batch rendering)
+- Registration and navigation (resampling between projections; navigation correction)
+
+### Getting CoastWatch Utilities
+
+CWUtils is available for **Windows, macOS, and Linux**.
+The [User’s Guide notes](https://github.com/coastwatch-training/CoastWatch-Utilities/blob/main/downloads/cwutils_ug_4_0_0.pdf) (minimum recommendations): **~400 MB disk** (1 GB recommended total workspace) and **4 GB RAM**.
+
+To download, the guide directs users to the CoastWatch site and to look for **CoastWatch Utilities** under Data Tools (or search “utilities”).
+
+### CoastWatch Utilities Online Course
+The [CoastWatch Utilities Online Course](http://coastwatch-training.github.io/CoastWatch-Utilities/) is about using the CoastWatch Utilities software package to help with processing satellite imagery and derived data products. The course covers working with data files (i) visually using a graphical user interface, and (ii) by typing commands at the Unix or Windows command prompts. No programming experience is needed, though it can be helpful when automating data processing.
+

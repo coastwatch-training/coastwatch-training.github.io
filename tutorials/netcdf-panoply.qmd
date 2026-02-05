@@ -1,0 +1,34 @@
+---
+title: "NetCDF and Panoply"
+format: html
+---
+
+### NetCDF {#netcdfpanoply}
+**NetCDF (Network Common Data Form)** is a file format for storing multidimensional scientific data (variables), including common satellite observations (e.g., sea surface temperature, salinity, chlorophyll, winds). Many organizations and scientific groups in different countries have adopted netCDF as a standard way to represent some forms of scientific data.
+
+The NetCDF format has many advantages, the most important of which is that it is self-describing, meaning that software packages can directly read the data and determine its structure, the variable names and essential metadata such as the units. This self-describing aspect of the netCDF file format means that the information needed to ensure accurate work (reduce the incidence of errors) is available within the data itself (no need for additional files). Secondly, it means that different analysis software, like Matlab, R, Python or ArcGIS (among many others), have utilities to read and work with NetCDF files. Thirdly, plotting software (e.g. Ferret, Panoply, ncview) can directly read the netCDF files for visualization.
+
+![](images/netcdf1.png){width=40%} ![](images/netcdf2.png){width=40%}
+
+### NASA Panoply
+
+NASA developed the Panoply viewer that allows users to view and visualize data held in NetCDF files. Some features the software includes are:
+
+- Visualize data from netCDF and HDF files
+- View the metadata
+- View the data
+- Display the data in many different map projections
+- Download visualization as images
+- Create animations
+- Freeware
+
+![](images/panoply1.png){width=60%}
+
+Panoply is available for download at: https://www.giss.nasa.gov/tools/panoply/ and can be run on Windows, Mac and Linux computers.
+
+A set of "how to" instructions can be found to the following URL https://www.giss.nasa.gov/tools/panoply/help/
+Below are a few examples to try out to get you used to visualizing data with the Panoply Viewer.
+
+💡 **Panoply Version Note:** The examples provided in CoastWatch materials are based on Panoply **Version 5.3.3** (interfaces may differ slightly across versions).
+
+If you’re looking for hands-on, step-by-step lessons, go to the **[Software Code Gallery](software.qmd)** page.

@@ -332,6 +332,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#plot-histogram-of-chlorophyll" id="toc-plot-histogram-of-chlorophyll" class="nav-link" data-scroll-target="#plot-histogram-of-chlorophyll">Plot histogram of chlorophyll</a></li>
   </ul></li>
   </ul></li>
+  <li><a href="#match-satellite-chlorophyll-to-dusky-shark-telemetry" id="toc-match-satellite-chlorophyll-to-dusky-shark-telemetry" class="nav-link" data-scroll-target="#match-satellite-chlorophyll-to-dusky-shark-telemetry">Match satellite chlorophyll to Dusky shark telemetry</a>
+  <ul class="collapse">
+  <li><a href="#import-and-validate-shark-tag-data" id="toc-import-and-validate-shark-tag-data" class="nav-link" data-scroll-target="#import-and-validate-shark-tag-data">Import and validate shark tag data</a></li>
+  <li><a href="#extract-coordinates-and-format-dates-for-erddap" id="toc-extract-coordinates-and-format-dates-for-erddap" class="nav-link" data-scroll-target="#extract-coordinates-and-format-dates-for-erddap">Extract coordinates and format dates for ERDDAP</a></li>
+  <li><a href="#retrieve-and-examine-erddap-dataset-metadata" id="toc-retrieve-and-examine-erddap-dataset-metadata" class="nav-link" data-scroll-target="#retrieve-and-examine-erddap-dataset-metadata">Retrieve and examine ERDDAP dataset metadata</a></li>
+  <li><a href="#extract-satellite-data-along-the-track-using-rxtracto" id="toc-extract-satellite-data-along-the-track-using-rxtracto" class="nav-link" data-scroll-target="#extract-satellite-data-along-the-track-using-rxtracto">Extract satellite data along the track using <code>rxtracto</code></a></li>
+  <li><a href="#visualize-chlorophyll-along-the-track" id="toc-visualize-chlorophyll-along-the-track" class="nav-link" data-scroll-target="#visualize-chlorophyll-along-the-track">Visualize chlorophyll along the track</a></li>
+  <li><a href="#combine-track-coordinates-with-extracted-chlorophyll-values" id="toc-combine-track-coordinates-with-extracted-chlorophyll-values" class="nav-link" data-scroll-target="#combine-track-coordinates-with-extracted-chlorophyll-values">Combine track coordinates with extracted chlorophyll values</a></li>
+  <li><a href="#select-a-single-shark-and-plot" id="toc-select-a-single-shark-and-plot" class="nav-link" data-scroll-target="#select-a-single-shark-and-plot">Select a single shark and plot</a></li>
+  <li><a href="#add-track-segments-to-connect-consecutive-shark-locations" id="toc-add-track-segments-to-connect-consecutive-shark-locations" class="nav-link" data-scroll-target="#add-track-segments-to-connect-consecutive-shark-locations">Add track segments to connect consecutive shark locations</a></li>
+  <li><a href="#compare-chlorophyll-values-across-years-for-a-single-shark" id="toc-compare-chlorophyll-values-across-years-for-a-single-shark" class="nav-link" data-scroll-target="#compare-chlorophyll-values-across-years-for-a-single-shark">Compare chlorophyll values across years for a single shark</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -343,7 +355,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="matchup-satellite-data-to-track-locations" class="level1">
 <h1>Matchup Satellite data to track locations</h1>
-<p>history | Modified March 2024</p>
+<p>history | Modified Feb 2026</p>
 <section id="objective" class="level2">
 <h2 class="anchored" data-anchor-id="objective">Objective</h2>
 <p>This tutorial will demonstrate how to extract satellite data around a set of points defined by longitude, latitude, and time coordinates, like those produced by an animal telemetry tag, and ship track, or a glider track.</p>
@@ -355,6 +367,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Plotting the latitude/longitude points onto a map</li>
 <li>Using rerddapXtraco function to extract satellite data from an ERDDAP data server along a track</li>
 <li>Plotting the satellite data onto a map</li>
+<li>Subsetting and analyzing data for individual animals</li>
+<li>Comparing satellite-derived environmental conditions across time</li>
 </ul>
 </section>
 <section id="datasets-used" class="level2">
@@ -363,6 +377,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We’ll use the European Space Agency’s OC-CCI product (<a href="https://climate.esa.int/en/projects/ocean-colour/" class="uri">https://climate.esa.int/en/projects/ocean-colour/</a>) to obtain chlorophyll data. This is a merged product combining data from many ocean color sensors to create a long time series (1997-present).</p>
 <p><strong>Loggerhead turtle telemetry track data</strong></p>
 <p>The turtle was raised in captivity in Japan, then tagged and released on 05/04/2005 in the Central Pacific. Its tag transmitted for over 3 years and went all the way to the Southern tip of Baja California. This dataset has been subsampled to reduce the data requests needed for this tutorial from over 1200 to 25. The track data are stored in the data folder in this project folder.</p>
+<p><strong>Dusky shark satellite tag data</strong></p>
+<p>An extended example uses satellite tag data from dusky sharks provided by Chuck Bangley (Smithsonian Environmental Research Center). This dataset includes daily positions from multiple tagged individuals and demonstrates how the same ERDDAP extraction workflow can be applied to a different species and telemetry format. The shark example highlights additional steps such as data validation, subsetting individual animals, and comparing satellite-derived chlorophyll values across years.</p>
+<p><strong>Chlorophyll-a, Aqua MODIS, NPP, L3SMI, Global, 4km, Science Quality, 2003-present (8 Day Composite)</strong></p>
 </section>
 <section id="install-required-packages-and-load-libraries" class="level2">
 <h2 class="anchored" data-anchor-id="install-required-packages-and-load-libraries">Install required packages and load libraries</h2>
@@ -763,10 +780,197 @@ We have preselected the dataset because we know it will work with this exercise.
 <section id="optional" class="level5">
 <h5 class="anchored" data-anchor-id="optional">Optional</h5>
 <p>Repeat the steps above with a daily version of the OC-CCI dataset to see how cloud cover can reduce the data you retrieve. <a href="https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorDaily_Lon0360.html" class="uri">https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorDaily_Lon0360.html</a></p>
-
-
 </section>
 </section>
+</section>
+</section>
+<section id="match-satellite-chlorophyll-to-dusky-shark-telemetry" class="level1">
+<h1>Match satellite chlorophyll to Dusky shark telemetry</h1>
+<p>In this example, we extend the techniques demonstrated above to a different type of animal telemetry dataset: satellite-tagged Dusky sharks. While the workflow is conceptually the same, this example highlights several additional considerations that commonly arise when working with real telemetry data.</p>
+<p><strong>Data note:</strong> These dusky shark data were collected and provided by Dr.&nbsp;Chuck Bangley (Smithsonian Environmental Research Center). For details, see:</p>
+<pre><code>Bangley, C.W., et al. (2020) Identifying Important Juvenile Dusky Shark Habitat in the Northwest Atlantic Ocean Using Acoustic Telemetry and Spatial Modeling. Marine and Coastal Fisheries, 12:348–363. DOI: 10.1002/mcf2.10120</code></pre>
+<section id="import-and-validate-shark-tag-data" class="level3">
+<h3 class="anchored" data-anchor-id="import-and-validate-shark-tag-data">Import and validate shark tag data</h3>
+<p>We load the Dusky shark tag data from a CSV file and perform a few basic checks to ensure the data are ready for analysis.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dusky shark tag data from Chuck Bangley (SERC)</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>infile <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"DuskyDaily_NOAAclass_sortedTransmitterDate.csv"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(infile)) {</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">"Tag CSV not found: "</span>, infile,</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>       <span class="st">"</span><span class="sc">\n</span><span class="st">Tip: put the CSV in your working directory or update `infile`."</span>)</span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>tagdata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(infile, <span class="at">head =</span> <span class="cn">TRUE</span>, <span class="at">sep =</span> <span class="st">","</span>, <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick look</span></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(tagdata)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Minimal column checks (same expected columns your script uses)</span></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>needed_cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Longitude"</span>, <span class="st">"Latitude"</span>, <span class="st">"Date"</span>, <span class="st">"Transmitter"</span>)</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>missing_cols <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(needed_cols, <span class="fu">names</span>(tagdata))</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(missing_cols) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">"Missing required columns in tag CSV: "</span>, <span class="fu">paste</span>(missing_cols, <span class="at">collapse =</span> <span class="st">", "</span>))</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="extract-coordinates-and-format-dates-for-erddap" class="level3">
+<h3 class="anchored" data-anchor-id="extract-coordinates-and-format-dates-for-erddap">Extract coordinates and format dates for ERDDAP</h3>
+<p>Extract the lat and lon values from the shark tag data and prepare the time information for use with ERDDAP. The <code>rxtracto</code> function requires coordinates to be supplied as a separate lon, lat, and time vectors.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>xcoord <span class="ot">&lt;-</span> tagdata<span class="sc">$</span>Longitude</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>ycoord <span class="ot">&lt;-</span> tagdata<span class="sc">$</span>Latitude</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert m/d/YYYY -&gt; YYYY-mm-dd (rxtracto expects character dates like this)</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>tcoord_chr <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">as.Date</span>(tagdata<span class="sc">$</span>Date, <span class="st">"%m/%d/%Y"</span>))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: catch date parse failures (NA)</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">any</span>(<span class="fu">is.na</span>(tcoord_chr))) {</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">"Some dates could not be parsed with format '%m/%d/%Y'.</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>       <span class="st">"Check the Date column (example: 12/31/2018)."</span>)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="retrieve-and-examine-erddap-dataset-metadata" class="level3">
+<h3 class="anchored" data-anchor-id="retrieve-and-examine-erddap-dataset-metadata">Retrieve and examine ERDDAP dataset metadata</h3>
+<p>Using the <code>rerrdap::info()</code> function, we query ERDDAP server for metadata describing the selected dataset.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>url <span class="ot">&lt;-</span> <span class="st">"https://coastwatch.pfeg.noaa.gov/erddap/"</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="st">"erdMH1chla8day"</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternates (using WCN ERDDAP server):</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># dataset &lt;- "nesdisVHNSQchlaWeekly"          # Suomi-NPP VIIRS weekly chlorophyll, global 4km</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># dataset &lt;- "pmlEsaCCI50OceanColorMonthly"   # OC-CCI Chlorophyll, Monthly</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># If you encounter an error reading the nc file, clear the rerddap cache:</span></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co"># rerddap::cache_delete_all(force = TRUE)</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>dataInfo <span class="ot">&lt;-</span> rerddap<span class="sc">::</span><span class="fu">info</span>(dataset, <span class="at">url =</span> url)</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>dataInfo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="extract-satellite-data-along-the-track-using-rxtracto" class="level3">
+<h3 class="anchored" data-anchor-id="extract-satellite-data-along-the-track-using-rxtracto">Extract satellite data along the track using <code>rxtracto</code></h3>
+<p>Extract satellite-derived chlorophyll values at each shark tag location using the <code>rxtracto</code> function from the rerddapXtracto package. Satellite data are rarely available at an exact point in space, so <code>rxtracto</code> averages all satellite grid cells within a user-defined search radius around each track location. Here, we use a search window on 0.2° in both lon and lat. This spatial averaging helps account for differences in satellite resolution and small uncertainties in tag position.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>parameter <span class="ot">&lt;-</span> <span class="st">"chlorophyll"</span>  <span class="co"># Chlorophyll, Aqua MODIS</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternate:</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># parameter &lt;- "chlor_a"     # Chlorophyll, Suomi-NPP VIIRS</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Some satellite datasets have an altitude dimension.</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># If the dataInfo shows an altitude dimension, then zcoord must be included.</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>zcoord <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fl">0.</span>, <span class="fu">length</span>(xcoord))</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Search radius in degrees: satellite cells within +/- xlen/ylen are averaged</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>xlen <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>ylen <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a>weekly_chl <span class="ot">&lt;-</span> <span class="fu">rxtracto</span>(</span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>  dataInfo,</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">parameter =</span> parameter,</span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">xcoord =</span> xcoord, <span class="at">ycoord =</span> ycoord,</span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">tcoord =</span> tcoord_chr,</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlen =</span> xlen, <span class="at">ylen =</span> ylen</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Save extracted values</span></span>
+<span id="cb30-22"><a href="#cb30-22" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(weekly_chl, <span class="st">"weekly_chl_rxtracto.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="visualize-chlorophyll-along-the-track" class="level3">
+<h3 class="anchored" data-anchor-id="visualize-chlorophyll-along-the-track">Visualize chlorophyll along the track</h3>
+<p>We use <code>plotTrack</code> to create a quick-look map of chlorophyll values along the sharks’ track.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># PlotTrack may not show the image in some environments.</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># If so, uncomment these lines to save a PNG:</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># png(file="chl_data_vals_at_shark_tag_locations.png")</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plotTrack</span>(weekly_chl, xcoord, ycoord, tcoord_chr, <span class="at">plotColor =</span> <span class="st">"algae"</span>)</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># dev.off()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/dusky_shark_1.png" class="img-fluid"></p>
+</section>
+<section id="combine-track-coordinates-with-extracted-chlorophyll-values" class="level3">
+<h3 class="anchored" data-anchor-id="combine-track-coordinates-with-extracted-chlorophyll-values">Combine track coordinates with extracted chlorophyll values</h3>
+<p>We create a tidy data frame that combines the shark tag locations with the corresponding satellie-derived chlorophyll values extracted using <code>rxtracto</code>.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>alltags <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> xcoord,</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> ycoord,</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataval =</span> weekly_chl<span class="sc">$</span><span class="st">`</span><span class="at">mean chlorophyll</span><span class="st">`</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternate: Chlorophyll, Suomi-NPP VIIRS</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># alltags &lt;- data.frame(x = xcoord, y = ycoord, dataval = weekly_chl$`mean chlor_a`)</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>mapWorld <span class="ot">&lt;-</span> <span class="fu">map_data</span>(<span class="st">"world"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="select-a-single-shark-and-plot" class="level3">
+<h3 class="anchored" data-anchor-id="select-a-single-shark-and-plot">Select a single shark and plot</h3>
+<p>We subset the full dataset to focus on a single shark, identified by its transmitter ID. We use <code>ggplot</code> to create a map showing the selected shark’s track locations colored by the satellite-derived chlorophyll concentration.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>transm <span class="ot">&lt;-</span> tagdata<span class="sc">$</span>Transmitter</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>shark1 <span class="ot">&lt;-</span> transm[<span class="dv">1</span>]          <span class="co"># selects the first value from transm</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>shark1                       <span class="co"># displays the transmitter number</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>shark1_index <span class="ot">&lt;-</span> <span class="fu">which</span>(transm <span class="sc">==</span> shark1)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>single_shark <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x_shark =</span> alltags<span class="sc">$</span>x[shark1_index],</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y_shark =</span> alltags<span class="sc">$</span>y[shark1_index],</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">dataval_shark =</span> alltags<span class="sc">$</span>dataval[shark1_index]</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom bounds for this shark </span></span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>maplonmax <span class="ot">&lt;-</span> <span class="fu">max</span>(single_shark<span class="sc">$</span>x_shark)</span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>maplonmin <span class="ot">&lt;-</span> <span class="fu">min</span>(single_shark<span class="sc">$</span>x_shark)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>maplatmax <span class="ot">&lt;-</span> <span class="fu">max</span>(single_shark<span class="sc">$</span>y_shark)</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>maplatmin <span class="ot">&lt;-</span> <span class="fu">min</span>(single_shark<span class="sc">$</span>y_shark)</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>mapplot_shark1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(single_shark) <span class="sc">+</span></span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(x_shark, y_shark, <span class="at">color =</span> dataval_shark), <span class="at">size =</span> <span class="fl">2.</span>) <span class="sc">+</span></span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_polygon</span>(<span class="at">data =</span> mapWorld, <span class="fu">aes</span>(<span class="at">x =</span> long, <span class="at">y =</span> lat, <span class="at">group =</span> group), <span class="at">fill =</span> <span class="st">"grey80"</span>) <span class="sc">+</span></span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim =</span> <span class="fu">c</span>(maplonmin, maplonmax), <span class="at">ylim =</span> <span class="fu">c</span>(maplatmin, maplatmax)) <span class="sc">+</span></span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradientn</span>(<span class="at">colours =</span> <span class="fu">brewer.pal</span>(<span class="at">n =</span> <span class="dv">8</span>, <span class="at">name =</span> <span class="st">"YlGn"</span>),</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>                        <span class="at">name =</span> <span class="fu">expression</span>(<span class="st">"Chlorophyll (mg m"</span><span class="sc">^</span>{<span class="sc">-</span><span class="dv">3</span>}<span class="sc">*</span><span class="st">")"</span>)) <span class="sc">+</span></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">""</span>, <span class="at">y =</span> <span class="st">""</span>) <span class="sc">+</span></span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Mean chl-a values for dusky shark #1 "</span>)</span>
+<span id="cb33-26"><a href="#cb33-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-27"><a href="#cb33-27" aria-hidden="true" tabindex="-1"></a>mapplot_shark1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/dusky_shark_2.png" class="img-fluid"></p>
+</section>
+<section id="add-track-segments-to-connect-consecutive-shark-locations" class="level3">
+<h3 class="anchored" data-anchor-id="add-track-segments-to-connect-consecutive-shark-locations">Add track segments to connect consecutive shark locations</h3>
+<p>Draw line segments to connect consecutive shark tag locations, creating a continuous movement track. Because a track with N location points contains N-1 movement segments, we construct a separate start and end coordinate vectors for each segment.</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start/end points for N-1 line segments (same as your approach)</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>start_lon <span class="ot">&lt;-</span> single_shark<span class="sc">$</span>x_shark[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(single_shark<span class="sc">$</span>x_shark) <span class="sc">-</span> <span class="dv">1</span>)]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>start_lat <span class="ot">&lt;-</span> single_shark<span class="sc">$</span>y_shark[<span class="dv">1</span><span class="sc">:</span>(<span class="fu">length</span>(single_shark<span class="sc">$</span>y_shark) <span class="sc">-</span> <span class="dv">1</span>)]</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>end_lon   <span class="ot">&lt;-</span> single_shark<span class="sc">$</span>x_shark[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(single_shark<span class="sc">$</span>x_shark)]</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>end_lat   <span class="ot">&lt;-</span> single_shark<span class="sc">$</span>y_shark[<span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(single_shark<span class="sc">$</span>y_shark)]</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(start_lon)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>nseg <span class="ot">&lt;-</span> <span class="fu">length</span>(start_lon)</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a>mapplot_shark1_tracks <span class="ot">&lt;-</span> mapplot_shark1 <span class="sc">+</span></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> <span class="fu">as.data.frame</span>(single_shark<span class="sc">$</span>dataval_shark[<span class="dv">1</span><span class="sc">:</span>nseg]),</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> start_lon, <span class="at">y =</span> start_lat, <span class="at">xend =</span> end_lon, <span class="at">yend =</span> end_lat)</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>mapplot_shark1_tracks</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/dusky_shark_3.png" class="img-fluid"></p>
+</section>
+<section id="compare-chlorophyll-values-across-years-for-a-single-shark" class="level3">
+<h3 class="anchored" data-anchor-id="compare-chlorophyll-values-across-years-for-a-single-shark">Compare chlorophyll values across years for a single shark</h3>
+<p>We add date information to the single-shark dataset and use it to examine how satellite-derived chlorophyll values vary across different years of the shark’s track. The data are subset by year allowing, us to separate observations from 2017 and 2018 for comparison. We then visualize these year-specific chlorophyll distributions using a boxplot.</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>date_shark <span class="ot">&lt;-</span> tcoord_chr[shark1_index]</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>single_shark<span class="sc">$</span>date_shark <span class="ot">&lt;-</span> date_shark</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>shark1_2017 <span class="ot">&lt;-</span> <span class="fu">subset</span>(single_shark, <span class="fu">format</span>(<span class="fu">as.Date</span>(date_shark), <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="dv">2017</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>shark1_2018 <span class="ot">&lt;-</span> <span class="fu">subset</span>(single_shark, <span class="fu">format</span>(<span class="fu">as.Date</span>(date_shark), <span class="st">"%Y"</span>) <span class="sc">==</span> <span class="dv">2018</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(shark1_2017)</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(shark1_2018)</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>  shark1_2017<span class="sc">$</span>dataval_shark, shark1_2018<span class="sc">$</span>dataval_shark,</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Shark1 chlorophyll"</span>,</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"2017"</span>, <span class="st">"2018"</span>),</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"green"</span>),</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Year"</span>,</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Chl, mg/cm^3"</span>,</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">at =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>)  <span class="co"># draws boxplots at positions 1,3 with a space in the middle</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/dusky_shark_4.png" class="img-fluid"></p>
+
+
 </section>
 </section>
 

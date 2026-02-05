@@ -377,7 +377,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <blockquote class="blockquote">
-<p>History | Updated Mar 2024</p>
+<p>History | Updated Feb 2026</p>
 </blockquote>
 <p>In this exercise you will extract satellite data around a set of points defined by longitude, latitude, and time coordinates, like that produced by an animal telemetry tag, and ship track, or a glider tract.</p>
 <p>Please note that there may be more efficient ways, more Pythonic ways, to accomplish the tasks in this tutorial. The tutorial was developed to be easier to follow for less experienced users of Python.</p>
@@ -1295,13 +1295,15 @@ longitude range 175.86 248.57</code></pre>
 <section id="load-dusky-shark-telemetry-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-dusky-shark-telemetry-data">Load Dusky shark telemetry data</h2>
 <p>Load the dusky shark acoustic telemetry detections, which include longitude, latitude, detection date, and transmitter ID. Each row represents a single shark detection that will be matched to satellite data.</p>
-<div id="cell-32" class="cell" data-execution_count="2">
+<div id="cell-32" class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shark tag data (lon, lat, date, transmitter ID)</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tags <span class="op">=</span> pd.read_csv(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"/Users/madisonrichardson/CoastWatch/Ron_R_stuff/DuskyDaily_NOAAclass_sortedTransmitterDate.csv"</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>tag_path <span class="op">=</span> os.path.join(<span class="st">'..'</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'resources'</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'DuskyDaily_NOAAclass_sortedTransmitterDate.csv'</span>)</span>
 <span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tags.head(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>tags <span class="op">=</span> pd.read_csv(tag_path)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tags.head(<span class="dv">3</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Transmitter       Date  Latitude  Longitude  Unnamed: 4  \
 0  A69-1601-46065  9/15/2017  38.22503  -75.03418         NaN   
