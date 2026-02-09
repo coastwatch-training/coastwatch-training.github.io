@@ -87,7 +87,6 @@ website:
 
       - text: "Help"
         href: help.qmd
-  page-navigation: true
 
 
 format:
