@@ -24,4 +24,4 @@ This site provides information on CoastWatch Satellite Training courses such as 
 
   The [Help](help.qmd) page points you to FAQs, resources, and support options.
 
-Testing. 
+Test 2 for git actions.
