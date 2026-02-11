@@ -51,6 +51,7 @@ tutorials/Tutorial1-basics/
 
 Inside that folder, organize by language:
 
+```
 tutorials/Tutorial1-basics/
 ├── python/
 │ └── Tutorial1-basics.ipynb
@@ -63,6 +64,7 @@ tutorials/Tutorial1-basics/
 ├── tut1_2_py.png
 ├── tut1_1_r.png
 └── tut1_1_m.png
+```
 
 You only need folders for the languages you are providing.
 
