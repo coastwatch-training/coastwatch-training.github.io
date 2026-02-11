@@ -1,101 +1,38 @@
+
 # CoastWatch Training Website — Collaborator Guide
 
-This repository hosts the **CoastWatch Training** website, built using **Quarto** and published via **GitHub Pages**.
+This repository hosts the CoastWatch Training website, built using Quarto and deployed automatically via **GitHub Actions + GitHub Pages**.
 
-This guide is written for collaborators who **may not have used Quarto before**. It explains:
+You do **NOT** need to install Quarto.
+You do **NOT** need to run quarto render.
+You do **NOT** need to touch the docs/ folder.
 
-- how the site is structured
-- where to make changes
-- how to safely render the site
-- how to push updates to GitHub without breaking anything
-
----
+GitHub automatically builds and deploys the site when changes are merged into main.
 
 ## 1. What this repository is
 
-This is a **Quarto website**.
+This is a Quarto website.
 
-You edit source files (mostly `.qmd`), then run Quarto to build the website into a folder called:
+You edit source files (mostly .qmd files), and GitHub handles:
 
-```
-docs/
-```
+- rendering the site
+- executing Python code
+- deploying the updated website
 
-GitHub Pages publishes the site **from `docs/`**.
+## 2. Important: What NOT to Do
 
-**Workflow overview:**
+- Do NOT run quarto render
+- Do NOT edit anything inside docs/
+- Do NOT push directly to main
 
-edit source files → quarto render → commit changes → push → open PR
+The docs/ folder is automatically generated during deployment and should never be edited manually.
 
----
+## 3. How the Site is Structured
 
-## 2. How the site is configured (`_quarto.yml`)
-
-### Output directory
-
-``` yml
-project:
-  output-dir: docs
-```
-
-- All rendered website files go into docs/
-- Do not manually edit files inside docs/
-
-### Files that get rendered
-
-``` yml
-project:
-  render: 
-    - "**/*.qmd"
-    - "**/*.ipynb"
-    - "!**/*.Rmd"
-```
-
-Quarto will:
-
-- render all .qmd pages
-- render all .ipynb notebooks
-- ignore .Rmd files
-
-### Sidebar navigation
-
-Everything under:
-
-``` yml
-website:
-  sidebar:
-    contents:
-```
-
-controls:
-
-- what appears in the left navigation
-- the order of pages
-
-If you add a new page and it doesn’t appear in the sidebar, it needs to be added here.
-
-### Styling
-
-``` yml
-format:
-  html:
-    theme: cosmo
-    css: styles.css
-```
-
-The site uses:
-
-- the Cosmo Bootstrap theme
-- custom styling in styles.css
-
----
-
-## 3. Repository structure (where things live)
-
-### Main pages
+### Main Pages
 
 | Page | File |
-|---|---|
+|------|------|
 | Welcome | `index.qmd` |
 | News & Announcements | `news-announcements.qmd` |
 | Office Hours | `officehours.qmd` |
@@ -107,171 +44,118 @@ The site uses:
 ### Trainings
 
 | Type | Location |
-|---|---|
+|------|----------|
 | Trainings landing page | `trainings/index.qmd` |
 | Upcoming trainings | `trainings/upcoming/*.qmd` |
 | Past trainings | `trainings/past/*.qmd` |
+
+Inside the trainings folder, is the presentations folder where presentations from each course is stored and referenced to by either the upcoming or past training pages.
 
 ---
 
 ### Tutorials
 
 | Page | Location |
-|---|---|
+|------|----------|
 | Tutorials landing page | `tutorials/index.qmd` |
 | Code Gallery | `tutorials/codegallery.qmd` |
 | Software tutorials | `tutorials/*.qmd` |
 
-### Site output (auto-generated)
+Software tutorials also has pages that teach users more about ERDDAP, NetCDF, Panoply, and CWUtils; there is also a code gallery for these tools. 
 
+### Sidebar Navigation
+
+The sidebar is controlled by:
+
+``` yml
+_quarto.yml
 ```
-docs/
+Under:
+
+``` yml
+website:
+  sidebar:
+    contents:
 ```
+If you add a new page and it does not appear in the sidebar, it must be added here.
 
-⚠️ Do not manually edit files in docs/.
-This folder is overwritten every time Quarto renders the site.
+## 4. Standard Workflow (Edit → PR → Merge)
 
---- 
+This is the only workflow collaborators should use.
 
-## 4. One-time setup for collaborators
-
-### Install Quarto
-
-Download and install Quarto from:  
-https://quarto.org
-
-Verify installation:
+#### Step 1 — Create a new branch
 
 ``` bash
-quarto --version
-```
-
-### Clone the repository
-
-``` bash
-git clone <repo-url>
-cd coastwatch-training.github.io
-```
-
----
-
-## 5. Standard workflow (edit → render → push)
-
-### Step 1 — Create a new branch
-
-```bash
 git checkout -b my-branch-name
 ```
-### Step 2 — Make your edits
 
-Edit the relevant .qmd files.
+#### Step 2 — Make your edits
 
-### Step 3 — Preview locally (recommended)
+Edit the relevant .qmd file(s).
 
-``` bash
-quarto preview
-```
+You may edit:
 
-This launches a local preview server and updates automatically as you save.
+- text
+- images
+- tables
+- links
+- page content
 
-Stop preview with:
+**Do not edit docs/.**
 
-Ctrl + C
-
-### Step 4 — Render the website
-
-From the repository root:
+#### Step 3 — Commit your changes
 
 ``` bash
-quarto render
-```
-
-This updates the docs/ folder.
-
-### Step 5 — Check changes before committing
-
-``` bash
-git status
-git diff --stat
-```
-
-If you only edited one page, you should see a small number of changed files.
-
-### Step 6 — Commit and push
-
-``` bash
-git add filename
+git add .
 git commit -m "Brief description of changes"
-git push -u origin
+git push origin my-branch-name
 ```
 
-### Step 7 — Open a Pull Request
+#### Step 4 — Open a Pull Request
 
 Open a PR from your branch into main.
 
-Once merged, GitHub Pages will automatically update the live site.
+#### Step 5 — Automated Rendering & Deployment
 
----
+Once your PR is merged:
 
-## 6. Avoiding massive deletions (VERY IMPORTANT)
+- GitHub Actions runs automatically
+- Quarto renders the site
+- Python code (if present) is executed
+- The website is deployed to GitHub Pages
 
-If you ever see thousands of deletions, STOP.
+You do not need to do anything else.
 
-This usually happens if:
+## 5. How Deployment Works (for context)
 
-- docs/ was deleted or cleaned
-- Quarto was run from the wrong directory
-- everything was staged without checking
+When changes are merged into main:
 
-### Safety checks before committing
+- GitHub installs Quarto
+- GitHub installs required Python packages
+- GitHub runs quarto render
+- The rendered site (in docs/) is deployed automatically
 
-Always run:
+The docs/ folder is not manually maintained.
 
-``` bash
-git status
-```
+## 6. Adding a New Page
 
-If you see a huge list of deletions in docs/, do not commit.
+Example: Add a new Upcoming Training
 
-### Undo staged changes
-
-``` bash
-git restore --staged .
-```
-
-### Restore files to last commit
-
-⚠️ This discards local changes:
-
-``` bash
-git restore .
-```
-
-### Restore only the rendered output
-
-``` bash
-git restore docs/
-```
-
-Then re-run:
-
-``` bash
-quarto render
-git status
-```
-
----
-
-## 7. Adding a new page correctly
-### Example: Add a new Past Training page
-
-Create the file:
+#### 1. Create the file:
 
 ```
 trainings/upcoming/newtraining26.qmd
 ```
 
-Add it to the sidebar in _quarto.yml:
+#### 2. Add it to _quarto.yml under:
+
+``` yml
+website:
+  sidebar:
+    contents:
+```
+
+Example:
 
 ``` yml
 - section: "Upcoming Trainings"
@@ -280,58 +164,48 @@ Add it to the sidebar in _quarto.yml:
       text: 2026 New Training Name
 ```
 
-Render and preview:
+#### 3. Commit and open a PR.
 
-``` bash
-quarto render
-quarto preview
-```
+That’s it.
 
-Commit, push, and open a PR.
+## 7. Common Issues
 
----
+#### Page does not appear in sidebar
 
-## 8. Common issues
-### Page doesn’t appear in the sidebar
+It was not added to _quarto.yml.
 
-The page exists but hasn’t been added to:
+#### Deployment fails after merge
 
-``` yml
-website:
-  sidebar:
-    contents:
-```
+This usually means:
 
-### Page title looks odd in the browser tab
+- A syntax error in YAML
+- A broken Python code chunk
+- A missing file path
 
-Quarto uses YAML frontmatter metadata for titles. Some layouts hide visible titles while still needing metadata for the browser tab.
+Check the Actions tab in GitHub to see the error log.
 
-Ask the site maintainer (madison.richardson@noaa.gov) if unsure.
+Do not attempt to manually fix docs/.
 
-### Render fails due to missing packages
+#### Page title looks strange in the browser tab
 
-Some pages may execute code during render. If this happens:
+Page titles are controlled by the YAML frontmatter at the top of each .qmd file.
 
-- required packages must be installed locally, or
-- the page should be rendered with pre-saved outputs
+If unsure, ask the maintainer (madison.richardson@noaa.gov).
 
-Ask the maintainer before troubleshooting.
-
----
-
-## 9. General best practices
+## 8. Best Practices
 
 - Always work on a branch
-- Always run git status before committing
-- Never manually edit docs/
-- If something looks wrong, stop and ask before pushing
+- Always open a Pull Request
+- Never push directly to main
+- Never edit docs/
+- Keep commits focused and small
+- If something breaks, check the GitHub Actions log
 
----
-
-## 10. Getting help
+## 9. Getting Help
 
 If something behaves unexpectedly:
 
-- do not force a commit
-- take a screenshot or copy terminal output
-- ask the site maintainer (madison.richardson@noaa.gov) for guidance
+- Do not force a merge
+- Check the Actions tab for error logs
+- Take a screenshot or copy the error message
+- Contact the site maintainer (madison.richardson@noaa.gov)
