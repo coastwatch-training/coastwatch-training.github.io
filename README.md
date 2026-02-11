@@ -209,3 +209,15 @@ If something behaves unexpectedly:
 - Check the Actions tab for error logs
 - Take a screenshot or copy the error message
 - Contact the site maintainer (madison.richardson@noaa.gov)
+
+# HOW TO ADD A TUTORIAL TO THE WEBSITE
+
+If you are adding tutorials, please read the guide:
+
+[Adding Tutorials](adding-tutorials.md)
+
+# HOW TO ADD A LECTURE TO THE WEBSITE
+
+If you are adding lectures, please read the guide:
+
+[Adding Lectures](adding-lectures.md)
