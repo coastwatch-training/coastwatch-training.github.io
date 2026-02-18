@@ -44,7 +44,7 @@ website:
                 text: 2026 Satellite 201 Summer Series
           - section: "Past Trainings"
             contents:
-               - href: trainings/past/pgrsc26.qmd
+              - href: trainings/past/pgrsc26.qmd
                 text: 2026 PGRSC Course
               - href: trainings/past/icft25.qmd
                 text: 2025 Satellite and Animal Telemetry
