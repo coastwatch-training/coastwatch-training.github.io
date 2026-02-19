@@ -172,70 +172,99 @@ def transcript_icon(url: str) -> str:
     )
 
 
-# sort so categories group together
+# --- Category dropdown options ---
 df["category"] = df.get("category", "").astype(str).str.strip()
-df = df.sort_values(["category", "title"], na_position="last").fillna("")
+cats = sorted([c for c in df["category"].unique() if str(c).strip()])
 
-rows = []
-last_cat = None
+FILTER_UI = f"""
+<div class="cg-filterbar">
+  <div class="cg-filtergroup">
+    <span class="cg-filterlabel">Category</span>
+    <select id="lec-category" class="cg-select">
+      <option value="">All</option>
+      {''.join([f'<option value="{c}">{c}</option>' for c in cats])}
+    </select>
+  </div>
+  <div class="cg-filtercount" id="lec-count"></div>
+</div>
+"""
 
+# --- Table rows (add data-category for filtering) ---
+table_rows = []
 for _, r in df.iterrows():
-    cat   = str(r.get("category", "")).strip() or "Other"
     title = str(r.get("title", "")).strip()
+    cat   = str(r.get("category", "")).strip() or "Other"
+    desc  = str(r.get("description", "")).strip()
     purl  = str(r.get("preview_url", "")).strip()
     durl  = str(r.get("download_url", "")).strip()
-    desc  = str(r.get("description", "")).strip()
+    vurl  = str(r.get("video_url", "")).strip()
+    turl  = str(r.get("transcript_url", "")).strip()
 
-    # ---- category divider row ----
-    if cat != last_cat:
-        rows.append(f"""
-          <tr class="cg-divider">
-            <td colspan="5">{cat}</td>
-          </tr>
-        """)
-        last_cat = cat
-
-    # ---- normal lecture row ----
-    rows.append(f"""
-      <tr class="cg-row">
+    table_rows.append(f"""
+      <tr class="lec-row" data-category="{cat.replace('"','&quot;')}">
         <td>
           <strong>{title}</strong><br>
           <span class="cg-desc">{desc}</span>
         </td>
         <td>{preview_icon(purl)}</td>
         <td>{download_icon(durl)}</td>
-        <td>{video_icon(r.get("video_url", ""))}</td>
-        <td>{transcript_icon(r.get("transcript_url", ""))}</td>
+        <td>{video_icon(vurl)}</td>
+        <td>{transcript_icon(turl)}</td>
       </tr>
     """)
 
-
 table = f"""
 <div class="cg-table-wrap">
-<table class="code-gallery-table">
-  <colgroup>
-    <col style="width: 60%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-    <col style="width: 10%;">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Lecture</th>
-      <th>Preview</th>
-      <th>Download</th>
-      <th>Video</th>
-      <th>Transcript</th>
-    </tr>
-  </thead>
-  <tbody>
-    {''.join(rows)}
-  </tbody>
-</table>
+  {FILTER_UI}
+  <table class="code-gallery-table">
+    <colgroup>
+      <col style="width: 60%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+      <col style="width: 10%;">
+    </colgroup>
+    <thead>
+      <tr>
+        <th>Lecture</th>
+        <th>Preview</th>
+        <th>Download</th>
+        <th>Video</th>
+        <th>Transcript</th>
+      </tr>
+    </thead>
+    <tbody>
+      {''.join(table_rows)}
+    </tbody>
+  </table>
 </div>
 """
 
 HTML(table)
 ```
 
+<script>
+(function(){
+  function applyCategoryFilter(){
+    const cat = document.getElementById("lec-category")?.value || "";
+    const rows = Array.from(document.querySelectorAll("tr.lec-row"));
+    let shown = 0;
+
+    rows.forEach(row => {
+      const rowCat = row.dataset.category || "";
+      const ok = !cat || rowCat === cat;
+      row.style.display = ok ? "" : "none";
+      if(ok) shown += 1;
+    });
+
+    const countEl = document.getElementById("lec-count");
+    if(countEl) countEl.textContent = `${shown} shown`;
+  }
+
+  document.addEventListener("change", (e) => {
+    if(e.target && e.target.id === "lec-category") applyCategoryFilter();
+  });
+
+  document.addEventListener("DOMContentLoaded", applyCategoryFilter);
+})();
+</script>
