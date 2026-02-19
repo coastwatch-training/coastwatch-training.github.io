@@ -172,13 +172,30 @@ def transcript_icon(url: str) -> str:
     )
 
 
+# sort so categories group together
+df["category"] = df.get("category", "").astype(str).str.strip()
+df = df.sort_values(["category", "title"], na_position="last").fillna("")
+
 rows = []
+last_cat = None
+
 for _, r in df.iterrows():
+    cat   = str(r.get("category", "")).strip() or "Other"
     title = str(r.get("title", "")).strip()
     purl  = str(r.get("preview_url", "")).strip()
     durl  = str(r.get("download_url", "")).strip()
-    desc = str(r.get("description", "")).strip()
+    desc  = str(r.get("description", "")).strip()
 
+    # ---- category divider row ----
+    if cat != last_cat:
+        rows.append(f"""
+          <tr class="cg-divider">
+            <td colspan="5">{cat}</td>
+          </tr>
+        """)
+        last_cat = cat
+
+    # ---- normal lecture row ----
     rows.append(f"""
       <tr class="cg-row">
         <td>
