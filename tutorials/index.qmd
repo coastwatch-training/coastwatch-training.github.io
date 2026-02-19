@@ -41,13 +41,3 @@ The Code Gallery provides an overview of available coding tutorials and direct l
 All tutorials are provided for educational and demonstrative purposes. Code examples are intended to illustrate workflows and techniques and should be reviewed, tested, and adapted as needed before being used for research or operational applications.
 :::
 
----
-
-## Acknowledgement
-
-The training materials for the CoastWatch Program have been developed, reviewed, and edited with the contributions of many dedicated individuals.
-
-**Contributors:**  
-Melanie Abecassis, Dave Foley, Peter Hollemans, Sun Bak Hospital, Songzhi Liu, Roy Mendelssohn, Madison Richardson, Dale Robinson, Jennifer Sevadjian, Jonathan Sherman, Hui (Daisy) Shi, Michael Soracco, Shelly Tomlinson, Ron Vogel, Victoria Wegman, Cara Wilson
-
-We also extend our gratitude to other external contributors whose specific acknowledgements are included within the training materials they helped to create.

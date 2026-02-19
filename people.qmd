@@ -1,0 +1,31 @@
+---
+title: "Collaborators & Acknowledgements"
+---
+
+The CoastWatch training program is built on the collaboration of scientists across NOAA, partner institutions, and the broader satellite science community. This page recognizes the instructors, contributors, collaborators, and supporters who have helped develop course materials, deliver trainings, and advance applied satellite data use.
+
+## People
+
+ | Name              | Affiliation                     | 
+ |:-----------------|:-----------------------------------------------------------------------------|
+ | [Cara Wilson](mailto:cara.wilson@noaa.gov)       | CoastWatch/West Coast Node/PolarWatch, Node Manager|
+ | [Dale Robinson](mailto:dale.robinson@noaa.gov)       | CoastWatch/West Coast Node/PolarWatch, Development Lead |
+ | [Sunny Hospital](mailto:sun.bak-hospital@noaa.gov)       | CoastWatch/PolarWatch, Development Lead |
+ | [Michelle Tomlinson](mailto:michelle.tomlinson@noaa.gov)        | CoastWatch/East Coast Node, Node Manager |
+ | [Ron Vogel](mailto:ronald.vogel@noaa.gov)        | CoastWatch/East Coast Node, Development Lead |
+ | [James Kessler](mailto:james.kessler@noaa.gov)        | CoastWatch/Great Lakes Node, Node Manager |
+ | [Songzhi Liu](mailto:songzhi.liu@noaa.gov)        | CoastWatch/Great Lakes Node, Development Lead |
+ | [Gregory Foltz](mailto:gregory.foltz@noaa.gov)        | CoastWatch/Caribbean and Gulf of America Node, Node Manager |
+ | [Joaquin A. Trinanes](mailto:joaquin.trinanes@noaa.gov)        | CoastWatch/Caribbean and Gulf of America Node, Development Lead |
+ | [Ryan Rykaczewski](ryan.rykaczewski@noaa.gov)         | CoastWatch/Pacific OceanWatch, Node Manager |
+ | [Daisy Shi](mailto:hui.shi@noaa.gov)         | CoastWatch/Pacific OceanWatch, Development Lead |
+ 
+
+## Acknowledgements
+
+The training materials for the CoastWatch Program have been developed, reviewed, and edited with the contributions of many dedicated individuals.
+
+**Contributors:**  
+Melanie Abecassis, Dave Foley, Peter Hollemans, Sunny Hospital, Songzhi Liu, Roy Mendelssohn, Madison Richardson, Dale Robinson, Jennifer Sevadjian, Jonathan Sherman, Hui (Daisy) Shi, Michael Soracco, Shelly Tomlinson, Ron Vogel, Victoria Wegman, and Cara Wilson. 
+
+We also extend our gratitude to other external contributors whose specific acknowledgements are included within the training materials they helped to create.
