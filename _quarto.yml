@@ -40,12 +40,12 @@ website:
         contents:
           - section: "Upcoming Trainings"
             contents:
-              - href: trainings/upcoming/pgrsc26.qmd
-                text: 2026 PGRSC Course
               - href: trainings/upcoming/sat201_26.qmd
                 text: 2026 Satellite 201 Summer Series
           - section: "Past Trainings"
             contents:
+              - href: trainings/past/pgrsc26.qmd
+                text: 2026 PGRSC Course
               - href: trainings/past/icft25.qmd
                 text: 2025 Satellite and Animal Telemetry
               - href: trainings/past/longislandsound25.qmd
