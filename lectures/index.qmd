@@ -222,15 +222,3 @@ table = f"""
 HTML(table)
 ```
 
-## Acknowledgements
-
-The CoastWatch training materials have been developed, reviewed, and edited with contributions from many dedicated individuals:
-
-- Melanie Abecassis — Code/content development, review
-- Dale Robinson — Code/content development, review
-- Shelly Tomlinson — Code/content development, review
-- Andrea Vander Woude — Code/content development, review
-- Victoria Wegman — Content review/editing
-- Cara Wilson — Code/content development, review
-
-We also extend our gratitude to additional external contributors whose acknowledgements are included within the training materials they helped to create.

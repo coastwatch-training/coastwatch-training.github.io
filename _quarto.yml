@@ -82,8 +82,11 @@ website:
       - text: "Office Hours"
         href: officehours.qmd
 
-      - text: "About Us"
+      - text: "Our History"
         href: about.qmd
+
+      - text: "People"
+        href: people.qmd
 
       - text: "Help"
         href: help.qmd
