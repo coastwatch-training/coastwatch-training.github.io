@@ -71,7 +71,4 @@ Friday, July 31, 2026
  | [Peter Hollemans](mailto:peter.hollemans@noaa.gov)         | CoastWatch Utilities Developer |
  | [Ryan Vandermeulen](mailto:ryan.vandermeulen@noaa.gov)         | NOAA Fisheries Satellite Coordinator |
  | [Chris Jackson](mailto:christopher.jackson@noaa.gov)         | |
-## Resources
-- [Coastwatch Tutorials](../../tutorials/index.qmd)
-- [Coastwatch Lecture series](https://umd.instructure.com/courses/1336575/pages/all-lectures)
 
