@@ -15,6 +15,7 @@ Flexibility: Attendance for all sessions is not required; feel free to join the 
 
 ## 2026 Curriculum
 The inaugural 2026 course will cover the following subjects:
+
 * Alternative Data Access: Methods for accessing data not hosted on ERDDAP servers.
 * CoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite.
 * Beyond Chlorophyll: Exploring ocean color products other than chlorophyll. 
