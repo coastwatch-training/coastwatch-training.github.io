@@ -1,7 +1,3 @@
----
-anchor-sections: true
----
-
 # How to Push Changes Using Only the GitHub Website
 
 This guide explains how to safely make and submit changes to the repository without cloning the repo or using the command line.
@@ -14,7 +10,7 @@ You will:
 
 This keeps the **main** branch protected and prevents accidental site breaks.
 
-[**Check that your branch is not behind in commits from the main branch before trying to push changes**](#keeping-your-branch-up-to-date-with-main-update-branch)
+**Check** that your branch is [not behind in commits](#keeping-your-branch-up-to-date-with-main) from the main branch before trying to push changes
 
 ## Step 1 - Create Your Own Branch
 
