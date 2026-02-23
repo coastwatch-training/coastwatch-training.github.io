@@ -1,3 +1,7 @@
+---
+anchor-sections: true
+---
+
 # How to Push Changes Using Only the GitHub Website
 
 This guide explains how to safely make and submit changes to the repository without cloning the repo or using the command line.
@@ -17,7 +21,7 @@ This keeps the **main** branch protected and prevents accidental site breaks.
 - Got to the repository on GitHub
 - At the top left, click the branch dropdown and type a new branch name
 
-![](images/create-branch.png)
+![](images/create-branch.png){width=50%}
 
 For this example, we are using the branch madi-dev.
 
