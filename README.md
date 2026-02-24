@@ -81,7 +81,7 @@ If you add a new page and it does not appear in the sidebar, it must be added he
 
 ## 4. Standard Workflow (Edit → PR → Merge)
 
-This is the only workflow collaborators should use.
+This is the workflow collaborators will use through terminal. If you are committing changes through the GitHub web interface, follow the steps of this [guide](github-branches-merging.md). 
 
 #### Step 1 — Create a new branch
 
