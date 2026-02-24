@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you reference or reuse the CoastWatch Training website infrastructure, please cite as below."
+title: "CoastWatch Training Cyberinfrastructure: Website Architecture and Automated Satellite Data Workflow Framework"
+version: 1.0.0
+date-released: 2026-02-01
+
+authors:
+  - family-names: Richardson
+    given-names: Madison
+    affiliation: NOAA CoastWatch West Coast Node and Miami TSPi
+
+repository-code: https://github.com/coastwatch-training/coastwatch-training.github.io
+url: https://coastwatch-training.github.io
+
+abstract: >
+  A Quarto-based web platform and automation framework developed 
+  to support NOAA CoastWatch satellite data training. This repository 
+  implements a reproducible cyberinfrastructure system integrating 
+  multi-language tutorials (Python, R, Matlab, and ArcGIS), ERDDAP data workflows, 
+  GitHub Actions-based automation, dynamic content rendering, and 
+  structured metadata catalogs. The framework supports scalable delivery 
+  of satellite remote sensing training materials and enables 
+  reproducible dissemination of applied oceanographic data workflows. 
+  Educational content hosted within the platform is contributed by 
+  multiple instructors and collaborators; this citation refers specifically 
+  to the website architecture and automation framework.
+
+license: MIT
