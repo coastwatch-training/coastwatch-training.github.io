@@ -412,7 +412,7 @@ for i, r in df.iterrows():
     has_m_block  = has_any(r.get("m_img",""), r.get("m_view",""), r.get("m_download",""))
     has_arc_block  = has_any(r.get("arc_img",""), r.get("arc_view",""), r.get("arc_download",""))
 
-    n_blocks = sum([has_py_block, has_r_block, has_m_block])
+    n_blocks = sum([has_py_block, has_r_block, has_m_block, has_arc_block])
     single = (n_blocks == 1)
 
     grid_class = "cg-grid cg-grid-single" if single else "cg-grid"
@@ -505,7 +505,7 @@ for i, r in df.iterrows():
           data-has-py="{has_py}"
           data-has-r="{has_r}"
           data-has-m="{has_m}"
-          data-has-m="{has_arc}">
+          data-has-arc="{has_arc}">
         <td>{title}</td>
         <td>{cat}</td>
         <td>{modal_eye(mid)}</td>
@@ -683,7 +683,7 @@ function cgNext(id){
     const soft = activeSoftware();
 
     // if no chips active -> show all software
-    const anySoft = soft.py || soft.r || soft.m;
+    const anySoft = soft.py || soft.r || soft.m || soft.arc;
 
     const rows = Array.from(document.querySelectorAll("tr.cg-row"));
     let shown = 0;
