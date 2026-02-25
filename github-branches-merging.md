@@ -99,9 +99,7 @@ Navigate to the Pull Requests and open a New Pull Request:
 
 ## Step 2 - Comparing Changes
 
-After opening the PR, change the base (red box) to your branch (madi-dev), and the compare branch (orange box) to the main branch.
-
-![](images/change-base-to-mybranch.png)
+After opening the PR, change the base to main, and the compare branch to the your branch.
 
 If we can merge the branches, then a green check mark saying "Able to Merge" will appear next to the boxes. 
 
@@ -118,3 +116,93 @@ GitHub will automatically check for conflicts between branches, and then allow y
 ![](images/successful-merge-madidev.png)
 
 Now, your branch is sucessfully updated to the main branch! You can now make edits on your branch and push them to main. 
+
+# How to Reverse Changes
+
+Sometimes mistakes happen. You may:
+
+* Merge a Pull Request too early
+* Edit the wrong file
+* Delete something accidentally
+* Break navigation in a Quarto page
+
+There are safe ways to reverse changes directly in the GitHub web interface.
+
+## Scenario 1 – The Pull Request Has NOT Been Merged
+
+If the PR is still open, the easiest solution is:
+
+### Option A – Close the Pull Request
+
+1. Go to the Pull Request.
+2. Click **Close pull request**.
+3. (Optional) Click **Delete branch**.
+
+The changes will not be merged into `main`.
+
+This is the safest option.
+
+### Option B – Edit the File Again
+
+If you only need to fix part of the change:
+
+1. Go to the file.
+2. Click the ✏️ pencil icon.
+3. Restore the previous content manually.
+4. Commit to your branch.
+
+Then update the Pull Request.
+
+## Scenario 2 – The Pull Request Has Already Been Merged
+
+If the changes are already merged into `main`, do NOT try to manually edit files back.
+
+Instead, use GitHub’s **Revert** feature.
+
+### Step 1 – Go to the Merged Pull Request
+
+Find the merged PR in the Pull Requests tab.
+
+### Step 2 – Click “Revert”
+
+In the top-right of the merged PR, click Revert as shown in the red box:
+
+![](images/revert.png)
+
+GitHub will:
+
+* Create a new branch
+* Create a new commit that undoes the previous merge
+* Open a new Pull Request
+
+### Step 3 – Create and Merge the Revert PR
+
+Add a short description explaining why you are reverting.
+
+Then:
+
+* Click **Create pull request**
+* Click **Merge pull request**
+* Confirm merge
+
+This safely restores the repository to its previous state.
+
+# Important Notes for This Repository (Quarto Website)
+
+Because this repository builds a website:
+
+* Do NOT edit files inside the `docs/` folder to reverse changes.
+* Always revert using the PR if possible.
+* Reverting ensures the exact previous working state is restored.
+
+Manually editing files back can miss small changes and cause layout issues.
+
+
+# Quick Decision Guide
+
+| Situation     | What To Do              |
+| ------------- | ----------------------- |
+| PR open       | Close PR                |
+| PR merged     | Click Revert            |
+| Minor mistake | Edit again and recommit |
+| Major break   | Revert PR immediately   |
