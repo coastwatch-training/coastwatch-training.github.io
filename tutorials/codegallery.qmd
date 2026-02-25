@@ -412,7 +412,7 @@ for i, r in df.iterrows():
     has_m_block  = has_any(r.get("m_img",""), r.get("m_view",""), r.get("m_download",""))
     has_arc_block  = has_any(r.get("arc_img",""), r.get("arc_view",""), r.get("arc_download",""))
 
-    n_blocks = sum([has_py_block, has_r_block, has_m_block])
+    n_blocks = sum([has_py_block, has_r_block, has_m_block, has_arc_block])
     single = (n_blocks == 1)
 
     grid_class = "cg-grid cg-grid-single" if single else "cg-grid"
