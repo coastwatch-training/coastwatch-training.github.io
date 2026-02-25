@@ -1,0 +1,48 @@
+---
+title: "Using Satellite SST Data in ArcGIS (ArcMap & ArcGIS Pro)"
+---
+
+## Overview
+
+This tutorial series demonstrates how to use NOAA CoastWatch **Sea Surface Temperature (SST)** satellite data within ArcGIS to perform spatial and temporal analysis using multidimensional NetCDF datasets. The workflow includes downloading data from ERDDAP, preparing and modifying CSV-based tracking data, enabling time-aware layers, extracting raster values using Spatial Analyst tools, and generating maps, graphs, and animations.
+
+A real-world example using a multi-year loggerhead sea turtle track is used to illustrate spatial–temporal sampling and habitat interpretation (e.g., TurtleWatch temperature thresholds). The workflow highlights practical GIS concepts including longitude format conversion (0–360 vs. -180–180), time configuration, multidimensional raster management, and feature–raster extraction.
+
+---
+
+## Software Versions
+
+Two parallel versions of this tutorial are available. Both follow the same scientific workflow but use platform-specific tools and interfaces.
+
+### ArcGIS Pro 
+
+- Uses modern multidimensional raster tools  
+- Built-in time slider with improved time management  
+- Enhanced NetCDF support  
+- Streamlined Spatial Analyst workflows  
+
+[Open the ArcGIS Pro Tutorial](ArcGIS_ArcProv3_Training2023_General_EXERCISE_r1.pdf)
+
+
+### ArcMap 
+
+- Uses *Make NetCDF Raster Layer* and legacy multidimension tools  
+- Manual time layer configuration  
+- Spatial Analyst *Sample* tool for multidimensional extraction  
+- Compatible with ArcMap 10.4–10.8.1  
+
+[Open the ArcMap Tutorial](ArcGIS_Training2022_General_EXERCISE_r1.pdf)
+
+
+## What You Will Learn
+
+Across both versions, you will learn how to:
+
+- Download and subset SST data from ERDDAP  
+- Import and configure multidimensional NetCDF raster data  
+- Convert and prepare CSV point data for GIS use  
+- Enable and control time-aware layers  
+- Extract raster values at point locations  
+- Create publication-ready maps and visualizations  
+- Generate time-series graphs and animated outputs  
+

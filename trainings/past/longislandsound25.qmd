@@ -67,13 +67,9 @@ Learn R and/or Python techniques to access data on ERDDAP data servers for data 
 * [CoastWatch main website](https://coastwatch.noaa.gov/cwn/index.html)
 * [CoastWatch East Coast Regional Node website](https://eastcoast.coastwatch.noaa.gov/)
 * [CoastWatch Data Access methods](https://coastwatch.noaa.gov/cwn/data-access-tools.html)
-* [Coastwatch Coding Tutorials: R and Python](../../tutorials/index.qmd)
+* [Coastwatch Coding Tutorials: R, Python, Matlab, & ArcGIS](../../tutorials/index.qmd)
 * [Coastwatch Lecture series](../../lectures/index.qmd)
-* [Coastwatch Data Portal video tutorials](https://umd.instructure.com/courses/1336575/pages/coastwatch-data-portal-tutorials)
-* [Coastwatch ArcGIS lecture videos and tutorials](https://umd.instructure.com/courses/1336575/pages/arcgis-tutorials?module_item_id=12322036)
-* CoastWatch Utilities
-    * [CoastWatch Utilities Tutorials - CDAT and Command-Line](https://umd.instructure.com/courses/1336575/pages/coastwatch-utilities-tutorials)
-    * [CDAT demo videos on YouTube](https://www.youtube.com/playlist?list=PL_-bsOLKMYJybI8chOl90HWWd_jTsaO3e)
+* [CoastWatch Utilities](https://coastwatch-training.github.io/CoastWatch-Utilities/)
 * CoastWatch Help Desk
     * Email: coastwatch.info@noaa.gov
     * Phone: +1-301-683-3335
