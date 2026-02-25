@@ -1,0 +1,52 @@
+---
+title: "ArcGIS SST Workflow (ArcMap & ArcGIS Pro)"
+---
+
+## Overview
+
+This ArcGIS workflow provides a step-by-step guide for working with **Sea Surface Temperature (SST)** satellite data in a desktop GIS environment. The tutorial walks through downloading **NetCDF data from ERDDAP**, importing and managing multidimensional raster data, visualizing time-varying SST, extracting environmental values at survey locations, calculating zonal statistics within polygons, and creating a simple habitat suitability map based on an SST range.
+
+Because satellite datasets include longitude, latitude, and time dimensions, this workflow demonstrates how to properly configure and manage multidimensional data within ArcGIS. The tutorial also highlights practical considerations when working with large raster datasets and the use of the **Spatial Analyst** extension for raster processing and statistics.
+
+## Software Versions
+
+This workflow is available in two versions:
+
+### ArcGIS Pro
+
+The ArcGIS Pro tutorial uses modern multidimensional raster tools and the built-in time slider to visualize monthly SST data. It demonstrates how to:
+
+- Import NetCDF data as a multidimensional raster
+- Configure the time dimension and synchronize the time slider
+- Export to Cloud Raster Format (CRF) when needed
+- Create layout maps with survey data
+- Run **Zonal Statistics as Table** with multidimensional processing enabled
+
+[Open the ArcGIS Pro Tutorial](arcgis-arcpro-tutorial1.qmd)
+
+### ArcMap
+
+The ArcMap tutorial follows the same scientific workflow but uses legacy desktop tools. It demonstrates how to:
+
+- Create a raster layer from NetCDF using *Make NetCDF Raster Layer*
+- Enable and configure the Time Slider
+- Export temporary layers for permanent use
+- Sample raster values at survey locations
+- Run zonal statistics across multiple raster bands
+- Build a simple SST-based suitability model (e.g., TurtleWatch example)
+
+[Open the ArcGIS Map Tutorial](arcgis-arcmap-tutorial1.qmd)
+
+## What You Will Learn
+
+Across both versions, you will learn how to:
+
+- Download and subset satellite SST data from ERDDAP  
+- Work with multidimensional NetCDF datasets  
+- Visualize time-varying environmental data  
+- Extract raster values at point locations  
+- Calculate summary statistics within polygons  
+- Create publication-ready layout maps  
+- Develop a simple habitat suitability map based on SST thresholds  
+
+This workflow is designed to support research, management, and educational applications using satellite oceanographic data within ArcGIS.

@@ -105,6 +105,10 @@ FILTER_UI = f"""
       Matlab <span class="cg-chipx" aria-hidden="true">×</span>
     </button>
 
+    <button type="button" class="cg-chip" data-soft="arc" aria-pressed="false">
+      ArcGIS <span class="cg-chipx" aria-hidden="true">×</span>
+    </button>
+
     <button type="button" class="cg-chip cg-chipclear" id="cg-clear">
       Clear
     </button>
@@ -400,11 +404,13 @@ for i, r in df.iterrows():
         "Python ↓": download_icon(r["py_download"]),
         "R ↓": download_icon(r["r_download"]),
         "Matlab ↓": download_icon(r["m_download"]),
+        "ArcGIS ↓": download_icon(r["arc_download"]),
     })
 
     has_py_block = has_any(r["py_img"], r["py_view"], r["py_download"])
     has_r_block  = has_any(r["r_img"], r["r_view"], r["r_download"])
     has_m_block  = has_any(r.get("m_img",""), r.get("m_view",""), r.get("m_download",""))
+    has_arc_block  = has_any(r.get("arc_img",""), r.get("arc_view",""), r.get("arc_download",""))
 
     n_blocks = sum([has_py_block, has_r_block, has_m_block])
     single = (n_blocks == 1)
@@ -449,6 +455,18 @@ for i, r in df.iterrows():
             single=single
         )
 
+    # -----------------------
+    # ArcGIS block
+    # -----------------------
+    arc_block = ""
+    if has_arc_block:
+        arc_block = render_lang_block(
+            "ArcGIS",
+            render_carousel(r.get("arc_img", ""), f"arc-carousel-{i}", slug),
+            r.get("arc_view", ""),
+            single=single
+        )
+
     
     modals.append(f"""
     <div id="{mid}" class="cg-modal">
@@ -459,6 +477,7 @@ for i, r in df.iterrows():
         {py_block}
         {r_block}
         {m_block}
+        {arc_block}
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -475,6 +494,7 @@ for i, r in df.iterrows():
     has_py = 1 if str(r.get("py_view","")).strip() or str(r.get("py_download","")).strip() else 0
     has_r  = 1 if str(r.get("r_view","")).strip()  or str(r.get("r_download","")).strip()  else 0
     has_m  = 1 if str(r.get("m_view","")).strip()  or str(r.get("m_download","")).strip()  else 0
+    has_arc  = 1 if str(r.get("arc_view","")).strip()  or str(r.get("arc_download","")).strip()  else 0
 
     title = str(r.get("title",""))
     cat   = str(r.get("category",""))
@@ -484,7 +504,8 @@ for i, r in df.iterrows():
           data-category="{cat.replace('"','&quot;')}"
           data-has-py="{has_py}"
           data-has-r="{has_r}"
-          data-has-m="{has_m}">
+          data-has-m="{has_m}"
+          data-has-m="{has_arc}">
         <td>{title}</td>
         <td>{cat}</td>
         <td>{modal_eye(mid)}</td>
@@ -492,6 +513,7 @@ for i, r in df.iterrows():
         <td>{download_icon(r.get("py_download",""))}</td>
         <td>{download_icon(r.get("r_download",""))}</td>
         <td>{download_icon(r.get("m_download",""))}</td>
+        <td>{download_icon(r.get("arc_download",""))}</td>
       </tr>
     """)
 
@@ -506,6 +528,7 @@ table = f"""
       <th>Python ↓</th>
       <th>R ↓</th>
       <th>Matlab ↓</th>
+      <th>ArcGIS ↓</th>
     </tr>
   </thead>
   <tbody>
@@ -647,7 +670,7 @@ function cgNext(id){
 <script>
 (function(){
   function activeSoftware(){
-    const active = { py:false, r:false, m:false };
+    const active = { py:false, r:false, m:false, arc:false };
     document.querySelectorAll(".cg-chip[data-soft]").forEach(btn => {
       const k = btn.dataset.soft;
       active[k] = btn.getAttribute("aria-pressed") === "true";
@@ -670,6 +693,7 @@ function cgNext(id){
       const hasPy = row.dataset.hasPy === "1";
       const hasR  = row.dataset.hasR  === "1";
       const hasM  = row.dataset.hasM  === "1";
+      const hasArc  = row.dataset.hasArc  === "1";
 
       const matchesCat = !cat || rowCat === cat;
 
@@ -677,7 +701,8 @@ function cgNext(id){
         !anySoft ||
         (soft.py && hasPy) ||
         (soft.r  && hasR)  ||
-        (soft.m  && hasM);
+        (soft.m  && hasM)  ||
+        (soft.arc  && hasArc);
 
       const ok = matchesCat && matchesSoftware;
 
