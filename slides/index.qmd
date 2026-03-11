@@ -1,1 +1,5 @@
+---
+title: "Examples of Participant Slides"
+---
 
+As part of our full, week-long courses we ask participants to give us a slide at the end of the course on what they are using satellite data for and what they were able to accomplish during teh course.  We also encourage this slide to mention any challenges or data gaps they encountered.  Here we showcase  some  slides that are represntative of the broad usages and applications.  
