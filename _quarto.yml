@@ -79,6 +79,9 @@ website:
       - text: "Course Lectures"
         href: lectures/index.qmd
 
+      - text: "Examples Slides"
+        href: slides/index.qmd
+        
       - text: "Office Hours"
         href: officehours.qmd
 
