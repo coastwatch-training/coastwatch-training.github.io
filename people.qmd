@@ -25,6 +25,8 @@ The CoastWatch training program is built on the collaboration of scientists acro
 
 The training materials for the CoastWatch Program have been developed, reviewed, and edited with the contributions of many dedicated individuals.
 
+The site architecture, design, and automation framework were developed by Madison Richardson. The platform was built using the Quarto publishing system with integrated GitHub version control and automated rendering workflows to enable collaborative contributions and long-term maintainability. Sunny Hospital provided assistance during the intial setup of the website and contributed materials and project content that are featured throughout the site. 
+
 **Contributors:**  
 Melanie Abecassis, Dave Foley, Peter Hollemans, Sunny Hospital, Songzhi Liu, Roy Mendelssohn, Madison Richardson, Dale Robinson, Jennifer Sevadjian, Jonathan Sherman, Hui (Daisy) Shi, Michael Soracco, Shelly Tomlinson, Ron Vogel, Victoria Wegman, and Cara Wilson. 
 
