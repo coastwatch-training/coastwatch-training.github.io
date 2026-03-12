@@ -3969,5 +3969,15 @@
     "title": "ArcGIS SST Workflow (ArcMap & ArcGIS Pro)",
     "section": "What You Will Learn",
     "text": "What You Will Learn\nAcross both versions, you will learn how to:\n\nDownload and subset satellite SST data from ERDDAP\n\nWork with multidimensional NetCDF datasets\n\nVisualize time-varying environmental data\n\nExtract raster values at point locations\n\nCalculate summary statistics within polygons\n\nCreate publication-ready layout maps\n\nDevelop a simple habitat suitability map based on SST thresholds\n\nThis workflow is designed to support research, management, and educational applications using satellite oceanographic data within ArcGIS."
+  },
+  {
+    "objectID": "slides/index.html",
+    "href": "slides/index.html",
+    "title": "Examples of Participant Slides",
+    "section": "",
+    "text": "As part of our full, week-long courses we ask participants to give us a slide at the end of the course on what they are using satellite data for and what they were able to accomplish during the course. We also encourage this slide to mention any challenges or data gaps they encountered. Here we showcase some slides that are representative of the broad usages and applications.\n\n\n\n\n  \n    ❮\n\n    \n      \n    \n\n    ❯",
+    "crumbs": [
+      "Course Slides"
+    ]
   }
 ]
