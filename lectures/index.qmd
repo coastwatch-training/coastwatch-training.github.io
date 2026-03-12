@@ -4,7 +4,7 @@ title: "Satellite Course Lectures"
 
 This page provides access to the lecture slide decks used in CoastWatch training courses. The lectures are designed to be short (about 20 minutes when narrated), and many have narrated versions available on YouTube. Use the table below to preview a lecture in your browser or download the slides for offline viewing.
 
-Click the **eye** icon to open the lecture, **download** to go to the source file, **play button** to view the narrated lecture, and **clipboard** to read the transcript of the narrated lecture.
+Click the **eye** icon to preview the lecture slides directly on this page, **download** to go to the source file, **play button** to view the narrated lecture, and **clipboard** to read the transcript of the narrated lecture.
 
 ```{python}
 #| echo: false
@@ -13,7 +13,6 @@ Click the **eye** icon to open the lecture, **download** to go to the source fil
 
 import pandas as pd
 from IPython.display import HTML
-from urllib.parse import quote
 
 df = pd.read_csv("lectures.csv", encoding="utf-8-sig").fillna("")
 
@@ -44,7 +43,6 @@ VIDEO_SVG = (
     '</svg>'
 )
 
-
 TRANSCRIPT_SVG = (
     '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" '
     'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '
@@ -57,35 +55,32 @@ TRANSCRIPT_SVG = (
     '</svg>'
 )
 
-
 def preview_icon(url: str) -> str:
     """
-    Generate an HTML link element for previewing a lecture or tutorial.
+    Generate an HTML button element for previewing lecture slides in an embedded modal.
 
-    This function returns a clickable icon that links to a preview page or
-    rendered output. If no valid URL is provided, a placeholder dash is
-    returned instead.
+    This function returns a clickable eye icon that opens a PDF slide deck
+    inside an on-page modal viewer. If no valid URL is provided, a placeholder
+    dash is returned instead.
 
     Parameters
     ----------
     url : str
-        The URL pointing to a previewable lecture, tutorial, or rendered
-        output page.
+        The URL pointing to a previewable PDF lecture file.
 
     Returns
     -------
     str
-        An HTML string containing a preview (eye) icon link, or a dash ("—")
-        if no URL is provided.
+        An HTML string containing a preview button with the PDF URL stored in
+        a data attribute, or a dash ("—") if no URL is provided.
     """
     url = str(url).strip()
     if not url:
         return "—"
     return (
-        f'<a href="{url}" class="cg-icon" target="_blank" rel="noopener" '
-        f'aria-label="Preview lecture">{EYE_SVG}</a>'
+        f'<button class="cg-icon cg-preview-btn" data-pdf="{url}" '
+        f'aria-label="Preview lecture" type="button">{EYE_SVG}</button>'
     )
-
 
 def download_icon(url: str) -> str:
     """
@@ -109,20 +104,17 @@ def download_icon(url: str) -> str:
     url = str(url).strip()
     if not url:
         return "—"
-    # if you ever store repo-relative paths instead of full URLs, you can adapt here.
     return (
         f'<a href="{url}" class="cg-icon" target="_blank" rel="noopener" '
         f'aria-label="Download lecture">{DOWNLOAD_SVG}</a>'
     )
-
 
 def video_icon(url: str) -> str:
     """
     Generate an HTML link element for watching a lecture video.
 
     This function returns a clickable video icon that links to an external
-    video platform (e.g., YouTube or Vimeo). If no valid URL is provided,
-    a placeholder dash is returned.
+    video platform. If no valid URL is provided, a placeholder dash is returned.
 
     Parameters
     ----------
@@ -142,7 +134,6 @@ def video_icon(url: str) -> str:
         f'<a href="{url}" class="cg-icon" target="_blank" rel="noopener" '
         f'aria-label="Watch lecture video">{VIDEO_SVG}</a>'
     )
-
 
 def transcript_icon(url: str) -> str:
     """
@@ -171,8 +162,6 @@ def transcript_icon(url: str) -> str:
         f'aria-label="View video transcript">{TRANSCRIPT_SVG}</a>'
     )
 
-
-# --- Category dropdown options ---
 df["category"] = df.get("category", "").astype(str).str.strip()
 cats = sorted([c for c in df["category"].unique() if str(c).strip()])
 
@@ -189,7 +178,6 @@ FILTER_UI = f"""
 </div>
 """
 
-# --- Table rows (add data-category for filtering) ---
 table_rows = []
 for _, r in df.iterrows():
     title = str(r.get("title", "")).strip()
@@ -238,14 +226,22 @@ table = f"""
     </tbody>
   </table>
 </div>
+
+<div id="pdf-modal" class="pdf-modal" aria-hidden="true">
+  <div class="pdf-modal-backdrop"></div>
+  <div class="pdf-modal-content" role="dialog" aria-modal="true" aria-label="Lecture slides preview">
+    <button id="pdf-modal-close" class="pdf-modal-close" type="button" aria-label="Close preview">×</button>
+    <iframe id="pdf-frame" class="pdf-frame" src="" title="Lecture slides preview"></iframe>
+  </div>
+</div>
 """
 
 HTML(table)
 ```
 
 <script>
-(function(){
-  function applyCategoryFilter(){
+(function () {
+  function applyCategoryFilter() {
     const cat = document.getElementById("lec-category")?.value || "";
     const rows = Array.from(document.querySelectorAll("tr.lec-row"));
     let shown = 0;
@@ -254,17 +250,60 @@ HTML(table)
       const rowCat = row.dataset.category || "";
       const ok = !cat || rowCat === cat;
       row.style.display = ok ? "" : "none";
-      if(ok) shown += 1;
+      if (ok) shown += 1;
     });
 
     const countEl = document.getElementById("lec-count");
-    if(countEl) countEl.textContent = `${shown} shown`;
+    if (countEl) countEl.textContent = `${shown} shown`;
+  }
+
+  function setupPdfModal() {
+    const modal = document.getElementById("pdf-modal");
+    const frame = document.getElementById("pdf-frame");
+    const closeBtn = document.getElementById("pdf-modal-close");
+    const backdrop = document.querySelector(".pdf-modal-backdrop");
+
+    if (!modal || !frame || !closeBtn || !backdrop) return;
+
+    function openModal(pdfUrl) {
+      frame.src = pdfUrl;
+      modal.classList.add("show");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      frame.src = "";
+      modal.classList.remove("show");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    document.addEventListener("click", function (e) {
+      const btn = e.target.closest(".cg-preview-btn");
+      if (btn) {
+        const pdfUrl = btn.getAttribute("data-pdf");
+        if (pdfUrl) openModal(pdfUrl);
+      }
+    });
+
+    closeBtn.addEventListener("click", closeModal);
+    backdrop.addEventListener("click", closeModal);
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && modal.classList.contains("show")) {
+        closeModal();
+      }
+    });
   }
 
   document.addEventListener("change", (e) => {
-    if(e.target && e.target.id === "lec-category") applyCategoryFilter();
+    if (e.target && e.target.id === "lec-category") applyCategoryFilter();
   });
 
-  document.addEventListener("DOMContentLoaded", applyCategoryFilter);
+  document.addEventListener("DOMContentLoaded", function () {
+    applyCategoryFilter();
+    setupPdfModal();
+  });
 })();
 </script>
