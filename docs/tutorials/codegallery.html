@@ -145,12 +145,6 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../trainings/upcoming/pgrsc26.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2026 PGRSC Course</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../trainings/upcoming/sat201_26.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">2026 Satellite 201 Summer Series</span></a>
   </div>
@@ -166,6 +160,12 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../trainings/past/pgrsc26.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2026 PGRSC Course</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../trainings/past/icft25.html" class="sidebar-item-text sidebar-link">
@@ -278,7 +278,13 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../about.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">About Us</span></a>
+ <span class="menu-text">Our History</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../people.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">People</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -322,7 +328,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Each tutorial presents a complete example workflow, including data access (for example through ERDDAP), basic data processing and quality control steps, and the generation of common outputs such as maps, time series, or summary statistics.</p>
 <p>The Code Gallery is designed to support exploration, comparison, and reuse of coding workflows. Users are encouraged to adapt the example code to their own research, educational, or operational needs.</p>
 <p>Click the <strong>eye</strong> icon to view the tutorial, <strong>box</strong> icon to view the required resources, or <strong>download</strong> to get directed to the source file.</p>
-<div id="82dddae8" class="cell" data-message="false" data-execution_count="1">
+<div id="b739a5c0" class="cell" data-message="false" data-execution_count="1">
 <div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <script>
 function cgOpenModal(id){
@@ -362,6 +368,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
       Matlab <span class="cg-chipx" aria-hidden="true">×</span>
     </button>
 
+    <button type="button" class="cg-chip" data-soft="arc" aria-pressed="false">
+      ArcGIS <span class="cg-chipx" aria-hidden="true">×</span>
+    </button>
+
     <button type="button" class="cg-chip cg-chipclear" id="cg-clear">
       Clear
     </button>
@@ -373,13 +383,14 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 
 <table class="code-gallery-table caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <colgroup>
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
-<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -390,10 +401,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <th data-quarto-table-cell-role="th">Python ↓</th>
 <th data-quarto-table-cell-role="th">R ↓</th>
 <th data-quarto-table-cell-role="th">Matlab ↓</th>
+<th data-quarto-table-cell-role="th">ArcGIS ↓</th>
 </tr>
 </thead>
 <tbody>
-<tr class="cg-row odd" data-category="ERDDAP Basics" data-has-py="1" data-has-r="1" data-has-m="1">
+<tr class="cg-row odd" data-category="ERDDAP Basics" data-has-py="1" data-has-r="1" data-has-m="1" data-has-arc="0">
 <td>Basics of working with satellite data</td>
 <td>ERDDAP Basics</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-0')" class="cg-icon">
@@ -417,8 +429,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="1">
+<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="1" data-has-arc="0">
 <td>Compare time series from different sensors</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-1')" class="cg-icon">
@@ -446,8 +459,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row odd" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Make a virtual buoy with satellite data</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-2')" class="cg-icon">
@@ -471,8 +485,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Calculating sea ice area and extent</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-3')" class="cg-icon">
@@ -492,8 +507,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="0" data-has-m="0">
+<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="0" data-has-m="0" data-has-arc="0">
 <td>Working with data that crosses the antimeridian</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-4')" class="cg-icon">
@@ -509,8 +525,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Define a marine habitat</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-5')" class="cg-icon">
@@ -530,8 +547,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Data Access &amp; Subsetting" data-has-py="1" data-has-r="1" data-has-m="1">
+<tr class="cg-row odd" data-category="Data Access &amp; Subsetting" data-has-py="1" data-has-r="1" data-has-m="1" data-has-arc="0">
 <td>Extract data within a boundary</td>
 <td>Data Access &amp; Subsetting</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-6')" class="cg-icon">
@@ -559,8 +577,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="ERDDAP Basics" data-has-py="0" data-has-r="0" data-has-m="1">
+<tr class="cg-row even" data-category="ERDDAP Basics" data-has-py="0" data-has-r="0" data-has-m="1" data-has-arc="0">
 <td>How to work with satellite data in Matlab in the Great Lakes</td>
 <td>ERDDAP Basics</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-7')" class="cg-icon">
@@ -576,8 +595,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Data Access &amp; Subsetting" data-has-py="1" data-has-r="0" data-has-m="0">
+<tr class="cg-row odd" data-category="Data Access &amp; Subsetting" data-has-py="1" data-has-r="0" data-has-m="0" data-has-arc="0">
 <td>Working with Great Lakes Surface Temperature Data</td>
 <td>Data Access &amp; Subsetting</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-8')" class="cg-icon">
@@ -593,8 +613,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="0" data-has-m="0">
+<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="0" data-has-m="0" data-has-arc="0">
 <td>Analyze Great Lakes Ice Concentration</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-9')" class="cg-icon">
@@ -610,8 +631,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Time Series" data-has-py="1" data-has-r="0" data-has-m="0">
+<tr class="cg-row odd" data-category="Time Series" data-has-py="1" data-has-r="0" data-has-m="0" data-has-arc="0">
 <td>Multi-Sensor chlorophyll time series analysis for Lake Erie</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-10')" class="cg-icon">
@@ -627,8 +649,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="0" data-has-m="0">
+<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="0" data-has-m="0" data-has-arc="0">
 <td>Long-term lake surface temperature variability from Great Lakes Satellite Records</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-11')" class="cg-icon">
@@ -644,8 +667,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Time Series" data-has-py="1" data-has-r="0" data-has-m="0">
+<tr class="cg-row odd" data-category="Time Series" data-has-py="1" data-has-r="0" data-has-m="0" data-has-arc="0">
 <td>Visualizing JPSS Sea Ice Concentration products using Google Colab</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-12')" class="cg-icon">
@@ -661,8 +685,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </a></td>
 <td>—</td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Long Island Sound Chlorophyll-a Dynamics</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-13')" class="cg-icon">
@@ -682,8 +707,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Map geographical and polarstereographic data on a projected map</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-14')" class="cg-icon">
@@ -707,8 +733,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="0" data-has-r="1" data-has-m="0">
+<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="0" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Mask shallow pixels for satellite ocean color datasets</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-15')" class="cg-icon">
@@ -728,8 +755,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Matching polar data to animal track locations</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-16')" class="cg-icon">
@@ -753,8 +781,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Matching satellite and buoy surface temperature data in polar regions</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-17')" class="cg-icon">
@@ -774,8 +803,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Time Series" data-has-py="0" data-has-r="1" data-has-m="0">
+<tr class="cg-row odd" data-category="Time Series" data-has-py="0" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Comparing satellite and buoy sea surface temperature observations</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-18')" class="cg-icon">
@@ -791,8 +821,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Matchup satellite data to ship, glider, or animal tracks</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-19')" class="cg-icon">
@@ -816,8 +847,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="1">
+<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="1" data-has-arc="0">
 <td>Matching satellite chlorophyll to animal telemetry tracks</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-20')" class="cg-icon">
@@ -845,8 +877,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
 </svg>
 </a></td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row even" data-category="Time Series" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Calculating anomaly and trend with sea ice thickness time series</td>
 <td>Time Series</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-21')" class="cg-icon">
@@ -870,8 +903,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row odd" data-category="Data Access &amp; Subsetting" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row odd" data-category="Data Access &amp; Subsetting" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Subset data in polar stereographic projection using a shapefile</td>
 <td>Data Access &amp; Subsetting</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-22')" class="cg-icon">
@@ -895,8 +929,9 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
 </tr>
-<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0">
+<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="1" data-has-r="1" data-has-m="0" data-has-arc="0">
 <td>Transforming satellite data from one map to another</td>
 <td>Spatial Analysis &amp; Mapping</td>
 <td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-23')" class="cg-icon">
@@ -916,6 +951,43 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
 </svg>
 </a></td>
 <td>—</td>
+<td>—</td>
+</tr>
+<tr class="cg-row odd" data-category="Spatial Analysis &amp; Mapping" data-has-py="0" data-has-r="0" data-has-m="0" data-has-arc="1">
+<td>Working with Multidimensional SST Data in ArcGIS</td>
+<td>Spatial Analysis &amp; Mapping</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-24')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td><a href="https://github.com/madrichardson/coastwatch-training.github.io/blob/main/ArcGIS-Tutorial1/arcgis/arcgis-overview.qmd" class="cg-icon" aria-label="Open arcgis-overview.qmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
+</tr>
+<tr class="cg-row even" data-category="Spatial Analysis &amp; Mapping" data-has-py="0" data-has-r="0" data-has-m="0" data-has-arc="1">
+<td>Using Satellite SST Data in ArcGIS</td>
+<td>Spatial Analysis &amp; Mapping</td>
+<td><a href="javascript:void(0)" onclick="cgOpenModal('cg-modal-25')" class="cg-icon">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"></path><circle cx="12" cy="12" r="3"></circle>
+</svg>
+</a></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+<td><a href="https://github.com/madrichardson/coastwatch-training.github.io/blob/main/ArcGIS-Tutorial2/arcgis/arcgis2-overview.qmd" class="cg-icon" aria-label="Open arcgis2-overview.qmd on GitHub" target="_blank" rel="noopener">
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path>
+</svg>
+</a></td>
 </tr>
 </tbody>
 </table>
@@ -989,6 +1061,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <p><a class="cg-btn" href="../tutorials/Tutorial1-basics/matlab/Tutorial1-basics.html">View Matlab tutorial</a></p>
         </div>
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1048,6 +1121,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <p><a class="cg-btn" href="../tutorials/Tutorial2-timeseries-compare-sensors/matlab/Tutorial2-timeseries-compare-sensors.html">View Matlab tutorial</a></p>
         </div>
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1099,6 +1173,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('r-carousel-2')">◀</button>  <span class="cg-count">1 / 2</span>  <button class="cg-arrow" onclick="cgNext('r-carousel-2')">▶</button></div></div>
           <p><a class="cg-btn" href="../tutorials/create-virtual-buoy-with-satellite-data/r/virtual_buoy_example.html">View R tutorial</a></p>
         </div>
+        
         
         
       </div>
@@ -1154,6 +1229,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         </div>
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1186,6 +1262,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <a class="cg-btn" href="../tutorials/convert-180+180-to-0-360-longitude/python/convert-180+180-to-0-360-longitude.html">View Python tutorial</a>
           </div>
         </div>
+        
         
         
         
@@ -1226,6 +1303,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           <p><a class="cg-btn" href="../tutorials/define_marine_habitat/r/define_marine_habitat.html">View R tutorial</a></p>
         </div>
+        
         
         
       </div>
@@ -1294,6 +1372,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <p><a class="cg-btn" href="../tutorials/extract-satellite-data-within-boundary/matlab/extract-satellite-data-within-boundary.html">View Matlab tutorial</a></p>
         </div>
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1335,6 +1414,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <a class="cg-btn" href="../tutorials/matlab-basics/matlab/matlab_basics_gl.html">View Matlab tutorial</a>
           </div>
         </div>
+        
         
       </div>
 
@@ -1378,6 +1458,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1410,6 +1491,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <a class="cg-btn" href="../tutorials/gl-ice-plot-timeseries-ice-conc/python/gl-ice-plot-timeseries-ice-conc.html">View Python tutorial</a>
           </div>
         </div>
+        
         
         
         
@@ -1455,6 +1537,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1483,6 +1566,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1508,6 +1592,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <a class="cg-btn" href="../tutorials/jpss-projects/python/sport-jpss-seaice.html">View Python tutorial</a>
           </div>
         </div>
+        
         
         
         
@@ -1578,6 +1663,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         </div>
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1631,6 +1717,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         </div>
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1678,6 +1765,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <a class="cg-btn" href="../tutorials/mask-shallow-ocean-color/r/mask-shallow-ocean-color.html">View R tutorial</a>
           </div>
         </div>
+        
         
         
       </div>
@@ -1747,6 +1835,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         </div>
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1786,6 +1875,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         </div>
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1819,6 +1909,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
             <a class="cg-btn" href="../tutorials/matchup-satellite-buoy-data/r/matchup_satellite_buoy_data.html">View R tutorial</a>
           </div>
         </div>
+        
         
         
       </div>
@@ -1858,6 +1949,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           </div>
           <p><a class="cg-btn" href="../tutorials/matchup-satellite-data-to-ATN-animal-tracks/r/matchup-satellite-data-to-ATN_track-locations.html">View R tutorial</a></p>
         </div>
+        
         
         
       </div>
@@ -1926,6 +2018,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <p><a class="cg-btn" href="../tutorials/matchup-satellite-data-to-track-locations/matlab/matchup-satellite-data-to-track-locations.html">View Matlab tutorial</a></p>
         </div>
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -1963,6 +2056,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <div class="text-muted">No preview image</div>
           <p><a class="cg-btn" href="../tutorials/seaice-thickness-climatology/r/ice-thickness-climatology.html">View R tutorial</a></p>
         </div>
+        
         
         
       </div>
@@ -2018,6 +2112,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
         </div>
         
         
+        
       </div>
 
       <button class="cg-close" onclick="cgCloseModal()">Close</button>
@@ -2070,6 +2165,107 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")cgCloseModal();});
           <p><a class="cg-btn" href="../tutorials/transform-to-another-map-projection/r/transforming-coords-from-crs-to-crs.html">View R tutorial</a></p>
         </div>
         
+        
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-24" class="cg-modal">
+      <h3 class="anchored">Working with Multidimensional SST Data in ArcGIS</h3>
+      <p>This ArcGIS tutorial walks through a complete end-to-end SST workflow, from downloading NetCDF data from ERDDAP to importing and managing multidimensional raster data within ArcGIS. You will learn how to configure the time dimension, visualize monthly SST using the time slider, extract environmental values at survey locations and within polygons, calculate zonal statistics using the Spatial Analyst extension, and build a simple habitat suitability map based on an SST range. Parallel tutorials are available for both ArcGIS Pro and ArcMap, allowing you to follow the same workflow in the platform you use.</p>
+
+      <div class="cg-grid cg-grid-single">
+        
+        
+        
+        
+        <div class="cg-one cg-one-vertical">
+          <strong>ArcGIS output</strong>
+          <div id="arc-carousel-24" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="ArcGIS-Tutorial1/images/finished-map.png" loading="lazy" data-caption="Layout map created in ArcGIS Pro showing 2016 fish survey locations overlaid on monthly Sea Surface Temperature (SST) data.">
+            </div>
+            <div class="cg-caption">Layout map created in ArcGIS Pro showing 2016 fish survey locations overlaid on monthly Sea Surface Temperature (SST) data.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="ArcGIS-Tutorial1/images/table-contents.png" loading="lazy" data-caption="Output table from the Zonal Statistics as Table tool in ArcGIS Pro, summarizing SST statistics by island and time step.">
+            </div>
+            <div class="cg-caption">Output table from the Zonal Statistics as Table tool in ArcGIS Pro, summarizing SST statistics by island and time step.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="ArcGIS-Tutorial1/images/arcmap-finished-map.png" loading="lazy" data-caption="Data View map in ArcMap displaying Sea Surface Temperature (SST) over the Hawaiian Islands with 2016 fish survey sites overlaid as point features.">
+            </div>
+            <div class="cg-caption">Data View map in ArcMap displaying Sea Surface Temperature (SST) over the Hawaiian Islands with 2016 fish survey sites overlaid as point features.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="ArcGIS-Tutorial1/images/arcmap-sustainability-model.png" loading="lazy" data-caption="Map of TurtleWatch for January 17, 2019.">
+            </div>
+            <div class="cg-caption">Map of TurtleWatch for January 17, 2019.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('arc-carousel-24')">◀</button>  <span class="cg-count">1 / 4</span>  <button class="cg-arrow" onclick="cgNext('arc-carousel-24')">▶</button></div></div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/ArcGIS-Tutorial1/arcgis/arcgis-overview.html">View ArcGIS tutorial</a>
+          </div>
+        </div>
+        
+      </div>
+
+      <button class="cg-close" onclick="cgCloseModal()">Close</button>
+    </div>
+    
+    <div id="cg-modal-25" class="cg-modal">
+      <h3 class="anchored">Using Satellite SST Data in ArcGIS</h3>
+      <p>This tutorial demonstrates how to use Sea Surface Temperature (SST) data in ArcGIS to perform spatial and temporal analysis with multidimensional NetCDF datasets. Using a multi-year loggerhead sea turtle track example, you will import satellite data from ERDDAP, prepare and convert CSV tracking data, enable time-aware layers, extract raster values with the Spatial Analyst tools, and create maps, graphs, and animations. Parallel versions are provided for both ArcMap and ArcGIS Pro, following the same scientific workflow with platform-specific tools.</p>
+
+      <div class="cg-grid cg-grid-single">
+        
+        
+        
+        
+        <div class="cg-one cg-one-vertical">
+          <strong>ArcGIS output</strong>
+          <div id="arc-carousel-25" class="cg-carousel" data-idx="0">
+          <div class="cg-slide active cg-figure">
+            <div class="cg-imgframe">
+              <img src="ArcGIS-Tutorial2/images/arcpro1.png" loading="lazy" data-caption="ArcGIS Pro symbology panel showing the turtle track layer classified using graduated colors based on extracted analysed_sst values.">
+            </div>
+            <div class="cg-caption">ArcGIS Pro symbology panel showing the turtle track layer classified using graduated colors based on extracted analysed_sst values.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="ArcGIS-Tutorial2/images/arcpro2.png" loading="lazy" data-caption="Time-series chart generated in ArcGIS Pro displaying Sea Surface Temperature (°C) encountered by Turtle Tag 25317 along its track.">
+            </div>
+            <div class="cg-caption">Time-series chart generated in ArcGIS Pro displaying Sea Surface Temperature (°C) encountered by Turtle Tag 25317 along its track.</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="ArcGIS-Tutorial2/images/arcmap1.png" loading="lazy" data-caption="Final ArcMap visualization showing turtle track locations symbolized by extracted Sea Surface Temperature (SST) values (Kelvin).">
+            </div>
+            <div class="cg-caption">Final ArcMap visualization showing turtle track locations symbolized by extracted Sea Surface Temperature (SST) values (Kelvin).</div>
+          </div>
+          
+          <div class="cg-slide cg-figure">
+            <div class="cg-imgframe">
+              <img src="ArcGIS-Tutorial2/images/arcmap2.png" loading="lazy" data-caption="Time-series graph created in ArcMap showing Sea Surface Temperature (K) encountered by Turtle Tag 25317 over the selected study period.">
+            </div>
+            <div class="cg-caption">Time-series graph created in ArcMap showing Sea Surface Temperature (K) encountered by Turtle Tag 25317 over the selected study period.</div>
+          </div>
+          <div class="cg-nav">  <button class="cg-arrow" onclick="cgPrev('arc-carousel-25')">◀</button>  <span class="cg-count">1 / 4</span>  <button class="cg-arrow" onclick="cgNext('arc-carousel-25')">▶</button></div></div>
+          <div class="cg-one-actions">
+            <a class="cg-btn" href="../tutorials/ArcGIS-Tutorial2/arcgis/arcgis2-overview.html">View ArcGIS tutorial</a>
+          </div>
+        </div>
         
       </div>
 
@@ -2199,7 +2395,7 @@ function cgNext(id){
 <script>
 (function(){
   function activeSoftware(){
-    const active = { py:false, r:false, m:false };
+    const active = { py:false, r:false, m:false, arc:false };
     document.querySelectorAll(".cg-chip[data-soft]").forEach(btn => {
       const k = btn.dataset.soft;
       active[k] = btn.getAttribute("aria-pressed") === "true";
@@ -2212,7 +2408,7 @@ function cgNext(id){
     const soft = activeSoftware();
 
     // if no chips active -> show all software
-    const anySoft = soft.py || soft.r || soft.m;
+    const anySoft = soft.py || soft.r || soft.m || soft.arc;
 
     const rows = Array.from(document.querySelectorAll("tr.cg-row"));
     let shown = 0;
@@ -2222,6 +2418,7 @@ function cgNext(id){
       const hasPy = row.dataset.hasPy === "1";
       const hasR  = row.dataset.hasR  === "1";
       const hasM  = row.dataset.hasM  === "1";
+      const hasArc  = row.dataset.hasArc  === "1";
 
       const matchesCat = !cat || rowCat === cat;
 
@@ -2229,7 +2426,8 @@ function cgNext(id){
         !anySoft ||
         (soft.py && hasPy) ||
         (soft.r  && hasR)  ||
-        (soft.m  && hasM);
+        (soft.m  && hasM)  ||
+        (soft.arc  && hasArc);
 
       const ok = matchesCat && matchesSoftware;
 
