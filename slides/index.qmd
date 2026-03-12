@@ -1,5 +1,50 @@
 ---
 title: "Examples of Participant Slides"
+format: html
+echo: false
 ---
 
 As part of our full, week-long courses we ask participants to give us a slide at the end of the course on what they are using satellite data for and what they were able to accomplish during teh course.  We also encourage this slide to mention any challenges or data gaps they encountered.  Here we showcase  some  slides that are represntative of the broad usages and applications.  
+
+```{r}
+#| label: setup
+#| include: false
+
+# 1. Get all PNG files in the current directory
+# Change path to "images" if they are in a subfolder
+img_files <- list.files(path = ".", pattern = "\\.png$", full.names = FALSE)
+
+# 2. Pass the R vector into the OJS environment
+ojs_define(img_list = img_files)
+
+ // 3. Convert the R list into an object OJS can use
+// We map it to include a clean title based on the filename
+data = img_list.map(d => ({
+  path: d,
+  title: d.replace(".png", "").replace(/_/g, " ").toUpperCase()
+}))
+
+// 4. Reactive Index and Buttons
+mutable index = 0
+
+viewof controls = html`
+  <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+    <button on-click=${() => mutable index = (mutable index - 1 + data.length) % data.length}>← Previous</button>
+    <button on-click=${() => mutable index = (mutable index + 1) % data.length}>Next Image →</button>
+  </div>
+`
+
+// 5. The Display Stage
+html`
+  <div style="text-align: center; border: 2px solid #002f5d; padding: 25px; border-radius: 15px; background: #f9f9f9;">
+    <div style="height: 500px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: white; border: 1px solid #ddd;">
+      <img src="${data[index].path}" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+    </div>
+    <div style="margin-top: 20px;">
+      <span style="background: #002f5d; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em;">
+        IMAGE ${index + 1} OF ${data.length}
+      </span>
+      <h2 style="color: #333; margin-top: 15px; font-family: sans-serif;">${data[index].title}</h2>
+    </div>
+  </div>
+`
