@@ -3,6 +3,8 @@ project:
   output-dir: docs
   resources: 
     - slides/**
+    - lectures/*.pdf
+    - lectures/*.pptx
   render: 
     - "**/*.qmd"
     - "**/*.ipynb"
