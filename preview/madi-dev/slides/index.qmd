@@ -1,0 +1,170 @@
+---
+title: "Examples of Participant Slides"
+format: html
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+As part of our full, week-long courses we ask participants to give us a slide at the end of the course on what they are using satellite data for and what they were able to accomplish during the course. We also encourage this slide to mention any challenges or data gaps they encountered. Here we showcase some slides that are representative of the broad usages and applications.
+
+```{python}
+from pathlib import Path
+from IPython.display import HTML
+import json
+
+img_files = sorted(Path(".").glob("*.png"))
+
+slides = [
+    {
+        "path": f"./{f.name}",
+        "title": f.stem.replace("_", " ").upper()
+    }
+    for f in img_files
+]
+
+slides_json = json.dumps(slides)
+
+html = f"""
+<div class="slide-carousel-wrapper">
+  <div class="slide-carousel">
+    <button class="carousel-arrow" id="prevSlide" aria-label="Previous slide">&#10094;</button>
+
+    <div class="carousel-stage">
+      <img id="carouselImage" src="" alt="">
+    </div>
+
+    <button class="carousel-arrow" id="nextSlide" aria-label="Next slide">&#10095;</button>
+  </div>
+
+  <div class="carousel-meta">
+    <span class="carousel-counter" id="carouselCounter"></span>
+  </div>
+</div>
+
+<style>
+.slide-carousel-wrapper {{
+  max-width: 1100px;
+  margin: 2rem auto;
+  text-align: center;
+}}
+
+.slide-carousel {{
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  align-items: center;
+  gap: 1rem;
+  border: 2px solid #002f5d;
+  border-radius: 16px;
+  padding: 1.5rem;
+  background: #f8fafc;
+}}
+
+.carousel-stage {{
+  display: flex;
+  justify-content: center;
+  background: white;
+  border: 1px solid #d9e2ec;
+  border-radius: 12px;
+  overflow: hidden;
+}}
+
+.carousel-stage img {{
+  width: 100%;
+  height: 100%;
+  display: block;
+}}
+
+.carousel-arrow {{
+  border: none;
+  background: #002f5d;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}}
+
+.carousel-meta {{
+  margin-top: 1rem;
+}}
+
+.carousel-counter {{
+  display: inline-block;
+  background: #002f5d;
+  color: white;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}}
+
+.carousel-title {{
+  margin-top: 0.9rem;
+  font-size: 1.2rem;
+  color: #1f2937;
+  font-family: sans-serif;
+}}
+</style>
+
+<script>
+(function() {{
+  const slides = {slides_json};
+  let currentIndex = 0;
+  let autoAdvance = null;
+
+  const imageEl = document.getElementById("carouselImage");
+  const counterEl = document.getElementById("carouselCounter");
+  const prevBtn = document.getElementById("prevSlide");
+  const nextBtn = document.getElementById("nextSlide");
+
+  function renderSlide(index) {{
+    if (!slides.length) {{
+      imageEl.style.display = "none";
+      titleEl.textContent = "No slide images found.";
+      counterEl.textContent = "";
+      return;
+    }}
+
+    imageEl.style.display = "block";
+    imageEl.src = slides[index].path;
+    counterEl.textContent = `IMAGE ${{index + 1}} OF ${{slides.length}}`;
+  }}
+
+  function nextSlide() {{
+    currentIndex = (currentIndex + 1) % slides.length;
+    renderSlide(currentIndex);
+  }}
+
+  function prevSlide() {{
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    renderSlide(currentIndex);
+  }}
+
+  function restartAutoAdvance() {{
+    clearInterval(autoAdvance);
+    autoAdvance = setInterval(nextSlide, 7000);
+  }}
+
+  prevBtn.addEventListener("click", () => {{
+    prevSlide();
+    restartAutoAdvance();
+  }});
+
+  nextBtn.addEventListener("click", () => {{
+    nextSlide();
+    restartAutoAdvance();
+  }});
+
+  renderSlide(currentIndex);
+
+  if (slides.length > 1) {{
+    autoAdvance = setInterval(nextSlide, 7000);
+  }}
+}})();
+</script>
+"""
+
+HTML(html)
+```
