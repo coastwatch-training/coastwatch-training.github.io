@@ -49,3 +49,5 @@ To support continued learning beyond formal courses, the CoastWatch training tea
 
 ### In Memoriam
 We gratefully acknowledge the contributions of Dave Foley, who played an important role the the development and delivery of the CoastWatch Satellite Training Courses. His efforts helped support scientists and resource managers in applying satellite data to real-world problems, and that impact continues through this site. 
+
+TESTING
