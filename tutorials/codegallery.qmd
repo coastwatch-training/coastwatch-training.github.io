@@ -500,7 +500,7 @@ for i, r in df.iterrows():
     cat   = str(r.get("category",""))
 
     table_rows.append(f"""
-      <tr class="cg-row"
+      <tr id="cg-{slug}" class="cg-row"
           data-category="{cat.replace('"','&quot;')}"
           data-has-py="{has_py}"
           data-has-r="{has_r}"
