@@ -27,19 +27,19 @@ The trainings below are included as part of the CoastWatch training history. Ded
 
 | Date   | Location |
 |--------|----------|
-| 4/2020 | USGS Anchorage, Online |
-| 2/2020 | University of Puerto Rico, San Juan |
-| 9/2019 | Texas A&amp;M, Galveston |
-| 8/2018 | University of Washington, Seattle |
-| 8/2017 | University of Washington, Seattle |
-| 8/2016 | University of Washington, Seattle |
-| 8/2015 | University of Washington, Seattle |
-| 8/2014 | University of Washington, Seattle |
-| 8/2013 | Oregon State University, Corvallis |
+| 4/2020 | USGS Anchorage, Online, AK |
+| 2/2020 | University of Puerto Rico, San Juan, PR |
+| 9/2019 | Texas A&amp;M, Galveston, TX |
+| 8/2018 | University of Washington, Seattle, WA |
+| 8/2017 | University of Washington, Seattle, WA |
+| 8/2016 | University of Washington, Seattle, WA |
+| 8/2015 | University of Washington, Seattle, WA |
+| 8/2014 | University of Washington, Seattle, WA |
+| 8/2013 | Oregon State University, Corvallis, OR |
 | 3/2012 | NOS Coastal Services, Charleston, SC |
-| 3/2011 | Oregon State University, Corvallis |
+| 3/2011 | Oregon State University, Corvallis, OR |
 | 8/2010 | Peninsula College, Monterey, CA |
 | 8/2009 | Peninsula College, Monterey, CA |
-| 3/2008 | Oregon State University, Corvallis |
-| 3/2007 | Oregon State University, Corvallis |
-| 8/2006 | Oregon State University, Corvallis |
+| 3/2008 | Oregon State University, Corvallis, OR |
+| 3/2007 | Oregon State University, Corvalli, OR |
+| 8/2006 | Oregon State University, Corvallis, OR |
