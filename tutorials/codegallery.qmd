@@ -396,7 +396,6 @@ def has_any(*vals):
 
 for i, r in df.iterrows():
     mid = f"cg-modal-{i}"
-    slug = str(r.get("slug", "")).strip()
 
     rows.append({
         "Title": r["title"],
@@ -490,6 +489,7 @@ table_rows = []
 
 for i, r in df.iterrows():
     mid = f"cg-modal-{i}"
+    slug = str(r.get("slug", "")).strip()
 
     # language availability flags
     has_py = 1 if str(r.get("py_view","")).strip() or str(r.get("py_download","")).strip() else 0
@@ -508,7 +508,9 @@ for i, r in df.iterrows():
           data-has-m="{has_m}"
           data-has-arc="{has_arc}">
         <td>
-          <a href="#cg-{slug}" class="cg-title-link">
+          <a href="codegallery.html#cg-{slug}"
+             class="cg-title-link"
+             onclick="cgScrollTo(event, 'cg-{slug}')">
             {title}
           </a>
         </td>
@@ -748,13 +750,34 @@ function cgNext(id){
 </script>
 
 <script>
+function cgScrollTo(e, id){
+  e.preventDefault();  // stops jump-to-top behavior
+
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  // update URL manually (so linking still works)
+  history.pushState(null, "", "#" + id);
+
+  // smooth center scroll
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  // highlight flash
+  el.classList.add("cg-highlight");
+
+  setTimeout(() => {
+    el.classList.remove("cg-highlight");
+  }, 3000);
+}
+
+// handle direct URL visits (same as before but cleaner)
 document.addEventListener("DOMContentLoaded", function() {
   if (window.location.hash) {
-    const el = document.querySelector(window.location.hash);
+    const id = window.location.hash.replace("#","");
+    const el = document.getElementById(id);
+
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "center" });
-
-      // extra highlight flash (better than :target alone)
       el.classList.add("cg-highlight");
 
       setTimeout(() => {
@@ -762,5 +785,16 @@ document.addEventListener("DOMContentLoaded", function() {
       }, 3000);
     }
   }
+});
+</script>
+
+<script>
+document.addEventListener("click", function(e){
+  // ignore clicks on links that trigger highlighting
+  if (e.target.closest(".cg-title-link")) return;
+
+  document.querySelectorAll(".cg-highlight").forEach(el => {
+    el.classList.remove("cg-highlight");
+  });
 });
 </script>

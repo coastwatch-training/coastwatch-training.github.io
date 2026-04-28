@@ -44,6 +44,22 @@
   width: 4.25rem;
 }
 
+
+.cg-highlight {
+  background-color: #9ed2ff !important;
+  transition: background-color 0.5s ease;
+}
+
+.cg-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cg-title-link:hover {
+  color: #0271d2;
+  text-decoration: underline
+}
+
 /* ==========================================================================
    ICON LINKS (PREVIEW / DOWNLOAD / RESOURCES)
    ========================================================================== */
@@ -671,4 +687,14 @@
   width: 100%;
   height: 100%;
   border: none;
+}
+
+/* ==========================================================================
+   Agenda Text Bolding and Coloring
+   ========================================================================== */
+
+/* Inline text styles */
+.text-bold-blue {
+  color: #2b6da8;
+  font-weight: 700;
 }
