@@ -24,9 +24,9 @@ from IPython.display import HTML
 from urllib.parse import quote
 from pathlib import Path
 
-REPO_RAW_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/raw/main"
-REPO_BLOB_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/blob/main/"
-REPO_TREE_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/tree/main/"
+REPO_RAW_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/raw/main"
+REPO_BLOB_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/blob/main/"
+REPO_TREE_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/tree/main/"
 
 BASE_DIR = Path("code_gallery.csv").resolve().parent
 TUTORIALS_ROOT = BASE_DIR
@@ -500,13 +500,17 @@ for i, r in df.iterrows():
     cat   = str(r.get("category",""))
 
     table_rows.append(f"""
-      <tr class="cg-row"
+      <tr id="cg-{slug}" class="cg-row"
           data-category="{cat.replace('"','&quot;')}"
           data-has-py="{has_py}"
           data-has-r="{has_r}"
           data-has-m="{has_m}"
           data-has-arc="{has_arc}">
-        <td>{title}</td>
+        <td>
+          <a href="#cg-{slug}" class="cg-title-link">
+            {title}
+          </a>
+        </td>
         <td>{cat}</td>
         <td>{modal_eye(mid)}</td>
         <td>{resources_icon_for_row(r)}</td>
@@ -742,5 +746,20 @@ function cgNext(id){
 })();
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.location.hash) {
+    const el = document.querySelector(window.location.hash);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
 
+      // extra highlight flash (better than :target alone)
+      el.classList.add("cg-highlight");
 
+      setTimeout(() => {
+        el.classList.remove("cg-highlight");
+      }, 3000);
+    }
+  }
+});
+</script>

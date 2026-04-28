@@ -44,6 +44,17 @@
   width: 4.25rem;
 }
 
+.cg-row:target {
+  background-color: #fff3cd;
+  box-shadow: 0 0 0 3px #ffe69c inset;
+  transition: all 0.3s ease;
+}
+
+.cg-highlight {
+  background-color: #ffe69c !important;
+  transition: background-color 0.5s ease;
+}
+
 /* ==========================================================================
    ICON LINKS (PREVIEW / DOWNLOAD / RESOURCES)
    ========================================================================== */
