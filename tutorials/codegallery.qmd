@@ -396,6 +396,7 @@ def has_any(*vals):
 
 for i, r in df.iterrows():
     mid = f"cg-modal-{i}"
+    slug = str(r.get("slug", "")).strip()
 
     rows.append({
         "Title": r["title"],
