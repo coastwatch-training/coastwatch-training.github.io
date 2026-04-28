@@ -44,15 +44,20 @@
   width: 4.25rem;
 }
 
-.cg-row:target {
-  background-color: #fff3cd;
-  box-shadow: 0 0 0 3px #ffe69c inset;
-  transition: all 0.3s ease;
-}
 
 .cg-highlight {
-  background-color: #ffe69c !important;
+  background-color: #9ed2ff !important;
   transition: background-color 0.5s ease;
+}
+
+.cg-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cg-title-link:hover {
+  color: #0271d2;
+  text-decoration: underline
 }
 
 /* ==========================================================================
