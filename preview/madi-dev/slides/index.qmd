@@ -1,13 +1,16 @@
 ---
 title: "Examples of Participant Slides"
 format: html
+anchor-sections: false
 execute:
   echo: false
   warning: false
   message: false
 ---
 
-As part of our full, week-long courses we ask participants to give us a slide at the end of the course on what they are using satellite data for and what they were able to accomplish during the course. We also encourage this slide to mention any challenges or data gaps they encountered. Here we showcase some slides that are representative of the broad usages and applications.
+As part of our full, week-long courses we ask participants to complete a final slide summarizing what they were able to accomplish during the course. Each slide includes the participant's name and affiliation, a description of their project or objective, and a figure created using satellite data during the course. Participants also document the datasets and software used, and may include any challenges encountered or desired data that were not available. 
+
+Here we showcase some slides that are representative of the broad usages and applications.
 
 ```{python}
 from pathlib import Path
