@@ -751,50 +751,39 @@ function cgNext(id){
 
 <script>
 function cgScrollTo(e, id){
-  e.preventDefault();  // stops jump-to-top behavior
+  e.preventDefault();
 
   const el = document.getElementById(id);
   if(!el) return;
 
-  // update URL manually (so linking still works)
+  // update URL
   history.pushState(null, "", "#" + id);
 
-  // smooth center scroll
+  // scroll
   el.scrollIntoView({ behavior: "smooth", block: "center" });
 
-  // highlight flash
-  el.classList.add("cg-highlight");
+  // clear previous selection
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
 
-  setTimeout(() => {
-    el.classList.remove("cg-highlight");
-  }, 3000);
+  // apply persistent highlight
+  el.classList.add("cg-selected");
 }
-
-// handle direct URL visits (same as before but cleaner)
-document.addEventListener("DOMContentLoaded", function() {
-  if (window.location.hash) {
-    const id = window.location.hash.replace("#","");
-    const el = document.getElementById(id);
-
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-      el.classList.add("cg-highlight");
-
-      setTimeout(() => {
-        el.classList.remove("cg-highlight");
-      }, 3000);
-    }
-  }
-});
 </script>
 
 <script>
 document.addEventListener("click", function(e){
-  // ignore clicks on links that trigger highlighting
+
+  // ignore clicks on title links
   if (e.target.closest(".cg-title-link")) return;
 
-  document.querySelectorAll(".cg-highlight").forEach(el => {
-    el.classList.remove("cg-highlight");
+  // ignore clicks inside modals
+  if (e.target.closest(".cg-modal")) return;
+
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
   });
+
 });
 </script>
