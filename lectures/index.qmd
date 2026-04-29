@@ -207,10 +207,11 @@ FILTER_UI = f"""
 </div>
 """
 
-# --- Table rows (add data-category for filtering) ---
+# --- Table rows ---
 table_rows = []
 for _, r in df.iterrows():
     title = str(r.get("title", "")).strip()
+    slug = title.lower().replace(" ", "-").replace("/", "-")
     cat   = str(r.get("category", "")).strip() or "Other"
     desc  = str(r.get("description", "")).strip()
     purl  = str(r.get("preview_url", "")).strip()     # PDF path
@@ -219,9 +220,13 @@ for _, r in df.iterrows():
     turl  = str(r.get("transcript_url", "")).strip()
 
     table_rows.append(f"""
-      <tr class="lec-row" data-category="{cat.replace('"','&quot;')}">
+      <tr id="cg-{slug}" class="lec-row" data-category="{cat.replace('"','&quot;')}">
         <td>
-          <strong>{title}</strong><br>
+          <a href="index.html#cg-{slug}"
+             class="cg-title-link"
+             onclick="cgScrollTo(event, 'cg-{slug}')">
+            <strong>{title}</strong><br>
+          </a>
           <span class="cg-desc">{desc}</span>
         </td>
         <td>{preview_icon(purl)}</td>
@@ -340,4 +345,57 @@ HTML(table)
     setupPdfModal();
   });
 })();
+</script>
+
+<script>
+function cgScrollTo(e, id){
+  e.preventDefault();
+
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  // update URL
+  history.pushState(null, "", "#" + id);
+
+  // scroll
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  // clear previous selection
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
+
+  // apply persistent highlight
+  el.classList.add("cg-selected");
+}
+</script>
+
+<script>
+document.addEventListener("click", function(e){
+
+  // ignore clicks on title links
+  if (e.target.closest(".cg-title-link")) return;
+
+  // ignore clicks inside modals
+  if (e.target.closest(".cg-modal")) return;
+
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
+
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.location.hash) {
+    const id = window.location.hash.replace("#","");
+    const el = document.getElementById(id);
+
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.classList.add("cg-selected");
+    }
+  }
+});
 </script>

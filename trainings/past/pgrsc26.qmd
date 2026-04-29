@@ -1,6 +1,7 @@
 ---
 title: "NOAA CoastWatch/PacIOOS Satellite and Ocean Data Training Course"
 description: "February 10-13, 2026, Virtual, 9 AM-3 PM (Fiji Standard Time)"
+anchor-sections: false
 ---
 
 

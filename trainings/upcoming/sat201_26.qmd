@@ -1,6 +1,7 @@
 ---
 title: "Satellite 201 Summer Lecture Series"
 description: "July 10, 17, 24 and 31, 2026, Virtual 11am - 1pm (Pacific Time)"
+anchor-sections: false
 ---
 
 

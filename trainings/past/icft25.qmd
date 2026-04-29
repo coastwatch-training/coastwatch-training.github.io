@@ -1,6 +1,7 @@
 ---
 title: "Satellite and Animal Telemetry Data Training"
 description: "August 14 & 15, 2025, Virtual 10am - 1pm (Pacific Time)"
+anchor-sections: false
 ---
 
 

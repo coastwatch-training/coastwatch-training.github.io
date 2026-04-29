@@ -1,6 +1,7 @@
 ---
 title: "Past Trainings"
 format: html
+anchor-sections: false
 ---
 
 CoastWatch has offered satellite data trainings for many years in both in-person and online formats. These workshops have supported NOAA scientists, resource managers, and students in learning how to access, analyze, and apply satellite data in their work.
