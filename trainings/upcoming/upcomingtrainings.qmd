@@ -1,6 +1,7 @@
 ---
 title: "Upcoming Trainings"
 format: html
+anchor-sections: false
 ---
 
 CoastWatch offers a range of upcoming satellite data trainings designed for different experience levels and regional areas. Each training provides a mixture of background information, hands-on tutorials, and practical applications using real-world datasets.
