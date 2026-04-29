@@ -45,11 +45,11 @@
 }
 
 
-.cg-highlight {
-  background-color: #9ed2ff !important;
-  transition: background-color 0.5s ease;
+.cg-selected {
+  background-color: #c7deff;
+  box-shadow: 0 0 0 3px #bad2f5 inset;
+  transition: all 0.2s ease;
 }
-
 .cg-title-link {
   color: inherit;
   text-decoration: none;

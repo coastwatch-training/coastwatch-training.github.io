@@ -334,8 +334,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Each tutorial presents a complete example workflow, including data access (for example through ERDDAP), basic data processing and quality control steps, and the generation of common outputs such as maps, time series, or summary statistics.</p>
 <p>The Code Gallery is designed to support exploration, comparison, and reuse of coding workflows. Users are encouraged to adapt the example code to their own research, educational, or operational needs.</p>
 <p>Click the <strong>eye</strong> icon to view the tutorial, <strong>box</strong> icon to view the required resources, or <strong>download</strong> to get directed to the source file.</p>
-<div id="6e88db67" class="cell" data-message="false" data-execution_count="1">
-<div class="cell-output cell-output-display no-overflow-x" data-execution_count="3">
+<div id="cec3eea0" class="cell" data-message="false" data-execution_count="1">
+<div class="cell-output cell-output-display no-overflow-x" data-execution_count="1">
 <script>
 function cgOpenModal(id){
   document.getElementById("cg-backdrop").style.display="block";
@@ -2550,50 +2550,39 @@ function cgNext(id){
 </script>
 <script>
 function cgScrollTo(e, id){
-  e.preventDefault();  // stops jump-to-top behavior
+  e.preventDefault();
 
   const el = document.getElementById(id);
   if(!el) return;
 
-  // update URL manually (so linking still works)
+  // update URL
   history.pushState(null, "", "#" + id);
 
-  // smooth center scroll
+  // scroll
   el.scrollIntoView({ behavior: "smooth", block: "center" });
 
-  // highlight flash
-  el.classList.add("cg-highlight");
+  // clear previous selection
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
 
-  setTimeout(() => {
-    el.classList.remove("cg-highlight");
-  }, 3000);
+  // apply persistent highlight
+  el.classList.add("cg-selected");
 }
-
-// handle direct URL visits (same as before but cleaner)
-document.addEventListener("DOMContentLoaded", function() {
-  if (window.location.hash) {
-    const id = window.location.hash.replace("#","");
-    const el = document.getElementById(id);
-
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "center" });
-      el.classList.add("cg-highlight");
-
-      setTimeout(() => {
-        el.classList.remove("cg-highlight");
-      }, 3000);
-    }
-  }
-});
 </script>
 <script>
 document.addEventListener("click", function(e){
-  // ignore clicks on links that trigger highlighting
+
+  // ignore clicks on title links
   if (e.target.closest(".cg-title-link")) return;
 
-  document.querySelectorAll(".cg-highlight").forEach(el => {
-    el.classList.remove("cg-highlight");
+  // ignore clicks inside modals
+  if (e.target.closest(".cg-modal")) return;
+
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
   });
+
 });
 </script>
 
