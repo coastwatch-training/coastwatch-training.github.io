@@ -1,5 +1,4 @@
 ---
-title: "CoastWatch Utilities"
 format: html
 ---
 
