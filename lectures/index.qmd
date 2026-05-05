@@ -1,5 +1,6 @@
 ---
 title: "Satellite Course Lectures"
+anchor-sections: false
 ---
 
 This page provides access to the lecture slide decks used in CoastWatch training courses. The lectures are designed to be short (about 20 minutes when narrated), and many have narrated versions available on YouTube. Use the table below to preview a lecture in your browser or download the slides for offline viewing.
