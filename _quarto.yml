@@ -5,6 +5,7 @@ project:
     - slides/**
     - lectures/*.pdf
     - lectures/*.pptx
+    - trainings/presentations/**
   render: 
     - "**/*.qmd"
     - "**/*.ipynb"
