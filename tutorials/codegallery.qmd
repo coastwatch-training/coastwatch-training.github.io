@@ -24,9 +24,9 @@ from IPython.display import HTML
 from urllib.parse import quote
 from pathlib import Path
 
-REPO_RAW_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/raw/main"
-REPO_BLOB_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/blob/main/"
-REPO_TREE_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/tree/main/"
+REPO_RAW_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/raw/main"
+REPO_BLOB_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/blob/main/"
+REPO_TREE_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/tree/main/"
 
 BASE_DIR = Path("code_gallery.csv").resolve().parent
 TUTORIALS_ROOT = BASE_DIR
@@ -489,6 +489,7 @@ table_rows = []
 
 for i, r in df.iterrows():
     mid = f"cg-modal-{i}"
+    slug = str(r.get("slug", "")).strip()
 
     # language availability flags
     has_py = 1 if str(r.get("py_view","")).strip() or str(r.get("py_download","")).strip() else 0
@@ -500,13 +501,19 @@ for i, r in df.iterrows():
     cat   = str(r.get("category",""))
 
     table_rows.append(f"""
-      <tr class="cg-row"
+      <tr id="cg-{slug}" class="cg-row"
           data-category="{cat.replace('"','&quot;')}"
           data-has-py="{has_py}"
           data-has-r="{has_r}"
           data-has-m="{has_m}"
           data-has-arc="{has_arc}">
-        <td>{title}</td>
+        <td>
+          <a href="codegallery.html#cg-{slug}"
+             class="cg-title-link"
+             onclick="cgScrollTo(event, 'cg-{slug}')">
+            {title}
+          </a>
+        </td>
         <td>{cat}</td>
         <td>{modal_eye(mid)}</td>
         <td>{resources_icon_for_row(r)}</td>
@@ -742,7 +749,41 @@ function cgNext(id){
 })();
 </script>
 
+<script>
+function cgScrollTo(e, id){
+  e.preventDefault();
 
+  const el = document.getElementById(id);
+  if(!el) return;
 
+  // update URL
+  history.pushState(null, "", "#" + id);
 
+  // scroll
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
 
+  // clear previous selection
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
+
+  // apply persistent highlight
+  el.classList.add("cg-selected");
+}
+</script>
+
+<script>
+document.addEventListener("click", function(e){
+
+  // ignore clicks on title links
+  if (e.target.closest(".cg-title-link")) return;
+
+  // ignore clicks inside modals
+  if (e.target.closest(".cg-modal")) return;
+
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
+
+});
+</script>

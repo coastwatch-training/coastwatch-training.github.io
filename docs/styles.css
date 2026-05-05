@@ -8,7 +8,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.95rem;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
 /* Shared table cell spacing and separators */
@@ -44,6 +44,30 @@
   width: 4.25rem;
 }
 
+/* Reduce spacing on small screens */
+@media (max-width: 900px) {
+  .code-gallery-table th,
+  .code-gallery-table td {
+    padding: 0.4rem;
+    font-size: 0.9rem;
+  }
+}
+
+
+.cg-selected {
+  background-color: #c7deff;
+  box-shadow: 0 0 0 3px #bad2f5 inset;
+  transition: all 0.2s ease;
+}
+.cg-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.cg-title-link:hover {
+  color: #0271d2;
+  text-decoration: underline
+}
 
 /* ==========================================================================
    ICON LINKS (PREVIEW / DOWNLOAD / RESOURCES)
@@ -672,4 +696,14 @@
   width: 100%;
   height: 100%;
   border: none;
+}
+
+/* ==========================================================================
+   Agenda Text Bolding and Coloring
+   ========================================================================== */
+
+/* Inline text styles */
+.text-bold-blue {
+  color: #2b6da8;
+  font-weight: 700;
 }

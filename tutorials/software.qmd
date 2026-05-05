@@ -17,8 +17,8 @@ from IPython.display import HTML
 from urllib.parse import quote
 from pathlib import Path
 
-REPO_BLOB_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/blob/main/"
-REPO_TREE_BASE = "https://github.com/madrichardson/coastwatch-training.github.io/tree/main/"
+REPO_BLOB_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/blob/main/"
+REPO_TREE_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/tree/main/"
 
 TUTORIALS_BASE = "tutorials"
 BASE_DIR = Path("softwarecodegallery.csv").resolve().parent
@@ -313,8 +313,14 @@ for i, r in df.iterrows():
     slug   = str(r.get("slug","")).strip()
 
     table_rows.append(f"""
-    <tr class="cg-row">
-        <td>{title}</td>
+    <tr id="cg-{slug}" class="cg-row">
+        <td>
+            <a href="software.html#cg-{slug}"
+               class="cg-title-link"
+               onclick="cgScrollTo(event, 'cg-{slug}')">
+              {title}
+            </a>
+        </td>
         <td>{info_icon_for_row(r)}</td>
         <td>{modal_eye(mid)}</td>
         <td>{resources_icon_for_row(r)}</td>
@@ -432,4 +438,57 @@ function cgNext(id) {
     if (img) openImg(img.src, img.dataset.caption);
   });
 })();
+</script>
+
+<script>
+function cgScrollTo(e, id){
+  e.preventDefault();
+
+  const el = document.getElementById(id);
+  if(!el) return;
+
+  // update URL
+  history.pushState(null, "", "#" + id);
+
+  // scroll
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+
+  // clear previous selection
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
+
+  // apply persistent highlight
+  el.classList.add("cg-selected");
+}
+</script>
+
+<script>
+document.addEventListener("click", function(e){
+
+  // ignore clicks on title links
+  if (e.target.closest(".cg-title-link")) return;
+
+  // ignore clicks inside modals
+  if (e.target.closest(".cg-modal")) return;
+
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
+
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  if (window.location.hash) {
+    const id = window.location.hash.replace("#","");
+    const el = document.getElementById(id);
+
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+      el.classList.add("cg-selected");
+    }
+  }
+});
 </script>

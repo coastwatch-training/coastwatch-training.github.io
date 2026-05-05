@@ -5,6 +5,7 @@ project:
     - slides/**
     - lectures/*.pdf
     - lectures/*.pptx
+    - trainings/presentations/**
   render: 
     - "**/*.qmd"
     - "**/*.ipynb"
@@ -43,10 +44,12 @@ website:
         href: trainings/index.qmd
         contents:
           - section: "Upcoming Trainings"
+            href: trainings/upcoming/upcomingtrainings.qmd
             contents:
               - href: trainings/upcoming/sat201_26.qmd
                 text: 2026 Satellite 201 Summer Series
           - section: "Past Trainings"
+            href: trainings/past/pasttrainings.qmd
             contents:
               - href: trainings/past/pgrsc26.qmd
                 text: 2026 PGRSC Course

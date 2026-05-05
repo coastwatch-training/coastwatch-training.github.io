@@ -1,6 +1,7 @@
 ---
 title: "Access and Use Satellite Data and Decision-making tools for Ocean and Coastal Applications"
 description: "November 26, 2024, In person, 1pm - 6pm (Fiji Standard Time)"
+anchor-sections: false
 ---
 
 

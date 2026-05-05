@@ -20,6 +20,14 @@ This site provides information on CoastWatch Satellite Training courses such as 
 
   Check out the [Training Tutorials](tutorials/index.qmd) to explore workflows in Python, R, and MATLAB, as well as software tutorials exploring NASA's Panoply and CoastWatch Utilities.
 
+- **Interested in reviewing lecture content at your own pace?**
+
+  Browse our collection of lectures and presentations on the [Course Lectures](lectures/index.qmd) page. If you want course specific content, browse our [training class pages](trainings/index.qmd) for course specific presentations and materials.
+
+- **Want a preview of participant projects?**
+
+  Check out [archived presentation slides](slides/index.qmd) developed by past attendees showcasing how they applied course concepts to their own data and research. 
+
 - **Need help or have questions?**
 
   The [Help](help.qmd) page points you to FAQs, resources, and support options.
