@@ -1437,7 +1437,46 @@
     "href": "tutorials/cwutils.html",
     "title": "CoastWatch Utilities",
     "section": "",
-    "text": "CoastWatch Utilities\nThe CoastWatch Utilities (CWUtils) are software tools designed to help users work with NOAA/NESDIS CoastWatch satellite data—especially because these scientific data files aren’t meant to be opened in standard image viewers.\n\nWhat CoastWatch Utilities includes\nCWUtils provides both: - Graphical tools for interactive exploration - Command-line tools for scripting and repeatable processing workflows\nThe tools commonly support workflows like: - Information and statistics (inspect file contents, compute summary stats) - Data processing (format conversions, compositing, variable math, sampling) - Graphics and visualization (interactive visualization + batch rendering) - Registration and navigation (resampling between projections; navigation correction)\n\n\nGetting CoastWatch Utilities\nCWUtils is available for Windows, macOS, and Linux. The User’s Guide notes (minimum recommendations): ~400 MB disk (1 GB recommended total workspace) and 4 GB RAM.\nTo download, the guide directs users to the CoastWatch site and to look for CoastWatch Utilities under Data Tools (or search “utilities”).\n\n\nCoastWatch Utilities Online Course\nThe CoastWatch Utilities Online Course is about using the CoastWatch Utilities software package to help with processing satellite imagery and derived data products. The course covers working with data files (i) visually using a graphical user interface, and (ii) by typing commands at the Unix or Windows command prompts. No programming experience is needed, though it can be helpful when automating data processing.",
+    "text": "The CoastWatch Utilities is a software package for viewing, inspecting, and processing NOAA/NESDIS CoastWatch satellite data products. It is designed for scientific data formats that are not practical to open with standard image viewers.\n\n\nThe package provides both:\n\nGraphical tools for interactive data exploration\nCommand-line tools for repeatable processing and automation\n\nTypical tasks include:\n\nInspecting file contents and computing summary statistics\nConverting formats, sampling data, and performing variable math\nCreating rendered images and other visual products\nResampling data between map projections and correcting navigation\n\n\n\n\nThe CoastWatch Utilities package and latest user’s guide is available for Windows, macOS, and Linux from the NOAA CoastWatch website. The user’s guide describes installation and system requirements.\n\n\n\nThe CoastWatch Utilities Online Course provides a structured introduction to the software for processing satellite imagery and derived data products.\nThe course covers:\n\nWorking with data visually through the graphical interface\nUsing command-line tools from Unix or Windows terminals\nFollowing practical examples without requiring prior programming experience",
+    "crumbs": [
+      "Training Tutorials",
+      "Software Tutorials",
+      "Software Information",
+      "CoastWatch Utilities"
+    ]
+  },
+  {
+    "objectID": "tutorials/cwutils.html#what-it-includes",
+    "href": "tutorials/cwutils.html#what-it-includes",
+    "title": "CoastWatch Utilities",
+    "section": "",
+    "text": "The package provides both:\n\nGraphical tools for interactive data exploration\nCommand-line tools for repeatable processing and automation\n\nTypical tasks include:\n\nInspecting file contents and computing summary statistics\nConverting formats, sampling data, and performing variable math\nCreating rendered images and other visual products\nResampling data between map projections and correcting navigation",
+    "crumbs": [
+      "Training Tutorials",
+      "Software Tutorials",
+      "Software Information",
+      "CoastWatch Utilities"
+    ]
+  },
+  {
+    "objectID": "tutorials/cwutils.html#availability",
+    "href": "tutorials/cwutils.html#availability",
+    "title": "CoastWatch Utilities",
+    "section": "",
+    "text": "The CoastWatch Utilities package and latest user’s guide is available for Windows, macOS, and Linux from the NOAA CoastWatch website. The user’s guide describes installation and system requirements.",
+    "crumbs": [
+      "Training Tutorials",
+      "Software Tutorials",
+      "Software Information",
+      "CoastWatch Utilities"
+    ]
+  },
+  {
+    "objectID": "tutorials/cwutils.html#online-course",
+    "href": "tutorials/cwutils.html#online-course",
+    "title": "CoastWatch Utilities",
+    "section": "",
+    "text": "The CoastWatch Utilities Online Course provides a structured introduction to the software for processing satellite imagery and derived data products.\nThe course covers:\n\nWorking with data visually through the graphical interface\nUsing command-line tools from Unix or Windows terminals\nFollowing practical examples without requiring prior programming experience",
     "crumbs": [
       "Training Tutorials",
       "Software Tutorials",
