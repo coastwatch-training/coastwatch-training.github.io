@@ -91,4 +91,4 @@ The Day 1 live session will include an introduction to the course and the instru
 - [Coastwatch Tutorials](../../tutorials/index.qmd)
 - [PacIOOS](http://pacioos.org)
 
-{{< include includes/pdf-modal.html >}}
+{{< include ../../includes/pdf-modal.html >}}
