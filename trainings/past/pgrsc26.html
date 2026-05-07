@@ -391,7 +391,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td><strong>Day 1 - February 10</strong></td>
 <td>9:00 AM (<a href="https://meet.google.com/rzu-btgp-nzi">live session</a>)</td>
-<td>Introduction to <a href="../presentations/pgrsc26/1-a_Intro_CW_OWCP.pptx.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH">NOAA CoastWatch</a> &amp; <a href="../presentations/pgrsc26/1-b_PacIOOS_Overview.pdf#toolbar=0&amp;navpanes=0&amp;view=FitH">PacIOOS</a></td>
+<td>Introduction to <a href="#" data-pdf="../presentations/pgrsc26/1-a_Intro_CW_OWCP.pptx.pdf"> NOAA CoastWatch </a> &amp; <a href="#" data-pdf="../presentations/pgrsc26/1-b_PacIOOS_Overview.pdf"> PacIOOS </a></td>
 <td>Daisy Shi &amp; Lauren Kaiser</td>
 </tr>
 <tr class="even">
@@ -652,6 +652,61 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="../../tutorials/index.html">Coastwatch Tutorials</a></li>
 <li><a href="http://pacioos.org">PacIOOS</a></li>
 </ul>
+<div id="pdf-modal" class="pdf-modal" aria-hidden="true">
+<div class="pdf-modal-backdrop">
+
+</div>
+<div class="pdf-modal-content">
+<pre><code>&lt;button id="pdf-modal-close" class="pdf-modal-close"&gt;×&lt;/button&gt;
+&lt;iframe id="pdf-frame" class="pdf-frame"&gt;&lt;/iframe&gt;</code></pre>
+</div>
+</div>
+<script>
+function buildPdfViewerUrl(pdfPath){
+  return pdfPath + "#toolbar=0&navpanes=0&scrollbar=1&view=FitH";
+}
+
+document.addEventListener("click", function(e){
+  const btn = e.target.closest("[data-pdf]");
+  if(!btn) return;
+
+  e.preventDefault();
+
+  const modal = document.getElementById("pdf-modal");
+  const frame = document.getElementById("pdf-frame");
+
+  const pdf = btn.getAttribute("data-pdf");
+  if(!pdf) return;
+
+  frame.src = buildPdfViewerUrl(pdf);
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+});
+
+document.addEventListener("click", function(e){
+  if(e.target.matches("#pdf-modal-close, .pdf-modal-backdrop")){
+    const modal = document.getElementById("pdf-modal");
+    const frame = document.getElementById("pdf-frame");
+
+    frame.src = "";
+    modal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+});
+
+document.addEventListener("keydown", function(e){
+  if(e.key === "Escape"){
+    const modal = document.getElementById("pdf-modal");
+    const frame = document.getElementById("pdf-frame");
+
+    if(modal.classList.contains("show")){
+      frame.src = "";
+      modal.classList.remove("show");
+      document.body.style.overflow = "";
+    }
+  }
+});
+</script>
 
 
 </section>
