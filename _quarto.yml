@@ -6,6 +6,9 @@ project:
     - lectures/*.pdf
     - lectures/*.pptx
     - trainings/presentations/**
+    - tutorials/**/*.ipynb
+    - tutorials/**/*.Rmd
+    - tutorials/**/*.md
   render: 
     - "**/*.qmd"
     - "**/*.ipynb"
