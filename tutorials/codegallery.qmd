@@ -146,57 +146,39 @@ def modal_eye(modal_id):
 
 def download_icon(path):
     """
-    Generate an HTML anchor element that directly downloads a tutorial source file.
+    Generate an HTML anchor element that downloads a tutorial source file.
 
-    This function creates a clickable download icon used in the Code Gallery
-    table. When a valid file path is provided, the icon links directly to the
-    raw version of the source file hosted in the GitHub repository and triggers
-    a browser download instead of opening the GitHub preview page.
+    This function creates a clickable download icon for the Code Gallery table.
+    The link points directly to a file path within the rendered website, such
+    as a Jupyter notebook, R script, MATLAB file, or other downloadable tutorial
+    source file.
 
-    The function supports downloading tutorial source files such as Jupyter
-    notebooks (``.ipynb``), R scripts (``.R``), MATLAB files (``.m``),
-    ArcGIS resources, or other supported code formats. If no valid path is
-    provided, a placeholder dash is returned to indicate that no downloadable
-    file is available.
+    When clicked, the browser will download the file instead of opening the
+    rendered tutorial page, as long as the path points to the actual source file
+    and not an HTML page.
 
     Parameters
     ----------
     path : str
-        Relative path to the tutorial source file within the GitHub repository.
-        The path should be relative to the repository root and compatible with
-        the configured ``REPO_RAW_BASE`` URL.
+        Site-relative path to the downloadable tutorial source file. This should
+        point directly to the file to download, such as ``.ipynb``, ``.R``,
+        ``.py``, or ``.m``.
 
     Returns
     -------
     str
-        An HTML string containing an anchor element with an embedded SVG
-        download icon that links directly to the raw downloadable file, or
-        a dash ("—") if no valid file path is available.
-
-    Notes
-    -----
-    The generated link uses the GitHub raw file endpoint rather than the
-    standard GitHub blob viewer so that files download immediately when
-    clicked. The HTML ``download`` attribute is included to encourage
-    browser-based downloading and preserve the original filename.
-
-    Examples
-    --------
-    >>> download_icon("tutorials/example/tutorial.ipynb")
-    '<a href="https://raw.githubusercontent.com/...">...</a>'
-
-    >>> download_icon("")
-    '—'
+        An HTML string containing a download icon link, or a dash ("—") if no
+        valid file path is provided.
     """
+    path = str(path).strip()
+
     if not path:
         return "—"
 
     filename = path.split("/")[-1]
 
-    url = f"{REPO_RAW_BASE}/{quote(path)}"
-
     return (
-        f'<a href="{url}" '
+        f'<a href="{path}" '
         f'class="cg-icon" '
         f'download="{filename}" '
         f'aria-label="Download {filename}">'
