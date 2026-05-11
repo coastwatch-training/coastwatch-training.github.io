@@ -24,7 +24,7 @@ from IPython.display import HTML
 from urllib.parse import quote
 from pathlib import Path
 
-REPO_RAW_BASE = "https://raw.githubusercontent.com/coastwatch-training/coastwatch-training.github.io/raw/main"
+REPO_RAW_BASE = "https://github.com/coastwatch-training/coastwatch-training.github.io/raw/main"
 REPO_BLOB_BASE = "https://github.com/coastwatch-training/coastwatch-training.github.io/blob/main/"
 REPO_TREE_BASE = "https://github.com/coastwatch-training/coastwatch-training.github.io/tree/main/"
 
