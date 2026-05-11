@@ -151,9 +151,6 @@ def download_icon(path):
         return "—"
 
     filename = path.split("/")[-1]
-
-    # Go up one level from codegallery.html into the site root,
-    # then into tutorials/
     url = "../" + path.lstrip("/")
 
     return (
