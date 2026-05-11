@@ -145,31 +145,6 @@ def modal_eye(modal_id):
 
 
 def download_icon(path):
-    """
-    Generate an HTML anchor element that downloads a tutorial source file.
-
-    This function creates a clickable download icon for the Code Gallery table.
-    The link points directly to a file path within the rendered website, such
-    as a Jupyter notebook, R script, MATLAB file, or other downloadable tutorial
-    source file.
-
-    When clicked, the browser will download the file instead of opening the
-    rendered tutorial page, as long as the path points to the actual source file
-    and not an HTML page.
-
-    Parameters
-    ----------
-    path : str
-        Site-relative path to the downloadable tutorial source file. This should
-        point directly to the file to download, such as ``.ipynb``, ``.R``,
-        ``.py``, or ``.m``.
-
-    Returns
-    -------
-    str
-        An HTML string containing a download icon link, or a dash ("—") if no
-        valid file path is provided.
-    """
     path = str(path).strip()
 
     if not path:
@@ -177,8 +152,12 @@ def download_icon(path):
 
     filename = path.split("/")[-1]
 
+    # Go up one level from codegallery.html into the site root,
+    # then into tutorials/
+    url = "../" + path.lstrip("/")
+
     return (
-        f'<a href="{path}" '
+        f'<a href="{url}" '
         f'class="cg-icon" '
         f'download="{filename}" '
         f'aria-label="Download {filename}">'
