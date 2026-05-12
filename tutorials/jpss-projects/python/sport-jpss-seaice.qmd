@@ -1,11 +1,7 @@
 ---
 execute:
   eval: false
-jupyter:
-  kernelspec:
-    display_name: seaice
-    language: python
-    name: seaice
+jupyter: python3
 ---
 
 <img src="https://www.nsstc.uah.edu/public/rwade/lis-data/jpss_sport_logos.png" width="600" align='center'>
