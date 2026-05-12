@@ -1,5 +1,7 @@
 ---
 title: Time series of chlorophyll data from different sensors
+execute:
+  eval: false
 jupyter: python3
 ---
 

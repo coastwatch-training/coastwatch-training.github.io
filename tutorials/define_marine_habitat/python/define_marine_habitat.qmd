@@ -1,5 +1,7 @@
 ---
 title: Define a marine habitat
+execute:
+  eval: false
 jupyter: python3
 ---
 

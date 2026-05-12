@@ -1,6 +1,8 @@
 ---
 title: Great Lakes longterm water surface temperature plot
 author: Songzhi Liu (NOAA CoastWatch Great Lakes Node)
+execute:
+  eval: false
 jupyter: python3
 ---
 

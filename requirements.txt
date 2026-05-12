@@ -5,11 +5,3 @@ ipython
 xarray
 numpy
 matplotlib
-io
-requests
-seaborn
-sys
-subprocess
-plotly
-erddapy
-cartopy

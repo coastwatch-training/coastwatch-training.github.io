@@ -1,5 +1,7 @@
 ---
 title: Make a virtual buoy with satellite data
+execute:
+  eval: false
 jupyter: python3
 ---
 

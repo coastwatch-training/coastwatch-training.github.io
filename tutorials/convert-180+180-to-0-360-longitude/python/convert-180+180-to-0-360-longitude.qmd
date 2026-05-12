@@ -1,5 +1,7 @@
 ---
 title: Working with data that crosses the antimeridian
+execute:
+  eval: false
 jupyter: python3
 ---
 

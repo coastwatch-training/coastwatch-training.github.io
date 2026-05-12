@@ -1,5 +1,7 @@
 ---
 title: Python Tutorial - How to work with CoastWatch data in Python
+execute:
+  eval: false
 jupyter: python3
 ---
 

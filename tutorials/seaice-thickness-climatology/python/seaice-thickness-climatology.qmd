@@ -1,5 +1,7 @@
 ---
 title: Calculating anomaly and trend with sea ice thickness time series
+execute:
+  eval: false
 jupyter: python3
 ---
 

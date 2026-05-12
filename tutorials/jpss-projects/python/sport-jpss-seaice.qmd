@@ -1,4 +1,6 @@
 ---
+execute:
+  eval: false
 jupyter:
   kernelspec:
     display_name: seaice

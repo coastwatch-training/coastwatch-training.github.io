@@ -1,5 +1,7 @@
 ---
 title: Long Island Sound Chlorophyll-a Dynamics Tutorial
+execute:
+  eval: false
 jupyter: python3
 ---
 

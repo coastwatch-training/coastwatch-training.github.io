@@ -1,5 +1,7 @@
 ---
 title: Subset data in polar stereographic projection using a shape file fr
+execute:
+  eval: false
 jupyter: python3
 ---
 
