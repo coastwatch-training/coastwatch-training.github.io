@@ -1,0 +1,338 @@
+---
+title: Calculating sea ice area and extent
+execute:
+  eval: false
+jupyter: python3
+---
+
+
+> History | Created Sep 2023
+
+## Background
+Sea ice cover is one of the key components of polar ecological and climatological research. This measurement has gained attention because of the recent decrease in the Arctic sea ice cover. Satellite observations are a key tool in tracking sea ice cover, providing continuous global coverage extending back to 1978. Typically for satellite data, sea ice cover is reported as sea ice concentration, which is the percent areal coverage of ice within a grid cell. Depending on the application, additional parameters of interest can be calculated from sea ice cover:  
+* __Sea ice area__ - the sum of the product of ice concentration and area of all grid cells with at least 15% ice concentration.  
+* __Sea ice extent__ - the sum of the areas of all grid cells with at least 15% ice concentration
+
+## Objective
+This tutorial will demonstrate how to calculate the sea ice area and extent using sea ice concentration and grid cell area data.  Please visit the  <a href="https://nsidc.org/learn/ask-scientist/what-difference-between-sea-ice-area-and-extent#:~:text=But%20NSIDC%20scientists%2C%20like%20most,the%20total%20in%20their%20entirety.&text=Calculating%20sea%20ice%20extent%20means,with%2015%20percent%20or%20more.">NSIDC website</a> for more detailed descriptions of the calculations. 
+
+## This tutorial demonstrates the following techniques
+-   Downloading and saving a netCDF file from PolarWatch ERDDAP data server
+-   Accessing satellite data and metadata in polar stereographic projection
+-   Downloading and adding grid cell area using OPeNDAP web services
+-   Visualizing data on a map
+-   Computing sea ice area and extent using sea ice concentration data
+-   Plotting a time series of sea ice area and extent
+
+## Datasets used
+
+__Sea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere__   
+The Sea ice concentration (SIC) dataset used in this exercise is produced by NOAA NSIDC from passive microwave sensors as part of the Climate Data Record. It is a science quality dataset of monthly averages that extends from 1978-2022. SIC is reported as the fraction (0 to 1) of each grid cell that is covered by ice. The data are mapped in the Northern Polar Stereographic projection (EPSG:3413). The resolution is 25km, meaning each grid in this data set represents a value that covers a 25km by 25km area. The dataset is available on the <a href="https://polarwatch.noaa.gov/catalog/ice-sq-nh-nsidc-cdr-v4/preview/?dataset=monthly&var=cdr_seaice_conc_monthly&time_min=2022-12-01T00:00:00Z&time_max=2022-12-01T00:00:00Z&proj=epsg3413&colorBar=KT_ice,,,0,1,">PolarWatch data portal</a> and can be  downloaded directly from the PolarWatch ERDDAP at the following link: https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4nhmday.graph
+
+__Polar Stereographic Ancillary Grid Information__   
+This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km resolution Northern Polar Stereographic projection (EPSG:3413). The file for this exercise is available in the <a href="#">resources folder</a> or can be downloaded from the NSIDC website at https://nsidc.org/data/nsidc-0771/versions/1. For this tutorial, we will  access the dataset directly from the PolarWatch ERDDAP at the following link: 
+https://polarwatch.noaa.gov/erddap/griddap/pstere_gridcell_N25k
+
+
+
+### Import packages
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-11T16:38:24.284311Z', start_time: '2023-08-11T16:38:24.262984Z'}
+#| tags: [packages]
+import urllib.request
+import xarray as xr
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+```
+
+## Download the Arctic Sea Ice Concentration Data
+### Review of the ERDDAP data request URL
+For our first exercise, we will download sea ice concentration data that has been temporally subsetted:
+* A single month, December 2021  
+
+and spatially subsetted:
+* Y grid values that have been subsetted from the full range (5337500m to -5337500m) to a reduced range (4843696m to -4858210m). 
+
+__The ERDDAP data request URL for this data subset is presented below.__ 
+
+```
+https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4nhmday.nc?cdr_seaice_conc_monthly[(2021-01-01T00:00:00Z):1:(2021-12-01T00:00:00Z)][(4843696.04):1:(-4858210.64)][(-3850000.0):1:(3750000.0)]"
+```
+
+__The following table shows the component parts of the ERDDAP data request URL.__  
+
+| Name   | Value| Description |
+| ---:        |    :----   |          :--- |
+| **base_url**    |    https://polarwatch.noaa.gov/erddap/griddap  | ERDDAP URL for gridded datasets
+| **datasetID** | nsidcG02202v4nhmday   | Unique ID for dataset from PolarWatch ERDDAP
+| **file_type**  | .nc        | format of file to download (netCDF) |
+| **query_start**   | ?        | Details of the query follow the ?  
+| **variable_name**   | cdr_seaice_conc_monthly        | Variable from the dataset 
+| **date_range**   | **[(2021-01-01T00:00:00Z):1:(2021-01-01T00:00:00Z)]**      |  Temporal range (2021-01-01)
+| **spatial_range**   | [**(4843696.04):1:(-4858210.64)**][(-3850000.0):1:(3750000.0)]  |  Y and X axes ranges 
+
+ 
+
+
+### Generate the ERDDAP data query URL from its component parts
+
+```{python}
+base_url = 'https://polarwatch.noaa.gov/erddap/griddap/'
+datasetID = 'nsidcG02202v4nhmday'
+file_type = '.nc'
+query_start = '?'
+variable_name = 'cdr_seaice_conc_monthly'
+date_range = '[(2021-01-01T00:00:00Z):1:(2021-01-01T00:00:00Z)]'
+spatial_range = '[(4843696.04):1:(-4858210.64)][(-3850000.0):1:(3750000.0)]'
+
+url = ''.join([base_url,
+               datasetID,
+               file_type,
+               query_start,
+               variable_name,
+               date_range,
+               spatial_range
+               ])
+url
+```
+
+### Download the data as a netCDF file and load file data into Python
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-10T16:46:54.553728Z', start_time: '2023-08-10T16:46:54.060087Z'}
+# Download the data from ERDDAP URL as a netCDF file
+urllib.request.urlretrieve(url, "sic.nc")
+
+# Open the netCDF file to create an xarray dataset object
+ds = xr.open_dataset("sic.nc")
+ds
+```
+
+### Display the sea ice cover data as a map
+The sea ice concentration values range from zero (no ice cover) to 1 (100% ice cover). However, this dataset also includes values above 1 to flag features like lakes, coastline, and land. Therefore, included in the code below is a step to remove those flag values from the mapping workflow.
+
+```{python}
+img = ds['cdr_seaice_conc_monthly'].squeeze()
+
+# Remove flag values
+img = img.where(img <= 1)
+
+# Make plot area
+fig, ax = plt.subplots(figsize=(8, 10))
+
+# Set the color palette
+cmap = mpl.cm.get_cmap("Blues_r").copy()
+cmap.set_bad(color='gray')
+
+# show image
+shw = ax.imshow(img, cmap=cmap, vmin=0, vmax=1)
+
+# Make the colorbar
+bar = plt.colorbar(shw, shrink=0.75)
+
+# show plot with labels
+plt.xlabel('X Grid (m)')
+plt.ylabel('Y Grid (m)')
+bar.set_label('Sea Ice Cover (fractional coverage)')
+plt.show()
+```
+
+
+## Get area information from the ancillary grid dataset
+
+While the resolution of this data set is 25km (25km by 25km grid), the actual area of the grid depends on the grid projection. To obtain area value, we will need to:  
+* Subset the Polar Stereographic Ancillary Grid Information dataset to match our SIC dataset and 
+* Extract the area values for each grid cell. 
+
+#### Access the Ancillary Grid with OPeNDAP web services
+ERDDAP allows you to access data using <a href="https://www.opendap.org/">OPeNDAP web services</a>. The OPeNDAP protocol allows you to create the xarray dataset object directly from the remote server, without downloading a data file onto your computer. When you request the subset of the dataset (e.g. the sub_area object below), the data are uploaded directly into an xarray data array. 
+
+```{python}
+# Open xarray dataset object via an OPeNDAP connection
+grid_url = 'https://polarwatch.noaa.gov/erddap/griddap/pstere_gridcell_N25k'
+grid_area = xr.open_dataset(grid_url)
+
+# Subset grid area to match SIC data grids
+sub_area = grid_area.sel(x=slice(ds['xgrid'].min(), ds['xgrid'].max()),
+                         y=slice(ds['ygrid'].max(), ds['ygrid'].min())
+                         )
+sub_area
+```
+
+### Combine the subsetted grid to the SIC dataset
+Add subsetted area values from grid_area dataset as a new layer in the sea ice concentration dataset.
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-11T16:31:28.600726Z', start_time: '2023-08-11T16:31:28.575131Z'}
+# Add agrid area to the dataset
+ds['area'] = (('ygrid', 'xgrid'), sub_area.cell_area.values)
+ds
+```
+
+## Compute sea ice area and extent
+Although area and extent may sound the same, they are different measurements. 
+* Sea ice area is the total region covered by ice, i.e. area that is 100% covered by ice. 
+* Sea ice extent is the total region with at least 15 percent sea ice cover. 
+
+Therefore, extent will give higher values than area.
+
+
+```{python}
+# Subset the dataset to exclude flag values (value > 1)
+seaice_ds = ds.where(ds.cdr_seaice_conc_monthly <= 1)
+
+# Set all cell with < 15% ice cover to zero
+# Leave the other cells unchanged
+cells_15ice_andup = xr.where(seaice_ds.cdr_seaice_conc_monthly.squeeze() < 0.15, 
+                             0,  # Set to 0
+                             seaice_ds.cdr_seaice_conc_monthly.squeeze()   # Set to 1
+                             )
+
+# Calculate sea ice area
+icearea = seaice_ds.area * cells_15ice_andup
+
+# Convert the units from m^2 to km^2
+icearea_km = np.sum(icearea) / 1000000
+print("Sea Ice Area (km^2): ", icearea_km.item())
+
+# Compute sea ice extent
+# Find all cells with < 0.15 ice cover and set to 0, Set all other cells to 1
+cells_15ice_andup = xr.where(seaice_ds.cdr_seaice_conc_monthly.squeeze() < 0.15,
+                             0,  # Set to 0
+                             1  # Set to 1
+                             )
+
+# Calculate sea ice extent
+extent = seaice_ds.area * cells_15ice_andup
+extent_km = np.sum(extent)/1000000
+print("Sea Ice Extent (km^2):", extent_km.item())
+```
+
+## Create a time series with 12 months of data
+
+#### For the next exercise, download 12 months of SIC data from 2021. Then, compute sea ice area and extent for each month and plot the time series. 
+
+The first step is to change our ERDDAP data query URL to request the 12 month time period. To do this, change the second part of the __Time coverage__ component of the URL December of 2021 (see the table below). 
+
+| Name   | Value| Description |
+| ---:        |    :----   |          :--- |
+| **base_url**    |    https://polarwatch.noaa.gov/erddap/griddap  | ERDDAP URL for gridded datasets
+| **datasetID** | nsidcG02202v4nhmday   | Unique ID for dataset from PolarWatch ERDDAP
+| **file_type**  | .nc        | NetCDF (there are many other available file formats)|
+| **query_start**   | ?        | Details of the query follow the ?  
+| **variable_name**   | cdr_seaice_conc_monthly        | Variables from the dataset 
+| **date_range**   | __[(2021-01-01T00:00:00Z):1:(2021-12-01T00:00:00Z)]__      |  Temporal range
+| **spatial_range**   | [(4843696.04):1:(-4858210.64)][(-3850000.0):1:(3750000.0)]  |  Spatial range 
+
+__The modified ERDDAP data request URL for this data subset is presented below:__
+
+<code>url="https:\/\/polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4nhmday.nc?cdr_seaice_conc_monthly[(**2021-01-01T00:00:00Z**):1:( **2021-12-01T00:00:00Z** )][(4843696.04):1:(-4858210.64)][(-3850000.0):1:(3750000.0)]</code>
+
+__We can generate the URL quickly by changing the "date_range" variable__  
+* From: `date_range = '[(2021-01-01T00:00:00Z):1:(2021-01-01T00:00:00Z)]'`    
+* To: `date_range = '[(2021-01-01T00:00:00Z):1:(2021-12-01T00:00:00Z)]'`
+
+__Then rerunning the code to generate the ERDDAP data query URL.__
+
+```{python}
+date_range = '[(2021-01-01T00:00:00Z):1:(2021-12-01T00:00:00Z)]'
+
+url = ''.join([base_url,
+               datasetID,
+               file_type,
+               query_start,
+               variable_name,
+               date_range,
+               spatial_range
+               ])
+url
+```
+
+### Generate the sea ice area and extent time series
+
+```{python}
+# Download 12 months of data
+urllib.request.urlretrieve(url, "sic12.nc")
+
+# Open the netCDF file to create an Xarray dataset object
+ds = xr.open_dataset("sic12.nc")
+
+# Add grid area to the dataset
+cell_area = sub_area.cell_area.values
+ds['area'] = (('ygrid', 'xgrid'), cell_area)
+
+# Subset the dataset to exclude flag values
+seaice_ds = ds.where(ds.cdr_seaice_conc_monthly <= 1)
+
+# Find all cells with < 0.15 ice cover and set to 0.
+# Leave the other cells unchanged
+cells_15ice_andup_ts = xr.where(seaice_ds.cdr_seaice_conc_monthly < 0.15, 
+                                0,  # Set to 0
+                                seaice_ds.cdr_seaice_conc_monthly
+                                )
+
+# Calculate sea ice area for each time layer
+icearea_timeseries = seaice_ds.area * cells_15ice_andup_ts
+
+# Sum area for each time step and convert to km^2
+icearea_timeseries_km = icearea_timeseries.sum(dim=['xgrid', 'ygrid']) / 1000000
+
+# Find all cells with < 0.15 ice cover and set to 0. Set all other cells to 1
+cells_15ice_andup_ts = xr.where(seaice_ds.cdr_seaice_conc_monthly < 0.15,
+                                0,  # Set to 0
+                                1  # Set to 1
+                                )
+
+# Calculate sea ice extent by month
+extent_timeseries = seaice_ds.area * cells_15ice_andup_ts
+
+# # Sum extent for each time step and convert units to km^2
+extent_timeseries_km = extent_timeseries.sum(dim=['xgrid', 'ygrid']) / 1000000
+```
+
+### Plot the sea ice area and extent time series
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-11T19:32:23.581311Z', start_time: '2023-08-11T19:32:23.495609Z'}
+
+fig, ax = plt.subplots(figsize=(10, 4))
+
+# Plot the data as a line
+ax.plot(icearea_timeseries_km.time, 
+        icearea_timeseries_km,
+        label='Sea ice area',
+        marker='o', 
+        linestyle='-')
+
+ax.plot(extent_timeseries_km.time,
+        extent_timeseries_km,
+        label='Sea ice extent',
+        marker='s', 
+        linestyle='-')
+
+# Add a title and labels
+ax.set_title('2021 Monthly Sea ice area and sea ice extent')
+ax.set_xlabel('Date')
+ax.set_ylabel('Area (km^2)')
+
+# Display the legend
+ax.legend()
+
+# Show the plot
+plt.show()
+```
+
+## References
+-   <a href="https://nsidc.org/data/g02202/versions/4" target="_blank">NSIDC Data Product Description</a>
+-   <a href="https://nsidc.org/sites/default/files/g02202-v004-userguide_1_1.pdf" target="_blank">NSIDC Data Product User Guide (pdf)</a>
+- <a href="https://polarwatch.noaa.gov/catalog/">PolarWatch Data Catalog</a>
+- <a href="https://nsidc.org/learn/ask-scientist/what-difference-between-sea-ice-area-and-extent#:~:text=But%20NSIDC%20scientists%2C%20like%20most,the%20total%20in%20their%20entirety.&text=Calculating%20sea%20ice%20extent%20means,with%2015%20percent%20or%20more.">What's the difference between Sea ice area and extent?</a>
+- <a href="https://nsidc.org/arcticseaicenews/">NSIDC Arctic Sea Ice News & Analysis</a>
+- <a href="https://www.climate.gov/news-features/understanding-climate/understanding-climate-antarctic-sea-ice-extent">Climate.gov Understanding Climate: sea ice extent</a>
+* Several CoastWatch Node websites have data catalogs containing documentation and links to all the datasets available:  
+    * https://oceanwatch.pifsc.noaa.gov/doc.html
+    * https://coastwatch.pfeg.noaa.gov/data.html
+
+

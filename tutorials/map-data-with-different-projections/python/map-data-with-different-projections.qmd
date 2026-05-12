@@ -1,0 +1,206 @@
+---
+title: Map Geographical and Polarstereographic data on a projected map
+execute:
+  eval: false
+jupyter: python3
+---
+
+
+> history \| Updated September 2023 <br/>
+
+<a href="https://polarwatch.noaa.gov/" target="_blank">NOAA PolarWatch</a> distributes gridded and tabular oceanographic data for polar regions.  Satellite data include geospatial information and most of them are in geographical coordinates (latitude and longitude).  PolarWatch satellite data are often projected using <a href="https://nsidc.org/data/user-resources/help-center/guide-nsidcs-polar-stereographic-projection" target="_blank">Polar Stereographic Projections</a> in x and y coordinates.
+
+## Objective
+
+This tutorial will demonstrate how to plot a polar stereographic projected data on a projected map, and to add another dataset with geographical coordinates (latitude and longitude) onto the map. 
+
+## The tutorial demonstrates the following techniques
+-   Accessing satellite data from ERDDAP
+-   Making a projected map
+-   Adding polarstereographic data to the map
+-   Adding geographically referenced data (lat and lon) to the map
+
+## Datasets used
+
+__Sea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere, 25km, Science Quality, 1978-Present, Monthly__  
+This dataset includes sea ice concentration data from the northern hemisphere, and is produced by the NOAA/NSIDC using the Climate Data Record algorithm.  The resolution is 25km, meaning each grid in this data set represents a value that covers a 25km by 25km area.  The dataset is avaialble from <a href="https://polarwatch.noaa.gov/catalog/ice-sq-nh-nsidc-cdr-v4/preview/?dataset=daily&var=cdr_seaice_conc&time_min=2022-12-31T00:00:00Z&time_max=2022-12-31T00:00:00Z&proj=epsg3413&colorBar=KT_ice|||0|1|">the NOAA PolarWatch Catalog</a>.
+
+
+__Polar bear tracking data__ <br/>
+For the demonstrative purpose of adding a dataset in geographical coords (lat, lon) to the projected map, GPS data for a polar bear track were used.  More information about the data can be found at https://borealisdata.ca/file.xhtml?fileId=151017&version=1.0
+
+
+## Import  packages
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-04T18:45:35.828080Z', start_time: '2023-08-04T18:45:35.517077Z'}
+import netCDF4 as nc
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+import matplotlib.pyplot as plt
+import warnings
+warnings.filterwarnings("ignore")
+ 
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-04T18:45:39.789479Z', start_time: '2023-08-04T18:45:39.040559Z'}
+# There are many ways to get data.  We will create a function that points to 
+# NOAA PolarWatch ERDDAP Server gridded dataset page to get data with its unique ID
+
+def point_to_dataset(dataset_id, base_url='https://polarwatch.noaa.gov/erddap/griddap'):
+    base_url = base_url.rstrip('/')
+    full_url = '/'.join([base_url, dataset_id])
+    return nc.Dataset(full_url)
+ 
+
+# 'nsidcG02202v4nhmday' is the unique ID of our interested data 
+# from PolarWatch ERDDAP data server
+da = point_to_dataset('nsidcG02202v4nhmday')
+```
+
+## Mapping projected data on a projected basemap
+
+We first need to create a basemap with the Polar Stereographic projection. Most of the netCDF data files include metadata about mapping.  This can be used to set a projection and mapping boundaries for the data.
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-04T18:45:42.377249Z', start_time: '2023-08-04T18:45:42.366469Z'}
+# prints metadata embedded in netCDF file
+print(da)
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-04T18:45:45.132108Z', start_time: '2023-08-04T18:45:45.116947Z'}
+# prints variable names
+da.variables.keys()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2023-08-04T18:47:07.417301Z', start_time: '2023-08-04T18:47:07.097346Z'}
+da['cdr_seaice_conc_monthly'][0][:].shape
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2023-07-31T19:34:07.598128Z', start_time: '2023-07-31T19:34:06.479427Z'}
+# set mapping crs to Cartopy's North Polar Stereo graphic
+crs_epsg = ccrs.NorthPolarStereo(central_longitude=-45)
+
+# set figure size
+fig = plt.figure(figsize=[10, 10])
+
+# set the map projection and associated boundaries
+ax = plt.axes(projection = crs_epsg)
+ax.set_extent([-3850000.0, 3750000.0, -5350000, 5850000.0],crs_epsg)
+ax.coastlines()
+ax.add_feature(cfeature.LAND)
+
+# set the data crs using 'transform' 
+# set the data crs as described in the netcdf metadata
+cs = ax.pcolormesh(da['xgrid'], da['ygrid'], da['cdr_seaice_conc_monthly'][0][:] , 
+                   cmap=plt.cm.Blues,  transform= ccrs.NorthPolarStereo(true_scale_latitude=70, central_longitude=-45)) #transform default is basemap specs
+
+fig.colorbar(cs, ax=ax, location='bottom', shrink =0.8)
+ax.set_title('Ice Concentration using Cartopy projection NorthPolarStereo()')
+
+plt.show()
+```
+
+## Mapping data with EPSG Code
+
+You can set the data crs using the EPSG code. In our case, the metadata provides the projection crs (EPSG: 3411)
+In this exercise, we will use the same basemap projection, but set the data projection with the EPSG code.
+
+```{python}
+#| ExecuteTime: {end_time: '2023-07-31T19:34:08.727179Z', start_time: '2023-07-31T19:34:07.599078Z'}
+# Set data projection using EPSG Code 
+data_crs = ccrs.epsg('3411')
+crs_epsg = ccrs.NorthPolarStereo(central_longitude=-45)
+
+# set the basemap 
+fig = plt.figure(figsize=[10, 10])
+ax = plt.axes(projection = crs_epsg)
+ax.set_extent([-3850000.0, 3750000.0, -5350000, 5850000.0],ccrs.NorthPolarStereo(central_longitude=-45))
+ax.add_feature(cfeature.LAND)
+ax.coastlines()
+
+# transform= which projection data (coords) were defined 
+cs = ax.pcolormesh(da['xgrid'], da['ygrid'], da['cdr_seaice_conc_monthly'][0][:], 
+                   cmap=plt.cm.Blues,  transform= data_crs) 
+
+fig.colorbar(cs, ax=ax, location='bottom', shrink =0.8)
+ax.set_title('Ice Concentration using EPSG code (3411)')
+
+plt.show()
+```
+
+# Adding non-projected data with lat and lon to the projected map
+
+To demonstrate mapping non-projected data onto the projected map, we will use polar bear tracking data. While the temporal coverage of the two datasets differ (*sea ice concentration* and *polarbear locations*), the exercise is to show how to use data with latitude and longitude onto the projected basemap.
+
+Data:  Polar bear tracking data
+
+Dataset Info: https://borealisdata.ca/file.xhtml?fileId=151017&version=1.0
+
+```{python}
+#| ExecuteTime: {end_time: '2023-07-31T19:34:08.763624Z', start_time: '2023-07-31T19:34:08.728150Z'}
+import pandas as pd
+
+# read the dataset
+df = pd.read_csv('../data/PB_Argos.csv')
+df = df[df["QualClass"].isin(["B"])]
+
+# set basemap with Cartopy PlateCarree() projection
+fig = plt.figure() 
+ax = plt.axes(projection=ccrs.PlateCarree()) 
+ax.coastlines()
+ax.set_global()
+ax.add_feature(cfeature.LAND)
+
+# set the data crs 
+plt.scatter(
+    y=df["Lat"],
+    x=df["Lon"],
+    color="red",
+    s=5,
+    alpha=1,
+    transform=ccrs.PlateCarree()
+)
+ax.set_title('Polar bear track data (B)')
+plt.show()
+```
+
+```{python}
+#| ExecuteTime: {end_time: '2023-07-31T19:34:10.210429Z', start_time: '2023-07-31T19:34:08.764428Z'}
+fig = plt.figure(figsize=[10, 10])
+ax = plt.axes(projection=crs_epsg)
+ax.add_feature(cfeature.LAND)
+ax.coastlines(resolution='50m')
+ax.set_extent([-3850000.0, 3750000.0, -5350000.0, 5850000.0],crs_epsg )
+ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=True)
+
+cs = ax.pcolormesh(da['xgrid'], da['ygrid'], da['cdr_seaice_conc_monthly'][0][:] , 
+                   cmap=plt.cm.Blues,  transform= ccrs.NorthPolarStereo(true_scale_latitude=70, central_longitude=-45))
+
+# set the data crs
+# the data will get transformed to be properly projected on the basemap 
+scatter = plt.scatter(
+    y=df["Lat"],
+    x=df["Lon"],
+    color="red",
+    s=3,
+    alpha=1,
+    transform=ccrs.PlateCarree()
+)
+fig.colorbar(cs, ax=ax, location='right', shrink =0.8)
+plt.legend(["Polarbear (B)"], loc = "upper left")
+ax.set_title('Ice Concentration and polar bear track data on Polar Stereographic map')
+
+plt.show()
+```
+
+## References
+
+-   <a href="https://nsidc.org/data/g02202/versions/4" target="_blank">NSIDC Data Product Description</a>
+-   <a href="https://nsidc.org/sites/default/files/g02202-v004-userguide_1_1.pdf" target="_blank">NSIDC Data Product User Guide (pdf)</a>
+-   <a href="https://polarwatch.noaa.gov/catalog/ice-sq-nh-nsidc-cdr-v4/preview/?dataset=daily&var=cdr_seaice_conc&time_min=2022-05-31T00:00:00Z&time_max=2022-05-31T00:00:00Z&proj=epsg3413&colorBar=KT_ice|||0|1|" target="_blank">NOAA PolarWatch Data Product Page (download, preview)</a>
+

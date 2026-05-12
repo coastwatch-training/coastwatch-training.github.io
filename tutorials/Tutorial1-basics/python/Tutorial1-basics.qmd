@@ -1,0 +1,261 @@
+---
+title: Tutorial 1 - Basics of working with satellite data in Python
+execute:
+  eval: false
+jupyter: python3
+---
+
+
+> History | Updated August 2023
+
+
+## Objective
+
+This tutorial will show the steps to grab data hosted on an ERDDAP server from Python, how to work with NetCDF files in Python and how to make some maps and time-series of sea surface temperature.
+
+
+## The tutorial demonstrates the following techniques
+
+- Locating a satellite product in ERDDAP, manually changing the constraints and copying the URL defining the data request
+- Downloading the resulting netCDF file
+- Opening and examining the netCDF file
+- Making basic maps and time series plots
+
+
+## Datasets used
+
+**CoralTemp Sea Surface Temperature** product from the NOAA Coral Reef Watch program.
+The NOAA Coral Reef Watch (CRW) daily global 5km Sea Surface Temperature (SST) product, also known as CoralTemp, shows the nighttime ocean temperature measured at the surface. The SST scale ranges from -2 to 35 °C.
+The CoralTemp SST data product was developed from two, related reanalysis (reprocessed) SST products and a near real-time SST product. Spanning January 1, 1985 to the present, the CoralTemp SST is one of the best and most internally consistent daily global 5km SST products available.
+More information about the product: https://coralreefwatch.noaa.gov/product/5km/index_5km_sst.php
+
+We will use the monthly composite of this product and download it from the NOAA CoastWatch ERDDAP server:
+https://coastwatch.pfeg.noaa.gov/erddap/griddap/NOAA_DHW_monthly.graph
+
+
+
+## Import Python modules
+
+
+```{python}
+import urllib.request
+import xarray as xr
+import numpy as np
+from matplotlib import pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
+import warnings
+warnings.filterwarnings('ignore')
+```
+
+## 1. Download data from ERDDAP using Python
+
+Because ERDDAP includes RESTful services, you can download data listed on any ERDDAP platform from Python using the URL structure. 
+
+For example, the following page allows you to subset monthly sea surface temperature (SST) https://coastwatch.pfeg.noaa.gov/erddap/griddap/NOAA_DHW_monthly.html
+
+![erddap.png](attachment:erddap.png)
+
+* Select your region and date range of interest, then select the '.nc' (NetCDF) file type and click on "Just Generate the URL".  
+
+* In this specific example, the URL we generated is :  
+https://coastwatch.pfeg.noaa.gov/erddap/griddap/NOAA_DHW_monthly.nc?sea_surface_temperature%5B(2022-01-16T00:00:00Z):1:(2022-12-16T00:00:00Z)%5D%5B(40):1:(30)%5D%5B(-80):1:(-70)%5D
+
+### With Python, run the following to download the data using the generated URL .
+
+```{python}
+# Below we have broken the url into parts and rejoin the them
+# to allow you to better see the url in the notebook.
+url = ''.join(['https://coastwatch.pfeg.noaa.gov/erddap/griddap/NOAA_DHW_monthly.nc?',
+               'sea_surface_temperature',
+               '%5B(2022-01-16T00:00:00Z):1:(2022-12-16T00:00:00Z)%5D',
+               '%5B(40):1:(30)%5D%5B(-80):1:(-70)%5D'
+               ])
+
+urllib.request.urlretrieve(url, "sst.nc")
+```
+
+## 2. Loading netCDF4 data into Python
+
+Now that we've downloaded the data locally, we can load it into Python and extract the variables of interest.
+
+The xarray package makes it very convenient to work with NetCDF files. Documentation is available here:
+http://xarray.pydata.org/en/stable/why-xarray.html
+
+### Open the netCDF file as an xarray dataset object and examine the data structure.
+
+```{python}
+ds = xr.open_dataset('sst.nc', decode_cf=True)
+ds
+```
+
+### Examine which coordinates and variables are included in the dataset.
+
+```{python}
+# List the coordinates
+print('The coordinates variables:', list(ds.coords), '\n')
+
+# List the data variables
+print('The data variables:', list(ds.data_vars))
+```
+
+### Examine the structure of sea_surface_temperature.
+
+```{python}
+ds.sea_surface_temperature.shape
+```
+
+The dataset is a 3-D array with 12 time steps, each with 202 rows corresponding to latitudes and 201 columns corresponding to longitudes.
+
+### List the dates for each time step.
+The dataset has 12 time steps, one for each month between January 2022 and December 2022.  
+
+```{python}
+ds.time
+```
+
+### Examine the latitude coordinate variable
+Typically, the latitude coordinate variable will be in ascending order. However, in some datasets the order is reversed, i.e the order is descending.  
+
+By examining the first and last values on our latitude array (below), we can see that the values are descending.  
+* In practice what this means is that when you slice (subset) using latitude later in this tutorial, you will put the largest latitude value first.
+
+```{python}
+print('First latitude value', ds.latitude[0].item())
+print('Last latitude value', ds.latitude[-1].item())
+```
+
+## 3. Working with the  data
+
+### Creating a map for for January 2022 (our first time step)
+
+#### Find the minimum and maximum SST values.
+
+```{python}
+print('Minimum SST', np.nanmin(ds.sea_surface_temperature))
+print('Maximum SST', np.nanmax(ds.sea_surface_temperature))
+```
+
+#### Use the minimum and maximum SST to set some color breaks.
+
+```{python}
+# Sets color breaks from 2 to 30 with 0.05 steps
+levs = np.arange(2, 30, 0.05)
+```
+
+#### Define a color palette.
+
+```{python}
+jet = ["blue", "#007FFF", "cyan", "#7FFF7F",
+       "yellow", "#FF7F00", "red", "#7F0000"]
+```
+
+#### Set color scale using the jet palette.
+
+```{python}
+cm = LinearSegmentedColormap.from_list('my_jet', jet, N=len(levs))
+```
+
+#### Plot the SST map
+The code also shows how to annotate the map by: 
+- Adding points to the map (e.g. station locations)
+- Adding contour lines
+
+```{python}
+plt.contourf(ds.longitude, 
+             ds.latitude, 
+             ds.sea_surface_temperature[0, :, :], 
+             levs,
+             cmap=cm)
+
+# Plot the colorbar
+plt.colorbar()
+
+# Annotation: Example of how to add points to the map
+plt.scatter(range(-74, -71), np.repeat(34, 3), c='black')
+
+# Annotation: Example of how to add a contour line
+plt.contour(ds.longitude, 
+            ds.latitude, 
+            ds.sea_surface_temperature[0, :, :], 
+            levels=[14],
+            linewidths=1)
+
+# Add a title
+plt.title("Monthly Sea Surface Temperature - " 
+          + ds.time[0].dt.strftime('%b %Y').item())
+plt.show()
+```
+
+## Plotting a time series
+
+### Subset the following box from the data: 
+* 36<sup>o</sup> to 38<sup>o</sup>N latitude
+* -77<sup>o</sup> to -75<sup>o</sup>E longitude  
+
+We are going to generate a time series of mean SST within that box.
+
+- First, subset the data:
+
+**Remember!**  
+For this product, latitudes are indexed in descending order (high to low). Therefore when you slice latitude, put the largest value first.
+
+```{python}
+da = ds.sel(latitude=slice(38, 36), longitude=slice(-77, -75))
+```
+
+### Examine the structure of the subsetted data.
+The subset is a 3-D array with 12 time steps, each with 40 rows corresponding to latitudes and 40 columns corresponding to longitudes.
+
+```{python}
+da.sea_surface_temperature.shape
+```
+
+### Plot the subsetted data
+
+```{python}
+plt.contourf(da.longitude, 
+             da.latitude, 
+             da.sea_surface_temperature[0, :, :], 
+             levs,
+             cmap=cm)
+plt.colorbar()
+plt.title("Monthly Sea Surface Temperature " 
+          + ds.time[0].dt.strftime('%b %Y').item())
+plt.show()  
+```
+
+## Compute the monthly mean for each month
+
+```{python}
+res = np.mean(da.sea_surface_temperature, axis=(1, 2))
+```
+
+### Plot the time-series
+
+```{python}
+plt.figure(figsize=(8, 4))
+plt.scatter(ds.time, res)
+plt.ylabel('SST (ºC)')
+```
+
+## Creating a map of average SST over a year
+### Compute the yearly mean for the region
+
+```{python}
+mean_sst = np.mean(ds.sea_surface_temperature, axis=0)
+```
+
+### Plot the map of the 2022 average SST in the region
+
+```{python}
+plt.contourf(ds.longitude, ds.latitude, mean_sst, levs, cmap=cm)
+plt.colorbar()
+plt.title("Mean SST " 
+          + ds.time[0].dt.strftime('%b %Y').item() 
+          + ' - '
+          + ds.time[11].dt.strftime('%b %Y').item())
+
+plt.show()
+```
+
+
