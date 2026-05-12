@@ -151,7 +151,11 @@ def download_icon(path):
         return "—"
 
     filename = path.split("/")[-1]
-    url = "../" + path.lstrip("/")
+
+    if filename.lower().endswith(".ipynb"):
+        url = f"https://github.com/coastwatch-training/coastwatch-training.github.io/raw/main/{path}"
+    else:
+        url = "../" + path.lstrip("/")
 
     return (
         f'<a href="{url}" '
