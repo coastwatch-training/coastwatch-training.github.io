@@ -1,0 +1,225 @@
+---
+title: Extract data within a boundary
+jupyter: python3
+---
+
+> History | Updated Sep 2023  
+
+## Background
+One use for satellite observations is to supplement in situ sampling of geographical locations where the timespan or frequency measurements, or spatial dimensions or remoteness of the locations, make physical sampling impossible or impractical. One drawback is that satellite data are often rectangular, whereas geographical locations can have irregular boundaries. Examples of locations with boundaries include Marine Protected Areas or marine physical, biological, and ecological divisions like the Longhurst Marine Provinces.  
+
+## Objectives
+In this tutorial we will learn how to download a timeseries of SST satellite data from an ERDDAP server, and then mask the data to retain only the data within an irregular geographical boundary (polygon). We will then plot a yearly seasonal cycle from within the boundary. 
+
+## The tutorial demonstrates the following techniques
+-   Downloading data from an ERDDAP data server
+-   Visualizing data on a map
+-   Masking satellite data using a shape file
+
+## Datasets used
+__NOAA Geo-polar Blended Analysis Sea-Surface Temperature, Global, Monthly, 5km, 2019-Present__    
+The NOAA geo-polar blended SST is a high resolution satellite-based sea surface temperature (SST) product that combines SST data from US, Japanese and European geostationary infrared imagers, and low-earth orbiting infrared (U.S. and European) SST data, into a single product. We will use the monthly composite.
+https://coastwatch.pfeg.noaa.gov/erddap/griddap/NOAA_DHW_monthly
+
+__Longhurst Marine Provinces__  
+The dataset represents the division of the world oceans into provinces as defined by Longhurst (1995; 1998; 2006). This division has been based on the prevailing role of physical forcing as a regulator of phytoplankton distribution. The Longhurst Marine Provinces dataset is available online (https://www.marineregions.org/downloads.php) and within the shapes folder associated with this repository. For this tutorial we will use the Gulf Stream province (ProvCode: GFST)  
+
+![../images/longhurst.png](attachment:longhurst.png)
+
+
+## Import packages
+Note: Make sure you have at least version 0.10.0 of regionmask
+* To install with conda use "conda install -c conda-forge regionmask=0.10.0 cartopy"
+
+```{python}
+#| ExecuteTime: {end_time: '2024-03-15T05:05:41.334822Z', start_time: '2024-03-15T05:05:39.765760Z'}
+import matplotlib.pyplot as plt
+import xarray as xr
+import geopandas
+import regionmask
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
+import warnings
+import os
+warnings.filterwarnings('ignore')
+```
+
+## Load the Longhurst Provinces shape files into a geopandas dataframe
+
+```{python}
+#| ExecuteTime: {end_time: '2024-03-15T05:06:24.591369Z', start_time: '2024-03-15T05:06:24.359466Z'}
+#shape_path = '../resources/longhurst_v4_2010/Longhurst_world_v4_2010.shp'
+shape_path = os.path.join('..',
+                          'resources',
+                          'longhurst_v4_2010',
+                          'Longhurst_world_v4_2010.shp'
+                          )
+shapefiles = geopandas.read_file(shape_path)
+shapefiles.head(8)
+```
+
+## Isolate the Gulf Stream Province
+The Gulf Stream Province can be isolated using its ProvCode (GFST)
+
+```{python}
+ProvCode = "GFST"
+
+# Locate the row with the ProvCode code
+gulf_stream = shapefiles.loc[shapefiles["ProvCode"] == ProvCode]
+gulf_stream
+```
+
+## Find the coordinates of the bounding box
+* The bounding box is the smallest rectangle that will completely enclose the province. 
+* We will use the bounding box coordinates to subset the satellite data 
+
+```{python}
+gs_bnds = gulf_stream.bounds
+gs_bnds
+```
+
+## Open the satellite dataset into a xarray dataset object
+
+```{python}
+erddap_url = '/'.join(['https://coastwatch.pfeg.noaa.gov',
+                       'erddap',
+                       'griddap',
+                       'NOAA_DHW_monthly'
+                       ])
+
+ds = xr.open_dataset(erddap_url)
+ds
+```
+
+## Subset the satellite data
+* Use the bounding box coordinates for the latitude and longitude slices
+* Select the entire year of 2020
+
+```{python}
+# This dataset has latitude in descending order. 
+# Therefore use maxy first and miny last to slice latitude
+ds_subset = ds['sea_surface_temperature'].sel(time=slice("2020-01-16", "2020-12-16"),
+                                              latitude=slice(gs_bnds.maxy.item(), 
+                                                             gs_bnds.miny.item()),
+                                              longitude=slice(gs_bnds.minx.item(), 
+                                                              gs_bnds.maxx.item())
+                                            )
+ds_subset
+```
+
+## Visualize the unmasked data on a map
+The map shows the full extent of the bounding box
+
+```{python}
+plt.figure(figsize=(14, 10))
+
+# Label axes of a Plate Carree projection with a central longitude of 180:
+ax1 = plt.subplot(211, projection=ccrs.PlateCarree(central_longitude=180))
+
+# Use the lon and lat ranges to set the extent of the map
+# the 120, 260 lon range will show the whole Pacific
+# the 15, 55 lat range with capture the range of the data
+ax1.set_extent([260, 350, 15, 55], ccrs.PlateCarree())
+
+# set the tick marks to be slightly inside the map extents
+
+# add feature to the map
+ax1.add_feature(cfeature.LAND, facecolor='0.6')
+ax1.coastlines()
+
+# format the lat and lon axis labels
+lon_formatter = LongitudeFormatter(zero_direction_label=True)
+lat_formatter = LatitudeFormatter()
+ax1.xaxis.set_major_formatter(lon_formatter)
+ax1.yaxis.set_major_formatter(lat_formatter)
+
+ds_subset[0].plot.pcolormesh(ax=ax1, transform=ccrs.PlateCarree(), cmap='jet')
+
+plt.title('Satellite Data Before Masking')
+```
+
+## Create the region from the shape file
+The plot shows the shape of the region and its placement along the US East Coast. 
+
+```{python}
+region = regionmask.from_geopandas(gulf_stream)
+region.plot()
+
+```
+
+## Mask the satellite data
+
+```{python}
+# Create the mask
+mask = region.mask(ds_subset.longitude, ds_subset.latitude)
+
+# Apply mask the the satellite data
+masked_ds = ds_subset.where(mask == region.numbers[0])
+```
+
+## Visualize the masked data on a map
+These data have been trimmed to contain only values within the Gulf Stream Province
+
+```{python}
+plt.figure(figsize=(14, 10))
+
+# Label axes of a Plate Carree projection with a central longitude of 180:
+ax1 = plt.subplot(211, projection=ccrs.PlateCarree(central_longitude=180))
+
+# Use the lon and lat ranges to set the extent of the map
+# the 120, 260 lon range will show the whole Pacific
+# the 15, 55 lat range with capture the range of the data
+ax1.set_extent([260, 350, 15, 55], ccrs.PlateCarree())
+
+# set the tick marks to be slightly inside the map extents
+
+# add feature to the map
+ax1.add_feature(cfeature.LAND, facecolor='0.6')
+ax1.coastlines()
+
+# format the lat and lon axis labels
+lon_formatter = LongitudeFormatter(zero_direction_label=True)
+lat_formatter = LatitudeFormatter()
+ax1.xaxis.set_major_formatter(lon_formatter)
+ax1.yaxis.set_major_formatter(lat_formatter)
+
+masked_ds[0].plot.pcolormesh(ax=ax1,
+                             transform=ccrs.PlateCarree(),
+                             cmap='jet')
+
+plt.title('Satellite Data After Masking for Longhurst GFST')
+
+```
+
+## Plot the mean seasonal temperature for the province
+
+```{python}
+gulf_stream_mean = masked_ds.mean(dim=['latitude', 'longitude'])
+```
+
+```{python}
+gulf_stream_mean
+
+plt.figure(figsize=(10, 5)) 
+# Plot the SeaWiFS data
+plt.plot_date(gulf_stream_mean.time,
+              gulf_stream_mean, 
+              'o', markersize=8, 
+              label='gulf stream', c='black', 
+              linestyle='-', linewidth=2) 
+
+plt.title('Gulf Stream Province Monthly Mean Temperature 2020')
+plt.ylabel('SST(degrees C)') 
+plt.legend()
+```
+
+## References
+The several CoastWatch Node websites have data catalog containing documentation and links to all the datasets available:  
+    * https://oceanwatch.pifsc.noaa.gov/doc.html  
+    * https://coastwatch.pfeg.noaa.gov/data.html  
+    * https://polarwatch.noaa.gov/catalog/  
+
+Sources for marine shape files
+* https://www.marineregions.org/downloads.php
+

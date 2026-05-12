@@ -1,0 +1,290 @@
+---
+title: '**Tracking Penguin in Antarctica**'
+jupyter: python3
+---
+
+
+
+> Modified October 2024
+
+### Overview
+
+In this exercise, you will learn how to extract satellite data in polar stereographic projection (defined by xgrid and ygrid) around a set of points specified by longitude, latitude, and time coordinates. These coordinates could represent data from animal telemetry tags, ship tracks, or glider tracks.
+
+
+#### The exercise demonstrates the following techniques:
+
+* Loading animal telemetry tags data from tab- or comma-separated files
+* Extracting satellite data along a track
+* Plotting animal tracks and satellite data on a map
+
+### Datasets Used:
+**Sea Ice Concentration Satellite Data**  
+
+This dataset contains daily and monthly Climate Data Records (CDR) of sea ice concentration, processed by the NOAA/NSIDC team for the Arctic at a 25 km resolution, spanning from 1978 to the most recent annual data processing update. The sea ice concentration data are derived from microwave remote sensing. Due to processing and quality control, CDR data has a slight delay in availability, but [near real-time data is available for more recent dates.](https://polarwatch.noaa.gov/catalog/ice-sq-sh-nsidc-cdr-v4/preview).
+
+For this tutorial, the monthly sea ice concentration data is used. To preview and download CDR data, [visit NOAA PolarWatch CDR Data](https://polarwatch.noaa.gov/catalog/ice-sq-sh-nsidc-cdr-v4/preview/?).
+
+
+
+**Adelie Penguin Telemetry Track** 
+
+Telemetry data from Adelie penguins (_Pygoscelis adeliae_) were collected via Argos satellites in the Southern Ocean between October 29, 1996, and February 19, 2013, as part of the U.S. Antarctic Marine Living Resources project. Additionally, a turtle raised in captivity in Japan was tagged and released on May 4, 2005, in the Central Pacific.  
+
+The telemetry track dataset is included in the data/ folder of this module. For more information about the project and to download the full dataset, visit the [NOAA NCEI webpage](https://www.ncei.noaa.gov/access/metadata/landing-page/bin/iso?id=gov.noaa.nodc:0244399).
+ 
+
+## Import the required Python modules
+
+## Packages
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/}
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import xarray as xr
+import cartopy.crs as ccrs  
+import cartopy.feature as cfeature
+import warnings
+from cartopy.mpl.ticker import LongitudeFormatter, LatitudeFormatter
+warnings.filterwarnings("ignore")
+```
+
+### Loading the sea ice data from PolarWatch ERDDAP
+
+```{python}
+# Get sea ice data by sending data request using xarray to ERDDAP using its unique ID 'nsidcG02202v4shmday'
+ds = xr.open_dataset("https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4shmday")
+
+
+```
+
+```{python}
+ds
+```
+
+### Plotting Sea Ice Data on a Map
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 786}
+# Select sea ice concentration variable of first timestep
+sic = ds['cdr_seaice_conc_monthly'][0]
+
+# Based on the metadata, values above 1 represent variouag flags, therefore we will 
+# remove the values greater than 1.
+sic = sic.where(sic <=1, np.nan)
+
+# Set coordinate reference system (crs) based on the projection attribute from ds
+polar_crs = ccrs.SouthPolarStereo(central_longitude=0.0, true_scale_latitude=-70)
+
+# Set figure size
+plt.figure(figsize=(5,5))
+
+# Set the map projection and associated boundaries based on the metadata
+ax = plt.axes(projection = polar_crs)
+ax.set_extent([-3950000.0, 3950000.0, -3950000.0, 4350000.0], polar_crs)  
+ax.coastlines()
+ax.add_feature(cfeature.LAND)
+
+# Plot first time-step
+cs = ax.pcolormesh(ds['xgrid'], ds['ygrid'], sic,
+                   cmap=plt.cm.Blues,  transform= polar_crs) #transform default is basemap specs
+plt.colorbar(cs, ax=ax, location='right', shrink =0.8)
+ax.set_title('Ice Concentration of timestep 1')
+```
+
+### Loading penguin telemetry data in csv 
+
+```{python}
+#| colab: {base_uri: https://localhost:8080/, height: 206}
+# Load penguin data into pandas data frame
+penguin = pd.read_csv('../data/copa_adpe_ncei.csv')
+penguin.head()
+```
+
+### Processing Penguin Data
+
+For this exercise, we will select ADPE24, female penguin whose track records are highest within the female group, and will follow her 
+journey in the Arctic.
+
+```{python}
+# Find BirdID with the most count by sex
+penguin.groupby('Sex')['BirdId'].apply(lambda x: x.value_counts().idxmax())
+
+# Extract ADPE24 track data
+adpe24 = penguin[penguin['BirdId']=='ADPE24']
+
+# Format Date
+adpe24['DateGMT'] = pd.to_datetime(adpe24['DateGMT'], format='%d/%m/%Y')
+adpe24['Year_Month'] = adpe24['DateGMT'].dt.strftime('%Y-%m')
+
+# unique penguin dates
+adpe_dates = adpe24['Year_Month'].unique()
+
+print(f"Date Range: {adpe24['DateGMT'].min()}, {adpe24['DateGMT'].max()}")
+print(f"Unique Month: {adpe24['Year_Month'].unique()}")
+```
+
+### Visualize penguin tracks on sea ice concentration map
+
+```{python}
+adpe_dates
+```
+
+```{python}
+# Subset sea ice data based on ADPE24 unique dates
+ds_penguin = ds.sel(time=adpe_dates, method='nearest')
+# Process sea ice data
+sic_penguin = ds_penguin['cdr_seaice_conc_monthly']
+sic_penguin = sic_penguin.where(sic_penguin <=1, np.nan)
+
+
+# Penguin Data for Each Month
+adpe24_jan = adpe24[adpe24['DateGMT'].dt.month == 1]
+adpe24_feb = adpe24[adpe24['DateGMT'].dt.month == 2]
+adpe24_mar = adpe24[adpe24['DateGMT'].dt.month == 3]
+
+adpe24_data = [adpe24_jan, adpe24_feb, adpe24_mar]
+titles = ['January', 'February', 'March']
+
+# set mapping crs to Cartopy's South Polar Stereo graphic
+crs_epsg = ccrs.SouthPolarStereo(central_longitude=-45)
+
+# Assuming your setup is the same
+fig, axes = plt.subplots(nrows=1, ncols=3, figsize=(12, 8), subplot_kw={'projection': crs_epsg})
+
+for i, ax in enumerate(axes):
+    # set basemap with Cartopy PlateCarree() projection
+    ax.add_feature(cfeature.LAND)
+    ax.coastlines(resolution='50m')
+    ax.set_extent([-1500000.0, 500000.0, 2000000.0, 3500000.0], crs_epsg)
+    ax.gridlines(draw_labels=True, dms=True, x_inline=False, y_inline=True)
+
+    cs = ax.pcolormesh(ds_penguin['xgrid'], ds_penguin['ygrid'], sic_penguin[i],
+                       cmap=plt.cm.Blues, transform=ccrs.SouthPolarStereo(true_scale_latitude=-70, central_longitude=0))
+
+    # set the data crs
+    ax.scatter(
+        y=adpe24_data[i]["Latitude"],
+        x=adpe24_data[i]["Longitude"],
+        color="red",
+        s=3,
+        alpha=1,
+        transform=ccrs.PlateCarree()
+    )
+
+    ax.set_title(titles[i])
+
+ #Create a colorbar
+cbar_ax = fig.add_axes([1, 0.15, 0.02, 0.7])  # [left, bottom, width, height]  
+fig.colorbar(cs, cax=cbar_ax, orientation='vertical', label='Sea Ice Concentration')
+
+plt.tight_layout()
+plt.show()
+     
+```
+
+### Resampling Penguin data to match satellite Date
+
+```{python}
+
+adpe24 = adpe24[["DateGMT", "Latitude", "Longitude"]]
+adpe24['DateGMT'] = pd.to_datetime(adpe24['DateGMT'], format='%d/%m/%Y')
+adpe24_df = adpe24.resample('D', on='DateGMT').mean()
+```
+
+### Transforming CRS of the penguin locations
+
+```{python}
+
+latlon_crs = ccrs.PlateCarree() # lat and lon
+polar_crs = ccrs.epsg('3412') # South pole
+
+transformed_coords = polar_crs.transform_points(latlon_crs, adpe24_df['Longitude'].values, adpe24_df['Latitude'].values)
+
+adpe24_df['xgrid'] = transformed_coords[:, 0]
+adpe24_df['ygrid'] = transformed_coords[:, 1]
+
+adpe24_df.head()
+```
+
+### Extracting Satellite Data to match penguin track and date
+
+```{python}
+
+# Add new columns to the dataframe
+adpe24_df[["erddap_date", "matched_ygrid", "matched_xgrid", "matched_sea_ice_concen"]] = np.nan
+
+# Subset the satellite data
+for i in range(0, len(adpe24_df)):
+    # Download the satellite data
+    temp_ds = ds['cdr_seaice_conc_monthly'].sel(time='{0:%Y-%m-%d}'.format(adpe24_df.index[i]),
+                                ygrid=adpe24_df.iloc[i]['ygrid'],
+                                xgrid=adpe24_df.iloc[i]['xgrid'],
+                                method='nearest'
+                                )
+    
+    # Add to the dataframe
+    adpe24_df.loc[adpe24_df.index[i], ["erddap_date", "matched_ygrid",
+                                 "matched_xgrid", "matched_sea_ice_concen"]
+          ] = [temp_ds.time.values,
+               np.round(temp_ds.ygrid.values, 5),  # round 5 dec
+               np.round(temp_ds.xgrid.values, 5), # round 5 dec
+               np.round(temp_ds.values, 2)  # round 2 decimals
+               ]
+```
+
+
+### Plotting Penguin Tracks with Matched Sea Ice Concentration Data
+
+```{python}
+plt.figure(figsize=(14, 10))
+
+
+# set the projection
+ax1 = plt.subplot(211, projection=crs_epsg)
+
+# Use the lon and lat ranges to set the extent of the map
+ax1.set_extent([-90, -30, -75, -55], ccrs.PlateCarree()) # South Pole
+
+# Add grid line
+gl = ax1.gridlines(draw_labels=True, crs=ccrs.PlateCarree(), linestyle='--')
+gl.xlabels_top = False
+gl.ylabels_right = False
+gl.xformatter = LongitudeFormatter()
+gl.yformatter = LatitudeFormatter()
+
+# Add geographical features
+ax1.add_feature(cfeature.LAND, facecolor='0.6')
+ax1.coastlines()
+
+# build and plot coordinates onto map
+x,y = list(adpe24_df.Longitude), list(adpe24_df.Latitude)
+ax1 = plt.scatter(x, y, transform=ccrs.PlateCarree(),
+                  marker='o',
+                  c=adpe24_df.matched_sea_ice_concen,
+                  cmap=plt.get_cmap('Blues'),
+                  edgecolor='Black',
+                  linewidth=0.25
+                  )
+ax1=plt.plot(x[0],y[0],marker='*', label='start', color='red', transform=ccrs.PlateCarree(), markersize=10)
+ax1=plt.plot(x[-1],y[-1],marker='X', label='end',color='orange', transform=ccrs.PlateCarree(), markersize=10)
+
+
+
+# control color bar values spacing
+levs2 = np.arange(0, 1, 0.1)
+
+cbar=plt.colorbar()
+cbar.set_label("Sea Ice Concentration", size=12, labelpad=20)
+
+# set the labels to be exp(levs2) so the label reflect values of chl-a, not log(chl-a)
+cbar.ax.set_yticklabels(np.round(levs2, 1), size=10)
+
+plt.legend()
+plt.title("Sea Ice Concen Matchup to Penguin Track", size=15)
+plt.show()
+     
+```
+
