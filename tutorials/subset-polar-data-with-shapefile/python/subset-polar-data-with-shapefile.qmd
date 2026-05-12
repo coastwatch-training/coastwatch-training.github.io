@@ -220,9 +220,6 @@ ds_clipped["IMS_Surface_Values"].plot()
 
 ### Resources
 
-* [CoastWatch Learning Portal](https://umd.instructure.com/courses/1336575) - Lectures, Videos, Other learning resources
-* [CoastWatch Tutorials on Github](https://github.com/coastwatch-training/CoastWatch-Tutorials) - Tutorial notebooks and code samples
-
 * [PolarWatch ERDDAP](https://polarwatch.noaa.gov/erddap/) - Complete list of data available on PolarWatch ERDDAP Server
 * [PolarWatch Catalog](https://polarwatch.noaa.gov/catalog/list.php) - Preview data on polar map 
 
