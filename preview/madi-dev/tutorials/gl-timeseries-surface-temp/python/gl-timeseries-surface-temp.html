@@ -395,22 +395,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="import-the-required-python-modules" class="level4">
 <h4 class="anchored" data-anchor-id="import-the-required-python-modules">Import the required Python modules</h4>
-<div id="8664aa79" class="cell" data-execution_count="1">
+<div id="ab69ed1d" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#from PIL import Image</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> math <span class="im">as</span> m</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> datetime <span class="im">import</span> datetime</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="define-some-function-that-we-need" class="level4">
 <h4 class="anchored" data-anchor-id="define-some-function-that-we-need">Define some function that we need :</h4>
 <p>function get_366_arry(): Checks to make sure the input array size is 366</p>
-<div id="bfe597c2" class="cell" data-execution_count="2">
+<div id="559e9f94" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_366_arry(t_arry):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (t_arry.size <span class="op">&lt;</span> <span class="dv">366</span>):</span>
@@ -419,7 +417,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> t_arry</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>function get_days_arr() takes a year (integer) and reture a list of datetime stamp.</p>
-<div id="825964be" class="cell" data-execution_count="3">
+<div id="61b37101" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> get_days_arr(c_yr):</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> <span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">367</span>)  <span class="co"># range from 1 to 366</span></span>
@@ -438,7 +436,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> d_arr    </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>function draw_plot() takes data array, lake, year Jilian day and years list as input to draw the plat</p>
-<div id="c23a386c" class="cell" data-execution_count="4">
+<div id="3cea6bd8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> draw_plot(t_all_arry, lake, c_yr, jd,  year_list):</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    begin_day_str <span class="op">=</span> <span class="bu">str</span>(c_yr) <span class="op">+</span> <span class="st">'-01-01'</span>  <span class="co"># '2021-01-01'</span></span>
@@ -529,7 +527,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="define-current-year-and-past-years-range" class="level4">
 <h4 class="anchored" data-anchor-id="define-current-year-and-past-years-range">Define current year and past years range</h4>
 <p>Get the current year as an integer number and define a longterm time ranage. In this example, the current year is 2024 and longterm range is 2007 - 2023.</p>
-<div id="f46bd28d" class="cell" data-execution_count="5">
+<div id="bca9e9be" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>c_year <span class="op">=</span> <span class="bu">int</span>(datetime.now().strftime(<span class="st">"%Y"</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c_year)</span>
@@ -544,10 +542,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>today <span class="op">=</span> datetime.now()</span>
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>jd <span class="op">=</span> (today <span class="op">-</span> datetime(today.year, <span class="dv">1</span>, <span class="dv">1</span>)).days </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>2024
-[2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023]</code></pre>
-</div>
 </div>
 </section>
 <section id="get-current-years-temperature-data-from-erddap" class="level4">
@@ -570,85 +564,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </table>
 <p>2023 127 2.24 4.64 4.14 8.87 7.02 9.59 2023 128 2.26 4.81 4.23 9.51 7.33 10.13 …… 2024 125 3.42 6.75 5.10 10.01 6.69 10.38 2024 126 3.47 6.94 5.27 9.99 6.62 10.16</p>
 <p>Get data from ERDDAP server:</p>
-<div id="d1d8126e" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>c_fn <span class="op">=</span> <span class="st">'https://apps.glerl.noaa.gov/erddap/files/glsea_avgtemps_3/glsea-temps_1024_3.dat'</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>c_df <span class="op">=</span> pd.read_csv(c_fn, skiprows<span class="op">=</span><span class="dv">9</span>,delimiter<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>, header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>[<span class="st">'YEAR'</span>, <span class="st">'JD'</span>, <span class="st">'S'</span>, <span class="st">'M'</span>, <span class="st">'H'</span>, <span class="st">'E'</span>, <span class="st">'O'</span>,<span class="st">'St'</span>], dtype<span class="op">=</span>np.float64)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c_df.head())</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c_df.info())</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>c_yr_list <span class="op">=</span> c_df[<span class="st">'YEAR'</span>]</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>begin_c_yr_index <span class="op">=</span> <span class="bu">list</span>(c_yr_list).index(<span class="bu">float</span>(c_year))  <span class="co"># find the index of the current year (2024)</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'index of begin current year : '</span>, begin_c_yr_index)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>     YEAR     JD     S     M     H      E     O     St
-0  2023.0  127.0  2.24  4.64  4.14   8.87  7.02   9.59
-1  2023.0  128.0  2.26  4.81  4.23   9.51  7.33  10.13
-2  2023.0  129.0  2.30  4.98  4.37   9.97  7.58  10.81
-3  2023.0  130.0  2.27  5.17  4.50  10.29  7.68  10.95
-4  2023.0  131.0  2.38  5.39  4.64  10.71  7.80  11.01
-&lt;class 'pandas.core.frame.DataFrame'&gt;
-RangeIndex: 365 entries, 0 to 364
-Data columns (total 8 columns):
- #   Column  Non-Null Count  Dtype  
----  ------  --------------  -----  
- 0   YEAR    365 non-null    float64
- 1   JD      365 non-null    float64
- 2   S       365 non-null    float64
- 3   M       365 non-null    float64
- 4   H       365 non-null    float64
- 5   E       365 non-null    float64
- 6   O       365 non-null    float64
- 7   St      365 non-null    float64
-dtypes: float64(8)
-memory usage: 22.9 KB
-None
-index of begin current year :  239</code></pre>
-</div>
+<div id="f8c51061" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>c_fn <span class="op">=</span> <span class="st">'https://apps.glerl.noaa.gov/erddap/files/glsea_avgtemps_3/glsea-temps_1024_3.dat'</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>c_df <span class="op">=</span> pd.read_csv(c_fn, skiprows<span class="op">=</span><span class="dv">9</span>,delimiter<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>, header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>[<span class="st">'YEAR'</span>, <span class="st">'JD'</span>, <span class="st">'S'</span>, <span class="st">'M'</span>, <span class="st">'H'</span>, <span class="st">'E'</span>, <span class="st">'O'</span>,<span class="st">'St'</span>], dtype<span class="op">=</span>np.float64)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c_df.head())</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(c_df.info())</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>c_yr_list <span class="op">=</span> c_df[<span class="st">'YEAR'</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>begin_c_yr_index <span class="op">=</span> <span class="bu">list</span>(c_yr_list).index(<span class="bu">float</span>(c_year))  <span class="co"># find the index of the current year (2024)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'index of begin current year : '</span>, begin_c_yr_index)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Get a sub datafreme of Lake Michigan for current year:</p>
-<div id="17bf3778" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>c_df_sub <span class="op">=</span> c_df[begin_c_yr_index:]  <span class="co"># get a sub dataframe that only contains data for 2024</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>cur_m_arry <span class="op">=</span> c_df_sub[<span class="st">'M'</span>].values   <span class="co"># get a sub dataframe that only contains data for Lake Michigan</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(begin_c_yr_index<span class="op">+</span><span class="dv">1</span>):</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    cur_m_arry <span class="op">=</span> np.append(cur_m_arry, np.NAN)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cur_m_arry)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[5.63 5.51 5.47 5.43 5.4  5.35 5.32 5.27 5.16 4.71 4.37 4.26 4.1  3.97
- 3.82 3.69 3.62 3.55 3.29 3.24 3.26 3.25 3.37 3.39 3.4  3.47 3.49 3.56
- 3.56 3.61 3.62 3.63 3.65 3.62 3.62 3.6  3.54 3.49 3.48 3.49 3.51 3.47
- 3.47 3.44 3.38 3.33 3.28 3.23 3.24 3.22 3.34 3.38 3.32 3.31 3.18 3.17
- 3.22 3.31 3.31 3.29 3.41 3.5  3.51 3.54 3.63 3.69 3.66 3.7  3.64 3.64
- 3.65 3.67 3.73 3.77 3.8  3.79 3.74 3.64 3.53 3.47 3.42 3.42 3.46 3.42
- 3.53 3.57 3.54 3.51 3.5  3.55 3.6  3.65 3.74 3.9  3.99 4.04 4.1  4.16
- 4.23 4.31 4.38 4.51 4.68 4.82 4.99 5.09 5.1  5.07 5.05 5.1  5.08 5.1
- 5.14 5.25 5.37 5.49 5.56 5.64 5.67 5.76 5.89 6.   6.14 6.48 6.75 6.94
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan  nan
-  nan  nan]</code></pre>
-</div>
+<div id="0e53914b" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>c_df_sub <span class="op">=</span> c_df[begin_c_yr_index:]  <span class="co"># get a sub dataframe that only contains data for 2024</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>cur_m_arry <span class="op">=</span> c_df_sub[<span class="st">'M'</span>].values   <span class="co"># get a sub dataframe that only contains data for Lake Michigan</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(begin_c_yr_index<span class="op">+</span><span class="dv">1</span>):</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    cur_m_arry <span class="op">=</span> np.append(cur_m_arry, np.NAN)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(cur_m_arry)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="get-data-from-2007-to-2023" class="level4">
@@ -657,66 +595,30 @@ index of begin current year :  239</code></pre>
 <p>eg. glsea-temps2023_1024.dat.</p>
 <p>The file format is samilar as the current year’s data file.</p>
 <p>first, define an array of (18,366) to hold all data</p>
-<div id="6b59f8cb" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>m_all_arry <span class="op">=</span> np.zeros( (<span class="bu">len</span>(year_list)<span class="op">+</span><span class="dv">1</span>,<span class="dv">366</span>), dtype<span class="op">=</span><span class="bu">float</span>)   </span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m_all_arry.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>(18, 366)</code></pre>
-</div>
+<div id="4dc81bdc" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m_all_arry <span class="op">=</span> np.zeros( (<span class="bu">len</span>(year_list)<span class="op">+</span><span class="dv">1</span>,<span class="dv">366</span>), dtype<span class="op">=</span><span class="bu">float</span>)   </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(m_all_arry.shape)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Second, get the data from the 2007 to 2023 and put all the data in variable m_all_arry</p>
-<div id="bbea4b6c" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, yr4 <span class="kw">in</span> <span class="bu">enumerate</span>(year_list):</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    fn <span class="op">=</span> <span class="st">'https://apps.glerl.noaa.gov/erddap/files/glsea_avgtemps_3/'</span> <span class="op">+</span> <span class="bu">str</span>(yr4) <span class="op">+</span> <span class="st">'/glsea-temps'</span> <span class="op">+</span> <span class="bu">str</span>(yr4) <span class="op">+</span> <span class="st">'_1024_3.dat'</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(fn)</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.read_csv(fn, skiprows<span class="op">=</span><span class="dv">9</span>,delimiter<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>, header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>[<span class="st">'YEAR'</span>, <span class="st">'JD'</span>, <span class="st">'S'</span>, <span class="st">'M'</span>, <span class="st">'H'</span>, <span class="st">'E'</span>, <span class="st">'O'</span>,<span class="st">'St'</span>], dtype<span class="op">=</span>np.float64)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    m_arry <span class="op">=</span> df[<span class="st">'M'</span>].values            <span class="co"># get data for Lake Michigan</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(s_arry.size)</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(yr4)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    m_all_arry[i] <span class="op">=</span> get_366_arry(m_arry)   </span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#print(s_all_arry)</span></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>m_all_arry[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> cur_m_arry   <span class="co"># last row is current year sst               </span></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>2007
-2008
-2009
-2010
-2011
-2012
-2013
-2014
-2015
-2016
-2017
-2018
-2019
-2020
-2021
-2022
-2023</code></pre>
-</div>
+<div id="8ea80814" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, yr4 <span class="kw">in</span> <span class="bu">enumerate</span>(year_list):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    fn <span class="op">=</span> <span class="st">'https://apps.glerl.noaa.gov/erddap/files/glsea_avgtemps_3/'</span> <span class="op">+</span> <span class="bu">str</span>(yr4) <span class="op">+</span> <span class="st">'/glsea-temps'</span> <span class="op">+</span> <span class="bu">str</span>(yr4) <span class="op">+</span> <span class="st">'_1024_3.dat'</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(fn)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> pd.read_csv(fn, skiprows<span class="op">=</span><span class="dv">9</span>,delimiter<span class="op">=</span><span class="vs">r'</span><span class="dv">\s</span><span class="op">+</span><span class="vs">'</span>, header<span class="op">=</span><span class="va">None</span>, names<span class="op">=</span>[<span class="st">'YEAR'</span>, <span class="st">'JD'</span>, <span class="st">'S'</span>, <span class="st">'M'</span>, <span class="st">'H'</span>, <span class="st">'E'</span>, <span class="st">'O'</span>,<span class="st">'St'</span>], dtype<span class="op">=</span>np.float64)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    m_arry <span class="op">=</span> df[<span class="st">'M'</span>].values            <span class="co"># get data for Lake Michigan</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">#print(s_arry.size)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(yr4)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    m_all_arry[i] <span class="op">=</span> get_366_arry(m_arry)   </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#print(s_all_arry)</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>m_all_arry[<span class="op">-</span><span class="dv">1</span>] <span class="op">=</span> cur_m_arry   <span class="co"># last row is current year sst               </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Third, call the function (defined before) to draw the plot.</p>
-<div id="51f961c2" class="cell" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>draw_plot(m_all_arry, <span class="st">'Michigan'</span>,  c_year, jd, year_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[datetime.date(2024, 1, 31), datetime.date(2024, 2, 29), datetime.date(2024, 3, 31), datetime.date(2024, 4, 30), datetime.date(2024, 5, 31), datetime.date(2024, 6, 30), datetime.date(2024, 7, 31), datetime.date(2024, 8, 31), datetime.date(2024, 9, 30), datetime.date(2024, 10, 31), datetime.date(2024, 11, 30), datetime.date(2024, 12, 31)]
-7
-2024 May 05</code></pre>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="gl-timeseries-surface-temp_files/figure-html/cell-11-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="4ddf7085" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>draw_plot(m_all_arry, <span class="st">'Michigan'</span>,  c_year, jd, year_list)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 

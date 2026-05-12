@@ -405,16 +405,15 @@ This dataset includes sea ice concentration data from the northern hemisphere, a
 </section>
 <section id="import-packages" class="level2">
 <h2 class="anchored" data-anchor-id="import-packages">Import packages</h2>
-<div id="215f8dc3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:35.828080Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:35.517077Z&quot;}}" data-execution_count="1">
+<div id="14f51eb4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:35.828080Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:35.517077Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4 <span class="im">as</span> nc</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="933be2cb" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:39.789479Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:39.040559Z&quot;}}" data-execution_count="2">
+<div id="7e125c18" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:39.789479Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:39.040559Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There are many ways to get data.  We will create a function that points to </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># NOAA PolarWatch ERDDAP Server gridded dataset page to get data with its unique ID</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -432,159 +431,64 @@ This dataset includes sea ice concentration data from the northern hemisphere, a
 <section id="mapping-projected-data-on-a-projected-basemap" class="level2">
 <h2 class="anchored" data-anchor-id="mapping-projected-data-on-a-projected-basemap">Mapping projected data on a projected basemap</h2>
 <p>We first need to create a basemap with the Polar Stereographic projection. Most of the netCDF data files include metadata about mapping. This can be used to set a projection and mapping boundaries for the data.</p>
-<div id="c9e59b08" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:42.377249Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:42.366469Z&quot;}}" data-execution_count="3">
+<div id="fab961f9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:42.377249Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:42.366469Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints metadata embedded in netCDF file</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(da)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;class 'netCDF4._netCDF4.Dataset'&gt;
-root group (NETCDF3_CLASSIC data model, file format DAP2):
-    _NCProperties: version=2,netcdf=4.8.1,hdf5=1.10.6
-    acknowledgement: This project was supported in part by a grant from the NOAA Climate Data Record Program. Production of original NASA Team and Bootstrap algorithm estimates supported by the NASA Polar Distributed Active Archive Center. The sea ice concentration algorithms were developed by Donald J. Cavalieri, Josefino C. Comiso, Claire L. Parkinson, and others at the NASA Goddard Space Flight Center in Greenbelt, MD.
-    cdm_data_type: Grid
-    cdr_variable: cdr_seaice_conc_monthly
-    comment: The variable melt_onset_day_cdr_seaice_conc_monthly is not available for this month.
-    contributor_name: Walter N. Meier, Florence Fetterer, Ann Windnagel, J. Scott Stewart, Trey Stafford, Matt Fisher
-    contributor_role: principal investigator, author, author, software developer, software developer, software developer
-    Conventions: CF-1.6, ACDD-1.3, COARDS
-    creator_email: nsidc@nsidc.org
-    creator_name: NSIDC
-    creator_type: institution
-    creator_url: https://nsidc.org/
-    date_created: 2023-02-22T23:18:04Z
-    defaultGraphQuery: cdr_seaice_conc_monthly[last]%5B(-5337500.0)%5D%5B(3737500.0)%5D&amp;.draw=surface
-    grid_mapping_false_easting: 0.0
-    grid_mapping_false_northing: 0.0
-    grid_mapping_GeoTransform: -3850000.0 25000.0 0 5850000.0 0 -25000.0
-    grid_mapping_grid_boundary_bottom_projected_y: -5350000.0
-    grid_mapping_grid_boundary_left_projected_x: -3850000.0
-    grid_mapping_grid_boundary_right_projected_x: 3750000.0
-    grid_mapping_grid_boundary_top_projected_y: 5850000.0
-    grid_mapping_latitude_of_projection_origin: 90.0
-    grid_mapping_longitude_of_projection_origin: -45.0
-    grid_mapping_name: polar_stereographic
-    grid_mapping_parent_grid_cell_column_subset_end: 304.0
-    grid_mapping_parent_grid_cell_column_subset_start: 0.0
-    grid_mapping_parent_grid_cell_row_subset_end: 448.0
-    grid_mapping_parent_grid_cell_row_subset_start: 0.0
-    grid_mapping_proj4text: +proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45 +k=1 +x_0=0 +y_0=0 +a=6378273 +b=6356889.449 +units=m +no_defs
-    grid_mapping_scaling_factor: 1.0
-    grid_mapping_semimajor_radius: 6378273.0
-    grid_mapping_semiminor_radius: 6356889.449
-    grid_mapping_spatial_ref: PROJCS["NSIDC Sea Ice Polar Stereographic North",GEOGCS["Unspecified datum based upon the Hughes 1980 ellipsoid",DATUM["Not_specified_based_on_Hughes_1980_ellipsoid",SPHEROID["Hughes 1980",6378273,298.279411123061,AUTHORITY["EPSG","7058"]],AUTHORITY["EPSG","6054"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.01745329251994328,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4054"]],UNIT["metre",1,AUTHORITY["EPSG","9001"]],PROJECTION["Polar_Stereographic"],PARAMETER["latitude_of_origin",70],PARAMETER["central_meridian",-45],PARAMETER["scale_factor",1],PARAMETER["false_easting",0],PARAMETER["false_northing",0],AUTHORITY["EPSG","3411"],AXIS["X",UNKNOWN],AXIS["Y",UNKNOWN]]
-    grid_mapping_srid: urn:ogc:def:crs:EPSG::3411
-    grid_mapping_standard_parallel: 70.0
-    grid_mapping_straight_vertical_longitude_from_pole: 135.0
-    grid_mapping_units: meters
-    history: HISTORY_ATTRIBUTE
-2023-08-04T18:45:39Z (local files)
-2023-08-04T18:45:39Z https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4nhmday.das
-    id: https://doi.org/10.7265/sr8p-kc62
-    infoUrl: https://nsidc.org/data/g02202/versions/4/
-    institution: NSIDC &gt; National Snow and Ice Data Center
-    keywords: algorithm, america, arctic, area, atlantic, barents, bay, beaufort, bering, bootstrap, canada, cdr_seaice_conc_monthly, center, chukchi, climate, common, concentration, continent, CONTINENT &gt; NORTH AMERICA &gt; CANADA &gt; HUDSON BAY, Continent &gt; North America &gt; Canada &gt; Hudson Bay, cryosphere, data, davis, day, defense, deviation, distribution, dmsp, earth, Earth Science &gt; Cryosphere &gt; Sea Ice &gt; Ice Extent, Earth Science &gt; Cryosphere &gt; Sea Ice &gt; Sea Ice Concentration, Earth Science &gt; Oceans &gt; Sea Ice &gt; Ice Extent, estimated, extent, flag, flags, flight, format, fraction, geographic, Geographic Region &gt; Arctic, Geographic Region &gt; Northern Hemisphere, Geographic Region &gt; Polar, goddard, gsfc, gulf, hemisphere, hudson, ice, ice distribution, lawrence, mayen, melt, melt_onset_day_cdr_seaice_conc_monthly, meteorological, microwave, month, monthly, nasa, national, network, noaa, noaa/nsidc, north, northern, norwegian, nsidc, nsidc_bt_seaice_conc_monthly, nsidc_nt_seaice_conc_monthly, ocean, Ocean &gt; Arctic Ocean, Ocean &gt; Arctic Ocean &gt; Barents Sea, Ocean &gt; Arctic Ocean &gt; Beaufort Sea, Ocean &gt; Arctic Ocean &gt; Chukchi Sea, Ocean &gt; Atlantic Ocean &gt; North Atlantic Ocean &gt; Davis Straight, OCEAN &gt; ATLANTIC OCEAN &gt; NORTH ATLANTIC OCEAN &gt; GULF OF ST LAWRENCE, Ocean &gt; Atlantic Ocean &gt; North Atlantic Ocean &gt; North Sea, Ocean &gt; Atlantic Ocean &gt; North Atlantic Ocean &gt; Norwegian Sea, OCEAN &gt; ATLANTIC OCEAN &gt; NORTH ATLANTIC OCEAN &gt; SVALBARD AND JAN MAYEN, Ocean &gt; Pacific Ocean, Ocean &gt; Pacific Ocean &gt; North Pacific Ocean &gt; Bering Sea, Ocean &gt; Pacific Ocean &gt; North Pacific Ocean &gt; Sea Of Okhotsk, oceans, okhotsk, onset, over, pacific, passive, polar, processed, program, qa_of_cdr_seaice_conc_monthly, quality, record, region, satellite, science, sea, sea_ice_area_fraction, sea_ice_area_fraction status_flag, snow, source, space, standard, statistics, status, stdev_of_cdr_seaice_conc_monthly, straight, svalbard, tdim, team, version
-    keywords_vocabulary: GCMD Science Keywords
-    license: No constraints on data access or use
-    metadata_link: https://nsidc.org/data/g02202/versions/4/
-    naming_authority: org.doi.dx
-    platform: DMSP 5D-3/F17 &gt; Defense Meteorological Satellite Program-F17
-    processing_level: NOAA Level 3
-    product_version: v04r00
-    program: NOAA Climate Data Record Program
-    proj_crs_code: EPSG:3411
-    proj_crs_code_description: The proj_crs_code attribute references a registered projection identifier (i.e. EPSG) when available. If the projection is not registered, non-standard then this attribute references a PolarWatch assigned internal identifier.
-    project: NOAA/NSIDC passive microwave sea ice concentration climate data record
-    references: Comiso, J. C., and F. Nishio. 2008. Trends in the Sea Ice Cover Using Enhanced and Compatible AMSR-E, SSM/I, and SMMR Data. Journal of Geophysical Research 113, C02S07, doi:10.1029/2007JC0043257. ; Comiso, J. C., D. Cavalieri, C. Parkinson, and P. Gloersen. 1997. Passive Microwave Algorithms for Sea Ice Concentrations: A Comparison of Two Techniques. Remote Sensing of the Environment 60(3):357-84. ; Comiso, J. C. 1984. Characteristics of Winter Sea Ice from Satellite Multispectral Microwave Observations. Journal of Geophysical Research 91(C1):975-94. ; Cavalieri, D. J., P. Gloersen, and W. J. Campbell. 1984. Determination of Sea Ice Parameters with the NIMBUS-7 SMMR. Journal of Geophysical Research 89(D4):5355-5369. ; Cavalieri, D. J., C. l. Parkinson, P. Gloersen, J. C. Comiso, and H. J. Zwally. 1999. Deriving Long-term Time Series of Sea Ice Cover from Satellite Passive-Microwave Multisensor Data Sets. Journal of Geophysical Research 104(7): 15,803-15,814. ; Comiso, J.C., R.A. Gersten, L.V. Stock, J. Turner, G.J. Perez, and K. Cho. 2017. Positive Trend in the Antarctic Sea Ice Cover and Associated Changes in Surface Temperature. J. Climate, 30, 2251?2267, https://doi.org/10.1175/JCLI-D-16-0408.1
-    sensor: SSMI/S &gt; Special Sensor Microwave Imager/Sounder
-    software_version_id: git@bitbucket.org:nsidc/seaice_cdr.git@c9c632e73530554d8acfac9090baeb1e35755897
-    source: ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220901_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220902_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220903_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220904_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220905_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220906_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220907_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220908_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220909_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220910_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220911_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220912_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220913_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220914_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220915_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220916_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220917_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220918_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220919_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220920_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220921_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220922_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220923_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220924_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220925_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220926_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220927_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220928_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220929_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/north/daily/2022/seaice_conc_daily_nh_20220930_f17_v04r00.nc
-    sourceUrl: (local files)
-    spatial_resolution: 25km
-    standard_name_vocabulary: CF Standard Name Table v70
-    summary: This data set provides a passive microwave sea ice concentration climate data record (CDR) based on gridded brightness temperatures (TBs) from the Defense Meteorological Satellite Program (DMSP) series of passive microwave radiometers: the Nimbus-7 Scanning Multichannel Microwave Radiometer (SMMR), the Special Sensor Microwave Imager (SSM/I) and the Special Sensor Microwave Imager/Sounder (SSMIS). The sea ice concentration CDR is an estimate of sea ice concentration that is produced by combining concentration estimates from two algorithms developed at the NASA Goddard Space Flight Center (GSFC): the NASA Team algorithm and the Bootstrap algorithm. The individual algorithms are used to process and combine brightness temperature data at National Snow and Ice Data Center (NSIDC).  This product is designed to provide a consistent time series of sea ice concentrations (the fraction, or percentage, of ocean area covered by sea ice) from November 1978 to the present which spans the coverage of several passive microwave instruments. The data are gridded on the NSIDC polar stereographic grid with 25 x 25 km grid cells, and are available in Network Common Data Format (NetCDF) file format. Each file contains a variable with the CDR concentration values as well as variables that hold the NASA Team and Bootstrap concentrations for reference. Variables containing standard deviation, quality flags, and projection information are also included. Data are available from NSIDC via FTP see https://nsidc.org/data/G02202/versions/4/. Data are also distributed via the PolarWatch ERDDAP at https://polarwatch.noaa.gov/erddap. Note that the data format available through PolarWatch is different from the NSIDC FTP NetCDF files. The PolarWatch data server stores projection information as global attributes (with the prefix grid_mapping) instead of as a variable; and the timestamp is served in different units (seconds since 1970).
-    time_coverage_duration: P1M
-    time_coverage_end: 2022-12-01T00:00:00Z
-    time_coverage_resolution: P1M
-    time_coverage_start: 1978-11-01T00:00:00Z
-    title: Sea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere, 25km, Science Quality, 1978-Present, Monthly
-    dimensions(sizes): time(530), xgrid(304), ygrid(448)
-    variables(dimensions): float64 time(time), float32 ygrid(ygrid), float32 xgrid(xgrid), float32 cdr_seaice_conc_monthly(time, ygrid, xgrid), int8 melt_onset_day_cdr_seaice_conc_monthly(time, ygrid, xgrid), float32 nsidc_bt_seaice_conc_monthly(time, ygrid, xgrid), float32 nsidc_nt_seaice_conc_monthly(time, ygrid, xgrid), int8 qa_of_cdr_seaice_conc_monthly(time, ygrid, xgrid), float32 stdev_of_cdr_seaice_conc_monthly(time, ygrid, xgrid)
-    groups: </code></pre>
 </div>
+<div id="c219dd13" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:45.132108Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:45.116947Z&quot;}}" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints variable names</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>da.variables.keys()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f3f9838d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:45.132108Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:45.116947Z&quot;}}" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints variable names</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>da.variables.keys()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>dict_keys(['time', 'ygrid', 'xgrid', 'cdr_seaice_conc_monthly', 'melt_onset_day_cdr_seaice_conc_monthly', 'nsidc_bt_seaice_conc_monthly', 'nsidc_nt_seaice_conc_monthly', 'qa_of_cdr_seaice_conc_monthly', 'stdev_of_cdr_seaice_conc_monthly'])</code></pre>
+<div id="e9f61847" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:47:07.417301Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:47:07.097346Z&quot;}}" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-<div id="a165c50a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:47:07.417301Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:47:07.097346Z&quot;}}" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>(448, 304)</code></pre>
-</div>
-</div>
-<div id="822e6094" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:07.598128Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:06.479427Z&quot;}}" data-execution_count="16">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set mapping crs to Cartopy's North Polar Stereo graphic</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>crs_epsg <span class="op">=</span> ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set figure size</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set the map projection and associated boundaries</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection <span class="op">=</span> crs_epsg)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="dv">5350000</span>, <span class="fl">5850000.0</span>],crs_epsg)</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs using 'transform' </span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs as described in the netcdf metadata</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:] , </span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> ccrs.NorthPolarStereo(true_scale_latitude<span class="op">=</span><span class="dv">70</span>, central_longitude<span class="op">=-</span><span class="dv">45</span>)) <span class="co">#transform default is basemap specs</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'bottom'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration using Cartopy projection NorthPolarStereo()'</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="map-data-with-different-projections_files/figure-html/cell-7-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="3d2a1145" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:07.598128Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:06.479427Z&quot;}}" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set mapping crs to Cartopy's North Polar Stereo graphic</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>crs_epsg <span class="op">=</span> ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set figure size</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set the map projection and associated boundaries</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection <span class="op">=</span> crs_epsg)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="dv">5350000</span>, <span class="fl">5850000.0</span>],crs_epsg)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs using 'transform' </span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs as described in the netcdf metadata</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:] , </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> ccrs.NorthPolarStereo(true_scale_latitude<span class="op">=</span><span class="dv">70</span>, central_longitude<span class="op">=-</span><span class="dv">45</span>)) <span class="co">#transform default is basemap specs</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'bottom'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration using Cartopy projection NorthPolarStereo()'</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="mapping-data-with-epsg-code" class="level2">
 <h2 class="anchored" data-anchor-id="mapping-data-with-epsg-code">Mapping data with EPSG Code</h2>
 <p>You can set the data crs using the EPSG code. In our case, the metadata provides the projection crs (EPSG: 3411) In this exercise, we will use the same basemap projection, but set the data projection with the EPSG code.</p>
-<div id="3b726daf" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.727179Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:07.599078Z&quot;}}" data-execution_count="17">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set data projection using EPSG Code </span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data_crs <span class="op">=</span> ccrs.epsg(<span class="st">'3411'</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>crs_epsg <span class="op">=</span> ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set the basemap </span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection <span class="op">=</span> crs_epsg)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="dv">5350000</span>, <span class="fl">5850000.0</span>],ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>))</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># transform= which projection data (coords) were defined </span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:], </span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> data_crs) </span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'bottom'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration using EPSG code (3411)'</span>)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="map-data-with-different-projections_files/figure-html/cell-8-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="98d4c463" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.727179Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:07.599078Z&quot;}}" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set data projection using EPSG Code </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data_crs <span class="op">=</span> ccrs.epsg(<span class="st">'3411'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>crs_epsg <span class="op">=</span> ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set the basemap </span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection <span class="op">=</span> crs_epsg)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="dv">5350000</span>, <span class="fl">5850000.0</span>],ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># transform= which projection data (coords) were defined </span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:], </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> data_crs) </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'bottom'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration using EPSG code (3411)'</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="adding-non-projected-data-with-lat-and-lon-to-the-projected-map" class="level1">
@@ -592,72 +496,58 @@ root group (NETCDF3_CLASSIC data model, file format DAP2):
 <p>To demonstrate mapping non-projected data onto the projected map, we will use polar bear tracking data. While the temporal coverage of the two datasets differ (<em>sea ice concentration</em> and <em>polarbear locations</em>), the exercise is to show how to use data with latitude and longitude onto the projected basemap.</p>
 <p>Data: Polar bear tracking data</p>
 <p>Dataset Info: https://borealisdata.ca/file.xhtml?fileId=151017&amp;version=1.0</p>
-<div id="b1417066" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.763624Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.728150Z&quot;}}" data-execution_count="18">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read the dataset</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'../data/PB_Argos.csv'</span>)</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"QualClass"</span>].isin([<span class="st">"B"</span>])]</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set basemap with Cartopy PlateCarree() projection</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure() </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree()) </span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>ax.set_global()</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs </span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>df[<span class="st">"Lat"</span>],</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>df[<span class="st">"Lon"</span>],</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree()</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Polar bear track data (B)'</span>)</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="map-data-with-different-projections_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
-</figure>
+<div id="27f9a3ac" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.763624Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.728150Z&quot;}}" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read the dataset</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'../data/PB_Argos.csv'</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"QualClass"</span>].isin([<span class="st">"B"</span>])]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set basemap with Cartopy PlateCarree() projection</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure() </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree()) </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ax.set_global()</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs </span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>df[<span class="st">"Lat"</span>],</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>df[<span class="st">"Lon"</span>],</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Polar bear track data (B)'</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-</div>
-</div>
-<div id="7ac38492" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:10.210429Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.764428Z&quot;}}" data-execution_count="19">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>crs_epsg)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">'50m'</span>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="fl">5350000.0</span>, <span class="fl">5850000.0</span>],crs_epsg )</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, dms<span class="op">=</span><span class="va">True</span>, x_inline<span class="op">=</span><span class="va">False</span>, y_inline<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:] , </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> ccrs.NorthPolarStereo(true_scale_latitude<span class="op">=</span><span class="dv">70</span>, central_longitude<span class="op">=-</span><span class="dv">45</span>))</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the data will get transformed to be properly projected on the basemap </span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>df[<span class="st">"Lat"</span>],</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>df[<span class="st">"Lon"</span>],</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree()</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'right'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">"Polarbear (B)"</span>], loc <span class="op">=</span> <span class="st">"upper left"</span>)</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration and polar bear track data on Polar Stereographic map'</span>)</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="map-data-with-different-projections_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="95166138" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:10.210429Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.764428Z&quot;}}" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>crs_epsg)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">'50m'</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="fl">5350000.0</span>, <span class="fl">5850000.0</span>],crs_epsg )</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, dms<span class="op">=</span><span class="va">True</span>, x_inline<span class="op">=</span><span class="va">False</span>, y_inline<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:] , </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> ccrs.NorthPolarStereo(true_scale_latitude<span class="op">=</span><span class="dv">70</span>, central_longitude<span class="op">=-</span><span class="dv">45</span>))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the data will get transformed to be properly projected on the basemap </span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>df[<span class="st">"Lat"</span>],</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>df[<span class="st">"Lon"</span>],</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="dv">1</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree()</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'right'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">"Polarbear (B)"</span>], loc <span class="op">=</span> <span class="st">"upper left"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration and polar bear track data on Polar Stereographic map'</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>

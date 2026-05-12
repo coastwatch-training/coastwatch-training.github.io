@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../../../site_libs/quarto-search/fuse.min.js"></script>
@@ -105,9 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
-
-<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../../../styles.css">
@@ -418,7 +415,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 </section>
 <section id="import-packages" class="level2">
 <h2 class="anchored" data-anchor-id="import-packages">Import packages</h2>
-<div id="215f8dc3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.393146Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.382576Z&quot;}}" data-execution_count="2">
+<div id="240c7f10" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.393146Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.382576Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
@@ -429,7 +426,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cmocean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>## Get data from ERDDAP</p>
-<div id="d642428e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.816349Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.397409Z&quot;}}" data-execution_count="3">
+<div id="97c566e0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.816349Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.397409Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># request data from polarwatch.noaa.gov erddap and save it to sic.nc file</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">''</span>.join([<span class="st">"https://polarwatch.noaa.gov/erddap/griddap/"</span>,</span>
@@ -439,417 +436,13 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>               ])</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(url, <span class="st">"sic.nc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>('sic.nc', &lt;http.client.HTTPMessage at 0x1a7e0cca0&gt;)</code></pre>
 </div>
-</div>
-<div id="61aea04a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.835319Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.824853Z&quot;}}" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># open and assign data from the file to a variable ds using xarray</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">"sic.nc"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># view metadata </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
-<defs>
-<symbol id="icon-database" viewbox="0 0 32 32">
-<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
-<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
-<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
-</symbol>
-<symbol id="icon-file-text2" viewbox="0 0 32 32">
-<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
-<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
-</symbol>
-</defs>
-</svg>
-<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
- *
- */
-
-:root {
-  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
-  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
-  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
-  --xr-border-color: var(--jp-border-color2, #e0e0e0);
-  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
-  --xr-background-color: var(--jp-layout-color0, white);
-  --xr-background-color-row-even: var(--jp-layout-color1, white);
-  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
-}
-
-html[theme=dark],
-body[data-theme=dark],
-body.vscode-dark {
-  --xr-font-color0: rgba(255, 255, 255, 1);
-  --xr-font-color2: rgba(255, 255, 255, 0.54);
-  --xr-font-color3: rgba(255, 255, 255, 0.38);
-  --xr-border-color: #1F1F1F;
-  --xr-disabled-color: #515151;
-  --xr-background-color: #111111;
-  --xr-background-color-row-even: #111111;
-  --xr-background-color-row-odd: #313131;
-}
-
-.xr-wrap {
-  display: block !important;
-  min-width: 300px;
-  max-width: 700px;
-}
-
-.xr-text-repr-fallback {
-  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
-  display: none;
-}
-
-.xr-header {
-  padding-top: 6px;
-  padding-bottom: 6px;
-  margin-bottom: 4px;
-  border-bottom: solid 1px var(--xr-border-color);
-}
-
-.xr-header > div,
-.xr-header > ul {
-  display: inline;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.xr-obj-type,
-.xr-array-name {
-  margin-left: 2px;
-  margin-right: 10px;
-}
-
-.xr-obj-type {
-  color: var(--xr-font-color2);
-}
-
-.xr-sections {
-  padding-left: 0 !important;
-  display: grid;
-  grid-template-columns: 150px auto auto 1fr 20px 20px;
-}
-
-.xr-section-item {
-  display: contents;
-}
-
-.xr-section-item input {
-  display: none;
-}
-
-.xr-section-item input + label {
-  color: var(--xr-disabled-color);
-}
-
-.xr-section-item input:enabled + label {
-  cursor: pointer;
-  color: var(--xr-font-color2);
-}
-
-.xr-section-item input:enabled + label:hover {
-  color: var(--xr-font-color0);
-}
-
-.xr-section-summary {
-  grid-column: 1;
-  color: var(--xr-font-color2);
-  font-weight: 500;
-}
-
-.xr-section-summary > span {
-  display: inline-block;
-  padding-left: 0.5em;
-}
-
-.xr-section-summary-in:disabled + label {
-  color: var(--xr-font-color2);
-}
-
-.xr-section-summary-in + label:before {
-  display: inline-block;
-  content: '►';
-  font-size: 11px;
-  width: 15px;
-  text-align: center;
-}
-
-.xr-section-summary-in:disabled + label:before {
-  color: var(--xr-disabled-color);
-}
-
-.xr-section-summary-in:checked + label:before {
-  content: '▼';
-}
-
-.xr-section-summary-in:checked + label > span {
-  display: none;
-}
-
-.xr-section-summary,
-.xr-section-inline-details {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-.xr-section-inline-details {
-  grid-column: 2 / -1;
-}
-
-.xr-section-details {
-  display: none;
-  grid-column: 1 / -1;
-  margin-bottom: 5px;
-}
-
-.xr-section-summary-in:checked ~ .xr-section-details {
-  display: contents;
-}
-
-.xr-array-wrap {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 20px auto;
-}
-
-.xr-array-wrap > label {
-  grid-column: 1;
-  vertical-align: top;
-}
-
-.xr-preview {
-  color: var(--xr-font-color3);
-}
-
-.xr-array-preview,
-.xr-array-data {
-  padding: 0 5px !important;
-  grid-column: 2;
-}
-
-.xr-array-data,
-.xr-array-in:checked ~ .xr-array-preview {
-  display: none;
-}
-
-.xr-array-in:checked ~ .xr-array-data,
-.xr-array-preview {
-  display: inline-block;
-}
-
-.xr-dim-list {
-  display: inline-block !important;
-  list-style: none;
-  padding: 0 !important;
-  margin: 0;
-}
-
-.xr-dim-list li {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-}
-
-.xr-dim-list:before {
-  content: '(';
-}
-
-.xr-dim-list:after {
-  content: ')';
-}
-
-.xr-dim-list li:not(:last-child):after {
-  content: ',';
-  padding-right: 5px;
-}
-
-.xr-has-index {
-  font-weight: bold;
-}
-
-.xr-var-list,
-.xr-var-item {
-  display: contents;
-}
-
-.xr-var-item > div,
-.xr-var-item label,
-.xr-var-item > .xr-var-name span {
-  background-color: var(--xr-background-color-row-even);
-  margin-bottom: 0;
-}
-
-.xr-var-item > .xr-var-name:hover span {
-  padding-right: 5px;
-}
-
-.xr-var-list > li:nth-child(odd) > div,
-.xr-var-list > li:nth-child(odd) > label,
-.xr-var-list > li:nth-child(odd) > .xr-var-name span {
-  background-color: var(--xr-background-color-row-odd);
-}
-
-.xr-var-name {
-  grid-column: 1;
-}
-
-.xr-var-dims {
-  grid-column: 2;
-}
-
-.xr-var-dtype {
-  grid-column: 3;
-  text-align: right;
-  color: var(--xr-font-color2);
-}
-
-.xr-var-preview {
-  grid-column: 4;
-}
-
-.xr-index-preview {
-  grid-column: 2 / 5;
-  color: var(--xr-font-color2);
-}
-
-.xr-var-name,
-.xr-var-dims,
-.xr-var-dtype,
-.xr-preview,
-.xr-attrs dt {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-right: 10px;
-}
-
-.xr-var-name:hover,
-.xr-var-dims:hover,
-.xr-var-dtype:hover,
-.xr-attrs dt:hover {
-  overflow: visible;
-  width: auto;
-  z-index: 1;
-}
-
-.xr-var-attrs,
-.xr-var-data,
-.xr-index-data {
-  display: none;
-  background-color: var(--xr-background-color) !important;
-  padding-bottom: 5px !important;
-}
-
-.xr-var-attrs-in:checked ~ .xr-var-attrs,
-.xr-var-data-in:checked ~ .xr-var-data,
-.xr-index-data-in:checked ~ .xr-index-data {
-  display: block;
-}
-
-.xr-var-data > table {
-  float: right;
-}
-
-.xr-var-name span,
-.xr-var-data,
-.xr-index-name div,
-.xr-index-data,
-.xr-attrs {
-  padding-left: 25px !important;
-}
-
-.xr-attrs,
-.xr-var-attrs,
-.xr-var-data,
-.xr-index-data {
-  grid-column: 1 / -1;
-}
-
-dl.xr-attrs {
-  padding: 0;
-  margin: 0;
-  display: grid;
-  grid-template-columns: 125px auto;
-}
-
-.xr-attrs dt,
-.xr-attrs dd {
-  padding: 0;
-  margin: 0;
-  float: left;
-  padding-right: 10px;
-  width: auto;
-}
-
-.xr-attrs dt {
-  font-weight: normal;
-  grid-column: 1;
-}
-
-.xr-attrs dt:hover span {
-  display: inline-block;
-  background: var(--xr-background-color);
-  padding-right: 10px;
-}
-
-.xr-attrs dd {
-  grid-column: 2;
-  white-space: pre-wrap;
-  word-break: break-all;
-}
-
-.xr-icon-database,
-.xr-icon-file-text2,
-.xr-no-icon {
-  display: inline-block;
-  vertical-align: middle;
-  width: 1em;
-  height: 1.5em !important;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
-}
-</style><pre class="xr-text-repr-fallback">&lt;xarray.Dataset&gt;
-Dimensions:                  (time: 1, ygrid: 332, xgrid: 316)
-Coordinates:
-  * time                     (time) datetime64[ns] 2022-12-01
-  * ygrid                    (ygrid) float32 4.338e+06 4.312e+06 ... -3.938e+06
-  * xgrid                    (xgrid) float32 -3.938e+06 -3.912e+06 ... 3.938e+06
-Data variables:
-    cdr_seaice_conc_monthly  (time, ygrid, xgrid) float32 ...
-Attributes: (12/65)
-    acknowledgement:                                     This project was sup...
-    cdm_data_type:                                       Grid
-    cdr_variable:                                        cdr_seaice_conc_monthly
-    contributor_name:                                    Walter N. Meier, Flo...
-    contributor_role:                                    principal investigat...
-    Conventions:                                         CF-1.6, ACDD-1.3, CO...
-    ...                                                  ...
-    summary:                                             This data set provid...
-    time_coverage_duration:                              P1M
-    time_coverage_end:                                   2022-12-01T00:00:00Z
-    time_coverage_resolution:                            P1M
-    time_coverage_start:                                 2022-12-01T00:00:00Z
-    title:                                               Sea Ice Concentratio...</pre><div class="xr-wrap" style="display:none"><div class="xr-header"><div class="xr-obj-type">xarray.Dataset</div></div><ul class="xr-sections"><li class="xr-section-item"><input id="section-21054cb4-95a4-4747-971b-aceaf1cd66c9" class="xr-section-summary-in" type="checkbox" disabled=""><label for="section-21054cb4-95a4-4747-971b-aceaf1cd66c9" class="xr-section-summary" title="Expand/collapse section">Dimensions:</label><div class="xr-section-inline-details"><ul class="xr-dim-list"><li><span class="xr-has-index">time</span>: 1</li><li><span class="xr-has-index">ygrid</span>: 332</li><li><span class="xr-has-index">xgrid</span>: 316</li></ul></div><div class="xr-section-details"></div></li><li class="xr-section-item"><input id="section-bf521d9a-dd43-4f13-b62d-4e1e42829cab" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-bf521d9a-dd43-4f13-b62d-4e1e42829cab" class="xr-section-summary">Coordinates: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">time</span></div><div class="xr-var-dims">(time)</div><div class="xr-var-dtype">datetime64[ns]</div><div class="xr-var-preview xr-preview">2022-12-01</div><input id="attrs-cb7deb2a-68c9-4f97-a26e-92447e2b3b32" class="xr-var-attrs-in" type="checkbox"><label for="attrs-cb7deb2a-68c9-4f97-a26e-92447e2b3b32" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-b5d8b3ee-7bac-44dc-b29d-1d8f65e19218" class="xr-var-data-in" type="checkbox"><label for="data-b5d8b3ee-7bac-44dc-b29d-1d8f65e19218" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>1024</dd><dt><span>_CoordinateAxisType :</span></dt><dd>Time</dd><dt><span>actual_range :</span></dt><dd>[1.6698528e+09 1.6698528e+09]</dd><dt><span>axis :</span></dt><dd>T</dd><dt><span>ioos_category :</span></dt><dd>Time</dd><dt><span>long_name :</span></dt><dd>ANSI date</dd><dt><span>standard_name :</span></dt><dd>time</dd><dt><span>time_origin :</span></dt><dd>01-JAN-1970 00:00:00</dd></dl></div><div class="xr-var-data"><pre>array(['2022-12-01T00:00:00.000000000'], dtype='datetime64[ns]')</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">ygrid</span></div><div class="xr-var-dims">(ygrid)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">4.338e+06 4.312e+06 ... -3.938e+06</div><input id="attrs-a19e380b-814a-4ac8-89c7-b808ac722174" class="xr-var-attrs-in" type="checkbox"><label for="attrs-a19e380b-814a-4ac8-89c7-b808ac722174" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-7ab31b02-4481-452a-9b17-2837d58ed606" class="xr-var-data-in" type="checkbox"><label for="data-7ab31b02-4481-452a-9b17-2837d58ed606" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>332</dd><dt><span>actual_range :</span></dt><dd>[-3937500.  4337500.]</dd><dt><span>axis :</span></dt><dd>Y</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>projection_grid_y_centers</dd><dt><span>standard_name :</span></dt><dd>projection_y_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd><dt><span>valid_range :</span></dt><dd>[-3950000.  4350000.]</dd></dl></div><div class="xr-var-data"><pre>array([ 4337500.,  4312500.,  4287500., ..., -3887500., -3912500., -3937500.],
-      dtype=float32)</pre></div></li><li class="xr-var-item"><div class="xr-var-name"><span class="xr-has-index">xgrid</span></div><div class="xr-var-dims">(xgrid)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">-3.938e+06 -3.912e+06 ... 3.938e+06</div><input id="attrs-6f11ad67-2ca9-4a93-b770-e721e45d30d7" class="xr-var-attrs-in" type="checkbox"><label for="attrs-6f11ad67-2ca9-4a93-b770-e721e45d30d7" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-c49a49fb-7010-4b6f-8a57-1a3ae5481ff3" class="xr-var-data-in" type="checkbox"><label for="data-c49a49fb-7010-4b6f-8a57-1a3ae5481ff3" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>_ChunkSizes :</span></dt><dd>316</dd><dt><span>actual_range :</span></dt><dd>[-3937500.  3937500.]</dd><dt><span>axis :</span></dt><dd>X</dd><dt><span>ioos_category :</span></dt><dd>Location</dd><dt><span>long_name :</span></dt><dd>projection_grid_x_centers</dd><dt><span>standard_name :</span></dt><dd>projection_x_coordinate</dd><dt><span>units :</span></dt><dd>meters</dd><dt><span>valid_range :</span></dt><dd>[-3950000.  3950000.]</dd></dl></div><div class="xr-var-data"><pre>array([-3937500., -3912500., -3887500., ...,  3887500.,  3912500.,  3937500.],
-      dtype=float32)</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-950f92f0-fb63-4e19-a197-1fa6c41acb11" class="xr-section-summary-in" type="checkbox" checked=""><label for="section-950f92f0-fb63-4e19-a197-1fa6c41acb11" class="xr-section-summary">Data variables: <span>(1)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-var-name"><span>cdr_seaice_conc_monthly</span></div><div class="xr-var-dims">(time, ygrid, xgrid)</div><div class="xr-var-dtype">float32</div><div class="xr-var-preview xr-preview">...</div><input id="attrs-ab74d1e0-1486-4bc3-ae57-b249dbc2b639" class="xr-var-attrs-in" type="checkbox"><label for="attrs-ab74d1e0-1486-4bc3-ae57-b249dbc2b639" title="Show/Hide attributes"><svg class="icon xr-icon-file-text2"><use href="#icon-file-text2"></use></svg></label><input id="data-b5acae4d-28a9-4658-9124-a4fc35ec103b" class="xr-var-data-in" type="checkbox"><label for="data-b5acae4d-28a9-4658-9124-a4fc35ec103b" title="Show/Hide data repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-var-attrs"><dl class="xr-attrs"><dt><span>ancillary_variables :</span></dt><dd>stdev_of_cdr_seaice_conc_monthly qa_of_cdr_seaice_conc_monthly</dd><dt><span>colorBarMaximum :</span></dt><dd>1.0</dd><dt><span>colorBarMinimum :</span></dt><dd>0.0</dd><dt><span>colorBarPalette :</span></dt><dd>KT_ice</dd><dt><span>datum :</span></dt><dd>+ellps=urn:ogc:def:crs:EPSG::4326</dd><dt><span>flag_meanings :</span></dt><dd>pole_hole lakes coastal land_mask missing_data</dd><dt><span>flag_values :</span></dt><dd>[-5 -4 -3 -2 -1]</dd><dt><span>ioos_category :</span></dt><dd>Ice Distribution</dd><dt><span>long_name :</span></dt><dd>NOAA/NSIDC Climate Data Record of Passive Microwave Monthly Southern Hemisphere Sea Ice Concentration</dd><dt><span>references :</span></dt><dd>https://nsidc.org/data/g02202/versions/4/</dd><dt><span>standard_name :</span></dt><dd>sea_ice_area_fraction</dd><dt><span>units :</span></dt><dd>1</dd><dt><span>valid_range :</span></dt><dd>[0. 1.]</dd></dl></div><div class="xr-var-data"><pre>[104912 values with dtype=float32]</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-a60e5781-3399-405a-ac6c-b0b616f7af16" class="xr-section-summary-in" type="checkbox"><label for="section-a60e5781-3399-405a-ac6c-b0b616f7af16" class="xr-section-summary">Indexes: <span>(3)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><ul class="xr-var-list"><li class="xr-var-item"><div class="xr-index-name"><div>time</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-2054fc0c-2bfe-4116-9588-e98eb6510ff4" class="xr-index-data-in" type="checkbox"><label for="index-2054fc0c-2bfe-4116-9588-e98eb6510ff4" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(DatetimeIndex(['2022-12-01'], dtype='datetime64[ns]', name='time', freq=None))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>ygrid</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-14c1b5a2-8cda-4e16-8ee6-a72830e2cdf1" class="xr-index-data-in" type="checkbox"><label for="index-14c1b5a2-8cda-4e16-8ee6-a72830e2cdf1" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([ 4337500.0,  4312500.0,  4287500.0,  4262500.0,  4237500.0,  4212500.0,
-        4187500.0,  4162500.0,  4137500.0,  4112500.0,
-       ...
-       -3712500.0, -3737500.0, -3762500.0, -3787500.0, -3812500.0, -3837500.0,
-       -3862500.0, -3887500.0, -3912500.0, -3937500.0],
-      dtype='float32', name='ygrid', length=332))</pre></div></li><li class="xr-var-item"><div class="xr-index-name"><div>xgrid</div></div><div class="xr-index-preview">PandasIndex</div><div></div><input id="index-4578a688-8c1a-41eb-a60a-aff967711cb4" class="xr-index-data-in" type="checkbox"><label for="index-4578a688-8c1a-41eb-a60a-aff967711cb4" title="Show/Hide index repr"><svg class="icon xr-icon-database"><use href="#icon-database"></use></svg></label><div class="xr-index-data"><pre>PandasIndex(Index([-3937500.0, -3912500.0, -3887500.0, -3862500.0, -3837500.0, -3812500.0,
-       -3787500.0, -3762500.0, -3737500.0, -3712500.0,
-       ...
-        3712500.0,  3737500.0,  3762500.0,  3787500.0,  3812500.0,  3837500.0,
-        3862500.0,  3887500.0,  3912500.0,  3937500.0],
-      dtype='float32', name='xgrid', length=316))</pre></div></li></ul></div></li><li class="xr-section-item"><input id="section-9b156a74-aabc-46b3-ba9a-0b1e8d9ced37" class="xr-section-summary-in" type="checkbox"><label for="section-9b156a74-aabc-46b3-ba9a-0b1e8d9ced37" class="xr-section-summary">Attributes: <span>(65)</span></label><div class="xr-section-inline-details"></div><div class="xr-section-details"><dl class="xr-attrs"><dt><span>acknowledgement :</span></dt><dd>This project was supported in part by a grant from the NOAA Climate Data Record Program. Production of original NASA Team and Bootstrap algorithm estimates supported by the NASA Polar Distributed Active Archive Center. The sea ice concentration algorithms were developed by Donald J. Cavalieri, Josefino C. Comiso, Claire L. Parkinson, and others at the NASA Goddard Space Flight Center in Greenbelt, MD.</dd><dt><span>cdm_data_type :</span></dt><dd>Grid</dd><dt><span>cdr_variable :</span></dt><dd>cdr_seaice_conc_monthly</dd><dt><span>contributor_name :</span></dt><dd>Walter N. Meier, Florence Fetterer, Ann Windnagel, J. Scott Stewart, Trey Stafford, Matt Fisher</dd><dt><span>contributor_role :</span></dt><dd>principal investigator, author, author, software developer, software developer, software developer</dd><dt><span>Conventions :</span></dt><dd>CF-1.6, ACDD-1.3, COARDS</dd><dt><span>creator_email :</span></dt><dd>nsidc@nsidc.org</dd><dt><span>creator_name :</span></dt><dd>NSIDC</dd><dt><span>creator_type :</span></dt><dd>institution</dd><dt><span>creator_url :</span></dt><dd>https://nsidc.org/</dd><dt><span>date_created :</span></dt><dd>2023-02-22T23:17:53Z</dd><dt><span>defaultGraphQuery :</span></dt><dd>cdr_seaice_conc_monthly%5Blast%5D%5B(4337500.0):(-3937500.0)%5D%5B(-3937500.0):(3937500.0)%5D&amp;.draw=surface</dd><dt><span>grid_mapping_false_easting :</span></dt><dd>0.0</dd><dt><span>grid_mapping_false_northing :</span></dt><dd>0.0</dd><dt><span>grid_mapping_GeoTransform :</span></dt><dd>-3950000.0 25000.0 0 4350000.0 0 -25000.0</dd><dt><span>grid_mapping_grid_boundary_bottom_projected_y :</span></dt><dd>-3950000.0</dd><dt><span>grid_mapping_grid_boundary_left_projected_x :</span></dt><dd>-3950000.0</dd><dt><span>grid_mapping_grid_boundary_right_projected_x :</span></dt><dd>3950000.0</dd><dt><span>grid_mapping_grid_boundary_top_projected_y :</span></dt><dd>4350000.0</dd><dt><span>grid_mapping_latitude_of_projection_origin :</span></dt><dd>-90.0</dd><dt><span>grid_mapping_longitude_of_projection_origin :</span></dt><dd>0.0</dd><dt><span>grid_mapping_name :</span></dt><dd>polar_stereographic</dd><dt><span>grid_mapping_parent_grid_cell_column_subset_end :</span></dt><dd>316.0</dd><dt><span>grid_mapping_parent_grid_cell_column_subset_start :</span></dt><dd>0.0</dd><dt><span>grid_mapping_parent_grid_cell_row_subset_end :</span></dt><dd>332.0</dd><dt><span>grid_mapping_parent_grid_cell_row_subset_start :</span></dt><dd>0.0</dd><dt><span>grid_mapping_proj4text :</span></dt><dd>+proj=stere +lat_0=-90 +lat_ts=-70 +lon_0=0 +k=1 +x_0=0 +y_0=0 +a=6378273 +b=6356889.449 +units=m +no_defs</dd><dt><span>grid_mapping_scaling_factor :</span></dt><dd>1.0</dd><dt><span>grid_mapping_semimajor_radius :</span></dt><dd>6378273.0</dd><dt><span>grid_mapping_semiminor_radius :</span></dt><dd>6356889.449</dd><dt><span>grid_mapping_spatial_ref :</span></dt><dd>PROJCS["NSIDC Sea Ice Polar Stereographic South",GEOGCS["Unspecified datum based upon the Hughes 1980 ellipsoid",DATUM["Not_specified_based_on_Hughes_1980_ellipsoid",SPHEROID["Hughes 1980",6378273,298.279411123061,AUTHORITY["EPSG","7058"]],AUTHORITY["EPSG","6054"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.01745329251994328,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4054"]],UNIT["metre",1,AUTHORITY["EPSG","9001"]],PROJECTION["Polar_Stereographic"],PARAMETER["latitude_of_origin",-70],PARAMETER["central_meridian",0],PARAMETER["scale_factor",1],PARAMETER["false_easting",0],PARAMETER["false_northing",0],AUTHORITY["EPSG","3412"],AXIS["X",UNKNOWN],AXIS["Y",UNKNOWN]]</dd><dt><span>grid_mapping_srid :</span></dt><dd>urn:ogc:def:crs:EPSG::3412</dd><dt><span>grid_mapping_standard_parallel :</span></dt><dd>-70.0</dd><dt><span>grid_mapping_straight_vertical_longitude_from_pole :</span></dt><dd>180.0</dd><dt><span>grid_mapping_units :</span></dt><dd>meters</dd><dt><span>history :</span></dt><dd>Tue Jan  5 13:40:25 2021: ncks -x -v goddard_merged_seaice_conc_monthly ./previous_blank_ncs/S_monthly_blank.nc ./S_monthly_blank.nc
-2023-09-06T03:13:27Z (local files)
-2023-09-06T03:13:27Z https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4shmday.nc?cdr_seaice_conc_monthly[(2022-12-01T00:00:00Z):1:(2022-12-01T00:00:00Z)][(4350000.0):1:(-3950000.0)][(-3950000.0):1:(3950000.0)]</dd><dt><span>id :</span></dt><dd>https://doi.org/10.7265/sr8p-kc62</dd><dt><span>infoUrl :</span></dt><dd>https://nsidc.org/data/g02202/versions/4/</dd><dt><span>institution :</span></dt><dd>NSIDC &gt; National Snow and Ice Data Center</dd><dt><span>keywords :</span></dt><dd>algorithm, area, bellingshausen, bootstrap, cdr_seaice_conc_monthly, center, climate, common, concentration, cryosphere, data, defense, deviation, distribution, dmsp, earth, Earth Science &gt; Cryosphere &gt; Sea Ice &gt; Ice Extent, Earth Science &gt; Cryosphere &gt; Sea Ice &gt; Sea Ice Concentration, Earth Science &gt; Oceans &gt; Sea Ice &gt; Ice Extent, estimated, extent, flag, flags, flight, format, fraction, geographic, Geographic Region &gt; Polar, Geographic Region &gt; Southern Hemisphere, goddard, gsfc, hemisphere, ice, ice distribution, meteorological, microwave, month, monthly, nasa, national, network, noaa, noaa/nsidc, nsidc, nsidc_bt_seaice_conc_monthly, nsidc_nt_seaice_conc_monthly, ocean, Ocean &gt; Southern Ocean, Ocean &gt; Southern Ocean &gt; Bellingshausen Sea, Ocean &gt; Southern Ocean &gt; Ross Sea, Ocean &gt; Southern Ocean &gt; Weddell Sea, oceans, passive, polar, processed, program, qa_of_cdr_seaice_conc_monthly, quality, record, region, ross, satellite, science, sea, sea_ice_area_fraction, sea_ice_area_fraction status_flag, snow, source, southern, space, standard, statistics, status, stdev_of_cdr_seaice_conc_monthly, tdim, team, version, weddell</dd><dt><span>keywords_vocabulary :</span></dt><dd>GCMD Science Keywords</dd><dt><span>license :</span></dt><dd>No constraints on data access or use</dd><dt><span>metadata_link :</span></dt><dd>https://nsidc.org/data/g02202/versions/4/</dd><dt><span>naming_authority :</span></dt><dd>org.doi.dx</dd><dt><span>NCO :</span></dt><dd>"4.5.4"</dd><dt><span>platform :</span></dt><dd>DMSP 5D-3/F17 &gt; Defense Meteorological Satellite Program-F17</dd><dt><span>processing_level :</span></dt><dd>NOAA Level 3</dd><dt><span>product_version :</span></dt><dd>v04r00</dd><dt><span>program :</span></dt><dd>NOAA Climate Data Record Program</dd><dt><span>proj_crs_code :</span></dt><dd>EPSG:3412</dd><dt><span>proj_crs_code_description :</span></dt><dd>The proj_crs_code attribute references a registered projection identifier (i.e. EPSG) when available. If the projection is not registered, non-standard then this attribute references a PolarWatch assigned internal identifier.</dd><dt><span>project :</span></dt><dd>NOAA/NSIDC passive microwave sea ice concentration climate data record</dd><dt><span>references :</span></dt><dd>Comiso, J. C., and F. Nishio. 2008. Trends in the Sea Ice Cover Using Enhanced and Compatible AMSR-E, SSM/I, and SMMR Data. Journal of Geophysical Research 113, C02S07, doi:10.1029/2007JC0043257. ; Comiso, J. C., D. Cavalieri, C. Parkinson, and P. Gloersen. 1997. Passive Microwave Algorithms for Sea Ice Concentrations: A Comparison of Two Techniques. Remote Sensing of the Environment 60(3):357-84. ; Comiso, J. C. 1984. Characteristics of Winter Sea Ice from Satellite Multispectral Microwave Observations. Journal of Geophysical Research 91(C1):975-94. ; Cavalieri, D. J., P. Gloersen, and W. J. Campbell. 1984. Determination of Sea Ice Parameters with the NIMBUS-7 SMMR. Journal of Geophysical Research 89(D4):5355-5369. ; Cavalieri, D. J., C. l. Parkinson, P. Gloersen, J. C. Comiso, and H. J. Zwally. 1999. Deriving Long-term Time Series of Sea Ice Cover from Satellite Passive-Microwave Multisensor Data Sets. Journal of Geophysical Research 104(7):  15,803-15,814. ; Comiso, J.C., R.A. Gersten, L.V. Stock, J. Turner, G.J. Perez, and K. Cho. 2017. Positive Trend in the Antarctic Sea Ice Cover and Associated Changes in Surface Temperature. J. Climate, 30, 2251–2267, https://doi.org/10.1175/JCLI-D-16-0408.1</dd><dt><span>sensor :</span></dt><dd>SSMI/S &gt; Special Sensor Microwave Imager/Sounder</dd><dt><span>software_version_id :</span></dt><dd>git@bitbucket.org:nsidc/seaice_cdr.git@c9c632e73530554d8acfac9090baeb1e35755897</dd><dt><span>source :</span></dt><dd>ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220701_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220702_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220703_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220704_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220705_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220706_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220707_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220708_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220709_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220710_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220711_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220712_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220713_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220714_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220715_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220716_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220717_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220718_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220719_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220720_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220721_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220722_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220723_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220724_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220725_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220726_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220727_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220728_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220729_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220730_f17_v04r00.nc, ftp://sidads.colorado.edu/pub/DATASETS/NOAA/G02202_V4/south/daily/2022/seaice_conc_daily_sh_20220731_f17_v04r00.nc</dd><dt><span>sourceUrl :</span></dt><dd>(local files)</dd><dt><span>spatial_resolution :</span></dt><dd>25km</dd><dt><span>standard_name_vocabulary :</span></dt><dd>CF Standard Name Table v70</dd><dt><span>summary :</span></dt><dd>This data set provides a passive microwave sea ice concentration climate data record (CDR) based on gridded brightness temperatures (TBs) from the Defense Meteorological Satellite Program (DMSP) series of passive microwave radiometers: the Nimbus-7 Scanning Multichannel Microwave Radiometer (SMMR), the Special Sensor Microwave Imager (SSM/I) and the Special Sensor Microwave Imager/Sounder (SSMIS). The sea ice concentration CDR is an estimate of sea ice concentration that is produced by combining concentration estimates from two algorithms developed at the NASA Goddard Space Flight Center (GSFC): the NASA Team algorithm and the Bootstrap algorithm. The individual algorithms are used to process and combine brightness temperature data at National Snow and Ice Data Center (NSIDC).  This product is designed to provide a consistent time series of sea ice concentrations (the fraction, or percentage, of ocean area covered by sea ice) from November 1978 to the present which spans the coverage of several passive microwave instruments. The data are gridded on the NSIDC polar stereographic grid with 25 x 25 km grid cells, and are available in Network Common Data Format (NetCDF) file format. Each file contains a variable with the CDR concentration values as well as variables that hold the NASA Team and Bootstrap concentrations for reference. Variables containing standard deviation, quality flags, and projection information are also included. Data are available from NSIDC via FTP see https://nsidc.org/data/G02202/versions/4/. Data are also distributed via the PolarWatch ERDDAP at https://polarwatch.noaa.gov/erddap. Note that the data format available through PolarWatch is different from the NSIDC FTP NetCDF files. The PolarWatch data server stores projection information as global attributes (with the prefix grid_mapping) instead of as a variable; and the timestamp is served in different units (seconds since 1970).</dd><dt><span>time_coverage_duration :</span></dt><dd>P1M</dd><dt><span>time_coverage_end :</span></dt><dd>2022-12-01T00:00:00Z</dd><dt><span>time_coverage_resolution :</span></dt><dd>P1M</dd><dt><span>time_coverage_start :</span></dt><dd>2022-12-01T00:00:00Z</dd><dt><span>title :</span></dt><dd>Sea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Southern Hemisphere, 25km, Science Quality, 1978-Present, Monthly</dd></dl></div></li></ul></div></div>
-</div>
+<div id="3dbba8b0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.835319Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.824853Z&quot;}}" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># open and assign data from the file to a variable ds using xarray</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">"sic.nc"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># view metadata </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="inspect-crs-definitions-and-the-transformation-function" class="level2">
@@ -863,43 +456,14 @@ Attributes: (12/65)
 <section id="get-the-projection-information-from-the-epsg-code" class="level3">
 <h3 class="anchored" data-anchor-id="get-the-projection-information-from-the-epsg-code">Get the projection information from the EPSG code</h3>
 <p><strong>Geographic</strong></p>
-<div id="1e74102c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.861436Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.852557Z&quot;}}" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>crs_4326 <span class="op">=</span> CRS.from_epsg(<span class="dv">4326</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>crs_4326</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
-<pre><code>&lt;Geographic 2D CRS: EPSG:4326&gt;
-Name: WGS 84
-Axis Info [ellipsoidal]:
-- Lat[north]: Geodetic latitude (degree)
-- Lon[east]: Geodetic longitude (degree)
-Area of Use:
-- name: World.
-- bounds: (-180.0, -90.0, 180.0, 90.0)
-Datum: World Geodetic System 1984 ensemble
-- Ellipsoid: WGS 84
-- Prime Meridian: Greenwich</code></pre>
-</div>
+<div id="be4bd2e5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.861436Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.852557Z&quot;}}" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>crs_4326 <span class="op">=</span> CRS.from_epsg(<span class="dv">4326</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>crs_4326</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>NSIDC Polar Stereographic South</strong></p>
-<div id="eb101002" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.870023Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.862713Z&quot;}}" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>crs_3031 <span class="op">=</span> CRS.from_epsg(<span class="dv">3031</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>crs_3031</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
-<pre><code>&lt;Projected CRS: EPSG:3031&gt;
-Name: WGS 84 / Antarctic Polar Stereographic
-Axis Info [cartesian]:
-- E[north]: Easting (metre)
-- N[north]: Northing (metre)
-Area of Use:
-- name: Antarctica.
-- bounds: (-180.0, -90.0, 180.0, -60.0)
-Coordinate Operation:
-- name: Antarctic Polar Stereographic
-- method: Polar Stereographic (variant B)
-Datum: World Geodetic System 1984 ensemble
-- Ellipsoid: WGS 84
-- Prime Meridian: Greenwich</code></pre>
-</div>
+<div id="5bcc5256" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.870023Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.862713Z&quot;}}" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>crs_3031 <span class="op">=</span> CRS.from_epsg(<span class="dv">3031</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>crs_3031</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="inspect-crs-definitions" class="level3">
@@ -913,15 +477,15 @@ Datum: World Geodetic System 1984 ensemble
 </section>
 <section id="transform-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="transform-the-data">Transform the data</h2>
-<div id="3761bee4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.876879Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.870960Z&quot;}}" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformer converts lon and lat values to x, y </span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>transformer <span class="op">=</span> Transformer.from_crs(crs_3031, crs_4326)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a rectangular grid </span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> np.meshgrid(ds.xgrid, ds.ygrid)</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pass x and y grid values to transform</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>lat, lon <span class="op">=</span> transformer.transform(x,y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="9f8d5da0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.876879Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.870960Z&quot;}}" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformer converts lon and lat values to x, y </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>transformer <span class="op">=</span> Transformer.from_crs(crs_3031, crs_4326)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># create a rectangular grid </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>x, y <span class="op">=</span> np.meshgrid(ds.xgrid, ds.ygrid)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># pass x and y grid values to transform</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>lat, lon <span class="op">=</span> transformer.transform(x,y)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="add-latitude-and-longitude-values-to-the-dataset" class="level2">
@@ -931,65 +495,51 @@ Datum: World Geodetic System 1984 ensemble
 <li>create a tuple <code>(dimension, value)</code></li>
 <li>add to the dataset (ds) <code>ds.coord['name']=(dimension, value)</code></li>
 </ul>
-<div id="5d6d5ffc" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.934488Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.927943Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ds.coords[<span class="st">'lat'</span>] <span class="op">=</span> (ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].dims, lat)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ds.coords[<span class="st">'lon'</span>] <span class="op">=</span> (ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].dims, lon)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>ds[<span class="st">'cdr_seaice_conc_monthly'</span>] <span class="op">=</span> (ds[<span class="st">'cdr_seaice_conc_monthly'</span>]</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>                                 .where(ds[<span class="st">'cdr_seaice_conc_monthly'</span>] <span class="op">&lt;=</span> <span class="dv">1</span>, </span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>                                        np.nan)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>                                 )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="fa390771" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.934488Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.927943Z&quot;}}" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ds.coords[<span class="st">'lat'</span>] <span class="op">=</span> (ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].dims, lat)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ds.coords[<span class="st">'lon'</span>] <span class="op">=</span> (ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].dims, lon)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>ds[<span class="st">'cdr_seaice_conc_monthly'</span>] <span class="op">=</span> (ds[<span class="st">'cdr_seaice_conc_monthly'</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                 .where(ds[<span class="st">'cdr_seaice_conc_monthly'</span>] <span class="op">&lt;=</span> <span class="dv">1</span>, </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                                        np.nan)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                                 )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="plot-data-with-new-coordinates-on-a-global-map" class="level2">
 <h2 class="anchored" data-anchor-id="plot-data-with-new-coordinates-on-a-global-map">Plot data with new coordinates on a global map</h2>
 <p>Because the data were in the polar stereographic projection, mapping the data onto a different projection (global map projection) below, doesn’t make the data fit well on the map.</p>
-<div id="d8163bec" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:12.048211Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.935142Z&quot;}}" data-execution_count="10">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the map size</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">13</span>,<span class="dv">5</span>))</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set map projection (PlateCarree(): global map projection)</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot data with new coordinates</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].plot.pcolormesh(<span class="st">'lon'</span>, </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">'lat'</span>, </span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>                                                 ax<span class="op">=</span>ax, </span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>                                                 transform<span class="op">=</span>ccrs.PlateCarree(), </span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>                                                 cmap<span class="op">=</span>cmocean.cm.ice, </span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>                                                 add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># add coastlines to the map</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="transforming-coords-from-crs-to-crs_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="7e0ee1a4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:12.048211Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.935142Z&quot;}}" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the map size</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">13</span>,<span class="dv">5</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set map projection (PlateCarree(): global map projection)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot data with new coordinates</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].plot.pcolormesh(<span class="st">'lon'</span>, </span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">'lat'</span>, </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>                                                 ax<span class="op">=</span>ax, </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>                                                 transform<span class="op">=</span>ccrs.PlateCarree(), </span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>                                                 cmap<span class="op">=</span>cmocean.cm.ice, </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>                                                 add_colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># add coastlines to the map</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="plot-data-with-new-coordinates-on-a-polar-stereographic-projection-map" class="level2">
 <h2 class="anchored" data-anchor-id="plot-data-with-new-coordinates-on-a-polar-stereographic-projection-map">Plot data with new coordinates on a polar stereographic projection map</h2>
-<div id="bb49fbe1" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:12.253404Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:12.049315Z&quot;}}" data-scrolled="true" data-execution_count="11">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set map projection </span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SouthPolarStereo(): southern polar stereographic projection)</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.SouthPolarStereo())</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].plot.pcolormesh(<span class="st">'lon'</span>, </span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">'lat'</span>, </span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>                                                 ax<span class="op">=</span>ax, </span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>                                                 cmap<span class="op">=</span>cmocean.cm.ice, </span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>                                                 transform<span class="op">=</span>ccrs.PlateCarree())</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="transforming-coords-from-crs-to-crs_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
+<div id="0b5ee8ef" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:12.253404Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:12.049315Z&quot;}}" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set map projection </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SouthPolarStereo(): southern polar stereographic projection)</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.SouthPolarStereo())</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].plot.pcolormesh(<span class="st">'lon'</span>, </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                                 <span class="st">'lat'</span>, </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>                                                 ax<span class="op">=</span>ax, </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                                                 cmap<span class="op">=</span>cmocean.cm.ice, </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                                                 transform<span class="op">=</span>ccrs.PlateCarree())</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="references" class="level2">
