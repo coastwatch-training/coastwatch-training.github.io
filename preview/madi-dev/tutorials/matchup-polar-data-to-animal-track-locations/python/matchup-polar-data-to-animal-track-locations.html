@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-0e3ed539be041831cc1e78d1e7c6bc50.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-22a0bb5b6e83dd4bbf2d82c671885b73.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -414,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="packages" class="level2">
 <h2 class="anchored" data-anchor-id="packages">Packages</h2>
-<div id="82ce58c7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-execution_count="1">
+<div id="1d2721cc" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -427,17 +427,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="loading-the-sea-ice-data-from-polarwatch-erddap" class="level3">
 <h3 class="anchored" data-anchor-id="loading-the-sea-ice-data-from-polarwatch-erddap">Loading the sea ice data from PolarWatch ERDDAP</h3>
-<div id="11ecd3b3" class="cell" data-execution_count="2">
+<div id="91f747bb" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get sea ice data by sending data request using xarray to ERDDAP using its unique ID 'nsidcG02202v4shmday'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">"https://polarwatch.noaa.gov/erddap/griddap/nsidcG02202v4shmday"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c8506cf2" class="cell" data-execution_count="3">
+<div id="bd1c5f43" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="plotting-sea-ice-data-on-a-map" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-sea-ice-data-on-a-map">Plotting Sea Ice Data on a Map</h3>
-<div id="f285991e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:786}}" data-execution_count="4">
+<div id="b081634d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:786}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select sea ice concentration variable of first timestep</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>sic <span class="op">=</span> ds[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -466,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="loading-penguin-telemetry-data-in-csv" class="level3">
 <h3 class="anchored" data-anchor-id="loading-penguin-telemetry-data-in-csv">Loading penguin telemetry data in csv</h3>
-<div id="c28393e8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:206}}" data-execution_count="5">
+<div id="d0bcec98" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:206}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load penguin data into pandas data frame</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>penguin <span class="op">=</span> pd.read_csv(<span class="st">'../data/copa_adpe_ncei.csv'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>penguin.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -475,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="processing-penguin-data" class="level3">
 <h3 class="anchored" data-anchor-id="processing-penguin-data">Processing Penguin Data</h3>
 <p>For this exercise, we will select ADPE24, female penguin whose track records are highest within the female group, and will follow her journey in the Arctic.</p>
-<div id="c18160ec" class="cell" data-execution_count="6">
+<div id="97210e10" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find BirdID with the most count by sex</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>penguin.groupby(<span class="st">'Sex'</span>)[<span class="st">'BirdId'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x.value_counts().idxmax())</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -495,10 +495,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="visualize-penguin-tracks-on-sea-ice-concentration-map" class="level3">
 <h3 class="anchored" data-anchor-id="visualize-penguin-tracks-on-sea-ice-concentration-map">Visualize penguin tracks on sea ice concentration map</h3>
-<div id="971cf837" class="cell" data-execution_count="7">
+<div id="7bc1fe63" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>adpe_dates</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f2f611fe" class="cell" data-execution_count="8">
+<div id="181e64bc" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset sea ice data based on ADPE24 unique dates</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ds_penguin <span class="op">=</span> ds.sel(time<span class="op">=</span>adpe_dates, method<span class="op">=</span><span class="st">'nearest'</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Process sea ice data</span></span>
@@ -552,7 +552,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="resampling-penguin-data-to-match-satellite-date" class="level3">
 <h3 class="anchored" data-anchor-id="resampling-penguin-data-to-match-satellite-date">Resampling Penguin data to match satellite Date</h3>
-<div id="3ff44b30" class="cell" data-execution_count="9">
+<div id="0a3f0e62" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>adpe24 <span class="op">=</span> adpe24[[<span class="st">"DateGMT"</span>, <span class="st">"Latitude"</span>, <span class="st">"Longitude"</span>]]</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>adpe24[<span class="st">'DateGMT'</span>] <span class="op">=</span> pd.to_datetime(adpe24[<span class="st">'DateGMT'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'</span><span class="sc">%d</span><span class="st">/%m/%Y'</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>adpe24_df <span class="op">=</span> adpe24.resample(<span class="st">'D'</span>, on<span class="op">=</span><span class="st">'DateGMT'</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -560,7 +560,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="transforming-crs-of-the-penguin-locations" class="level3">
 <h3 class="anchored" data-anchor-id="transforming-crs-of-the-penguin-locations">Transforming CRS of the penguin locations</h3>
-<div id="14e5507b" class="cell" data-execution_count="10">
+<div id="554b0909" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>latlon_crs <span class="op">=</span> ccrs.PlateCarree() <span class="co"># lat and lon</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>polar_crs <span class="op">=</span> ccrs.epsg(<span class="st">'3412'</span>) <span class="co"># South pole</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -574,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="extracting-satellite-data-to-match-penguin-track-and-date" class="level3">
 <h3 class="anchored" data-anchor-id="extracting-satellite-data-to-match-penguin-track-and-date">Extracting Satellite Data to match penguin track and date</h3>
-<div id="a86e0b0e" class="cell" data-execution_count="11">
+<div id="7e6045e2" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add new columns to the dataframe</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>adpe24_df[[<span class="st">"erddap_date"</span>, <span class="st">"matched_ygrid"</span>, <span class="st">"matched_xgrid"</span>, <span class="st">"matched_sea_ice_concen"</span>]] <span class="op">=</span> np.nan</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -599,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plotting-penguin-tracks-with-matched-sea-ice-concentration-data" class="level3">
 <h3 class="anchored" data-anchor-id="plotting-penguin-tracks-with-matched-sea-ice-concentration-data">Plotting Penguin Tracks with Matched Sea Ice Concentration Data</h3>
-<div id="387f00aa" class="cell" data-execution_count="12">
+<div id="7e5f6d85" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
