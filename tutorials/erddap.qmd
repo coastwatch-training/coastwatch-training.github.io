@@ -50,7 +50,7 @@ On the [Software Code Gallery](software.qmd) page, you’ll find individual less
 
 - [CoastWatch West Coast Node](https://coastwatch.pfeg.noaa.gov/erddap/)
 - [CoastWatch Central Pacific Node](https://oceanwatch.pifsc.noaa.gov/erddap/)
-- [CoastWatch Gulf of Mexico Node](https://cwcgom.aoml.noaa.gov/erddap/)
+- [CoastWatch Gulf of America Node](https://cwcgom.aoml.noaa.gov/erddap/)
 - [CoastWatch Great Lakes Node](https://coastwatch.glerl.noaa.gov/erddap/)
 - [CoastWatch Central](https://coastwatch.noaa.gov/erddap/)
 
