@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-22a0bb5b6e83dd4bbf2d82c671885b73.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-be56d6e2d0607e2b6296a90c573c7a5d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -391,7 +391,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="loadinstall-required-packages-mount-google-drive" class="level2">
 <h2 class="anchored" data-anchor-id="loadinstall-required-packages-mount-google-drive">Load/install required packages &amp; Mount Google Drive</h2>
-<div id="4043e03c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-execution_count="1">
+<div id="93697039" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load/install the required non-standard Python packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install cartopy</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install netCDF4</span>
@@ -413,7 +413,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </blockquote>
 <p>Next, choose one of the recognized domains, placing it into the <strong><em>Domain</em></strong> variable below.</p>
 <p>Finally, specify the location where you want the output PNG files to be created; in the <strong><em>Out_dir_L2</em></strong> and <strong><em>Out_dir_L3</em></strong> variables for level-2, and level-3 output, respectively. Execute this cell with the ‘play’ icon.</p>
-<div id="61e6a160" class="cell" data-execution_count="2">
+<div id="59aa0c83" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify Filename</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Filename = '/content/drive/MyDrive/ColabNotebooks/JPSS_SIC/JRR-IceConcentration_v3r3_j01_s202403070044010_e202403070045255_c202403070121021.nc'</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Filename = '/content/drive/MyDrive/ColabNotebooks/JPSS_SIC/Blended_SIC_N20_2020_350_12_15_0000_2400_north.tiff'  # SSEC</span></span>
@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>Out_dir_L3 <span class="op">=</span> <span class="st">'/content/drive/MyDrive/ColabNotebooks/JPSS_SIC/Output_L3'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>This portion of code imports required Python packages, as well as defining the domains to be recognized by the script. You can add your own domain, or change on of the existing ones, in the ‘domains’ dictionary.</p>
-<div id="f47e7303" class="cell" data-execution_count="3">
+<div id="333f4926" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
@@ -469,7 +469,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>These classes, or functions (<em>SIC_L2</em> and <em>SIC_L3</em>), handle the Level-2 (swath) VIIRS SIC files and the Level-3 (gridded) Blended files.</p>
-<div id="218ed71e" class="cell" data-execution_count="4">
+<div id="ae6bfee1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> SIC_L2:</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   <span class="co">"""Level2 SIC files"""</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -791,7 +791,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>Finally, execute the code below. Either SIC_L2 or SIC_L3 will be executed, depending on which type of file you’ve specified. You may have to scroll down a bit to see the resulting image here in Colab, but a PNG file will be generated, as well.</p>
 <p><strong>Note</strong>: During the first execution of this script, the Python module ‘Cartopy’ will need to download map-related files from “Natural Earth”. You will see Python-generated warning messages for this.</p>
-<div id="acacaea8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}}" data-execution_count="5">
+<div id="53865e60" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;colab&quot;,&quot;value&quot;:{&quot;base_uri&quot;:&quot;https://localhost:8080/&quot;,&quot;height&quot;:1000}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify data file exists</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> os.path.exists(<span class="ss">f'</span><span class="sc">{</span>Filename<span class="sc">}</span><span class="ss">'</span>):</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   sys.exit(<span class="ss">f'</span><span class="sc">{</span>Filename<span class="sc">}</span><span class="ss"> does not exist'</span>)</span>
