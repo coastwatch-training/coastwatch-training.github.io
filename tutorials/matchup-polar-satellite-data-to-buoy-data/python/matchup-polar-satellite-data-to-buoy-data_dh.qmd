@@ -201,3 +201,4 @@ plt.xticks(rotation=45)
 plt.legend()
 ```
 
+![](images/py1.png)

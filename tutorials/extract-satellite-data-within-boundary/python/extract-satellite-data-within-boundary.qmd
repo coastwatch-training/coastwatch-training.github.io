@@ -26,7 +26,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/NOAA_DHW_monthly
 __Longhurst Marine Provinces__  
 The dataset represents the division of the world oceans into provinces as defined by Longhurst (1995; 1998; 2006). This division has been based on the prevailing role of physical forcing as a regulator of phytoplankton distribution. The Longhurst Marine Provinces dataset is available online (https://www.marineregions.org/downloads.php) and within the shapes folder associated with this repository. For this tutorial we will use the Gulf Stream province (ProvCode: GFST)  
 
-![../images/longhurst.png](attachment:longhurst.png)
+![](images/longhurst.png)
 
 
 ## Import packages
@@ -141,6 +141,8 @@ ds_subset[0].plot.pcolormesh(ax=ax1, transform=ccrs.PlateCarree(), cmap='jet')
 plt.title('Satellite Data Before Masking')
 ```
 
+![](images/py1.png)
+
 ## Create the region from the shape file
 The plot shows the shape of the region and its placement along the US East Coast. 
 
@@ -149,6 +151,8 @@ region = regionmask.from_geopandas(gulf_stream)
 region.plot()
 
 ```
+
+![](images/py2.png)
 
 ## Mask the satellite data
 
@@ -194,6 +198,8 @@ plt.title('Satellite Data After Masking for Longhurst GFST')
 
 ```
 
+![](images/py3.png)
+
 ## Plot the mean seasonal temperature for the province
 
 ```{python}
@@ -215,6 +221,8 @@ plt.title('Gulf Stream Province Monthly Mean Temperature 2020')
 plt.ylabel('SST(degrees C)') 
 plt.legend()
 ```
+
+![](images/py4.png)
 
 ## References
 The several CoastWatch Node websites have data catalog containing documentation and links to all the datasets available:  

@@ -169,6 +169,8 @@ plt.title("Lake Erie Average CHL - " + yr + '-' + mn)
 plt.show()
 ```
 
+![](images/py1.png)
+
 #### -  Compute the Lake Erie chlorophyll monthly mean from 2002 to 2017
 
 ```{python}
@@ -225,6 +227,8 @@ plt.title("Lake Erie Monthly Average CHL " + m_yr_list[0] + '-' + m_yr_list[-1])
 plt.legend()
 ```
 
+![](images/py2.png)
+
 ## Get Lake Erie Dailly Average VIIRS data 
 
 ```{python}
@@ -270,6 +274,8 @@ print(type(v_chl_avg))
 print(v_chl_avg.shape)
 print(e_v_dates.shape)
 ```
+
+![](images/py3.png)
 
 ```{python}
 #e_v_ds.close()

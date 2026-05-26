@@ -88,6 +88,8 @@ iliamna_shp.crs
 iliamna_shp.plot()
 ```
 
+![](images/py1.png)
+
 #### Load IMS data from PolarWatch ERDDAP
 
 ```{python}
@@ -102,6 +104,8 @@ ds = ds.sel(time=ds_date)
 # Visualize the IMS data
 ds["IMS_Surface_Values"].plot()
 ```
+
+![](images/py2.png)
 
 ```{python}
 # Check the IMS data projection
@@ -206,6 +210,8 @@ iliamna_transformed.crs
 iliamna_transformed.plot()
 ```
 
+![](images/py3.png)
+
 #### Subset the satellite data using the Lake shape
 
 ```{python}
@@ -217,6 +223,8 @@ ds_clipped = clip_data_to_shapefile(ds, iliamna_transformed.geometry, iliamna_tr
 # Visualized clipped data
 ds_clipped["IMS_Surface_Values"].plot()
 ```
+
+![](images/py4.png)
 
 ### Resources
 

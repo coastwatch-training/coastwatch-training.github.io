@@ -93,6 +93,8 @@ ds_subset.plot.pcolormesh(cmap="gist_rainbow_r",
                           )
 ```
 
+![](images/py1.png)
+
 ## Define and mask the TurtleWatch band
 * The band is between 17.5°C and 18.5°C.
 * Use the "where" function of xarray to flag all pixels in the habitat range by replacing their values with a value that is much smaller than the data range minimum.
@@ -133,6 +135,8 @@ plt.title('TurtleWatch band - ' + date_for_sat_data)
 plt.ylabel('Latitude')
 plt.xlabel('Longitude')
 ```
+
+![](images/py2.png)
 
 ## References
 * TurtleWatch: https://oceanwatch.pifsc.noaa.gov/turtlewatch.html

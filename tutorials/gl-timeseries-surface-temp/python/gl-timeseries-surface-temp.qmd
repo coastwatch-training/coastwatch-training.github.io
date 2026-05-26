@@ -276,4 +276,6 @@ Third, call the function (defined before) to draw the plot.
 draw_plot(m_all_arry, 'Michigan',  c_year, jd, year_list)
 ```
 
+![](images/py1.png)
+
 
