@@ -425,7 +425,7 @@ Figure. Global map on -180/+180 longitude showing data region crossing the antim
 This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/Radiometer Suite (VIIRS) sensors aboard the Suomi-NPP and NOAA-20 spacecraft. The gaps in the data are then filled using an empirical orthogonal function (DINEOF). The dataset is available from the CoastWatch Central ERDDAP: https://coastwatch.noaa.gov/erddap/griddap/noaacwNPPN20VIIRSSCIDINEOFDaily</p>
 <section id="import-packages" class="level3">
 <h3 class="anchored" data-anchor-id="import-packages">Import packages</h3>
-<div id="0974ff72" class="cell" data-execution_count="1">
+<div id="513ec0f7" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -443,7 +443,7 @@ This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/R
 <li>Date to extract</li>
 <li>Minimum and maximum values for the longitude and latitude ranges.</li>
 </ul>
-<div id="5f36ffbe" class="cell" data-execution_count="2">
+<div id="39644b31" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_date <span class="op">=</span> <span class="st">'2023-08-18'</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lon_min <span class="op">=</span> <span class="op">-</span><span class="fl">152.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lon_max <span class="op">=</span> <span class="fl">176.</span></span>
@@ -456,7 +456,7 @@ This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/R
 <h2 class="anchored" data-anchor-id="get-the-seawifs-data">Get the SeaWiFS data</h2>
 <section id="open-an-xarray-dataset-object" class="level3">
 <h3 class="anchored" data-anchor-id="open-an-xarray-dataset-object">Open an xarray dataset object</h3>
-<div id="1b3c27da" class="cell" data-execution_count="3">
+<div id="b64048a5" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#url = 'https://coastwatch.noaa.gov/erddap/griddap/noaacwNPPN20VIIRSSCIDINEOFDaily'</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.noaa.gov'</span>,</span>
@@ -472,7 +472,7 @@ This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/R
 <section id="subset-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="subset-the-data">Subset the data</h3>
 <p>We will do this in two steps to make the process easier to follow. 1. Subset the data for date and latitude range 2. Subset the area around the antimeridian * Request data &lt; the limit (-152) on the US side of the antimeridian, i.e.&nbsp;-180 to -152 * Request data &gt; the limit (176) on the Russian side of the antimeridian, i.e.&nbsp;176 to 180</p>
-<div id="4218b1f9" class="cell" data-execution_count="4">
+<div id="31637c1e" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The lat1 and lat2 values are used in the slice function</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># At first we set them as if the dataset is compliant with standards</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>lat1 <span class="op">=</span> lat_min</span>
@@ -499,7 +499,7 @@ This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/R
 </section>
 <section id="plot-the-downloaded-data" class="level2">
 <h2 class="anchored" data-anchor-id="plot-the-downloaded-data">Plot the downloaded data</h2>
-<div id="f4fd8a56" class="cell" data-execution_count="5">
+<div id="2d648d9d" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make plot area</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -526,7 +526,7 @@ This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/R
 </section>
 <section id="change-to-0-360-longitude-numbering" class="level2">
 <h2 class="anchored" data-anchor-id="change-to-0-360-longitude-numbering">Change to 0-360 longitude numbering</h2>
-<div id="67c0da54" class="cell" data-execution_count="6">
+<div id="fb3066ab" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ds_360 <span class="op">=</span> ds_subset.assign_coords(longitude<span class="op">=</span>(ds_subset.longitude <span class="op">%</span> <span class="dv">360</span>))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'minimum lon value ='</span>, ds_360.longitude.<span class="bu">min</span>().item())</span>
@@ -544,7 +544,7 @@ This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/R
 <li>First we need to find the position where the longitude discontinuity happens, i.e.&nbsp;where the most easterly longitude (208.0) abruptly meets the most easterly longitude value (176.0)</li>
 <li>Next, use the discontinuity position to determine how many positions to roll the longitude array to the right. Apply the number to the <code>roll</code> function.</li>
 </ul>
-<div id="60cada71" class="cell" data-execution_count="7">
+<div id="1d8b7cc6" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code finds the index where the absolute value between each longitude value </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and the largest longitude value is maximal</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>discont_index <span class="op">=</span> <span class="bu">max</span>(<span class="bu">range</span>(<span class="bu">len</span>(ds_360.longitude)), </span>
@@ -572,7 +572,7 @@ This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/R
 <h2 class="anchored" data-anchor-id="plot-the-data">Plot the data</h2>
 <section id="the-discontinuity-has-been-corrected" class="level4">
 <h4 class="anchored" data-anchor-id="the-discontinuity-has-been-corrected">The discontinuity has been corrected!</h4>
-<div id="d9495777" class="cell" data-execution_count="8">
+<div id="34466cb3" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make plot area</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -597,7 +597,7 @@ This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/R
 </section>
 <section id="save-the-corrected-dataset-as-a-netcdf-file" class="level2">
 <h2 class="anchored" data-anchor-id="save-the-corrected-dataset-as-a-netcdf-file">Save the corrected dataset as a netCDF file</h2>
-<div id="9fe6276e" class="cell" data-execution_count="9">
+<div id="08bad43b" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ds_rolled.to_netcdf(<span class="st">'data_corrected_0_to_360.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 

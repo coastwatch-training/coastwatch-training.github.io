@@ -405,7 +405,7 @@ This dataset includes sea ice concentration data from the northern hemisphere, a
 </section>
 <section id="import-packages" class="level2">
 <h2 class="anchored" data-anchor-id="import-packages">Import packages</h2>
-<div id="5ecaf928" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:35.828080Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:35.517077Z&quot;}}" data-execution_count="1">
+<div id="7900bb63" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:35.828080Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:35.517077Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4 <span class="im">as</span> nc</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
@@ -413,7 +413,7 @@ This dataset includes sea ice concentration data from the northern hemisphere, a
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ca315659" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:39.789479Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:39.040559Z&quot;}}" data-execution_count="2">
+<div id="a1ee876e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:39.789479Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:39.040559Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There are many ways to get data.  We will create a function that points to </span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># NOAA PolarWatch ERDDAP Server gridded dataset page to get data with its unique ID</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -431,18 +431,18 @@ This dataset includes sea ice concentration data from the northern hemisphere, a
 <section id="mapping-projected-data-on-a-projected-basemap" class="level2">
 <h2 class="anchored" data-anchor-id="mapping-projected-data-on-a-projected-basemap">Mapping projected data on a projected basemap</h2>
 <p>We first need to create a basemap with the Polar Stereographic projection. Most of the netCDF data files include metadata about mapping. This can be used to set a projection and mapping boundaries for the data.</p>
-<div id="aa07a9ba" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:42.377249Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:42.366469Z&quot;}}" data-execution_count="3">
+<div id="de4e2dd0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:42.377249Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:42.366469Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints metadata embedded in netCDF file</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(da)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="6b7de45a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:45.132108Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:45.116947Z&quot;}}" data-execution_count="4">
+<div id="506f0bfd" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:45.132108Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:45.116947Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints variable names</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>da.variables.keys()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9c4f85a5" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:47:07.417301Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:47:07.097346Z&quot;}}" data-execution_count="5">
+<div id="63d38bd2" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:47:07.417301Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:47:07.097346Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="6441be03" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:07.598128Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:06.479427Z&quot;}}" data-execution_count="6">
+<div id="9fe669fc" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:07.598128Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:06.479427Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set mapping crs to Cartopy's North Polar Stereo graphic</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>crs_epsg <span class="op">=</span> ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -470,7 +470,7 @@ This dataset includes sea ice concentration data from the northern hemisphere, a
 <section id="mapping-data-with-epsg-code" class="level2">
 <h2 class="anchored" data-anchor-id="mapping-data-with-epsg-code">Mapping data with EPSG Code</h2>
 <p>You can set the data crs using the EPSG code. In our case, the metadata provides the projection crs (EPSG: 3411) In this exercise, we will use the same basemap projection, but set the data projection with the EPSG code.</p>
-<div id="a1855036" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.727179Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:07.599078Z&quot;}}" data-execution_count="7">
+<div id="d98b2cff" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.727179Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:07.599078Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set data projection using EPSG Code </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data_crs <span class="op">=</span> ccrs.epsg(<span class="st">'3411'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>crs_epsg <span class="op">=</span> ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>)</span>
@@ -498,7 +498,7 @@ This dataset includes sea ice concentration data from the northern hemisphere, a
 <p>To demonstrate mapping non-projected data onto the projected map, we will use polar bear tracking data. While the temporal coverage of the two datasets differ (<em>sea ice concentration</em> and <em>polarbear locations</em>), the exercise is to show how to use data with latitude and longitude onto the projected basemap.</p>
 <p>Data: Polar bear tracking data</p>
 <p>Dataset Info: https://borealisdata.ca/file.xhtml?fileId=151017&amp;version=1.0</p>
-<div id="2f232b74" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.763624Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.728150Z&quot;}}" data-execution_count="8">
+<div id="1d02b3a9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.763624Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.728150Z&quot;}}" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read the dataset</span></span>
@@ -525,7 +525,7 @@ This dataset includes sea ice concentration data from the northern hemisphere, a
 <span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="images/py3.png" class="img-fluid"></p>
-<div id="5aa861c0" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:10.210429Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.764428Z&quot;}}" data-execution_count="9">
+<div id="56a31d4a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:10.210429Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.764428Z&quot;}}" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>crs_epsg)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
