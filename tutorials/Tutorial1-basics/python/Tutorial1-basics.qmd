@@ -53,7 +53,7 @@ Because ERDDAP includes RESTful services, you can download data listed on any ER
 
 For example, the following page allows you to subset monthly sea surface temperature (SST) https://coastwatch.pfeg.noaa.gov/erddap/griddap/NOAA_DHW_monthly.html
 
-![erddap.png](attachment:erddap.png)
+![](images/erddap.png)
 
 * Select your region and date range of interest, then select the '.nc' (NetCDF) file type and click on "Just Generate the URL".  
 
@@ -186,6 +186,8 @@ plt.title("Monthly Sea Surface Temperature - "
 plt.show()
 ```
 
+![](images/py1.png)
+
 ## Plotting a time series
 
 ### Subset the following box from the data: 
@@ -224,6 +226,8 @@ plt.title("Monthly Sea Surface Temperature "
 plt.show()  
 ```
 
+![](images/py2.png)
+
 ## Compute the monthly mean for each month
 
 ```{python}
@@ -237,6 +241,8 @@ plt.figure(figsize=(8, 4))
 plt.scatter(ds.time, res)
 plt.ylabel('SST (ºC)')
 ```
+
+![](images/py3.png)
 
 ## Creating a map of average SST over a year
 ### Compute the yearly mean for the region
@@ -258,4 +264,4 @@ plt.title("Mean SST "
 plt.show()
 ```
 
-
+![](images/py4.png)
