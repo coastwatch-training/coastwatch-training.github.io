@@ -96,6 +96,8 @@ plt.colorbar(cs, ax=ax, location='right', shrink =0.8)
 ax.set_title('Ice Concentration of timestep 1')
 ```
 
+![](images/py1.png)
+
 ### Loading penguin telemetry data in csv 
 
 ```{python}
@@ -186,6 +188,8 @@ plt.tight_layout()
 plt.show()
      
 ```
+
+![](images/py2.png)
 
 ### Resampling Penguin data to match satellite Date
 
@@ -289,4 +293,6 @@ plt.title("Sea Ice Concen Matchup to Penguin Track", size=15)
 plt.show()
      
 ```
+
+![](images/py3.png)
 

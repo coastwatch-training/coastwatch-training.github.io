@@ -10,7 +10,7 @@ jupyter: python3
 ## Background
 Many datasets use a system where longitude is numbered from -180 to +180 degrees east (see example below). This numbering system presents a problem for researchers working in a region that spans the antimeridian, because the parts of the data end up on the opposite ends of the map.
 
-![map_-180to180_500px.png](attachment:map_-180to180_500px.png)
+![](images/py1.png)
 <center>Figure. Global map on -180/+180 longitude showing data region crossing the antimeridian.</center>
 
 
@@ -44,7 +44,7 @@ import matplotlib as mpl
 ## Define the area to extract
 We will extract data for an area in the Bering Sea between Russia and the United States at 176°E to -152°E longitude and 50°N to 70°N latitude. 
 
-![interest_area_500px.png](attachment:interest_area_500px.png)
+![](images/py.png)
 
 ### Set up variables
 * Date to extract
@@ -127,6 +127,8 @@ bar.set_label('Chlorophyll (log mg m-3)')
 plt.show()
 ```
 
+![](images/py3.png)
+
 ### The plot of the data shows a discontinuity
 The plot of subsetted data (above) shows that we downloaded the data we requested, but there is a discontinuity on the right side of the map. The data from the Russian side (west of the antimeridian) is mapped to the east of the data on the US side.   
 
@@ -202,6 +204,8 @@ bar = plt.colorbar(shw, shrink=0.65)
 bar.set_label('Chlorophyll (log mg m-3)')
 plt.show()
 ```
+
+![](images/py4.png)
 
 ## Save the corrected dataset as a netCDF file
 

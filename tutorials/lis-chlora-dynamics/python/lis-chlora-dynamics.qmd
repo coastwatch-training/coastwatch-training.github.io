@@ -69,8 +69,6 @@ Because ERDDAP includes RESTful services, you can download data listed on any ER
 
 For example, the following page allows you to download daily chlorophyll-a (chlor_a) https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.html
 
-![image.png](attachment:image.png)
-
 * Select the date range of interest, then select the '.nc' (NetCDF) file type and click on "Just Generate the URL".  
 
 * In this specific example, the URL we generated is :  
@@ -173,6 +171,8 @@ ds_mon.chlor_a.plot(col="time",
                         )
 ```
 
+![](images/py1.png)
+
 ## Creating a Map of Average Chlorophyll-a Over the Year
 ### Compute the yearly mean for the region
 Here we use NumPy's mean function to calculate the average chlorophyll-a across the time dimension (axis 0), resulting in a xarray dataarray of yearly mean values.
@@ -193,6 +193,8 @@ plt.title("Mean Chl-a "
 
 plt.show()
 ```
+
+![](images/py2.png)
 
 ## Spatial Subset and Time Series Comparing Chlorophyll-a Seasonal Cycles in Western and Eastern Long Island Sound
 
@@ -243,4 +245,4 @@ plt.ylabel('Chlorophyll-a (mg m$^{-3}$)')
 plt.legend()
 ```
 
-
+![](images/py3.png)

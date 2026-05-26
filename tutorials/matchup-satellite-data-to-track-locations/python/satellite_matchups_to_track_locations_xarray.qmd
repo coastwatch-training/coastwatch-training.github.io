@@ -114,6 +114,8 @@ plt.title('Animal Track for Turtle #25317', fontsize=20)
 plt.show()
 ```
 
+![](images/py1.png)
+
 ## Prepare track data for use to extract satellite data
 
 ### Create a column with Pandas date objects  
@@ -264,6 +266,8 @@ print('Range:', df.matched_chla.min(), df.matched_chla.max())
 _ = df.matched_chla.hist(bins=40)
 ```
 
+![](images/py2.png)
+
 The range of chlorophyll values can be large, with lots of very low values and a few very high values. Using a  linear color bar,  most of the lower values would have the same color.
 * To better visualize the data, we often plot the log or log10 of chlorophyll. 
 
@@ -273,6 +277,8 @@ The range of chlorophyll values can be large, with lots of very low values and a
 print('Range:', np.log(df.matched_chla.min()), np.log(df.matched_chla.max()))
 _ = np.log(df.matched_chla).hist(bins=40)
 ```
+
+![](images/py3.png)
 
 * The logarithmic transformation displays the range of values across the color bar range (above). 
 
@@ -328,6 +334,8 @@ cbar.ax.set_yticklabels(np.around(np.exp(levs2), 2), size=10)
 plt.title("Chlorophyll Matchup to Animal Track #25317", size=15)
 plt.show()
 ```
+
+![](images/py4.png)
 
 ## On your own!
 
@@ -547,6 +555,8 @@ ax.set_title("Mean chlorophyll at dusky shark locations")
 plt.show()
 ```
 
+![](images/py5.png)
+
 ## Subset all tags for a single shark
 
 This step selects all detections associated with one transmitter ID. Focusing on a single shark allows individual movement patterns and environmental conditions to be examined.
@@ -620,6 +630,8 @@ plt.show()
 plt.close(fig)
 ```
 
+![](images/py6.png)
+
 ## Compare chlorophyll conditions by year using a boxplot
 
 Matched chlorophyll values for a single shark are grouped by calendar year and displayed as a boxplot. The boxplot summarizes interannual differences and variability in environmental conditions experienced by the shark.
@@ -653,3 +665,4 @@ ax.set_xticklabels(["2017", "2018"])
 plt.show()
 ```
 
+![](images/py7.png)

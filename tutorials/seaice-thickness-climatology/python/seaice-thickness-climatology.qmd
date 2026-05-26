@@ -99,6 +99,8 @@ plt.title("2023 Sea ice thickness January Average")
 plt.show()
 ```
 
+![](images/py1.png)
+
 ### Loading Monthly Average from 2006 to 2020
 
 To do climate analysis such as computing climatology and trend analysis, 
@@ -131,6 +133,8 @@ plt.title("Sea Ice Thickness Historical Month Mean (Feb)")
 plt.show()
 ```
 
+![](images/py2.png)
+
 ### Computing Anomalies  
 
 To assess recent changes in sea ice thickness, we can compare the current sea ice thickness for the year 2023 to the 15-year historical mean.  An anaomaly is a commonly used metric that represents the difference (or departure) between the current value and the historical average. 
@@ -153,6 +157,8 @@ plt.tight_layout()
 # Display the plots
 plt.show()
 ```
+
+![](images/py3.png)
 
 ### Computing Trends
 
@@ -204,3 +210,4 @@ plt.title('Sea Ice Thickness Trend for September')
 plt.show()
 ```
 
+![](images/py4.png)
