@@ -215,7 +215,7 @@ plt.title("Lake Erie Water Surface Temperature - " + dates[0].strftime('%b %d, %
 plt.show()
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ### Plotting a time series
 
@@ -239,7 +239,7 @@ plt.title("Subset of Lake Erie Water Surface Temperature " + dates[0].strftime('
 plt.show()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 #### - let's compute the daily mean over the bounding region:
 
@@ -266,7 +266,7 @@ plt.xticks(dates,rotation=70, fontsize=10 )
 plt.show()
 ```
 
-![](images/py3.png)
+![](../images/py3.png)
 
 ### Creating a map of average SST over a month
 
@@ -297,7 +297,7 @@ plt.title("Mean SST " + dates[0].strftime('%Y-%m-%d')+' - '+dates[-1].strftime('
 plt.show()
 ```
 
-![](images/py4.png)
+![](../images/py4.png)
 
 ```{python}
 !jupyter nbconvert --to html GL_python_tutorial1.ipynb

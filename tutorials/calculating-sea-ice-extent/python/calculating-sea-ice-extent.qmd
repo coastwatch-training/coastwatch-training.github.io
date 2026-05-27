@@ -139,7 +139,7 @@ bar.set_label('Sea Ice Cover (fractional coverage)')
 plt.show()
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ## Get area information from the ancillary grid dataset
 
@@ -325,7 +325,7 @@ ax.legend()
 plt.show()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ## References
 -   <a href="https://nsidc.org/data/g02202/versions/4" target="_blank">NSIDC Data Product Description</a>

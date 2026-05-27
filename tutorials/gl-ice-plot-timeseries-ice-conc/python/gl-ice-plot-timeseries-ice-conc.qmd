@@ -219,7 +219,7 @@ plt.title("West Lake Erie Ice Concentration - " + dates[5872].strftime('%b %d, %
 plt.show()
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 #### Let's compute the daily mean over the west Lake Erie region:
 
@@ -257,7 +257,7 @@ plt.xticks(dates[5872:5902+1],rotation=70, fontsize=10 )
 plt.show()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ```{python}
 !jupyter nbconvert --to html GL_python_tutorial4.ipynb

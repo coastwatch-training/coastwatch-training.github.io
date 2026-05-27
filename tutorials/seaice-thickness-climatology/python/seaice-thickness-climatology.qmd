@@ -99,7 +99,7 @@ plt.title("2023 Sea ice thickness January Average")
 plt.show()
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ### Loading Monthly Average from 2006 to 2020
 
@@ -133,7 +133,7 @@ plt.title("Sea Ice Thickness Historical Month Mean (Feb)")
 plt.show()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ### Computing Anomalies  
 
@@ -158,7 +158,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![](images/py3.png)
+![](../images/py3.png)
 
 ### Computing Trends
 
@@ -210,4 +210,4 @@ plt.title('Sea Ice Thickness Trend for September')
 plt.show()
 ```
 
-![](images/py4.png)
+![](../images/py4.png)

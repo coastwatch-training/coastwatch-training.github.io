@@ -248,7 +248,7 @@ plt.savefig("SSHmap.png", dpi=300, bbox_inches="tight")
 plt.show()
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ## Make map of EKE
 
@@ -325,7 +325,7 @@ plt.savefig("EKEmap.png", dpi=300, bbox_inches="tight")
 plt.show()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ## Make map of MESI
 
@@ -404,7 +404,7 @@ plt.savefig("MESImap.png", dpi=300, bbox_inches="tight")
 plt.show()
 ```
 
-![](images/py3.png)
+![](../images/py3.png)
 
 ## Make map of eddy location
 
@@ -526,7 +526,7 @@ plt.savefig("Eddymap.png", dpi=300, bbox_inches="tight")
 plt.show()
 ```
 
-![](images/py4.png)
+![](../images/py4.png)
 
 The maps above show a snapshot of conditions in the middle of the cruise track. To see a more synoptic view of of conditions along the track we will extract the match-up data for the positions along the cruise track
 
@@ -650,7 +650,7 @@ plt.savefig("mesi_track.png", dpi=300, bbox_inches="tight")
 plt.show()
 ```
 
-![](images/py5.png)
+![](../images/py5.png)
 
 ## Get eddy label (anti) values
 
@@ -834,7 +834,7 @@ plt.savefig("eddy_track.png", dpi=300, bbox_inches="tight")
 plt.show()
 ```
 
-![](images/py6.png)
+![](../images/py6.png)
 
 ## Extract EKE values along the ship track
 
@@ -921,4 +921,4 @@ plt.savefig("eke_map.png", dpi=300, bbox_inches="tight")
 plt.show()
 ```
 
-![](images/py7.png)
+![](../images/py7.png)
