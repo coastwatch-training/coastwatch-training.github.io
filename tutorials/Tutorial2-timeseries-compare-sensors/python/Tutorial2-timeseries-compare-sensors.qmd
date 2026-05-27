@@ -159,7 +159,7 @@ np.log10(sw_subset[-1]).plot.pcolormesh(ax=ax1,
 plt.title('Time series data location - Gulf of Mexico')
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ### Compute the monthly mean over the region
 
@@ -275,7 +275,7 @@ plt.ylabel('Chl-a (mg m-3)')
 plt.legend()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ## Get OC-CCI data
 If you needed a single time series from 1997 to present, you would have to use the plot above to devise some method to reconcile the difference in values where two datasets overlap. Alternatively, you could use the ESA OC-CCI (Ocean Color Climate Change Initiative) dataset, which blends data from many satellite missions into a single dataset, including data from SeaWiFS, MODIS, and VIIRS. 
@@ -358,7 +358,7 @@ plt.ylabel('Chl-a (mg m-3)')
 plt.legend()
 ```
 
-![](images/py3.png)
+![](../images/py3.png)
 
 ## References
 * CoastWatch Node websites have data catalogs containing documentation and links to all the datasets available:  

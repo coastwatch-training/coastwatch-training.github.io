@@ -175,7 +175,7 @@ ds.cdr_seaice_conc_monthly[0][:].plot.pcolormesh('lon',
 ax.coastlines()
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ## Plot data with new coordinates on a polar stereographic projection map
 
@@ -195,7 +195,7 @@ ds.cdr_seaice_conc_monthly[0][:].plot.pcolormesh('lon',
 ax.coastlines()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ## References
 **Useful links**

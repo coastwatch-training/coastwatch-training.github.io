@@ -105,7 +105,7 @@ ax.set_title('Ice Concentration using Cartopy projection NorthPolarStereo()')
 plt.show()
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ## Mapping data with EPSG Code
 
@@ -135,7 +135,7 @@ ax.set_title('Ice Concentration using EPSG code (3411)')
 plt.show()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 # Adding non-projected data with lat and lon to the projected map
 
@@ -173,7 +173,7 @@ ax.set_title('Polar bear track data (B)')
 plt.show()
 ```
 
-![](images/py3.png)
+![](../images/py3.png)
 
 ```{python}
 #| ExecuteTime: {end_time: '2023-07-31T19:34:10.210429Z', start_time: '2023-07-31T19:34:08.764428Z'}
@@ -204,7 +204,7 @@ ax.set_title('Ice Concentration and polar bear track data on Polar Stereographic
 plt.show()
 ```
 
-![](images/py4.png)
+![](../images/py4.png)
 
 ## References
 

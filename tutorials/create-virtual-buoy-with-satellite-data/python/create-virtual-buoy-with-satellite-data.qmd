@@ -204,7 +204,7 @@ plt.ylabel('SST (degrees C)')
 plt.legend()
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ## Clean up the merged dataset
 Regression packages typically do not like nan's. 
@@ -253,7 +253,7 @@ print(slope, intercept)
 # clean_merged_df.to_csv("virtual_buoy_example.csv", index=False)
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ## It looks like your virtual buoy is ready for operations
 * There is essentially a one-to-one relationship between buoy and satellite SST. The slope (0.93) is very close to 1

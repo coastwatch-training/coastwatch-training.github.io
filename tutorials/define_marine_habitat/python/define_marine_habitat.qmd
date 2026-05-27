@@ -93,7 +93,7 @@ ds_subset.plot.pcolormesh(cmap="gist_rainbow_r",
                           )
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ## Define and mask the TurtleWatch band
 * The band is between 17.5°C and 18.5°C.
@@ -136,7 +136,7 @@ plt.ylabel('Latitude')
 plt.xlabel('Longitude')
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ## References
 * TurtleWatch: https://oceanwatch.pifsc.noaa.gov/turtlewatch.html

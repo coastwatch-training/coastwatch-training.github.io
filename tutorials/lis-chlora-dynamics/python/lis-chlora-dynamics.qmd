@@ -171,7 +171,7 @@ ds_mon.chlor_a.plot(col="time",
                         )
 ```
 
-![](images/py1.png)
+![](../images/py1.png)
 
 ## Creating a Map of Average Chlorophyll-a Over the Year
 ### Compute the yearly mean for the region
@@ -194,7 +194,7 @@ plt.title("Mean Chl-a "
 plt.show()
 ```
 
-![](images/py2.png)
+![](../images/py2.png)
 
 ## Spatial Subset and Time Series Comparing Chlorophyll-a Seasonal Cycles in Western and Eastern Long Island Sound
 
@@ -245,4 +245,4 @@ plt.ylabel('Chlorophyll-a (mg m$^{-3}$)')
 plt.legend()
 ```
 
-![](images/py3.png)
+![](../images/py3.png)
