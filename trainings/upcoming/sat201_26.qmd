@@ -29,8 +29,8 @@ The inaugural 2026 course will cover the following subjects:
 
 | Time (PST)      | Topic                                                                         | Presenter                    |
 |:-------------|:-----------------------------------------------------------------------------|:----------------------------|
-| 11:00 - 11:45   | Accessing data not on ERDDAP servers                                     |  Dale Robinson  |
-| 11:45 - 12:30   | a demo                                                      |     |
+| 11:00 - 11:45   | Introduction to SAR data                                     |  Chris Jackson  |
+| 11:45 - 12:30   | SAR Case Study                                                      |     |
 | 12:30 - 12:45   | Break                                                    |     |   
 | 12:45 - 1:30   | Question & Answer and hand's on session                                                      |     | 
 
@@ -58,8 +58,8 @@ The inaugural 2026 course will cover the following subjects:
 
 | Time (PST)      | Topic                                                                         | Presenter                    |
 |:-------------|:-----------------------------------------------------------------------------|:----------------------------|
-| 11:00 - 11:45   | Introduction to SAR Data                                               | Chris Jackson   |
-| 11:45 - 12:30   | SAR Case Study                                                     |     |
+| 11:00 - 11:45   | Accessing data not on ERDDAP servers                                               | Madison Richardson   |
+| 11:45 - 12:30   | A demo                                                     |     |
 | 12:30 - 12:45   | Break                                                    |     |   
 | 12:45 - 1:30   | Question & Answer and hand's on session                                                      |     | 
 
@@ -68,7 +68,8 @@ The inaugural 2026 course will cover the following subjects:
  | Name              | Affiliation                    | 
  |:-----------------|:-----------------------------------------------------------------------------|
  | [Cara Wilson](mailto:cara.wilson@noaa.gov)       | CoastWatch/West Coast Node, PI |
- | [Dale Robinson](mailto:dale.robinson@noaa.gov)     | CoastWatch/West Coast Node, node manager |
+ | [Dale Robinson](mailto:dale.robinson@noaa.gov)     | CoastWatch/West Coast Node, Development Lead |
+ | [Madison Richardson](mailto:madison.richardson@noaa.gov)     | CoastWatch/West Coast Node, Environmental Data Analyst |
  | [Peter Hollemans](mailto:peter.hollemans@noaa.gov)         | CoastWatch Utilities Developer |
  | [Ryan Vandermeulen](mailto:ryan.vandermeulen@noaa.gov)         | NOAA Fisheries Satellite Coordinator |
  | [Chris Jackson](mailto:christopher.jackson@noaa.gov)         | |
