@@ -453,7 +453,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="import-the-required-python-modules" class="level2">
 <h2 class="anchored" data-anchor-id="import-the-required-python-modules">Import the required Python modules</h2>
-<div id="510ac7a2" class="cell" data-execution_count="1">
+<div id="99f18ac1" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -471,7 +471,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-the-track-data-into-a-pandas-data-frame" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-track-data-into-a-pandas-data-frame">Load the track data into a Pandas data frame</h2>
 <p>Below, the track data will load using the Pandas “read_csv” method. * Then use the “.head()” method to view the column names and the first few rows of data.</p>
-<div id="31ef4cfe" class="cell" data-execution_count="2">
+<div id="7b4737b5" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>track_path <span class="op">=</span> os.path.join(<span class="st">'..'</span>,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'data'</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'25317_05_subsampled.dat'</span>)</span>
@@ -482,7 +482,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plot-the-track-on-a-map" class="level2">
 <h2 class="anchored" data-anchor-id="plot-the-track-on-a-map">Plot the track on a map</h2>
-<div id="d16de5ea" class="cell" data-execution_count="3">
+<div id="a0bb493e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes of a Plate Carree projection with a central longitude of 180:</span></span>
@@ -533,7 +533,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="create-a-column-with-pandas-date-objects" class="level3">
 <h3 class="anchored" data-anchor-id="create-a-column-with-pandas-date-objects">Create a column with Pandas date objects</h3>
 <p><strong>Reload the “25317_05_subsampled.dat”. This time we will use the “parse_dates” option to create a Pandas date object column (year_month_day) from the ‘year’, ‘month’, and ‘day’ columns.</strong></p>
-<div id="fda8dd45" class="cell" data-execution_count="4">
+<div id="9ae165d1" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(track_path,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                 parse_dates<span class="op">=</span>[[<span class="st">'year'</span>, <span class="st">'month'</span>, <span class="st">'day'</span>]]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                 )</span>
@@ -560,7 +560,7 @@ https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v6-0</p>
 <li>Use the ERDDAP URL with no extension (e.g.&nbsp;without .html or .graph…). This is the OPeNDAP URL, which allows viewing the dataset metadata and, when you select the data you want, downloading the data.</li>
 <li>Use the Xarray “open_dataset” function then view the metadata</li>
 </ul>
-<div id="7396334d" class="cell" data-execution_count="5">
+<div id="49b1eb20" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>erddap_url <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://oceanwatch.pifsc.noaa.gov'</span>,</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'erddap'</span>,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'griddap'</span>,</span>
@@ -576,7 +576,7 @@ https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v6-0</p>
 We have preselected the OC-CCI monthly dataset because we know it will work with this exercise. If you were selecting datasets on your own, you would want to check out the dataset to determine if its spatial and temporal coverages are suitable for your application.</p>
 <p>You can find that information above by clicking the right arrow next to “Attribute”. Then look through the list to find: * ‘time_coverage_start’ and ‘time_coverage_end’: the time range * ‘geospatial_lat_min’ and ‘geospatial_lat_max’: the latitude range * ‘geospatial_lon_min’ and ‘geospatial_lon_max’: the longitude range</p>
 <p>There are a lot of metadata attributes to look through. We can make it easier with a little code to print out the metadata of interest. Then compare these ranges to those found in your track data.</p>
-<div id="03e5e95d" class="cell" data-execution_count="6">
+<div id="75b5b7d6" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Temporal and spatial ranges of the satellite dataset'</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'time range'</span>, ds.attrs[<span class="st">'time_coverage_start'</span>], </span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      ds.attrs[<span class="st">'time_coverage_end'</span>])</span>
@@ -595,7 +595,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 </section>
 <section id="download-the-satellite-data-that-corresponds-to-each-track-location" class="level3">
 <h3 class="anchored" data-anchor-id="download-the-satellite-data-that-corresponds-to-each-track-location">Download the satellite data that corresponds to each track location</h3>
-<div id="826cffd2" class="cell" data-execution_count="7">
+<div id="bd0a8a49" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a temporary Pandas data frame to hold the downloaded satellite data</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>col_names <span class="op">=</span> [<span class="st">"erddap_date"</span>, <span class="st">"matched_lat"</span>, <span class="st">"matched_lon"</span>, <span class="st">"matched_chla"</span>]</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tot <span class="op">=</span> pd.DataFrame(columns<span class="op">=</span>col_names)</span>
@@ -626,7 +626,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 </section>
 <section id="consolidate-the-downloaded-satellite-data-into-the-track-data-frame" class="level3">
 <h3 class="anchored" data-anchor-id="consolidate-the-downloaded-satellite-data-into-the-track-data-frame">Consolidate the downloaded satellite data into the track data frame</h3>
-<div id="547b5805" class="cell" data-execution_count="8">
+<div id="579f9a66" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">'matched_lat'</span>, </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'matched_lon'</span>, </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'matched_chla'</span>, </span>
@@ -640,7 +640,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 </section>
 <section id="save-your-work" class="level3">
 <h3 class="anchored" data-anchor-id="save-your-work">Save your work</h3>
-<div id="33995974" class="cell" data-execution_count="9">
+<div id="afc92603" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'chl_matchup_turtle25327.csv'</span>, index<span class="op">=</span><span class="va">False</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -649,7 +649,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <h2 class="anchored" data-anchor-id="plot-chlorophyll-matchup-data-onto-a-map">Plot chlorophyll matchup data onto a map</h2>
 <section id="first-plot-a-histogram-of-the-chlorophyll-data" class="level3">
 <h3 class="anchored" data-anchor-id="first-plot-a-histogram-of-the-chlorophyll-data">First plot a histogram of the chlorophyll data</h3>
-<div id="5d9e2910" class="cell" data-execution_count="10">
+<div id="9ddc273d" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Range:'</span>, df.matched_chla.<span class="bu">min</span>(), df.matched_chla.<span class="bu">max</span>())</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> df.matched_chla.hist(bins<span class="op">=</span><span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -658,7 +658,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 </section>
 <section id="plot-a-histogram-of-the-log-of-the-chlorophyll-data" class="level3">
 <h3 class="anchored" data-anchor-id="plot-a-histogram-of-the-log-of-the-chlorophyll-data">Plot a histogram of the log of the chlorophyll data</h3>
-<div id="f3fb781b" class="cell" data-execution_count="11">
+<div id="5a7aebc3" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Range:'</span>, np.log(df.matched_chla.<span class="bu">min</span>()), np.log(df.matched_chla.<span class="bu">max</span>()))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> np.log(df.matched_chla).hist(bins<span class="op">=</span><span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -669,7 +669,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 </section>
 <section id="map-the-chlorophyll-data" class="level3">
 <h3 class="anchored" data-anchor-id="map-the-chlorophyll-data">Map the chlorophyll data</h3>
-<div id="9eee04e1" class="cell" data-execution_count="12">
+<div id="4ebb7277" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes of a Plate Carree projection with a central longitude of 180:</span></span>
@@ -758,7 +758,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <section id="load-dusky-shark-telemetry-data" class="level2">
 <h2 class="anchored" data-anchor-id="load-dusky-shark-telemetry-data">Load Dusky shark telemetry data</h2>
 <p>Load the dusky shark acoustic telemetry detections, which include longitude, latitude, detection date, and transmitter ID. Each row represents a single shark detection that will be matched to satellite data.</p>
-<div id="6857d0fe" class="cell" data-execution_count="13">
+<div id="90e32e84" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load shark tag data (lon, lat, date, transmitter ID)</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>tag_path <span class="op">=</span> os.path.join(<span class="st">'..'</span>,</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'resources'</span>,</span>
@@ -772,7 +772,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <section id="convert-telemetry-columns-to-coordinate-arrays" class="level2">
 <h2 class="anchored" data-anchor-id="convert-telemetry-columns-to-coordinate-arrays">Convert telemetry columns to coordinate arrays</h2>
 <p>Longitude, latitude, and detection dates are extracted and converted into NumPy arrays and datetime objects. This format is required for iterating over detections and selecting satellite data by time.</p>
-<div id="b2d41271" class="cell" data-execution_count="14">
+<div id="18c964a3" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert columns to arrays (same pattern used earlier in this tutorial)</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>xcoord <span class="op">=</span> tags[<span class="st">"Longitude"</span>].to_numpy()</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>ycoord <span class="op">=</span> tags[<span class="st">"Latitude"</span>].to_numpy()</span>
@@ -782,7 +782,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <section id="open-a-satellite-dataset-using-xarray-opendap" class="level2">
 <h2 class="anchored" data-anchor-id="open-a-satellite-dataset-using-xarray-opendap">Open a satellite dataset using Xarray (OPeNDAP)</h2>
 <p>For this example, we use a CoastWatch MODIS 8-day chlorophyll dataset</p>
-<div id="d63e243c" class="cell" data-execution_count="15">
+<div id="71c0e223" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>erddap_url2 <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.pfeg.noaa.gov/'</span>,</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'erddap'</span>,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'griddap'</span>,</span>
@@ -800,7 +800,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <section id="match-each-shark-detection-to-a-local-satellite-window-0.2" class="level2">
 <h2 class="anchored" data-anchor-id="match-each-shark-detection-to-a-local-satellite-window-0.2">Match each shark detection to a local satellite window (±0.2°)</h2>
 <p>This function matches a single shark detection to satellite chlorophyll by selecting the nearest satellite time and extracting a ±0.2° spatial window. It summarizes local conditions by computing the mean, standard deviation, and number of valid pixels.</p>
-<div id="31d1929a" class="cell" data-execution_count="16">
+<div id="6d285cd8" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> match_one_point(ds, lon, lat, req_time, half_window<span class="op">=</span><span class="fl">0.2</span>):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">    Match a single telemetry detection to satellite chlorophyll using</span></span>
@@ -862,7 +862,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 </section>
 <section id="run-the-matchup-for-all-shark-detections" class="level2">
 <h2 class="anchored" data-anchor-id="run-the-matchup-for-all-shark-detections">Run the matchup for all shark detections</h2>
-<div id="55f250bf" class="cell" data-execution_count="17">
+<div id="fc01655f" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the matchup for every point:</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>half_window <span class="op">=</span> <span class="fl">0.2</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -878,7 +878,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <section id="assemble-a-consolidated-telemetrysatellite-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="assemble-a-consolidated-telemetrysatellite-dataset">Assemble a consolidated telemetry–satellite dataset</h2>
 <p>Telemetry coordinates, transmitter IDs, and matched chlorophyll values are combined into a single DataFrame. This unified table is used for all subsequent mapping and analysis steps.</p>
-<div id="18af4af0" class="cell" data-execution_count="18">
+<div id="3cd4a2b7" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>alltags <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lon"</span>: xcoord,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"lat"</span>: ycoord,</span>
@@ -896,7 +896,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <p>Plot the locations of all tagged dusky sharks and color each detection by the mean satellite-derived chlorophyll-a concentration matched to that location and date.</p>
 <p>Each point represents a single shark detection, and the color scale highlights spatial differences in chlorophyll conditions encountered by sharks across the study area. A simple land mask and coastline provide geographic context, while latitude and longitude gridlines help orient the map.</p>
 <p>This visualization provides a spatial overview of shark movements in relation to surface ocean productivity.</p>
-<div id="c1fc6ba4" class="cell" data-execution_count="19">
+<div id="5a09b5d4" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">8</span>))</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree())</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -934,7 +934,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <section id="subset-all-tags-for-a-single-shark" class="level2">
 <h2 class="anchored" data-anchor-id="subset-all-tags-for-a-single-shark">Subset all tags for a single shark</h2>
 <p>This step selects all detections associated with one transmitter ID. Focusing on a single shark allows individual movement patterns and environmental conditions to be examined.</p>
-<div id="a59ee7d9" class="cell" data-execution_count="20">
+<div id="9f241ee9" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>shark1 <span class="op">=</span> alltags[<span class="st">"transmitter"</span>].iloc[<span class="dv">0</span>]</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Selected shark transmitter:"</span>, shark1)</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -947,7 +947,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <section id="plot-the-movement-track-for-a-single-shark" class="level2">
 <h2 class="anchored" data-anchor-id="plot-the-movement-track-for-a-single-shark">Plot the movement track for a single shark</h2>
 <p>Successive detections for one shark are connected with track lines and colored by chlorophyll concentration. This combined view highlights both movement pathways and changing environmental conditions along the track.</p>
-<div id="2fe25c4e" class="cell" data-execution_count="21">
+<div id="d2c03eb3" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> single_shark[<span class="st">"x_shark"</span>].to_numpy()</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> single_shark[<span class="st">"y_shark"</span>].to_numpy()</span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>chl <span class="op">=</span> single_shark[<span class="st">"dataval_shark"</span>].to_numpy()</span>
@@ -1006,7 +1006,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <section id="compare-chlorophyll-conditions-by-year-using-a-boxplot" class="level2">
 <h2 class="anchored" data-anchor-id="compare-chlorophyll-conditions-by-year-using-a-boxplot">Compare chlorophyll conditions by year using a boxplot</h2>
 <p>Matched chlorophyll values for a single shark are grouped by calendar year and displayed as a boxplot. The boxplot summarizes interannual differences and variability in environmental conditions experienced by the shark.</p>
-<div id="202f7e74" class="cell" data-execution_count="22">
+<div id="a4e59f3f" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df1 <span class="op">=</span> alltags.loc[alltags[<span class="st">"transmitter"</span>] <span class="op">==</span> shark1, [<span class="st">"date"</span>, <span class="st">"chlorophyll"</span>]].dropna()</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>df1[<span class="st">"year"</span>] <span class="op">=</span> pd.to_datetime(df1[<span class="st">"date"</span>]).dt.year</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
