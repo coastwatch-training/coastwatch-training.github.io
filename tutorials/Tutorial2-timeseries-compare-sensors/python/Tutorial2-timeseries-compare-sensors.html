@@ -444,7 +444,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 </section>
 <section id="import-required-packages" class="level2">
 <h2 class="anchored" data-anchor-id="import-required-packages">Import required packages</h2>
-<div id="e04d8f94" class="cell" data-execution_count="1">
+<div id="bf2cbc0e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
@@ -454,7 +454,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 </div>
 <p>For each dataset we will extract data for an area in the Gulf of Mexico between -95 to -90°W longitude and 25-30°N latitude.</p>
 <p>Set up variables with the minimum and maximum values from the longitude and latitude ranges.</p>
-<div id="af069cfa" class="cell" data-execution_count="2">
+<div id="e8839a79" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>lon_min <span class="op">=</span> <span class="op">-</span><span class="fl">95.</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lon_max <span class="op">=</span> <span class="op">-</span><span class="fl">90.</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lat_min <span class="op">=</span> <span class="fl">25.</span></span>
@@ -465,7 +465,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 <h2 class="anchored" data-anchor-id="get-the-seawifs-data">Get the SeaWiFS data</h2>
 <section id="open-a-dataset-object-in-xarray" class="level3">
 <h3 class="anchored" data-anchor-id="open-a-dataset-object-in-xarray">Open a dataset object in xarray</h3>
-<div id="2570fd92" class="cell" data-execution_count="3">
+<div id="3c380e9b" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>url_sw <span class="op">=</span> <span class="st">'https://coastwatch.pfeg.noaa.gov/erddap/griddap/erdSW2018chlamday'</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sw_ds <span class="op">=</span> xr.open_dataset(url_sw)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sw_ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -475,7 +475,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 <h3 class="anchored" data-anchor-id="print-out-some-useful-metadata">Print out some useful metadata</h3>
 <p>You can view all of the metadata above in the dataset object. Let’s print out some metadata items to point a few things out: * The SeaWiFS dataset spans 13 years, from 1997 to 2010<br>
 * The chlorophyll variable is called “chlorophyll”. Knowing this is important because variable names are not standardized, and we will need to know the exact variable name to extract the data. * Checking the first and last value of latitude can tell us if the latitude values are in ascending or descending order.</p>
-<div id="e0b95191" class="cell" data-execution_count="4">
+<div id="2134da90" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'earliest date ='</span>, sw_ds.time.values[<span class="dv">0</span>])</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'most recent date ='</span>, sw_ds.time.values[<span class="op">-</span><span class="dv">1</span>], <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'variable:'</span>, <span class="bu">list</span>(sw_ds.data_vars.keys()), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
@@ -495,7 +495,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 * With latitude values in descending order, if you use “slice(lat_min, lat_max)” you will get no data, because <strong>there are no latitude values between lat_min and lat_max</strong>. * However, by reversing the order within slice by <strong>using “slice(lat_max, lat_min)” you will get data.</strong></p>
 <p><strong>For the SeaWiFS dataset, the metadata above show that the first latitude value (89.958336) is greater than the last (-89.958336). The latitude values are in descending order.</strong><br>
 * There are methods in xarray to flip the latitude dimension. A simpler solution is to use a logic step that determines if latitude values are descending, then set slice values to use the higher value first (see below).</p>
-<div id="56b6b917" class="cell" data-execution_count="5">
+<div id="a812906e" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The lat1 and lat2 values are used in the slice function</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># At first we set them as if the dataset is compliant with standards</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>lat1 <span class="op">=</span> lat_min</span>
@@ -510,7 +510,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 <section id="subset-the-data-from-the-dataset-object." class="level3">
 <h3 class="anchored" data-anchor-id="subset-the-data-from-the-dataset-object.">Subset the data from the dataset object.</h3>
 <p>Note that so far we have not downloaded data. We have only set up how we want to download the data. * The download will happen when we request to use data, like when creating the map below.</p>
-<div id="1e81662c" class="cell" data-execution_count="6">
+<div id="a3ca99dd" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sw_subset <span class="op">=</span> sw_ds[<span class="st">'chlorophyll'</span>].sel(time<span class="op">=</span><span class="bu">slice</span>(sw_ds.time[<span class="dv">0</span>], sw_ds.time[<span class="op">-</span><span class="dv">1</span>]),</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                                     latitude<span class="op">=</span><span class="bu">slice</span>(lat1, lat2),</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                     longitude<span class="op">=</span><span class="bu">slice</span>(lon_min, lon_max)</span>
@@ -520,7 +520,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 </section>
 <section id="plot-data-to-show-where-it-is-in-the-world." class="level3">
 <h3 class="anchored" data-anchor-id="plot-data-to-show-where-it-is-in-the-world.">Plot data to show where it is in the world.</h3>
-<div id="6f365fa2" class="cell" data-execution_count="7">
+<div id="a5006786" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes of a Plate Carree projection with a central longitude of 180:</span></span>
@@ -554,7 +554,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 </section>
 <section id="compute-the-monthly-mean-over-the-region" class="level3">
 <h3 class="anchored" data-anchor-id="compute-the-monthly-mean-over-the-region">Compute the monthly mean over the region</h3>
-<div id="900096b8" class="cell" data-execution_count="8">
+<div id="b208f60e" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>swAVG <span class="op">=</span> sw_subset.mean(dim<span class="op">=</span>[<span class="st">'latitude'</span>,<span class="st">'longitude'</span>])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>swAVG.head()</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -567,7 +567,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 <h2 class="anchored" data-anchor-id="get-monthly-modis-data">Get monthly MODIS data</h2>
 <section id="repeat-the-steps-above-to-get-data-for-the-modis-aqua-chlorophyll-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="repeat-the-steps-above-to-get-data-for-the-modis-aqua-chlorophyll-dataset">Repeat the steps above to get data for the MODIS Aqua chlorophyll dataset</h3>
-<div id="16c0be79" class="cell" data-execution_count="9">
+<div id="4cb7e4eb" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>url_modis <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.pfeg.noaa.gov'</span>,</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'erddap'</span>,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>                      <span class="st">'griddap'</span>,</span>
@@ -607,7 +607,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 <h2 class="anchored" data-anchor-id="get-monthly-viirs-data">Get monthly VIIRS data</h2>
 <section id="repeat-the-steps-above-to-get-data-for-the-viirs-snpp-chlorophyll-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="repeat-the-steps-above-to-get-data-for-the-viirs-snpp-chlorophyll-dataset">Repeat the steps above to get data for the VIIRS SNPP chlorophyll dataset</h3>
-<div id="8f8db1a4" class="cell" data-execution_count="10">
+<div id="87c32a15" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>url_viirs <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.noaa.gov'</span>,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'erddap'</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                        <span class="st">'griddap'</span>,</span>
@@ -647,7 +647,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 <h2 class="anchored" data-anchor-id="plot-the-time-series">Plot the time series</h2>
 <section id="plot-the-result-for-three-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="plot-the-result-for-three-datasets">Plot the result for three datasets</h3>
-<div id="710dbc6b" class="cell" data-execution_count="11">
+<div id="04921696" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the SeaWiFS data</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>plt.plot_date(swAVG.time, swAVG, </span>
@@ -679,7 +679,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 <p>If you needed a single time series from 1997 to present, you would have to use the plot above to devise some method to reconcile the difference in values where two datasets overlap. Alternatively, you could use the ESA OC-CCI (Ocean Color Climate Change Initiative) dataset, which blends data from many satellite missions into a single dataset, including data from SeaWiFS, MODIS, and VIIRS.</p>
 <p>Add the ESA OC-CCI dataset to the plot above to see how it compares with data from the individual satellite missions.<br>
 ### Repeat the steps above to get data from the ESA OC-CCI chlorophyll dataset</p>
-<div id="f8212fb9" class="cell" data-execution_count="12">
+<div id="68340cfa" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>url_cci <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.pfeg.noaa.gov'</span>,</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'erddap'</span>,</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'griddap'</span>,</span>
@@ -722,7 +722,7 @@ https://coastwatch.pfeg.noaa.gov/erddap/griddap/pmlEsaCCI60OceanColorMonthly</p>
 </section>
 <section id="replot-the-results-using-data-from-all-four-datasets" class="level2">
 <h2 class="anchored" data-anchor-id="replot-the-results-using-data-from-all-four-datasets">Replot the results using data from all four datasets</h2>
-<div id="c45bfdf4" class="cell" data-execution_count="13">
+<div id="e2ac10b3" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>)) </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Add SeaWiFS data</span></span>
