@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-22a0bb5b6e83dd4bbf2d82c671885b73.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-be56d6e2d0607e2b6296a90c573c7a5d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -405,7 +405,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 </section>
 <section id="load-packages" class="level3">
 <h3 class="anchored" data-anchor-id="load-packages">Load packages</h3>
-<div id="fe5bf8dd" class="cell" data-execution_count="1">
+<div id="ec227327" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
@@ -427,7 +427,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 <li>Construct ERDDAP URL to query the IABP buoy for: buoy_id, longitude, latitude, time, and surface temperature that filters for data where surface_temp exists and for the date range between 2023-08-01 and 2023-09-30.</li>
 <li>Download the data into a Pandas dataframe.</li>
 </ul>
-<div id="0582f326" class="cell" data-execution_count="2">
+<div id="257dfe4c" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct ERDDAP URL</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>buoy_url <span class="op">=</span> <span class="st">''</span>.join([<span class="st">'https://polarwatch.noaa.gov/erddap/tabledap/iabpv2_buoys.csv?'</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                    <span class="st">'buoy_id,longitude,latitude,time,surface_temp'</span>,</span>
@@ -447,7 +447,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 <h3 class="anchored" data-anchor-id="select-one-buoy-and-process-data">Select one buoy and process data</h3>
 <p>Select one buoy (buoy id = “300534062897730”). The buoy records measurements at intervals of minutes, resulting in a high-resolution dataset. , * Downsample the buoy data to align it with the daily resolution of the satellite dataset.<br>
 * The time data is recorded in the UTC time zone. Pandas operations often encounter issues with time zones, so remove the time zone information for easier processing.</p>
-<div id="4e4c966a" class="cell" data-execution_count="3">
+<div id="33345000" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select one buoy (buoy id = "300534062897730")</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>buoy_df <span class="op">=</span> df.loc[df[<span class="st">"buoy_id"</span>]<span class="op">==</span> <span class="dv">300534062897730</span>]</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -471,7 +471,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 <section id="transform-buoy-coordinates-to-polar-projection" class="level3">
 <h3 class="anchored" data-anchor-id="transform-buoy-coordinates-to-polar-projection">Transform buoy coordinates to polar projection</h3>
 <p>The buoy locations are provided in latitude and longitude coordinates. The satellite data is in polar stereographic projection, which provided location in columns and rows with units of meters. * Convert the buoy locations from latitude and longitude to the corresponding columns and rows values in the polar projection.</p>
-<div id="b00634bd" class="cell" data-execution_count="4">
+<div id="821aa694" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the projection using the PROJ4 string format</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>proj4text <span class="op">=</span> <span class="st">"+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45 +k=1 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs"</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -487,7 +487,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Verify that the 'cols' and 'rows' columns were added to dataframe</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>buoy_df_resampled.head(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="a97ead03" class="cell" data-execution_count="5">
+<div id="02e0e485" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the first buoy location to pull corresponding satellite data</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>buoy_cols <span class="op">=</span> buoy_df_resampled[<span class="st">'cols'</span>].iloc[<span class="dv">0</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>buoy_rows <span class="op">=</span> buoy_df_resampled[<span class="st">'rows'</span>].iloc[<span class="dv">0</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -495,7 +495,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 </section>
 <section id="load-satellite-data-from-polarwatch" class="level3">
 <h3 class="anchored" data-anchor-id="load-satellite-data-from-polarwatch">Load satellite data from PolarWatch</h3>
-<div id="6615cd82" class="cell" data-execution_count="6">
+<div id="606d3307" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Construct ERDDAP data request</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>gridded_url <span class="op">=</span> <span class="st">"https://polarwatch.noaa.gov/erddap/griddap/noaacwVIIRSn20icesrftempNP06Daily4Day"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -509,7 +509,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 <section id="select-satellite-data-to-match-buoy-location-and-dates" class="level3">
 <h3 class="anchored" data-anchor-id="select-satellite-data-to-match-buoy-location-and-dates">Select satellite data to match buoy location and dates</h3>
 <p>Subset the satellite data using the buoy locations and dates.</p>
-<div id="fbe2ba81" class="cell" data-execution_count="7">
+<div id="5e361c8c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>buoy_cols <span class="op">=</span> buoy_df_resampled[<span class="st">'cols'</span>].values</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>buoy_rows <span class="op">=</span> buoy_df_resampled[<span class="st">'rows'</span>].values</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>buoy_times <span class="op">=</span> buoy_df_resampled.index.values</span>
@@ -529,7 +529,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 <section id="merge-satellite-ice-temperature-data-with-buoy" class="level3">
 <h3 class="anchored" data-anchor-id="merge-satellite-ice-temperature-data-with-buoy">Merge satellite ice temperature data with buoy</h3>
 <p>Merge the datasets by index (date). Not all buoy dates have corresponding satellite data. Unmatched dates will be filled with NaN values.</p>
-<div id="fb874469" class="cell" data-execution_count="8">
+<div id="a5fdd578" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> buoy_df_resampled</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>merged_df[<span class="st">'temp_sat'</span>] <span class="op">=</span> np.array(sat_temps) <span class="op">-</span> <span class="fl">273.15</span></span>
@@ -540,7 +540,7 @@ Similar tutorials for mid to lower latitudes can be found at <a href="https://gi
 <section id="visualize-matched-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="visualize-matched-datasets">Visualize matched dataSets</h3>
 <p>Visualize the matched buoy and satellite datasets to assess the data alignment.</p>
-<div id="d6edaebc" class="cell" data-execution_count="9">
+<div id="3dc48e32" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize <span class="op">=</span> (<span class="dv">10</span>, <span class="dv">5</span>)) </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the SeaWiFS data</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.plot_date(merged_df.index, merged_df.temp_buoy, </span>
