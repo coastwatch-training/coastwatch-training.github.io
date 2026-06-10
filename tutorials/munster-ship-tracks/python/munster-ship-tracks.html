@@ -77,7 +77,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-be56d6e2d0607e2b6296a90c573c7a5d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-da62ba2beb580c8a39d15639cf97d1bd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -396,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="load-packages" class="level2">
 <h2 class="anchored" data-anchor-id="load-packages">Load Packages</h2>
-<div id="0242e056" class="cell" data-execution_count="1">
+<div id="bbcb9dfc" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> importlib</span>
@@ -415,7 +415,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="get-the-ship-underway-data-for-nancy-foster-in-the-gulf-in-june-2025" class="level2">
 <h2 class="anchored" data-anchor-id="get-the-ship-underway-data-for-nancy-foster-in-the-gulf-in-june-2025">Get the ship underway data for Nancy Foster in the Gulf in June 2025</h2>
-<div id="2e2d3e1d" class="cell" data-execution_count="2">
+<div id="def4a575" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define ERDDAP dataset ID</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>dataset <span class="op">=</span> <span class="st">"fsuNoaaShipWTER"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -454,7 +454,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="subset-track-every-2-hours" class="level2">
 <h2 class="anchored" data-anchor-id="subset-track-every-2-hours">Subset track every 2 hours</h2>
-<div id="a9999af0" class="cell" data-execution_count="3">
+<div id="c0d5cae7" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initially tried averaging into a daily product, but that produced points</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># that were not actually along the survey track and did not have enough</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># track coverage, so instead subset every 2 hours.</span></span>
@@ -466,7 +466,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="get-boundaries-of-trackline" class="level2">
 <h2 class="anchored" data-anchor-id="get-boundaries-of-trackline">Get boundaries of trackline</h2>
-<div id="1f23af72" class="cell" data-execution_count="4">
+<div id="42a6d618" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure time is datetime</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ship[<span class="st">"time"</span>] <span class="op">=</span> pd.to_datetime(ship[<span class="st">"time"</span>])</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="get-fields-of-eke-sla-and-eddy-labels" class="level2">
 <h2 class="anchored" data-anchor-id="get-fields-of-eke-sla-and-eddy-labels">Get fields of eke, SLA and eddy labels</h2>
-<div id="e824c183" class="cell" data-execution_count="5">
+<div id="56c99b5a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The MESI data set contains SSH, EKE and the MESI data, while the MUNSTER dataset provides the</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># unique identification of specific eddies.</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Here the data is being extracted for only one day, for the entire region traversed by the ship.</span></span>
@@ -550,7 +550,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="make-map-of-ssh" class="level2">
 <h2 class="anchored" data-anchor-id="make-map-of-ssh">Make map of SSH</h2>
-<div id="dc68460a" class="cell" data-execution_count="6">
+<div id="207af1bb" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot sea surface height (SSH)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset SSH data from long-format dataframe</span></span>
@@ -632,7 +632,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="make-map-of-eke" class="level2">
 <h2 class="anchored" data-anchor-id="make-map-of-eke">Make map of EKE</h2>
-<div id="a8ad1731" class="cell" data-execution_count="7">
+<div id="5fff6c54" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot eddy kinetic energy (EKE)</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset EKE data</span></span>
@@ -708,7 +708,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="make-map-of-mesi" class="level2">
 <h2 class="anchored" data-anchor-id="make-map-of-mesi">Make map of MESI</h2>
-<div id="1a128d8f" class="cell" data-execution_count="8">
+<div id="3fadee16" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot MESI</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset MESI data</span></span>
@@ -786,7 +786,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="make-map-of-eddy-location" class="level2">
 <h2 class="anchored" data-anchor-id="make-map-of-eddy-location">Make map of eddy location</h2>
-<div id="74cf2aba" class="cell" data-execution_count="9">
+<div id="5e1bc033" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify eddy centers (for labeling)</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>eddy_centers <span class="op">=</span> (</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    eddy_df[eddy_df[<span class="st">"value"</span>].<span class="bu">abs</span>() <span class="op">&gt;</span> <span class="dv">0</span>]</span>
@@ -908,7 +908,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="get-mesi-values" class="level2">
 <h2 class="anchored" data-anchor-id="get-mesi-values">Get mesi values</h2>
-<div id="653d7d9a" class="cell" data-execution_count="10">
+<div id="f7d1ae4f" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make ship times timezone-naive UTC to match xarray indexing</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ship_2[<span class="st">"time"</span>] <span class="op">=</span> pd.to_datetime(ship_2[<span class="st">"time"</span>], utc<span class="op">=</span><span class="va">True</span>).dt.tz_localize(<span class="va">None</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -950,7 +950,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="map-tracks-with-mesi-data" class="level2">
 <h2 class="anchored" data-anchor-id="map-tracks-with-mesi-data">Map tracks with mesi data</h2>
-<div id="ea143709" class="cell" data-execution_count="11">
+<div id="52e5ac55" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot title from ship time range</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>begtime <span class="op">=</span> ship[<span class="st">"time"</span>].<span class="bu">min</span>().strftime(<span class="st">"%b </span><span class="sc">%d</span><span class="st">"</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>endtime <span class="op">=</span> ship[<span class="st">"time"</span>].<span class="bu">max</span>().strftime(<span class="st">"%b </span><span class="sc">%d</span><span class="st">, %Y"</span>)</span>
@@ -1029,7 +1029,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="get-eddy-label-anti-values" class="level2">
 <h2 class="anchored" data-anchor-id="get-eddy-label-anti-values">Get eddy label (anti) values</h2>
-<div id="b2abc806" class="cell" data-execution_count="12">
+<div id="320d1289" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize list to store extracted values</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>track2 <span class="op">=</span> []</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1055,7 +1055,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="get-eddy-label-cyclo-values" class="level2">
 <h2 class="anchored" data-anchor-id="get-eddy-label-cyclo-values">Get eddy label (cyclo) values</h2>
-<div id="1d8570d6" class="cell" data-execution_count="13">
+<div id="5670bb28" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize list to store extracted values</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>track3 <span class="op">=</span> []</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1084,7 +1084,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="map-tracks-with-eddy-locations" class="level2">
 <h2 class="anchored" data-anchor-id="map-tracks-with-eddy-locations">Map tracks with eddy locations</h2>
-<div id="787356d7" class="cell" data-execution_count="14">
+<div id="ea2d9ac5" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only ship points that fall inside an eddy</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>eddies <span class="op">=</span> ship_2[ship_2[<span class="st">"Label"</span>].<span class="bu">abs</span>() <span class="op">&gt;</span> <span class="dv">0</span>].copy()</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1212,7 +1212,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="extract-eke-values-along-the-ship-track" class="level2">
 <h2 class="anchored" data-anchor-id="extract-eke-values-along-the-ship-track">Extract EKE values along the ship track</h2>
-<div id="af1b4125" class="cell" data-execution_count="15">
+<div id="b7e2353b" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize list to store extracted values</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>track4 <span class="op">=</span> []</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -1238,7 +1238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="map-tracks-with-eke-data" class="level2">
 <h2 class="anchored" data-anchor-id="map-tracks-with-eke-data">Map tracks with EKE data</h2>
-<div id="13b02cbd" class="cell" data-execution_count="16">
+<div id="a0769ae6" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot subset ship track colored by EKE</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
