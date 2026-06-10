@@ -71,6 +71,8 @@ The inaugural 2026 course will cover the following subjects:
  | [Dale Robinson](mailto:dale.robinson@noaa.gov)     | CoastWatch/West Coast Node, Development Lead |
  | [Madison Richardson](mailto:madison.richardson@noaa.gov)     | CoastWatch/West Coast Node, Environmental Data Analyst |
  | [Peter Hollemans](mailto:peter.hollemans@noaa.gov)         | CoastWatch Utilities Developer |
+ | [Dale Robinson](mailto:dale.robinson@noaa.gov)     | CoastWatch/West Coast Node, node manager |
+ | [Peter Hollemans](mailto:peter@terrenusearth.com)         | CoastWatch Utilities Developer |
  | [Ryan Vandermeulen](mailto:ryan.vandermeulen@noaa.gov)         | NOAA Fisheries Satellite Coordinator |
  | [Chris Jackson](mailto:christopher.jackson@noaa.gov)         | |
 
