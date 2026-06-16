@@ -10,6 +10,14 @@ This site provides information on CoastWatch Satellite Training courses such as 
 - Training materials developed through NOAA CoastWatch courses, including information on upcoming and past trainings
 - Resources and support options, including scheduled office hours, to help you integrate satellite data into research and management workflows
 
+## Upcoming Events
+
+**Satellite 201 Summer Lecture Series**
+
+  - July 10, 17, 24 and 31, 2026, Virtual 11am - 1pm (Pacific Time)
+
+  This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Find out more [here](trainings/upcoming/sat201_26.qmd).
+
 ### Not sure where to start?
 
 - **Interested in participanting in a training course?**
