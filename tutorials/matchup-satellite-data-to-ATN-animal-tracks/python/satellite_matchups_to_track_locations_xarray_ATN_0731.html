@@ -439,7 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="import-the-required-python-modules" class="level2">
 <h2 class="anchored" data-anchor-id="import-the-required-python-modules">Import the required Python modules</h2>
-<div id="d3044738" class="cell" data-execution_count="1">
+<div id="e7c0ef46" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> clear_output</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -517,7 +517,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-the-track-data-into-a-pandas-data-frame" class="level2">
 <h2 class="anchored" data-anchor-id="load-the-track-data-into-a-pandas-data-frame">Load the track data into a Pandas data frame</h2>
 <p>Below, the track data will load using the Pandas “read_csv” method. * Then use the “.head()” method to view the column names and the first few rows of data.</p>
-<div id="bb6509c4" class="cell" data-execution_count="2">
+<div id="85e45d80" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>track_path <span class="op">=</span> os.path.join(<span class="st">'..'</span>,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'data'</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                          <span class="st">'THUALB_2022_04-233568-5-GPE3.csv'</span>)</span>
@@ -526,7 +526,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>track_df.head(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>## Convert the date strings into the Python datetime date objects * The dates are loaded from the CSV file as strings. * Converting the dates to Python datetime date object gives us flexibility to manipulate the dataframe.</p>
-<div id="7f52d2b5" class="cell" data-execution_count="3">
+<div id="ed985797" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>track_df[<span class="st">'Date'</span>] <span class="op">=</span> pd.to_datetime(track_df[<span class="st">'Date'</span>], <span class="bu">format</span><span class="op">=</span><span class="st">'</span><span class="sc">%d</span><span class="st">-%b-%Y %H:%M:%S'</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>track_df.head(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -539,7 +539,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>The track data has longitude values into -180/+180 format. However, the satellite dataset we are using has longitude values into 0/360 format. So, convert the track data to 0/360 format so that the longitude formats are consistent.</li>
 </ul>
-<div id="08065fba" class="cell" data-execution_count="4">
+<div id="5ec78712" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> track_df[<span class="st">'DeployID'</span>]</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> track_df[<span class="st">'Ptt'</span>]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">del</span> track_df[<span class="st">'Sunrise'</span>]</span>
@@ -558,14 +558,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="bin-multiple-observations-from-each-day-into-daily-mean-values" class="level2">
 <h2 class="anchored" data-anchor-id="bin-multiple-observations-from-each-day-into-daily-mean-values">Bin multiple observations from each day into daily mean values</h2>
 <p>The track data has multiple longitude/latitude/time points for each date. That temporal resolution is much higher than the daily and month satellite datasets that are available. So, let’s reduce the multiple daily values for the animal track data to a single value for each day. The code below creates a new dataframe that bins data for each date and calculates the mean for selected columns. * This process will move the “Date” column to the index column (most left column)</p>
-<div id="3d47348f" class="cell" data-execution_count="5">
+<div id="4b43bd83" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> track_df.resample(<span class="st">'D'</span>, on<span class="op">=</span><span class="st">'Date'</span>).mean()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="plot-the-track-on-a-map" class="level2">
 <h2 class="anchored" data-anchor-id="plot-the-track-on-a-map">Plot the track on a map</h2>
-<div id="cbac8ffd" class="cell" data-execution_count="6">
+<div id="3cc66529" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes of a Plate Carree projection with a central longitude of 180:</span></span>
@@ -629,7 +629,7 @@ https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v6-0</p>
 <li>Use the ERDDAP URL with no extension (e.g.&nbsp;without .html or .graph…). This is the OPeNDAP URL, which allows viewing the dataset metadata and, when you select the data you want, downloading the data.</li>
 <li>Use the Xarray “open_dataset” function then view the metadata</li>
 </ul>
-<div id="c15be82f" class="cell" data-execution_count="7">
+<div id="55ccc07c" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>erddap_url <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://oceanwatch.pifsc.noaa.gov'</span>,</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'erddap'</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'griddap'</span>,</span>
@@ -645,7 +645,7 @@ https://oceanwatch.pifsc.noaa.gov/erddap/griddap/esa-cci-chla-monthly-v6-0</p>
 We have preselected the OC-CCI monthly dataset because we know it will work with this exercise. If you were selecting datasets on your own, you would want to check out the dataset to determine if its spatial and temporal coverages are suitable for your application.</p>
 <p>You can find that information above by clicking the right arrow next to “Attribute”. Then look through the list to find: * ‘time_coverage_start’ and ‘time_coverage_end’: the time range * ‘geospatial_lat_min’ and ‘geospatial_lat_max’: the latitude range * ‘geospatial_lon_min’ and ‘geospatial_lon_max’: the longitude range</p>
 <p>There are a lot of metadata attributes to look through. We can make it easier with a little code to print out the metadata of interest. Then compare these ranges to those found in your track data.</p>
-<div id="2014ba9d" class="cell" data-execution_count="8">
+<div id="99eede6d" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Temporal and spatial ranges of the satellite dataset'</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'time range'</span>, ds.attrs[<span class="st">'time_coverage_start'</span>], </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>      ds.attrs[<span class="st">'time_coverage_end'</span>])</span>
@@ -670,7 +670,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <li>Download the chlorophyll data, time, latitude, and longitude from the ERDDAP satellite dataset.</li>
 <li>Consolidate data adding the downloaded satellite data to the track data (df) dataframe.</li>
 </ul>
-<div id="8553706e" class="cell" data-execution_count="9">
+<div id="6659c4ee" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add new columns to the dataframe</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df[[<span class="st">"erddap_date"</span>, <span class="st">"matched_lat"</span>, <span class="st">"matched_lon"</span>, <span class="st">"matched_chla"</span>]] <span class="op">=</span> np.nan</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -704,7 +704,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <ul>
 <li>Since we moved the Date column to the index, be sure to use index=True</li>
 </ul>
-<div id="9a52b2ee" class="cell" data-execution_count="10">
+<div id="bad76297" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df.to_csv(<span class="st">'chl_matchup_tuna233568.csv'</span>, index<span class="op">=</span><span class="va">True</span>, encoding<span class="op">=</span><span class="st">'utf-8'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -713,7 +713,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 <h2 class="anchored" data-anchor-id="plot-chlorophyll-matchup-data-onto-a-map">Plot chlorophyll matchup data onto a map</h2>
 <section id="first-plot-a-histogram-of-the-chlorophyll-data" class="level3">
 <h3 class="anchored" data-anchor-id="first-plot-a-histogram-of-the-chlorophyll-data">First plot a histogram of the chlorophyll data</h3>
-<div id="8e48974c" class="cell" data-execution_count="11">
+<div id="a0c2c3e3" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Range:'</span>, df.matched_chla.<span class="bu">min</span>(), df.matched_chla.<span class="bu">max</span>())</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> df.matched_chla.hist(bins<span class="op">=</span><span class="dv">40</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -721,7 +721,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 </section>
 <section id="plot-a-histogram-of-the-log-of-the-chlorophyll-data" class="level3">
 <h3 class="anchored" data-anchor-id="plot-a-histogram-of-the-log-of-the-chlorophyll-data">Plot a histogram of the log of the chlorophyll data</h3>
-<div id="fef3c45b" class="cell" data-execution_count="12">
+<div id="a2a918d8" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Range:'</span>,</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>      np.log(df.matched_chla.<span class="bu">min</span>()),</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      np.log(df.matched_chla.<span class="bu">max</span>()))</span>
@@ -734,7 +734,7 @@ We have preselected the OC-CCI monthly dataset because we know it will work with
 </section>
 <section id="map-the-chlorophyll-data" class="level3">
 <h3 class="anchored" data-anchor-id="map-the-chlorophyll-data">Map the chlorophyll data</h3>
-<div id="db08d6d9" class="cell" data-execution_count="13">
+<div id="f5a59cdf" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">10</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Label axes of a Plate Carree projection with a central longitude of 180:</span></span>
