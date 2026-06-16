@@ -431,7 +431,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="import-python-modules" class="level2">
 <h2 class="anchored" data-anchor-id="import-python-modules">Import Python modules</h2>
-<div id="80b39955" class="cell" data-execution_count="1">
+<div id="bee0de66" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -452,7 +452,7 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 </ul>
 <section id="with-python-run-the-following-to-download-the-data-using-the-generated-url-." class="level3">
 <h3 class="anchored" data-anchor-id="with-python-run-the-following-to-download-the-data-using-the-generated-url-.">With Python, run the following to download the data using the generated URL .</h3>
-<div id="acc55ab3" class="cell" data-execution_count="2">
+<div id="5d9c31c3" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">''</span>.join([<span class="st">'https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?'</span>,</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>               <span class="st">'chlor_a'</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>               <span class="st">'%5B(2022-01-01T00:00:00Z):1:(2022-12-31T00:00:00Z)%5D'</span>,</span>
@@ -470,13 +470,13 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 <p>The xarray package makes it very convenient to work with NetCDF files. Documentation is available here: http://xarray.pydata.org/en/stable/why-xarray.html</p>
 <section id="open-the-netcdf-file-as-an-xarray-dataset-object-and-examine-the-data-structure." class="level3">
 <h3 class="anchored" data-anchor-id="open-the-netcdf-file-as-an-xarray-dataset-object-and-examine-the-data-structure.">Open the netCDF file as an xarray dataset object and examine the data structure.</h3>
-<div id="63d2631f" class="cell" data-execution_count="3">
+<div id="2ef26648" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'chlor_a_2022_LIS_tutorial.nc'</span>, decode_cf<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="examine-which-coordinates-and-variables-are-included-in-the-dataset." class="level3">
 <h3 class="anchored" data-anchor-id="examine-which-coordinates-and-variables-are-included-in-the-dataset.">Examine which coordinates and variables are included in the dataset.</h3>
-<div id="ccf46248" class="cell" data-execution_count="4">
+<div id="933cf4e3" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List the coordinates</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'The coordinates variables:'</span>, <span class="bu">list</span>(ds.coords), <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -486,7 +486,7 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 </section>
 <section id="examine-the-structure-of-chlor_a." class="level3">
 <h3 class="anchored" data-anchor-id="examine-the-structure-of-chlor_a.">Examine the structure of chlor_a.</h3>
-<div id="a1dea3c4" class="cell" data-execution_count="5">
+<div id="98024bff" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ds.chlor_a.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>The dataset is a 3-D array with 365 time steps, each with 481 rows corresponding to latitudes and 814 columns corresponding to longitudes.</p>
@@ -494,21 +494,21 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 <section id="list-the-dates-for-each-time-step." class="level3">
 <h3 class="anchored" data-anchor-id="list-the-dates-for-each-time-step.">List the dates for each time step.</h3>
 <p>The dataset has 365 time steps, one for each day between January 2022 and December 2022.</p>
-<div id="2cd68f70" class="cell" data-execution_count="6">
+<div id="c77da396" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ds.time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="resample-daily-data-monthly." class="level3">
 <h3 class="anchored" data-anchor-id="resample-daily-data-monthly.">Resample daily data monthly.</h3>
 <p>Use Xarray’s resample function to group the data into a monthly dataset (“MS” = Month Start). You can then apply aggregation functions like .mean(), .median(), .sum(), .cumsum(), etc., to compute statistics for each month.</p>
-<div id="6428c580" class="cell" data-execution_count="7">
+<div id="f84f04a7" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ds_mon <span class="op">=</span> ds.resample(time<span class="op">=</span><span class="st">"MS"</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="list-the-dates-for-each-time-step-after-resampling" class="level3">
 <h3 class="anchored" data-anchor-id="list-the-dates-for-each-time-step-after-resampling">List the dates for each time step after resampling</h3>
 <p>The dataset now has 12 time steps, one for each month between January 2022 and December 2022.</p>
-<div id="c70b78ea" class="cell" data-execution_count="8">
+<div id="d61bc05c" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ds_mon.time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -517,7 +517,7 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 <p>Typically, the latitude coordinate variable will be in ascending order. However, in some datasets the order is reversed, i.e the order is descending.</p>
 <p>By examining the first and last values on our latitude array (below), we can see that the values are descending.<br>
 * In practice what this means is that when you slice (subset) using latitude later in this tutorial, you will put the largest latitude value first.</p>
-<div id="9eb44713" class="cell" data-execution_count="9">
+<div id="73b3226a" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'First latitude value'</span>, ds.latitude[<span class="dv">0</span>].item())</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Last latitude value'</span>, ds.latitude[<span class="op">-</span><span class="dv">1</span>].item())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -529,7 +529,7 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 <h3 class="anchored" data-anchor-id="creating-a-faceted-plot-of-monthly-mean-chlorophyll-a-for-2022">Creating a Faceted Plot of Monthly Mean Chlorophyll-a for 2022</h3>
 <p>In this example, we plot directly from an xarray object using its built-in .plot() method. This is a quick and convenient way to create faceted maps, though it offers limited control over layout and map styling compared to using matplotlib or cartopy directly.</p>
 <p>The col and col_wrap arguments define which dimension to facet over (in this case, “time”) and how many panels to display per row. The cbar_kwargs dictionary gives access to colorbar customization, such as setting the label and size.</p>
-<div id="de9c53ce" class="cell" data-execution_count="10">
+<div id="069d789b" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ds_mon.chlor_a.plot(col<span class="op">=</span><span class="st">"time"</span>,</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                    col_wrap<span class="op">=</span><span class="dv">4</span>,</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                    cmap<span class="op">=</span><span class="st">"turbo"</span>,</span>
@@ -550,13 +550,13 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 <section id="compute-the-yearly-mean-for-the-region" class="level3">
 <h3 class="anchored" data-anchor-id="compute-the-yearly-mean-for-the-region">Compute the yearly mean for the region</h3>
 <p>Here we use NumPy’s mean function to calculate the average chlorophyll-a across the time dimension (axis 0), resulting in a xarray dataarray of yearly mean values.</p>
-<div id="ca61b9d6" class="cell" data-execution_count="11">
+<div id="1f03527a" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ds_yearly <span class="op">=</span> np.mean(ds_mon.chlor_a, axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="plot-the-map-of-the-2022-average-sst-in-the-region" class="level3">
 <h3 class="anchored" data-anchor-id="plot-the-map-of-the-2022-average-sst-in-the-region">Plot the map of the 2022 average SST in the region</h3>
-<div id="99cb6625" class="cell" data-execution_count="12">
+<div id="24a2c7b0" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>plt.pcolormesh(ds_yearly.longitude, ds_yearly.latitude, ds_yearly, cmap<span class="op">=</span><span class="st">"turbo"</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">20</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Mean Chl-a "</span> </span>
@@ -573,14 +573,14 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 <h2 class="anchored" data-anchor-id="spatial-subset-and-time-series-comparing-chlorophyll-a-seasonal-cycles-in-western-and-eastern-long-island-sound">Spatial Subset and Time Series Comparing Chlorophyll-a Seasonal Cycles in Western and Eastern Long Island Sound</h2>
 <p>Subset the data - West Long Island Ssound bewteen -73.9<sup>o</sup> to -73.1<sup>o</sup> W longitude - East Long Island Ssound bewteen -72.9<sup>o</sup> to -71.8<sup>o</sup> W longitude</p>
 <p>We are going to generate a time series of mean SST within each box.</p>
-<div id="920d6bac" class="cell" data-execution_count="13">
+<div id="6f6fad72" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>da_west <span class="op">=</span> ds.sel(longitude<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="fl">73.9</span>, <span class="op">-</span><span class="fl">73.1</span>))</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>da_east <span class="op">=</span> ds.sel(longitude<span class="op">=</span><span class="bu">slice</span>(<span class="op">-</span><span class="fl">72.9</span>, <span class="op">-</span><span class="fl">71.8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="examine-the-structure-of-the-subsetted-data." class="level3">
 <h3 class="anchored" data-anchor-id="examine-the-structure-of-the-subsetted-data.">Examine the structure of the subsetted data.</h3>
 <p>The subsets are 3D arrays with 365 time steps, each with 481 rows corresponding to latitudes (full LIS latitudinal extent) and 296 / 406 columns corresponding to longitudes in the West and East, respectively.</p>
-<div id="b45286b1" class="cell" data-execution_count="14">
+<div id="f7313274" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"West shape: </span><span class="sc">{</span>da_west<span class="sc">.</span>chlor_a<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"West shape: </span><span class="sc">{</span>da_east<span class="sc">.</span>chlor_a<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -588,7 +588,7 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 <section id="resmaple-each-subset-to-an-8-day-means" class="level3">
 <h3 class="anchored" data-anchor-id="resmaple-each-subset-to-an-8-day-means">Resmaple each subset to an 8-Day means</h3>
 <p>Plotting a daily time series can often be messy, so we compute 8-day averages to smooth the data and highlight seasonal patterns.</p>
-<div id="189af7b0" class="cell" data-execution_count="15">
+<div id="e4358ce3" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>da_west <span class="op">=</span> da_west.resample(time<span class="op">=</span><span class="st">"8D"</span>).mean()</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>da_east <span class="op">=</span> da_east.resample(time<span class="op">=</span><span class="st">"8D"</span>).mean()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -596,14 +596,14 @@ https://coastwatch.noaa.gov/erddap/griddap/noaacwappsS3ABcolorLISDaily.nc?chlor_
 <section id="compute-a-time-series" class="level3">
 <h3 class="anchored" data-anchor-id="compute-a-time-series">Compute a time series</h3>
 <p>Now, we will average all data within each subset across the latitude and longitude dimensions to produce a single time series.</p>
-<div id="ecfe1e0d" class="cell" data-execution_count="16">
+<div id="8731bca9" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>west_TS <span class="op">=</span> da_west.chlor_a.mean(dim<span class="op">=</span>(<span class="st">"latitude"</span>,<span class="st">"longitude"</span>))</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>east_TS <span class="op">=</span> da_east.chlor_a.mean(dim<span class="op">=</span>(<span class="st">"latitude"</span>,<span class="st">"longitude"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="plot-the-time-series" class="level3">
 <h3 class="anchored" data-anchor-id="plot-the-time-series">Plot the time-series</h3>
-<div id="67d00a7c" class="cell" data-execution_count="17">
+<div id="cb2d7a0c" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">4</span>))</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plt.plot(west_TS.time, west_TS, label<span class="op">=</span><span class="st">"West LIS"</span>, marker<span class="op">=</span><span class="st">"o"</span>, c<span class="op">=</span><span class="st">"tab:blue"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>plt.plot(east_TS.time, east_TS, label<span class="op">=</span><span class="st">"East LIS"</span>, marker<span class="op">=</span><span class="st">"o"</span>, c<span class="op">=</span><span class="st">"tab:red"</span>)</span>
