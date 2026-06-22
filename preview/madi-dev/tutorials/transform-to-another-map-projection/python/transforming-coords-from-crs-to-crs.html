@@ -415,7 +415,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 </section>
 <section id="import-packages" class="level2">
 <h2 class="anchored" data-anchor-id="import-packages">Import packages</h2>
-<div id="29f673b9" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.393146Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.382576Z&quot;}}" data-execution_count="1">
+<div id="567ef10f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.393146Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.382576Z&quot;}}" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
@@ -426,7 +426,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cmocean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>## Get data from ERDDAP</p>
-<div id="3f5273aa" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.816349Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.397409Z&quot;}}" data-execution_count="2">
+<div id="0ad097a7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.816349Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.397409Z&quot;}}" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># request data from polarwatch.noaa.gov erddap and save it to sic.nc file</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">''</span>.join([<span class="st">"https://polarwatch.noaa.gov/erddap/griddap/"</span>,</span>
@@ -437,7 +437,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(url, <span class="st">"sic.nc"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="68fbad42" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.835319Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.824853Z&quot;}}" data-execution_count="3">
+<div id="9bf258fd" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.835319Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.824853Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># open and assign data from the file to a variable ds using xarray</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">"sic.nc"</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -456,12 +456,12 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 <section id="get-the-projection-information-from-the-epsg-code" class="level3">
 <h3 class="anchored" data-anchor-id="get-the-projection-information-from-the-epsg-code">Get the projection information from the EPSG code</h3>
 <p><strong>Geographic</strong></p>
-<div id="760ec41d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.861436Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.852557Z&quot;}}" data-execution_count="4">
+<div id="94eb8fa3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.861436Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.852557Z&quot;}}" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>crs_4326 <span class="op">=</span> CRS.from_epsg(<span class="dv">4326</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>crs_4326</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><strong>NSIDC Polar Stereographic South</strong></p>
-<div id="f76f608c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.870023Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.862713Z&quot;}}" data-execution_count="5">
+<div id="51168403" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.870023Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.862713Z&quot;}}" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>crs_3031 <span class="op">=</span> CRS.from_epsg(<span class="dv">3031</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>crs_3031</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -477,7 +477,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 </section>
 <section id="transform-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="transform-the-data">Transform the data</h2>
-<div id="82f6c893" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.876879Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.870960Z&quot;}}" data-execution_count="6">
+<div id="ac76450c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.876879Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.870960Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># transformer converts lon and lat values to x, y </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>transformer <span class="op">=</span> Transformer.from_crs(crs_3031, crs_4326)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -495,7 +495,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 <li>create a tuple <code>(dimension, value)</code></li>
 <li>add to the dataset (ds) <code>ds.coord['name']=(dimension, value)</code></li>
 </ul>
-<div id="021e9e0c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.934488Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.927943Z&quot;}}" data-execution_count="7">
+<div id="68d4d066" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:11.934488Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.927943Z&quot;}}" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ds.coords[<span class="st">'lat'</span>] <span class="op">=</span> (ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].dims, lat)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ds.coords[<span class="st">'lon'</span>] <span class="op">=</span> (ds.cdr_seaice_conc_monthly[<span class="dv">0</span>][:].dims, lon)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -508,7 +508,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 <section id="plot-data-with-new-coordinates-on-a-global-map" class="level2">
 <h2 class="anchored" data-anchor-id="plot-data-with-new-coordinates-on-a-global-map">Plot data with new coordinates on a global map</h2>
 <p>Because the data were in the polar stereographic projection, mapping the data onto a different projection (global map projection) below, doesn’t make the data fit well on the map.</p>
-<div id="12d4935e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:12.048211Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.935142Z&quot;}}" data-execution_count="8">
+<div id="22a12351" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:12.048211Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:11.935142Z&quot;}}" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set the map size</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">13</span>,<span class="dv">5</span>))</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -529,7 +529,7 @@ The sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 </section>
 <section id="plot-data-with-new-coordinates-on-a-polar-stereographic-projection-map" class="level2">
 <h2 class="anchored" data-anchor-id="plot-data-with-new-coordinates-on-a-polar-stereographic-projection-map">Plot data with new coordinates on a polar stereographic projection map</h2>
-<div id="3f8f733f" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:12.253404Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:12.049315Z&quot;}}" data-execution_count="9">
+<div id="d3cacbc7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:41:12.253404Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:41:12.049315Z&quot;}}" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set map projection </span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># SouthPolarStereo(): southern polar stereographic projection)</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.SouthPolarStereo())</span>

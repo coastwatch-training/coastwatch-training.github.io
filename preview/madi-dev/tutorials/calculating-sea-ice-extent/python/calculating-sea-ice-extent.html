@@ -427,7 +427,7 @@ The Sea ice concentration (SIC) dataset used in this exercise is produced by NOA
 This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km resolution Northern Polar Stereographic projection (EPSG:3413). The file for this exercise is available in the <a href="#">resources folder</a> or can be downloaded from the NSIDC website at https://nsidc.org/data/nsidc-0771/versions/1. For this tutorial, we will access the dataset directly from the PolarWatch ERDDAP at the following link: https://polarwatch.noaa.gov/erddap/griddap/pstere_gridcell_N25k</p>
 <section id="import-packages" class="level3">
 <h3 class="anchored" data-anchor-id="import-packages">Import packages</h3>
-<div id="a4e078e3" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:38:24.284311Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:38:24.262984Z&quot;}}" data-tags="[&quot;packages&quot;]" data-execution_count="1">
+<div id="1ce7596a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:38:24.284311Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:38:24.262984Z&quot;}}" data-tags="[&quot;packages&quot;]" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -499,7 +499,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 </section>
 <section id="generate-the-erddap-data-query-url-from-its-component-parts" class="level3">
 <h3 class="anchored" data-anchor-id="generate-the-erddap-data-query-url-from-its-component-parts">Generate the ERDDAP data query URL from its component parts</h3>
-<div id="809a9941" class="cell" data-execution_count="2">
+<div id="159eb706" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>base_url <span class="op">=</span> <span class="st">'https://polarwatch.noaa.gov/erddap/griddap/'</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>datasetID <span class="op">=</span> <span class="st">'nsidcG02202v4nhmday'</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>file_type <span class="op">=</span> <span class="st">'.nc'</span></span>
@@ -521,7 +521,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 </section>
 <section id="download-the-data-as-a-netcdf-file-and-load-file-data-into-python" class="level3">
 <h3 class="anchored" data-anchor-id="download-the-data-as-a-netcdf-file-and-load-file-data-into-python">Download the data as a netCDF file and load file data into Python</h3>
-<div id="8f1e8341" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-10T16:46:54.553728Z&quot;,&quot;start_time&quot;:&quot;2023-08-10T16:46:54.060087Z&quot;}}" data-execution_count="3">
+<div id="8ea1c723" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-10T16:46:54.553728Z&quot;,&quot;start_time&quot;:&quot;2023-08-10T16:46:54.060087Z&quot;}}" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download the data from ERDDAP URL as a netCDF file</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(url, <span class="st">"sic.nc"</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -533,7 +533,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 <section id="display-the-sea-ice-cover-data-as-a-map" class="level3">
 <h3 class="anchored" data-anchor-id="display-the-sea-ice-cover-data-as-a-map">Display the sea ice cover data as a map</h3>
 <p>The sea ice concentration values range from zero (no ice cover) to 1 (100% ice cover). However, this dataset also includes values above 1 to flag features like lakes, coastline, and land. Therefore, included in the code below is a step to remove those flag values from the mapping workflow.</p>
-<div id="40bb90f5" class="cell" data-execution_count="4">
+<div id="c3223ff6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>img <span class="op">=</span> ds[<span class="st">'cdr_seaice_conc_monthly'</span>].squeeze()</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove flag values</span></span>
@@ -568,7 +568,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 <section id="access-the-ancillary-grid-with-opendap-web-services" class="level4">
 <h4 class="anchored" data-anchor-id="access-the-ancillary-grid-with-opendap-web-services">Access the Ancillary Grid with OPeNDAP web services</h4>
 <p>ERDDAP allows you to access data using <a href="https://www.opendap.org/">OPeNDAP web services</a>. The OPeNDAP protocol allows you to create the xarray dataset object directly from the remote server, without downloading a data file onto your computer. When you request the subset of the dataset (e.g.&nbsp;the sub_area object below), the data are uploaded directly into an xarray data array.</p>
-<div id="04eb7d1c" class="cell" data-execution_count="5">
+<div id="e85dded7" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Open xarray dataset object via an OPeNDAP connection</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>grid_url <span class="op">=</span> <span class="st">'https://polarwatch.noaa.gov/erddap/griddap/pstere_gridcell_N25k'</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>grid_area <span class="op">=</span> xr.open_dataset(grid_url)</span>
@@ -583,7 +583,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 <section id="combine-the-subsetted-grid-to-the-sic-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="combine-the-subsetted-grid-to-the-sic-dataset">Combine the subsetted grid to the SIC dataset</h3>
 <p>Add subsetted area values from grid_area dataset as a new layer in the sea ice concentration dataset.</p>
-<div id="e5e70f1a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:31:28.600726Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:31:28.575131Z&quot;}}" data-execution_count="6">
+<div id="d67321e8" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T16:31:28.600726Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T16:31:28.575131Z&quot;}}" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add agrid area to the dataset</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ds[<span class="st">'area'</span>] <span class="op">=</span> ((<span class="st">'ygrid'</span>, <span class="st">'xgrid'</span>), sub_area.cell_area.values)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -594,7 +594,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 <h2 class="anchored" data-anchor-id="compute-sea-ice-area-and-extent">Compute sea ice area and extent</h2>
 <p>Although area and extent may sound the same, they are different measurements. * Sea ice area is the total region covered by ice, i.e.&nbsp;area that is 100% covered by ice. * Sea ice extent is the total region with at least 15 percent sea ice cover.</p>
 <p>Therefore, extent will give higher values than area.</p>
-<div id="22e1a72d" class="cell" data-execution_count="7">
+<div id="b5de08f9" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the dataset to exclude flag values (value &gt; 1)</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>seaice_ds <span class="op">=</span> ds.where(ds.cdr_seaice_conc_monthly <span class="op">&lt;=</span> <span class="dv">1</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -687,7 +687,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 * From: <code>date_range = '[(2021-01-01T00:00:00Z):1:(2021-01-01T00:00:00Z)]'</code><br>
 * To: <code>date_range = '[(2021-01-01T00:00:00Z):1:(2021-12-01T00:00:00Z)]'</code></p>
 <p><strong>Then rerunning the code to generate the ERDDAP data query URL.</strong></p>
-<div id="e2b9a8a2" class="cell" data-execution_count="8">
+<div id="5a15f89f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>date_range <span class="op">=</span> <span class="st">'[(2021-01-01T00:00:00Z):1:(2021-12-01T00:00:00Z)]'</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">''</span>.join([base_url,</span>
@@ -703,7 +703,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 </section>
 <section id="generate-the-sea-ice-area-and-extent-time-series" class="level3">
 <h3 class="anchored" data-anchor-id="generate-the-sea-ice-area-and-extent-time-series">Generate the sea ice area and extent time series</h3>
-<div id="448f1652" class="cell" data-execution_count="9">
+<div id="bf33b6b0" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Download 12 months of data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>urllib.request.urlretrieve(url, <span class="st">"sic12.nc"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -745,7 +745,7 @@ This dataset includes area values (m<sup>2</sup>) of each grid cell in the 25km 
 </section>
 <section id="plot-the-sea-ice-area-and-extent-time-series" class="level3">
 <h3 class="anchored" data-anchor-id="plot-the-sea-ice-area-and-extent-time-series">Plot the sea ice area and extent time series</h3>
-<div id="dfd21625" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T19:32:23.581311Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T19:32:23.495609Z&quot;}}" data-execution_count="10">
+<div id="c5d2f292" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-11T19:32:23.581311Z&quot;,&quot;start_time&quot;:&quot;2023-08-11T19:32:23.495609Z&quot;}}" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">4</span>))</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data as a line</span></span>
