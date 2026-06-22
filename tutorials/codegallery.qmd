@@ -794,3 +794,30 @@ document.addEventListener("click", function(e){
 
 });
 </script>
+
+<script>
+function cgHighlightFromHash() {
+  const hash = window.location.hash;
+  if (!hash) return;
+
+  const el = document.querySelector(hash);
+  if (!el) return;
+
+  // clear existing highlights
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
+
+  // highlight target row
+  el.classList.add("cg-selected");
+
+  // center it on page
+  el.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+document.addEventListener("DOMContentLoaded", cgHighlightFromHash);
+window.addEventListener("hashchange", cgHighlightFromHash);
+</script>
