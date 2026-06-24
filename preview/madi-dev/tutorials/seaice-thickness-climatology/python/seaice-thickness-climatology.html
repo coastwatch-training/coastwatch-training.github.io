@@ -404,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="import-python-packages" class="level3">
 <h3 class="anchored" data-anchor-id="import-python-packages">Import Python packages</h3>
-<div id="61343599" class="cell" data-execution_count="1">
+<div id="68180e93" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -416,7 +416,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="load-data-from-polarwatch-erddap-data-server" class="level3">
 <h3 class="anchored" data-anchor-id="load-data-from-polarwatch-erddap-data-server">Load data from PolarWatch ERDDAP data server</h3>
 <p>We will begin by obtaining the current sea ice thickness data from the PolarWatch ERDDAP data server. The data request is made using a URL that includes the ERDDAP address and a unique dataset ID.</p>
-<div id="55c24cfa" class="cell" data-execution_count="2">
+<div id="3fec8f60" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the URL for the PolarWatch sea ice thickness dataset on the ERDDAP server</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>erddap_url <span class="op">=</span> <span class="st">"https://polarwatch.noaa.gov/erddap/griddap/ncei_polarAPPX20_nhem"</span>  </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -438,7 +438,7 @@ ds_monthly_mean21 = ds21.groupby("time.month").mean()
 
 # Close dataset to free up memory
 ds21.close()</code></pre>
-<div id="a6653784" class="cell" data-execution_count="3">
+<div id="2ca9e28c" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data from year 2021</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ds23 <span class="op">=</span> ds[<span class="st">'cdr_sea_ice_thickness'</span>].sel(time<span class="op">=</span><span class="bu">slice</span>(<span class="st">'2023-01-01'</span>, <span class="st">'2023-12-31'</span>))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -448,7 +448,7 @@ ds21.close()</code></pre>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Close dataset to free up memory</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>ds23.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="5b46b602" class="cell" data-execution_count="4">
+<div id="a0cf3bd5" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load already computed monthly mean for 2021</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>ds_monthly_mean23 <span class="op">=</span> xr.open_dataset(<span class="st">'../data/sit_monthly_mean23.nc'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ds_monthly_mean23</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -456,7 +456,7 @@ ds21.close()</code></pre>
 </section>
 <section id="visualizing-2023-january-monthly-average-on-the-map" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-2023-january-monthly-average-on-the-map">Visualizing 2023 January Monthly Average on the Map</h3>
-<div id="bd58ee41" class="cell" data-execution_count="5">
+<div id="e9b3b745" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualize the January sea ice thickness mean (first time step: index[0])</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ds_monthly_mean23[<span class="st">'cdr_sea_ice_thickness'</span>][<span class="dv">0</span>].plot()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"2023 Sea ice thickness January Average"</span>)</span>
@@ -467,7 +467,7 @@ ds21.close()</code></pre>
 <section id="loading-monthly-average-from-2006-to-2020" class="level3">
 <h3 class="anchored" data-anchor-id="loading-monthly-average-from-2006-to-2020">Loading Monthly Average from 2006 to 2020</h3>
 <p>To do climate analysis such as computing climatology and trend analysis, we will use sea ice thickness monthly average from 2005 to 2020. The monthly averages are already computed and are available in netcdf file.</p>
-<div id="fc738987" class="cell" data-execution_count="6">
+<div id="d3b0cd50" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load monthly average data from 2006-2020</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>ds_monthly <span class="op">=</span> xr.open_dataset(<span class="st">'../data/seaice-thickness-monthly2006_2020.nc'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>ds_monthly</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -476,7 +476,7 @@ ds21.close()</code></pre>
 <section id="compute-the-15-year-historical-mean" class="level3">
 <h3 class="anchored" data-anchor-id="compute-the-15-year-historical-mean">Compute the 15 year historical mean</h3>
 <p>Using <code>ds_monthly</code> dataset, we will compute 15 year historical monthly means.</p>
-<div id="08a2f498" class="cell" data-execution_count="7">
+<div id="41d411c8" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute monthly mean from annualized data</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>historical_mean <span class="op">=</span> ds_monthly.mean(dim<span class="op">=</span><span class="st">'year'</span>)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>ds_monthly.close()</span>
@@ -485,7 +485,7 @@ ds21.close()</code></pre>
 </section>
 <section id="visualizing-monthly-historical-mean" class="level3">
 <h3 class="anchored" data-anchor-id="visualizing-monthly-historical-mean">Visualizing monthly historical mean</h3>
-<div id="76b35457" class="cell" data-execution_count="8">
+<div id="0c5db68c" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the first time step of the sea ice thickness</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>historical_mean[<span class="st">'cdr_sea_ice_thickness'</span>][<span class="dv">1</span>].plot()</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Sea Ice Thickness Historical Month Mean (Feb)"</span>)</span>
@@ -496,7 +496,7 @@ ds21.close()</code></pre>
 <section id="computing-anomalies" class="level3">
 <h3 class="anchored" data-anchor-id="computing-anomalies">Computing Anomalies</h3>
 <p>To assess recent changes in sea ice thickness, we can compare the current sea ice thickness for the year 2023 to the 15-year historical mean. An anaomaly is a commonly used metric that represents the difference (or departure) between the current value and the historical average.</p>
-<div id="37bd08c5" class="cell" data-execution_count="9">
+<div id="0d332b83" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute anomaly of 2021 from the mean data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>anom_mean <span class="op">=</span> ds_monthly_mean23[<span class="st">'cdr_sea_ice_thickness'</span>] <span class="op">-</span> historical_mean[<span class="st">'cdr_sea_ice_thickness'</span>]</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -521,7 +521,7 @@ ds21.close()</code></pre>
 <p>https://www.geeksforgeeks.org/how-to-perform-a-mann-kendall-trend-test-in-python/</p>
 <p>A trend in climatology refers to long-term changes over an extended period. There are several methods to estimate the trends in the time series data. In this exercise, we will use Mann-Kendall regression with <code>mk_slope()</code> function to compute the slope. Mann-Kendall test is a non-parametric method that does not assume data normality, making it suitable for various data distributions.</p>
 <p>Note: The code may take some time to process (approximately 3 minutes).</p>
-<div id="0ea9fe3a" class="cell" data-execution_count="10">
+<div id="4b022b42" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Define a function to apply the Mann-Kendall test and return the slope</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mk_slope(data):</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -551,7 +551,7 @@ ds21.close()</code></pre>
 <h3 class="anchored" data-anchor-id="visualizing-the-trends-slopes-for-each-grid">Visualizing the Trends (Slopes) for Each Grid</h3>
 <p>The slopes are calculated for each month and grid over the 15-year-period (2005-2020).<br>
 For this visualization, we will display the results from the month of September across the grid.</p>
-<div id="13b14ae7" class="cell" data-execution_count="11">
+<div id="f647b43c" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>slopes[<span class="st">'cdr_sea_ice_thickness'</span>].sel(month<span class="op">=</span><span class="dv">9</span>).plot()</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">'Sea Ice Thickness Trend for September'</span>)</span>
