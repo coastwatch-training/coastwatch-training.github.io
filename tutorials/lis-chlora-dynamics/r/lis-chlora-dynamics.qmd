@@ -1,8 +1,8 @@
-History \| Updated Apr 2025
-
 # Long Island Sound Chlorophyll-a Dynamics Tutorial
 
-> Update: Apr 2025
+### Authors: Jonathan Sherman & Madison Richardson
+
+> History | Updated Apr 2025
 
 ## Objective
 
@@ -210,8 +210,7 @@ ggplot(monthly_mean, aes(x = longitude, y = latitude, fill = chlor_a)) +
   theme(strip.text = element_text(size = 10))
 
 ```
-
-![images](facet_chla.png)
+![](images/facet_chla.png)
 
 
 ## Compute the annual average for the region
@@ -244,9 +243,7 @@ ggplot(yearly_mean, aes(x = longitude, y = latitude, fill = chlor_a)) +
   theme_minimal(base_size = 14)
 
 ```
-
-![images](average_chlorophyll-a.png)
-
+![](images/average_chlorophyll-a.png)
 
 ## Spatial Subset and Time Series Comparing Chlorophyll-a Seasonal Cycles in Western and Eastern Long Island Sound
 
@@ -333,6 +330,4 @@ ggplot(ts_combined, aes(x = period, y = chlor_a, color = region)) +
   theme_minimal(base_size = 14)
 
 ```
-
-![images](chla_timeseries.png)
-
+![](images/chla_timeseries.png)

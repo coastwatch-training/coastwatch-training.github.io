@@ -3,7 +3,8 @@ title: "Exploring the MESI & MUNSTER eddy datasets"
 format: html
 ---
 
-> Author: Cara Wilson
+### Author: Cara Wilson
+
 > History | Updated 2026-3-24
 
 
