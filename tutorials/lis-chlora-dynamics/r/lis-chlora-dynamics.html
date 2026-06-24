@@ -347,6 +347,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#long-island-sound-chlorophyll-a-dynamics-tutorial" id="toc-long-island-sound-chlorophyll-a-dynamics-tutorial" class="nav-link active" data-scroll-target="#long-island-sound-chlorophyll-a-dynamics-tutorial">Long Island Sound Chlorophyll-a Dynamics Tutorial</a>
   <ul class="collapse">
+  <li><a href="#authors-jonathan-sherman-madison-richardson" id="toc-authors-jonathan-sherman-madison-richardson" class="nav-link" data-scroll-target="#authors-jonathan-sherman-madison-richardson">Authors: Jonathan Sherman &amp; Madison Richardson</a></li>
   <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
   <li><a href="#the-tutorial-demonstrates-the-following-techniques" id="toc-the-tutorial-demonstrates-the-following-techniques" class="nav-link" data-scroll-target="#the-tutorial-demonstrates-the-following-techniques">The tutorial demonstrates the following techniques:</a></li>
   <li><a href="#datasets-used" id="toc-datasets-used" class="nav-link" data-scroll-target="#datasets-used">Datasets used</a></li>
@@ -375,12 +376,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<p>History | Updated Apr 2025</p>
 <section id="long-island-sound-chlorophyll-a-dynamics-tutorial" class="level1">
 <h1>Long Island Sound Chlorophyll-a Dynamics Tutorial</h1>
+<section id="authors-jonathan-sherman-madison-richardson" class="level3">
+<h3 class="anchored" data-anchor-id="authors-jonathan-sherman-madison-richardson">Authors: Jonathan Sherman &amp; Madison Richardson</h3>
 <blockquote class="blockquote">
-<p>Update: Apr 2025</p>
+<p>History | Updated Apr 2025</p>
 </blockquote>
+</section>
 <section id="objective" class="level2">
 <h2 class="anchored" data-anchor-id="objective">Objective</h2>
 <p>This tutorial will show the steps to grab daily chlorophyll-a data hosted on an ERDDAP server using the <code>griddap</code> function in the <code>rerrdap</code> package, how to make temporal composites in R and how to make some maps and time-series of chlorophyll-a.</p>
@@ -551,12 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Longitude"</span>, <span class="at">y =</span> <span class="st">"Latitude"</span>) <span class="sc">+</span></span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="facet_chla.png" class="img-fluid figure-img"></p>
-<figcaption>images</figcaption>
-</figure>
-</div>
+<p><img src="images/facet_chla.png" class="img-fluid"></p>
 </section>
 <section id="compute-the-annual-average-for-the-region" class="level2">
 <h2 class="anchored" data-anchor-id="compute-the-annual-average-for-the-region">Compute the annual average for the region</h2>
@@ -581,12 +579,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Longitude"</span>, <span class="at">y =</span> <span class="st">"Latitude"</span></span>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="average_chlorophyll-a.png" class="img-fluid figure-img"></p>
-<figcaption>images</figcaption>
-</figure>
-</div>
+<p><img src="images/average_chlorophyll-a.png" class="img-fluid"></p>
 </section>
 <section id="spatial-subset-and-time-series-comparing-chlorophyll-a-seasonal-cycles-in-western-and-eastern-long-island-sound" class="level2">
 <h2 class="anchored" data-anchor-id="spatial-subset-and-time-series-comparing-chlorophyll-a-seasonal-cycles-in-western-and-eastern-long-island-sound">Spatial Subset and Time Series Comparing Chlorophyll-a Seasonal Cycles in Western and Eastern Long Island Sound</h2>
@@ -657,12 +650,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Region"</span></span>
 <span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="chla_timeseries.png" class="img-fluid figure-img"></p>
-<figcaption>images</figcaption>
-</figure>
-</div>
+<p><img src="images/chla_timeseries.png" class="img-fluid"></p>
 
 
 </section>
