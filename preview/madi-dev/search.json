@@ -1747,7 +1747,7 @@
     "href": "trainings/upcoming/sat201_26.html#curriculum",
     "title": "Satellite 201 Summer Lecture Series",
     "section": "2026 Curriculum",
-    "text": "2026 Curriculum\nThe inaugural 2026 course will cover the following subjects:\n\nAlternative Data Access: Methods for accessing data not hosted on ERDDAP servers.\nCoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite.\nBeyond Chlorophyll: Exploring ocean color products other than chlorophyll.\nSAR Data: An introduction to Synthetic Aperture Radar.",
+    "text": "2026 Curriculum\nThe inaugural 2026 course will cover the following subjects:\n\nSAR Data: An introduction to Synthetic Aperture Radar.\nCoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite.\nBeyond Chlorophyll: Exploring ocean color products other than chlorophyll.\nAlternative Data Access: Methods for accessing data not hosted on ERDDAP servers.",
     "crumbs": [
       "Training Classes",
       "Upcoming Trainings",
