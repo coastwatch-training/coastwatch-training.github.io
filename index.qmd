@@ -8,7 +8,7 @@ This site provides information on CoastWatch Satellite Training courses such as 
 
 **Satellite 201 Summer Lecture Series**
 
-  - July 10, 17, 24 and 31, 2026, Virtual 11am - 1pm (Pacific Time)
+  - July 10, 17, 24 and 31, 2026, Virtual 11am - 1:30pm (Pacific Time)
 
   This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Find out more [here](trainings/upcoming/sat201_26.qmd).
 
