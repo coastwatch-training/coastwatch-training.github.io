@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>In this specific example, the URL we generated is :</p>
 <p>https://apps.glerl.noaa.gov/erddap/griddap/GLSEA_ACSPO_GCS.nc?sst%5B(2023-06-01T12:00:00Z):1:(2023-06-30T12:00:00Z)%5D%5B(41):1:(43)%5D%5B(-83.5):1:(-78.5)%5D</p>
 <p>In Python, run the following to download the data using the generated URL. <strong>Note:</strong> replace coastwatch.glerl.noaa.gov with apps.glerl.noaa.gov) :</p>
-<div id="155c0f86" class="cell" data-execution_count="1">
+<div id="ae5d624f" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> urllib.request</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>url<span class="op">=</span><span class="st">"https://apps.glerl.noaa.gov/erddap/griddap/GLSEA_ACSPO_GCS.nc?sst%5B(2023-06-01T12:00:00Z):1:(2023-06-30T12:00:00Z)%5D%5B(41):1:(43)%5D%5B(-83.5):1:(-78.5)%5D"</span></span>
@@ -398,60 +398,60 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>2. Importing NetCDF4 data in Python</h1>
 <p>Now that we’ve downloaded the data locally, we can import it and extract our variables of interest.</p>
 <p>The xarray package makes it very convenient to work with NetCDF files. Documentation is available here: http://xarray.pydata.org/en/stable/why-xarray.html</p>
-<div id="dcd7f147" class="cell" data-execution_count="2">
+<div id="4c3db2f6" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4 <span class="im">as</span> nc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <section id="open-the-file-and-load-it-as-an-xarray-dataset" class="level4">
 <h4 class="anchored" data-anchor-id="open-the-file-and-load-it-as-an-xarray-dataset">- Open the file and load it as an xarray dataset:</h4>
-<div id="8db96bd3" class="cell" data-execution_count="3">
+<div id="89bdee95" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(<span class="st">'e_sst.nc'</span>,decode_cf<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ds = xr.open_dataset('e_sst.nc')</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="examine-the-data-structure" class="level4">
 <h4 class="anchored" data-anchor-id="examine-the-data-structure">- Examine the data structure:</h4>
-<div id="469622cc" class="cell" data-execution_count="4">
+<div id="d756f6ea" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="038b6a6e" class="cell" data-execution_count="5">
+<div id="a782fac9" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ds)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="examine-which-coordinates-and-variables-are-included-in-the-dataset" class="level4">
 <h4 class="anchored" data-anchor-id="examine-which-coordinates-and-variables-are-included-in-the-dataset">- Examine which coordinates and variables are included in the dataset:</h4>
-<div id="6bb81b0f" class="cell" data-execution_count="6">
+<div id="8db39624" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ds.dims</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="b6bed2dd" class="cell" data-execution_count="7">
+<div id="44e666b7" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ds.coords</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="abc97a3b" class="cell" data-execution_count="8">
+<div id="153f9ff5" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ds.data_vars</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="7ae58b6b" class="cell" data-execution_count="9">
+<div id="6698743e" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ds.attrs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="examine-the-structure-of-sst" class="level4">
 <h4 class="anchored" data-anchor-id="examine-the-structure-of-sst">- Examine the structure of sst:</h4>
-<div id="dba2720d" class="cell" data-execution_count="10">
+<div id="fa36e62a" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ds.sst.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Our dataset is a 3-D array with 143 rows corresponding to latitudes and 358 columns corresponding to longitudes, for each of the 30 time steps.</p>
 </section>
 <section id="get-the-dates-for-each-time-step" class="level4">
 <h4 class="anchored" data-anchor-id="get-the-dates-for-each-time-step">- Get the dates for each time step:</h4>
-<div id="185f05bd" class="cell" data-execution_count="11">
+<div id="3905ed73" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ds.time</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="853bf84a" class="cell" data-execution_count="12">
+<div id="1d417af2" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>ds.time.attrs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="the-time-units-is-seconds-we-need-to-convert-the-seconds-to-dates." class="level4">
 <h4 class="anchored" data-anchor-id="the-time-units-is-seconds-we-need-to-convert-the-seconds-to-dates.">the time units is seconds, we need to convert the seconds to dates.</h4>
-<div id="cd562d87" class="cell" data-execution_count="13">
+<div id="db3477de" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>dates<span class="op">=</span>nc.num2date(ds.time,ds.time.units,only_use_cftime_datetimes<span class="op">=</span><span class="va">False</span>, </span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                        only_use_python_datetimes<span class="op">=</span><span class="va">True</span> )</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>dates</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -463,7 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="creating-a-map-for-one-time-step" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-map-for-one-time-step">Creating a map for one time step</h3>
 <p>Let’s create a map of SST for June 1, 2021 (our first time step).</p>
-<div id="9e4d191a" class="cell" data-execution_count="14">
+<div id="fbb903b4" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> pyplot <span class="im">as</span> plt</span>
@@ -472,23 +472,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="examine-the-values-of-sst" class="level4">
 <h4 class="anchored" data-anchor-id="examine-the-values-of-sst">- Examine the values of sst:</h4>
-<div id="debefc85" class="cell" data-execution_count="15">
+<div id="025ffde0" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>ds.sst.values</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="0276a598" class="cell" data-execution_count="16">
+<div id="d8d7e551" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>ds.sst.attrs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="087402d7" class="cell" data-execution_count="17">
+<div id="86060a44" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>ds.sst.attrs[<span class="st">'_FillValue'</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="4ed5281c" class="cell" data-execution_count="18">
+<div id="43fe9008" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ds.sst.dims</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#ds.sst.coords</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="make-a-new-sst-dataarray-and-replace-_fillvalue-with-nan" class="level4">
 <h4 class="anchored" data-anchor-id="make-a-new-sst-dataarray-and-replace-_fillvalue-with-nan">- Make a new sst DataArray and replace _fillValue with NaN</h4>
-<div id="7945f77f" class="cell" data-execution_count="19">
+<div id="bf2723d3" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#nan_sst = ds.sst.where(ds.sst.values != -99999.0)</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>nan_sst <span class="op">=</span> ds.sst.where(ds.sst.values <span class="op">!=</span> ds.sst.attrs[<span class="st">'_FillValue'</span>])</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -500,31 +500,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="set-some-color-breaks" class="level4">
 <h4 class="anchored" data-anchor-id="set-some-color-breaks">- Set some color breaks</h4>
-<div id="095957d3" class="cell" data-execution_count="20">
+<div id="ff4bf365" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>np.nanmin(ds.sst)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="ba88c62c" class="cell" data-execution_count="21">
+<div id="37127893" class="cell" data-execution_count="21">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find min value in man_sst</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>np.nanmin(nan_sst)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="c9f4e696" class="cell" data-execution_count="22">
+<div id="45cac364" class="cell" data-execution_count="22">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>np.nanmax(nan_sst)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="f3dd0d16" class="cell" data-execution_count="23">
+<div id="ff8de469" class="cell" data-execution_count="23">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>levs <span class="op">=</span> np.arange(<span class="fl">13.25</span>, <span class="fl">23.35</span>, <span class="fl">0.05</span>)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(levs)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="define-a-color-palette" class="level4">
 <h4 class="anchored" data-anchor-id="define-a-color-palette">- Define a color palette</h4>
-<div id="9720b62a" class="cell" data-execution_count="24">
+<div id="004699a4" class="cell" data-execution_count="24">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># init a color list</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>jet<span class="op">=</span>[<span class="st">"blue"</span>, <span class="st">"#007FFF"</span>, <span class="st">"cyan"</span>,<span class="st">"#7FFF7F"</span>, <span class="st">"yellow"</span>, <span class="st">"#FF7F00"</span>, <span class="st">"red"</span>, <span class="st">"#7F0000"</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="set-color-scale-using-the-jet-palette" class="level4">
 <h4 class="anchored" data-anchor-id="set-color-scale-using-the-jet-palette">- Set color scale using the jet palette</h4>
-<div id="92df7b46" class="cell" data-execution_count="25">
+<div id="e8e7901f" class="cell" data-execution_count="25">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cm <span class="op">=</span> LinearSegmentedColormap.from_list(<span class="st">'my_jet'</span>, jet, N<span class="op">=</span><span class="bu">len</span>(levs))</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">#https://www.youtube.com/watch?v=qk0n-YaKIkY</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -532,10 +532,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plot-the-sst-map" class="level4">
 <h4 class="anchored" data-anchor-id="plot-the-sst-map">- plot the SST map</h4>
-<div id="9098822f" class="cell" data-execution_count="26">
+<div id="699b1cfb" class="cell" data-execution_count="26">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>np.linspace(<span class="op">-</span><span class="fl">82.5</span>,<span class="op">-</span><span class="dv">80</span>,num<span class="op">=</span><span class="dv">4</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="82d53ce3" class="cell" data-execution_count="27">
+<div id="d20ab779" class="cell" data-execution_count="27">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co">#plot first sst image: nan_sst[0,:,:]</span></span>
@@ -564,7 +564,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Let’s pick the following box : 41.75-42.0N, 83.0-83.5W. We are going to generate a time series of mean SST within that box.</p>
 <section id="first-lets-subset-our-data" class="level4">
 <h4 class="anchored" data-anchor-id="first-lets-subset-our-data">- first, let’s subset our data:</h4>
-<div id="98ce38f4" class="cell" data-execution_count="28">
+<div id="262c0308" class="cell" data-execution_count="28">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>lat_bnds, lon_bnds <span class="op">=</span> [<span class="fl">41.75</span>, <span class="fl">42.0</span>], [<span class="op">-</span><span class="fl">83.5</span>, <span class="op">-</span><span class="fl">83.0</span>]</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>a_sst<span class="op">=</span>nan_sst.sel(latitude<span class="op">=</span><span class="bu">slice</span>(<span class="op">*</span>lat_bnds), longitude<span class="op">=</span><span class="bu">slice</span>(<span class="op">*</span>lon_bnds))</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a_sst)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -572,7 +572,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="lets-plot-the-subset" class="level4">
 <h4 class="anchored" data-anchor-id="lets-plot-the-subset">- let’s plot the subset:</h4>
-<div id="3477992e" class="cell" data-execution_count="29">
+<div id="a5dce2bd" class="cell" data-execution_count="29">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plot first image of the a_sst array</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>plt.contourf(a_sst.longitude, a_sst.latitude, a_sst[<span class="dv">0</span>,:,:], levs,cmap<span class="op">=</span>cm)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>plt.colorbar()</span>
@@ -583,14 +583,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="lets-compute-the-daily-mean-over-the-bounding-region" class="level4">
 <h4 class="anchored" data-anchor-id="lets-compute-the-daily-mean-over-the-bounding-region">- let’s compute the daily mean over the bounding region:</h4>
-<div id="5c4a0d83" class="cell" data-execution_count="30">
+<div id="ae2c273a" class="cell" data-execution_count="30">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>res<span class="op">=</span>np.nanmean(a_sst,axis<span class="op">=</span>(<span class="dv">1</span>,<span class="dv">2</span>))</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="lets-plot-the-time-series" class="level4">
 <h4 class="anchored" data-anchor-id="lets-plot-the-time-series">- let’s plot the time-series:</h4>
-<div id="76e5305c" class="cell" data-execution_count="31">
+<div id="35318926" class="cell" data-execution_count="31">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">4</span>))</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>plt.scatter(dates,res)</span>
@@ -610,19 +610,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="creating-a-map-of-average-sst-over-a-month">Creating a map of average SST over a month</h3>
 <section id="lets-compute-the-monthly-mean-for-the-region" class="level4">
 <h4 class="anchored" data-anchor-id="lets-compute-the-monthly-mean-for-the-region">- let’s compute the monthly mean for the region:</h4>
-<div id="c15fe559" class="cell" data-execution_count="32">
+<div id="f7b076f5" class="cell" data-execution_count="32">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>mean_sst<span class="op">=</span>np.nanmean(nan_sst,axis<span class="op">=</span><span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="81dc37e2" class="cell" data-execution_count="33">
+<div id="6d0d5cd9" class="cell" data-execution_count="33">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>mean_sst.shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="lets-plot-the-map-of-the-average-sst-in-the-region-for-2021-june" class="level4">
 <h4 class="anchored" data-anchor-id="lets-plot-the-map-of-the-average-sst-in-the-region-for-2021-june">- let’s plot the map of the average SST in the region for 2021 June:</h4>
-<div id="35b82513" class="cell" data-execution_count="34">
+<div id="b712f3c9" class="cell" data-execution_count="34">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
 <span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>plt.contourf(ds.longitude, ds.latitude, mean_sst, levs,cmap<span class="op">=</span>cm)</span>
@@ -634,7 +634,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="../images/py4.png" class="img-fluid"></p>
-<div id="df54967a" class="cell" data-execution_count="35">
+<div id="c881e948" class="cell" data-execution_count="35">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>jupyter nbconvert <span class="op">--</span>to html GL_python_tutorial1.ipynb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
