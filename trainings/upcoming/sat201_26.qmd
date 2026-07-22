@@ -22,6 +22,11 @@ The inaugural 2026 course will cover the following subjects:
 * Beyond Chlorophyll: Exploring ocean color products other than chlorophyll. 
 * Accessing CoastWatch Data: HTTPS and THREDDS Services.
 
+## Meeting Privacy Notice
+
+**To protect participant privacy, AI-powered meeting recording and transcription will not be used or allowed during this meeting. NOAA guidance requires participant consent when AI is used to collect, transcribe, or summarize personally identifiable information (PII). Because we cannot ensure consent from all participants, AI recording and transcription will not be permitted.**
+
+For additional information on NOAA's privacy practices regarding AI-enabled meetings, see [NOAA's Privacy Statement](https://www.noaa.gov/protecting-your-privacy#:~:text=NOAA%20Privacy%20Statement).
 
 ## Schedule
 
