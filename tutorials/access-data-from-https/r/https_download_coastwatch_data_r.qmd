@@ -5,7 +5,7 @@ execute:
 
 # HTTPS Downloads of CoastWatch Data
 
-#### Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node
+#### Authors: Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node
 
 > **History | Updated July 2026**
 
@@ -114,7 +114,7 @@ download_url <- paste0(
 
 ## 4. Single File Downloads with R
 
-## 4.1 Download Helper Function
+### 4.1 Download Helper Function
 
 Let's build a helper function to simplify downloading files from an HTTPS server using **base R**. This function includes several useful features:
 
