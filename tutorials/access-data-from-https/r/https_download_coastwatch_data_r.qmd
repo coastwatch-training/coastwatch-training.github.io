@@ -1,5 +1,7 @@
 ---
 title: "HTTPS Downloads of CoastWatch Data"
+execute:
+  enabled: false
 output: html_notebook
 authors: Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node
 ---

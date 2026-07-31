@@ -1,5 +1,7 @@
 ---
 title: "THREDDS Downloads of CoastWatch Data"
+execute:
+  enabled: false
 output: html_notebook
 author: "Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node"
 ---
