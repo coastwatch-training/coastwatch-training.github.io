@@ -1,10 +1,6 @@
----
-title: "THREDDS Downloads of CoastWatch Data"
-execute:
-  enabled: false
-output: html_notebook
-author: "Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node"
----
+# THREDDS Downloads of CoastWatch Data
+
+#### Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node
 
 > **History | Updated July 2026**
 
@@ -41,7 +37,7 @@ In this tutorial, you will learn how to:
 
 ### Library installation examples for running in a code block
 
-```{r}
+``` r
 # install.packages(c(
 #   "ncdf4",
 #   "ggplot2",
@@ -107,7 +103,7 @@ The `ncdf4` package provides functions for opening and reading NetCDF datasets i
 
 The `nc_open()` function opens the dataset and reads its metadata, including the available variables, dimensions, and attributes. The data values themselves are **not** read until you explicitly request them with `ncvar_get()`.
 
-```{r}
+``` r
 library(ncdf4)
 
 opendap_url <- "https://www.star.nesdis.noaa.gov/thredds/dodsC/AltimetryBlendedAggGlobalLoM"
@@ -125,7 +121,7 @@ After opening the dataset, it's helpful to spend a few moments exploring its con
 
 Use the following command to list the scientific variables stored in the dataset.
 
-```{r}
+``` r
 names(ds$var)
 ```
 
@@ -135,7 +131,7 @@ For this tutorial, we will work with the `sla` (Sea Level Anomaly) variable.
 
 The dimensions define the coordinate axes (such as time, latitude, and longitude) and determine the shape of each variable. They are also used when selecting subsets of the data.
 
-```{r}
+``` r
 names(ds$dim)
 ```
 
@@ -143,7 +139,7 @@ names(ds$dim)
 
 If you would like to learn more about a specific variable, `sla` in this case, you can inspect its metadata. This includes information such as the variable dimensions, units, and other descriptive attributes
 
-```{r}
+``` r
 ds$var$sla
 ```
 
@@ -161,7 +157,7 @@ In this example, we'll subset the dataset by latitude, longitude, and time befor
 
 To further reduce the amount of data retrieved, we'll keep only **every fourth time step** after reading the requested time range.
 
-```{r}
+``` r
 # Define subset bounds
 lat_min <- 0
 lat_max <- 50
@@ -177,7 +173,7 @@ stride <- 4
 
 Before reading the Sea Level Anomaly variable, we first retrieve the latitude, longitude, and time coordinate variables. These coordinate arrays contain the actual coordinate values stored in the dataset and allow us to determine which array indices correspond to our desired geographic region and time period.
 
-```{r}
+``` r
 # Read the coordinate variables
 lat <- ncvar_get(ds, "latitude")
 lon <- ncvar_get(ds, "longitude")
@@ -186,14 +182,14 @@ time <- ncvar_get(ds, "time")
 
 The `time` variable is stored as numeric values rather than calendar dates. While this format is efficient for storing data, it is difficult to interpret and use in analyses. Converting the time values to standard R `Date` objects makes it easier to subset the dataset by date, create plots, and understand when the observations were collected.
 
-```{r}
+``` r
 # Convert the NetCDF time variable to dates
 time_units <- ncatt_get(ds, "time", "units")$value
 print(time_units)
 
 ```
 
-```{r}
+``` r
 origin <- sub("days since ", "", time_units)
 
 time_dates <- as.Date(time, origin = origin)
@@ -204,7 +200,7 @@ tail(time_dates)
 
 Next, identify the latitude and longitude indices corresponding to our region of interest. The `which()` function returns the positions (indices) of the latitude and longitude values that fall within the requested range.
 
-```{r}
+``` r
 # Find the indices corresponding to your desired region and time range:
 lat_idx <- which(lat >= lat_min & lat <= lat_max)
 
@@ -213,7 +209,7 @@ lon_idx <- which(lon >= lon_min & lon <= lon_max)
 
 Next, identify the indices corresponding to the requested time range. The `which()` function returns the indices of all dates between the selected start and end dates.
 
-```{r}
+``` r
 # Full contiguous time range
 time_idx_full <- which(
   time_dates >= time_min &
@@ -229,7 +225,7 @@ The `start` argument specifies where to begin reading the data, while the `count
 - start = "Begin reading at the first longitude, first latitude, and first date that I selected."
 - count = "From that starting point, read this many longitudes, latitudes, and time steps."
 
-```{r}
+``` r
 # Retrieve SLA values for the selected latitude, longitude, and time indices
 subset_sla <- ncvar_get(
   ds,
@@ -249,7 +245,7 @@ subset_sla <- ncvar_get(
 
 Because we read the full time range in the previous step, we can now reduce the number of observations by keeping every fourth time step. We apply the same selection to both the Sea Level Anomaly data and the time values so that each observation remains associated with the correct date.
 
-```{r}
+``` r
 # Apply the stride after reading to reduce the number of time steps
 stride_idx <- seq(
   1,
@@ -260,7 +256,7 @@ stride_idx <- seq(
 subset_sla <- subset_sla[, , stride_idx]
 ```
 
-```{r}
+``` r
 # Confirm dates are 4 days apart
 time_subset <- time_dates[time_idx_full][stride_idx]
 print(time_subset)
@@ -268,7 +264,7 @@ print(time_subset)
 
 Finally, verify that the Sea Level Anomaly data and the corresponding dates contain the same number of time steps. This confirms that each observation is still paired with the correct date after applying the stride.
 
-```{r}
+``` r
 # Verify the last dimension of subset_sla matches the length(time_subset)
 dim(subset_sla)
 length(time_subset)
@@ -281,7 +277,7 @@ Now that we've retrieved the subsetted data, let's create a map of the **Sea Lev
 
 Because the dataset contains multiple time steps, we first select one date to visualize. We then organize the longitude, latitude, and Sea Level Anomaly values into a dataframe so they can be plotted with **ggplot2**.
 
-```{r}
+``` r
 # Load plotting package
 library(ggplot2)
 
@@ -340,7 +336,7 @@ To prepare the data for animation, we will:
 3.  Add the corresponding date to each dataframe.
 4.  Combine all of the individual dataframes into a single dataframe that will be used to create the animation.
 
-```{r}
+``` r
 # Load packages
 library(ggplot2)
 library(gganimate)
@@ -357,7 +353,7 @@ time_subset <- time_subset[seq_len(n_frames)]
 head(time_subset, 20)
 ```
 
-```{r}
+``` r
 # Create a dataframe for each time step and combine them
 animation_df <- do.call(
   rbind,
@@ -383,7 +379,7 @@ animation_df <- do.call(
 
 Next, use **ggplot2** to create the map that will be displayed in the animation. This is very similar to the static map we created in the previous section. The main difference is that we add `transition_manual(date)`, which tells **gganimate** to display one frame for each date in the dataframe.
 
-```{r}
+``` r
 # Create the animation
 p <- ggplot(
   animation_df,
@@ -420,7 +416,7 @@ p <- ggplot(
 
 Finally, generate and save the animation. The `animate()` function creates the animation, and `anim_save()` saves it locally as a GIF that you can view or share.
 
-```{r}
+``` r
 # Render and save GIF
 anim <- animate(
   p,
@@ -446,7 +442,7 @@ anim_save(
 
 Display the animation.
 
-```{r}
+``` r
 knitr::include_graphics("sla_animation.gif")
 
 ```
@@ -457,7 +453,7 @@ The subsetted Sea Level Anomaly data currently exists only in R's memory. To use
 
 To do this, we first define the longitude, latitude, and time coordinates that will be included in the file. Next, we define the Sea Level Anomaly variable and specify that it uses these coordinates. Finally, we create the NetCDF file, write the subsetted data, and close the file to save it.
 
-```{r}
+``` r
 # Define the longitude coordinate
 lon_dim <- ncdim_def(
   "longitude",
@@ -500,7 +496,7 @@ nc_close(nc_out)
 
 To verify that the file was created successfully, open it and display its contents. You should see the Sea Level Anomaly variable along with the longitude, latitude, and time coordinates that were written to the file.
 
-```{r}
+``` r
 # Open the saved NetCDF file
 nc_check <- nc_open("sla_subset.nc")
 
@@ -516,7 +512,7 @@ The file now contains your subsetted data and can be reopened later or shared wi
 
 Finally, close the connection to the original dataset. This ensures that all files are properly closed before ending your session.
 
-```{r}
+``` r
 # Close the original dataset
 nc_close(ds)
 
@@ -586,7 +582,7 @@ Workflow using **per-file views** for the same task we accomplished with the **a
 
 #### Workflow example
 
-```{r}
+``` r
 library(ncdf4)
 
 # Define spatial and temporal subset
@@ -733,7 +729,7 @@ We will use OPeNDAP (DODS) to programmatically access and subset the data.
 
 #### Full Workflow example
 
-```{r}
+``` r
 library(ncdf4)
 library(ggplot2)
 library(gganimate)

@@ -1,10 +1,6 @@
----
-title: "HTTPS Downloads of CoastWatch Data"
-execute:
-  enabled: false
-output: html_notebook
-authors: Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node
----
+# HTTPS Downloads of CoastWatch Data
+
+#### Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node
 
 > **History | Updated July 2026**
 
@@ -37,7 +33,7 @@ The `curl` package is not required to run the main tutorial, but is required to 
 
 ### Library installation examples for running in a code block
 
-```{r}
+``` r
 #install.packages(c(
 #  "rvest",
 #  "curl"
@@ -45,7 +41,7 @@ The `curl` package is not required to run the main tutorial, but is required to 
 
 ```
 
-```{r}
+``` r
 # Load necessary packages
 library(rvest)
 library(curl)
@@ -102,7 +98,7 @@ The full web path looks like this: [https://www.star.nesdis.noaa.gov/data/pub001
 
 We use paste0() here simply to make the URL easier to read across multiple lines. It produces the same result as writing the entire URL as one long string.
 
-```{r}
+``` r
 download_url <- paste0(
   "https://www.star.nesdis.noaa.gov/data/pub0015/",
   "coastwatch/rads/sla/2024/",
@@ -128,7 +124,7 @@ Let's build a helper function to simplify downloading files from an HTTPS server
 
 ### R Helper Function to download files
 
-```{r}
+``` r
 download_file_with_r <- function(
     url,
     output_dir,
@@ -185,7 +181,7 @@ We will use the default timeout, adding:
 1.  HTTPS URL of the file to download.
 2.  The download directory.
 
-```{r}
+``` r
 # Download the file
 saved_file <- download_file_with_r(
     download_url,
@@ -237,7 +233,7 @@ To automatically collect file links from an HTTPS directory, we will create a he
 
 The function automatically reads the directory listing, removes navigation links and subdirectories, filters the results by file extension (if specified), and returns a **sorted list of complete file URLs** ready for downloading.
 
-```{r}
+``` r
 scrape_http_files <- function(
     url,
     file_ext = NULL,
@@ -307,7 +303,7 @@ For demonstration purposes, this example includes a `break` statement so that on
 
 - **Note**: Without the `break`, the workflow would download every June file for both **2022** and **2023** (about **60 daily NetCDF files**), which can take several minutes. Once you've confirmed the workflow is working correctly, remove or comment out the `break` statement to download every matching file.
 
-```{r}
+``` r
 # Years to download data for
 years <- c(2022, 2023)
 
@@ -425,7 +421,7 @@ This dataset combines sea surface temperature (SST) observations from multiple *
 
 You must have the `curl` package installed on your system for this function to work. Unlike download.file(), curl::curl_download() provides additional networking features and may offer improved performance for some download workflows.
 
-```{r}
+``` r
 library(curl)
 
 download_file_with_curl <- function(url, output_dir) {
@@ -456,7 +452,7 @@ download_file_with_curl <- function(url, output_dir) {
 
 ### Usage example
 
-```{r}
+``` r
 # Download using the curl package
 saved_file <- download_file_with_curl(
   download_url,
