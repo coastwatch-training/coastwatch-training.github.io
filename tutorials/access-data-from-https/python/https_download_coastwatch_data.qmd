@@ -1,12 +1,11 @@
 ---
+title: "HTTPS Downloads of CoastWatch Data"
 execute:
   eval: false
 jupyter: python3
 ---
 
-#  HTTPS Downloads of CoastWatch Data
-
-### Author: Dale Robinson & Madison Richardson
+#### Author: Dale Robinson & Madison Richardson
 
 > History | Updated July 2026
 
@@ -24,6 +23,7 @@ You can download most **CoastWatch** data directly from a secure web server usin
 ### What You Will Learn
 
 In this tutorial, you will learn how to:
+
 1. **Find files:** Explore the folder structure of a web server to find the files you need.
 2. **Download one file:** Use Python to automatically save a single file to your computer.
 3. **Download many files:** Use a Python script to download multiple files automatically.
@@ -32,14 +32,17 @@ In this tutorial, you will learn how to:
 
 
 ## 2. Environment Requirements:
+
 - Python Version: 3.6+ (3.9+ recommended)
 - Dependencies: requests, tqdm
 
 ### Library installation examples for running in a code block
 * Option 1: For standard Python environments
+
     >!pip install --quiet "requests>=2.25.0" "tqdm>=4.50.0"
 
 * Option 2: For Conda or Mamba environments
+
     >%conda install --quiet --yes -c conda-forge "requests>=2.25.0" "tqdm>=4.50.0"
     >Or
     >%mamba install --quiet --yes -c conda-forge "requests>=2.25.0" "tqdm>=4.50.0"
@@ -54,20 +57,25 @@ We’ll use the CoastWatch **Sea Level Anomaly and Geostrophic Currents** datase
 * The "Data Access" tab points you to all of the ways to download and visuallize the the data from the dataset.
 
 
-<img src="ssh_download_options.png" style="border: 2px solid grey;" width=50%> 
+<img src="images/ssh_download_options.png" style="border: 2px solid grey;" width=50%> 
 
 ### 3.1. Exploring the HTTPS Directory
+
 1. On the "Data Access" of the documentation page, scroll down and click the **HTTPS** link.
+
    * The folders are organized by year (from 2015 to the present).
    * Note that other datasets might use different setups, like sorting by month or region.
+
 2. Open the **2024** folder. Inside, you will see a long list of data files.
 
 
 ### 3.2. File naming conventions:
 The files in this dataset follow a strict naming pattern:  
+
 > `rads_global_nrt_sla_20240119_20240120_001.nc`
 
 Here is what each piece of the name means:
+
 * **rads:** Radar Altimeter Database System (the system used to gather data).
 * **global:** Covers the entire global ocean.
 * **nrt:** Near Real-Time data (collected quickly).
@@ -86,6 +94,7 @@ We will look for the file from January 19, 2024:
 * Right-click the file name and choose **"Copy link address"** to get its web path.
 
 The full web path looks like this:
+
 * <font size="2">[https://www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/2024/    rads_global_nrt_sla_20240119_20240120_001.nc](https://www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/2024/rads_global_nrt_sla_20240119_20240120_001.nc)</font>
 
 ##### Put the URL into a variable called **download_url**, as shown.
@@ -138,8 +147,6 @@ Let's build a helper function to make our file downloads safe and stable. This f
 * **Timeout Limits:** It sets a maximum waiting time so your Python script will not freeze if the web server drops the connection.
 * **Progress Bar:** It shows a visual progress bar so you can see the download happen in real-time.
 >**Alternative Approach:** You can also download files using standard computer system tools like `wget` or `curl`. We have included a section explaining how to do this in [Appendix A](#appendix-a).
-
-
 
 #### Python helper function to download files 
 
@@ -255,7 +262,9 @@ def download_file_with_python(
 Now that we've created our helper function, downloading a file only requires a single function call.
 
 #### The download function takes four arguments
+
 > download_file_with_python(url, output_dir: str, timeout, retries)
+
 * **url (str)**: The HTTPS URL of the file to download.
 * **output_dir (str)**: The local directory where the file will be saved.
 * **timeout (int, optional)**: Seconds to wait for server connection. Default = 30
@@ -264,8 +273,9 @@ Now that we've created our helper function, downloading a file only requires a s
 #### The download function returns the full download path
 
 For this example, we'll use the default values for timeout and retries, so we only need to provide:
-1) HTTPS URL of the file to download.
-2) The directory where the file should be downloaded.
+
+1. HTTPS URL of the file to download.
+2. The directory where the file should be downloaded.
 
 ```{python}
 from pathlib import Path
@@ -286,11 +296,15 @@ We can take advantage of **consistent web links** and **file names** to download
 For this **Sea Level Anomaly and Geostrophic Currents** dataset:
 
 * **Web Links Follow This Setup:**
+
   > `www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/YYYY/`
+
   *(Where **YYYY** is the four-digit year you want to download).*
 
 * **File Names Follow This Setup:**
+
   > `rads_global_nrt_sla_20240119_20240120_001.nc`
+
   *(Where **20240119** is the exact date the data was collected, written as YYYYMMDD for January 19, 2024).*
 
 ### 5.1. Task Scenario
@@ -463,6 +477,7 @@ for year in years:
 ```
 
 ## 6. Things to Keep in Mind
+
 * HTTPS directory structures vary between datasets (by year, month, region, etc.).
 * File naming conventions also vary — check documentation before automating.
 * Directory listings may include files for multiple product types (SST, Chlorophyll...).
@@ -480,6 +495,7 @@ We’ll use:
 This dataset combines sea surface temperature (SST) observations from multiple **polar-orbiting** and **geostationary satellites**, producing a global SST product at **0.05° (~5 km) resolution**.
 
 #### Instructions
+
 1. Open the [dataset documentation page](https://coastwatch.noaa.gov/cwn/products/noaa-geo-polar-blended-global-sea-surface-temperature-analysis-level-4.html).
 2. Scroll down to the HTTPS section.
 3. Click the Day + Night link to access the data directory.

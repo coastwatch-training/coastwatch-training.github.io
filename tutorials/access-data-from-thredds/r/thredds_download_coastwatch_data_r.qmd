@@ -5,7 +5,7 @@ execute:
 
 # THREDDS Downloads of CoastWatch Data
 
-#### Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node
+#### Authors: Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node
 
 > **History | Updated July 2026**
 
@@ -717,7 +717,7 @@ We will work with:
 
 - Find the PacIOOS THREDDS Catalog [here](https://pae-paha.pacioos.hawaii.edu/thredds/catalog.html).
 
-<img src="pacioos_catalog.png" style="border: 2px solid grey;" width="50%"/>
+<img src="images/pacioos_catalog.png" style="border: 2px solid grey;" width="50%"/>
 
 1.  From the catalog page, scroll down and choose **Satellite Data**.
 2.  Then choose the **NOAA Coral Reef Watch Degree Heating Week: Daily 5-km** dataset.
@@ -728,7 +728,7 @@ We will use OPeNDAP (DODS) to programmatically access and subset the data.
 
 1.  Click OPeNDAP (DODS) to open the OPeNDAP Dataset Access Form, which displays dataset metadata.
 
-<img src="sst_opendap.png" alt="thredds opendap page" style="border: 2px solid grey;" width="50%"/>
+<img src="images/sst_opendap.png" alt="thredds opendap page" style="border: 2px solid grey;" width="50%"/>
 
 2.  Copy the link shown next to Data URL — this is the OPeNDAP endpoint. \> opendap_url = <https://pae-paha.pacioos.hawaii.edu/thredds/dodsC/dhw_5km>
 
