@@ -2,8 +2,9 @@
 title: "THREDDS Downloads of CoastWatch Data"
 output: html_notebook
 author: "Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node"
-history: Updated July 2026
 ---
+
+> **History | Updated July 2026**
 
 ## 1. Introduction
 
