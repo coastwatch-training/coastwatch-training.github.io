@@ -1,3 +1,9 @@
+---
+execute:
+  eval: false
+jupyter: python3
+---
+
 #  HTTPS Downloads of CoastWatch Data
 
 ### Author: Dale Robinson & Madison Richardson
