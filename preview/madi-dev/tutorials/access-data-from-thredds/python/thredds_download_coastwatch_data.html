@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>thredds_download_coastwatch_data – CoastWatch Training</title>
+<title>THREDDS Access to CoastWatch Data – CoastWatch Training</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">5.2 Examine the output from the opened dataset</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">THREDDS Access to CoastWatch Data</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -348,10 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#thredds-access-to-coastwatch-data" id="toc-thredds-access-to-coastwatch-data" class="nav-link active" data-scroll-target="#thredds-access-to-coastwatch-data">THREDDS Access to CoastWatch Data</a>
-  <ul class="collapse">
-  <li><a href="#author-dale-robinson-madison-richardson" id="toc-author-dale-robinson-madison-richardson" class="nav-link" data-scroll-target="#author-dale-robinson-madison-richardson">Author: Dale Robinson &amp; Madison Richardson</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a>
   <ul class="collapse">
   <li><a href="#what-you-will-learn" id="toc-what-you-will-learn" class="nav-link" data-scroll-target="#what-you-will-learn">What You Will Learn</a></li>
   </ul></li>
@@ -369,6 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#open-the-dataset-with-with-xarray-using-the-opendap-endpoint" id="toc-open-the-dataset-with-with-xarray-using-the-opendap-endpoint" class="nav-link" data-scroll-target="#open-the-dataset-with-with-xarray-using-the-opendap-endpoint">5.1 Open the dataset with with xarray using the OPeNDAP endpoint</a></li>
   <li><a href="#lets-add-a-few-helper-features" id="toc-lets-add-a-few-helper-features" class="nav-link" data-scroll-target="#lets-add-a-few-helper-features">Let’s add a few helper features</a></li>
+  <li><a href="#examine-the-output-from-the-opened-dataset" id="toc-examine-the-output-from-the-opened-dataset" class="nav-link" data-scroll-target="#examine-the-output-from-the-opened-dataset">5.2 Examine the output from the opened dataset</a></li>
   <li><a href="#subsetting-data-with-xarray" id="toc-subsetting-data-with-xarray" class="nav-link" data-scroll-target="#subsetting-data-with-xarray">5.3 Subsetting data with xarray</a></li>
   <li><a href="#visualize-your-results" id="toc-visualize-your-results" class="nav-link" data-scroll-target="#visualize-your-results">5.4 Visualize Your Results</a></li>
   <li><a href="#save-your-subsetted-data-to-a-netcdf-file" id="toc-save-your-subsetted-data-to-a-netcdf-file" class="nav-link" data-scroll-target="#save-your-subsetted-data-to-a-netcdf-file">5.5 Save Your Subsetted Data to a NetCDF File</a></li>
@@ -387,7 +385,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#dataset-for-this-tutorial-1" id="toc-dataset-for-this-tutorial-1" class="nav-link" data-scroll-target="#dataset-for-this-tutorial-1">1. Dataset for This Tutorial</a></li>
   <li><a href="#opendap-dods-access-1" id="toc-opendap-dods-access-1" class="nav-link" data-scroll-target="#opendap-dods-access-1">2. OPeNDAP (DODS) Access</a></li>
   </ul></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -396,7 +393,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">5.2 Examine the output from the opened dataset</h1>
+<h1 class="title">THREDDS Access to CoastWatch Data</h1>
 </div>
 
 
@@ -413,10 +410,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="thredds-access-to-coastwatch-data" class="level1">
-<h1>THREDDS Access to CoastWatch Data</h1>
-<section id="author-dale-robinson-madison-richardson" class="level3">
-<h3 class="anchored" data-anchor-id="author-dale-robinson-madison-richardson">Author: Dale Robinson &amp; Madison Richardson</h3>
+<section id="author-dale-robinson-madison-richardson" class="level4">
+<h4 class="anchored" data-anchor-id="author-dale-robinson-madison-richardson">Author: Dale Robinson &amp; Madison Richardson</h4>
 <blockquote class="blockquote">
 <p>History | Updated July 2026</p>
 </blockquote>
@@ -535,7 +530,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Explicitly Disable Caching</strong> Setting cache=False ensures that xarray does not try to store massive chunks in memory, which often leads to Out-Of-Memory (OOM) crashes when dealing with global altimetry data.</li>
 <li><strong>Wrap in a Context Manager</strong> Using Python’s with statement ensures that the remote network connection closes automatically when you are done, preventing hanging connections.</li>
 </ol>
-<div id="2448aa0a" class="cell" data-execution_count="1">
+<div id="ad4b9c0b" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The OPeNDAP URL for Blended Altimetry</span></span>
@@ -552,9 +547,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># subset = ds['sla'].sel(time='2026-01-01', latitude=slice(-20, 20), longitude=slice(180, 240))</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># df = subset.to_dataframe() </span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="examine-the-output-from-the-opened-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="examine-the-output-from-the-opened-dataset">5.2 Examine the output from the opened dataset</h3>
 <p>When you open a dataset with xarray, you can quickly explore its structure and metadata: 1. <strong>Dimensions</strong> – The coordinate axes (e.g., time, lat, lon, depth) and their sizes. 2. <strong>Coordinates</strong> – The actual labeled values along each dimension (e.g., latitude/longitude arrays, time stamps). 3. <strong>Data variables</strong> – The main scientific fields stored in the dataset (e.g., <code>sla</code>, <code>ugos</code>, <code>vgos</code>), represented as multidimensional arrays tied to dimensions. 4. <strong>Attributes (Metadata)</strong> – Descriptive information about the dataset. * <strong>Global attributes</strong> (accessible via the Attributes dropdown) provide context such as title, data source, and geospatial coverage. * <strong>Variable-specific attributes</strong> (click the <img src="./page.png" alt="xarray variable info" style="border: 1px solid black;" width="12px"> icon next to each variable) describe details for individual variables, such as <code>units</code>, <code>long_name</code>, and <code>standard_name</code>.</p>
 <p>For example, the <code>sla</code> variable represents <strong>Sea Level Anomaly</strong>. Inspect its attributes to understand the measurement units and scientific meaning.</p>
-<div id="0d3566b6" class="cell" data-execution_count="2">
+<div id="236cb88c" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the dataset metadata</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -564,7 +562,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To work with a smaller region and timeframe, we can subset the dataset using <code>.sel()</code> with <code>slice()</code>.</p>
 <p><strong>Task</strong>: In this example, we’ll select: * <strong>Latitude range</strong>: 0° to 50°N * <strong>Longitude range</strong>: -180° to -120°E * <strong>Time range</strong>: January 1, 2024 – May 31, 2024</p>
 <p>Additionally, to reduce data volume, we’ll keep only <strong>every 4th time step</strong>. * Click the click the <img src="./storage2.png" alt="xarray variable info" style="border: 1px solid black;" width="12px"> icon next to the time variable below to verify that the time steps are four days apart.</p>
-<div id="2013baa1" class="cell" data-execution_count="3">
+<div id="42bef8a4" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The OPeNDAP URL for Blended Altimetry</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>download_url <span class="op">=</span> (</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://www.star.nesdis.noaa.gov/thredds/dodsC/AltimetryBlendedAggGlobalLoM"</span></span>
@@ -599,7 +597,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="visualize-your-results">5.4 Visualize Your Results</h3>
 <p>Now that we’ve subsetted the dataset, let’s visualize the <strong>Sea Level Anomaly (SLA)</strong> over time.</p>
 <p>We’ll create an <strong>animated plot</strong> where each frame shows SLA for a single time step.</p>
-<div id="47ae1946" class="cell" data-execution_count="4">
+<div id="0f68dc86" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML</span>
@@ -662,7 +660,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Once you have created and explored your subset, it’s often useful to save the results locally.</p>
 <p>This allows you to reuse the data later without having to download or subset it again.</p>
 <p>You can save an <strong>xarray Dataset or DataArray</strong> to a NetCDF file with the <code>to_netcdf()</code> method:</p>
-<div id="5e90faa3" class="cell" data-execution_count="5">
+<div id="d452504f" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save to NetCDF</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> <span class="st">"sla_subset.nc"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>downloaded_data.to_netcdf(output_file)</span>
@@ -675,7 +673,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>This workflow ensures that your analysis is <strong>reproducible and portable</strong> across different computing environments.</p></li>
 <li><p>You can reopen it later with:</p></li>
 </ul>
-<div id="8b6dbdf5" class="cell" data-execution_count="6">
+<div id="31de4601" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect that the data was downloaded correctly</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>reopened <span class="op">=</span> xr.open_dataset(<span class="st">"sla_subset.nc"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>reopened</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -749,7 +747,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="workflow-example" class="level4">
 <h4 class="anchored" data-anchor-id="workflow-example">Workflow example</h4>
-<div id="c06d0077" class="cell" data-execution_count="7">
+<div id="bbb7646d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -811,7 +809,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Find the PacIOOS THREDDS Catalog <a href="https://pae-paha.pacioos.hawaii.edu/thredds/catalog.html">here</a>.</li>
 </ul>
-<p><img src="pacioos_catalog.png" style="border: 2px solid grey;" width="50%"></p>
+<p><img src="images/pacioos_catalog.png" style="border: 2px solid grey;" width="50%"></p>
 <ol type="1">
 <li>From the catalog page, scroll down and choose <strong>Satellite Data</strong>.</li>
 <li>Then choose the <strong>NOAA Coral Reef Watch Degree Heating Week: Daily 5-km</strong> dataset.</li>
@@ -823,13 +821,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li>Click OPeNDAP (DODS) to open the OPeNDAP Dataset Access Form, which displays dataset metadata.</li>
 </ol>
-<p><img src="sst_opendap.png" alt="thredds opendap page" style="border: 2px solid grey;" width="50%"></p>
+<p><img src="images/sst_opendap.png" alt="thredds opendap page" style="border: 2px solid grey;" width="50%"></p>
 <ol start="3" type="1">
 <li>Copy the link shown next to Data URL — this is the OPeNDAP endpoint. &gt; opendap_url = <a href="https://pae-paha.pacioos.hawaii.edu/thredds/dodsC/dhw_5km">https://pae-paha.pacioos.hawaii.edu/thredds/dodsC/dhw_5km</a></li>
 </ol>
 <section id="full-workflow-example" class="level4">
 <h4 class="anchored" data-anchor-id="full-workflow-example">Full Workflow example</h4>
-<div id="6d3f27dd" class="cell" data-execution_count="8">
+<div id="f2759ef0" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.animation <span class="im">import</span> FuncAnimation</span>
@@ -896,7 +894,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-64"><a href="#cb9-64" aria-hidden="true" tabindex="-1"></a>plt.close()  <span class="co"># prevent duplicate static plot in notebook</span></span>
 <span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>HTML(ani.to_jshtml())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="9109f558" class="cell" data-execution_count="9">
+<div id="ab4a8857" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save to NetCDF</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> <span class="st">"crw_sst_subset.nc"</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>subset.to_netcdf(output_file)</span>
@@ -908,7 +906,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
 </section>
 </section>
 </section>

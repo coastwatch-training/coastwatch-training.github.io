@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>https_download_coastwatch_data – CoastWatch Training</title>
+<title>HTTPS Downloads of CoastWatch Data – CoastWatch Training</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">4. Single File Downloads with Python</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">HTTPS Downloads of CoastWatch Data</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -348,10 +348,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#https-downloads-of-coastwatch-data" id="toc-https-downloads-of-coastwatch-data" class="nav-link active" data-scroll-target="#https-downloads-of-coastwatch-data">HTTPS Downloads of CoastWatch Data</a>
-  <ul class="collapse">
-  <li><a href="#author-dale-robinson-madison-richardson" id="toc-author-dale-robinson-madison-richardson" class="nav-link" data-scroll-target="#author-dale-robinson-madison-richardson">Author: Dale Robinson &amp; Madison Richardson</a></li>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">1. Introduction</a>
   <ul class="collapse">
   <li><a href="#what-you-will-learn" id="toc-what-you-will-learn" class="nav-link" data-scroll-target="#what-you-will-learn">What You Will Learn</a></li>
   </ul></li>
@@ -364,6 +361,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exploring-the-https-directory" id="toc-exploring-the-https-directory" class="nav-link" data-scroll-target="#exploring-the-https-directory">3.1. Exploring the HTTPS Directory</a></li>
   <li><a href="#file-naming-conventions" id="toc-file-naming-conventions" class="nav-link" data-scroll-target="#file-naming-conventions">3.2. File naming conventions:</a></li>
   <li><a href="#get-the-file-link-for-the-python-example" id="toc-get-the-file-link-for-the-python-example" class="nav-link" data-scroll-target="#get-the-file-link-for-the-python-example">3.3. Get the File Link for the Python Example</a></li>
+  </ul></li>
+  <li><a href="#single-file-downloads-with-python" id="toc-single-file-downloads-with-python" class="nav-link" data-scroll-target="#single-file-downloads-with-python">4. Single File Downloads with Python</a>
+  <ul class="collapse">
   <li><a href="#the-barebones-code" id="toc-the-barebones-code" class="nav-link" data-scroll-target="#the-barebones-code">4.1. The barebones code</a></li>
   <li><a href="#download-helper-function" id="toc-download-helper-function" class="nav-link" data-scroll-target="#download-helper-function">4.2. Download Helper Function</a></li>
   <li><a href="#usage-example" id="toc-usage-example" class="nav-link" data-scroll-target="#usage-example">4.3. Usage example</a></li>
@@ -384,7 +384,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#using-wget-or-curl-for-programmatic-downloads" id="toc-using-wget-or-curl-for-programmatic-downloads" class="nav-link" data-scroll-target="#using-wget-or-curl-for-programmatic-downloads">Using <code>wget</code> or <code>curl</code> for programmatic downloads</a></li>
   <li><a href="#usage-example-1" id="toc-usage-example-1" class="nav-link" data-scroll-target="#usage-example-1">Usage example</a></li>
   </ul></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -393,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">4. Single File Downloads with Python</h1>
+<h1 class="title">HTTPS Downloads of CoastWatch Data</h1>
 </div>
 
 
@@ -410,10 +409,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="https-downloads-of-coastwatch-data" class="level1">
-<h1>HTTPS Downloads of CoastWatch Data</h1>
-<section id="author-dale-robinson-madison-richardson" class="level3">
-<h3 class="anchored" data-anchor-id="author-dale-robinson-madison-richardson">Author: Dale Robinson &amp; Madison Richardson</h3>
+<section id="author-dale-robinson-madison-richardson" class="level4">
+<h4 class="anchored" data-anchor-id="author-dale-robinson-madison-richardson">Author: Dale Robinson &amp; Madison Richardson</h4>
 <blockquote class="blockquote">
 <p>History | Updated July 2026</p>
 </blockquote>
@@ -429,7 +426,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 <section id="what-you-will-learn" class="level3">
 <h3 class="anchored" data-anchor-id="what-you-will-learn">What You Will Learn</h3>
-<p>In this tutorial, you will learn how to: 1. <strong>Find files:</strong> Explore the folder structure of a web server to find the files you need. 2. <strong>Download one file:</strong> Use Python to automatically save a single file to your computer. 3. <strong>Download many files:</strong> Use a Python script to download multiple files automatically.</p>
+<p>In this tutorial, you will learn how to:</p>
+<ol type="1">
+<li><strong>Find files:</strong> Explore the folder structure of a web server to find the files you need.</li>
+<li><strong>Download one file:</strong> Use Python to automatically save a single file to your computer.</li>
+<li><strong>Download many files:</strong> Use a Python script to download multiple files automatically.</li>
+</ol>
 <blockquote class="blockquote">
 <p><strong>Tip:</strong> While this guide uses CoastWatch data as an example, you can use these same Python steps to download files from other HTTPS web servers.</p>
 </blockquote>
@@ -444,8 +446,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="library-installation-examples-for-running-in-a-code-block" class="level3">
 <h3 class="anchored" data-anchor-id="library-installation-examples-for-running-in-a-code-block">Library installation examples for running in a code block</h3>
 <ul>
-<li><p>Option 1: For standard Python environments &gt;!pip install –quiet “requests&gt;=2.25.0” “tqdm&gt;=4.50.0”</p></li>
-<li><p>Option 2: For Conda or Mamba environments &gt;%conda install –quiet –yes -c conda-forge “requests&gt;=2.25.0” “tqdm&gt;=4.50.0” &gt;Or &gt;%mamba install –quiet –yes -c conda-forge “requests&gt;=2.25.0” “tqdm&gt;=4.50.0”</p></li>
+<li><p>Option 1: For standard Python environments</p>
+<blockquote class="blockquote">
+<p>!pip install –quiet “requests&gt;=2.25.0” “tqdm&gt;=4.50.0”</p>
+</blockquote></li>
+<li><p>Option 2: For Conda or Mamba environments</p>
+<blockquote class="blockquote">
+<p>%conda install –quiet –yes -c conda-forge “requests&gt;=2.25.0” “tqdm&gt;=4.50.0” Or %mamba install –quiet –yes -c conda-forge “requests&gt;=2.25.0” “tqdm&gt;=4.50.0”</p>
+</blockquote></li>
 </ul>
 </section>
 </section>
@@ -460,23 +468,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The dataset documentation page give you access to the product overview, details, and citations.</li>
 <li>The “Data Access” tab points you to all of the ways to download and visuallize the the data from the dataset.</li>
 </ul>
-<p><img src="ssh_download_options.png" style="border: 2px solid grey;" width="50%"></p>
+<p><img src="images/ssh_download_options.png" style="border: 2px solid grey;" width="50%"></p>
 <section id="exploring-the-https-directory" class="level3">
 <h3 class="anchored" data-anchor-id="exploring-the-https-directory">3.1. Exploring the HTTPS Directory</h3>
 <ol type="1">
-<li>On the “Data Access” of the documentation page, scroll down and click the <strong>HTTPS</strong> link.
+<li><p>On the “Data Access” of the documentation page, scroll down and click the <strong>HTTPS</strong> link.</p>
 <ul>
 <li>The folders are organized by year (from 2015 to the present).</li>
 <li>Note that other datasets might use different setups, like sorting by month or region.</li>
 </ul></li>
-<li>Open the <strong>2024</strong> folder. Inside, you will see a long list of data files.</li>
+<li><p>Open the <strong>2024</strong> folder. Inside, you will see a long list of data files.</p></li>
 </ol>
 </section>
 <section id="file-naming-conventions" class="level3">
 <h3 class="anchored" data-anchor-id="file-naming-conventions">3.2. File naming conventions:</h3>
-<p>The files in this dataset follow a strict naming pattern:<br>
-&gt; <code>rads_global_nrt_sla_20240119_20240120_001.nc</code></p>
-<p>Here is what each piece of the name means: * <strong>rads:</strong> Radar Altimeter Database System (the system used to gather data). * <strong>global:</strong> Covers the entire global ocean. * <strong>nrt:</strong> Near Real-Time data (collected quickly). * <strong>sla:</strong> Sea Level Anomaly dataset. * <strong>20240119:</strong> The date the data was collected (January 19, 2024). * <strong>20240120:</strong> The date the file was processed (January 20, 2024).</p>
+<p>The files in this dataset follow a strict naming pattern:</p>
+<blockquote class="blockquote">
+<p><code>rads_global_nrt_sla_20240119_20240120_001.nc</code></p>
+</blockquote>
+<p>Here is what each piece of the name means:</p>
+<ul>
+<li><strong>rads:</strong> Radar Altimeter Database System (the system used to gather data).</li>
+<li><strong>global:</strong> Covers the entire global ocean.</li>
+<li><strong>nrt:</strong> Near Real-Time data (collected quickly).</li>
+<li><strong>sla:</strong> Sea Level Anomaly dataset.</li>
+<li><strong>20240119:</strong> The date the data was collected (January 19, 2024).</li>
+<li><strong>20240120:</strong> The date the file was processed (January 20, 2024).</li>
+</ul>
 <blockquote class="blockquote">
 <p><strong>Note:</strong> Different CoastWatch datasets use different naming styles. Always check the documentation for the specific data you are using.</p>
 </blockquote>
@@ -489,10 +507,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Instead, we want to download it automatically using Python.</strong></li>
 <li>Right-click the file name and choose <strong>“Copy link address”</strong> to get its web path.</li>
 </ul>
-<p>The full web path looks like this: * <font size="2"><a href="https://www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/2024/rads_global_nrt_sla_20240119_20240120_001.nc">https://www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/2024/ rads_global_nrt_sla_20240119_20240120_001.nc</a></font></p>
+<p>The full web path looks like this:</p>
+<ul>
+<li><font size="2"><a href="https://www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/2024/rads_global_nrt_sla_20240119_20240120_001.nc">https://www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/2024/ rads_global_nrt_sla_20240119_20240120_001.nc</a></font></li>
+</ul>
 <section id="put-the-url-into-a-variable-called-download_url-as-shown." class="level5">
 <h5 class="anchored" data-anchor-id="put-the-url-into-a-variable-called-download_url-as-shown.">Put the URL into a variable called <strong>download_url</strong>, as shown.</h5>
-<div id="aff90ad7" class="cell" data-execution_count="1">
+<div id="1d2e3e8e" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>download_url <span class="op">=</span> (</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://www.star.nesdis.noaa.gov/data/pub0015/coastwatch/"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rads/sla/2024/rads_global_nrt_sla_20240119_20240120_001.nc"</span></span>
@@ -500,6 +521,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
+</section>
+<section id="single-file-downloads-with-python" class="level2">
+<h2 class="anchored" data-anchor-id="single-file-downloads-with-python">4. Single File Downloads with Python</h2>
 <section id="the-barebones-code" class="level3">
 <h3 class="anchored" data-anchor-id="the-barebones-code">4.1. The barebones code</h3>
 <p>The code below is a bare-bones example that downloads a file from the CoastWatch HTTPS server.</p>
@@ -537,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <section id="python-helper-function-to-download-files" class="level4">
 <h4 class="anchored" data-anchor-id="python-helper-function-to-download-files">Python helper function to download files</h4>
-<div id="8372f9b4" class="cell" data-execution_count="2">
+<div id="3bd7e8fd" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> urllib.parse <span class="im">import</span> urlparse</span>
@@ -651,13 +675,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-download-function-takes-four-arguments" class="level4">
 <h4 class="anchored" data-anchor-id="the-download-function-takes-four-arguments">The download function takes four arguments</h4>
 <blockquote class="blockquote">
-<p>download_file_with_python(url, output_dir: str, timeout, retries) * <strong>url (str)</strong>: The HTTPS URL of the file to download. * <strong>output_dir (str)</strong>: The local directory where the file will be saved. * <strong>timeout (int, optional)</strong>: Seconds to wait for server connection. Default = 30 * <strong>retries (int, optional)</strong>: Number of times to retry temporary connection failures or server errors. Default = 3</p>
+<p>download_file_with_python(url, output_dir: str, timeout, retries)</p>
 </blockquote>
+<ul>
+<li><strong>url (str)</strong>: The HTTPS URL of the file to download.</li>
+<li><strong>output_dir (str)</strong>: The local directory where the file will be saved.</li>
+<li><strong>timeout (int, optional)</strong>: Seconds to wait for server connection. Default = 30</li>
+<li><strong>retries (int, optional)</strong>: Number of times to retry temporary connection failures or server errors. Default = 3</li>
+</ul>
 </section>
 <section id="the-download-function-returns-the-full-download-path" class="level4">
 <h4 class="anchored" data-anchor-id="the-download-function-returns-the-full-download-path">The download function returns the full download path</h4>
-<p>For this example, we’ll use the default values for timeout and retries, so we only need to provide: 1) HTTPS URL of the file to download. 2) The directory where the file should be downloaded.</p>
-<div id="f5ccf033" class="cell" data-execution_count="3">
+<p>For this example, we’ll use the default values for timeout and retries, so we only need to provide:</p>
+<ol type="1">
+<li>HTTPS URL of the file to download.</li>
+<li>The directory where the file should be downloaded.</li>
+</ol>
+<div id="ff5c0f8e" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The download_url variable is defined above </span></span>
@@ -677,8 +711,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We can take advantage of <strong>consistent web links</strong> and <strong>file names</strong> to download large sets of data automatically.</p>
 <p>For this <strong>Sea Level Anomaly and Geostrophic Currents</strong> dataset:</p>
 <ul>
-<li><p><strong>Web Links Follow This Setup:</strong> &gt; <code>www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/YYYY/</code> <em>(Where <strong>YYYY</strong> is the four-digit year you want to download).</em></p></li>
-<li><p><strong>File Names Follow This Setup:</strong> &gt; <code>rads_global_nrt_sla_20240119_20240120_001.nc</code> <em>(Where <strong>20240119</strong> is the exact date the data was collected, written as YYYYMMDD for January 19, 2024).</em></p></li>
+<li><p><strong>Web Links Follow This Setup:</strong></p>
+<blockquote class="blockquote">
+<p><code>www.star.nesdis.noaa.gov/data/pub0015/coastwatch/rads/sla/YYYY/</code></p>
+</blockquote>
+<p><em>(Where <strong>YYYY</strong> is the four-digit year you want to download).</em></p></li>
+<li><p><strong>File Names Follow This Setup:</strong></p>
+<blockquote class="blockquote">
+<p><code>rads_global_nrt_sla_20240119_20240120_001.nc</code></p>
+</blockquote>
+<p><em>(Where <strong>20240119</strong> is the exact date the data was collected, written as YYYYMMDD for January 19, 2024).</em></p></li>
 </ul>
 <section id="task-scenario" class="level3">
 <h3 class="anchored" data-anchor-id="task-scenario">5.1. Task Scenario</h3>
@@ -704,7 +746,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>timeout:</strong> How many seconds Python should wait for the website to respond before giving up.</li>
 </ol>
 <p>It returns a sorted list of complete download URLs that match the requested file type.</p>
-<div id="15ce6da6" class="cell" data-execution_count="4">
+<div id="9065c1b2" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> requests</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> bs4 <span class="im">import</span> BeautifulSoup</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> urllib.parse <span class="im">import</span> urljoin</span>
@@ -792,7 +834,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><strong>Note</strong>: Without the <code>break</code>, the workflow would download every June file for both <strong>2022</strong> and <strong>2023</strong> (about <strong>60 daily NetCDF files</strong>), which can take several minutes. Remove or comment out the break statement when you’re ready to download the full dataset.</li>
 </ul>
-<div id="e18afc82" class="cell" data-execution_count="5">
+<div id="906caf4a" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -893,7 +935,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>You must have <code>wget</code> or <code>curl</code> installed on your system for this function to work.</li>
 </ul>
-<div id="1044d16f" class="cell" data-execution_count="6">
+<div id="ae1f00b8" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Union</span>
@@ -972,7 +1014,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="usage-example-1" class="level3">
 <h3 class="anchored" data-anchor-id="usage-example-1">Usage example</h3>
-<div id="1756b725" class="cell" data-execution_count="7">
+<div id="31cd4c94" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The download_url variable is defined above </span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>out_dir <span class="op">=</span> Path(<span class="st">"downloads"</span>) <span class="op">/</span> <span class="st">"sea_level_anon"</span> <span class="op">/</span> <span class="st">"2024"</span></span>
@@ -983,7 +1025,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 
 
-</section>
 </section>
 </section>
 

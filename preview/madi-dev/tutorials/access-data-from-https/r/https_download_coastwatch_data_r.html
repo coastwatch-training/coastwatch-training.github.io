@@ -364,9 +364,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#file-naming-conventions" id="toc-file-naming-conventions" class="nav-link" data-scroll-target="#file-naming-conventions">3.2. File naming conventions:</a></li>
   <li><a href="#get-the-file-link-for-the-r-example" id="toc-get-the-file-link-for-the-r-example" class="nav-link" data-scroll-target="#get-the-file-link-for-the-r-example">3.3. Get the File Link for the R Example</a></li>
   </ul></li>
-  <li><a href="#single-file-downloads-with-r" id="toc-single-file-downloads-with-r" class="nav-link" data-scroll-target="#single-file-downloads-with-r">4. Single File Downloads with R</a></li>
-  <li><a href="#download-helper-function" id="toc-download-helper-function" class="nav-link" data-scroll-target="#download-helper-function">4.1 Download Helper Function</a>
+  <li><a href="#single-file-downloads-with-r" id="toc-single-file-downloads-with-r" class="nav-link" data-scroll-target="#single-file-downloads-with-r">4. Single File Downloads with R</a>
   <ul class="collapse">
+  <li><a href="#download-helper-function" id="toc-download-helper-function" class="nav-link" data-scroll-target="#download-helper-function">4.1 Download Helper Function</a></li>
   <li><a href="#r-helper-function-to-download-files" id="toc-r-helper-function-to-download-files" class="nav-link" data-scroll-target="#r-helper-function-to-download-files">R Helper Function to download files</a></li>
   <li><a href="#usage-example" id="toc-usage-example" class="nav-link" data-scroll-target="#usage-example">4.2 Usage example</a></li>
   </ul></li>
@@ -398,8 +398,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="https-downloads-of-coastwatch-data" class="level1">
 <h1>HTTPS Downloads of CoastWatch Data</h1>
-<section id="dale-robinson-and-madison-richardson-noaa-coastwatch-west-coast-node" class="level4">
-<h4 class="anchored" data-anchor-id="dale-robinson-and-madison-richardson-noaa-coastwatch-west-coast-node">Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node</h4>
+<section id="authors-dale-robinson-and-madison-richardson-noaa-coastwatch-west-coast-node" class="level4">
+<h4 class="anchored" data-anchor-id="authors-dale-robinson-and-madison-richardson-noaa-coastwatch-west-coast-node">Authors: Dale Robinson and Madison Richardson, NOAA CoastWatch West Coast Node</h4>
 <blockquote class="blockquote">
 <p><strong>History | Updated July 2026</strong></p>
 </blockquote>
@@ -506,9 +506,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="single-file-downloads-with-r" class="level2">
 <h2 class="anchored" data-anchor-id="single-file-downloads-with-r">4. Single File Downloads with R</h2>
-</section>
-<section id="download-helper-function" class="level2">
-<h2 class="anchored" data-anchor-id="download-helper-function">4.1 Download Helper Function</h2>
+<section id="download-helper-function" class="level3">
+<h3 class="anchored" data-anchor-id="download-helper-function">4.1 Download Helper Function</h3>
 <p>Let’s build a helper function to simplify downloading files from an HTTPS server using <strong>base R</strong>. This function includes several useful features:</p>
 <ul>
 <li><strong>Base R Implementation:</strong> It uses R’s built-in <code>download.file()</code> function, so no additional packages are required for downloading files.</li>
@@ -521,6 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><strong>Alternative Approach:</strong> You can also download files using the <code>curl</code> package, which provides additional features for handling network transfers. We demonstrate this approach in the <a href="#appendix">Appendix</a>.</p>
 </blockquote>
+</section>
 <section id="r-helper-function-to-download-files" class="level3">
 <h3 class="anchored" data-anchor-id="r-helper-function-to-download-files">R Helper Function to download files</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>download_file_with_r <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
