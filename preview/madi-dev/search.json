@@ -1833,87 +1833,63 @@
     "text": "TurtleWatch is a tool developed by Dr. Evan Howell (NOAA/PIFSC, Howell et al, 2008, 2015) to advise longline fishermen on areas to avoid to reduce their likelihood to interact with loggerhead turtles which are a protected species.\nEvery year, the Hawaii-based shallow-set longline fishery has a cap of interactions which triggers a fishery closure when it’s exceeded. For 2019, the cap was 17 interactions for loggerhead turtles.\nFor loggerhead turtles, Howell et al 2008 showed that 50% of interactions have historically happened in waters with 17.5ºC &lt; SST &lt; 18.5ºC.\nLet’s create a map of the zone to avoid for a given day.\n\n\nStart a new map in ArcMap.\n\nUse the “Make NetCDF Raster Layer” to import the data into ArcMap. You’ll notice that the range of values is between 283 and 300. These are degrees Kelvin. We are going to need to convert these values to degrees Celsius.\nIn the search box, type “Raster Calculator” and open the tool.\nDrag your layer name in the middle box and type “- 273.15”. Click ok\n\n\n\nIn the search box, type “Reclassify” and open the “Reclassify (Spatial Analyst)” tool.\nSelect your new SST layer (in ºC) as the input layer and click on the “Classify…” button.\nChange the number of classes to 3 and edit the 1st and 2d break values to 17.5 and 18.5 respectively and click OK.\n\n\n\nOn the first screen, change the new values to 0, 1, 0, then click ok.\n\n\n\nChange the color for each class (by right-clicking on each symbol) to “No color” and dark red respectively.\nRemove the layer in Kelvin, and change the color scale for the SST layer (right-click, Properties, Symbology).\n\nYou now have a map of the zone to avoid. Add a graticule (in Layout View, click on View, Data Frame Properties, Grids), a legend and send it to your favorite longline fisherman!"
   },
   {
-    "objectID": "trainings/upcoming/sat201_26.html",
-    "href": "trainings/upcoming/sat201_26.html",
-    "title": "Satellite 201 Summer Lecture Series",
+    "objectID": "trainings/past/seaice24.html",
+    "href": "trainings/past/seaice24.html",
+    "title": "2024 PolarWatch Sea Ice Training",
     "section": "",
-    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
+    "text": "PolarWatch node of the CoastWatch is hosting a free, virtual training class on October 21, 2024 (9am-4pm Pacific Time).",
     "crumbs": [
       "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
     ]
   },
   {
-    "objectID": "trainings/upcoming/sat201_26.html#course-description",
-    "href": "trainings/upcoming/sat201_26.html#course-description",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "",
-    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page",
+    "objectID": "trainings/past/seaice24.html#course-description",
+    "href": "trainings/past/seaice24.html#course-description",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Course Description",
+    "text": "Course Description\nMany satellite sea ice products are available for download from NOAA and many other data providers: e.g. sea ice concentration, sea ice thickness, sea ice age, sea ice temperature, and sea ice extent. It can often be challenging to know the differences between the products and how each can be applied to a user’s specific application. For example, the spatial resolutions of the products can vary widely, largely dependent on the type of satellite measurement the product is derived from (passive microwave, visible radiometry or synthetic aperture radar). Additionally, when working with data in the high-latitudes issues of data projection invariably arise and can complicate accessing and working with data. To address these issues, NOAA’s PolarWatch node has developed a 1-day (6 hour) online course with the following training objectives.",
     "crumbs": [
       "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
     ]
   },
   {
-    "objectID": "trainings/upcoming/sat201_26.html#schedule-attendance",
-    "href": "trainings/upcoming/sat201_26.html#schedule-attendance",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Schedule & Attendance",
-    "text": "Schedule & Attendance\nFrequency: Sessions are held every Friday for one month.\nDuration: Approximately 2.5 hours per session.\nFlexibility: Attendance for all sessions is not required; feel free to join the topics most relevant to you.",
+    "objectID": "trainings/past/seaice24.html#objectives",
+    "href": "trainings/past/seaice24.html#objectives",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Objectives",
+    "text": "Objectives\n\nDescribe the basic types of sea-ice products available from satellite data\nGive an overview of working with different projections\nExplore the data available on the PolarWatch portal\nProvide hands-on time to access data and try tutorials\nIntroduce CoastWatch and other sea ice satellite data training resources",
     "crumbs": [
       "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
     ]
   },
   {
-    "objectID": "trainings/upcoming/sat201_26.html#curriculum",
-    "href": "trainings/upcoming/sat201_26.html#curriculum",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "2026 Curriculum",
-    "text": "2026 Curriculum\nThe inaugural 2026 course will cover the following subjects:\n\nSAR Data: An introduction to Synthetic Aperture Radar.\nCoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite.\nBeyond Chlorophyll: Exploring ocean color products other than chlorophyll.\nAccessing CoastWatch Data: HTTPS and THREDDS Services.",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#meeting-privacy-notice",
-    "href": "trainings/upcoming/sat201_26.html#meeting-privacy-notice",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Meeting Privacy Notice",
-    "text": "Meeting Privacy Notice\nTo protect participant privacy, AI-powered meeting recording and transcription will not be used or allowed during this meeting. NOAA guidance requires participant consent when AI is used to collect, transcribe, or summarize personally identifiable information (PII). Because we cannot ensure consent from all participants, AI recording and transcription will not be permitted.\nFor additional information on NOAA’s privacy practices regarding AI-enabled meetings, see NOAA’s Privacy Statement.",
-    "crumbs": [
-      "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
-    ]
-  },
-  {
-    "objectID": "trainings/upcoming/sat201_26.html#schedule",
-    "href": "trainings/upcoming/sat201_26.html#schedule",
-    "title": "Satellite 201 Summer Lecture Series",
+    "objectID": "trainings/past/seaice24.html#schedule",
+    "href": "trainings/past/seaice24.html#schedule",
+    "title": "2024 PolarWatch Sea Ice Training",
     "section": "Schedule",
-    "text": "Schedule\nFriday, July 10, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to SAR data\nChris Jackson\n\n\n11:45 - 12:30\nSAR Data Access\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 17, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to using Coastwatch Utilities software\nPeter Hollemans\n\n\n11:45 - 12:30\nA demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 24, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nBeyond Chlorophyll\nRyan Vandermeulen\n\n\n11:45 - 12:30\nBeyond Chlorophyll Case Study\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 31, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nAccessing CoastWatch Data: HTTPS and THREDDS Services\nMadison Richardson & Dale Robinson\n\n\n11:45 - 12:30\nHTTPS & THREDDS Demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session",
+    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n9:00 - 9:30\nPresentation 1: Introduction to NOAA CoastWatch\nCara Wilson\n\n\n9:30 - 10:00\nPresentation 2: Overview of Sea Ice Remote Sensing\nLudovic Brucker\n\n\n10:00 - 10:30\nPresentation 3: JPSS Sea Ice Microlesson\nKevin Fuell\n\n\n10:30 - 10:45\nBreak\n\n\n\n10:45 - 11:15\nPresentation 4: Sea Ice from SAR\nChris Jackson\n\n\n11:15 - 11:30\nPresentation 5: Projections - Why they Matter\nMichael Soracco\n\n\n11:30 - 11:45\nPresentation 6: Ice in the Great Lakes\nAndrea VanderWoude\n\n\n11:45 - 12:45\nLunch break\n\n\n\n12:45 - 13:00\nPresentation 7: Projections in Action (Watch Video)\nPeter Hollemans\n\n\n13:00 - 13:30\nPresentation 8: ERDDAP Demo\nCara Wilson\n\n\n13:30 - 13:45\nPresentation 9: PolarWatch Portal Demo\nSunny Hospital\n\n\n13:45 - 14:00\nPresentation 10: CoastWatch Viewer Demo\nMichael Soracco\n\n\n14:00 - 14:15\nBreak\n\n\n\n14:15 - 14:30\nPresentation 11: Overview of Tutorials\nCara Wilson, Matthew Smith\n\n\n14:30 - 16:00\nHand’s on time, with instuctor’s guidance available",
     "crumbs": [
       "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
     ]
   },
   {
-    "objectID": "trainings/upcoming/sat201_26.html#instructors",
-    "href": "trainings/upcoming/sat201_26.html#instructors",
-    "title": "Satellite 201 Summer Lecture Series",
-    "section": "Instructors",
-    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, Development Lead\n\n\nMadison Richardson\nCoastWatch/West Coast Node, Environmental Data Analyst\n\n\nPeter Hollemans\nCoastWatch Utilities Developer\n\n\nRyan Vandermeulen\nNOAA Fisheries Satellite Coordinator\n\n\nChris Jackson",
+    "objectID": "trainings/past/seaice24.html#resources",
+    "href": "trainings/past/seaice24.html#resources",
+    "title": "2024 PolarWatch Sea Ice Training",
+    "section": "Resources",
+    "text": "Resources\n\nCoastwatch Tutorials\nCoastwatch Lecture series\nJPSS Sea Ice Microlesson",
     "crumbs": [
       "Training Classes",
-      "Upcoming Trainings",
-      "2026 Satellite 201 Summer Series"
+      "Past Trainings",
+      "2024 Sea Ice Data Course"
     ]
   },
   {
@@ -2343,7 +2319,7 @@
     "href": "index.html",
     "title": "CoastWatch Training Website",
     "section": "",
-    "text": "This site provides information on CoastWatch Satellite Training courses such as upcoming or past trainings, training tutorials, course lectures, and more to support scientists working with oceanographic satellite data.\n\nUpcoming Events\nSatellite 201 Summer Lecture Series\n\nJuly 10, 17, 24 and 31, 2026, Virtual 11am - 1:30pm (Pacific Time)\n\nThis lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Find out more here.\n\n\nWhat you’ll find here\n\nStep-by-step coding and software tutorials for accessing and analyzing satellite data\nTraining materials developed through NOAA CoastWatch courses, including information on upcoming and past trainings\nResources and support options, including scheduled office hours, to help you integrate satellite data into research and management workflows\n\n\n\nNot sure where to start?\n\nInterested in participanting in a training course?\nVisit the Training Classes page to see upcoming trainings or past trainings to get an idea of what to expect.\nLooking for hands-on examples?\nCheck out the Training Tutorials to explore workflows in Python, R, and MATLAB, as well as software tutorials exploring NASA’s Panoply and CoastWatch Utilities.\nInterested in reviewing lecture content at your own pace?\nBrowse our collection of lectures and presentations on the Course Lectures page. If you want course specific content, browse our training class pages for course specific presentations and materials.\nWant a preview of participant projects?\nCheck out archived presentation slides developed by past attendees showcasing how they applied course concepts to their own data and research.\nNeed help or have questions?\nThe Help page points you to FAQs, resources, and support options.",
+    "text": "This site provides information on CoastWatch Satellite Training courses such as upcoming or past trainings, training tutorials, course lectures, and more to support scientists working with oceanographic satellite data.\n\nWhat you’ll find here\n\nStep-by-step coding and software tutorials for accessing and analyzing satellite data\nTraining materials developed through NOAA CoastWatch courses, including information on upcoming and past trainings\nResources and support options, including scheduled office hours, to help you integrate satellite data into research and management workflows\n\n\n\nNot sure where to start?\n\nInterested in participanting in a training course?\nVisit the Training Classes page to see upcoming trainings or past trainings to get an idea of what to expect.\nLooking for hands-on examples?\nCheck out the Training Tutorials to explore workflows in Python, R, and MATLAB, as well as software tutorials exploring NASA’s Panoply and CoastWatch Utilities.\nInterested in reviewing lecture content at your own pace?\nBrowse our collection of lectures and presentations on the Course Lectures page. If you want course specific content, browse our training class pages for course specific presentations and materials.\nWant a preview of participant projects?\nCheck out archived presentation slides developed by past attendees showcasing how they applied course concepts to their own data and research.\nNeed help or have questions?\nThe Help page points you to FAQs, resources, and support options.",
     "crumbs": [
       "Welcome"
     ]
@@ -2629,71 +2605,60 @@
     ]
   },
   {
-    "objectID": "trainings/past/seaice24.html",
-    "href": "trainings/past/seaice24.html",
-    "title": "2024 PolarWatch Sea Ice Training",
+    "objectID": "trainings/past/sat201_26.html",
+    "href": "trainings/past/sat201_26.html",
+    "title": "Satellite 201 Summer Lecture Series",
     "section": "",
-    "text": "PolarWatch node of the CoastWatch is hosting a free, virtual training class on October 21, 2024 (9am-4pm Pacific Time).",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
+    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page"
   },
   {
-    "objectID": "trainings/past/seaice24.html#course-description",
-    "href": "trainings/past/seaice24.html#course-description",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Course Description",
-    "text": "Course Description\nMany satellite sea ice products are available for download from NOAA and many other data providers: e.g. sea ice concentration, sea ice thickness, sea ice age, sea ice temperature, and sea ice extent. It can often be challenging to know the differences between the products and how each can be applied to a user’s specific application. For example, the spatial resolutions of the products can vary widely, largely dependent on the type of satellite measurement the product is derived from (passive microwave, visible radiometry or synthetic aperture radar). Additionally, when working with data in the high-latitudes issues of data projection invariably arise and can complicate accessing and working with data. To address these issues, NOAA’s PolarWatch node has developed a 1-day (6 hour) online course with the following training objectives.",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
+    "objectID": "trainings/past/sat201_26.html#course-description",
+    "href": "trainings/past/sat201_26.html#course-description",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "",
+    "text": "This lecture series provides a deeper dive into satellite oceanography, exploring advanced topics beyond the regular CoastWatch satellite course. Link to registration page"
   },
   {
-    "objectID": "trainings/past/seaice24.html#objectives",
-    "href": "trainings/past/seaice24.html#objectives",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Objectives",
-    "text": "Objectives\n\nDescribe the basic types of sea-ice products available from satellite data\nGive an overview of working with different projections\nExplore the data available on the PolarWatch portal\nProvide hands-on time to access data and try tutorials\nIntroduce CoastWatch and other sea ice satellite data training resources",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
+    "objectID": "trainings/past/sat201_26.html#schedule-attendance",
+    "href": "trainings/past/sat201_26.html#schedule-attendance",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Schedule & Attendance",
+    "text": "Schedule & Attendance\nFrequency: Sessions are held every Friday for one month.\nDuration: Approximately 2.5 hours per session.\nFlexibility: Attendance for all sessions is not required; feel free to join the topics most relevant to you."
   },
   {
-    "objectID": "trainings/past/seaice24.html#schedule",
-    "href": "trainings/past/seaice24.html#schedule",
-    "title": "2024 PolarWatch Sea Ice Training",
+    "objectID": "trainings/past/sat201_26.html#curriculum",
+    "href": "trainings/past/sat201_26.html#curriculum",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "2026 Curriculum",
+    "text": "2026 Curriculum\nThe inaugural 2026 course will cover the following subjects:\n\nSAR Data: An introduction to Synthetic Aperture Radar.\nCoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite.\nBeyond Chlorophyll: Exploring ocean color products other than chlorophyll.\nAccessing CoastWatch Data: HTTPS and THREDDS Services."
+  },
+  {
+    "objectID": "trainings/past/sat201_26.html#meeting-privacy-notice",
+    "href": "trainings/past/sat201_26.html#meeting-privacy-notice",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Meeting Privacy Notice",
+    "text": "Meeting Privacy Notice\nTo protect participant privacy, AI-powered meeting recording and transcription will not be used or allowed during this meeting. NOAA guidance requires participant consent when AI is used to collect, transcribe, or summarize personally identifiable information (PII). Because we cannot ensure consent from all participants, AI recording and transcription will not be permitted.\nFor additional information on NOAA’s privacy practices regarding AI-enabled meetings, see NOAA’s Privacy Statement."
+  },
+  {
+    "objectID": "trainings/past/sat201_26.html#schedule",
+    "href": "trainings/past/sat201_26.html#schedule",
+    "title": "Satellite 201 Summer Lecture Series",
     "section": "Schedule",
-    "text": "Schedule\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n9:00 - 9:30\nPresentation 1: Introduction to NOAA CoastWatch\nCara Wilson\n\n\n9:30 - 10:00\nPresentation 2: Overview of Sea Ice Remote Sensing\nLudovic Brucker\n\n\n10:00 - 10:30\nPresentation 3: JPSS Sea Ice Microlesson\nKevin Fuell\n\n\n10:30 - 10:45\nBreak\n\n\n\n10:45 - 11:15\nPresentation 4: Sea Ice from SAR\nChris Jackson\n\n\n11:15 - 11:30\nPresentation 5: Projections - Why they Matter\nMichael Soracco\n\n\n11:30 - 11:45\nPresentation 6: Ice in the Great Lakes\nAndrea VanderWoude\n\n\n11:45 - 12:45\nLunch break\n\n\n\n12:45 - 13:00\nPresentation 7: Projections in Action (Watch Video)\nPeter Hollemans\n\n\n13:00 - 13:30\nPresentation 8: ERDDAP Demo\nCara Wilson\n\n\n13:30 - 13:45\nPresentation 9: PolarWatch Portal Demo\nSunny Hospital\n\n\n13:45 - 14:00\nPresentation 10: CoastWatch Viewer Demo\nMichael Soracco\n\n\n14:00 - 14:15\nBreak\n\n\n\n14:15 - 14:30\nPresentation 11: Overview of Tutorials\nCara Wilson, Matthew Smith\n\n\n14:30 - 16:00\nHand’s on time, with instuctor’s guidance available",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
+    "text": "Schedule\nFriday, July 10, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to SAR data\nChris Jackson\n\n\n11:45 - 12:30\nSAR Data Access\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 17, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nIntroduction to using Coastwatch Utilities software\nPeter Hollemans\n\n\n11:45 - 12:30\nA demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 24, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nBeyond Chlorophyll\nRyan Vandermeulen\n\n\n11:45 - 12:30\nBeyond Chlorophyll Case Study\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session\n\n\n\n\nFriday, July 31, 2026\n\n\n\nTime (PST)\nTopic\nPresenter\n\n\n\n\n11:00 - 11:45\nAccessing CoastWatch Data: HTTPS and THREDDS Services\nMadison Richardson & Dale Robinson\n\n\n11:45 - 12:30\nHTTPS & THREDDS Demo\n\n\n\n12:30 - 12:45\nBreak\n\n\n\n12:45 - 1:30\nQuestion & Answer and hand’s on session"
   },
   {
-    "objectID": "trainings/past/seaice24.html#resources",
-    "href": "trainings/past/seaice24.html#resources",
-    "title": "2024 PolarWatch Sea Ice Training",
-    "section": "Resources",
-    "text": "Resources\n\nCoastwatch Tutorials\nCoastwatch Lecture series\nJPSS Sea Ice Microlesson",
-    "crumbs": [
-      "Training Classes",
-      "Past Trainings",
-      "2024 Sea Ice Data Course"
-    ]
+    "objectID": "trainings/past/sat201_26.html#instructors",
+    "href": "trainings/past/sat201_26.html#instructors",
+    "title": "Satellite 201 Summer Lecture Series",
+    "section": "Instructors",
+    "text": "Instructors\n\n\n\nName\nAffiliation\n\n\n\n\nCara Wilson\nCoastWatch/West Coast Node, PI\n\n\nDale Robinson\nCoastWatch/West Coast Node, Development Lead\n\n\nMadison Richardson\nCoastWatch/West Coast Node, Environmental Data Analyst\n\n\nPeter Hollemans\nCoastWatch Utilities Developer\n\n\nRyan Vandermeulen\nNOAA Fisheries Satellite Coordinator\n\n\nChris Jackson"
   },
   {
     "objectID": "trainings/upcoming/upcomingtrainings.html",
     "href": "trainings/upcoming/upcomingtrainings.html",
     "title": "Upcoming Trainings",
     "section": "",
-    "text": "CoastWatch offers a range of upcoming satellite data trainings designed for different experience levels and regional areas. Each training provides a mixture of background information, hands-on tutorials, and practical applications using real-world datasets.\nFind the upcoming trainings here:\n\nSatellite 201 Summer Lecture Series",
+    "text": "CoastWatch offers a range of upcoming satellite data trainings designed for different experience levels and regional areas. Each training provides a mixture of background information, hands-on tutorials, and practical applications using real-world datasets.\nFind the upcoming trainings here:",
     "crumbs": [
       "Training Classes",
       "Upcoming Trainings"
