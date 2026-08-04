@@ -8,4 +8,3 @@ CoastWatch offers a range of upcoming satellite data trainings designed for diff
 
 Find the upcoming trainings here:
 
-- [Satellite 201 Summer Lecture Series](sat201_26.qmd)
