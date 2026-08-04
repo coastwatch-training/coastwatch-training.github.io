@@ -328,6 +328,8 @@ ggplot(sla_df, aes(lon, lat, fill = sla)) +
 
 ```
 
+![](../images/thredds-sla-r.png)
+
 ### 5.5 Animate the Time Series
 
 Lets create an animation to show how **Sea Level Anomaly (SLA)** changes over time.
@@ -451,6 +453,7 @@ Display the animation.
 knitr::include_graphics("sla_animation.gif")
 
 ```
+![](../images/sla_animation_r.gif)
 
 ### 5.6 Save the Subset to a NetCDF File
 
