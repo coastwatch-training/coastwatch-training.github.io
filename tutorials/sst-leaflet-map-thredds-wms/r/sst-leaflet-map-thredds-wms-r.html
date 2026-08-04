@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Working with data that crosses the antimeridian – CoastWatch Training</title>
+<title>sst-leaflet-map-thredds-wms-r – CoastWatch Training</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Working with data that crosses the antimeridian</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -341,263 +341,298 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#background" id="toc-background" class="nav-link active" data-scroll-target="#background">Background</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
-  <li><a href="#the-tutorial-demonstrates-the-following-techniques" id="toc-the-tutorial-demonstrates-the-following-techniques" class="nav-link" data-scroll-target="#the-tutorial-demonstrates-the-following-techniques">The tutorial demonstrates the following techniques</a></li>
-  <li><a href="#datasets-used" id="toc-datasets-used" class="nav-link" data-scroll-target="#datasets-used">Datasets used</a>
+  <li><a href="#interactive-leaflet-map-using-noaa-coastwatch-thredds-wms" id="toc-interactive-leaflet-map-using-noaa-coastwatch-thredds-wms" class="nav-link active" data-scroll-target="#interactive-leaflet-map-using-noaa-coastwatch-thredds-wms">Interactive Leaflet map using NOAA CoastWatch THREDDS WMS</a>
   <ul class="collapse">
-  <li><a href="#import-packages" id="toc-import-packages" class="nav-link" data-scroll-target="#import-packages">Import packages</a></li>
-  </ul></li>
-  <li><a href="#define-the-area-to-extract" id="toc-define-the-area-to-extract" class="nav-link" data-scroll-target="#define-the-area-to-extract">Define the area to extract</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#set-up-variables" id="toc-set-up-variables" class="nav-link" data-scroll-target="#set-up-variables">Set up variables</a></li>
+  <li><a href="#what-you-will-learn" id="toc-what-you-will-learn" class="nav-link" data-scroll-target="#what-you-will-learn">What You Will Learn</a></li>
   </ul></li>
-  <li><a href="#get-the-seawifs-data" id="toc-get-the-seawifs-data" class="nav-link" data-scroll-target="#get-the-seawifs-data">Get the SeaWiFS data</a>
+  <li><a href="#environment-requirements" id="toc-environment-requirements" class="nav-link" data-scroll-target="#environment-requirements">Environment Requirements:</a>
   <ul class="collapse">
-  <li><a href="#open-an-xarray-dataset-object" id="toc-open-an-xarray-dataset-object" class="nav-link" data-scroll-target="#open-an-xarray-dataset-object">Open an xarray dataset object</a></li>
-  <li><a href="#subset-the-data" id="toc-subset-the-data" class="nav-link" data-scroll-target="#subset-the-data">Subset the data</a></li>
+  <li><a href="#library-installation-examples-for-running-in-a-code-block" id="toc-library-installation-examples-for-running-in-a-code-block" class="nav-link" data-scroll-target="#library-installation-examples-for-running-in-a-code-block">Library installation examples for running in a code block</a></li>
   </ul></li>
-  <li><a href="#plot-the-downloaded-data" id="toc-plot-the-downloaded-data" class="nav-link" data-scroll-target="#plot-the-downloaded-data">Plot the downloaded data</a>
+  <li><a href="#dataset-for-this-tutorial" id="toc-dataset-for-this-tutorial" class="nav-link" data-scroll-target="#dataset-for-this-tutorial">Dataset for this tutorial</a></li>
+  <li><a href="#where-to-find-the-data" id="toc-where-to-find-the-data" class="nav-link" data-scroll-target="#where-to-find-the-data">Where to find the data</a></li>
+  <li><a href="#accessing-the-wms-data" id="toc-accessing-the-wms-data" class="nav-link" data-scroll-target="#accessing-the-wms-data">Accessing the WMS data</a>
   <ul class="collapse">
-  <li><a href="#the-plot-of-the-data-shows-a-discontinuity" id="toc-the-plot-of-the-data-shows-a-discontinuity" class="nav-link" data-scroll-target="#the-plot-of-the-data-shows-a-discontinuity">The plot of the data shows a discontinuity</a></li>
+  <li><a href="#understanding-the-color-range" id="toc-understanding-the-color-range" class="nav-link" data-scroll-target="#understanding-the-color-range">Understanding the color range</a></li>
+  <li><a href="#choosing-a-color-palette" id="toc-choosing-a-color-palette" class="nav-link" data-scroll-target="#choosing-a-color-palette">Choosing a color palette</a></li>
   </ul></li>
-  <li><a href="#change-to-0-360-longitude-numbering" id="toc-change-to-0-360-longitude-numbering" class="nav-link" data-scroll-target="#change-to-0-360-longitude-numbering">Change to 0-360 longitude numbering</a></li>
-  <li><a href="#reorder-the-longitude-axis" id="toc-reorder-the-longitude-axis" class="nav-link" data-scroll-target="#reorder-the-longitude-axis">Reorder the longitude axis</a></li>
-  <li><a href="#plot-the-data" id="toc-plot-the-data" class="nav-link" data-scroll-target="#plot-the-data">Plot the data</a></li>
-  <li><a href="#save-the-corrected-dataset-as-a-netcdf-file" id="toc-save-the-corrected-dataset-as-a-netcdf-file" class="nav-link" data-scroll-target="#save-the-corrected-dataset-as-a-netcdf-file">Save the corrected dataset as a netCDF file</a></li>
+  <li><a href="#cruise-stations-off-of-monterey-bay" id="toc-cruise-stations-off-of-monterey-bay" class="nav-link" data-scroll-target="#cruise-stations-off-of-monterey-bay">Cruise stations off of Monterey Bay</a></li>
+  <li><a href="#create-the-interactive-map" id="toc-create-the-interactive-map" class="nav-link" data-scroll-target="#create-the-interactive-map">Create the interactive map</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Working with data that crosses the antimeridian</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="interactive-leaflet-map-using-noaa-coastwatch-thredds-wms" class="level1">
+<h1>Interactive Leaflet map using NOAA CoastWatch THREDDS WMS</h1>
+<section id="madison-richardson-noaa-coastwatch-west-coast-node" class="level4">
+<h4 class="anchored" data-anchor-id="madison-richardson-noaa-coastwatch-west-coast-node">Madison Richardson, NOAA CoastWatch West Coast Node</h4>
 <blockquote class="blockquote">
-<p>History | Updated Sep 2023</p>
+<p><strong>History | Updated August 2026</strong></p>
 </blockquote>
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>Many datasets use a system where longitude is numbered from -180 to +180 degrees east (see example below). This numbering system presents a problem for researchers working in a region that spans the antimeridian, because the parts of the data end up on the opposite ends of the map.</p>
-<img src="../images/py1.png" class="img-fluid">
-<center>
-Figure. Global map on -180/+180 longitude showing data region crossing the antimeridian.
-</center>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
-<p>This tutorial will demonstrate how to use datasets with -180 to +180 longitude values to work within regions that cross the antimeridian.</p>
-</section>
-<section id="the-tutorial-demonstrates-the-following-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="the-tutorial-demonstrates-the-following-techniques">The tutorial demonstrates the following techniques</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Most CoastWatch <strong>THREDDS (Thematic Real-time Environmental Distributed Data Services)</strong> servers also provide access through a <strong>Web Map Service (WMS)</strong>.</p>
 <ul>
-<li>Downloading data that crosses the antimeridian from a dataset with -180 to +180 longitude values<br>
-</li>
-<li>Convert the data to a 0-360 longitude values</li>
-<li>Reordering the longitude axis so that the longitude values are in ascending order</li>
-<li>Visualizing data on a map</li>
+<li>A <strong>WMS</strong> streams <strong>pre-rendered satellite imagery</strong> directly into mapping applications.</li>
+<li>Unlike <strong>OPeNDAP</strong>, which returns the underlying scientific data, <strong>WMS</strong> returns rendered map images that are ready to display.</li>
+<li>As users pan and zoom around the map, Leaflet automatically requests only the imagery needed for the current view, making WMS an efficient option for interactive web maps.</li>
+<li>WMS layers can be customized by selecting different color palettes, value ranges, and display options without downloading the original dataset.</li>
 </ul>
+<p>In this tutorial, we will learn <strong>R methods to stream CoastWatch satellite imagery from a THREDDS Web Map Service (WMS)</strong> and display it in an interactive Leaflet map.</p>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> While this guide uses CoastWatch data as an example, you can use these same R steps with other THREDDS WMS services that support the OGC Web Map Service standard.</p>
+</blockquote>
+<hr>
+<section id="what-you-will-learn" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-will-learn">What You Will Learn</h3>
+<p>In this tutorial, you will learn how to:</p>
+<ol type="1">
+<li><strong>Find a WMS endpoint:</strong> Locate a THREDDS WMS service for a CoastWatch dataset.</li>
+<li><strong>Create an interactive map:</strong> Display satellite imagery in an interactive Leaflet map using R.</li>
+<li><strong>Customize the WMS layer:</strong> Modify the color palette, value range, and rendering options.</li>
+<li><strong>Overlay additional data:</strong> Add cruise station locations as interactive map markers.</li>
+<li><strong>Add a legend:</strong> Display a WMS-generated legend to help interpret the satellite imagery.</li>
+</ol>
 </section>
-<section id="datasets-used" class="level2">
-<h2 class="anchored" data-anchor-id="datasets-used">Datasets used</h2>
-<p><strong>NOAA Chlorophyll Gap-filled, Blended NOAA-20 and S-NPP VIIRS, Science Quality, Global, 9km, 2018- recent, Daily</strong><br>
-This NOAA dataset blends chlorophyll data from the Visible and Infrared Imager/Radiometer Suite (VIIRS) sensors aboard the Suomi-NPP and NOAA-20 spacecraft. The gaps in the data are then filled using an empirical orthogonal function (DINEOF). The dataset is available from the CoastWatch Central ERDDAP: https://coastwatch.noaa.gov/erddap/griddap/noaacwNPPN20VIIRSSCIDINEOFDaily</p>
-<section id="import-packages" class="level3">
-<h3 class="anchored" data-anchor-id="import-packages">Import packages</h3>
-<div id="ef1372cf" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib <span class="im">as</span> mpl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
 </section>
-</section>
-<section id="define-the-area-to-extract" class="level2">
-<h2 class="anchored" data-anchor-id="define-the-area-to-extract">Define the area to extract</h2>
-<p>We will extract data for an area in the Bering Sea between Russia and the United States at 176°E to -152°E longitude and 50°N to 70°N latitude.</p>
-<p><img src="../images/py2.png" class="img-fluid"></p>
-<section id="set-up-variables" class="level3">
-<h3 class="anchored" data-anchor-id="set-up-variables">Set up variables</h3>
+<section id="environment-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="environment-requirements">Environment Requirements:</h2>
 <ul>
-<li>Date to extract</li>
-<li>Minimum and maximum values for the longitude and latitude ranges.</li>
+<li>R Version: 4.6.0+</li>
+<li>Dependencies: leaflet, htmltools</li>
 </ul>
-<div id="42d5a028" class="cell" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_date <span class="op">=</span> <span class="st">'2023-08-18'</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>lon_min <span class="op">=</span> <span class="op">-</span><span class="fl">152.</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>lon_max <span class="op">=</span> <span class="fl">176.</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>lat_min <span class="op">=</span> <span class="fl">50.</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>lat_max <span class="op">=</span> <span class="fl">70.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="library-installation-examples-for-running-in-a-code-block" class="level3">
+<h3 class="anchored" data-anchor-id="library-installation-examples-for-running-in-a-code-block">Library installation examples for running in a code block</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   "leaflet",</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   "htmltools"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="get-the-seawifs-data" class="level2">
-<h2 class="anchored" data-anchor-id="get-the-seawifs-data">Get the SeaWiFS data</h2>
-<section id="open-an-xarray-dataset-object" class="level3">
-<h3 class="anchored" data-anchor-id="open-an-xarray-dataset-object">Open an xarray dataset object</h3>
-<div id="6945a502" class="cell" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#url = 'https://coastwatch.noaa.gov/erddap/griddap/noaacwNPPN20VIIRSSCIDINEOFDaily'</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'/'</span>.join([<span class="st">'https://coastwatch.noaa.gov'</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="st">'erddap'</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">'griddap'</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                <span class="st">'noaacwNPPN20VIIRSSCIDINEOFDaily'</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                ])</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ds <span class="op">=</span> xr.open_dataset(url)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="subset-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="subset-the-data">Subset the data</h3>
-<p>We will do this in two steps to make the process easier to follow. 1. Subset the data for date and latitude range 2. Subset the area around the antimeridian * Request data &lt; the limit (-152) on the US side of the antimeridian, i.e.&nbsp;-180 to -152 * Request data &gt; the limit (176) on the Russian side of the antimeridian, i.e.&nbsp;176 to 180</p>
-<div id="edd7c180" class="cell" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The lat1 and lat2 values are used in the slice function</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># At first we set them as if the dataset is compliant with standards</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>lat1 <span class="op">=</span> lat_min</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>lat2 <span class="op">=</span> lat_max</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Then switch them if latitude values are descending</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ds.latitude[<span class="dv">0</span>].item() <span class="op">&gt;</span> ds.latitude[<span class="op">-</span><span class="dv">1</span>].item():</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    lat1 <span class="op">=</span> lat_max</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    lat2 <span class="op">=</span> lat_min</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the data in two steps to make it easier to understand</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Subset the date and latitude range</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>ds_subset <span class="op">=</span> ds[<span class="st">'chlor_a'</span>].sel(time<span class="op">=</span>my_date, </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                              method<span class="op">=</span><span class="st">'nearest'</span>).sel(latitude<span class="op">=</span><span class="bu">slice</span>(lat1, lat2))</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Subset the around the antimeridian</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>ds_subset <span class="op">=</span> ds_subset.sel(longitude<span class="op">=</span>(ds.longitude <span class="op">&lt;</span> lon_min) </span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>                          <span class="op">|</span> (ds.longitude <span class="op">&gt;</span> lon_max)</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>                          )</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>ds_subset</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-<section id="plot-the-downloaded-data" class="level2">
-<h2 class="anchored" data-anchor-id="plot-the-downloaded-data">Plot the downloaded data</h2>
-<div id="2980c476" class="cell" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make plot area</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the color palette</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> mpl.cm.get_cmap(<span class="st">"jet"</span>).copy()</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>cmap.set_bad(color<span class="op">=</span><span class="st">'gray'</span>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Show image</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>shw <span class="op">=</span> ax.imshow(np.log10(ds_subset.squeeze()), cmap<span class="op">=</span>cmap, vmin<span class="op">=-</span><span class="dv">1</span>, vmax<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>bar <span class="op">=</span> plt.colorbar(shw, shrink<span class="op">=</span><span class="fl">0.65</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot with labels</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>bar.set_label(<span class="st">'Chlorophyll (log mg m-3)'</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><img src="../images/py3.png" class="img-fluid"></p>
-<section id="the-plot-of-the-data-shows-a-discontinuity" class="level3">
-<h3 class="anchored" data-anchor-id="the-plot-of-the-data-shows-a-discontinuity">The plot of the data shows a discontinuity</h3>
-<p>The plot of subsetted data (above) shows that we downloaded the data we requested, but there is a discontinuity on the right side of the map. The data from the Russian side (west of the antimeridian) is mapped to the east of the data on the US side.</p>
-<p>To fix the discontinuity, we need to:<br>
-* Change the longitude values on the US side of the antimeridian (-180 to -152) to values on the 0-360 longitude indexing system (180-208). * Rearrange the longitude values so that the data on the Russian side is moved to the west of the data on the US side.</p>
-</section>
-</section>
-<section id="change-to-0-360-longitude-numbering" class="level2">
-<h2 class="anchored" data-anchor-id="change-to-0-360-longitude-numbering">Change to 0-360 longitude numbering</h2>
-<div id="23f43992" class="cell" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ds_360 <span class="op">=</span> ds_subset.assign_coords(longitude<span class="op">=</span>(ds_subset.longitude <span class="op">%</span> <span class="dv">360</span>))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'minimum lon value ='</span>, ds_360.longitude.<span class="bu">min</span>().item())</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'minimum lon value ='</span>, ds_360.longitude.<span class="bu">max</span>().item(), end<span class="op">=</span><span class="st">'</span><span class="ch">\n\n</span><span class="st">'</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'first value in lon array ='</span>, ds_360.longitude[<span class="dv">0</span>].item())</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last value in lon array ='</span>, ds_360.longitude[<span class="op">-</span><span class="dv">1</span>].item())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="reorder-the-longitude-axis" class="level2">
-<h2 class="anchored" data-anchor-id="reorder-the-longitude-axis">Reorder the longitude axis</h2>
-<p>The output from the cell above shows that the longitude values have been converted to 0-360. However, the lowest longitude value is not at the beginning of the array and the highest longitude value is not at the end of the array.</p>
-<p>To rearrange the longitude values, use the <code>roll</code> function of <code>xarray</code>. The <code>roll</code> function will push values along an axis by the number of steps you enter. The values that are “pushed off” of the end of the array will be put at the beginning of the array.</p>
+<section id="dataset-for-this-tutorial" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-for-this-tutorial">Dataset for this tutorial</h2>
+<p>This tutorial uses the <strong>NOAA Geo-Polar Blended Global Sea Surface Temperature Analysis (Level 4)</strong> dataset.</p>
+<p>This product combines observations from multiple polar-orbiting and geostationary satellites to produce a gap-filled, daily global sea surface temperature analysis at approximately 5 km spatial resolution.</p>
+<p>Open the dataset documentation page:</p>
 <ul>
-<li>First we need to find the position where the longitude discontinuity happens, i.e.&nbsp;where the most easterly longitude (208.0) abruptly meets the most easterly longitude value (176.0)</li>
-<li>Next, use the discontinuity position to determine how many positions to roll the longitude array to the right. Apply the number to the <code>roll</code> function.</li>
+<li><a href="https://coastwatch.noaa.gov/cwn/products/noaa-geo-polar-blended-global-sea-surface-temperature-analysis-level-4.html" class="uri">https://coastwatch.noaa.gov/cwn/products/noaa-geo-polar-blended-global-sea-surface-temperature-analysis-level-4.html</a></li>
 </ul>
-<div id="74e8d217" class="cell" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code finds the index where the absolute value between each longitude value </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># and the largest longitude value is maximal</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>discont_index <span class="op">=</span> <span class="bu">max</span>(<span class="bu">range</span>(<span class="bu">len</span>(ds_360.longitude)), </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                    key<span class="op">=</span><span class="kw">lambda</span> i: <span class="bu">abs</span>(ds_360.longitude[i] <span class="op">-</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                                      ds_360.longitude.<span class="bu">max</span>())</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                    )</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'the index marking the discontinuity is:'</span>, discont_index, end<span class="op">=</span><span class="st">'</span><span class="ch">\n\n</span><span class="st">'</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Substract the discontinuity position from the length of the array </span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># to obtain the number of positions to roll the longitude axis</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>postions_to_roll <span class="op">=</span> <span class="bu">len</span>(ds_360.longitude) <span class="op">-</span> discont_index</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Roll the dataset</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>ds_rolled <span class="op">=</span> ds_360.roll(longitude<span class="op">=</span>postions_to_roll, roll_coords<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'minimum lon value ='</span>, ds_rolled.longitude.<span class="bu">min</span>().item())</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'minimum lon value ='</span>, ds_rolled.longitude.<span class="bu">max</span>().item(), end<span class="op">=</span><span class="st">'</span><span class="ch">\n\n</span><span class="st">'</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'first value in lon array ='</span>, ds_rolled.longitude[<span class="dv">0</span>].item())</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'last value in lon array ='</span>, ds_rolled.longitude[<span class="op">-</span><span class="dv">1</span>].item())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p>The output from the cell above shows that the longitude values have been converted to 0-360, and that the lowest longitude value is at the beginning of the array and the highest longitude value is at the end of the array.</p>
+<p><img src="images/sst-documentation.png" class="img-fluid"></p>
 </section>
-<section id="plot-the-data" class="level2">
-<h2 class="anchored" data-anchor-id="plot-the-data">Plot the data</h2>
-<section id="the-discontinuity-has-been-corrected" class="level4">
-<h4 class="anchored" data-anchor-id="the-discontinuity-has-been-corrected">The discontinuity has been corrected!</h4>
-<div id="90138215" class="cell" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make plot area</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the color palette</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> mpl.cm.get_cmap(<span class="st">"jet"</span>).copy()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cmap.set_bad(color<span class="op">=</span><span class="st">'gray'</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># show image</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>shw <span class="op">=</span> ax.imshow(np.log10(ds_rolled.squeeze()), </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                cmap<span class="op">=</span>cmap,</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>                vmin<span class="op">=-</span><span class="dv">1</span>, </span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                vmax<span class="op">=</span><span class="dv">2</span>)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>bar <span class="op">=</span> plt.colorbar(shw, shrink<span class="op">=</span><span class="fl">0.65</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co"># show plot with labels</span></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>bar.set_label(<span class="st">'Chlorophyll (log mg m-3)'</span>)</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><img src="../images/py4.png" class="img-fluid"></p>
+<section id="where-to-find-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-find-the-data">Where to find the data</h2>
+<p>CoastWatch datasets provide several access methods, including HTTPS, THREDDS, and ERDDAP. Since this tutorial focuses on Web Map Services, we will use the THREDDS server.</p>
+<p>From the dataset documentation page:</p>
+<ol type="1">
+<li>Scroll down to the <strong>THREDDS</strong> access section.</li>
+</ol>
+<p><img src="images/thredds-documentation.png" class="img-fluid"></p>
+<ol start="2" type="1">
+<li>Open the <strong>Polar plus Geostationary Multisatellite Blended SST – Diurnal Operational OSPO – Geographic Projection (Aggregated View)</strong> dataset.</li>
+</ol>
+<p><img src="images/thredds-catalog.png" class="img-fluid"></p>
+<ol start="3" type="1">
+<li>Select <strong>Entire Collection (Aggregated View)</strong>.</li>
+</ol>
+<p>The aggregated view allows a single WMS endpoint to access the complete time series instead of working with individual daily files.</p>
+<p><img src="images/thredds-aggregated.png" class="img-fluid"></p>
+<ol start="4" type="1">
+<li>Click the <strong>WMS</strong> link.</li>
+</ol>
+<p><img src="images/thredds-wms.png" class="img-fluid"></p>
+<ol start="5" type="1">
+<li>The WMS capabilities document will open in your browser.</li>
+</ol>
+<p>Copy the WMS endpoint URL shown in the browser address bar. This URL will be used by Leaflet to request imagery from the WMS server.</p>
+<p><img src="images/thredds-xml.png" class="img-fluid"></p>
+</section>
+<section id="accessing-the-wms-data" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-the-wms-data">Accessing the WMS data</h2>
+<p>First, load the packages used in this tutorial.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install necessary packages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmltools)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Next, define the WMS endpoint and specify how the satellite layer should be rendered.</p>
+<p>This section defines:</p>
+<ul>
+<li>the WMS endpoint URL</li>
+<li>the satellite variable to display</li>
+<li>the WMS color palette</li>
+<li>the color scale used to render the imagery</li>
+</ul>
+<section id="understanding-the-color-range" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-the-color-range">Understanding the color range</h3>
+<p>One important detail is that the <strong>analysed_sst</strong> variable is stored internally in <strong>Kelvin</strong>, even though sea surface temperature is typically interpreted in <strong>degrees Celsius</strong>.</p>
+<p>Because the THREDDS WMS server expects the color scale in the variable’s native units, the <code>COLORSCALERANGE</code> parameter must also be specified in Kelvin.</p>
+<p>For example:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Celsius</th>
+<th style="text-align: right;">Kelvin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0 °C</td>
+<td style="text-align: right;">273.15 K</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">32 °C</td>
+<td style="text-align: right;">305.15 K</td>
+</tr>
+</tbody>
+</table>
+<p>The WMS legend displayed later in this tutorial is generated directly by the server and reflects the selected color palette and rendering style.</p>
+</section>
+<section id="choosing-a-color-palette" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-a-color-palette">Choosing a color palette</h3>
+<p>The WMS server supports multiple color palettes that control how the satellite imagery is rendered. To view the available palettes for a variable, open the WMS capabilities (XML) document and search for the <strong>Style</strong> elements associated with that layer. Each available palette appears as a <code>boxfill/&lt;palette_name&gt;</code> style (for example, <code>boxfill/alg</code>, <code>boxfill/sst_36</code>, or <code>boxfill/rainbow</code>).</p>
+<p>The legend provided by the WMS server automatically updates to match the selected palette, so no additional changes are needed when you choose a different style.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WMS endpoint</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>wms_url <span class="ot">&lt;-</span> <span class="st">"https://www.star.nesdis.noaa.gov/thredds/wms/BlendedSST5kmDiurnalAggGHRSSTOSPOLoM"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># SST variable</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sst_layer <span class="ot">&lt;-</span> <span class="st">"analysed_sst"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Color bar palette</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>palette <span class="ot">&lt;-</span> <span class="st">"alg"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>color_range <span class="ot">&lt;-</span> <span class="st">"273,305"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># WMS Legend</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>legend_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  wms_url,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"?SERVICE=WMS"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;REQUEST=GetLegendGraphic"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;VERSION=1.3.0"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;FORMAT=image/png"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;LAYER="</span>, sst_layer,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;STYLE=boxfill/"</span>, palette,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;COLORSCALERANGE="</span>, color_range</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 </section>
-<section id="save-the-corrected-dataset-as-a-netcdf-file" class="level2">
-<h2 class="anchored" data-anchor-id="save-the-corrected-dataset-as-a-netcdf-file">Save the corrected dataset as a netCDF file</h2>
-<div id="9565a72b" class="cell" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ds_rolled.to_netcdf(<span class="st">'data_corrected_0_to_360.nc'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<section id="cruise-stations-off-of-monterey-bay" class="level2">
+<h2 class="anchored" data-anchor-id="cruise-stations-off-of-monterey-bay">Cruise stations off of Monterey Bay</h2>
+<p>Next, create a small set of example cruise stations.</p>
+<p>These locations are used to demonstrate how in-situ observations can be displayed alongside satellite imagery. In practice, these coordinates could come from ship observations, gliders, buoys, autonomous vehicles, or other field measurements.</p>
+<p>Each point will be added to the interactive map and displayed with a popup containing its location information.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cruise_points <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">station =</span> <span class="fu">c</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Station 1"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Station 2"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Station 3"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">lon =</span> <span class="fu">c</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">122.10</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">122.35</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">122.60</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat =</span> <span class="fu">c</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fl">36.85</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fl">36.65</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fl">36.45</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-the-interactive-map" class="level2">
+<h2 class="anchored" data-anchor-id="create-the-interactive-map">Create the interactive map</h2>
+<p>Finally, combine the WMS imagery and cruise stations into a single interactive Leaflet map. We will be looking at sea surface temperature (SST) on <strong>July 1, 2024</strong>.</p>
+<p>This example demonstrates several common Leaflet features:</p>
+<ul>
+<li>a CartoDB basemap</li>
+<li>streamed WMS satellite imagery</li>
+<li>cruise station markers</li>
+<li>popup information</li>
+<li>layer controls</li>
+<li>a WMS-generated legend (units are in Kelvin)</li>
+</ul>
+<p>Notice that the sea surface temperature imagery is <strong>not downloaded locally</strong>. Instead, Leaflet requests map tiles directly from the THREDDS WMS server as you pan and zoom around the map.</p>
+<p>The legend is also requested directly from the WMS server using a standard <strong>GetLegendGraphic</strong> request. Because it is generated by the server, its appearance—including the displayed units and layout—is determined by the WMS implementation. Some servers may truncate portions of the legend text (such as the variable name or unit label), but the color bar and value range remain unchanged and accurately represent the displayed imagery.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    providers<span class="sc">$</span>CartoDB.Positron,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">group=</span><span class="st">"Basemap"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng=</span><span class="sc">-</span><span class="fl">122.3</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat=</span><span class="fl">36.7</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">zoom=</span><span class="dv">6</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addWMSTiles</span>(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">baseUrl=</span>wms_url,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">layers=</span>sst_layer,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">options=</span><span class="fu">WMSTileOptions</span>(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">format=</span><span class="st">"image/png"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">transparent=</span><span class="cn">TRUE</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">version=</span><span class="st">"1.3.0"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">styles=</span><span class="fu">paste0</span>(<span class="st">"boxfill/"</span>, palette),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">colorscalerange=</span>color_range,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">logarithmic=</span><span class="cn">FALSE</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">time=</span><span class="st">"2024-07-01T12:00:00.000Z"</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">attribution=</span><span class="st">"NOAA CoastWatch"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">group=</span><span class="st">"Sea Surface Temperature"</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>cruise_points,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng=</span><span class="sc">~</span>lon,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat=</span><span class="sc">~</span>lat,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius=</span><span class="dv">6</span>,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"#0057e7"</span>,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight=</span><span class="dv">2</span>,</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillColor=</span><span class="st">"#4da6ff"</span>,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity=</span><span class="dv">1</span>,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup=</span><span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;"</span>,station,<span class="st">"&lt;/b&gt;&lt;br&gt;"</span>,</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Latitude: "</span>,lat,<span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Longitude: "</span>,lon</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">group=</span><span class="st">"Cruise Stations"</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLayersControl</span>(</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">overlayGroups=</span><span class="fu">c</span>(</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Sea Surface Temperature"</span>,</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Cruise Stations"</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">options=</span><span class="fu">layersControlOptions</span>(<span class="at">collapsed=</span><span class="cn">FALSE</span>)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># WMS Legend</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addControl</span>(</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">html =</span> <span class="fu">HTML</span>(</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;img src='"</span>,</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>        legend_url,</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>        <span class="st">"' width='90'&gt;"</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"topright"</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this tutorial, you learned how to:</p>
+<ul>
+<li>Locate a WMS endpoint from a CoastWatch THREDDS server.</li>
+<li>Stream satellite imagery directly into a Leaflet map.</li>
+<li>Overlay in situ cruise stations on top of satellite data.</li>
+<li>Customize the appearance of a WMS layer using palettes and color ranges.</li>
+<li>Add the WMS-generated legend to improve map interpretation.</li>
+</ul>
+<p>Because WMS streams pre-rendered imagery rather than downloading the underlying dataset, it is particularly well suited for interactive visualization applications and web-based dashboards.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
