@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Map Geographical and Polarstereographic data on a projected map – CoastWatch Training</title>
+<title>sst-leaflet-map-thredds-wms-r – CoastWatch Training</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -122,7 +122,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Map Geographical and Polarstereographic data on a projected map</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -341,221 +341,295 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective">Objective</a></li>
-  <li><a href="#the-tutorial-demonstrates-the-following-techniques" id="toc-the-tutorial-demonstrates-the-following-techniques" class="nav-link" data-scroll-target="#the-tutorial-demonstrates-the-following-techniques">The tutorial demonstrates the following techniques</a></li>
-  <li><a href="#datasets-used" id="toc-datasets-used" class="nav-link" data-scroll-target="#datasets-used">Datasets used</a></li>
-  <li><a href="#import-packages" id="toc-import-packages" class="nav-link" data-scroll-target="#import-packages">Import packages</a></li>
-  <li><a href="#mapping-projected-data-on-a-projected-basemap" id="toc-mapping-projected-data-on-a-projected-basemap" class="nav-link" data-scroll-target="#mapping-projected-data-on-a-projected-basemap">Mapping projected data on a projected basemap</a></li>
-  <li><a href="#mapping-data-with-epsg-code" id="toc-mapping-data-with-epsg-code" class="nav-link" data-scroll-target="#mapping-data-with-epsg-code">Mapping data with EPSG Code</a></li>
-  <li><a href="#adding-non-projected-data-with-lat-and-lon-to-the-projected-map" id="toc-adding-non-projected-data-with-lat-and-lon-to-the-projected-map" class="nav-link" data-scroll-target="#adding-non-projected-data-with-lat-and-lon-to-the-projected-map">Adding non-projected data with lat and lon to the projected map</a>
+  <li><a href="#interactive-leaflet-map-using-noaa-coastwatch-thredds-wms" id="toc-interactive-leaflet-map-using-noaa-coastwatch-thredds-wms" class="nav-link active" data-scroll-target="#interactive-leaflet-map-using-noaa-coastwatch-thredds-wms">Interactive Leaflet map using NOAA CoastWatch THREDDS WMS</a>
   <ul class="collapse">
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#what-you-will-learn" id="toc-what-you-will-learn" class="nav-link" data-scroll-target="#what-you-will-learn">What You Will Learn</a></li>
+  </ul></li>
+  <li><a href="#environment-requirements" id="toc-environment-requirements" class="nav-link" data-scroll-target="#environment-requirements">Environment Requirements:</a>
+  <ul class="collapse">
+  <li><a href="#library-installation-examples-for-running-in-a-code-block" id="toc-library-installation-examples-for-running-in-a-code-block" class="nav-link" data-scroll-target="#library-installation-examples-for-running-in-a-code-block">Library installation examples for running in a code block</a></li>
+  </ul></li>
+  <li><a href="#dataset-for-this-tutorial" id="toc-dataset-for-this-tutorial" class="nav-link" data-scroll-target="#dataset-for-this-tutorial">Dataset for this tutorial</a></li>
+  <li><a href="#where-to-find-the-data" id="toc-where-to-find-the-data" class="nav-link" data-scroll-target="#where-to-find-the-data">Where to find the data</a></li>
+  <li><a href="#accessing-the-wms-data" id="toc-accessing-the-wms-data" class="nav-link" data-scroll-target="#accessing-the-wms-data">Accessing the WMS data</a>
+  <ul class="collapse">
+  <li><a href="#understanding-the-color-range" id="toc-understanding-the-color-range" class="nav-link" data-scroll-target="#understanding-the-color-range">Understanding the color range</a></li>
+  <li><a href="#choosing-a-color-palette" id="toc-choosing-a-color-palette" class="nav-link" data-scroll-target="#choosing-a-color-palette">Choosing a color palette</a></li>
+  </ul></li>
+  <li><a href="#cruise-stations-off-of-monterey-bay" id="toc-cruise-stations-off-of-monterey-bay" class="nav-link" data-scroll-target="#cruise-stations-off-of-monterey-bay">Cruise stations off of Monterey Bay</a></li>
+  <li><a href="#create-the-interactive-map" id="toc-create-the-interactive-map" class="nav-link" data-scroll-target="#create-the-interactive-map">Create the interactive map</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Map Geographical and Polarstereographic data on a projected map</h1>
-</div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
-<div class="quarto-title-meta">
 
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
+<section id="interactive-leaflet-map-using-noaa-coastwatch-thredds-wms" class="level1">
+<h1>Interactive Leaflet map using NOAA CoastWatch THREDDS WMS</h1>
+<section id="madison-richardson-noaa-coastwatch-west-coast-node" class="level4">
+<h4 class="anchored" data-anchor-id="madison-richardson-noaa-coastwatch-west-coast-node">Madison Richardson, NOAA CoastWatch West Coast Node</h4>
 <blockquote class="blockquote">
-<p>history | Updated September 2023 <br></p>
+<p><strong>History | Updated August 2026</strong></p>
 </blockquote>
-<p><a href="https://polarwatch.noaa.gov/" target="_blank">NOAA PolarWatch</a> distributes gridded and tabular oceanographic data for polar regions. Satellite data include geospatial information and most of them are in geographical coordinates (latitude and longitude). PolarWatch satellite data are often projected using <a href="https://nsidc.org/data/user-resources/help-center/guide-nsidcs-polar-stereographic-projection" target="_blank">Polar Stereographic Projections</a> in x and y coordinates.</p>
-<section id="objective" class="level2">
-<h2 class="anchored" data-anchor-id="objective">Objective</h2>
-<p>This tutorial will demonstrate how to plot a polar stereographic projected data on a projected map, and to add another dataset with geographical coordinates (latitude and longitude) onto the map.</p>
 </section>
-<section id="the-tutorial-demonstrates-the-following-techniques" class="level2">
-<h2 class="anchored" data-anchor-id="the-tutorial-demonstrates-the-following-techniques">The tutorial demonstrates the following techniques</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Most CoastWatch <strong>THREDDS (Thematic Real-time Environmental Distributed Data Services)</strong> servers also provide access through a <strong>Web Map Service (WMS)</strong>.</p>
 <ul>
-<li>Accessing satellite data from ERDDAP</li>
-<li>Making a projected map</li>
-<li>Adding polarstereographic data to the map</li>
-<li>Adding geographically referenced data (lat and lon) to the map</li>
+<li>A <strong>WMS</strong> streams <strong>pre-rendered satellite imagery</strong> directly into mapping applications.</li>
+<li>Unlike <strong>OPeNDAP</strong>, which returns the underlying scientific data, <strong>WMS</strong> returns rendered map images that are ready to display.</li>
+<li>As users pan and zoom around the map, Leaflet automatically requests only the imagery needed for the current view, making WMS an efficient option for interactive web maps.</li>
+<li>WMS layers can be customized by selecting different color palettes, value ranges, and display options without downloading the original dataset.</li>
 </ul>
+<p>In this tutorial, we will learn <strong>R methods to stream CoastWatch satellite imagery from a THREDDS Web Map Service (WMS)</strong> and display it in an interactive Leaflet map.</p>
+<blockquote class="blockquote">
+<p><strong>Note:</strong> While this guide uses CoastWatch data as an example, you can use these same R steps with other THREDDS WMS services that support the OGC Web Map Service standard.</p>
+</blockquote>
+<hr>
+<section id="what-you-will-learn" class="level3">
+<h3 class="anchored" data-anchor-id="what-you-will-learn">What You Will Learn</h3>
+<p>In this tutorial, you will learn how to:</p>
+<ol type="1">
+<li><strong>Find a WMS endpoint:</strong> Locate a THREDDS WMS service for a CoastWatch dataset.</li>
+<li><strong>Create an interactive map:</strong> Display satellite imagery in an interactive Leaflet map using R.</li>
+<li><strong>Customize the WMS layer:</strong> Modify the color palette, value range, and rendering options.</li>
+<li><strong>Overlay additional data:</strong> Add cruise station locations as interactive map markers.</li>
+<li><strong>Add a legend:</strong> Display a WMS-generated legend to help interpret the satellite imagery.</li>
+</ol>
 </section>
-<section id="datasets-used" class="level2">
-<h2 class="anchored" data-anchor-id="datasets-used">Datasets used</h2>
-<p><strong>Sea Ice Concentration, NOAA/NSIDC Climate Data Record V4, Northern Hemisphere, 25km, Science Quality, 1978-Present, Monthly</strong><br>
-This dataset includes sea ice concentration data from the northern hemisphere, and is produced by the NOAA/NSIDC using the Climate Data Record algorithm. The resolution is 25km, meaning each grid in this data set represents a value that covers a 25km by 25km area. The dataset is avaialble from <a href="https://polarwatch.noaa.gov/catalog/ice-sq-nh-nsidc-cdr-v4/preview/?dataset=daily&amp;var=cdr_seaice_conc&amp;time_min=2022-12-31T00:00:00Z&amp;time_max=2022-12-31T00:00:00Z&amp;proj=epsg3413&amp;colorBar=KT_ice|||0|1|">the NOAA PolarWatch Catalog</a>.</p>
-<p><strong>Polar bear tracking data</strong> <br> For the demonstrative purpose of adding a dataset in geographical coords (lat, lon) to the projected map, GPS data for a polar bear track were used. More information about the data can be found at https://borealisdata.ca/file.xhtml?fileId=151017&amp;version=1.0</p>
 </section>
-<section id="import-packages" class="level2">
-<h2 class="anchored" data-anchor-id="import-packages">Import packages</h2>
-<div id="26e93e2e" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:35.828080Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:35.517077Z&quot;}}" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> netCDF4 <span class="im">as</span> nc</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.crs <span class="im">as</span> ccrs</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> cartopy.feature <span class="im">as</span> cfeature</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">"ignore"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="fd2549f4" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:39.789479Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:39.040559Z&quot;}}" data-execution_count="2">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># There are many ways to get data.  We will create a function that points to </span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># NOAA PolarWatch ERDDAP Server gridded dataset page to get data with its unique ID</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> point_to_dataset(dataset_id, base_url<span class="op">=</span><span class="st">'https://polarwatch.noaa.gov/erddap/griddap'</span>):</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    base_url <span class="op">=</span> base_url.rstrip(<span class="st">'/'</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    full_url <span class="op">=</span> <span class="st">'/'</span>.join([base_url, dataset_id])</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> nc.Dataset(full_url)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 'nsidcG02202v4nhmday' is the unique ID of our interested data </span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># from PolarWatch ERDDAP data server</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>da <span class="op">=</span> point_to_dataset(<span class="st">'nsidcG02202v4nhmday'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="mapping-projected-data-on-a-projected-basemap" class="level2">
-<h2 class="anchored" data-anchor-id="mapping-projected-data-on-a-projected-basemap">Mapping projected data on a projected basemap</h2>
-<p>We first need to create a basemap with the Polar Stereographic projection. Most of the netCDF data files include metadata about mapping. This can be used to set a projection and mapping boundaries for the data.</p>
-<div id="a0779190" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:42.377249Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:42.366469Z&quot;}}" data-execution_count="3">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints metadata embedded in netCDF file</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(da)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="84376d61" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:45:45.132108Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:45:45.116947Z&quot;}}" data-execution_count="4">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># prints variable names</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>da.variables.keys()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="6bcb9ec7" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-08-04T18:47:07.417301Z&quot;,&quot;start_time&quot;:&quot;2023-08-04T18:47:07.097346Z&quot;}}" data-execution_count="5">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:].shape</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div id="3144197b" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:07.598128Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:06.479427Z&quot;}}" data-execution_count="6">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># set mapping crs to Cartopy's North Polar Stereo graphic</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>crs_epsg <span class="op">=</span> ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># set figure size</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set the map projection and associated boundaries</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection <span class="op">=</span> crs_epsg)</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="dv">5350000</span>, <span class="fl">5850000.0</span>],crs_epsg)</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs using 'transform' </span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs as described in the netcdf metadata</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:] , </span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> ccrs.NorthPolarStereo(true_scale_latitude<span class="op">=</span><span class="dv">70</span>, central_longitude<span class="op">=-</span><span class="dv">45</span>)) <span class="co">#transform default is basemap specs</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'bottom'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration using Cartopy projection NorthPolarStereo()'</span>)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><img src="../images/py1.png" class="img-fluid"></p>
-</section>
-<section id="mapping-data-with-epsg-code" class="level2">
-<h2 class="anchored" data-anchor-id="mapping-data-with-epsg-code">Mapping data with EPSG Code</h2>
-<p>You can set the data crs using the EPSG code. In our case, the metadata provides the projection crs (EPSG: 3411) In this exercise, we will use the same basemap projection, but set the data projection with the EPSG code.</p>
-<div id="86003e72" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.727179Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:07.599078Z&quot;}}" data-execution_count="7">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set data projection using EPSG Code </span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>data_crs <span class="op">=</span> ccrs.epsg(<span class="st">'3411'</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>crs_epsg <span class="op">=</span> ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># set the basemap </span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection <span class="op">=</span> crs_epsg)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="dv">5350000</span>, <span class="fl">5850000.0</span>],ccrs.NorthPolarStereo(central_longitude<span class="op">=-</span><span class="dv">45</span>))</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># transform= which projection data (coords) were defined </span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:], </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> data_crs) </span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'bottom'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration using EPSG code (3411)'</span>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><img src="../images/py2.png" class="img-fluid"></p>
-</section>
-<section id="adding-non-projected-data-with-lat-and-lon-to-the-projected-map" class="level1">
-<h1>Adding non-projected data with lat and lon to the projected map</h1>
-<p>To demonstrate mapping non-projected data onto the projected map, we will use polar bear tracking data. While the temporal coverage of the two datasets differ (<em>sea ice concentration</em> and <em>polarbear locations</em>), the exercise is to show how to use data with latitude and longitude onto the projected basemap.</p>
-<p>Data: Polar bear tracking data</p>
-<p>Dataset Info: https://borealisdata.ca/file.xhtml?fileId=151017&amp;version=1.0</p>
-<div id="d66cf1cb" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:08.763624Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.728150Z&quot;}}" data-execution_count="8">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># read the dataset</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">'../data/PB_Argos.csv'</span>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> df[df[<span class="st">"QualClass"</span>].isin([<span class="st">"B"</span>])]</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># set basemap with Cartopy PlateCarree() projection</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure() </span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>ccrs.PlateCarree()) </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ax.coastlines()</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ax.set_global()</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs </span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plt.scatter(</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>df[<span class="st">"Lat"</span>],</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>df[<span class="st">"Lon"</span>],</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">5</span>,</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree()</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Polar bear track data (B)'</span>)</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><img src="../images/py3.png" class="img-fluid"></p>
-<div id="83244178" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;ExecuteTime&quot;,&quot;value&quot;:{&quot;end_time&quot;:&quot;2023-07-31T19:34:10.210429Z&quot;,&quot;start_time&quot;:&quot;2023-07-31T19:34:08.764428Z&quot;}}" data-execution_count="9">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig <span class="op">=</span> plt.figure(figsize<span class="op">=</span>[<span class="dv">10</span>, <span class="dv">10</span>])</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.axes(projection<span class="op">=</span>crs_epsg)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ax.add_feature(cfeature.LAND)</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>ax.coastlines(resolution<span class="op">=</span><span class="st">'50m'</span>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>ax.set_extent([<span class="op">-</span><span class="fl">3850000.0</span>, <span class="fl">3750000.0</span>, <span class="op">-</span><span class="fl">5350000.0</span>, <span class="fl">5850000.0</span>],crs_epsg )</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>ax.gridlines(draw_labels<span class="op">=</span><span class="va">True</span>, dms<span class="op">=</span><span class="va">True</span>, x_inline<span class="op">=</span><span class="va">False</span>, y_inline<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>cs <span class="op">=</span> ax.pcolormesh(da[<span class="st">'xgrid'</span>], da[<span class="st">'ygrid'</span>], da[<span class="st">'cdr_seaice_conc_monthly'</span>][<span class="dv">0</span>][:] , </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>                   cmap<span class="op">=</span>plt.cm.Blues,  transform<span class="op">=</span> ccrs.NorthPolarStereo(true_scale_latitude<span class="op">=</span><span class="dv">70</span>, central_longitude<span class="op">=-</span><span class="dv">45</span>))</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co"># set the data crs</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co"># the data will get transformed to be properly projected on the basemap </span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>scatter <span class="op">=</span> plt.scatter(</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    y<span class="op">=</span>df[<span class="st">"Lat"</span>],</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    x<span class="op">=</span>df[<span class="st">"Lon"</span>],</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    color<span class="op">=</span><span class="st">"red"</span>,</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span><span class="dv">3</span>,</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    alpha<span class="op">=</span><span class="dv">1</span>,</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    transform<span class="op">=</span>ccrs.PlateCarree()</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>fig.colorbar(cs, ax<span class="op">=</span>ax, location<span class="op">=</span><span class="st">'right'</span>, shrink <span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">"Polarbear (B)"</span>], loc <span class="op">=</span> <span class="st">"upper left"</span>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="st">'Ice Concentration and polar bear track data on Polar Stereographic map'</span>)</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<p><img src="../images/py4.png" class="img-fluid"></p>
-<section id="references" class="level2">
-<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="environment-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="environment-requirements">Environment Requirements:</h2>
 <ul>
-<li><a href="https://nsidc.org/data/g02202/versions/4" target="_blank">NSIDC Data Product Description</a></li>
-<li><a href="https://nsidc.org/sites/default/files/g02202-v004-userguide_1_1.pdf" target="_blank">NSIDC Data Product User Guide (pdf)</a></li>
-<li><a href="https://polarwatch.noaa.gov/catalog/ice-sq-nh-nsidc-cdr-v4/preview/?dataset=daily&amp;var=cdr_seaice_conc&amp;time_min=2022-05-31T00:00:00Z&amp;time_max=2022-05-31T00:00:00Z&amp;proj=epsg3413&amp;colorBar=KT_ice|||0|1|" target="_blank">NOAA PolarWatch Data Product Page (download, preview)</a></li>
+<li>R Version: 4.6.0+</li>
+<li>Dependencies: leaflet, htmltools</li>
 </ul>
+<section id="library-installation-examples-for-running-in-a-code-block" class="level3">
+<h3 class="anchored" data-anchor-id="library-installation-examples-for-running-in-a-code-block">Library installation examples for running in a code block</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(c(</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   "leaflet",</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   "htmltools"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="dataset-for-this-tutorial" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-for-this-tutorial">Dataset for this tutorial</h2>
+<p>This tutorial uses the <strong>NOAA Geo-Polar Blended Global Sea Surface Temperature Analysis (Level 4)</strong> dataset.</p>
+<p>This product combines observations from multiple polar-orbiting and geostationary satellites to produce a gap-filled, daily global sea surface temperature analysis at approximately 5 km spatial resolution.</p>
+<p>Open the dataset documentation page:</p>
+<ul>
+<li><a href="https://coastwatch.noaa.gov/cwn/products/noaa-geo-polar-blended-global-sea-surface-temperature-analysis-level-4.html" class="uri">https://coastwatch.noaa.gov/cwn/products/noaa-geo-polar-blended-global-sea-surface-temperature-analysis-level-4.html</a></li>
+</ul>
+<p><img src="images/sst-documentation.png" class="img-fluid"></p>
+</section>
+<section id="where-to-find-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="where-to-find-the-data">Where to find the data</h2>
+<p>CoastWatch datasets provide several access methods, including HTTPS, THREDDS, and ERDDAP. Since this tutorial focuses on Web Map Services, we will use the THREDDS server.</p>
+<p>From the dataset documentation page:</p>
+<ol type="1">
+<li>Scroll down to the <strong>THREDDS</strong> access section.</li>
+</ol>
+<p><img src="images/thredds-documentation.png" class="img-fluid"></p>
+<ol start="2" type="1">
+<li>Open the <strong>Polar plus Geostationary Multisatellite Blended SST – Diurnal Operational OSPO – Geographic Projection (Aggregated View)</strong> dataset.</li>
+</ol>
+<p><img src="images/thredds-catalog.png" class="img-fluid"></p>
+<ol start="3" type="1">
+<li>Select <strong>Entire Collection (Aggregated View)</strong>.</li>
+</ol>
+<p>The aggregated view allows a single WMS endpoint to access the complete time series instead of working with individual daily files.</p>
+<p><img src="images/thredds-aggregated.png" class="img-fluid"></p>
+<ol start="4" type="1">
+<li>Click the <strong>WMS</strong> link.</li>
+</ol>
+<p><img src="images/thredds-wms.png" class="img-fluid"></p>
+<ol start="5" type="1">
+<li>The WMS capabilities document will open in your browser.</li>
+</ol>
+<p>Copy the WMS endpoint URL shown in the browser address bar. This URL will be used by Leaflet to request imagery from the WMS server.</p>
+<p><img src="images/thredds-xml.png" class="img-fluid"></p>
+</section>
+<section id="accessing-the-wms-data" class="level2">
+<h2 class="anchored" data-anchor-id="accessing-the-wms-data">Accessing the WMS data</h2>
+<p>First, load the packages used in this tutorial.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Install necessary packages</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmltools)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Next, define the WMS endpoint and specify how the satellite layer should be rendered.</p>
+<p>This section defines:</p>
+<ul>
+<li>the WMS endpoint URL</li>
+<li>the satellite variable to display</li>
+<li>the WMS color palette</li>
+<li>the color scale used to render the imagery</li>
+</ul>
+<section id="understanding-the-color-range" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-the-color-range">Understanding the color range</h3>
+<p>One important detail is that the <strong>analysed_sst</strong> variable is stored internally in <strong>Kelvin</strong>, even though sea surface temperature is typically interpreted in <strong>degrees Celsius</strong>.</p>
+<p>Because the THREDDS WMS server expects the color scale in the variable’s native units, the <code>COLORSCALERANGE</code> parameter must also be specified in Kelvin.</p>
+<p>For example:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Celsius</th>
+<th style="text-align: right;">Kelvin</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0 °C</td>
+<td style="text-align: right;">273.15 K</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">32 °C</td>
+<td style="text-align: right;">305.15 K</td>
+</tr>
+</tbody>
+</table>
+<p>The WMS legend displayed later in this tutorial is generated directly by the server and reflects the selected color palette and rendering style.</p>
+</section>
+<section id="choosing-a-color-palette" class="level3">
+<h3 class="anchored" data-anchor-id="choosing-a-color-palette">Choosing a color palette</h3>
+<p>The WMS server supports multiple color palettes that control how the satellite imagery is rendered. To view the available palettes for a variable, open the WMS capabilities (XML) document and search for the <strong>Style</strong> elements associated with that layer. Each available palette appears as a <code>boxfill/&lt;palette_name&gt;</code> style (for example, <code>boxfill/alg</code>, <code>boxfill/sst_36</code>, or <code>boxfill/rainbow</code>).</p>
+<p>The legend provided by the WMS server automatically updates to match the selected palette, so no additional changes are needed when you choose a different style.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># WMS endpoint</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>wms_url <span class="ot">&lt;-</span> <span class="st">"https://www.star.nesdis.noaa.gov/thredds/wms/BlendedSST5kmDiurnalAggGHRSSTOSPOLoM"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># SST variable</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>sst_layer <span class="ot">&lt;-</span> <span class="st">"analysed_sst"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Color bar palette</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>palette <span class="ot">&lt;-</span> <span class="st">"alg"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>color_range <span class="ot">&lt;-</span> <span class="st">"273,305"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># WMS Legend</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>legend_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  wms_url,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"?SERVICE=WMS"</span>,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;REQUEST=GetLegendGraphic"</span>,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;VERSION=1.3.0"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;FORMAT=image/png"</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;LAYER="</span>, sst_layer,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;STYLE=boxfill/"</span>, palette,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="st">"&amp;COLORSCALERANGE="</span>, color_range</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="cruise-stations-off-of-monterey-bay" class="level2">
+<h2 class="anchored" data-anchor-id="cruise-stations-off-of-monterey-bay">Cruise stations off of Monterey Bay</h2>
+<p>Next, create a small set of example cruise stations.</p>
+<p>These locations are used to demonstrate how in-situ observations can be displayed alongside satellite imagery. In practice, these coordinates could come from ship observations, gliders, buoys, autonomous vehicles, or other field measurements.</p>
+<p>Each point will be added to the interactive map and displayed with a popup containing its location information.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cruise_points <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">station =</span> <span class="fu">c</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Station 1"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Station 2"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Station 3"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">lon =</span> <span class="fu">c</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">122.10</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">122.35</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="sc">-</span><span class="fl">122.60</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">lat =</span> <span class="fu">c</span>(</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="fl">36.85</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="fl">36.65</span>,</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fl">36.45</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="create-the-interactive-map" class="level2">
+<h2 class="anchored" data-anchor-id="create-the-interactive-map">Create the interactive map</h2>
+<p>Finally, combine the WMS imagery and cruise stations into a single interactive Leaflet map. We will be looking at sea surface temperature (SST) on <strong>July 1, 2024</strong>.</p>
+<p>This example demonstrates several common Leaflet features:</p>
+<ul>
+<li>a CartoDB basemap</li>
+<li>streamed WMS satellite imagery</li>
+<li>cruise station markers</li>
+<li>popup information</li>
+<li>layer controls</li>
+<li>a WMS-generated legend (units are in Kelvin)</li>
+</ul>
+<p>Notice that the sea surface temperature imagery is <strong>not downloaded locally</strong>. Instead, Leaflet requests map tiles directly from the THREDDS WMS server as you pan and zoom around the map.</p>
+<p>The legend is also requested directly from the WMS server using a standard <strong>GetLegendGraphic</strong> request. Because it is generated by the server, its appearance—including the displayed units and layout—is determined by the WMS implementation. Some servers may truncate portions of the legend text (such as the variable name or unit label), but the color bar and value range remain unchanged and accurately represent the displayed imagery.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    providers<span class="sc">$</span>CartoDB.Positron,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">group=</span><span class="st">"Basemap"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng=</span><span class="sc">-</span><span class="fl">122.3</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat=</span><span class="fl">36.7</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">zoom=</span><span class="dv">6</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addWMSTiles</span>(</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">baseUrl=</span>wms_url,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">layers=</span>sst_layer,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">options=</span><span class="fu">WMSTileOptions</span>(</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">format=</span><span class="st">"image/png"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">transparent=</span><span class="cn">TRUE</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>      <span class="at">version=</span><span class="st">"1.3.0"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">styles=</span><span class="fu">paste0</span>(<span class="st">"boxfill/"</span>, palette),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">colorscalerange=</span>color_range,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>      <span class="at">logarithmic=</span><span class="cn">FALSE</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">time=</span><span class="st">"2024-07-01T12:00:00.000Z"</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">attribution=</span><span class="st">"NOAA CoastWatch"</span>,</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">group=</span><span class="st">"Sea Surface Temperature"</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>cruise_points,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">lng=</span><span class="sc">~</span>lon,</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat=</span><span class="sc">~</span>lat,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">radius=</span><span class="dv">6</span>,</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">color=</span><span class="st">"#0057e7"</span>,</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">weight=</span><span class="dv">2</span>,</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillColor=</span><span class="st">"#4da6ff"</span>,</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">fillOpacity=</span><span class="dv">1</span>,</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">popup=</span><span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>      <span class="st">"&lt;b&gt;"</span>,station,<span class="st">"&lt;/b&gt;&lt;br&gt;"</span>,</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Latitude: "</span>,lat,<span class="st">"&lt;br&gt;"</span>,</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Longitude: "</span>,lon</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">group=</span><span class="st">"Cruise Stations"</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLayersControl</span>(</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">overlayGroups=</span><span class="fu">c</span>(</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Sea Surface Temperature"</span>,</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Cruise Stations"</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">options=</span><span class="fu">layersControlOptions</span>(<span class="at">collapsed=</span><span class="cn">FALSE</span>)</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># WMS Legend</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addControl</span>(</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    <span class="at">html =</span> <span class="fu">HTML</span>(</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste0</span>(</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;img src='"</span>,</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>        legend_url,</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>        <span class="st">"' width='90'&gt;"</span></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="st">"topright"</span></span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="summary" class="level2">
+<h2 class="anchored" data-anchor-id="summary">Summary</h2>
+<p>In this tutorial, you learned how to:</p>
+<ul>
+<li>Locate a WMS endpoint from a CoastWatch THREDDS server.</li>
+<li>Stream satellite imagery directly into a Leaflet map.</li>
+<li>Overlay in situ cruise stations on top of satellite data.</li>
+<li>Customize the appearance of a WMS layer using palettes and color ranges.</li>
+<li>Add the WMS-generated legend to improve map interpretation.</li>
+</ul>
+<p>Because WMS streams pre-rendered imagery rather than downloading the underlying dataset, it is particularly well suited for interactive visualization applications and web-based dashboards.</p>
 
 
 </section>

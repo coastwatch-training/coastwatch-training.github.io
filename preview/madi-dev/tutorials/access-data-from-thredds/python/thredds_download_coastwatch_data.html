@@ -523,7 +523,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Explicitly Disable Caching</strong> Setting cache=False ensures that xarray does not try to store massive chunks in memory, which often leads to Out-Of-Memory (OOM) crashes when dealing with global altimetry data.</li>
 <li><strong>Wrap in a Context Manager</strong> Using Python’s with statement ensures that the remote network connection closes automatically when you are done, preventing hanging connections.</li>
 </ol>
-<div id="367bd5ec" class="cell" data-execution_count="1">
+<div id="cebb329d" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># The OPeNDAP URL for Blended Altimetry</span></span>
@@ -545,7 +545,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="examine-the-output-from-the-opened-dataset">5.2 Examine the output from the opened dataset</h3>
 <p>When you open a dataset with xarray, you can quickly explore its structure and metadata: 1. <strong>Dimensions</strong> – The coordinate axes (e.g., time, lat, lon, depth) and their sizes. 2. <strong>Coordinates</strong> – The actual labeled values along each dimension (e.g., latitude/longitude arrays, time stamps). 3. <strong>Data variables</strong> – The main scientific fields stored in the dataset (e.g., <code>sla</code>, <code>ugos</code>, <code>vgos</code>), represented as multidimensional arrays tied to dimensions. 4. <strong>Attributes (Metadata)</strong> – Descriptive information about the dataset. * <strong>Global attributes</strong> (accessible via the Attributes dropdown) provide context such as title, data source, and geospatial coverage. * <strong>Variable-specific attributes</strong> (click the <img src="./page.png" alt="xarray variable info" style="border: 1px solid black;" width="12px"> icon next to each variable) describe details for individual variables, such as <code>units</code>, <code>long_name</code>, and <code>standard_name</code>.</p>
 <p>For example, the <code>sla</code> variable represents <strong>Sea Level Anomaly</strong>. Inspect its attributes to understand the measurement units and scientific meaning.</p>
-<div id="3933f503" class="cell" data-execution_count="2">
+<div id="1e35190b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the dataset metadata</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -555,7 +555,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>To work with a smaller region and timeframe, we can subset the dataset using <code>.sel()</code> with <code>slice()</code>.</p>
 <p><strong>Task</strong>: In this example, we’ll select: * <strong>Latitude range</strong>: 0° to 50°N * <strong>Longitude range</strong>: -180° to -120°E * <strong>Time range</strong>: January 1, 2024 – May 31, 2024</p>
 <p>Additionally, to reduce data volume, we’ll keep only <strong>every 4th time step</strong>. * Click the click the <img src="./storage2.png" alt="xarray variable info" style="border: 1px solid black;" width="12px"> icon next to the time variable below to verify that the time steps are four days apart.</p>
-<div id="03902a3a" class="cell" data-execution_count="3">
+<div id="4c62f275" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The OPeNDAP URL for Blended Altimetry</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>download_url <span class="op">=</span> (</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://www.star.nesdis.noaa.gov/thredds/dodsC/AltimetryBlendedAggGlobalLoM"</span></span>
@@ -590,7 +590,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="visualize-your-results">5.4 Visualize Your Results</h3>
 <p>Now that we’ve subsetted the dataset, let’s visualize the <strong>Sea Level Anomaly (SLA)</strong> over time.</p>
 <p>We’ll create an <strong>animated plot</strong> where each frame shows SLA for a single time step.</p>
-<div id="db6d3aff" class="cell" data-execution_count="4">
+<div id="bea54d83" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> HTML</span>
@@ -654,7 +654,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Once you have created and explored your subset, it’s often useful to save the results locally.</p>
 <p>This allows you to reuse the data later without having to download or subset it again.</p>
 <p>You can save an <strong>xarray Dataset or DataArray</strong> to a NetCDF file with the <code>to_netcdf()</code> method:</p>
-<div id="760f30ce" class="cell" data-execution_count="5">
+<div id="7a99094b" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save to NetCDF</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> <span class="st">"sla_subset.nc"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>downloaded_data.to_netcdf(output_file)</span>
@@ -667,7 +667,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>This workflow ensures that your analysis is <strong>reproducible and portable</strong> across different computing environments.</p></li>
 <li><p>You can reopen it later with:</p></li>
 </ul>
-<div id="7f2f5923" class="cell" data-execution_count="6">
+<div id="d1840c9f" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Inspect that the data was downloaded correctly</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>reopened <span class="op">=</span> xr.open_dataset(<span class="st">"sla_subset.nc"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>reopened</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -741,7 +741,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="workflow-example" class="level4">
 <h4 class="anchored" data-anchor-id="workflow-example">Workflow example</h4>
-<div id="96afda50" class="cell" data-execution_count="7">
+<div id="0d504ce7" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -821,7 +821,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ol>
 <section id="full-workflow-example" class="level4">
 <h4 class="anchored" data-anchor-id="full-workflow-example">Full Workflow example</h4>
-<div id="c3198afc" class="cell" data-execution_count="8">
+<div id="056dc3ff" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.animation <span class="im">import</span> FuncAnimation</span>
@@ -889,7 +889,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-65"><a href="#cb9-65" aria-hidden="true" tabindex="-1"></a>HTML(ani.to_jshtml())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p><img src="../images/sst_pacioos_animation_py.gif" class="img-fluid" style="width:80.0%"></p>
-<div id="c69f727f" class="cell" data-execution_count="9">
+<div id="7db3dc26" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save to NetCDF</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>output_file <span class="op">=</span> <span class="st">"crw_sst_subset.nc"</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>subset.to_netcdf(output_file)</span>
