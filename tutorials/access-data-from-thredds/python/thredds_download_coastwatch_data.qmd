@@ -255,7 +255,7 @@ plt.close()
 # Display the animation
 HTML(ani.to_jshtml())
 ```
-![](../images/sla_cw_animation_py.gif){width="80%"}
+![](images/sla_cw_animation_py.gif){width="80%"}
 
 ### 5.5 Save Your Subsetted Data to a NetCDF File
 Once you have created and explored your subset, it’s often useful to save the results locally.
@@ -496,7 +496,7 @@ ani = FuncAnimation(
 plt.close()  # prevent duplicate static plot in notebook
 HTML(ani.to_jshtml())
 ```
-![](../images/sst_pacioos_animation_py.gif){width="80%"}
+![](images/sst_pacioos_animation_py.gif){width="80%"}
 
 ```{python}
 # Save to NetCDF
