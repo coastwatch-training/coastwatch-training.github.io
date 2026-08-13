@@ -63,7 +63,7 @@ warnings.filterwarnings('ignore')
 - Within the tab, scroll to find the telemetry tag labeled “Yellowfin tuna (233568)”.
 - Click the search icon (maginifying glass) label next to the label to zoom into the area the area of the animal track.
 
-![atn_map.png](attachment:f0999162-bcd5-4a1b-8e95-76b1196817cf.png)
+<img src="images/atn_map.png" style="border: 2px solid grey;" width=50%>   
 
 Image of the ATN portal webpage
 
@@ -72,7 +72,7 @@ Image of the ATN portal webpage
 - Next click the tag icon to the right of the search icon.
 - This page shows you details about the animal and the track.
 
-![atn_detail.png](attachment:8de76c51-1d5c-4175-b71f-d5e0ac8b0351.png)
+<img src="images/atn_detail.png" style="border: 2px solid grey;" width=50%> 
 
 Image of the detail page for the Yellowfin Tuna #233568
 
@@ -82,7 +82,7 @@ Image of the detail page for the Yellowfin Tuna #233568
 - Search for the animal id number (233568).
 - Click on the link “THUALB_2022_04-PTT_233568.zip (8.6 MB)” to download the data.
 
-![atn_data.png](attachment:43144510-22c7-4fa3-9269-22dff5ecc099.png)
+<img src="images/atn_data.png" style="border: 2px solid grey;" width=50%> 
 
 Data download page
 
@@ -196,6 +196,8 @@ plt.title('Yellowfin Tuna Track (PTT 233568)', fontsize=20)
 
 plt.show()
 ```
+
+<img src="images/tuna-track.png" style="border: 2px solid grey;" width=50%> 
 
 ## Extract data from a satellite dataset corresponding to points on the track
 
@@ -319,6 +321,8 @@ print('Range:', df.matched_chla.min(), df.matched_chla.max())
 _ = df.matched_chla.hist(bins=40)
 ```
 
+<img src="images/tuna-hist.png" style="border: 2px solid grey;" width=50%> 
+
 The range of chlorophyll values can be large, with lots of very low values and a few very high values. Using a  linear color bar,  most of the lower values would have the same color.
 * To better visualize the data, we often plot the log or log10 of chlorophyll. 
 
@@ -331,6 +335,8 @@ print('Range:',
 
 _ = np.log(df.matched_chla).hist(bins=40)
 ```
+
+<img src="images/chl-hist.png" style="border: 2px solid grey;" width=50%> 
 
 * The logarithmic transformation displays the range of values across the color bar range (above). 
 
@@ -388,6 +394,8 @@ plt.legend()
 plt.title("Chlorophyll Matchup to Yellowfin Tuna Track (233568)", size=15)
 plt.show()
 ```
+
+<img src="images/chl-tuna.png" style="border: 2px solid grey;" width=50%> 
 
 ## On your own!
 
