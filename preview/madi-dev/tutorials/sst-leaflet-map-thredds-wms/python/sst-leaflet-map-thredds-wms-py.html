@@ -80,7 +80,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-75ea76011aea360bb563ee68dcb8d7d7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-fad75c07af1b5e1ceff06f9748bff3a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="accessing-the-wms-data" class="level2">
 <h2 class="anchored" data-anchor-id="accessing-the-wms-data">Accessing the WMS data</h2>
 <p>First, load the packages used in this tutorial.</p>
-<div id="cc125e5f" class="cell" data-execution_count="1">
+<div id="3d466d8a" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipyleaflet <span class="im">import</span> (</span>
@@ -541,7 +541,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="choosing-a-color-palette">Choosing a color palette</h3>
 <p>The WMS server supports multiple color palettes that control how the satellite imagery is rendered. To view the available palettes for a variable, open the WMS capabilities (XML) document and search for the <strong>Style</strong> elements associated with that layer. Each available palette appears as a <code>boxfill/&lt;palette_name&gt;</code> style (for example, <code>boxfill/alg</code>, <code>boxfill/sst_36</code>, or <code>boxfill/rainbow</code>).</p>
 <p>The legend provided by the WMS server automatically updates to match the selected palette, so no additional changes are needed when you choose a different style.</p>
-<div id="25bce4cf" class="cell" data-execution_count="2">
+<div id="04b04b5b" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>wms_url <span class="op">=</span> (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"https://www.star.nesdis.noaa.gov/thredds/wms/"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BlendedSST5kmDiurnalAggGHRSSTOSPOLoM"</span></span>
@@ -559,7 +559,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Next, create a small set of example cruise stations.</p>
 <p>These locations are used to demonstrate how in-situ observations can be displayed alongside satellite imagery. In practice, these coordinates could come from ship observations, gliders, buoys, autonomous vehicles, or other field measurements.</p>
 <p>Each point will be added to the interactive map and displayed with a popup containing its location information.</p>
-<div id="47952f9b" class="cell" data-execution_count="3">
+<div id="0bc0243a" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cruise_points <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"station"</span>: [</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Station 1"</span>,</span>
@@ -589,7 +589,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>zoom</strong> – Controls the initial zoom level.</li>
 <li><strong>scroll_wheel_zoom</strong> – Enables zooming with the mouse scroll wheel.</li>
 </ul>
-<div id="e8bf75f6" class="cell" data-execution_count="4">
+<div id="b8a78eb8" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> Map(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    basemap<span class="op">=</span>basemaps.CartoDB.Positron,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    center<span class="op">=</span>(<span class="fl">36.7</span>, <span class="op">-</span><span class="fl">122.3</span>),</span>
@@ -601,7 +601,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="create-a-custom-coastwatch-wms-layer" class="level2">
 <h2 class="anchored" data-anchor-id="create-a-custom-coastwatch-wms-layer">Create a custom CoastWatch WMS Layer</h2>
 <p>The standard <code>ipyleaflet.WMSLayer</code> supports the core WMS specification but does not expose all of the optional parameters used by the NOAA CoastWatch THREDDS server. The custom class below extends <code>WMSLayer</code> to support the additional <code>time</code>, <code>colorscalerange</code>, and <code>logarithmic</code> parameters.</p>
-<div id="e252ae6f" class="cell" data-execution_count="5">
+<div id="d8f5ee64" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CoastWatchLayer(WMSLayer):</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    time <span class="op">=</span> Unicode(<span class="st">""</span>).tag(sync<span class="op">=</span><span class="va">True</span>, o<span class="op">=</span><span class="va">True</span>)</span>
@@ -624,7 +624,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>transparent</strong> – Allows the basemap to remain visible beneath the satellite imagery.</li>
 <li><strong>format</strong> – Requests the imagery as a PNG image with transparency.</li>
 </ul>
-<div id="c81c1a3c" class="cell" data-execution_count="6">
+<div id="23170a8f" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sst <span class="op">=</span> CoastWatchLayer(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    name <span class="op">=</span> <span class="st">"Sea Surface Temperature (K)"</span>,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    url<span class="op">=</span>wms_url,</span>
@@ -655,7 +655,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>color</strong> and <strong>fill_color</strong> – Control the outline and fill colors of the markers.</li>
 <li><strong>marker.popup</strong> – Associates an HTML popup with each marker that appears when the marker is clicked.</li>
 </ul>
-<div id="4f00958f" class="cell" data-execution_count="7">
+<div id="7381b42d" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cruise_layer <span class="op">=</span> LayerGroup(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    name<span class="op">=</span><span class="st">"Cruise Stations"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -686,7 +686,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="add-a-layer-control" class="level2">
 <h2 class="anchored" data-anchor-id="add-a-layer-control">Add a layer control</h2>
 <p>Finally, add a layer control to the map. The layer control displays the named overlays and allows users to toggle individual layers on or off interactively.</p>
-<div id="af46275b" class="cell" data-execution_count="8">
+<div id="c68bc702" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m.add(LayersControl(position<span class="op">=</span><span class="st">"topright"</span>))<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -703,7 +703,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>WidgetControl</strong> – Places the HTML widget on the interactive map.</li>
 </ul>
 <p><strong>Note:</strong> The legend is generated by the WMS server, so its appearance is determined by the server implementation. Some servers may truncate portions of the legend text (such as the variable name or unit label), but the color bar and value range still accurately represent the displayed imagery.</p>
-<div id="73f4cd00" class="cell" data-execution_count="9">
+<div id="2137d809" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>legend_url <span class="op">=</span> (</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"</span><span class="sc">{</span>wms_url<span class="sc">}</span><span class="ss">"</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="ss">f"?REQUEST=GetLegendGraphic"</span></span>
@@ -727,7 +727,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="view-the-final-map" class="level2">
 <h2 class="anchored" data-anchor-id="view-the-final-map">View the final map</h2>
 <p>The completed map combines all of the components created throughout this tutorial, including the basemap, streamed WMS satellite imagery, cruise station markers, layer control, and WMS-generated legend.</p>
-<div id="e1ed4b45" class="cell" data-execution_count="10">
+<div id="ac9c36dc" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>m</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
