@@ -13,11 +13,11 @@ Glider observations from CalCOFI Line 90 are retrieved from the Scripps Spray Gl
 
 The comparison includes:
 
-Chlorophyll-a
+- Chlorophyll-a
 
-Sea surface temperature (SST)
+- Sea surface temperature (SST)
 
-Sea surface salinity (SSS)
+- Sea surface salinity (SSS)
 
 The workflow demonstrates how to access remote ERDDAP datasets, subset satellite data, extract satellite observations around glider locations, and visualize the resulting comparisons.
 
