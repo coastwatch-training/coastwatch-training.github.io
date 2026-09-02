@@ -23,7 +23,7 @@ The workflow demonstrates how to access remote ERDDAP datasets, subset satellite
 
 ## Load packages
 
-```{r}
+``` r
 packages <- c( "rerddap", "rerddapXtracto","tidyverse","scales")
 
 
@@ -45,7 +45,7 @@ The glider observations are retrieved from the Scripps Spray Glider ERDDAP serve
 
 For this example, observations from the **CalCOFI Line 90** dataset are requested from January through June 2026. The query retrieves position, time, depth, chlorophyll, temperature, salinity, and dissolved oxygen measurements.
 
-```{r}
+``` r
 # Connect to the Scripps Spray Glider ERDDAP server
 url <- "https://spraydata.ucsd.edu/erddap/"
 dataset_info <- info(
@@ -81,7 +81,7 @@ Satellite products represent conditions at or near the ocean surface, while the 
 
 To make the measurements more comparable, the glider dataset is restricted to observations collected at **10m depth**.
 
-```{r}
+``` r
 # Subset to 10m
 glider_surface <- subset(glider, depth==10) 
 
@@ -93,7 +93,7 @@ Satellite chlorophyll-a observations are retrieved from the **ESA Ocean Colour C
 
 The variable `chlor_a` represents satellite-derived chlorophyll-a concentration.
 
-```{r}
+``` r
 # Get information for the satellite chlorophyll dataset
 dataset <- "pmlEsaCCI60OceanColorDaily"
 
@@ -113,7 +113,7 @@ The longitude, latitude, and date of each surface glider observation are used to
 
 A spatial window of ±0.2° longitude and latitude is used around each glider location. The `rxtracto()` function extracts the satellite data within these spatial windows for each glider observation.
 
-```{r}
+``` r
 # Set the spatial search window around each glider location
 xlen <- 0.2
 ylen <- 0.2
@@ -142,7 +142,7 @@ Sea surface temperature is retrieved from the **NOAA CoastWatch ACSPO SST** data
 
 The same glider coordinates, dates, and ±0.2° spatial window defined for the chlorophyll comparison are used to extract satellite SST observations along the glider track.
 
-```{r}
+``` r
 # Get information for the satellite SST dataset
 dataset <- "noaacwLEOACSPOSSTL3SCWeeklyNRT"
 
@@ -175,7 +175,7 @@ The same glider coordinates, dates, and ±0.2° spatial window are used to extra
 
 This dataset includes an altitude dimension, so the surface level (0) must also be specified when extracting the satellite observations.
 
-```{r}
+``` r
 # Get information for the satellite salinity dataset
 dataset <- "coastwatchSMOSv662SSS3day"
 
@@ -207,7 +207,7 @@ The matched satellite chlorophyll, SST, and salinity values are added to the sur
 
 Each row now contains the original in situ glider measurement and its corresponding satellite estimate, allowing the two data sources to be compared directly.
 
-```{r}
+``` r
 # Add the matched satellite values to the surface glider data
 glider_surface$chl_sat <- chl_sat$"mean chlor_a"
 glider_surface$sst_sat <- sst_sat$"mean sea_surface_temperature"
@@ -223,7 +223,7 @@ These comparisons provide a visual way to examine how closely the satellite prod
 
 ### Chlorophyll-a 
 
-```{r}
+``` r
 # Reshape the data for plotting
 glider_surface %>%
   pivot_longer(
@@ -311,7 +311,7 @@ glider_surface %>%
 
 ### Sea Surface Temperature
 
-```{r}
+``` r
 # Reshape the data for plotting
 glider_surface %>%
   pivot_longer(
@@ -399,7 +399,7 @@ glider_surface %>%
 
 ### Sea Surface Salinity
 
-```{r}
+``` r
 # Reshape the data for plotting
 glider_surface %>%
   pivot_longer(
