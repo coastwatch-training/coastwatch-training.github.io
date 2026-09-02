@@ -414,7 +414,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="load-packages" class="level2">
 <h2 class="anchored" data-anchor-id="load-packages">Load packages</h2>
-<div id="4a8fbc88" class="cell" data-execution_count="1">
+<div id="39170890" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> xarray <span class="im">as</span> xr</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -427,7 +427,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="define-a-function-for-opening-erddap-datasets">Define a Function for Opening ERDDAP Datasets</h2>
 <p>The satellite datasets used in this tutorial are available through ERDDAP’s <code>griddap</code> service. The following helper function constructs a remote ERDDAP URL from a dataset ID and opens the dataset directly with Xarray.</p>
 <p>Using a function avoids repeating the same URL-building steps for each satellite dataset.</p>
-<div id="73a41c17" class="cell" data-execution_count="2">
+<div id="ac2c1025" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> xr_open_ds(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    e_id, e_source<span class="op">=</span><span class="st">"https://coastwatch.pfeg.noaa.gov/wcn/erddap"</span>, dap<span class="op">=</span><span class="st">"griddap"</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>):</span>
@@ -460,7 +460,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="retrieve-glider-observations">Retrieve Glider Observations</h2>
 <p>The glider observations are retrieved from the Scripps Spray Glider ERDDAP server using ERDDAPy’s <code>tabledap</code> interface.</p>
 <p>For this example, observations from the <strong>CalCOFI Line 90</strong> dataset are requested from January through June 2026. The query retrieves position, time, depth, chlorophyll, temperature, salinity, and dissolved oxygen measurements.</p>
-<div id="19652fd7" class="cell" data-execution_count="3">
+<div id="6af07506" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Connect to the Spray Glider ERDDAP server</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> ERDDAP(</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    server<span class="op">=</span><span class="st">"https://spraydata.ucsd.edu/erddap"</span>,</span>
@@ -500,7 +500,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="select-surface-observations">Select Surface Observations</h3>
 <p>Satellite products represent conditions at or near the ocean surface, while the glider collects measurements throughout the water column.</p>
 <p>To make the measurements more comparable, the glider dataset is restricted to observations collected at <strong>10 m depth</strong>.</p>
-<div id="19f4e6c5" class="cell" data-execution_count="4">
+<div id="f2ed0a77" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Restrict dataset to 10m </span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>glider_surface <span class="op">=</span> glider.loc[</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    glider[<span class="st">"depth (m)"</span>] <span class="op">==</span> <span class="dv">10</span></span>
@@ -511,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="define-the-spatial-and-temporal-search-area">Define the Spatial and Temporal Search Area</h3>
 <p>The longitude, latitude, and date of each glider observation are extracted for use when matching the satellite data.</p>
 <p>A spatial window of ±0.2° longitude and latitude is used around each glider location. The overall minimum and maximum coordinates are also calculated so that only the portion of the satellite dataset surrounding the glider track needs to be loaded.</p>
-<div id="5848c563" class="cell" data-execution_count="5">
+<div id="bc4238bd" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get coordinates and times for each surface glider observation</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>xcoords <span class="op">=</span> glider_surface[<span class="st">"longitude (degrees_east)"</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>ycoords <span class="op">=</span> glider_surface[<span class="st">"latitude (degrees_north)"</span>]</span>
@@ -544,7 +544,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="retrieve-satellite-chlorophyll">Retrieve Satellite Chlorophyll</h2>
 <p>Satellite chlorophyll-a observations are retrieved from the <strong>ESA Ocean Colour Climate Change Initiative (OC-CCI)</strong> daily dataset available through NOAA CoastWatch ERDDAP.</p>
 <p>The variable <code>chlor_a</code> represents satellite-derived chlorophyll-a concentration.</p>
-<div id="c8490c26" class="cell" data-execution_count="6">
+<div id="54885661" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset ID</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>chl_dataset_id <span class="op">=</span> <span class="st">"pmlEsaCCI60OceanColorDaily"</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter of interest</span></span>
@@ -565,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p><strong>Note:</strong> Latitude in this dataset is ordered from north to south, so the latitude slice is specified from the maximum latitude to the minimum latitude.</p>
 </blockquote>
-<div id="9ad9c567" class="cell" data-execution_count="7">
+<div id="ed4cddee" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the data</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>chl_subset <span class="op">=</span> chl_ds[chl_parameter].sel(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    time<span class="op">=</span><span class="bu">slice</span>(time_min, time_max),</span>
@@ -581,7 +581,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="match-chlorophyll-observations-to-the-glider-track">Match Chlorophyll Observations to the Glider Track</h3>
 <p>For each glider observation, a small satellite region centered on the glider’s longitude and latitude is selected for the corresponding date.</p>
 <p>The mean chlorophyll concentration within this spatial window is then calculated and stored as the satellite value associated with that glider observation.</p>
-<div id="244ee0da" class="cell" data-execution_count="8">
+<div id="7171394f" class="cell" data-execution_count="8">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list to store matched satellite chlorophyll values</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>chl_values <span class="op">=</span> []</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -606,7 +606,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="retrieve-satellite-sea-surface-temperature">Retrieve Satellite Sea Surface Temperature</h2>
 <p>Sea surface temperature is retrieved from the <strong>NOAA CoastWatch ACSPO SST</strong> dataset.</p>
 <p>The same spatial and temporal bounds calculated from the glider observations are used to restrict the satellite dataset before individual observations are matched.</p>
-<div id="18940046" class="cell" data-execution_count="9">
+<div id="35fc0e9c" class="cell" data-execution_count="9">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset ID</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sst_dataset_id <span class="op">=</span> <span class="st">"noaacwLEOACSPOSSTL3SCWeeklyNRT"</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter of interest</span></span>
@@ -620,7 +620,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>sst_ds</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="6b7b7a70" class="cell" data-execution_count="10">
+<div id="07499994" class="cell" data-execution_count="10">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset the data</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sst_subset <span class="op">=</span> sst_ds[sst_parameter].sel(</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    time<span class="op">=</span><span class="bu">slice</span>(time_min, time_max),</span>
@@ -635,7 +635,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="match-sst-observations-to-the-glider-track">Match SST Observations to the Glider Track</h3>
 <p>Satellite SST observations are matched to each glider location using the same ±0.2° spatial window.</p>
 <p>Because this SST product does not necessarily contain an observation for every glider date, <code>method="nearest"</code> is used to select the satellite time closest to each glider observation date. The mean SST within the surrounding spatial window is then calculated.</p>
-<div id="17dd5d1f" class="cell" data-execution_count="11">
+<div id="900877d8" class="cell" data-execution_count="11">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list to store matched satellite SST values</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sst_values <span class="op">=</span> []</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -662,7 +662,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="retrieve-satellite-sea-surface-salinity">Retrieve Satellite Sea Surface Salinity</h2>
 <p>Sea surface salinity is retrieved from the <strong>NOAA CoastWatch SMOS 3-day Sea Surface Salinity</strong> dataset.</p>
 <p>The <code>sss</code> variable contains the satellite-derived sea surface salinity observations used for comparison with the glider measurements.</p>
-<div id="4cb858e0" class="cell" data-execution_count="12">
+<div id="6192a671" class="cell" data-execution_count="12">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dataset ID</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>salinity_dataset_id <span class="op">=</span> <span class="st">"noaacwSMOSsss3day"</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Parameter of interest</span></span>
@@ -681,7 +681,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The salinity dataset is restricted to the glider’s time period and geographic extent before matching individual observations.</p>
 <p>Unlike the previous satellite datasets, latitude in this dataset is ordered from south to north. Therefore, the latitude slice is specified from the minimum latitude to the maximum latitude.</p>
 <p>The dataset also contains an altitude dimension, so the surface level (<code>altitude=0</code>) is selected.</p>
-<div id="237e3b55" class="cell" data-execution_count="13">
+<div id="b7d7473f" class="cell" data-execution_count="13">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Subset dataset and load subset into memory</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>salinity_subset <span class="op">=</span> salinity_ds[salinity_parameter].sel(</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    time<span class="op">=</span><span class="bu">slice</span>(time_min, time_max),</span>
@@ -694,7 +694,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="match-salinity-observations-to-the-glider-track" class="level3">
 <h3 class="anchored" data-anchor-id="match-salinity-observations-to-the-glider-track">Match Salinity Observations to the Glider Track</h3>
 <p>For each glider observation, the nearest satellite salinity observation in time is selected. A ±0.2° spatial window is then extracted around the glider location, and the mean salinity within that region is calculated.</p>
-<div id="b047a68b" class="cell" data-execution_count="14">
+<div id="f88e2c68" class="cell" data-execution_count="14">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a list to store matched satellite salinity values</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>salinity_values <span class="op">=</span> []</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -721,7 +721,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="combine-glider-and-satellite-observations">Combine Glider and Satellite Observations</h2>
 <p>The matched satellite chlorophyll, SST, and salinity values are added to the surface glider DataFrame.</p>
 <p>Each row now contains the original in situ glider measurement and its corresponding satellite estimate, allowing the two data sources to be compared directly.</p>
-<div id="597717a4" class="cell" data-execution_count="15">
+<div id="254c4882" class="cell" data-execution_count="15">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Add chl, sst, and sss to glider dataset</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>glider_surface[<span class="st">"chl_sat"</span>] <span class="op">=</span> chl_values</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>glider_surface[<span class="st">"sst_sat"</span>] <span class="op">=</span> sst_values</span>
@@ -734,7 +734,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="create-a-reusable-comparison-plot">Create a Reusable Comparison Plot</h2>
 <p>The same plotting format is used for chlorophyll, temperature, and salinity. Instead of repeating the Matplotlib code for each variable, the following function creates a standardized time-series comparison.</p>
 <p>The function accepts the glider and satellite columns along with variable-specific labels, colors, and titles.</p>
-<div id="4adf3254" class="cell" data-execution_count="16">
+<div id="0c01337b" class="cell" data-execution_count="16">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_comparison(</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    df,</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    glider_col,</span>
@@ -871,7 +871,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="compare-glider-and-satellite-observations">9. Compare Glider and Satellite Observations</h2>
 <p>The following plots compare the matched glider and satellite observations through time.</p>
 <p>These comparisons provide a visual way to examine how closely the satellite products represent the conditions measured in situ by the glider. Differences may reflect spatial and temporal sampling differences between the two observing systems in addition to differences between the measurements themselves.</p>
-<div id="b51c589a" class="cell" data-execution_count="17">
+<div id="10e352b3" class="cell" data-execution_count="17">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert glider times to datetime for plotting</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>plot_time <span class="op">=</span> pd.to_datetime(glider_surface[<span class="st">"time (UTC)"</span>])</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -880,7 +880,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="chlorophyll-a" class="level3">
 <h3 class="anchored" data-anchor-id="chlorophyll-a">Chlorophyll-a</h3>
-<div id="b36bdfd4" class="cell" data-execution_count="18">
+<div id="f6be7fa2" class="cell" data-execution_count="18">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plot_comparison(</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    df<span class="op">=</span>glider_surface,</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    glider_col<span class="op">=</span><span class="st">"chlorophyll (mg m-3)"</span>,</span>
@@ -896,7 +896,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sea-surface-temperature" class="level3">
 <h3 class="anchored" data-anchor-id="sea-surface-temperature">Sea Surface Temperature</h3>
-<div id="43b73c15" class="cell" data-execution_count="19">
+<div id="d23984a9" class="cell" data-execution_count="19">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plot_comparison(</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    df<span class="op">=</span>glider_surface,</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    glider_col<span class="op">=</span><span class="st">"temperature (degree_C)"</span>,</span>
@@ -912,7 +912,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="sea-surface-salinity" class="level3">
 <h3 class="anchored" data-anchor-id="sea-surface-salinity">Sea Surface Salinity</h3>
-<div id="309d3a8f" class="cell" data-execution_count="20">
+<div id="41e8a2ca" class="cell" data-execution_count="20">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plot_comparison(</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    df<span class="op">=</span>glider_surface,</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    glider_col<span class="op">=</span><span class="st">"salinity (1)"</span>,</span>
