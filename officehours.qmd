@@ -4,7 +4,7 @@ description: "Every other Thursday, 11 am PST"
 ---
 
 
-Hosted by the West Coast Node and PolarWatch [every other Thursday at 11 am PST](https://meet.google.com/zgm-nsan-pwk).
+Hosted by the West Coast Node [every other Thursday at 11 am PST](https://meet.google.com/zgm-nsan-pwk).
 
 Upcoming dates: September 10, 24, October 8
 
