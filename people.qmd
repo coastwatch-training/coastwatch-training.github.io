@@ -10,7 +10,8 @@ The CoastWatch training program is built on the collaboration of scientists acro
  |:-----------------|:-----------------------------------------------------------------------------|
  | [Cara Wilson](mailto:cara.wilson@noaa.gov)       | CoastWatch/West Coast Node/PolarWatch, Node Manager|
  | [Dale Robinson](mailto:dale.robinson@noaa.gov)       | CoastWatch/West Coast Node/PolarWatch, Development Lead |
- | [Sunny Hospital](mailto:sun.bak-hospital@noaa.gov)       | CoastWatch/PolarWatch, Development Lead |
+ | [Madison Richardson](mailto:madison.richardson@noaa.gov)       | CoastWatch/West Coast Node, Environmental Data Analyst |
+ | [Jonathan Sherman](mailto:jonathan.sherman@noaa.gov)       | CoastWatch/West Coast Node/PolarWatch, Research Development Specialist |
  | [Michelle Tomlinson](mailto:michelle.tomlinson@noaa.gov)        | CoastWatch/East Coast Node, Node Manager |
  | [Ron Vogel](mailto:ronald.vogel@noaa.gov)        | CoastWatch/East Coast Node, Development Lead |
  | [James Kessler](mailto:james.kessler@noaa.gov)        | CoastWatch/Great Lakes Node, Node Manager |

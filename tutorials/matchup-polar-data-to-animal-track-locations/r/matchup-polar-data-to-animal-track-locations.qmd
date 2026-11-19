@@ -1,6 +1,8 @@
 # Tracking Penguins in Antarctica
 
-> Modified October 2024
+### Authors: Sunny Hospital & Madison Richardson
+
+> History | Updated Oct 2024
 
 ### Overview
 

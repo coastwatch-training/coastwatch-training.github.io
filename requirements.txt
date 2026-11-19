@@ -2,3 +2,7 @@ jupyter
 pyyaml
 pandas
 ipython
+xarray
+numpy
+matplotlib
+tqdm

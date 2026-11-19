@@ -1,6 +1,6 @@
 ---
 title: "Satellite 201 Summer Lecture Series"
-description: "July 10, 17, 24 and 31, 2026, Virtual 11am - 1pm (Pacific Time)"
+description: "July 10, 17, 24 and 31, 2026, Virtual 11am - 1:30pm (Pacific Time)"
 anchor-sections: false
 ---
 
@@ -17,11 +17,16 @@ Flexibility: Attendance for all sessions is not required; feel free to join the 
 ## 2026 Curriculum
 The inaugural 2026 course will cover the following subjects:
 
-* Alternative Data Access: Methods for accessing data not hosted on ERDDAP servers.
+* SAR Data: An introduction to Synthetic Aperture Radar.
 * CoastWatch Utilities: An introduction to using the CoastWatch proprietary software suite.
 * Beyond Chlorophyll: Exploring ocean color products other than chlorophyll. 
-* SAR Data: An introduction to Synthetic Aperture Radar.
+* Accessing CoastWatch Data: HTTPS and THREDDS Services.
 
+## Meeting Privacy Notice
+
+**To protect participant privacy, AI-powered meeting recording and transcription will not be used or allowed during this meeting. NOAA guidance requires participant consent when AI is used to collect, transcribe, or summarize personally identifiable information (PII). Because we cannot ensure consent from all participants, AI recording and transcription will not be permitted.**
+
+For additional information on NOAA's privacy practices regarding AI-enabled meetings, see [NOAA's Privacy Statement](https://www.noaa.gov/protecting-your-privacy#:~:text=NOAA%20Privacy%20Statement).
 
 ## Schedule
 
@@ -29,8 +34,8 @@ The inaugural 2026 course will cover the following subjects:
 
 | Time (PST)      | Topic                                                                         | Presenter                    |
 |:-------------|:-----------------------------------------------------------------------------|:----------------------------|
-| 11:00 - 11:45   | Accessing data not on ERDDAP servers                                     |  Dale Robinson  |
-| 11:45 - 12:30   | a demo                                                      |     |
+| 11:00 - 11:45   | [Introduction to SAR data](../presentations/sat201_26/CW_SAR_OverviewIntroduction_July2026_Final.pdf)                                     |  Chris Jackson  |
+| 11:45 - 12:30   | [SAR Data Access](../presentations/sat201_26/CW_SAR_Access_vJUL2026.pdf)                                                      |     |
 | 12:30 - 12:45   | Break                                                    |     |   
 | 12:45 - 1:30   | Question & Answer and hand's on session                                                      |     | 
 
@@ -39,8 +44,8 @@ The inaugural 2026 course will cover the following subjects:
 
 | Time (PST)      | Topic                                                                         | Presenter                    |
 |:-------------|:-----------------------------------------------------------------------------|:----------------------------|
-| 11:00 - 11:45   | Introduction to using Coastwatch Utilities software                                              |  Peter Hollemans   |
-| 11:45 - 12:30   | a demo                                                     |     |
+| 11:00 - 11:45   | [Introduction to using Coastwatch Utilities software](../presentations/sat201_26/CoastWatch-Utilities-Satellite-201-2026.pdf)                                              |  Peter Hollemans   |
+| 11:45 - 12:30   | A demo                                                     |     |
 | 12:30 - 12:45   | Break                                                    |     |   
 | 12:45 - 1:30   | Question & Answer and hand's on session                                                      |     | 
 
@@ -49,8 +54,8 @@ The inaugural 2026 course will cover the following subjects:
 
 | Time (PST)      | Topic                                                                         | Presenter                    |
 |:-------------|:-----------------------------------------------------------------------------|:----------------------------|
-| 11:00 - 11:45   | Beyond Chlorophyll                                              |  Ryan Vandermeulen  |
-| 11:45 - 12:30   | Beyond Chlorophyll Case Study                              |     |
+| 11:00 - 11:45   | [Beyond Chlorophyll](../presentations/sat201_26/CoastWatch_Beyond_CHL_shorter.pdf)                                              |  Ryan Vandermeulen  |
+| 11:45 - 12:30   | [Beyond Chlorophyll Case Study](../presentations/sat201_26/Case_study_and_resources_links.pdf)                              |     |
 | 12:30 - 12:45   | Break                                                    |     |   
 | 12:45 - 1:30   | Question & Answer and hand's on session                                                      |     | 
 
@@ -58,8 +63,8 @@ The inaugural 2026 course will cover the following subjects:
 
 | Time (PST)      | Topic                                                                         | Presenter                    |
 |:-------------|:-----------------------------------------------------------------------------|:----------------------------|
-| 11:00 - 11:45   | Introduction to SAR Data                                               | Chris Jackson   |
-| 11:45 - 12:30   | SAR Case Study                                                     |     |
+| 11:00 - 11:45   | [Accessing CoastWatch Data: HTTPS and THREDDS Services](../presentations/sat201_26/Accessing-HTTPS-THREDDS-Satellite-201-Presentation.pptx.pdf)                                               | Madison Richardson & Dale Robinson   |
+| 11:45 - 12:30   | [HTTPS](https://coastwatch-training.github.io/tutorials/codegallery.html#cg-access-data-from-https) & [THREDDS](https://coastwatch-training.github.io/tutorials/codegallery.html#cg-access-data-from-thredds) Demo                                                     |     |
 | 12:30 - 12:45   | Break                                                    |     |   
 | 12:45 - 1:30   | Question & Answer and hand's on session                                                      |     | 
 
@@ -68,8 +73,9 @@ The inaugural 2026 course will cover the following subjects:
  | Name              | Affiliation                    | 
  |:-----------------|:-----------------------------------------------------------------------------|
  | [Cara Wilson](mailto:cara.wilson@noaa.gov)       | CoastWatch/West Coast Node, PI |
- | [Dale Robinson](mailto:dale.robinson@noaa.gov)     | CoastWatch/West Coast Node, node manager |
- | [Peter Hollemans](mailto:peter.hollemans@noaa.gov)         | CoastWatch Utilities Developer |
+ | [Dale Robinson](mailto:dale.robinson@noaa.gov)     | CoastWatch/West Coast Node, Development Lead |
+ | [Madison Richardson](mailto:madison.richardson@noaa.gov)     | CoastWatch/West Coast Node, Environmental Data Analyst |
+ | [Peter Hollemans](mailto:peter@terrenusearth.com)         | CoastWatch Utilities Developer |
  | [Ryan Vandermeulen](mailto:ryan.vandermeulen@noaa.gov)         | NOAA Fisheries Satellite Coordinator |
  | [Chris Jackson](mailto:christopher.jackson@noaa.gov)         | |
 

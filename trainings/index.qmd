@@ -1,7 +1,6 @@
 ---
 title: "CoastWatch Workshops"
 description: "Satellite Data Trainings"
-anchor-sections: false
 ---
 
 CoastWatch regularly organizes and offers in-person and online satellite training classes or workshops featuring lectures, tutorials, and tool demonstrations.

@@ -24,9 +24,9 @@ from IPython.display import HTML
 from urllib.parse import quote
 from pathlib import Path
 
-REPO_RAW_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/raw/main"
-REPO_BLOB_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/blob/main/"
-REPO_TREE_BASE = "https://github.com/coastwatch-wcn/coastwatch-training.github.io/tree/main/"
+REPO_RAW_BASE = "https://github.com/coastwatch-training/coastwatch-training.github.io/raw/main"
+REPO_BLOB_BASE = "https://github.com/coastwatch-training/coastwatch-training.github.io/blob/main/"
+REPO_TREE_BASE = "https://github.com/coastwatch-training/coastwatch-training.github.io/tree/main/"
 
 BASE_DIR = Path("code_gallery.csv").resolve().parent
 TUTORIALS_ROOT = BASE_DIR
@@ -146,33 +146,40 @@ def modal_eye(modal_id):
 
 def download_icon(path):
     """
-    Generate an HTML anchor element linking to a tutorial source file on GitHub.
+    Generate an HTML anchor element that downloads a tutorial source file.
 
-    This function returns a clickable download icon used in the Code Gallery
-    table. If a valid file path is provided, the icon links to the corresponding
-    file in the GitHub repository and opens it in a new browser tab. If no path
-    is provided, a placeholder dash is returned to indicate that the file is
-    unavailable.
+    This function creates a clickable download icon used in the Code Gallery
+    table. The link points directly to a downloadable source file within the
+    rendered website, such as a Jupyter notebook, R script, MATLAB file,
+    or ArcGIS resource.
 
     Parameters
     ----------
     path : str
-        Relative path to the tutorial source file within the GitHub repository.
-        If empty or missing, no download icon is rendered.
+        Relative path to the downloadable tutorial source file.
 
     Returns
     -------
     str
-        An HTML string containing an anchor element with an embedded SVG icon
-        that links to the file on GitHub, or a dash ("—") if no file is available.
+        An HTML string containing a download icon link, or a dash ("—")
+        if no valid file path is provided.
     """
+    path = str(path).strip()
+
     if not path:
         return "—"
+
     filename = path.split("/")[-1]
-    url = f"{REPO_BLOB_BASE}{quote(path)}"
+
+    # Site-relative path
+    url = "../" + path.lstrip("/")
+
     return (
-        f'<a href="{url}" class="cg-icon" aria-label="Open {filename} on GitHub" '
-        f'target="_blank" rel="noopener">{DOWNLOAD_SVG}</a>'
+        f'<a href="{url}" '
+        f'class="cg-icon" '
+        f'download="{filename}" '
+        f'aria-label="Download {filename}">'
+        f'{DOWNLOAD_SVG}</a>'
     )
 
 
@@ -786,4 +793,31 @@ document.addEventListener("click", function(e){
   });
 
 });
+</script>
+
+<script>
+function cgHighlightFromHash() {
+  const hash = window.location.hash;
+  if (!hash) return;
+
+  const el = document.querySelector(hash);
+  if (!el) return;
+
+  // clear existing highlights
+  document.querySelectorAll(".cg-selected").forEach(row => {
+    row.classList.remove("cg-selected");
+  });
+
+  // highlight target row
+  el.classList.add("cg-selected");
+
+  // center it on page
+  el.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+}
+
+document.addEventListener("DOMContentLoaded", cgHighlightFromHash);
+window.addEventListener("hashchange", cgHighlightFromHash);
 </script>
